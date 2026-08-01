@@ -1,0 +1,31 @@
+{
+  "input": "C:\\Users\\kimji\\Documents\\Codex\\2026-07-28\\png-public-maps-world-1932-png\\.tmp-world-1932-colonies.png",
+  "dryRun": false,
+  "width": 5616,
+  "height": 2160,
+  "changedPixels": 405952,
+  "representativeColorCount": 59,
+  "unresolvedDarkLinePixelCount": 0,
+  "physicalComponentCount": 806,
+  "displayGroupCount": 128,
+  "protectedCountries": [
+    {
+      "id": 30,
+      "key": "country-030",
+      "color": "#2D2C2D",
+      "name": "아라곤 자유지대",
+      "physicalComponentCount": 1
+    }
+  ],
+  "backup": "public/maps/backups/world-1932-2026-08-01T11-38-55.748Z.png",
+  "updatedAt": "2026-08-01T11:39:00.986Z",
+  "preservedData": [
+    "country id/key",
+    "internalName/name/nativeName/shortName/mapLabel/shortLabel/allowShortMapLabel",
+    "flag settings",
+    "manual label/label group",
+    "manual display grouping",
+    "protected country settings",
+    "color migrations"
+  ]
+}

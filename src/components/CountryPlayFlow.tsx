@@ -1,0 +1,191 @@
+import { getCountryPresentation } from "../data/countryPresentation";
+import type { MapCountryIndex } from "../types/mapCountry";
+import { TexturedActionButton } from "./TexturedActionButton";
+
+export type CountryPlayStep =
+  | "closed"
+  | "description"
+  | "confirmation";
+
+type CountryPlayFlowProps = {
+  country: MapCountryIndex | null;
+  step: CountryPlayStep;
+  onClose: () => void;
+  onRequestConfirmation: () => void;
+  onBack: () => void;
+  onConfirm: () => void;
+};
+
+function DescriptionDialog({
+  country,
+  obscured,
+  onClose,
+  onRequestConfirmation,
+}: {
+  country: MapCountryIndex;
+  obscured: boolean;
+  onClose: () => void;
+  onRequestConfirmation: () => void;
+}) {
+  const presentation = getCountryPresentation(country);
+
+  return (
+    <section
+      className="country-play-description"
+      aria-hidden={obscured}
+      data-obscured={obscured}
+    >
+      <img
+        className="country-play-description__frame"
+        src="/assets/ui/country-description-dialog-clean.png"
+        alt=""
+        draggable={false}
+        aria-hidden="true"
+      />
+      <header className="country-play-description__title">
+        <h2>The Long Revolution</h2>
+      </header>
+      <div className="country-play-description__country-heading">
+        <h3>{presentation.title}</h3>
+        {presentation.secondaryNames[0] ? (
+          <p>{presentation.secondaryNames[0]}</p>
+        ) : null}
+      </div>
+      <div className="country-play-description__body">
+        {presentation.description
+          ? presentation.description
+              .split(/\n{2,}/u)
+              .map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+          : null}
+      </div>
+      <div className="country-play-description__actions">
+        <TexturedActionButton
+          tone="green"
+          onClick={onRequestConfirmation}
+          disabled={obscured}
+          autoFocus={!obscured}
+        >
+          플레이하기
+        </TexturedActionButton>
+        <TexturedActionButton
+          tone="gray"
+          onClick={onClose}
+          disabled={obscured}
+        >
+          닫기
+        </TexturedActionButton>
+      </div>
+      <button
+        type="button"
+        className="country-play-description__close"
+        onClick={onClose}
+        disabled={obscured}
+        aria-label="국가 설명창 닫기"
+      />
+    </section>
+  );
+}
+
+function ConfirmationDialog({
+  country,
+  onBack,
+  onConfirm,
+}: {
+  country: MapCountryIndex;
+  onBack: () => void;
+  onConfirm: () => void;
+}) {
+  const presentation = getCountryPresentation(country);
+
+  return (
+    <section
+      className="country-play-confirmation"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="country-play-confirmation-title"
+      aria-describedby="country-play-confirmation-warning"
+    >
+      <div className="country-play-confirmation__frame-wrap">
+        <img
+          className="country-play-confirmation__frame"
+          src="/assets/ui/play-confirmation-frame.png"
+          alt=""
+          draggable={false}
+          aria-hidden="true"
+        />
+        <header className="country-play-confirmation__title">
+          국가 선택 확인
+        </header>
+        <div className="country-play-confirmation__message">
+          <h2 id="country-play-confirmation-title">
+            정말 플레이하시겠습니까?
+          </h2>
+          <p>{presentation.title}</p>
+          <strong id="country-play-confirmation-warning">
+            해당 선택은 관리자의 승인 없이 바꿀 수 없습니다!
+          </strong>
+        </div>
+        <button
+          type="button"
+          className="country-play-confirmation__close"
+          onClick={onBack}
+          aria-label="국가 선택 확인창 닫기"
+        />
+      </div>
+      <div className="country-play-confirmation__actions">
+        <TexturedActionButton tone="green" onClick={onConfirm} autoFocus>
+          확인
+        </TexturedActionButton>
+        <TexturedActionButton tone="gray" onClick={onBack}>
+          돌아가기
+        </TexturedActionButton>
+      </div>
+    </section>
+  );
+}
+
+export function CountryPlayFlow({
+  country,
+  step,
+  onClose,
+  onRequestConfirmation,
+  onBack,
+  onConfirm,
+}: CountryPlayFlowProps) {
+  if (!country || step === "closed") {
+    return null;
+  }
+
+  const isConfirmationOpen = step === "confirmation";
+
+  return (
+    <div
+      className="country-play-layer"
+      role={isConfirmationOpen ? undefined : "dialog"}
+      aria-modal={isConfirmationOpen ? undefined : true}
+      aria-label={
+        isConfirmationOpen ? undefined : `${country.name} 국가 설명`
+      }
+      data-step={step}
+    >
+      <div
+        className="country-play-layer__backdrop"
+        aria-hidden="true"
+      />
+      <DescriptionDialog
+        key={step}
+        country={country}
+        obscured={isConfirmationOpen}
+        onClose={onClose}
+        onRequestConfirmation={onRequestConfirmation}
+      />
+      {isConfirmationOpen ? (
+        <ConfirmationDialog
+          country={country}
+          onBack={onBack}
+          onConfirm={onConfirm}
+        />
+      ) : null}
+    </div>
+  );
+}

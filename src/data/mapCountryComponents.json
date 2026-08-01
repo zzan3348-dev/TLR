@@ -1,0 +1,4250 @@
+[
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-001",
+    "displayGroupId": "country-001-group-001",
+    "physicalComponentIds": [
+      "country-001-physical-00004",
+      "country-001-physical-00051",
+      "country-001-physical-00020",
+      "country-001-physical-00076",
+      "country-001-physical-00047",
+      "country-001-physical-00088",
+      "country-001-physical-00090",
+      "country-001-physical-00098",
+      "country-001-physical-00048",
+      "country-001-physical-00105",
+      "country-001-physical-00086",
+      "country-001-physical-00045",
+      "country-001-physical-00104",
+      "country-001-physical-00050",
+      "country-001-physical-00092",
+      "country-001-physical-00003",
+      "country-001-physical-00023",
+      "country-001-physical-00077",
+      "country-001-physical-00100",
+      "country-001-physical-00001",
+      "country-001-physical-00097",
+      "country-001-physical-00099",
+      "country-001-physical-00002",
+      "country-001-physical-00080",
+      "country-001-physical-00107",
+      "country-001-physical-00046",
+      "country-001-physical-00064",
+      "country-001-physical-00084",
+      "country-001-physical-00065",
+      "country-001-physical-00072",
+      "country-001-physical-00101",
+      "country-001-physical-00044",
+      "country-001-physical-00057",
+      "country-001-physical-00078",
+      "country-001-physical-00079",
+      "country-001-physical-00095",
+      "country-001-physical-00075"
+    ],
+    "bounds": {
+      "x": 26,
+      "y": 0,
+      "width": 752,
+      "height": 300
+    },
+    "centroid": {
+      "x": 431.0838416661916,
+      "y": 81.59874959618416
+    },
+    "pixelCount": 52623,
+    "representative": {
+      "x": 286,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 42,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 37
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-002",
+    "displayGroupId": "country-001-group-002",
+    "physicalComponentIds": [
+      "country-001-physical-00012",
+      "country-001-physical-00014",
+      "country-001-physical-00013",
+      "country-001-physical-00037",
+      "country-001-physical-00060",
+      "country-001-physical-00041",
+      "country-001-physical-00058"
+    ],
+    "bounds": {
+      "x": 1966,
+      "y": 0,
+      "width": 376,
+      "height": 208
+    },
+    "centroid": {
+      "x": 2107.910220154875,
+      "y": 72.61379073393768
+    },
+    "pixelCount": 37837,
+    "representative": {
+      "x": 1974,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 29,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 7
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-003",
+    "displayGroupId": "country-001-group-003",
+    "physicalComponentIds": [
+      "country-001-physical-00049"
+    ],
+    "bounds": {
+      "x": 2425,
+      "y": 109,
+      "width": 170,
+      "height": 80
+    },
+    "centroid": {
+      "x": 2515.2976220591954,
+      "y": 148.01125727295724
+    },
+    "pixelCount": 7906,
+    "representative": {
+      "x": 2550,
+      "y": 109
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-004",
+    "displayGroupId": "country-001-group-004",
+    "physicalComponentIds": [
+      "country-001-physical-00118",
+      "country-001-physical-00053",
+      "country-001-physical-00087",
+      "country-001-physical-00137",
+      "country-001-physical-00073",
+      "country-001-physical-00083",
+      "country-001-physical-00071"
+    ],
+    "bounds": {
+      "x": 676,
+      "y": 152,
+      "width": 214,
+      "height": 216
+    },
+    "centroid": {
+      "x": 788.8802788027878,
+      "y": 284.3772037720377
+    },
+    "pixelCount": 2439,
+    "representative": {
+      "x": 807,
+      "y": 315
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-004.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-004-label-envelope.png",
+    "labelEnvelopeBuffer": 30,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 7
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-005",
+    "displayGroupId": "country-001-group-005",
+    "physicalComponentIds": [
+      "country-001-physical-00133",
+      "country-001-physical-00248",
+      "country-001-physical-00246",
+      "country-001-physical-00258",
+      "country-001-physical-00295",
+      "country-001-physical-00228",
+      "country-001-physical-00230"
+    ],
+    "bounds": {
+      "x": 860,
+      "y": 346,
+      "width": 901,
+      "height": 487
+    },
+    "centroid": {
+      "x": 1225.8320703217348,
+      "y": 553.2431730748565
+    },
+    "pixelCount": 232645,
+    "representative": {
+      "x": 1322,
+      "y": 346
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-005.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-005-label-envelope.png",
+    "labelEnvelopeBuffer": 68,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 7
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-006",
+    "displayGroupId": "country-001-group-006",
+    "physicalComponentIds": [
+      "country-001-physical-00167"
+    ],
+    "bounds": {
+      "x": 1764,
+      "y": 439,
+      "width": 1,
+      "height": 2
+    },
+    "centroid": {
+      "x": 1764,
+      "y": 439.5
+    },
+    "pixelCount": 2,
+    "representative": {
+      "x": 1764,
+      "y": 439
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-006.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-007",
+    "displayGroupId": "country-001-group-007",
+    "physicalComponentIds": [
+      "country-001-physical-00376",
+      "country-001-physical-00402",
+      "country-001-physical-00490",
+      "country-001-physical-00480",
+      "country-001-physical-00475",
+      "country-001-physical-00448",
+      "country-001-physical-00494",
+      "country-001-physical-00444",
+      "country-001-physical-00466",
+      "country-001-physical-00481",
+      "country-001-physical-00472",
+      "country-001-physical-00491",
+      "country-001-physical-00530",
+      "country-001-physical-00445",
+      "country-001-physical-00506",
+      "country-001-physical-00507",
+      "country-001-physical-00515",
+      "country-001-physical-00451",
+      "country-001-physical-00483",
+      "country-001-physical-00484",
+      "country-001-physical-00467",
+      "country-001-physical-00482",
+      "country-001-physical-00495",
+      "country-001-physical-00542",
+      "country-001-physical-00424",
+      "country-001-physical-00485",
+      "country-001-physical-00486",
+      "country-001-physical-00509",
+      "country-001-physical-00449",
+      "country-001-physical-00471",
+      "country-001-physical-00497",
+      "country-001-physical-00503",
+      "country-001-physical-00520",
+      "country-001-physical-00545",
+      "country-001-physical-00477",
+      "country-001-physical-00487",
+      "country-001-physical-00489",
+      "country-001-physical-00492",
+      "country-001-physical-00462",
+      "country-001-physical-00463",
+      "country-001-physical-00493",
+      "country-001-physical-00534",
+      "country-001-physical-00488",
+      "country-001-physical-00540"
+    ],
+    "bounds": {
+      "x": 4862,
+      "y": 1003,
+      "width": 649,
+      "height": 371
+    },
+    "centroid": {
+      "x": 5304.117318435754,
+      "y": 1204.730446927375
+    },
+    "pixelCount": 716,
+    "representative": {
+      "x": 5209,
+      "y": 1003
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-007.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-007-label-envelope.png",
+    "labelEnvelopeBuffer": 52,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 44
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-008",
+    "displayGroupId": "country-001-group-008",
+    "physicalComponentIds": [
+      "country-001-physical-00400",
+      "country-001-physical-00393",
+      "country-001-physical-00390",
+      "country-001-physical-00388",
+      "country-001-physical-00394",
+      "country-001-physical-00391",
+      "country-001-physical-00392",
+      "country-001-physical-00389"
+    ],
+    "bounds": {
+      "x": 311,
+      "y": 1037,
+      "width": 83,
+      "height": 55
+    },
+    "centroid": {
+      "x": 371.0137362637363,
+      "y": 1070.6263736263738
+    },
+    "pixelCount": 364,
+    "representative": {
+      "x": 379,
+      "y": 1071
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-008.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-001-component-008-label-envelope.png",
+    "labelEnvelopeBuffer": 8,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 8
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-009",
+    "displayGroupId": "country-001-group-009",
+    "physicalComponentIds": [
+      "country-001-physical-00431"
+    ],
+    "bounds": {
+      "x": 2628,
+      "y": 1195,
+      "width": 156,
+      "height": 135
+    },
+    "centroid": {
+      "x": 2707.672342713748,
+      "y": 1270.7059508872558
+    },
+    "pixelCount": 11158,
+    "representative": {
+      "x": 2744,
+      "y": 1195
+    },
+    "maskPath": "/maps/generated/country-masks/country-001-component-009.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-001",
+    "displayGroupId": "country-002-group-001",
+    "physicalComponentIds": [
+      "country-002-physical-00006",
+      "country-002-physical-00031",
+      "country-002-physical-00035",
+      "country-002-physical-00007",
+      "country-002-physical-00066",
+      "country-002-physical-00094",
+      "country-002-physical-00025",
+      "country-002-physical-00021",
+      "country-002-physical-00008",
+      "country-002-physical-00032",
+      "country-002-physical-00141",
+      "country-002-physical-00069",
+      "country-002-physical-00018",
+      "country-002-physical-00010",
+      "country-002-physical-00102",
+      "country-002-physical-00055",
+      "country-002-physical-00144",
+      "country-002-physical-00009",
+      "country-002-physical-00059",
+      "country-002-physical-00061",
+      "country-002-physical-00093",
+      "country-002-physical-00038",
+      "country-002-physical-00128",
+      "country-002-physical-00022"
+    ],
+    "bounds": {
+      "x": 1353,
+      "y": 0,
+      "width": 322,
+      "height": 383
+    },
+    "centroid": {
+      "x": 1520.974261479965,
+      "y": 45.28780345130155
+    },
+    "pixelCount": 3419,
+    "representative": {
+      "x": 1458,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 24
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-002",
+    "displayGroupId": "country-002-group-002",
+    "physicalComponentIds": [
+      "country-002-physical-00011",
+      "country-002-physical-00036",
+      "country-002-physical-00043",
+      "country-002-physical-00039",
+      "country-002-physical-00019"
+    ],
+    "bounds": {
+      "x": 1656,
+      "y": 0,
+      "width": 151,
+      "height": 106
+    },
+    "centroid": {
+      "x": 1739.597936341378,
+      "y": 25.58044770898916
+    },
+    "pixelCount": 5718,
+    "representative": {
+      "x": 1658,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 5
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-003",
+    "displayGroupId": "country-002-group-003",
+    "physicalComponentIds": [
+      "country-002-physical-00108",
+      "country-002-physical-00125",
+      "country-002-physical-00154",
+      "country-002-physical-00151",
+      "country-002-physical-00103",
+      "country-002-physical-00150",
+      "country-002-physical-00138",
+      "country-002-physical-00085",
+      "country-002-physical-00129",
+      "country-002-physical-00068",
+      "country-002-physical-00119",
+      "country-002-physical-00112"
+    ],
+    "bounds": {
+      "x": 1665,
+      "y": 193,
+      "width": 321,
+      "height": 223
+    },
+    "centroid": {
+      "x": 1917.2093391373169,
+      "y": 359.3375544123468
+    },
+    "pixelCount": 5054,
+    "representative": {
+      "x": 1933,
+      "y": 300
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-003.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-003-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 12
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-004",
+    "displayGroupId": "country-002-group-004",
+    "physicalComponentIds": [
+      "country-002-physical-00081",
+      "country-002-physical-00121",
+      "country-002-physical-00070"
+    ],
+    "bounds": {
+      "x": 719,
+      "y": 204,
+      "width": 114,
+      "height": 120
+    },
+    "centroid": {
+      "x": 779.6666666666666,
+      "y": 254.61111111111111
+    },
+    "pixelCount": 18,
+    "representative": {
+      "x": 771,
+      "y": 228
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-004.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-004-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-005",
+    "displayGroupId": "country-002-group-005",
+    "physicalComponentIds": [
+      "country-002-physical-00131",
+      "country-002-physical-00159",
+      "country-002-physical-00134",
+      "country-002-physical-00152",
+      "country-002-physical-00124",
+      "country-002-physical-00139",
+      "country-002-physical-00168",
+      "country-002-physical-00123",
+      "country-002-physical-00145",
+      "country-002-physical-00130",
+      "country-002-physical-00147"
+    ],
+    "bounds": {
+      "x": 2644,
+      "y": 329,
+      "width": 190,
+      "height": 201
+    },
+    "centroid": {
+      "x": 2742.4703532814547,
+      "y": 446.6038840300255
+    },
+    "pixelCount": 14521,
+    "representative": {
+      "x": 2756,
+      "y": 343
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-005.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-005-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 11
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-006",
+    "displayGroupId": "country-002-group-006",
+    "physicalComponentIds": [
+      "country-002-physical-00196",
+      "country-002-physical-00170",
+      "country-002-physical-00171",
+      "country-002-physical-00172",
+      "country-002-physical-00173",
+      "country-002-physical-00177",
+      "country-002-physical-00178",
+      "country-002-physical-00179",
+      "country-002-physical-00181",
+      "country-002-physical-00183",
+      "country-002-physical-00185",
+      "country-002-physical-00186",
+      "country-002-physical-00187",
+      "country-002-physical-00188",
+      "country-002-physical-00190",
+      "country-002-physical-00192",
+      "country-002-physical-00194",
+      "country-002-physical-00195",
+      "country-002-physical-00197",
+      "country-002-physical-00200",
+      "country-002-physical-00201"
+    ],
+    "bounds": {
+      "x": 4361,
+      "y": 445,
+      "width": 345,
+      "height": 81
+    },
+    "centroid": {
+      "x": 4487.478260869565,
+      "y": 480.8695652173913
+    },
+    "pixelCount": 23,
+    "representative": {
+      "x": 4544,
+      "y": 507
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-006.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-006-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 21
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-007",
+    "displayGroupId": "country-002-group-007",
+    "physicalComponentIds": [
+      "country-002-physical-00232"
+    ],
+    "bounds": {
+      "x": 1822,
+      "y": 654,
+      "width": 12,
+      "height": 14
+    },
+    "centroid": {
+      "x": 1827.7540983606557,
+      "y": 661.1967213114754
+    },
+    "pixelCount": 61,
+    "representative": {
+      "x": 1833,
+      "y": 654
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-007.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-007-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-008",
+    "displayGroupId": "country-002-group-008",
+    "physicalComponentIds": [
+      "country-002-physical-00323"
+    ],
+    "bounds": {
+      "x": 3148,
+      "y": 877,
+      "width": 312,
+      "height": 595
+    },
+    "centroid": {
+      "x": 3291.657122482496,
+      "y": 1153.5290971561933
+    },
+    "pixelCount": 92552,
+    "representative": {
+      "x": 3209,
+      "y": 877
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-008.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-008-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-009",
+    "displayGroupId": "country-002-group-009",
+    "physicalComponentIds": [
+      "country-002-physical-00364",
+      "country-002-physical-00365",
+      "country-002-physical-00334",
+      "country-002-physical-00432",
+      "country-002-physical-00363",
+      "country-002-physical-00399",
+      "country-002-physical-00440",
+      "country-002-physical-00397"
+    ],
+    "bounds": {
+      "x": 3473,
+      "y": 903,
+      "width": 268,
+      "height": 301
+    },
+    "centroid": {
+      "x": 3608.120705956508,
+      "y": 1096.9273558146865
+    },
+    "pixelCount": 19038,
+    "representative": {
+      "x": 3686,
+      "y": 969
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-009.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-009-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 8
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-010",
+    "displayGroupId": "country-002-group-010",
+    "physicalComponentIds": [
+      "country-002-physical-00338"
+    ],
+    "bounds": {
+      "x": 1414,
+      "y": 906,
+      "width": 19,
+      "height": 43
+    },
+    "centroid": {
+      "x": 1421.9087301587301,
+      "y": 926.4603174603175
+    },
+    "pixelCount": 504,
+    "representative": {
+      "x": 1426,
+      "y": 906
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-010.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-010-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-011",
+    "displayGroupId": "country-002-group-011",
+    "physicalComponentIds": [
+      "country-002-physical-00407"
+    ],
+    "bounds": {
+      "x": 1901,
+      "y": 1108,
+      "width": 63,
+      "height": 66
+    },
+    "centroid": {
+      "x": 1933.5421319796953,
+      "y": 1137.3553299492385
+    },
+    "pixelCount": 2955,
+    "representative": {
+      "x": 1918,
+      "y": 1108
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-011.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-011-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-012",
+    "displayGroupId": "country-002-group-012",
+    "physicalComponentIds": [
+      "country-002-physical-00455",
+      "country-002-physical-00468",
+      "country-002-physical-00423",
+      "country-002-physical-00425",
+      "country-002-physical-00411",
+      "country-002-physical-00415",
+      "country-002-physical-00412",
+      "country-002-physical-00417",
+      "country-002-physical-00416"
+    ],
+    "bounds": {
+      "x": 2404,
+      "y": 1121,
+      "width": 404,
+      "height": 201
+    },
+    "centroid": {
+      "x": 2727.1884032114185,
+      "y": 1263.2221231043711
+    },
+    "pixelCount": 5605,
+    "representative": {
+      "x": 2784,
+      "y": 1221
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-012.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-012-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 9
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-013",
+    "displayGroupId": "country-002-group-013",
+    "physicalComponentIds": [
+      "country-002-physical-00421"
+    ],
+    "bounds": {
+      "x": 2849,
+      "y": 1176,
+      "width": 186,
+      "height": 159
+    },
+    "centroid": {
+      "x": 2933.4632334232356,
+      "y": 1247.2478245381915
+    },
+    "pixelCount": 19651,
+    "representative": {
+      "x": 2891,
+      "y": 1176
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-013.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-013-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-014",
+    "displayGroupId": "country-002-group-014",
+    "physicalComponentIds": [
+      "country-002-physical-00473"
+    ],
+    "bounds": {
+      "x": 4051,
+      "y": 1245,
+      "width": 34,
+      "height": 63
+    },
+    "centroid": {
+      "x": 4065.912191582003,
+      "y": 1279.7089985486211
+    },
+    "pixelCount": 1378,
+    "representative": {
+      "x": 4055,
+      "y": 1245
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-014.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-014-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-015",
+    "displayGroupId": "country-002-group-015",
+    "physicalComponentIds": [
+      "country-002-physical-00502",
+      "country-002-physical-00526",
+      "country-002-physical-00496",
+      "country-002-physical-00535"
+    ],
+    "bounds": {
+      "x": 4457,
+      "y": 1285,
+      "width": 187,
+      "height": 105
+    },
+    "centroid": {
+      "x": 4583.4820512820515,
+      "y": 1350.308597285068
+    },
+    "pixelCount": 3315,
+    "representative": {
+      "x": 4629,
+      "y": 1290
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-015.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-015-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-016",
+    "displayGroupId": "country-002-group-016",
+    "physicalComponentIds": [
+      "country-002-physical-00500"
+    ],
+    "bounds": {
+      "x": 4370,
+      "y": 1287,
+      "width": 65,
+      "height": 96
+    },
+    "centroid": {
+      "x": 4399.728010386239,
+      "y": 1333.5699448231094
+    },
+    "pixelCount": 3081,
+    "representative": {
+      "x": 4376,
+      "y": 1287
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-016.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-016-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-017",
+    "displayGroupId": "country-002-group-017",
+    "physicalComponentIds": [
+      "country-002-physical-00695",
+      "country-002-physical-00615",
+      "country-002-physical-00760",
+      "country-002-physical-00773",
+      "country-002-physical-00763"
+    ],
+    "bounds": {
+      "x": 2535,
+      "y": 1516,
+      "width": 194,
+      "height": 320
+    },
+    "centroid": {
+      "x": 2620.31129476584,
+      "y": 1654.0275482093664
+    },
+    "pixelCount": 363,
+    "representative": {
+      "x": 2724,
+      "y": 1646
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-017.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-017-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 5
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-018",
+    "displayGroupId": "australia-papua-region",
+    "physicalComponentIds": [
+      "country-002-physical-00657",
+      "country-002-physical-00681",
+      "country-002-physical-00717",
+      "country-002-physical-00624",
+      "country-002-physical-00641",
+      "country-002-physical-00786"
+    ],
+    "bounds": {
+      "x": 5393,
+      "y": 1526,
+      "width": 2092,
+      "height": 550
+    },
+    "centroid": {
+      "x": 5572.968421052631,
+      "y": 1589.2842105263157
+    },
+    "pixelCount": 95,
+    "representative": {
+      "x": 5396,
+      "y": 1566
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-018.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-018-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": true,
+    "groupedTerritoryCount": 6
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-019",
+    "displayGroupId": "country-002-group-019",
+    "physicalComponentIds": [
+      "country-002-physical-00749",
+      "country-002-physical-00722",
+      "country-002-physical-00775",
+      "country-002-physical-00707",
+      "country-002-physical-00686",
+      "country-002-physical-00704",
+      "country-002-physical-00752",
+      "country-002-physical-00733",
+      "country-002-physical-00756",
+      "country-002-physical-00725",
+      "country-002-physical-00740",
+      "country-002-physical-00705",
+      "country-002-physical-00665",
+      "country-002-physical-00693",
+      "country-002-physical-00676",
+      "country-002-physical-00711",
+      "country-002-physical-00713",
+      "country-002-physical-00679",
+      "country-002-physical-00640",
+      "country-002-physical-00703",
+      "country-002-physical-00737",
+      "country-002-physical-00774"
+    ],
+    "bounds": {
+      "x": 5202,
+      "y": 1534,
+      "width": 412,
+      "height": 345
+    },
+    "centroid": {
+      "x": 5464.960582690658,
+      "y": 1718.935732647815
+    },
+    "pixelCount": 1167,
+    "representative": {
+      "x": 5368,
+      "y": 1725
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-019.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-019-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 22
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-020",
+    "displayGroupId": "country-002-group-020",
+    "physicalComponentIds": [
+      "country-002-physical-00684",
+      "country-002-physical-00674"
+    ],
+    "bounds": {
+      "x": 4303,
+      "y": 1615,
+      "width": 13,
+      "height": 27
+    },
+    "centroid": {
+      "x": 4308.09375,
+      "y": 1633.6953125
+    },
+    "pixelCount": 128,
+    "representative": {
+      "x": 4305,
+      "y": 1630
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-020.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-020-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-021",
+    "displayGroupId": "country-002-group-021",
+    "physicalComponentIds": [
+      "country-002-physical-00698",
+      "country-002-physical-00723",
+      "country-002-physical-00689",
+      "country-002-physical-00699",
+      "country-002-physical-00700",
+      "country-002-physical-00709",
+      "country-002-physical-00730",
+      "country-002-physical-00691",
+      "country-002-physical-00714",
+      "country-002-physical-00729",
+      "country-002-physical-00696",
+      "country-002-physical-00680",
+      "country-002-physical-00690",
+      "country-002-physical-00706",
+      "country-002-physical-00716",
+      "country-002-physical-00727",
+      "country-002-physical-00757",
+      "country-002-physical-00688",
+      "country-002-physical-00759",
+      "country-002-physical-00766",
+      "country-002-physical-00683",
+      "country-002-physical-00712",
+      "country-002-physical-00732",
+      "country-002-physical-00720",
+      "country-002-physical-00769",
+      "country-002-physical-00694",
+      "country-002-physical-00708",
+      "country-002-physical-00719",
+      "country-002-physical-00721",
+      "country-002-physical-00724",
+      "country-002-physical-00731",
+      "country-002-physical-00753",
+      "country-002-physical-00685",
+      "country-002-physical-00687",
+      "country-002-physical-00701",
+      "country-002-physical-00726",
+      "country-002-physical-00735",
+      "country-002-physical-00745",
+      "country-002-physical-00758",
+      "country-002-physical-00765",
+      "country-002-physical-00767",
+      "country-002-physical-00770",
+      "country-002-physical-00738",
+      "country-002-physical-00764",
+      "country-002-physical-00768"
+    ],
+    "bounds": {
+      "x": 446,
+      "y": 1626,
+      "width": 323,
+      "height": 165
+    },
+    "centroid": {
+      "x": 553.7598039215688,
+      "y": 1669.3496732026144
+    },
+    "pixelCount": 612,
+    "representative": {
+      "x": 527,
+      "y": 1650
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-021.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-021-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 45
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-022",
+    "displayGroupId": "country-002-group-022",
+    "physicalComponentIds": [
+      "country-002-physical-00771",
+      "country-002-physical-00751",
+      "country-002-physical-00772"
+    ],
+    "bounds": {
+      "x": 4571,
+      "y": 1732,
+      "width": 38,
+      "height": 91
+    },
+    "centroid": {
+      "x": 4583.1612903225805,
+      "y": 1804.6774193548388
+    },
+    "pixelCount": 31,
+    "representative": {
+      "x": 4578,
+      "y": 1815
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-022.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-022-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-023",
+    "displayGroupId": "country-002-group-023",
+    "physicalComponentIds": [
+      "country-002-physical-00787",
+      "country-002-physical-00788",
+      "country-002-physical-00792"
+    ],
+    "bounds": {
+      "x": 1854,
+      "y": 2075,
+      "width": 52,
+      "height": 20
+    },
+    "centroid": {
+      "x": 1881.3661971830986,
+      "y": 2083.8490945674043
+    },
+    "pixelCount": 497,
+    "representative": {
+      "x": 1889,
+      "y": 2075
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-023.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-023-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-024",
+    "displayGroupId": "country-002-group-024",
+    "physicalComponentIds": [
+      "country-002-physical-00798",
+      "country-002-physical-00797"
+    ],
+    "bounds": {
+      "x": 2204,
+      "y": 2126,
+      "width": 53,
+      "height": 26
+    },
+    "centroid": {
+      "x": 2236.4235924932977,
+      "y": 2136.450402144772
+    },
+    "pixelCount": 373,
+    "representative": {
+      "x": 2210,
+      "y": 2126
+    },
+    "maskPath": "/maps/generated/country-masks/country-002-component-024.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-002-component-024-label-envelope.png",
+    "labelEnvelopeBuffer": 18,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 3,
+    "componentId": "country-003-component-001",
+    "displayGroupId": "country-003-group-001",
+    "physicalComponentIds": [
+      "country-003-physical-00015",
+      "country-003-physical-00040"
+    ],
+    "bounds": {
+      "x": 3559,
+      "y": 0,
+      "width": 146,
+      "height": 94
+    },
+    "centroid": {
+      "x": 3640.3721694667643,
+      "y": 30.2509130752374
+    },
+    "pixelCount": 2738,
+    "representative": {
+      "x": 3610,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-003-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-003-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 13,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 3,
+    "componentId": "country-003-component-002",
+    "displayGroupId": "country-003-group-002",
+    "physicalComponentIds": [
+      "country-003-physical-00033",
+      "country-003-physical-00062",
+      "country-003-physical-00052"
+    ],
+    "bounds": {
+      "x": 3164,
+      "y": 45,
+      "width": 708,
+      "height": 591
+    },
+    "centroid": {
+      "x": 3523.2804271009372,
+      "y": 337.11356583192503
+    },
+    "pixelCount": 195270,
+    "representative": {
+      "x": 3726,
+      "y": 45
+    },
+    "maskPath": "/maps/generated/country-masks/country-003-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-003-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 83,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-001",
+    "displayGroupId": "country-004-group-001",
+    "physicalComponentIds": [
+      "country-004-physical-00016"
+    ],
+    "bounds": {
+      "x": 3714,
+      "y": 0,
+      "width": 1900,
+      "height": 549
+    },
+    "centroid": {
+      "x": 4588.855267479236,
+      "y": 231.51066975655888
+    },
+    "pixelCount": 758171,
+    "representative": {
+      "x": 3877,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-002",
+    "displayGroupId": "country-004-group-002",
+    "physicalComponentIds": [
+      "country-004-physical-00017"
+    ],
+    "bounds": {
+      "x": 4820,
+      "y": 2,
+      "width": 6,
+      "height": 7
+    },
+    "centroid": {
+      "x": 4822.857142857143,
+      "y": 5.857142857142857
+    },
+    "pixelCount": 21,
+    "representative": {
+      "x": 4822,
+      "y": 2
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-003",
+    "displayGroupId": "country-004-group-003",
+    "physicalComponentIds": [
+      "country-004-physical-00111",
+      "country-004-physical-00127"
+    ],
+    "bounds": {
+      "x": 5150,
+      "y": 306,
+      "width": 220,
+      "height": 34
+    },
+    "centroid": {
+      "x": 5347.330708661418,
+      "y": 315.2755905511811
+    },
+    "pixelCount": 127,
+    "representative": {
+      "x": 5366,
+      "y": 306
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-004",
+    "displayGroupId": "country-004-group-004",
+    "physicalComponentIds": [
+      "country-004-physical-00148",
+      "country-004-physical-00149"
+    ],
+    "bounds": {
+      "x": 5382,
+      "y": 387,
+      "width": 34,
+      "height": 10
+    },
+    "centroid": {
+      "x": 5392.557142857143,
+      "y": 391.51428571428573
+    },
+    "pixelCount": 70,
+    "representative": {
+      "x": 5385,
+      "y": 387
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-004.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-005",
+    "displayGroupId": "country-004-group-005",
+    "physicalComponentIds": [
+      "country-004-physical-00184",
+      "country-004-physical-00180"
+    ],
+    "bounds": {
+      "x": 4478,
+      "y": 464,
+      "width": 11,
+      "height": 6
+    },
+    "centroid": {
+      "x": 4482.727272727273,
+      "y": 467.5
+    },
+    "pixelCount": 22,
+    "representative": {
+      "x": 4485,
+      "y": 466
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-005.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-006",
+    "displayGroupId": "country-004-group-006",
+    "physicalComponentIds": [
+      "country-004-physical-00205",
+      "country-004-physical-00204"
+    ],
+    "bounds": {
+      "x": 5190,
+      "y": 535,
+      "width": 21,
+      "height": 21
+    },
+    "centroid": {
+      "x": 5198.788990825688,
+      "y": 544.954128440367
+    },
+    "pixelCount": 109,
+    "representative": {
+      "x": 5208,
+      "y": 535
+    },
+    "maskPath": "/maps/generated/country-masks/country-004-component-006.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 5,
+    "componentId": "country-005-component-001",
+    "displayGroupId": "country-005-group-001",
+    "physicalComponentIds": [
+      "country-005-physical-00026",
+      "country-005-physical-00140",
+      "country-005-physical-00153",
+      "country-005-physical-00157",
+      "country-005-physical-00136",
+      "country-005-physical-00089",
+      "country-005-physical-00106",
+      "country-005-physical-00030",
+      "country-005-physical-00146",
+      "country-005-physical-00166",
+      "country-005-physical-00024",
+      "country-005-physical-00160",
+      "country-005-physical-00034",
+      "country-005-physical-00113",
+      "country-005-physical-00063",
+      "country-005-physical-00082",
+      "country-005-physical-00067",
+      "country-005-physical-00028",
+      "country-005-physical-00096",
+      "country-005-physical-00110",
+      "country-005-physical-00029",
+      "country-005-physical-00143",
+      "country-005-physical-00155",
+      "country-005-physical-00091",
+      "country-005-physical-00115",
+      "country-005-physical-00117",
+      "country-005-physical-00142",
+      "country-005-physical-00027",
+      "country-005-physical-00056",
+      "country-005-physical-00109",
+      "country-005-physical-00116",
+      "country-005-physical-00042",
+      "country-005-physical-00114",
+      "country-005-physical-00165"
+    ],
+    "bounds": {
+      "x": 2665,
+      "y": 25,
+      "width": 788,
+      "height": 409
+    },
+    "centroid": {
+      "x": 3146.5368905280275,
+      "y": 202.80732853488786
+    },
+    "pixelCount": 100866,
+    "representative": {
+      "x": 3207,
+      "y": 26
+    },
+    "maskPath": "/maps/generated/country-masks/country-005-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-005-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 57,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 34
+  },
+  {
+    "countryId": 5,
+    "componentId": "country-005-component-002",
+    "displayGroupId": "country-005-group-002",
+    "physicalComponentIds": [
+      "country-005-physical-00239"
+    ],
+    "bounds": {
+      "x": 4997,
+      "y": 681,
+      "width": 1,
+      "height": 2
+    },
+    "centroid": {
+      "x": 4997,
+      "y": 681.5
+    },
+    "pixelCount": 2,
+    "representative": {
+      "x": 4997,
+      "y": 681
+    },
+    "maskPath": "/maps/generated/country-masks/country-005-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 6,
+    "componentId": "country-006-component-001",
+    "displayGroupId": "country-006-group-001",
+    "physicalComponentIds": [
+      "country-006-physical-00120",
+      "country-006-physical-00132",
+      "country-006-physical-00126"
+    ],
+    "bounds": {
+      "x": 3133,
+      "y": 321,
+      "width": 114,
+      "height": 139
+    },
+    "centroid": {
+      "x": 3191.5798718515243,
+      "y": 385.60086168802474
+    },
+    "pixelCount": 9052,
+    "representative": {
+      "x": 3208,
+      "y": 321
+    },
+    "maskPath": "/maps/generated/country-masks/country-006-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-006-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 16,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 7,
+    "componentId": "country-007-component-001",
+    "displayGroupId": "country-007-group-001",
+    "physicalComponentIds": [
+      "country-007-physical-00135",
+      "country-007-physical-00161"
+    ],
+    "bounds": {
+      "x": 1324,
+      "y": 359,
+      "width": 325,
+      "height": 196
+    },
+    "centroid": {
+      "x": 1455.1078745198463,
+      "y": 462.81091092006585
+    },
+    "pixelCount": 21868,
+    "representative": {
+      "x": 1329,
+      "y": 359
+    },
+    "maskPath": "/maps/generated/country-masks/country-007-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 8,
+    "componentId": "country-008-component-001",
+    "displayGroupId": "country-008-group-001",
+    "physicalComponentIds": [
+      "country-008-physical-00156"
+    ],
+    "bounds": {
+      "x": 2895,
+      "y": 406,
+      "width": 268,
+      "height": 145
+    },
+    "centroid": {
+      "x": 3014.5619848156184,
+      "y": 480.5266268980477
+    },
+    "pixelCount": 18440,
+    "representative": {
+      "x": 3136,
+      "y": 406
+    },
+    "maskPath": "/maps/generated/country-masks/country-008-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 9,
+    "componentId": "country-009-component-001",
+    "displayGroupId": "country-009-group-001",
+    "physicalComponentIds": [
+      "country-009-physical-00158"
+    ],
+    "bounds": {
+      "x": 3588,
+      "y": 417,
+      "width": 581,
+      "height": 266
+    },
+    "centroid": {
+      "x": 3879.825997619636,
+      "y": 549.1907547551144
+    },
+    "pixelCount": 89062,
+    "representative": {
+      "x": 3883,
+      "y": 417
+    },
+    "maskPath": "/maps/generated/country-masks/country-009-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 10,
+    "componentId": "country-010-component-001",
+    "displayGroupId": "country-010-group-001",
+    "physicalComponentIds": [
+      "country-010-physical-00163",
+      "country-010-physical-00169",
+      "country-010-physical-00162",
+      "country-010-physical-00164"
+    ],
+    "bounds": {
+      "x": 4771,
+      "y": 422,
+      "width": 283,
+      "height": 255
+    },
+    "centroid": {
+      "x": 4915.847666371978,
+      "y": 524.8280035362619
+    },
+    "pixelCount": 32803,
+    "representative": {
+      "x": 4899,
+      "y": 424
+    },
+    "maskPath": "/maps/generated/country-masks/country-010-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-010-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 36,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 11,
+    "componentId": "country-011-component-001",
+    "displayGroupId": "country-011-group-001",
+    "physicalComponentIds": [
+      "country-011-physical-00174"
+    ],
+    "bounds": {
+      "x": 3083,
+      "y": 457,
+      "width": 139,
+      "height": 120
+    },
+    "centroid": {
+      "x": 3149.9489870637053,
+      "y": 513.3070539419087
+    },
+    "pixelCount": 8194,
+    "representative": {
+      "x": 3153,
+      "y": 457
+    },
+    "maskPath": "/maps/generated/country-masks/country-011-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 12,
+    "componentId": "country-012-component-001",
+    "displayGroupId": "country-012-group-001",
+    "physicalComponentIds": [
+      "country-012-physical-00175"
+    ],
+    "bounds": {
+      "x": 4214,
+      "y": 458,
+      "width": 696,
+      "height": 359
+    },
+    "centroid": {
+      "x": 4587.134143955852,
+      "y": 664.0202827226209
+    },
+    "pixelCount": 97127,
+    "representative": {
+      "x": 4728,
+      "y": 458
+    },
+    "maskPath": "/maps/generated/country-masks/country-012-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 13,
+    "componentId": "country-013-component-001",
+    "displayGroupId": "country-013-group-001",
+    "physicalComponentIds": [
+      "country-013-physical-00176",
+      "country-013-physical-00237",
+      "country-013-physical-00309",
+      "country-013-physical-00182",
+      "country-013-physical-00206",
+      "country-013-physical-00220",
+      "country-013-physical-00214"
+    ],
+    "bounds": {
+      "x": 2732,
+      "y": 459,
+      "width": 247,
+      "height": 381
+    },
+    "centroid": {
+      "x": 2849.654269793962,
+      "y": 590.3179560278174
+    },
+    "pixelCount": 23151,
+    "representative": {
+      "x": 2909,
+      "y": 459
+    },
+    "maskPath": "/maps/generated/country-masks/country-013-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-013-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 35,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 7
+  },
+  {
+    "countryId": 13,
+    "componentId": "country-013-component-002",
+    "displayGroupId": "country-013-group-002",
+    "physicalComponentIds": [
+      "country-013-physical-00282"
+    ],
+    "bounds": {
+      "x": 2542,
+      "y": 774,
+      "width": 463,
+      "height": 318
+    },
+    "centroid": {
+      "x": 2822.986486001221,
+      "y": 925.7613324874616
+    },
+    "pixelCount": 83543,
+    "representative": {
+      "x": 2956,
+      "y": 774
+    },
+    "maskPath": "/maps/generated/country-masks/country-013-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 14,
+    "componentId": "country-014-component-001",
+    "displayGroupId": "country-014-group-001",
+    "physicalComponentIds": [
+      "country-014-physical-00189"
+    ],
+    "bounds": {
+      "x": 3175,
+      "y": 481,
+      "width": 271,
+      "height": 161
+    },
+    "centroid": {
+      "x": 3314.588846284522,
+      "y": 549.5406979566083
+    },
+    "pixelCount": 20603,
+    "representative": {
+      "x": 3326,
+      "y": 481
+    },
+    "maskPath": "/maps/generated/country-masks/country-014-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 15,
+    "componentId": "country-015-component-001",
+    "displayGroupId": "country-015-group-001",
+    "physicalComponentIds": [
+      "country-015-physical-00191"
+    ],
+    "bounds": {
+      "x": 4177,
+      "y": 487,
+      "width": 502,
+      "height": 207
+    },
+    "centroid": {
+      "x": 4415.912859838321,
+      "y": 590.516574633454
+    },
+    "pixelCount": 57769,
+    "representative": {
+      "x": 4350,
+      "y": 487
+    },
+    "maskPath": "/maps/generated/country-masks/country-015-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 16,
+    "componentId": "country-016-component-001",
+    "displayGroupId": "country-016-group-001",
+    "physicalComponentIds": [
+      "country-016-physical-00198"
+    ],
+    "bounds": {
+      "x": 3000,
+      "y": 511,
+      "width": 92,
+      "height": 49
+    },
+    "centroid": {
+      "x": 3044.9406392694063,
+      "y": 535.6011089367254
+    },
+    "pixelCount": 3066,
+    "representative": {
+      "x": 3041,
+      "y": 511
+    },
+    "maskPath": "/maps/generated/country-masks/country-016-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 17,
+    "componentId": "country-017-component-001",
+    "displayGroupId": "country-017-group-001",
+    "physicalComponentIds": [
+      "country-017-physical-00199"
+    ],
+    "bounds": {
+      "x": 2925,
+      "y": 519,
+      "width": 98,
+      "height": 65
+    },
+    "centroid": {
+      "x": 2972.896868787276,
+      "y": 554.3588469184891
+    },
+    "pixelCount": 4024,
+    "representative": {
+      "x": 2976,
+      "y": 519
+    },
+    "maskPath": "/maps/generated/country-masks/country-017-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 18,
+    "componentId": "country-018-component-001",
+    "displayGroupId": "country-018-group-001",
+    "physicalComponentIds": [
+      "country-018-physical-00243",
+      "country-018-physical-00223",
+      "country-018-physical-00202",
+      "country-018-physical-00306",
+      "country-018-physical-00224",
+      "country-018-physical-00221",
+      "country-018-physical-00229",
+      "country-018-physical-00303",
+      "country-018-physical-00269",
+      "country-018-physical-00350",
+      "country-018-physical-00222",
+      "country-018-physical-00360",
+      "country-018-physical-00332",
+      "country-018-physical-00307",
+      "country-018-physical-00329",
+      "country-018-physical-00211",
+      "country-018-physical-00231",
+      "country-018-physical-00318",
+      "country-018-physical-00291",
+      "country-018-physical-00316",
+      "country-018-physical-00225",
+      "country-018-physical-00293",
+      "country-018-physical-00209",
+      "country-018-physical-00215",
+      "country-018-physical-00240",
+      "country-018-physical-00355",
+      "country-018-physical-00371",
+      "country-018-physical-00213"
+    ],
+    "bounds": {
+      "x": 4803,
+      "y": 532,
+      "width": 377,
+      "height": 465
+    },
+    "centroid": {
+      "x": 4971.975483973342,
+      "y": 743.4749285940972
+    },
+    "pixelCount": 12604,
+    "representative": {
+      "x": 5006,
+      "y": 696
+    },
+    "maskPath": "/maps/generated/country-masks/country-018-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-018-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 53,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 28
+  },
+  {
+    "countryId": 18,
+    "componentId": "country-018-component-002",
+    "displayGroupId": "country-018-group-002",
+    "physicalComponentIds": [
+      "country-018-physical-00368",
+      "country-018-physical-00375",
+      "country-018-physical-00372",
+      "country-018-physical-00378"
+    ],
+    "bounds": {
+      "x": 4681,
+      "y": 987,
+      "width": 82,
+      "height": 56
+    },
+    "centroid": {
+      "x": 4694.662844036698,
+      "y": 1012.1376146788991
+    },
+    "pixelCount": 872,
+    "representative": {
+      "x": 4702,
+      "y": 987
+    },
+    "maskPath": "/maps/generated/country-masks/country-018-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-018-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 8,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 19,
+    "componentId": "country-019-component-001",
+    "displayGroupId": "country-019-group-001",
+    "physicalComponentIds": [
+      "country-019-physical-00203"
+    ],
+    "bounds": {
+      "x": 3061,
+      "y": 533,
+      "width": 158,
+      "height": 106
+    },
+    "centroid": {
+      "x": 3135.1420775677257,
+      "y": 587.042779185344
+    },
+    "pixelCount": 10262,
+    "representative": {
+      "x": 3092,
+      "y": 533
+    },
+    "maskPath": "/maps/generated/country-masks/country-019-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 20,
+    "componentId": "country-020-component-001",
+    "displayGroupId": "country-020-group-001",
+    "physicalComponentIds": [
+      "country-020-physical-00207"
+    ],
+    "bounds": {
+      "x": 3993,
+      "y": 548,
+      "width": 255,
+      "height": 259
+    },
+    "centroid": {
+      "x": 4130.201931431692,
+      "y": 692.9601797373451
+    },
+    "pixelCount": 40281,
+    "representative": {
+      "x": 4168,
+      "y": 548
+    },
+    "maskPath": "/maps/generated/country-masks/country-020-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 21,
+    "componentId": "country-021-component-001",
+    "displayGroupId": "country-021-group-001",
+    "physicalComponentIds": [
+      "country-021-physical-00208"
+    ],
+    "bounds": {
+      "x": 2955,
+      "y": 551,
+      "width": 119,
+      "height": 52
+    },
+    "centroid": {
+      "x": 3027.1882817643186,
+      "y": 578.6550362080316
+    },
+    "pixelCount": 3038,
+    "representative": {
+      "x": 3041,
+      "y": 551
+    },
+    "maskPath": "/maps/generated/country-masks/country-021-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 22,
+    "componentId": "country-022-component-001",
+    "displayGroupId": "country-022-group-001",
+    "physicalComponentIds": [
+      "country-022-physical-00210"
+    ],
+    "bounds": {
+      "x": 3157,
+      "y": 559,
+      "width": 128,
+      "height": 98
+    },
+    "centroid": {
+      "x": 3224.43895531781,
+      "y": 614.0446821900566
+    },
+    "pixelCount": 6356,
+    "representative": {
+      "x": 3232,
+      "y": 559
+    },
+    "maskPath": "/maps/generated/country-masks/country-022-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 23,
+    "componentId": "country-023-component-001",
+    "displayGroupId": "country-023-group-001",
+    "physicalComponentIds": [
+      "country-023-physical-00212"
+    ],
+    "bounds": {
+      "x": 2900,
+      "y": 576,
+      "width": 71,
+      "height": 37
+    },
+    "centroid": {
+      "x": 2935.000666666667,
+      "y": 594.5206666666667
+    },
+    "pixelCount": 1500,
+    "representative": {
+      "x": 2939,
+      "y": 576
+    },
+    "maskPath": "/maps/generated/country-masks/country-023-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 24,
+    "componentId": "country-024-component-001",
+    "displayGroupId": "country-024-group-001",
+    "physicalComponentIds": [
+      "country-024-physical-00216",
+      "country-024-physical-00244",
+      "country-024-physical-00270",
+      "country-024-physical-00294",
+      "country-024-physical-00238"
+    ],
+    "bounds": {
+      "x": 2911,
+      "y": 589,
+      "width": 184,
+      "height": 214
+    },
+    "centroid": {
+      "x": 2995.166457347116,
+      "y": 668.9824171577625
+    },
+    "pixelCount": 10351,
+    "representative": {
+      "x": 2996,
+      "y": 589
+    },
+    "maskPath": "/maps/generated/country-masks/country-024-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-024-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 26,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 5
+  },
+  {
+    "countryId": 24,
+    "componentId": "country-024-component-002",
+    "displayGroupId": "country-024-group-002",
+    "physicalComponentIds": [
+      "country-024-physical-00314"
+    ],
+    "bounds": {
+      "x": 2984,
+      "y": 850,
+      "width": 216,
+      "height": 233
+    },
+    "centroid": {
+      "x": 3101.4541109530583,
+      "y": 957.5660881934566
+    },
+    "pixelCount": 35150,
+    "representative": {
+      "x": 2987,
+      "y": 850
+    },
+    "maskPath": "/maps/generated/country-masks/country-024-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 25,
+    "componentId": "country-025-component-001",
+    "displayGroupId": "country-025-group-001",
+    "physicalComponentIds": [
+      "country-025-physical-00217",
+      "country-025-physical-00236",
+      "country-025-physical-00226",
+      "country-025-physical-00235"
+    ],
+    "bounds": {
+      "x": 3022,
+      "y": 593,
+      "width": 231,
+      "height": 130
+    },
+    "centroid": {
+      "x": 3130.519619302054,
+      "y": 658.4969944898982
+    },
+    "pixelCount": 11978,
+    "representative": {
+      "x": 3059,
+      "y": 593
+    },
+    "maskPath": "/maps/generated/country-masks/country-025-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 26,
+    "componentId": "country-026-component-001",
+    "displayGroupId": "country-026-group-001",
+    "physicalComponentIds": [
+      "country-026-physical-00218"
+    ],
+    "bounds": {
+      "x": 3379,
+      "y": 596,
+      "width": 213,
+      "height": 150
+    },
+    "centroid": {
+      "x": 3490.411624258135,
+      "y": 663.2320076403574
+    },
+    "pixelCount": 14659,
+    "representative": {
+      "x": 3420,
+      "y": 596
+    },
+    "maskPath": "/maps/generated/country-masks/country-026-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 27,
+    "componentId": "country-027-component-001",
+    "displayGroupId": "country-027-group-001",
+    "physicalComponentIds": [
+      "country-027-physical-00219"
+    ],
+    "bounds": {
+      "x": 3595,
+      "y": 602,
+      "width": 464,
+      "height": 216
+    },
+    "centroid": {
+      "x": 3806.808995275812,
+      "y": 712.1998384292514
+    },
+    "pixelCount": 56941,
+    "representative": {
+      "x": 3671,
+      "y": 602
+    },
+    "maskPath": "/maps/generated/country-masks/country-027-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 28,
+    "componentId": "country-028-component-001",
+    "displayGroupId": "country-028-group-001",
+    "physicalComponentIds": [
+      "country-028-physical-00054",
+      "country-028-physical-00074"
+    ],
+    "bounds": {
+      "x": 676,
+      "y": 158,
+      "width": 75,
+      "height": 61
+    },
+    "centroid": {
+      "x": 701,
+      "y": 178.33333333333334
+    },
+    "pixelCount": 3,
+    "representative": {
+      "x": 677,
+      "y": 158
+    },
+    "maskPath": "/maps/generated/country-masks/country-028-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 28,
+    "componentId": "country-028-component-002",
+    "displayGroupId": "country-028-group-002",
+    "physicalComponentIds": [
+      "country-028-physical-00193"
+    ],
+    "bounds": {
+      "x": 2649,
+      "y": 494,
+      "width": 1,
+      "height": 1
+    },
+    "centroid": {
+      "x": 2649,
+      "y": 494
+    },
+    "pixelCount": 1,
+    "representative": {
+      "x": 2649,
+      "y": 494
+    },
+    "maskPath": "/maps/generated/country-masks/country-028-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 28,
+    "componentId": "country-028-component-003",
+    "displayGroupId": "country-028-group-003",
+    "physicalComponentIds": [
+      "country-028-physical-00227",
+      "country-028-physical-00281"
+    ],
+    "bounds": {
+      "x": 4747,
+      "y": 635,
+      "width": 110,
+      "height": 195
+    },
+    "centroid": {
+      "x": 4800.81649160932,
+      "y": 734.29313050827
+    },
+    "pixelCount": 8283,
+    "representative": {
+      "x": 4851,
+      "y": 635
+    },
+    "maskPath": "/maps/generated/country-masks/country-028-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 28,
+    "componentId": "country-028-component-004",
+    "displayGroupId": "country-028-group-004",
+    "physicalComponentIds": [
+      "country-028-physical-00311",
+      "country-028-physical-00302"
+    ],
+    "bounds": {
+      "x": 4776,
+      "y": 819,
+      "width": 40,
+      "height": 31
+    },
+    "centroid": {
+      "x": 4786.11475409836,
+      "y": 842.6229508196722
+    },
+    "pixelCount": 61,
+    "representative": {
+      "x": 4781,
+      "y": 844
+    },
+    "maskPath": "/maps/generated/country-masks/country-028-component-004.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 29,
+    "componentId": "country-029-component-001",
+    "displayGroupId": "country-029-group-001",
+    "physicalComponentIds": [
+      "country-029-physical-00233",
+      "country-029-physical-00255",
+      "country-029-physical-00252",
+      "country-029-physical-00259"
+    ],
+    "bounds": {
+      "x": 2659,
+      "y": 654,
+      "width": 215,
+      "height": 144
+    },
+    "centroid": {
+      "x": 2724.9887107212194,
+      "y": 726.2748256273819
+    },
+    "pixelCount": 13907,
+    "representative": {
+      "x": 2682,
+      "y": 654
+    },
+    "maskPath": "/maps/generated/country-masks/country-029-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-029-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 20,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 29,
+    "componentId": "country-029-component-002",
+    "displayGroupId": "country-029-group-002",
+    "physicalComponentIds": [
+      "country-029-physical-00348",
+      "country-029-physical-00317",
+      "country-029-physical-00352",
+      "country-029-physical-00345",
+      "country-029-physical-00272",
+      "country-029-physical-00342",
+      "country-029-physical-00344",
+      "country-029-physical-00261",
+      "country-029-physical-00265",
+      "country-029-physical-00351",
+      "country-029-physical-00354",
+      "country-029-physical-00263"
+    ],
+    "bounds": {
+      "x": 2357,
+      "y": 747,
+      "width": 240,
+      "height": 199
+    },
+    "centroid": {
+      "x": 2526.099644128114,
+      "y": 887.5658362989324
+    },
+    "pixelCount": 281,
+    "representative": {
+      "x": 2551,
+      "y": 931
+    },
+    "maskPath": "/maps/generated/country-masks/country-029-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-029-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 28,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 12
+  },
+  {
+    "countryId": 30,
+    "componentId": "country-030-component-001",
+    "displayGroupId": "country-030-group-001",
+    "physicalComponentIds": [
+      "country-030-physical-00234"
+    ],
+    "bounds": {
+      "x": 2749,
+      "y": 660,
+      "width": 86,
+      "height": 67
+    },
+    "centroid": {
+      "x": 2785.9535288992156,
+      "y": 691.5367412140575
+    },
+    "pixelCount": 3443,
+    "representative": {
+      "x": 2760,
+      "y": 660
+    },
+    "maskPath": "/maps/generated/country-masks/country-030-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 31,
+    "componentId": "country-031-component-001",
+    "displayGroupId": "country-031-group-001",
+    "physicalComponentIds": [
+      "country-031-physical-00242",
+      "country-031-physical-00241",
+      "country-031-physical-00299",
+      "country-031-physical-00298",
+      "country-031-physical-00257",
+      "country-031-physical-00289",
+      "country-031-physical-00267",
+      "country-031-physical-00264",
+      "country-031-physical-00274",
+      "country-031-physical-00253",
+      "country-031-physical-00271",
+      "country-031-physical-00283",
+      "country-031-physical-00290",
+      "country-031-physical-00273",
+      "country-031-physical-00278",
+      "country-031-physical-00247",
+      "country-031-physical-00250",
+      "country-031-physical-00249",
+      "country-031-physical-00260",
+      "country-031-physical-00287",
+      "country-031-physical-00245",
+      "country-031-physical-00251",
+      "country-031-physical-00297",
+      "country-031-physical-00277",
+      "country-031-physical-00288",
+      "country-031-physical-00276",
+      "country-031-physical-00286",
+      "country-031-physical-00280"
+    ],
+    "bounds": {
+      "x": 3113,
+      "y": 686,
+      "width": 495,
+      "height": 448
+    },
+    "centroid": {
+      "x": 3386.2568256505906,
+      "y": 815.6620303756995
+    },
+    "pixelCount": 56295,
+    "representative": {
+      "x": 3352,
+      "y": 686
+    },
+    "maskPath": "/maps/generated/country-masks/country-031-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-031-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 63,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 28
+  },
+  {
+    "countryId": 32,
+    "componentId": "country-032-component-001",
+    "displayGroupId": "country-032-group-001",
+    "physicalComponentIds": [
+      "country-032-physical-00254"
+    ],
+    "bounds": {
+      "x": 3495,
+      "y": 724,
+      "width": 430,
+      "height": 266
+    },
+    "centroid": {
+      "x": 3695.467754166299,
+      "y": 859.2951591570409
+    },
+    "pixelCount": 56705,
+    "representative": {
+      "x": 3563,
+      "y": 724
+    },
+    "maskPath": "/maps/generated/country-masks/country-032-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 33,
+    "componentId": "country-033-component-001",
+    "displayGroupId": "country-033-group-001",
+    "physicalComponentIds": [
+      "country-033-physical-00256",
+      "country-033-physical-00322",
+      "country-033-physical-00403",
+      "country-033-physical-00315",
+      "country-033-physical-00398",
+      "country-033-physical-00383"
+    ],
+    "bounds": {
+      "x": 1068,
+      "y": 736,
+      "width": 534,
+      "height": 353
+    },
+    "centroid": {
+      "x": 1300.3014203933026,
+      "y": 886.7542216580038
+    },
+    "pixelCount": 41749,
+    "representative": {
+      "x": 1072,
+      "y": 736
+    },
+    "maskPath": "/maps/generated/country-masks/country-033-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 6
+  },
+  {
+    "countryId": 34,
+    "componentId": "country-034-component-001",
+    "displayGroupId": "country-034-group-001",
+    "physicalComponentIds": [
+      "country-034-physical-00262"
+    ],
+    "bounds": {
+      "x": 4310,
+      "y": 749,
+      "width": 193,
+      "height": 114
+    },
+    "centroid": {
+      "x": 4408.469099032018,
+      "y": 803.604285596095
+    },
+    "pixelCount": 12087,
+    "representative": {
+      "x": 4329,
+      "y": 749
+    },
+    "maskPath": "/maps/generated/country-masks/country-034-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 35,
+    "componentId": "country-035-component-001",
+    "displayGroupId": "country-035-group-001",
+    "physicalComponentIds": [
+      "country-035-physical-00266"
+    ],
+    "bounds": {
+      "x": 4007,
+      "y": 754,
+      "width": 346,
+      "height": 208
+    },
+    "centroid": {
+      "x": 4192.241620205548,
+      "y": 860.9647567228678
+    },
+    "pixelCount": 44661,
+    "representative": {
+      "x": 4211,
+      "y": 754
+    },
+    "maskPath": "/maps/generated/country-masks/country-035-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-001",
+    "displayGroupId": "country-036-group-001",
+    "physicalComponentIds": [
+      "country-036-physical-00268"
+    ],
+    "bounds": {
+      "x": 4453,
+      "y": 755,
+      "width": 266,
+      "height": 226
+    },
+    "centroid": {
+      "x": 4576.517253493637,
+      "y": 859.1142165664767
+    },
+    "pixelCount": 25618,
+    "representative": {
+      "x": 4642,
+      "y": 755
+    },
+    "maskPath": "/maps/generated/country-masks/country-036-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-002",
+    "displayGroupId": "country-036-group-002",
+    "physicalComponentIds": [
+      "country-036-physical-00566"
+    ],
+    "bounds": {
+      "x": 3258,
+      "y": 1413,
+      "width": 182,
+      "height": 233
+    },
+    "centroid": {
+      "x": 3356.2649716055757,
+      "y": 1516.185725348477
+    },
+    "pixelCount": 23244,
+    "representative": {
+      "x": 3295,
+      "y": 1413
+    },
+    "maskPath": "/maps/generated/country-masks/country-036-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-003",
+    "displayGroupId": "country-036-group-003",
+    "physicalComponentIds": [
+      "country-036-physical-00588"
+    ],
+    "bounds": {
+      "x": 2990,
+      "y": 1450,
+      "width": 229,
+      "height": 238
+    },
+    "centroid": {
+      "x": 3095.882087375918,
+      "y": 1572.8219112781112
+    },
+    "pixelCount": 35662,
+    "representative": {
+      "x": 3078,
+      "y": 1450
+    },
+    "maskPath": "/maps/generated/country-masks/country-036-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-004",
+    "displayGroupId": "country-036-group-004",
+    "physicalComponentIds": [
+      "country-036-physical-00604",
+      "country-036-physical-00593"
+    ],
+    "bounds": {
+      "x": 3418,
+      "y": 1476,
+      "width": 10,
+      "height": 25
+    },
+    "centroid": {
+      "x": 3422.2127659574467,
+      "y": 1490.063829787234
+    },
+    "pixelCount": 47,
+    "representative": {
+      "x": 3419,
+      "y": 1490
+    },
+    "maskPath": "/maps/generated/country-masks/country-036-component-004.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 37,
+    "componentId": "country-037-component-001",
+    "displayGroupId": "country-037-group-001",
+    "physicalComponentIds": [
+      "country-037-physical-00304",
+      "country-037-physical-00325",
+      "country-037-physical-00335",
+      "country-037-physical-00336",
+      "country-037-physical-00292",
+      "country-037-physical-00353",
+      "country-037-physical-00313",
+      "country-037-physical-00361",
+      "country-037-physical-00366",
+      "country-037-physical-00369",
+      "country-037-physical-00357",
+      "country-037-physical-00370",
+      "country-037-physical-00384",
+      "country-037-physical-00319",
+      "country-037-physical-00380",
+      "country-037-physical-00301",
+      "country-037-physical-00341",
+      "country-037-physical-00339",
+      "country-037-physical-00312",
+      "country-037-physical-00337",
+      "country-037-physical-00347",
+      "country-037-physical-00343",
+      "country-037-physical-00330",
+      "country-037-physical-00328",
+      "country-037-physical-00275",
+      "country-037-physical-00310",
+      "country-037-physical-00308",
+      "country-037-physical-00279",
+      "country-037-physical-00356",
+      "country-037-physical-00346",
+      "country-037-physical-00285",
+      "country-037-physical-00300",
+      "country-037-physical-00296",
+      "country-037-physical-00326",
+      "country-037-physical-00327"
+    ],
+    "bounds": {
+      "x": 1485,
+      "y": 768,
+      "width": 396,
+      "height": 259
+    },
+    "centroid": {
+      "x": 1646.322371967655,
+      "y": 881.2993710691824
+    },
+    "pixelCount": 5565,
+    "representative": {
+      "x": 1524,
+      "y": 827
+    },
+    "maskPath": "/maps/generated/country-masks/country-037-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-037-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 36,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 35
+  },
+  {
+    "countryId": 38,
+    "componentId": "country-038-component-001",
+    "displayGroupId": "country-038-group-001",
+    "physicalComponentIds": [
+      "country-038-physical-00305"
+    ],
+    "bounds": {
+      "x": 4328,
+      "y": 827,
+      "width": 169,
+      "height": 146
+    },
+    "centroid": {
+      "x": 4411.561851722938,
+      "y": 890.5273929690219
+    },
+    "pixelCount": 14365,
+    "representative": {
+      "x": 4349,
+      "y": 827
+    },
+    "maskPath": "/maps/generated/country-masks/country-038-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 39,
+    "componentId": "country-039-component-001",
+    "displayGroupId": "country-039-group-001",
+    "physicalComponentIds": [
+      "country-039-physical-00320",
+      "country-039-physical-00333",
+      "country-039-physical-00362",
+      "country-039-physical-00367",
+      "country-039-physical-00331"
+    ],
+    "bounds": {
+      "x": 4540,
+      "y": 861,
+      "width": 175,
+      "height": 154
+    },
+    "centroid": {
+      "x": 4627.984481776765,
+      "y": 935.9114464692483
+    },
+    "pixelCount": 14048,
+    "representative": {
+      "x": 4638,
+      "y": 861
+    },
+    "maskPath": "/maps/generated/country-masks/country-039-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 5
+  },
+  {
+    "countryId": 40,
+    "componentId": "country-040-component-001",
+    "displayGroupId": "country-040-group-001",
+    "physicalComponentIds": [
+      "country-040-physical-00321"
+    ],
+    "bounds": {
+      "x": 3377,
+      "y": 868,
+      "width": 298,
+      "height": 258
+    },
+    "centroid": {
+      "x": 3513.3231944222684,
+      "y": 1004.0883229549204
+    },
+    "pixelCount": 37578,
+    "representative": {
+      "x": 3418,
+      "y": 868
+    },
+    "maskPath": "/maps/generated/country-masks/country-040-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 41,
+    "componentId": "country-041-component-001",
+    "displayGroupId": "country-041-group-001",
+    "physicalComponentIds": [
+      "country-041-physical-00324"
+    ],
+    "bounds": {
+      "x": 4017,
+      "y": 880,
+      "width": 167,
+      "height": 88
+    },
+    "centroid": {
+      "x": 4096.571428571428,
+      "y": 925.011343972313
+    },
+    "pixelCount": 5201,
+    "representative": {
+      "x": 4039,
+      "y": 880
+    },
+    "maskPath": "/maps/generated/country-masks/country-041-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-001",
+    "displayGroupId": "country-042-group-001",
+    "physicalComponentIds": [
+      "country-042-physical-00349",
+      "country-042-physical-00430",
+      "country-042-physical-00426",
+      "country-042-physical-00498",
+      "country-042-physical-00460",
+      "country-042-physical-00405",
+      "country-042-physical-00464",
+      "country-042-physical-00433",
+      "country-042-physical-00510",
+      "country-042-physical-00395",
+      "country-042-physical-00476",
+      "country-042-physical-00387"
+    ],
+    "bounds": {
+      "x": 4161,
+      "y": 931,
+      "width": 354,
+      "height": 371
+    },
+    "centroid": {
+      "x": 4349.620109875072,
+      "y": 1089.8432813935756
+    },
+    "pixelCount": 51149,
+    "representative": {
+      "x": 4330,
+      "y": 931
+    },
+    "maskPath": "/maps/generated/country-masks/country-042-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-042-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 50,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 12
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-002",
+    "displayGroupId": "country-042-group-002",
+    "physicalComponentIds": [
+      "country-042-physical-00409"
+    ],
+    "bounds": {
+      "x": 1956,
+      "y": 1112,
+      "width": 45,
+      "height": 57
+    },
+    "centroid": {
+      "x": 1975.3610619469027,
+      "y": 1140.4784660766961
+    },
+    "pixelCount": 1695,
+    "representative": {
+      "x": 1964,
+      "y": 1112
+    },
+    "maskPath": "/maps/generated/country-masks/country-042-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-003",
+    "displayGroupId": "country-042-group-003",
+    "physicalComponentIds": [
+      "country-042-physical-00501",
+      "country-042-physical-00553",
+      "country-042-physical-00523",
+      "country-042-physical-00522",
+      "country-042-physical-00538",
+      "country-042-physical-00532",
+      "country-042-physical-00518",
+      "country-042-physical-00529",
+      "country-042-physical-00543",
+      "country-042-physical-00533",
+      "country-042-physical-00514",
+      "country-042-physical-00517",
+      "country-042-physical-00525",
+      "country-042-physical-00595",
+      "country-042-physical-00499"
+    ],
+    "bounds": {
+      "x": 3929,
+      "y": 1287,
+      "width": 25,
+      "height": 195
+    },
+    "centroid": {
+      "x": 3943.7048780487803,
+      "y": 1344.8536585365853
+    },
+    "pixelCount": 410,
+    "representative": {
+      "x": 3944,
+      "y": 1289
+    },
+    "maskPath": "/maps/generated/country-masks/country-042-component-003.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-042-component-003-label-envelope.png",
+    "labelEnvelopeBuffer": 4,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 15
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-004",
+    "displayGroupId": "country-042-group-004",
+    "physicalComponentIds": [
+      "country-042-physical-00672",
+      "country-042-physical-00678",
+      "country-042-physical-00635",
+      "country-042-physical-00644",
+      "country-042-physical-00742",
+      "country-042-physical-00647",
+      "country-042-physical-00541",
+      "country-042-physical-00677",
+      "country-042-physical-00715",
+      "country-042-physical-00734",
+      "country-042-physical-00754",
+      "country-042-physical-00755",
+      "country-042-physical-00660",
+      "country-042-physical-00739",
+      "country-042-physical-00643",
+      "country-042-physical-00524",
+      "country-042-physical-00682",
+      "country-042-physical-00728",
+      "country-042-physical-00736",
+      "country-042-physical-00761",
+      "country-042-physical-00504",
+      "country-042-physical-00508",
+      "country-042-physical-00743",
+      "country-042-physical-00744",
+      "country-042-physical-00746",
+      "country-042-physical-00747",
+      "country-042-physical-00511"
+    ],
+    "bounds": {
+      "x": 5615,
+      "y": 1293,
+      "width": 356,
+      "height": 461
+    },
+    "centroid": {
+      "x": 5778.284768211921,
+      "y": 1610.7450331125826
+    },
+    "pixelCount": 302,
+    "representative": {
+      "x": 117,
+      "y": 1611
+    },
+    "maskPath": "/maps/generated/country-masks/country-042-component-004.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-042-component-004-label-envelope.png",
+    "labelEnvelopeBuffer": 50,
+    "archipelago": true,
+    "wrapsX": true,
+    "groupedTerritoryCount": 27
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-005",
+    "displayGroupId": "country-042-group-005",
+    "physicalComponentIds": [
+      "country-042-physical-00668",
+      "country-042-physical-00673",
+      "country-042-physical-00741",
+      "country-042-physical-00750",
+      "country-042-physical-00662",
+      "country-042-physical-00670",
+      "country-042-physical-00667",
+      "country-042-physical-00669",
+      "country-042-physical-00671"
+    ],
+    "bounds": {
+      "x": 3295,
+      "y": 1579,
+      "width": 421,
+      "height": 236
+    },
+    "centroid": {
+      "x": 3454.982308712959,
+      "y": 1706.6381729725383
+    },
+    "pixelCount": 24871,
+    "representative": {
+      "x": 3574,
+      "y": 1590
+    },
+    "maskPath": "/maps/generated/country-masks/country-042-component-005.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-042-component-005-label-envelope.png",
+    "labelEnvelopeBuffer": 33,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 9
+  },
+  {
+    "countryId": 43,
+    "componentId": "country-043-component-001",
+    "displayGroupId": "country-043-group-001",
+    "physicalComponentIds": [
+      "country-043-physical-00340"
+    ],
+    "bounds": {
+      "x": 4330,
+      "y": 914,
+      "width": 140,
+      "height": 143
+    },
+    "centroid": {
+      "x": 4398.786823734729,
+      "y": 987.1499127399651
+    },
+    "pixelCount": 11460,
+    "representative": {
+      "x": 4354,
+      "y": 914
+    },
+    "maskPath": "/maps/generated/country-masks/country-043-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 44,
+    "componentId": "country-044-component-001",
+    "displayGroupId": "country-044-group-001",
+    "physicalComponentIds": [
+      "country-044-physical-00358",
+      "country-044-physical-00454",
+      "country-044-physical-00447"
+    ],
+    "bounds": {
+      "x": 2536,
+      "y": 953,
+      "width": 338,
+      "height": 301
+    },
+    "centroid": {
+      "x": 2687.671860555023,
+      "y": 1110.7721412603162
+    },
+    "pixelCount": 59493,
+    "representative": {
+      "x": 2672,
+      "y": 953
+    },
+    "maskPath": "/maps/generated/country-masks/country-044-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 45,
+    "componentId": "country-045-component-001",
+    "displayGroupId": "country-045-group-001",
+    "physicalComponentIds": [
+      "country-045-physical-00122"
+    ],
+    "bounds": {
+      "x": 828,
+      "y": 323,
+      "width": 1,
+      "height": 1
+    },
+    "centroid": {
+      "x": 828,
+      "y": 323
+    },
+    "pixelCount": 1,
+    "representative": {
+      "x": 828,
+      "y": 323
+    },
+    "maskPath": "/maps/generated/country-masks/country-045-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 45,
+    "componentId": "country-045-component-002",
+    "displayGroupId": "country-045-group-002",
+    "physicalComponentIds": [
+      "country-045-physical-00359",
+      "country-045-physical-00401"
+    ],
+    "bounds": {
+      "x": 4436,
+      "y": 955,
+      "width": 200,
+      "height": 151
+    },
+    "centroid": {
+      "x": 4527.3484883101055,
+      "y": 1017.1280938237758
+    },
+    "pixelCount": 13131,
+    "representative": {
+      "x": 4550,
+      "y": 955
+    },
+    "maskPath": "/maps/generated/country-masks/country-045-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-045-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 21,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 46,
+    "componentId": "country-046-component-001",
+    "displayGroupId": "country-046-group-001",
+    "physicalComponentIds": [
+      "country-046-physical-00377",
+      "country-046-physical-00386",
+      "country-046-physical-00381",
+      "country-046-physical-00374",
+      "country-046-physical-00385",
+      "country-046-physical-00379",
+      "country-046-physical-00373",
+      "country-046-physical-00396"
+    ],
+    "bounds": {
+      "x": 1544,
+      "y": 1000,
+      "width": 378,
+      "height": 285
+    },
+    "centroid": {
+      "x": 1709.9870347059882,
+      "y": 1138.8017263082181
+    },
+    "pixelCount": 55610,
+    "representative": {
+      "x": 1688,
+      "y": 1005
+    },
+    "maskPath": "/maps/generated/country-masks/country-046-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-046-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 40,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 8
+  },
+  {
+    "countryId": 46,
+    "componentId": "country-046-component-002",
+    "displayGroupId": "country-046-group-002",
+    "physicalComponentIds": [
+      "country-046-physical-00438",
+      "country-046-physical-00446",
+      "country-046-physical-00442",
+      "country-046-physical-00450"
+    ],
+    "bounds": {
+      "x": 1374,
+      "y": 1202,
+      "width": 41,
+      "height": 20
+    },
+    "centroid": {
+      "x": 1385.2228260869565,
+      "y": 1212.9728260869565
+    },
+    "pixelCount": 184,
+    "representative": {
+      "x": 1376,
+      "y": 1202
+    },
+    "maskPath": "/maps/generated/country-masks/country-046-component-002.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-046-component-002-label-envelope.png",
+    "labelEnvelopeBuffer": 3,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 47,
+    "componentId": "country-047-component-001",
+    "displayGroupId": "country-047-group-001",
+    "physicalComponentIds": [
+      "country-047-physical-00382"
+    ],
+    "bounds": {
+      "x": 2869,
+      "y": 1017,
+      "width": 312,
+      "height": 176
+    },
+    "centroid": {
+      "x": 3033.335426424417,
+      "y": 1108.9080755571567
+    },
+    "pixelCount": 38858,
+    "representative": {
+      "x": 2993,
+      "y": 1017
+    },
+    "maskPath": "/maps/generated/country-masks/country-047-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 48,
+    "componentId": "country-048-component-001",
+    "displayGroupId": "country-048-group-001",
+    "physicalComponentIds": [
+      "country-048-physical-00408",
+      "country-048-physical-00414",
+      "country-048-physical-00461"
+    ],
+    "bounds": {
+      "x": 3322,
+      "y": 1109,
+      "width": 287,
+      "height": 315
+    },
+    "centroid": {
+      "x": 3457.2661288270174,
+      "y": 1265.420558369175
+    },
+    "pixelCount": 39293,
+    "representative": {
+      "x": 3408,
+      "y": 1109
+    },
+    "maskPath": "/maps/generated/country-masks/country-048-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 49,
+    "componentId": "country-049-component-001",
+    "displayGroupId": "country-049-group-001",
+    "physicalComponentIds": [
+      "country-049-physical-00410",
+      "country-049-physical-00439",
+      "country-049-physical-00456"
+    ],
+    "bounds": {
+      "x": 1619,
+      "y": 1120,
+      "width": 645,
+      "height": 664
+    },
+    "centroid": {
+      "x": 1977.0297896038942,
+      "y": 1392.895739063847
+    },
+    "pixelCount": 186743,
+    "representative": {
+      "x": 1865,
+      "y": 1120
+    },
+    "maskPath": "/maps/generated/country-masks/country-049-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 49,
+    "componentId": "country-049-component-002",
+    "displayGroupId": "country-049-group-002",
+    "physicalComponentIds": [
+      "country-049-physical-00748",
+      "country-049-physical-00702"
+    ],
+    "bounds": {
+      "x": 2003,
+      "y": 1652,
+      "width": 49,
+      "height": 74
+    },
+    "centroid": {
+      "x": 2022.6,
+      "y": 1695.5
+    },
+    "pixelCount": 10,
+    "representative": {
+      "x": 2005,
+      "y": 1723
+    },
+    "maskPath": "/maps/generated/country-masks/country-049-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 2
+  },
+  {
+    "countryId": 49,
+    "componentId": "country-049-component-003",
+    "displayGroupId": "country-049-group-003",
+    "physicalComponentIds": [
+      "country-049-physical-00718"
+    ],
+    "bounds": {
+      "x": 2989,
+      "y": 1671,
+      "width": 211,
+      "height": 195
+    },
+    "centroid": {
+      "x": 3072.8693334861596,
+      "y": 1749.053183563528
+    },
+    "pixelCount": 17449,
+    "representative": {
+      "x": 3009,
+      "y": 1671
+    },
+    "maskPath": "/maps/generated/country-masks/country-049-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 50,
+    "componentId": "country-050-component-001",
+    "displayGroupId": "country-050-group-001",
+    "physicalComponentIds": [
+      "country-050-physical-00413"
+    ],
+    "bounds": {
+      "x": 2738,
+      "y": 1138,
+      "width": 208,
+      "height": 173
+    },
+    "centroid": {
+      "x": 2835.203732162459,
+      "y": 1203.5768020490304
+    },
+    "pixelCount": 13665,
+    "representative": {
+      "x": 2906,
+      "y": 1138
+    },
+    "maskPath": "/maps/generated/country-masks/country-050-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 51,
+    "componentId": "country-051-component-001",
+    "displayGroupId": "country-051-group-001",
+    "physicalComponentIds": [
+      "country-051-physical-00422"
+    ],
+    "bounds": {
+      "x": 2944,
+      "y": 1176,
+      "width": 353,
+      "height": 362
+    },
+    "centroid": {
+      "x": 3115.8678782875645,
+      "y": 1359.9559895262296
+    },
+    "pixelCount": 77527,
+    "representative": {
+      "x": 3063,
+      "y": 1176
+    },
+    "maskPath": "/maps/generated/country-masks/country-051-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 51,
+    "componentId": "country-051-component-002",
+    "displayGroupId": "country-051-group-002",
+    "physicalComponentIds": [
+      "country-051-physical-00527",
+      "country-051-physical-00556",
+      "country-051-physical-00546"
+    ],
+    "bounds": {
+      "x": 2908,
+      "y": 1338,
+      "width": 38,
+      "height": 59
+    },
+    "centroid": {
+      "x": 2931.5555555555557,
+      "y": 1359.2037037037037
+    },
+    "pixelCount": 54,
+    "representative": {
+      "x": 2944,
+      "y": 1338
+    },
+    "maskPath": "/maps/generated/country-masks/country-051-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 52,
+    "componentId": "country-052-component-001",
+    "displayGroupId": "country-052-group-001",
+    "physicalComponentIds": [
+      "country-052-physical-00478"
+    ],
+    "bounds": {
+      "x": 1537,
+      "y": 1252,
+      "width": 372,
+      "height": 331
+    },
+    "centroid": {
+      "x": 1736.8211450396943,
+      "y": 1433.5641610174575
+    },
+    "pixelCount": 50007,
+    "representative": {
+      "x": 1590,
+      "y": 1252
+    },
+    "maskPath": "/maps/generated/country-masks/country-052-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 53,
+    "componentId": "country-053-component-001",
+    "displayGroupId": "country-053-group-001",
+    "physicalComponentIds": [
+      "country-053-physical-00513",
+      "country-053-physical-00516",
+      "country-053-physical-00562",
+      "country-053-physical-00544",
+      "country-053-physical-00607",
+      "country-053-physical-00633",
+      "country-053-physical-00585",
+      "country-053-physical-00625",
+      "country-053-physical-00631",
+      "country-053-physical-00547",
+      "country-053-physical-00573",
+      "country-053-physical-00649",
+      "country-053-physical-00587",
+      "country-053-physical-00601",
+      "country-053-physical-00539",
+      "country-053-physical-00575",
+      "country-053-physical-00610",
+      "country-053-physical-00630",
+      "country-053-physical-00582",
+      "country-053-physical-00549",
+      "country-053-physical-00654",
+      "country-053-physical-00627",
+      "country-053-physical-00557",
+      "country-053-physical-00614",
+      "country-053-physical-00568",
+      "country-053-physical-00565",
+      "country-053-physical-00561",
+      "country-053-physical-00570",
+      "country-053-physical-00576",
+      "country-053-physical-00617",
+      "country-053-physical-00569",
+      "country-053-physical-00577",
+      "country-053-physical-00536",
+      "country-053-physical-00632",
+      "country-053-physical-00559",
+      "country-053-physical-00537",
+      "country-053-physical-00581",
+      "country-053-physical-00656",
+      "country-053-physical-00551",
+      "country-053-physical-00600",
+      "country-053-physical-00596",
+      "country-053-physical-00563",
+      "country-053-physical-00606",
+      "country-053-physical-00521",
+      "country-053-physical-00552",
+      "country-053-physical-00579",
+      "country-053-physical-00620",
+      "country-053-physical-00528",
+      "country-053-physical-00655",
+      "country-053-physical-00599",
+      "country-053-physical-00611",
+      "country-053-physical-00558",
+      "country-053-physical-00567",
+      "country-053-physical-00629",
+      "country-053-physical-00628",
+      "country-053-physical-00637",
+      "country-053-physical-00531",
+      "country-053-physical-00554",
+      "country-053-physical-00616",
+      "country-053-physical-00574",
+      "country-053-physical-00598",
+      "country-053-physical-00605",
+      "country-053-physical-00613",
+      "country-053-physical-00626"
+    ],
+    "bounds": {
+      "x": 4293,
+      "y": 1306,
+      "width": 715,
+      "height": 267
+    },
+    "centroid": {
+      "x": 4642.368497589099,
+      "y": 1433.58389672679
+    },
+    "pixelCount": 39197,
+    "representative": {
+      "x": 4637,
+      "y": 1306
+    },
+    "maskPath": "/maps/generated/country-masks/country-053-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-053-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 48,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 64
+  },
+  {
+    "countryId": 54,
+    "componentId": "country-054-component-001",
+    "displayGroupId": "country-054-group-001",
+    "physicalComponentIds": [
+      "country-054-physical-00592"
+    ],
+    "bounds": {
+      "x": 1626,
+      "y": 1474,
+      "width": 135,
+      "height": 678
+    },
+    "centroid": {
+      "x": 1692.3200796127924,
+      "y": 1836.383362735785
+    },
+    "pixelCount": 22107,
+    "representative": {
+      "x": 1707,
+      "y": 1474
+    },
+    "maskPath": "/maps/generated/country-masks/country-054-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 54,
+    "componentId": "country-054-component-002",
+    "displayGroupId": "country-054-group-002",
+    "physicalComponentIds": [
+      "country-054-physical-00692"
+    ],
+    "bounds": {
+      "x": 1092,
+      "y": 1642,
+      "width": 16,
+      "height": 13
+    },
+    "centroid": {
+      "x": 1098.9430379746836,
+      "y": 1647.9746835443038
+    },
+    "pixelCount": 158,
+    "representative": {
+      "x": 1096,
+      "y": 1642
+    },
+    "maskPath": "/maps/generated/country-masks/country-054-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 54,
+    "componentId": "country-054-component-003",
+    "displayGroupId": "country-054-group-003",
+    "physicalComponentIds": [
+      "country-054-physical-00782",
+      "country-054-physical-00777",
+      "country-054-physical-00780"
+    ],
+    "bounds": {
+      "x": 1629,
+      "y": 1944,
+      "width": 25,
+      "height": 117
+    },
+    "centroid": {
+      "x": 1634.9054054054054,
+      "y": 2035.1756756756756
+    },
+    "pixelCount": 74,
+    "representative": {
+      "x": 1631,
+      "y": 2047
+    },
+    "maskPath": "/maps/generated/country-masks/country-054-component-003.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 3
+  },
+  {
+    "countryId": 54,
+    "componentId": "country-054-component-004",
+    "displayGroupId": "country-054-group-004",
+    "physicalComponentIds": [
+      "country-054-physical-00789",
+      "country-054-physical-00794",
+      "country-054-physical-00804",
+      "country-054-physical-00790",
+      "country-054-physical-00799",
+      "country-054-physical-00802",
+      "country-054-physical-00796",
+      "country-054-physical-00803"
+    ],
+    "bounds": {
+      "x": 1636,
+      "y": 2077,
+      "width": 121,
+      "height": 79
+    },
+    "centroid": {
+      "x": 1664.6818181818182,
+      "y": 2103.190909090909
+    },
+    "pixelCount": 110,
+    "representative": {
+      "x": 1638,
+      "y": 2077
+    },
+    "maskPath": "/maps/generated/country-masks/country-054-component-004.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 8
+  },
+  {
+    "countryId": 55,
+    "componentId": "country-055-component-001",
+    "displayGroupId": "country-055-group-001",
+    "physicalComponentIds": [
+      "country-055-physical-00609"
+    ],
+    "bounds": {
+      "x": 3119,
+      "y": 1507,
+      "width": 229,
+      "height": 270
+    },
+    "centroid": {
+      "x": 3243.142492844132,
+      "y": 1652.8352849336457
+    },
+    "pixelCount": 38430,
+    "representative": {
+      "x": 3229,
+      "y": 1507
+    },
+    "maskPath": "/maps/generated/country-masks/country-055-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 56,
+    "componentId": "country-056-component-001",
+    "displayGroupId": "country-056-group-001",
+    "physicalComponentIds": [
+      "country-056-physical-00651"
+    ],
+    "bounds": {
+      "x": 1659,
+      "y": 1557,
+      "width": 279,
+      "height": 533
+    },
+    "centroid": {
+      "x": 1791.7731899864964,
+      "y": 1784.0569751739897
+    },
+    "pixelCount": 77016,
+    "representative": {
+      "x": 1773,
+      "y": 1557
+    },
+    "maskPath": "/maps/generated/country-masks/country-056-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 56,
+    "componentId": "country-056-component-002",
+    "displayGroupId": "country-056-group-002",
+    "physicalComponentIds": [
+      "country-056-physical-00795",
+      "country-056-physical-00793",
+      "country-056-physical-00800",
+      "country-056-physical-00801"
+    ],
+    "bounds": {
+      "x": 1735,
+      "y": 2097,
+      "width": 72,
+      "height": 49
+    },
+    "centroid": {
+      "x": 1753.8938605619146,
+      "y": 2128.8407908428717
+    },
+    "pixelCount": 961,
+    "representative": {
+      "x": 1737,
+      "y": 2106
+    },
+    "maskPath": "/maps/generated/country-masks/country-056-component-002.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  },
+  {
+    "countryId": 57,
+    "componentId": "country-057-component-001",
+    "displayGroupId": "country-057-group-001",
+    "physicalComponentIds": [
+      "country-057-physical-00005"
+    ],
+    "bounds": {
+      "x": 606,
+      "y": 0,
+      "width": 1332,
+      "height": 492
+    },
+    "centroid": {
+      "x": 1251.5338410728757,
+      "y": 204.28961196266894
+    },
+    "pixelCount": 344271,
+    "representative": {
+      "x": 607,
+      "y": 0
+    },
+    "maskPath": "/maps/generated/country-masks/country-057-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 58,
+    "componentId": "country-058-component-001",
+    "displayGroupId": "country-058-group-001",
+    "physicalComponentIds": [
+      "country-058-physical-00284"
+    ],
+    "bounds": {
+      "x": 3769,
+      "y": 777,
+      "width": 412,
+      "height": 496
+    },
+    "centroid": {
+      "x": 3991.246141646546,
+      "y": 1001.9639610850732
+    },
+    "pixelCount": 84492,
+    "representative": {
+      "x": 3970,
+      "y": 777
+    },
+    "maskPath": "/maps/generated/country-masks/country-058-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 59,
+    "componentId": "country-059-component-001",
+    "displayGroupId": "country-059-group-001",
+    "physicalComponentIds": [
+      "country-059-physical-00406",
+      "country-059-physical-00474",
+      "country-059-physical-00436",
+      "country-059-physical-00419",
+      "country-059-physical-00459",
+      "country-059-physical-00443",
+      "country-059-physical-00457",
+      "country-059-physical-00427",
+      "country-059-physical-00458",
+      "country-059-physical-00469",
+      "country-059-physical-00435",
+      "country-059-physical-00420",
+      "country-059-physical-00441",
+      "country-059-physical-00505",
+      "country-059-physical-00428",
+      "country-059-physical-00512",
+      "country-059-physical-00465",
+      "country-059-physical-00434",
+      "country-059-physical-00519",
+      "country-059-physical-00418",
+      "country-059-physical-00437",
+      "country-059-physical-00470",
+      "country-059-physical-00429",
+      "country-059-physical-00453",
+      "country-059-physical-00479",
+      "country-059-physical-00404",
+      "country-059-physical-00452"
+    ],
+    "bounds": {
+      "x": 4636,
+      "y": 1087,
+      "width": 147,
+      "height": 234
+    },
+    "centroid": {
+      "x": 4723.9945773524705,
+      "y": 1211.4799043062203
+    },
+    "pixelCount": 6270,
+    "representative": {
+      "x": 4696,
+      "y": 1099
+    },
+    "maskPath": "/maps/generated/country-masks/country-059-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-059-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 21,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 27
+  },
+  {
+    "countryId": 60,
+    "componentId": "country-060-component-001",
+    "displayGroupId": "country-060-group-001",
+    "physicalComponentIds": [
+      "country-060-physical-00659",
+      "country-060-physical-00583",
+      "country-060-physical-00791",
+      "country-060-physical-00590",
+      "country-060-physical-00661",
+      "country-060-physical-00603",
+      "country-060-physical-00779",
+      "country-060-physical-00648",
+      "country-060-physical-00634",
+      "country-060-physical-00589",
+      "country-060-physical-00619",
+      "country-060-physical-00560",
+      "country-060-physical-00653",
+      "country-060-physical-00785",
+      "country-060-physical-00608",
+      "country-060-physical-00646",
+      "country-060-physical-00623",
+      "country-060-physical-00675",
+      "country-060-physical-00578",
+      "country-060-physical-00586",
+      "country-060-physical-00784",
+      "country-060-physical-00710",
+      "country-060-physical-00580",
+      "country-060-physical-00642",
+      "country-060-physical-00564",
+      "country-060-physical-00584",
+      "country-060-physical-00594",
+      "country-060-physical-00602",
+      "country-060-physical-00650",
+      "country-060-physical-00618",
+      "country-060-physical-00571",
+      "country-060-physical-00621",
+      "country-060-physical-00664",
+      "country-060-physical-00548",
+      "country-060-physical-00555",
+      "country-060-physical-00572",
+      "country-060-physical-00636",
+      "country-060-physical-00666",
+      "country-060-physical-00550",
+      "country-060-physical-00597",
+      "country-060-physical-00639",
+      "country-060-physical-00591",
+      "country-060-physical-00645",
+      "country-060-physical-00697",
+      "country-060-physical-00622",
+      "country-060-physical-00663",
+      "country-060-physical-00612",
+      "country-060-physical-00638",
+      "country-060-physical-00658",
+      "country-060-physical-00652"
+    ],
+    "bounds": {
+      "x": 4575,
+      "y": 1373,
+      "width": 963,
+      "height": 767
+    },
+    "centroid": {
+      "x": 4916.21751879353,
+      "y": 1805.0059156760296
+    },
+    "pixelCount": 195413,
+    "representative": {
+      "x": 5030,
+      "y": 1569
+    },
+    "maskPath": "/maps/generated/country-masks/country-060-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-060-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 107,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 50
+  },
+  {
+    "countryId": 61,
+    "componentId": "country-061-component-001",
+    "displayGroupId": "country-061-group-001",
+    "physicalComponentIds": [
+      "country-061-physical-00762"
+    ],
+    "bounds": {
+      "x": 3064,
+      "y": 1757,
+      "width": 257,
+      "height": 218
+    },
+    "centroid": {
+      "x": 3192.3173174185717,
+      "y": 1859.8589672263806
+    },
+    "pixelCount": 39544,
+    "representative": {
+      "x": 3263,
+      "y": 1757
+    },
+    "maskPath": "/maps/generated/country-masks/country-061-component-001.png",
+    "labelEnvelopePath": null,
+    "labelEnvelopeBuffer": 0,
+    "archipelago": false,
+    "wrapsX": false,
+    "groupedTerritoryCount": 1
+  },
+  {
+    "countryId": 62,
+    "componentId": "country-062-component-001",
+    "displayGroupId": "country-062-group-001",
+    "physicalComponentIds": [
+      "country-062-physical-00781",
+      "country-062-physical-00776",
+      "country-062-physical-00778",
+      "country-062-physical-00783"
+    ],
+    "bounds": {
+      "x": 5408,
+      "y": 1931,
+      "width": 186,
+      "height": 228
+    },
+    "centroid": {
+      "x": 5503.244283852624,
+      "y": 2065.834498282194
+    },
+    "pixelCount": 8441,
+    "representative": {
+      "x": 5501,
+      "y": 2045
+    },
+    "maskPath": "/maps/generated/country-masks/country-062-component-001.png",
+    "labelEnvelopePath": "/maps/generated/label-envelopes/country-062-component-001-label-envelope.png",
+    "labelEnvelopeBuffer": 26,
+    "archipelago": true,
+    "wrapsX": false,
+    "groupedTerritoryCount": 4
+  }
+]

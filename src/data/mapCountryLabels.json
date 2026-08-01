@@ -1,0 +1,2851 @@
+[
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-005",
+    "labelGroupId": "country-001-group-005",
+    "text": "컬럼비아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 937.2273342359456,
+      "y": 498.7192570369172
+    },
+    "control": {
+      "x": 1268.6066244843314,
+      "y": 637.3249061919585
+    },
+    "end": {
+      "x": 1621.5594167953916,
+      "y": 570.6309305791659
+    },
+    "x": 1274,
+    "y": 586,
+    "angle": 5.998797039832284,
+    "curvature": 0.075,
+    "fontSize": 170,
+    "letterSpacing": 2.7000188954590247,
+    "maxWidth": 688.1000566863771,
+    "groupPixelCount": 232645,
+    "priority": 54,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 0.9727336991281517,
+    "candidateScore": 1.1793457181808997,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-001",
+    "labelGroupId": "country-001-group-001",
+    "text": "컬럼비아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 41.713018369073325,
+      "y": 31.122548511849956
+    },
+    "control": {
+      "x": 339.38370597894703,
+      "y": 139.43549134779695
+    },
+    "end": {
+      "x": 647.5195696730326,
+      "y": 66.00646879255615
+    },
+    "x": 342,
+    "y": 94,
+    "angle": 3.2956010726668556,
+    "curvature": 0.075,
+    "fontSize": 150,
+    "letterSpacing": 2.2700245537982386,
+    "maxWidth": 606.8100736613948,
+    "groupPixelCount": 52623,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9436323888722191,
+    "ownershipFitRatio": 0.5247117321788332,
+    "candidateScore": 1.0846598189663794,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 1,
+    "componentId": "country-001-component-002",
+    "labelGroupId": "country-001-group-002",
+    "text": "컬럼비아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1937.094913165641,
+      "y": 41.61562655472303
+    },
+    "control": {
+      "x": 2120,
+      "y": 140.38437344527696
+    },
+    "end": {
+      "x": 2302.9050868343593,
+      "y": 41.61562655472303
+    },
+    "x": 2120,
+    "y": 91,
+    "angle": 0,
+    "curvature": 0.135,
+    "fontSize": 90.88034345422334,
+    "letterSpacing": 0.763394885015476,
+    "maxWidth": 365.8101736687183,
+    "groupPixelCount": 37837,
+    "priority": 44,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.917,
+    "ownershipFitRatio": 0.6597777777777778,
+    "candidateScore": 1.069978783155879,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-008",
+    "labelGroupId": "country-002-group-008",
+    "text": "대영제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3162.174740127545,
+      "y": 1085.034948025509
+    },
+    "control": {
+      "x": 3307,
+      "y": 1142.965051974491
+    },
+    "end": {
+      "x": 3451.825259872455,
+      "y": 1085.034948025509
+    },
+    "x": 3307,
+    "y": 1114,
+    "angle": 0,
+    "curvature": 0.1,
+    "fontSize": 71.74453500000001,
+    "letterSpacing": 0.9101687723917424,
+    "maxWidth": 289.6505197449096,
+    "groupPixelCount": 92552,
+    "priority": 50,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8928571428571429,
+    "ownershipFitRatio": 0.7824829931972789,
+    "candidateScore": 0.9235854353299322,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-013",
+    "labelGroupId": "country-002-group-013",
+    "text": "대영제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2845.754738813031,
+      "y": 1290.7324669117668
+    },
+    "control": {
+      "x": 2958.034907528685,
+      "y": 1277.4420707316567
+    },
+    "end": {
+      "x": 3030.175446129599,
+      "y": 1190.3833916249196
+    },
+    "x": 2948,
+    "y": 1259,
+    "angle": -28.551994489623432,
+    "curvature": 0.1,
+    "fontSize": 52.16670382519377,
+    "letterSpacing": 0.43820031213162763,
+    "maxWidth": 209.95460032604333,
+    "groupPixelCount": 19651,
+    "priority": 42,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9966412213740458,
+    "ownershipFitRatio": 0.9612213740458015,
+    "candidateScore": 1.113100072519084,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-009",
+    "labelGroupId": "country-002-group-009",
+    "text": "대영제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3489.2816230344097,
+      "y": 1214.8191919550475
+    },
+    "control": {
+      "x": 3567.329096703261,
+      "y": 1092.9248943291711
+    },
+    "end": {
+      "x": 3712.0601835590683,
+      "y": 1091.3310193866105
+    },
+    "x": 3584,
+    "y": 1123,
+    "angle": -29,
+    "curvature": -0.135,
+    "fontSize": 63.284852922374576,
+    "letterSpacing": 0.5315927645479465,
+    "maxWidth": 254.71477341083133,
+    "groupPixelCount": 19038,
+    "priority": 41,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9863539445628998,
+    "ownershipFitRatio": 0.7931769722814499,
+    "candidateScore": 1.0465058350426097,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-005",
+    "labelGroupId": "country-002-group-005",
+    "text": "대영제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2671.6497250997672,
+      "y": 357.33592951775597
+    },
+    "control": {
+      "x": 2737.401731650776,
+      "y": 461.34228148741846
+    },
+    "end": {
+      "x": 2849.5468115986805,
+      "y": 511.97950750740705
+    },
+    "x": 2749,
+    "y": 448,
+    "angle": 41,
+    "curvature": 0.075,
+    "fontSize": 58.56926971400625,
+    "letterSpacing": 0.49198186559765245,
+    "maxWidth": 235.71595108995703,
+    "groupPixelCount": 14521,
+    "priority": 39,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9139863547758285,
+    "ownershipFitRatio": 0.5275341130604289,
+    "candidateScore": 1.099238723196881,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-002",
+    "labelGroupId": "country-002-group-002",
+    "text": "대영제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1649.151569534748,
+      "y": 15.205331589910273
+    },
+    "control": {
+      "x": 1741.5484498258988,
+      "y": 27.805002904097044
+    },
+    "end": {
+      "x": 1811.751530813454,
+      "y": 89.18466260189564
+    },
+    "x": 1736,
+    "y": 40,
+    "angle": 24.46446913956923,
+    "curvature": -0.075,
+    "fontSize": 44.38199019234502,
+    "letterSpacing": 0.37280871761569817,
+    "maxWidth": 178.63843042530803,
+    "groupPixelCount": 5718,
+    "priority": 34,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9498178874949413,
+    "ownershipFitRatio": 0.5163901254552813,
+    "candidateScore": 1.0918917384072764,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-012",
+    "labelGroupId": "country-002-group-012",
+    "text": "대영제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2512.7394040033205,
+      "y": 1252.4412379391676
+    },
+    "control": {
+      "x": 2625.2990616129955,
+      "y": 1245.7103857164052
+    },
+    "end": {
+      "x": 2692.662472770689,
+      "y": 1336.137990628022
+    },
+    "x": 2614,
+    "y": 1270,
+    "angle": 24.94694332205999,
+    "curvature": -0.135,
+    "fontSize": 49.137041468441545,
+    "letterSpacing": 0.6391784112898606,
+    "maxWidth": 198.43753950633052,
+    "groupPixelCount": 5605,
+    "priority": 32,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": false,
+    "fitRatio": 0.4031821259309411,
+    "ownershipFitRatio": 0.11543669600541638,
+    "candidateScore": 0.03260327682126174,
+    "mode": "auto",
+    "hiddenReason": "insufficient-territory-fit"
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-003",
+    "labelGroupId": "country-002-group-003",
+    "text": "대영제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1795.175727825925,
+      "y": 354.12741909281084
+    },
+    "control": {
+      "x": 1927.2587252180363,
+      "y": 331.8773023218695
+    },
+    "end": {
+      "x": 2018.3068217380026,
+      "y": 430.11797626345015
+    },
+    "x": 1917,
+    "y": 362,
+    "angle": 18.807026608460674,
+    "curvature": -0.135,
+    "fontSize": 58.57265784279052,
+    "letterSpacing": 0.4920103258794404,
+    "maxWidth": 235.71603647080238,
+    "groupPixelCount": 5054,
+    "priority": 31,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": false,
+    "fitRatio": 0.7437346437346437,
+    "ownershipFitRatio": 0.3678132678132678,
+    "candidateScore": 0.8682392691584999,
+    "mode": "auto",
+    "hiddenReason": "insufficient-territory-fit"
+  },
+  {
+    "countryId": 2,
+    "componentId": "country-002-component-001",
+    "labelGroupId": "country-002-group-001",
+    "text": "대영제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1392.6041005312886,
+      "y": 18.340615079693297
+    },
+    "control": {
+      "x": 1537,
+      "y": 61.65938492030671
+    },
+    "end": {
+      "x": 1681.3958994687114,
+      "y": 18.340615079693297
+    },
+    "x": 1537,
+    "y": 40,
+    "angle": 0,
+    "curvature": 0.075,
+    "fontSize": 71.74453500000001,
+    "letterSpacing": 0.6239285032294463,
+    "maxWidth": 288.7917989374227,
+    "groupPixelCount": 3419,
+    "priority": 28,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": false,
+    "fitRatio": 0.7690355329949239,
+    "ownershipFitRatio": 0.14737732656514382,
+    "candidateScore": 0.7752466148539868,
+    "mode": "auto",
+    "hiddenReason": "insufficient-territory-fit"
+  },
+  {
+    "countryId": 3,
+    "componentId": "country-003-component-002",
+    "labelGroupId": "country-003-group-002",
+    "text": "러시아인민공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3136.395605956747,
+      "y": 502.72737878066994
+    },
+    "control": {
+      "x": 3651.982806036475,
+      "y": 408.09782876183004
+    },
+    "end": {
+      "x": 3855.638781970303,
+      "y": -74.92303630433003
+    },
+    "x": 3574,
+    "y": 311,
+    "angle": -38.7692173538603,
+    "curvature": 0.135,
+    "fontSize": 114.48279226597934,
+    "letterSpacing": 0.9616554550342266,
+    "maxWidth": 922.4915979508646,
+    "groupPixelCount": 195270,
+    "priority": 53,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8737780558379604,
+    "ownershipFitRatio": 0.7713302572925628,
+    "candidateScore": 0.9776343462109954,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 4,
+    "componentId": "country-004-component-001",
+    "labelGroupId": "country-004-group-001",
+    "text": "러시아제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3797.656909058231,
+      "y": 245.72684250663832
+    },
+    "control": {
+      "x": 4285.444624124222,
+      "y": 310.6788313499301
+    },
+    "end": {
+      "x": 4755.453842693324,
+      "y": 164.91549479350147
+    },
+    "x": 4281,
+    "y": 258,
+    "angle": -4.822743610678848,
+    "curvature": 0.055,
+    "fontSize": 190,
+    "letterSpacing": 2.8,
+    "maxWidth": 961.2,
+    "groupPixelCount": 758171,
+    "priority": 59,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 1,
+    "candidateScore": 1.1841499999999998,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 5,
+    "componentId": "country-005-component-001",
+    "labelGroupId": "country-005-group-001",
+    "text": "노르드연방",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2644.577822611559,
+      "y": 260.93135494878084
+    },
+    "control": {
+      "x": 3061.3816223019744,
+      "y": 369.370949873346
+    },
+    "end": {
+      "x": 3380.658932784492,
+      "y": 80.32674530452718
+    },
+    "x": 3037,
+    "y": 270,
+    "angle": -13.785739082466838,
+    "curvature": 0.135,
+    "fontSize": 150,
+    "letterSpacing": 1.9784660881961103,
+    "maxWidth": 757.9138643527845,
+    "groupPixelCount": 100866,
+    "priority": 50,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9948724111685294,
+    "ownershipFitRatio": 0.616232023394624,
+    "candidateScore": 1.1530761734304635,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 6,
+    "componentId": "country-006-component-001",
+    "labelGroupId": "country-006-group-001",
+    "text": "발트연방",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3124.0936760147483,
+      "y": 412.6645926427253
+    },
+    "control": {
+      "x": 3195.3717175413954,
+      "y": 380.4801909665784
+    },
+    "end": {
+      "x": 3237.1628889024605,
+      "y": 314.3750254241179
+    },
+    "x": 3188,
+    "y": 372,
+    "angle": -41,
+    "curvature": 0.075,
+    "fontSize": 37.22902147335651,
+    "letterSpacing": 0.3127237803761947,
+    "maxWidth": 149.8181762239411,
+    "groupPixelCount": 9052,
+    "priority": 40,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9010695187165776,
+    "ownershipFitRatio": 0.7459893048128342,
+    "candidateScore": 0.9924830561497326,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 7,
+    "componentId": "country-007-component-001",
+    "labelGroupId": "country-007-group-001",
+    "text": "오대호연방",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1319.0430011462677,
+      "y": 361.08229075887107
+    },
+    "control": {
+      "x": 1403.4884217662345,
+      "y": 441.72154347962476
+    },
+    "end": {
+      "x": 1513.9801553212633,
+      "y": 479.4746222818794
+    },
+    "x": 1410,
+    "y": 431,
+    "angle": 31.27181241903712,
+    "curvature": 0.055,
+    "fontSize": 45.32358231607133,
+    "letterSpacing": 0.38071809145499924,
+    "maxWidth": 228.07287923227508,
+    "groupPixelCount": 21868,
+    "priority": 43,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.7857142857142857,
+    "ownershipFitRatio": 0.7857142857142857,
+    "candidateScore": 0.7830842634068925,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 8,
+    "componentId": "country-008-component-001",
+    "labelGroupId": "country-008-group-001",
+    "text": "독일민주공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2897.2073082569646,
+      "y": 527.6516446088011
+    },
+    "control": {
+      "x": 3001.57821427045,
+      "y": 462.5464074780156
+    },
+    "end": {
+      "x": 3123.6362632021355,
+      "y": 447.2555404351677
+    },
+    "x": 3006,
+    "y": 475,
+    "angle": -19.547969065116416,
+    "curvature": -0.055,
+    "fontSize": 34.090677321433226,
+    "letterSpacing": 0.2863616895000391,
+    "maxWidth": 240.27818295438306,
+    "groupPixelCount": 18440,
+    "priority": 43,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9722116482679863,
+    "ownershipFitRatio": 0.9722116482679863,
+    "candidateScore": 1.1022545609373162,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 9,
+    "componentId": "country-009-component-001",
+    "labelGroupId": "country-009-group-001",
+    "text": "알라시공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3593.958680521559,
+      "y": 570.4082638956882
+    },
+    "control": {
+      "x": 3866,
+      "y": 461.5917361043118
+    },
+    "end": {
+      "x": 4138.0413194784405,
+      "y": 570.4082638956882
+    },
+    "x": 3866,
+    "y": 516,
+    "angle": 0,
+    "curvature": -0.1,
+    "fontSize": 90.06239634130901,
+    "letterSpacing": 0.7565241292669956,
+    "maxWidth": 544.0826389568819,
+    "groupPixelCount": 89062,
+    "priority": 49,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9898855261094559,
+    "ownershipFitRatio": 0.9898855261094559,
+    "candidateScore": 1.111748821781402,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 10,
+    "componentId": "country-010-component-001",
+    "labelGroupId": "country-010-group-001",
+    "text": "황러시아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4775.8940722015805,
+      "y": 518.9210580657507
+    },
+    "control": {
+      "x": 4949.626999547262,
+      "y": 547.5493106278125
+    },
+    "end": {
+      "x": 5068.851928703895,
+      "y": 417.9803206786245
+    },
+    "x": 4936,
+    "y": 508,
+    "angle": -19.01175898894071,
+    "curvature": 0.135,
+    "fontSize": 76.99118529305598,
+    "letterSpacing": 0.6467259564616702,
+    "maxWidth": 309.8601912971194,
+    "groupPixelCount": 32803,
+    "priority": 45,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.908766812510128,
+    "ownershipFitRatio": 0.7384540593096743,
+    "candidateScore": 0.9793979483876195,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 11,
+    "componentId": "country-011-component-001",
+    "labelGroupId": "country-011-group-001",
+    "text": "폴란드사회민주공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3080.443474354993,
+      "y": 486.0424376999054
+    },
+    "control": {
+      "x": 3159.6670898902107,
+      "y": 504.6221128490408
+    },
+    "end": {
+      "x": 3204.2223458645853,
+      "y": 572.7133366020131
+    },
+    "x": 3151,
+    "y": 517,
+    "angle": 35,
+    "curvature": -0.1,
+    "fontSize": 14.630965138620317,
+    "letterSpacing": 0.12290010716441067,
+    "maxWidth": 151.1061009644797,
+    "groupPixelCount": 8194,
+    "priority": 39,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9713493530499075,
+    "ownershipFitRatio": 0.9713493530499075,
+    "candidateScore": 1.0739856829944545,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 12,
+    "componentId": "country-012-component-001",
+    "labelGroupId": "country-012-group-001",
+    "text": "대청제국",
+    "layoutMode": "straight",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4438.764277514777,
+      "y": 765.2010635387917
+    },
+    "control": {
+      "x": 4641,
+      "y": 676
+    },
+    "end": {
+      "x": 4843.235722485223,
+      "y": 586.7989364612083
+    },
+    "x": 4641,
+    "y": 676,
+    "angle": -23.801063023234942,
+    "curvature": 0,
+    "fontSize": 109.35000000000001,
+    "letterSpacing": 1.5694709702803038,
+    "maxWidth": 442.06839826240343,
+    "groupPixelCount": 97127,
+    "priority": 50,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 1,
+    "candidateScore": 1.097808767846434,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 13,
+    "componentId": "country-013-component-001",
+    "labelGroupId": "france-mainland-label",
+    "text": "프랑스인민공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2738.116713106084,
+      "y": 623.102030779874
+    },
+    "control": {
+      "x": 2866.252008383466,
+      "y": 565.2446917765675
+    },
+    "end": {
+      "x": 2941.379270126984,
+      "y": 446.4085856669909
+    },
+    "x": 2853,
+    "y": 550,
+    "angle": -41,
+    "curvature": 0.075,
+    "fontSize": 33.42761500737966,
+    "letterSpacing": 0.2807919660619891,
+    "maxWidth": 269.3255291139964,
+    "groupPixelCount": 23151,
+    "priority": 49,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.933711449840482,
+    "ownershipFitRatio": 0.6267281105990783,
+    "candidateScore": 0.8437937433429634,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 13,
+    "componentId": "country-013-component-002",
+    "labelGroupId": "france-north-africa-label",
+    "text": "프랑스인민공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2640.1273409834857,
+      "y": 928.3832583693353
+    },
+    "control": {
+      "x": 2848.4015587340446,
+      "y": 922.7218210310716
+    },
+    "end": {
+      "x": 3035.0695415484247,
+      "y": 830.1730995685215
+    },
+    "x": 2843,
+    "y": 901,
+    "angle": -13.964484068416255,
+    "curvature": 0.055,
+    "fontSize": 50.51012423898868,
+    "letterSpacing": 0.4242850436075049,
+    "maxWidth": 406.96999530525255,
+    "groupPixelCount": 83543,
+    "priority": 48,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8794102159031069,
+    "ownershipFitRatio": 0.8794102159031069,
+    "candidateScore": 1.0374413759610321,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 14,
+    "componentId": "country-014-component-001",
+    "labelGroupId": "country-014-group-001",
+    "text": "우크라이나농민연방공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3177.334763707708,
+      "y": 496.8803929840334
+    },
+    "control": {
+      "x": 3296.9225299746868,
+      "y": 562.0516976949366
+    },
+    "end": {
+      "x": 3432.820176342919,
+      "y": 571.0162116260934
+    },
+    "x": 3301,
+    "y": 548,
+    "angle": 16.18147763643962,
+    "curvature": 0.055,
+    "fontSize": 21.907754080106503,
+    "letterSpacing": 0.1840251342728946,
+    "maxWidth": 266.0242764770018,
+    "groupPixelCount": 20603,
+    "priority": 43,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9889145496535797,
+    "ownershipFitRatio": 0.9889145496535797,
+    "candidateScore": 1.1332564861431873,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 15,
+    "componentId": "country-015-component-001",
+    "labelGroupId": "country-015-group-001",
+    "text": "몽골국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4235.385916834238,
+      "y": 570.7780651411543
+    },
+    "control": {
+      "x": 4420.043096108915,
+      "y": 620.5228085762532
+    },
+    "end": {
+      "x": 4608.527890947932,
+      "y": 588.1763177063392
+    },
+    "x": 4421,
+    "y": 600,
+    "angle": 2.6695602896209345,
+    "curvature": 0.055,
+    "fontSize": 123.31278004101239,
+    "letterSpacing": 1.8086849168481907,
+    "maxWidth": 373.54736250947764,
+    "groupPixelCount": 57769,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9784701114488349,
+    "ownershipFitRatio": 0.9784701114488349,
+    "candidateScore": 1.071865506276968,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 16,
+    "componentId": "country-016-component-001",
+    "labelGroupId": "country-016-group-001",
+    "text": "보헤미아",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2999.8964336542563,
+      "y": 531.3854357422156
+    },
+    "control": {
+      "x": 3044.7760149090254,
+      "y": 523.7344897126563
+    },
+    "end": {
+      "x": 3082.5515365276924,
+      "y": 549.1455848324716
+    },
+    "x": 3043,
+    "y": 532,
+    "angle": 12.126791853680334,
+    "curvature": -0.1,
+    "fontSize": 21.49365850020077,
+    "letterSpacing": 0.18054673140168645,
+    "maxWidth": 84.54164019420506,
+    "groupPixelCount": 3066,
+    "priority": 35,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9986033519553073,
+    "ownershipFitRatio": 0.9986033519553073,
+    "candidateScore": 1.132001567726695,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 17,
+    "componentId": "country-017-component-001",
+    "labelGroupId": "country-017-group-001",
+    "text": "바이에른사회주의공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2925.721740969736,
+      "y": 566.4641761946091
+    },
+    "control": {
+      "x": 2974.5605251979637,
+      "y": 551.531049278447
+    },
+    "end": {
+      "x": 3025.1572086343363,
+      "y": 558.473725248497
+    },
+    "x": 2975,
+    "y": 557,
+    "angle": -4.594311078394922,
+    "curvature": -0.055,
+    "fontSize": 9,
+    "letterSpacing": 0.07559999999999999,
+    "maxWidth": 99.756,
+    "groupPixelCount": 4024,
+    "priority": 36,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.962890625,
+    "ownershipFitRatio": 0.962890625,
+    "candidateScore": 1.0520196847703533,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 18,
+    "componentId": "country-018-component-001",
+    "labelGroupId": "country-018-group-001",
+    "text": "대일본제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4769.515548508016,
+      "y": 933.5708614405123
+    },
+    "control": {
+      "x": 5005.39513875271,
+      "y": 827.0633969108911
+    },
+    "end": {
+      "x": 5143.694173986563,
+      "y": 608.3023447377055
+    },
+    "x": 4981,
+    "y": 799,
+    "angle": -41,
+    "curvature": 0.075,
+    "fontSize": 98.415,
+    "letterSpacing": 0.9353805704820282,
+    "maxWidth": 495.791540592475,
+    "groupPixelCount": 12604,
+    "priority": 41,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9049966390320412,
+    "ownershipFitRatio": 0.18022257076704756,
+    "candidateScore": 1.0517472803045693,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 19,
+    "componentId": "country-019-component-001",
+    "labelGroupId": "country-019-group-001",
+    "text": "헝가리인민공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3067.2913479376034,
+      "y": 565.3230845960113
+    },
+    "control": {
+      "x": 3144.923066282377,
+      "y": 576.1035855641978
+    },
+    "end": {
+      "x": 3210.8625194976426,
+      "y": 618.469744275593
+    },
+    "x": 3142,
+    "y": 584,
+    "angle": 20.31336322888992,
+    "curvature": -0.055,
+    "fontSize": 18.576331704254418,
+    "letterSpacing": 0.1560411863157371,
+    "maxWidth": 153.09228830421017,
+    "groupPixelCount": 10262,
+    "priority": 40,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9975349219391948,
+    "ownershipFitRatio": 0.9975349219391948,
+    "candidateScore": 1.1357985755957274,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 20,
+    "componentId": "country-020-component-001",
+    "labelGroupId": "country-020-group-001",
+    "text": "신강공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3992.9423534079924,
+      "y": 773.1536935440365
+    },
+    "control": {
+      "x": 4142.262542858161,
+      "y": 721.1590207467693
+    },
+    "end": {
+      "x": 4214.532560875686,
+      "y": 580.5282649624249
+    },
+    "x": 4123,
+    "y": 699,
+    "angle": -41,
+    "curvature": 0.1,
+    "fontSize": 58.330206496380356,
+    "letterSpacing": 0.489973734569595,
+    "maxWidth": 293.6099040935518,
+    "groupPixelCount": 40281,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9979105725031342,
+    "ownershipFitRatio": 0.9979105725031342,
+    "candidateScore": 1.1588487791475137,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 21,
+    "componentId": "country-021-component-001",
+    "labelGroupId": "country-021-group-001",
+    "text": "오스트리아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2990.9327095441895,
+      "y": 582.8431513718496
+    },
+    "control": {
+      "x": 3033.549347973656,
+      "y": 590.9035884964309
+    },
+    "end": {
+      "x": 3069.9685945084984,
+      "y": 567.3496716352887
+    },
+    "x": 3032,
+    "y": 583,
+    "angle": -11.091103312926554,
+    "curvature": 0.1,
+    "fontSize": 15.839560730925797,
+    "letterSpacing": 0.13504256644160628,
+    "maxWidth": 80.54017026576642,
+    "groupPixelCount": 3038,
+    "priority": 35,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.97165991902834,
+    "ownershipFitRatio": 0.97165991902834,
+    "candidateScore": 1.0419768017955469,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 22,
+    "componentId": "country-022-component-001",
+    "labelGroupId": "country-022-group-001",
+    "text": "루마니아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3190.1830763086846,
+      "y": 643.768193127991
+    },
+    "control": {
+      "x": 3237.5756210065647,
+      "y": 629.6465432953227
+    },
+    "end": {
+      "x": 3274.6656816781865,
+      "y": 596.9387202813638
+    },
+    "x": 3235,
+    "y": 625,
+    "angle": -29,
+    "curvature": 0.055,
+    "fontSize": 23.55279816494468,
+    "letterSpacing": 0.19784350458553532,
+    "maxWidth": 96.5935305137566,
+    "groupPixelCount": 6356,
+    "priority": 38,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9895287958115183,
+    "ownershipFitRatio": 0.9895287958115183,
+    "candidateScore": 1.1004115116235416,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 23,
+    "componentId": "country-023-component-001",
+    "labelGroupId": "country-023-group-001",
+    "text": "스위스연방",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2901.451229346978,
+      "y": 601.685135427673
+    },
+    "control": {
+      "x": 2930.4662728274866,
+      "y": 586.9835004348929
+    },
+    "end": {
+      "x": 2961.6162249980484,
+      "y": 596.3478637025411
+    },
+    "x": 2931,
+    "y": 593,
+    "angle": -5.069471504520869,
+    "curvature": -0.1,
+    "fontSize": 11.942498805955472,
+    "letterSpacing": 0.10031698997002596,
+    "maxWidth": 60.4012679598801,
+    "groupPixelCount": 1500,
+    "priority": 32,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9349112426035503,
+    "ownershipFitRatio": 0.9349112426035503,
+    "candidateScore": 1.0016741483238867,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 24,
+    "componentId": "country-024-component-002",
+    "labelGroupId": "country-024-group-002",
+    "text": "이탈리아인민공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2991.133583332154,
+      "y": 922.4703114766438
+    },
+    "control": {
+      "x": 3120.7121099724855,
+      "y": 955.9691386609279
+    },
+    "end": {
+      "x": 3191.4421967228745,
+      "y": 1069.5914112015003
+    },
+    "x": 3106,
+    "y": 976,
+    "angle": 36.29624599125991,
+    "curvature": -0.1,
+    "fontSize": 27.410841262809235,
+    "letterSpacing": 0.2302510666075976,
+    "maxWidth": 248.53200715956976,
+    "groupPixelCount": 35150,
+    "priority": 45,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9970942299709423,
+    "ownershipFitRatio": 0.9970942299709423,
+    "candidateScore": 1.1532881147571605,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 24,
+    "componentId": "country-024-component-001",
+    "labelGroupId": "country-024-group-001",
+    "text": "이탈리아인민공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2908.742114095966,
+      "y": 603.9701971844967
+    },
+    "control": {
+      "x": 2988.0868772718977,
+      "y": 685.2756512948205
+    },
+    "end": {
+      "x": 3099.084131360239,
+      "y": 709.4785002258624
+    },
+    "x": 2996,
+    "y": 671,
+    "angle": 29,
+    "curvature": 0.075,
+    "fontSize": 24.23094830833705,
+    "letterSpacing": 0.20353996579003122,
+    "maxWidth": 217.62831972632026,
+    "groupPixelCount": 10351,
+    "priority": 39,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9873160832064941,
+    "ownershipFitRatio": 0.7118214104515475,
+    "candidateScore": 1.0932956674530692,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 25,
+    "componentId": "country-025-component-001",
+    "labelGroupId": "country-025-group-001",
+    "text": "유고슬라비아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3031.4372907331767,
+      "y": 605.7259530421287
+    },
+    "control": {
+      "x": 3134.468941326056,
+      "y": 690.6187535881534
+    },
+    "end": {
+      "x": 3267.6248266147104,
+      "y": 681.0365397815646
+    },
+    "x": 3142,
+    "y": 667,
+    "angle": 17.685364400085792,
+    "curvature": 0.1,
+    "fontSize": 41.04027154786011,
+    "letterSpacing": 0.3447382810020248,
+    "maxWidth": 247.90368408079138,
+    "groupPixelCount": 11978,
+    "priority": 41,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8867662382771796,
+    "ownershipFitRatio": 0.8867662382771796,
+    "candidateScore": 1.0204733099758614,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 26,
+    "componentId": "country-026-component-001",
+    "labelGroupId": "country-026-group-001",
+    "text": "캅카스",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3388.2435149424564,
+      "y": 614.8996080767182
+    },
+    "control": {
+      "x": 3489.5031089623135,
+      "y": 645.0721286295246
+    },
+    "end": {
+      "x": 3568.750267132917,
+      "y": 714.9561346642324
+    },
+    "x": 3484,
+    "y": 655,
+    "angle": 29,
+    "curvature": -0.055,
+    "fontSize": 68.19641277196892,
+    "letterSpacing": 0.9065610356727924,
+    "maxWidth": 206.38312939556434,
+    "groupPixelCount": 14659,
+    "priority": 42,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9286520022560631,
+    "ownershipFitRatio": 0.9286520022560631,
+    "candidateScore": 1.057414030100963,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 27,
+    "componentId": "country-027-component-001",
+    "labelGroupId": "country-027-group-001",
+    "text": "투르키스탄",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3590.4524318513213,
+      "y": 621.3365705330789
+    },
+    "control": {
+      "x": 3781.162708492849,
+      "y": 760.476971931166
+    },
+    "end": {
+      "x": 4015.222151162981,
+      "y": 729.7094856045892
+    },
+    "x": 3792,
+    "y": 718,
+    "angle": 14.312724716435174,
+    "curvature": 0.1,
+    "fontSize": 87.10036870340144,
+    "letterSpacing": 0.7316430971085721,
+    "maxWidth": 438.3765540778874,
+    "groupPixelCount": 56941,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9307931570762052,
+    "ownershipFitRatio": 0.9307931570762052,
+    "candidateScore": 1.0386034823949848,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 28,
+    "componentId": "country-028-component-003",
+    "labelGroupId": "korea-mainland-label",
+    "text": "대한제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4761.752258273842,
+      "y": 769.7470572974153
+    },
+    "control": {
+      "x": 4799.533071210523,
+      "y": 718.8613862432802
+    },
+    "end": {
+      "x": 4855.1815993051105,
+      "y": 688.5301702160242
+    },
+    "x": 4804,
+    "y": 724,
+    "angle": -41,
+    "curvature": -0.055,
+    "fontSize": 30.739335669678006,
+    "letterSpacing": 0.2916975525008847,
+    "maxWidth": 123.79509082644796,
+    "groupPixelCount": 8283,
+    "priority": 45,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.6671511627906976,
+    "ownershipFitRatio": 0.6671511627906976,
+    "candidateScore": 0.7789849318755719,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 29,
+    "componentId": "country-029-component-001",
+    "labelGroupId": "country-029-group-001",
+    "text": "이베리아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2640.067202947916,
+      "y": 674.6778991241449
+    },
+    "control": {
+      "x": 2749.0712402540926,
+      "y": 776.2526203354577
+    },
+    "end": {
+      "x": 2893.790316543899,
+      "y": 740.8168602049399
+    },
+    "x": 2758,
+    "y": 742,
+    "angle": 14.61037014802081,
+    "curvature": 0.135,
+    "fontSize": 65.15063494662161,
+    "letterSpacing": 0.5472653335516215,
+    "maxWidth": 262.20179355924864,
+    "groupPixelCount": 13907,
+    "priority": 41,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8776852257781674,
+    "ownershipFitRatio": 0.5966681280140289,
+    "candidateScore": 1.0124144395462247,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 30,
+    "componentId": "country-030-component-001",
+    "labelGroupId": "country-030-group-001",
+    "text": "아라곤자유지대",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2750.9249716650775,
+      "y": 704.8742667839377
+    },
+    "control": {
+      "x": 2785.8146808582346,
+      "y": 685.9013617775644
+    },
+    "end": {
+      "x": 2825.4456666184533,
+      "y": 683.3230096609336
+    },
+    "x": 2787,
+    "y": 690,
+    "angle": -16.12977844868382,
+    "curvature": -0.055,
+    "fontSize": 11.397224981930002,
+    "letterSpacing": 0.09573668984821201,
+    "maxWidth": 77.57442013908927,
+    "groupPixelCount": 3443,
+    "priority": 35,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 1,
+    "candidateScore": 1.1436745,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 31,
+    "componentId": "country-031-component-001",
+    "labelGroupId": "country-031-group-001",
+    "text": "오스만제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3193.739341241535,
+      "y": 737.9808750929233
+    },
+    "control": {
+      "x": 3398.6051183942564,
+      "y": 782.6516689453687
+    },
+    "end": {
+      "x": 3545.0504219699524,
+      "y": 932.7157870163394
+    },
+    "x": 3384,
+    "y": 809,
+    "angle": 29,
+    "curvature": -0.075,
+    "fontSize": 79.71615000000001,
+    "letterSpacing": 0.7932421246493194,
+    "maxWidth": 401.67295323980824,
+    "groupPixelCount": 56295,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 0.8190712235846596,
+    "candidateScore": 1.1038213803508998,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 32,
+    "componentId": "country-032-component-001",
+    "labelGroupId": "country-032-group-001",
+    "text": "이란입헌왕국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3497.3627727981216,
+      "y": 773.1619504954889
+    },
+    "control": {
+      "x": 3681.863345372282,
+      "y": 894.1547763659194
+    },
+    "end": {
+      "x": 3898.910536457315,
+      "y": 854.5284967726724
+    },
+    "x": 3690,
+    "y": 854,
+    "angle": 11.45487762842862,
+    "curvature": 0.1,
+    "fontSize": 67.82370614017536,
+    "letterSpacing": 0.5697191315774729,
+    "maxWidth": 409.70858100944986,
+    "groupPixelCount": 56705,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9753498523558866,
+    "ownershipFitRatio": 0.9753498523558866,
+    "candidateScore": 1.0750167326357685,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 33,
+    "componentId": "country-033-component-001",
+    "labelGroupId": "country-033-group-001",
+    "text": "노바메히코연방",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1103.4265615484583,
+      "y": 736.7302201463108
+    },
+    "control": {
+      "x": 1250.3932515070421,
+      "y": 938.2360373889
+    },
+    "end": {
+      "x": 1495.7869354374575,
+      "y": 982.7977050758894
+    },
+    "x": 1275,
+    "y": 899,
+    "angle": 32.09374204376922,
+    "curvature": 0.1,
+    "fontSize": 65.68515395627973,
+    "letterSpacing": 0.5745002233485856,
+    "maxWidth": 463.1369885227087,
+    "groupPixelCount": 41749,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9097338767681611,
+    "ownershipFitRatio": 0.9097338767681611,
+    "candidateScore": 0.9539794187412376,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 34,
+    "componentId": "country-034-component-001",
+    "labelGroupId": "country-034-group-001",
+    "text": "작센-초",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4306.693057652188,
+      "y": 805.8800588776478
+    },
+    "control": {
+      "x": 4393.032909323058,
+      "y": 796.7298563672771
+    },
+    "end": {
+      "x": 4475.241123701696,
+      "y": 824.660228387798
+    },
+    "x": 4392,
+    "y": 806,
+    "angle": 6.357856007935387,
+    "curvature": -0.055,
+    "fontSize": 46.448567304809394,
+    "letterSpacing": 0.4170386193531266,
+    "maxWidth": 169.59111219595002,
+    "groupPixelCount": 12087,
+    "priority": 41,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.968054211035818,
+    "ownershipFitRatio": 0.968054211035818,
+    "candidateScore": 1.0311474588948837,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 35,
+    "componentId": "country-035-component-001",
+    "labelGroupId": "country-035-group-001",
+    "text": "티베트왕국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4104.172946465074,
+      "y": 899.9741521693046
+    },
+    "control": {
+      "x": 4227.927823939482,
+      "y": 881.5910847445011
+    },
+    "end": {
+      "x": 4347.971405655962,
+      "y": 916.8436783416931
+    },
+    "x": 4227,
+    "y": 895,
+    "angle": 3.9582468654366387,
+    "curvature": -0.055,
+    "fontSize": 48.55374288029377,
+    "letterSpacing": 0.4078514401944677,
+    "maxWidth": 244.38140194608062,
+    "groupPixelCount": 44661,
+    "priority": 46,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.993085566119274,
+    "ownershipFitRatio": 0.993085566119274,
+    "candidateScore": 1.1478730147783058,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-003",
+    "labelGroupId": "country-036-group-003",
+    "text": "신프로이센왕국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2959.717349803875,
+      "y": 1657.3027518170843
+    },
+    "control": {
+      "x": 3094.3149123280828,
+      "y": 1617.1964511654846
+    },
+    "end": {
+      "x": 3199.65282553996,
+      "y": 1524.3043458519464
+    },
+    "x": 3087,
+    "y": 1604,
+    "angle": -29,
+    "curvature": 0.055,
+    "fontSize": 38.91276345411984,
+    "letterSpacing": 0.32686721301460664,
+    "maxWidth": 274.3312022099724,
+    "groupPixelCount": 35662,
+    "priority": 46,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8785373608903021,
+    "ownershipFitRatio": 0.8785373608903021,
+    "candidateScore": 1.0104557949125597,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-001",
+    "labelGroupId": "country-036-group-001",
+    "text": "신프로이센왕국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4479.303718231801,
+      "y": 960.4927683996231
+    },
+    "control": {
+      "x": 4559.551250356128,
+      "y": 862.3140465446721
+    },
+    "end": {
+      "x": 4673.5937810559435,
+      "y": 806.8791385110326
+    },
+    "x": 4568,
+    "y": 873,
+    "angle": -38.33133119497273,
+    "curvature": -0.055,
+    "fontSize": 35.13465657397547,
+    "letterSpacing": 0.29513111522139385,
+    "maxWidth": 247.680794168135,
+    "groupPixelCount": 25618,
+    "priority": 43,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9825691549829481,
+    "ownershipFitRatio": 0.9825691549829481,
+    "candidateScore": 1.0837149625000002,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 36,
+    "componentId": "country-036-component-002",
+    "labelGroupId": "country-036-group-002",
+    "text": "신프로이센왕국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3255.1910256472224,
+      "y": 1437.6719342233057
+    },
+    "control": {
+      "x": 3376.671127047548,
+      "y": 1479.972430538954
+    },
+    "end": {
+      "x": 3435.4667202576816,
+      "y": 1594.3832046987861
+    },
+    "x": 3361,
+    "y": 1498,
+    "angle": 41,
+    "curvature": -0.1,
+    "fontSize": 33.881552917342596,
+    "letterSpacing": 0.2846050445056778,
+    "maxWidth": 238.8676377438407,
+    "groupPixelCount": 23244,
+    "priority": 42,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.975098814229249,
+    "ownershipFitRatio": 0.975098814229249,
+    "candidateScore": 1.128455330039526,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 37,
+    "componentId": "country-037-component-001",
+    "labelGroupId": "country-037-group-001",
+    "text": "카리브",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1475.8779812857304,
+      "y": 806.9607708627719
+    },
+    "control": {
+      "x": 1647.6399619075667,
+      "y": 911.9723085210055
+    },
+    "end": {
+      "x": 1848.8420948991366,
+      "y": 905.0946120952171
+    },
+    "x": 1655,
+    "y": 884,
+    "angle": 14.741463792594512,
+    "curvature": 0.075,
+    "fontSize": 127.36611656301511,
+    "letterSpacing": 1.789250521118373,
+    "maxWidth": 385.6585028732914,
+    "groupPixelCount": 5565,
+    "priority": 37,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9347013303191027,
+    "ownershipFitRatio": 0.16815929049647857,
+    "candidateScore": 1.0500117887949796,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 38,
+    "componentId": "country-038-component-001",
+    "labelGroupId": "country-038-group-001",
+    "text": "사천공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4334.464293813903,
+      "y": 846.570974904613
+    },
+    "control": {
+      "x": 4405.130406950352,
+      "y": 903.0810598471489
+    },
+    "end": {
+      "x": 4495.2748922853925,
+      "y": 895.2669054010892
+    },
+    "x": 4410,
+    "y": 887,
+    "angle": 16.847122203038825,
+    "curvature": 0.1,
+    "fontSize": 33.38824721872415,
+    "letterSpacing": 0.2804612766372829,
+    "maxWidth": 168.0218504471253,
+    "groupPixelCount": 14365,
+    "priority": 42,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 1,
+    "candidateScore": 1.1655244999999999,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 39,
+    "componentId": "country-039-component-001",
+    "labelGroupId": "country-039-group-001",
+    "text": "신도나우연합제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4556.136286010607,
+      "y": 969.6126937492326
+    },
+    "control": {
+      "x": 4651.612583951368,
+      "y": 969.450226007605
+    },
+    "end": {
+      "x": 4720.638546086658,
+      "y": 903.4868542355575
+    },
+    "x": 4645,
+    "y": 953,
+    "angle": -21.898907055048976,
+    "curvature": 0.1,
+    "fontSize": 22.028759018603534,
+    "letterSpacing": 0.18504157575626967,
+    "maxWidth": 177.2952910302939,
+    "groupPixelCount": 14048,
+    "priority": 41,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8851351351351351,
+    "ownershipFitRatio": 0.8851351351351351,
+    "candidateScore": 0.9950212162162162,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 40,
+    "componentId": "country-040-component-001",
+    "labelGroupId": "country-040-group-001",
+    "text": "사우디아라비아제2국가",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3392.9671919162333,
+      "y": 867.3492393764328
+    },
+    "control": {
+      "x": 3493.4530386525357,
+      "y": 1020.9159538862461
+    },
+    "end": {
+      "x": 3672.126730778695,
+      "y": 1062.8188528510748
+    },
+    "x": 3513,
+    "y": 993,
+    "angle": 35,
+    "curvature": 0.1,
+    "fontSize": 31.915149412576795,
+    "letterSpacing": 0.26808725506564507,
+    "maxWidth": 340.79087125365936,
+    "groupPixelCount": 37578,
+    "priority": 46,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9769443590531817,
+    "ownershipFitRatio": 0.9769443590531817,
+    "candidateScore": 1.0951422271749154,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 41,
+    "componentId": "country-041-component-001",
+    "labelGroupId": "country-041-group-001",
+    "text": "네팔왕국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4020.4811648732375,
+      "y": 898.2292903407794
+    },
+    "control": {
+      "x": 4084.937399362418,
+      "y": 901.0837128471311
+    },
+    "end": {
+      "x": 4129.644036401927,
+      "y": 947.6032839649586
+    },
+    "x": 4080,
+    "y": 912,
+    "angle": 24.337076943850956,
+    "curvature": -0.1,
+    "fontSize": 29.562170281758082,
+    "letterSpacing": 0.5365114178450388,
+    "maxWidth": 119.8095312017773,
+    "groupPixelCount": 5201,
+    "priority": 37,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.975317875841436,
+    "ownershipFitRatio": 0.975317875841436,
+    "candidateScore": 1.0872676876901688,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-001",
+    "labelGroupId": "country-042-group-001",
+    "text": "신프랑스",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4137.19045253258,
+      "y": 975.1312217921643
+    },
+    "control": {
+      "x": 4370.086583422193,
+      "y": 1080.291555393216
+    },
+    "end": {
+      "x": 4506.636380623035,
+      "y": 1296.2856674214038
+    },
+    "x": 4346,
+    "y": 1108,
+    "angle": 41,
+    "curvature": -0.075,
+    "fontSize": 121.50000000000001,
+    "letterSpacing": 1.1735516865543434,
+    "maxWidth": 489.52065505966306,
+    "groupPixelCount": 51149,
+    "priority": 47,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9740278796771827,
+    "ownershipFitRatio": 0.7556859867938371,
+    "candidateScore": 1.085356272927366,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 42,
+    "componentId": "country-042-component-005",
+    "labelGroupId": "country-042-group-005",
+    "text": "신프랑스",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3331.868984953313,
+      "y": 1705.109005166382
+    },
+    "control": {
+      "x": 3538.89879728025,
+      "y": 1616.747301203062
+    },
+    "end": {
+      "x": 3726.3334204861867,
+      "y": 1741.3963924274938
+    },
+    "x": 3534,
+    "y": 1670,
+    "angle": 5.255933762938213,
+    "curvature": -0.135,
+    "fontSize": 98.415,
+    "letterSpacing": 0.8299902679824587,
+    "maxWidth": 396.12998545238486,
+    "groupPixelCount": 24871,
+    "priority": 43,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8785753424657534,
+    "ownershipFitRatio": 0.3221917808219178,
+    "candidateScore": 1.0056100608342646,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 43,
+    "componentId": "country-043-component-001",
+    "labelGroupId": "country-043-group-001",
+    "text": "신사보이왕국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4335.746307567967,
+      "y": 992.5710165382033
+    },
+    "control": {
+      "x": 4403.965722120117,
+      "y": 1014.2575940623832
+    },
+    "end": {
+      "x": 4468.322248191798,
+      "y": 982.9137953370305
+    },
+    "x": 4403,
+    "y": 1001,
+    "angle": -4.166234578842025,
+    "curvature": 0.1,
+    "fontSize": 22.076320674746757,
+    "letterSpacing": 0.18544109366787273,
+    "maxWidth": 132.92720546833937,
+    "groupPixelCount": 11460,
+    "priority": 41,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9892891918208374,
+    "ownershipFitRatio": 0.9892891918208374,
+    "candidateScore": 1.0943034678675756,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 44,
+    "componentId": "country-044-component-001",
+    "labelGroupId": "country-044-group-001",
+    "text": "만데연방",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2519.460796497868,
+      "y": 1229.8127162251694
+    },
+    "control": {
+      "x": 2671.580797922742,
+      "y": 1125.6345753862672
+    },
+    "end": {
+      "x": 2853.377607656648,
+      "y": 1094.9181330022964
+    },
+    "x": 2679,
+    "y": 1144,
+    "angle": -21.997556377040826,
+    "curvature": -0.055,
+    "fontSize": 89.47110360911395,
+    "letterSpacing": 0.7515572703165572,
+    "maxWidth": 360.1346766937622,
+    "groupPixelCount": 59493,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.882084194495812,
+    "ownershipFitRatio": 0.882084194495812,
+    "candidateScore": 1.0164981287429746,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 45,
+    "componentId": "country-045-component-002",
+    "labelGroupId": "country-045-group-002",
+    "text": "광둥해양공화국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4431.956012013155,
+      "y": 1044.9818767564482
+    },
+    "control": {
+      "x": 4543,
+      "y": 985.0181232435518
+    },
+    "end": {
+      "x": 4654.043987986845,
+      "y": 1044.9818767564482
+    },
+    "x": 4543,
+    "y": 1015,
+    "angle": 0,
+    "curvature": -0.135,
+    "fontSize": 31.507459795442088,
+    "letterSpacing": 0.26466266228171353,
+    "maxWidth": 222.08797597369028,
+    "groupPixelCount": 13131,
+    "priority": 41,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9080954243253813,
+    "ownershipFitRatio": 0.8290965975752835,
+    "candidateScore": 1.0259404517012123,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 46,
+    "componentId": "country-046-component-001",
+    "labelGroupId": "country-046-group-001",
+    "text": "그란콜롬비아연방",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1474.379493113645,
+      "y": 1249.1819016530435
+    },
+    "control": {
+      "x": 1677.6960158014538,
+      "y": 1091.5113263372648
+    },
+    "end": {
+      "x": 1934.2284752834476,
+      "y": 1071.795445672427
+    },
+    "x": 1691,
+    "y": 1126,
+    "angle": -21.094089420545046,
+    "curvature": -0.075,
+    "fontSize": 61.161483013907116,
+    "letterSpacing": 0.5137564573168197,
+    "maxWidth": 492.8762939805146,
+    "groupPixelCount": 55610,
+    "priority": 47,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.877770083102493,
+    "ownershipFitRatio": 0.6754385964912281,
+    "candidateScore": 1.068970083102493,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 47,
+    "componentId": "country-047-component-001",
+    "labelGroupId": "country-047-group-001",
+    "text": "소코토연방",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2888.630323188984,
+      "y": 1094.9442815776947
+    },
+    "control": {
+      "x": 3038.528704787933,
+      "y": 1086.0674930774608
+    },
+    "end": {
+      "x": 3178.31226723515,
+      "y": 1140.9207322673835
+    },
+    "x": 3036,
+    "y": 1102,
+    "angle": 9.01839439460407,
+    "curvature": -0.055,
+    "fontSize": 58.26764613071641,
+    "letterSpacing": 0.48944822749801786,
+    "maxWidth": 293.3077951988104,
+    "groupPixelCount": 38858,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9995710915719493,
+    "ownershipFitRatio": 0.9995710915719493,
+    "candidateScore": 1.1423041375723784,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 48,
+    "componentId": "country-048-component-001",
+    "labelGroupId": "country-048-group-001",
+    "text": "에티오피아제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3327.147848864938,
+      "y": 1263.2762633751431
+    },
+    "control": {
+      "x": 3461,
+      "y": 1292.7237366248569
+    },
+    "end": {
+      "x": 3594.852151135062,
+      "y": 1263.2762633751431
+    },
+    "x": 3461,
+    "y": 1278,
+    "angle": 0,
+    "curvature": 0.055,
+    "fontSize": 37.98201835718324,
+    "letterSpacing": 0.3190489542003392,
+    "maxWidth": 267.7043022701239,
+    "groupPixelCount": 39293,
+    "priority": 46,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9691316146540027,
+    "ownershipFitRatio": 0.9691316146540027,
+    "candidateScore": 1.0767735210312077,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 49,
+    "componentId": "country-049-component-001",
+    "labelGroupId": "country-049-group-001",
+    "text": "대브라질제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1733.4238321320622,
+      "y": 1220.424968112165
+    },
+    "control": {
+      "x": 2002.6074746950537,
+      "y": 1367.1434437509827
+    },
+    "end": {
+      "x": 2185.3612184778303,
+      "y": 1613.2881443858694
+    },
+    "x": 1981,
+    "y": 1392,
+    "angle": 41,
+    "curvature": -0.055,
+    "fontSize": 99.11679586035496,
+    "letterSpacing": 0.8325810852269815,
+    "maxWidth": 598.8229090882443,
+    "groupPixelCount": 186743,
+    "priority": 53,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9010715652506698,
+    "ownershipFitRatio": 0.9010715652506698,
+    "candidateScore": 1.04029428568695,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 49,
+    "componentId": "country-049-component-003",
+    "labelGroupId": "country-049-group-003",
+    "text": "대브라질제국",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2977.8622356412166,
+      "y": 1685.1683160025148
+    },
+    "control": {
+      "x": 3072.1652378594695,
+      "y": 1718.0054947001372
+    },
+    "end": {
+      "x": 3117.807288639844,
+      "y": 1806.8206945972106
+    },
+    "x": 3060,
+    "y": 1732,
+    "angle": 41,
+    "curvature": -0.1,
+    "fontSize": 30.69072318389743,
+    "letterSpacing": 0.2578020747447384,
+    "maxWidth": 185.4290135780694,
+    "groupPixelCount": 17449,
+    "priority": 41,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8899643402954661,
+    "ownershipFitRatio": 0.8899643402954661,
+    "candidateScore": 0.9913930685175751,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 50,
+    "componentId": "country-050-component-001",
+    "labelGroupId": "country-050-group-001",
+    "text": "아샨티제국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 2765.1628294215907,
+      "y": 1214.2745452535717
+    },
+    "control": {
+      "x": 2841.9696114171643,
+      "y": 1204.573511832249
+    },
+    "end": {
+      "x": 2890.897947744081,
+      "y": 1144.5784310819301
+    },
+    "x": 2835,
+    "y": 1192,
+    "angle": -29,
+    "curvature": 0.1,
+    "fontSize": 28.56433567979205,
+    "letterSpacing": 0.2399404197102532,
+    "maxWidth": 143.75975900855292,
+    "groupPixelCount": 13665,
+    "priority": 41,
+    "minZoom": 1.5,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9483129935391242,
+    "ownershipFitRatio": 0.9483129935391242,
+    "candidateScore": 0.9923833748575019,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 51,
+    "componentId": "country-051-component-001",
+    "labelGroupId": "country-051-group-001",
+    "text": "벨기에-콩고왕령",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3012.554674351563,
+      "y": 1237.3238291643042
+    },
+    "control": {
+      "x": 3112.2166877269237,
+      "y": 1371.5551501713664
+    },
+    "end": {
+      "x": 3259.0119501945896,
+      "y": 1451.5658704929629
+    },
+    "x": 3124,
+    "y": 1358,
+    "angle": 41,
+    "curvature": 0.055,
+    "fontSize": 42.50158726904761,
+    "letterSpacing": 0.3570133330599999,
+    "maxWidth": 326.5590927973624,
+    "groupPixelCount": 77527,
+    "priority": 49,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9963890226287915,
+    "ownershipFitRatio": 0.9963890226287915,
+    "candidateScore": 1.1598782849542606,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 52,
+    "componentId": "country-052-component-001",
+    "labelGroupId": "country-052-group-001",
+    "text": "페루-볼리비아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1540.324993239026,
+      "y": 1282.453638456168
+    },
+    "control": {
+      "x": 1687.761651824905,
+      "y": 1412.4704690429676
+    },
+    "end": {
+      "x": 1876.1517031111641,
+      "y": 1468.605423457897
+    },
+    "x": 1698,
+    "y": 1394,
+    "angle": 29,
+    "curvature": 0.055,
+    "fontSize": 57.51649450993311,
+    "letterSpacing": 0.48313855388343807,
+    "maxWidth": 383.9688348328221,
+    "groupPixelCount": 50007,
+    "priority": 47,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9611377542583099,
+    "ownershipFitRatio": 0.9611377542583099,
+    "candidateScore": 1.0991559841822391,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 53,
+    "componentId": "country-053-component-001",
+    "labelGroupId": "country-053-group-001",
+    "text": "오라녜-누산타라",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4190.027263287071,
+      "y": 1356.5758704869008
+    },
+    "control": {
+      "x": 4586.264808947752,
+      "y": 1509.8561891647767
+    },
+    "end": {
+      "x": 5001.443118817426,
+      "y": 1419.711751183546
+    },
+    "x": 4591,
+    "y": 1449,
+    "angle": 4.449192777670759,
+    "curvature": 0.075,
+    "fontSize": 105.92604091555874,
+    "letterSpacing": 0.8897787436906934,
+    "maxWidth": 813.8684353366942,
+    "groupPixelCount": 39197,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8804732531095156,
+    "ownershipFitRatio": 0.28213166144200624,
+    "candidateScore": 1.027065102639296,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 54,
+    "componentId": "country-054-component-001",
+    "labelGroupId": "country-054-group-001",
+    "text": "칠레",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1717.1175181690276,
+      "y": 1594.8270130502544
+    },
+    "control": {
+      "x": 1729.7415763913475,
+      "y": 1581.0054995983587
+    },
+    "end": {
+      "x": 1735.3993290482774,
+      "y": 1563.1619877530281
+    },
+    "x": 1728,
+    "y": 1580,
+    "angle": -60,
+    "curvature": 0.055,
+    "fontSize": 18,
+    "letterSpacing": 0.5636217584997222,
+    "maxWidth": 36.56362175849972,
+    "groupPixelCount": 22107,
+    "priority": 43,
+    "minZoom": 2.4,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 1,
+    "candidateScore": 1.148208206833031,
+    "mode": "manual",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 55,
+    "componentId": "country-055-component-001",
+    "labelGroupId": "country-055-group-001",
+    "text": "로디지아",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3139.7331891441986,
+      "y": 1729.431028305033
+    },
+    "control": {
+      "x": 3275.5162289377295,
+      "y": 1682.1501163836144
+    },
+    "end": {
+      "x": 3341.2343529803425,
+      "y": 1554.2687389277382
+    },
+    "x": 3258,
+    "y": 1662,
+    "angle": -41,
+    "curvature": 0.1,
+    "fontSize": 66.33543387220683,
+    "letterSpacing": 0.5572176445265374,
+    "maxWidth": 266.99166025779834,
+    "groupPixelCount": 38430,
+    "priority": 46,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9498812351543943,
+    "ownershipFitRatio": 0.9498812351543943,
+    "candidateScore": 1.0323119570932264,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 56,
+    "componentId": "country-056-component-001",
+    "labelGroupId": "country-056-group-001",
+    "text": "아르헨티나공화국",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 1637.8703833762254,
+      "y": 1886.5077991075839
+    },
+    "control": {
+      "x": 1806.539103115287,
+      "y": 1794.5749564859336
+    },
+    "end": {
+      "x": 1921.0514103932007,
+      "y": 1640.3422879205489
+    },
+    "x": 1793,
+    "y": 1779,
+    "angle": -41,
+    "curvature": 0.055,
+    "fontSize": 46.57362722831452,
+    "letterSpacing": 0.39121846871784194,
+    "maxWidth": 375.21854026735303,
+    "groupPixelCount": 77016,
+    "priority": 49,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8462894066966908,
+    "ownershipFitRatio": 0.8462894066966908,
+    "candidateScore": 0.8009171435428823,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 57,
+    "componentId": "country-057-component-001",
+    "labelGroupId": "canada-main-label",
+    "text": "캐나다자치령",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 880.4937435229265,
+      "y": 154.3022933032196
+    },
+    "control": {
+      "x": 1267.2545941034489,
+      "y": 251.38013298988997
+    },
+    "end": {
+      "x": 1664.997068270176,
+      "y": 222.9374407170004
+    },
+    "x": 1270,
+    "y": 220,
+    "angle": 5,
+    "curvature": 0.04,
+    "fontSize": 130,
+    "letterSpacing": 1.5,
+    "maxWidth": 787.5,
+    "groupPixelCount": 344271,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.8356796213853126,
+    "ownershipFitRatio": 0.8356796213853126,
+    "candidateScore": 0.9457178276034317,
+    "mode": "manual",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 58,
+    "componentId": "country-058-component-001",
+    "labelGroupId": "india-main-label",
+    "text": "영국령인도",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3859.8038561138087,
+      "y": 892.6574930193751
+    },
+    "control": {
+      "x": 3985.163935261603,
+      "y": 1028.052898776213
+    },
+    "end": {
+      "x": 4149.868273362986,
+      "y": 1111.236709428199
+    },
+    "x": 3995,
+    "y": 1015,
+    "angle": 37,
+    "curvature": 0.045,
+    "fontSize": 72,
+    "letterSpacing": 0.8,
+    "maxWidth": 363.2,
+    "groupPixelCount": 84492,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9451820128479658,
+    "ownershipFitRatio": 0.9451820128479658,
+    "candidateScore": 1.102958432805808,
+    "mode": "manual",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 59,
+    "componentId": "country-059-component-001",
+    "labelGroupId": "country-059-group-001",
+    "text": "필리핀",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4659.0283712832115,
+      "y": 1119.6075188846442
+    },
+    "control": {
+      "x": 4693.674211792625,
+      "y": 1211.630302569524
+    },
+    "end": {
+      "x": 4789.623205131537,
+      "y": 1233.1318759763078
+    },
+    "x": 4709,
+    "y": 1194,
+    "angle": 41,
+    "curvature": 0.135,
+    "fontSize": 57.335584660041185,
+    "letterSpacing": 0.5249231100487401,
+    "maxWidth": 173.03985171326156,
+    "groupPixelCount": 6270,
+    "priority": 38,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9267049075844487,
+    "ownershipFitRatio": 0.3193116634799235,
+    "candidateScore": 1.078284329328118,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 60,
+    "componentId": "country-060-component-001",
+    "labelGroupId": "australia-main-label",
+    "text": "오스트레일리아",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 4575.606417219154,
+      "y": 1911.2403010550534
+    },
+    "control": {
+      "x": 4891.368138757346,
+      "y": 1814.15796447812
+    },
+    "end": {
+      "x": 5221.657305266154,
+      "y": 1820.4437699887067
+    },
+    "x": 4895,
+    "y": 1840,
+    "angle": -8,
+    "curvature": -0.04,
+    "fontSize": 92,
+    "letterSpacing": 1.4,
+    "maxWidth": 652.4,
+    "groupPixelCount": 195413,
+    "priority": 48,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 1,
+    "ownershipFitRatio": 0.9215998890891446,
+    "candidateScore": 1.1445529411764706,
+    "mode": "manual",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 61,
+    "componentId": "country-061-component-001",
+    "labelGroupId": "country-061-group-001",
+    "text": "남아프리카연방",
+    "layoutMode": "arc-up",
+    "pathType": "quadratic",
+    "start": {
+      "x": 3076.448722132659,
+      "y": 1956.1883574922117
+    },
+    "control": {
+      "x": 3169.9142882502238,
+      "y": 1839.499931142117
+    },
+    "end": {
+      "x": 3303.7227013668935,
+      "y": 1772.8117802235543
+    },
+    "x": 3180,
+    "y": 1852,
+    "angle": -38.89841116361954,
+    "curvature": -0.055,
+    "fontSize": 41.43147360810789,
+    "letterSpacing": 0.3480243783081063,
+    "maxWidth": 292.02813345246585,
+    "groupPixelCount": 39544,
+    "priority": 46,
+    "minZoom": 1,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.9333517699115044,
+    "ownershipFitRatio": 0.9333517699115044,
+    "candidateScore": 1.0939834845132743,
+    "mode": "auto",
+    "hiddenReason": null
+  },
+  {
+    "countryId": 62,
+    "componentId": "country-062-component-001",
+    "labelGroupId": "country-062-group-001",
+    "text": "뉴질랜드",
+    "layoutMode": "arc-down",
+    "pathType": "quadratic",
+    "start": {
+      "x": 5407.253209126943,
+      "y": 2134.5604387383974
+    },
+    "control": {
+      "x": 5539.69767100773,
+      "y": 2074.7573679797993
+    },
+    "end": {
+      "x": 5617.351448857598,
+      "y": 1951.9248253020044
+    },
+    "x": 5526,
+    "y": 2059,
+    "angle": -41,
+    "curvature": 0.075,
+    "fontSize": 69.16201882517726,
+    "letterSpacing": 0.580960958131489,
+    "maxWidth": 278.38289752283197,
+    "groupPixelCount": 8441,
+    "priority": 39,
+    "minZoom": 0.75,
+    "maxZoom": null,
+    "visible": true,
+    "fitRatio": 0.885306760453302,
+    "ownershipFitRatio": 0.5289175459163736,
+    "candidateScore": 1.0201998578042206,
+    "mode": "auto",
+    "hiddenReason": null
+  }
+]

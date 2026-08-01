@@ -1,0 +1,31 @@
+import type { CountryLawState } from "../types/laws";
+
+export const DEV_LAW_SAMPLE: CountryLawState = {
+  countryId: "__development_fixture__",
+  laws: {
+    "party-system": "party-system:multiparty",
+    "religion-policy": "religion-policy:secularism",
+    "trade-unions": "trade-unions:allowed",
+    immigration: "immigration:selective",
+    "forced-labor": "forced-labor:prohibited",
+    assembly: "assembly:protected",
+    press: "press:free-press",
+    franchise: "franchise:universal",
+    service: "service:limited",
+    training: "training:combat",
+    officers: "officers:academy",
+    exemptions: "exemptions:regulated",
+    trade: "trade:tariffs",
+    "income-tax": "income-tax:balanced",
+    "minimum-wage": "minimum-wage:regional",
+    "working-hours": "working-hours:standard",
+    unemployment: "unemployment:limited",
+    pensions: "pensions:occupational",
+    healthcare: "healthcare:mixed",
+    education: "education:primary",
+    "penal-system": "penal-system:mixed",
+    policing: "policing:centralized",
+    "industry-regulation": "industry-regulation:standard",
+    "womens-rights": "womens-rights:civil",
+  },
+};

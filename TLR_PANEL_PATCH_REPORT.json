@@ -1,0 +1,490 @@
+[
+  {
+    "key": "country-045",
+    "map_name_before": "광둥 해양공화국",
+    "panel_source": "광둥 해양공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(제한적)"
+  },
+  {
+    "key": "country-046",
+    "map_name_before": "그란콜롬비아 연방",
+    "panel_source": "그란콜롬비아 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-061",
+    "map_name_before": "남아프리카공화국",
+    "panel_source": "남아프리카 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(인종적으로 제한)"
+  },
+  {
+    "key": "country-041",
+    "map_name_before": "네팔 왕국",
+    "panel_source": "네팔 왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-005",
+    "map_name_before": "노르드 연방",
+    "panel_source": "노르드 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-033",
+    "map_name_before": "노바 메히코 연방",
+    "panel_source": "노바 메히코 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-062",
+    "map_name_before": "뉴질랜드",
+    "panel_source": "뉴질랜드 자치령",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-049",
+    "map_name_before": "대브라질 제국",
+    "panel_source": "대브라질 제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(제한적 입헌군주제 계열)"
+  },
+  {
+    "key": "country-002",
+    "map_name_before": "대영제국",
+    "panel_source": "대영제국",
+    "parties": 5,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-018",
+    "map_name_before": "대일본제국",
+    "panel_source": "대일본제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(제한적)"
+  },
+  {
+    "key": "country-012",
+    "map_name_before": "대청제국",
+    "panel_source": "대청제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-028",
+    "map_name_before": "대한제국",
+    "panel_source": "대한제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-008",
+    "map_name_before": "독일민주공화국",
+    "panel_source": "독일민주공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-003",
+    "map_name_before": "러시아 인민공화국",
+    "panel_source": "러시아 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-004",
+    "map_name_before": "러시아 제국",
+    "panel_source": "러시아 제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-055",
+    "map_name_before": "로디지아 인권동맹연방",
+    "panel_source": "로디지아 인권동맹연방",
+    "parties": 6,
+    "leader_named": true,
+    "election": "실시(참정권 제한)"
+  },
+  {
+    "key": "country-022",
+    "map_name_before": "루마니아 사회주의 공화국",
+    "panel_source": "루마니아 사회주의 공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-044",
+    "map_name_before": "만데 연방",
+    "panel_source": "만데 연방",
+    "parties": 6,
+    "leader_named": true,
+    "election": "미실시(연방 엘리트 합의형)"
+  },
+  {
+    "key": "country-015",
+    "map_name_before": "몽골국",
+    "panel_source": "몽골국",
+    "parties": 6,
+    "leader_named": true,
+    "election": "미실시"
+  },
+  {
+    "key": "country-017",
+    "map_name_before": "바이에른사회주의공화국",
+    "panel_source": "바이에른사회주의공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-006",
+    "map_name_before": "발트 연방",
+    "panel_source": "발트 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-051",
+    "map_name_before": "벨기에-콩고 왕령",
+    "panel_source": "벨기에-콩고 왕령",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-016",
+    "map_name_before": "보헤미아 인민공화국",
+    "panel_source": "보헤미아 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-040",
+    "map_name_before": "사우디아라비아 제2국가",
+    "panel_source": "사우디아라비아 제2국가",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-047",
+    "map_name_before": "소코토 연방",
+    "panel_source": "소코토 연방",
+    "parties": 6,
+    "leader_named": true,
+    "election": "미실시"
+  },
+  {
+    "key": "country-023",
+    "map_name_before": "스위스 연방",
+    "panel_source": "스위스 연방",
+    "parties": 6,
+    "leader_named": true,
+    "election": "실시"
+  },
+  {
+    "key": "country-020",
+    "map_name_before": "신강 공화국",
+    "panel_source": "신강 공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-039",
+    "map_name_before": "신도나우 연합제국",
+    "panel_source": "신도나우 연합제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-043",
+    "map_name_before": "신사보이 왕국",
+    "panel_source": "신사보이 왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-042",
+    "map_name_before": "신프랑스 연방왕국",
+    "panel_source": "신프랑스 연방왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-036",
+    "map_name_before": "신프로이센 왕국",
+    "panel_source": "신프로이센 왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-030",
+    "map_name_before": "아라곤 자유지대",
+    "panel_source": "아라곤 자유지대",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시(전국 정당선거 없음)"
+  },
+  {
+    "key": "country-056",
+    "map_name_before": "아르헨티나 공화국",
+    "panel_source": "아르헨티나 공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(부정·제한적)"
+  },
+  {
+    "key": "country-050",
+    "map_name_before": "아샨티 제국",
+    "panel_source": "아샨티 제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-009",
+    "map_name_before": "알라시 공화국",
+    "panel_source": "알라시 공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-048",
+    "map_name_before": "에티오피아 제국",
+    "panel_source": "에티오피아 제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-058",
+    "map_name_before": "영국령 인도제국",
+    "panel_source": "영국령 인도",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시(총독·중앙정권 기준)"
+  },
+  {
+    "key": "country-007",
+    "map_name_before": "오대호 연방",
+    "panel_source": "오대호 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-053",
+    "map_name_before": "오라녜-누산타라 연합왕국",
+    "panel_source": "오라녜-누산타라 연합왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시(전국 단위)"
+  },
+  {
+    "key": "country-031",
+    "map_name_before": "오스만 제국",
+    "panel_source": "오스만 제국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(제한적 입헌정)"
+  },
+  {
+    "key": "country-060",
+    "map_name_before": "오스트레일리아",
+    "panel_source": "오스트레일리아 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-021",
+    "map_name_before": "오스트리아 인민공화국",
+    "panel_source": "오스트리아 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-014",
+    "map_name_before": "우크라이나 농민연방공화국",
+    "panel_source": "우크라이나 농민연방공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시(전국 정당선거 없음)"
+  },
+  {
+    "key": "country-025",
+    "map_name_before": "유고슬라비아 인민연방공화국",
+    "panel_source": "유고슬라비아 인민연방공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-032",
+    "map_name_before": "이란 입헌왕국",
+    "panel_source": "이란 입헌왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-029",
+    "map_name_before": "이베리아 사회주의 공화국",
+    "panel_source": "이베리아 사회주의 공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-024",
+    "map_name_before": "이탈리아 인민공화국",
+    "panel_source": "이탈리아 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-034",
+    "map_name_before": "작센-초 연합왕국",
+    "panel_source": "작센-초 연합왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-054",
+    "map_name_before": "칠레 공화국",
+    "panel_source": "칠레 공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-037",
+    "map_name_before": "카리브 연방",
+    "panel_source": "카리브 연방",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-026",
+    "map_name_before": "캅카스 인민연방공화국",
+    "panel_source": "캅카스 인민연방공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-057",
+    "map_name_before": "캐나다 자치령",
+    "panel_source": "캐나다 자치령",
+    "parties": 5,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-001",
+    "map_name_before": "컬럼비아 개척 연방",
+    "panel_source": "콜럼비아 보전연방",
+    "parties": 5,
+    "leader_named": true,
+    "election": "실시"
+  },
+  {
+    "key": "country-027",
+    "map_name_before": "투르키스탄 민주인민공화국",
+    "panel_source": "투르키스탄 민주인민공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-035",
+    "map_name_before": "티베트 왕국",
+    "panel_source": "티베트 왕국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  },
+  {
+    "key": "country-052",
+    "map_name_before": "페루-볼리비아 연방",
+    "panel_source": "페루-볼리비아 연방",
+    "parties": 6,
+    "leader_named": true,
+    "election": "실시"
+  },
+  {
+    "key": "country-011",
+    "map_name_before": "폴란드 사회민주공화국",
+    "panel_source": "폴란드 사회민주공화국",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시"
+  },
+  {
+    "key": "country-013",
+    "map_name_before": "프랑스 인민공화국",
+    "panel_source": "프랑스 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-059",
+    "map_name_before": "필리핀",
+    "panel_source": "필리핀 제도정부",
+    "parties": 6,
+    "leader_named": false,
+    "election": "실시(자치정부 내부)"
+  },
+  {
+    "key": "country-019",
+    "map_name_before": "헝가리 인민공화국",
+    "panel_source": "헝가리 인민공화국",
+    "parties": 6,
+    "leader_named": true,
+    "election": ""
+  },
+  {
+    "key": "country-010",
+    "map_name_before": "황러시아",
+    "panel_source": "황러시아",
+    "parties": 6,
+    "leader_named": false,
+    "election": "미실시"
+  }
+]

@@ -1,0 +1,21 @@
+﻿TLR PANEL PATCH
+
+Applied:
+- 61 country descriptions
+- 61 leader portraits
+- 61 ideology icons
+- party/ideology support charts and icons
+- election + left/right political classification rows
+- existing national spirits preserved
+- leader tooltip now shows a source-provided leader name when available
+
+Name handling:
+- Current TLR name `컬럼비아 개척 연방` is preserved. Stale `콜럼비아 보전연방` references inside panel descriptions were normalized to it.
+- FINAL pack naming applied to: 영국령 인도, 필리핀 제도정부, 오스트레일리아 연방, 남아프리카 연방, 뉴질랜드 자치령. Map labels stay compact where appropriate.
+
+Not in the 61-country panel pack:
+- country-038 사천 공화국
+  Existing national-spirit data is preserved, but no new panel description/portrait/politics chart was invented.
+
+Leader names:
+- Only leader names explicitly present in the supplied 정치정보.txt files were inserted. No names were guessed from portraits.

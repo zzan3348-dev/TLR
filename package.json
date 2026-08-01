@@ -1,0 +1,45 @@
+{
+  "name": "world-map-country-selector",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "generate-map-countries": "node scripts/generate-map-assets.mjs",
+    "generate-map-assets": "node scripts/generate-map-assets.mjs",
+    "prepare-country-panel-frame": "node scripts/prepare-country-panel-frame.mjs",
+    "prepare-country-play-assets": "node scripts/prepare-country-play-assets.mjs",
+    "generate-ui-icons": "node scripts/generate-tlr-ui-icons.mjs",
+    "extract-reference-icons": "node scripts/extract-reference-icon-assets.mjs",
+    "generate-law-icons": "node scripts/extract-generated-law-icons.mjs",
+    "generate-status-icons": "node scripts/extract-status-icons.mjs",
+    "merge-western-papua": "node scripts/merge-western-papua.mjs",
+    "split-selected-colonies": "node scripts/split-selected-colonies.mjs",
+    "update-map-source": "node scripts/update-map-source.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@napi-rs/canvas": "^1.0.2",
+    "@types/node": "^26.1.1",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "pngjs": "^7.0.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
+  }
+}
