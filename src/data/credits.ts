@@ -9,7 +9,7 @@ export const credits: CreditEntry[] = [
   { role: "지도 제작", person: "김의진 (기타히어로)" },
   { role: "웹사이트 제작", person: "김의진 (기타히어로)" },
   { role: "UI 및 그래픽", person: "김의진 (기타히어로)" },
-  { role: "도움을 준 사람", person: "김의진 (기타히어로)" },
+  { role: "기록 및 정리", person: "김의진 (기타히어로)" },
 ];
 
-export const references = ["하츠 오브 아이언 4", "TFR", "TNO"] as const;
+export const references = ["하츠오브아이언 4", "TFR", "TNO"] as const;

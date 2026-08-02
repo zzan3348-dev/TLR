@@ -22,6 +22,7 @@
     "update-map-source": "node scripts/update-map-source.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.111.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

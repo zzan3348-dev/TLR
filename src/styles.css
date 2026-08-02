@@ -5379,6 +5379,136 @@ button:focus-visible,
   }
 }
 
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(2, 7, 10, 0.78);
+  animation: auth-fade-in 180ms ease-out both;
+}
+
+.auth-modal,
+.access-blocked-card {
+  width: min(460px, 100%);
+  color: #d9d5c8;
+  background: linear-gradient(145deg, #202525, #0b1113 72%);
+  border: 1px solid #69736d;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.58), inset 0 0 0 2px rgba(16, 20, 20, 0.8);
+}
+
+.auth-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 18px 13px;
+  border-bottom: 1px solid #3a4643;
+}
+
+.auth-modal__kicker,
+.title-window__kicker {
+  color: #7aa49c;
+  font: 10px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: .14em;
+}
+
+.auth-modal h2,
+.access-blocked-card h1 {
+  margin: 7px 0 0;
+  color: #e5ddc8;
+  font-size: 26px;
+}
+
+.auth-modal__close {
+  width: 28px;
+  height: 28px;
+  color: #d9d5c8;
+  background: #151b1d;
+  border: 1px solid #65706a;
+  cursor: pointer;
+}
+
+.auth-modal__body,
+.access-blocked-card {
+  padding: 20px;
+}
+
+.auth-modal__body p,
+.access-blocked-card p {
+  margin: 0 0 12px;
+  color: #bbc2bd;
+  line-height: 1.55;
+}
+
+.auth-modal__status {
+  color: #e9cb62 !important;
+  font-size: 20px;
+}
+
+.auth-modal__muted,
+.auth-modal__privacy {
+  color: #7f9690 !important;
+  font-size: 12px;
+}
+
+.auth-modal__privacy {
+  padding: 10px;
+  background: rgba(12, 29, 31, 0.72);
+  border-left: 2px solid #5d8e8a;
+}
+
+.auth-modal__action {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 9px;
+  color: #e8dfc6;
+  background: linear-gradient(#3a423d, #1b2322);
+  border: 1px solid #9b8b55;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-modal__action:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.auth-modal__error {
+  color: #e18476 !important;
+  font-size: 12px;
+}
+
+.access-blocked-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #080e11;
+}
+
+.access-blocked-card dl {
+  margin: 18px 0;
+  border-top: 1px solid #33423e;
+}
+
+.access-blocked-card dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid #273532;
+}
+
+.access-blocked-card dt { color: #7f9690; }
+.access-blocked-card dd { margin: 0; color: #e1d8bf; text-align: right; word-break: break-word; }
+
+@keyframes auth-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Foreign-country shell: vertical action board with the same steel language */
 .strategic-window--diplomacy {
   width: clamp(430px, 36vw, 560px);

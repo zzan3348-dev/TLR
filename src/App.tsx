@@ -10,6 +10,8 @@ import { ReadOnlyCountryPanel } from "./components/ReadOnlyCountryPanel";
 import { TexturedActionButton } from "./components/TexturedActionButton";
 import { IconCatalog } from "./components/IconCatalog";
 import { TitleScreen, type TitleWindow } from "./components/TitleScreen";
+import { AuthModal } from "./components/AuthModal";
+import { AccessBlockedScreen } from "./components/AccessBlockedScreen";
 import { WorldMap, type WorldMapHandle } from "./components/WorldMap";
 import { mapCountries } from "./data/mapCountries";
 import { PlayHud } from "./features/play/components/PlayHud";
@@ -26,6 +28,8 @@ import type {
   MapCountryIndex,
 } from "./types/mapCountry";
 import type { MapMode } from "./types/faction";
+import { useAuth } from "./auth/AuthProvider";
+import { rememberNextPath, signInWithDiscord, signOut } from "./services/authService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -50,8 +54,11 @@ function readStoredPlayCountry(): MapCountryIndex | null {
 }
 
 export default function App() {
+  const { profile, loading: authLoading, refresh: refreshAuth } = useAuth();
   const mapRef = useRef<WorldMapHandle>(null);
-  const [screen, setScreen] = useState<"title" | "map">("title");
+  const [screen, setScreen] = useState<"title" | "map">(
+    window.location.pathname.startsWith("/play/") ? "map" : "title",
+  );
   const [isMapEntering, setIsMapEntering] = useState(false);
   const [titleWindow, setTitleWindow] = useState<TitleWindow>(null);
   const [selection, setSelection] = useState<SelectedMapTerritory | null>(null);
@@ -69,6 +76,37 @@ export default function App() {
   const [showProvinceBorders, setShowProvinceBorders] = useState(
     readStoredProvinceSetting,
   );
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
+
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (authLoading) return;
+    const match = window.location.pathname.match(/^\/play\/([^/]+)$/u);
+    if (!match) return;
+    const country = mapCountries.find(
+      (candidate) => candidate.key === decodeURIComponent(match[1]),
+    );
+    if (!country) {
+      window.history.replaceState({}, "", "/");
+      setScreen("title");
+      return;
+    }
+    if (profile?.accessStatus === "blocked") {
+      setAccessBlockedOpen(true);
+      return;
+    }
+    if (profile?.accessStatus !== "active") {
+      rememberNextPath(`/play/${country.key}`);
+      setScreen("title");
+      setAuthModalOpen(true);
+      return;
+    }
+    setPlayCountry(country);
+    storePlayCountryKey(country.key);
+    setScreen("map");
+  }, [authLoading, profile]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!isMapEntering) {
@@ -123,13 +161,23 @@ export default function App() {
     if (!selection) {
       return;
     }
+    if (profile?.accessStatus === "blocked") {
+      setAccessBlockedOpen(true);
+      return;
+    }
+    if (profile?.accessStatus !== "active") {
+      rememberNextPath(`/play/${selection.country.key}`);
+      setAuthModalOpen(true);
+      return;
+    }
     setPlayCountry(selection.country);
     setInspectedCountry(null);
     setActivePlayWindow("politics");
     storePlayCountryKey(selection.country.key);
     setCountryPlayStep("closed");
     setSelection(null);
-  }, [selection]);
+    window.history.replaceState({}, "", `/play/${selection.country.key}`);
+  }, [profile, selection]);
 
   const exitPlayMode = useCallback(() => {
     setPlayCountry(null);
@@ -138,6 +186,7 @@ export default function App() {
     setSelection(null);
     clearPlayCountryKey();
     setCountryPlayStep("closed");
+    window.history.replaceState({}, "", "/");
   }, []);
 
   const closePlayWindow = useCallback(() => {
@@ -189,10 +238,27 @@ export default function App() {
     return <IconCatalog />;
   }
 
+  if (accessBlockedOpen && profile?.accessStatus === "blocked") {
+    return (
+      <AccessBlockedScreen
+        profile={profile}
+        onLogout={async () => {
+          await signOut();
+          await refreshAuth();
+          setAccessBlockedOpen(false);
+          setScreen("title");
+          window.history.replaceState({}, "", "/");
+        }}
+      />
+    );
+  }
+
   if (screen === "title") {
     return (
       <TitleScreen
         activeWindow={titleWindow}
+        authProfile={profile}
+        authLoading={authLoading}
         onOpenCountrySelection={() => {
           setTitleWindow(null);
           setIsMapEntering(true);
@@ -200,6 +266,13 @@ export default function App() {
         }}
         onOpenWindow={setTitleWindow}
         onCloseWindow={() => setTitleWindow(null)}
+        onLogin={() => {
+          void signInWithDiscord("/");
+        }}
+        onLogout={async () => {
+          await signOut();
+          await refreshAuth();
+        }}
       />
     );
   }
@@ -296,6 +369,18 @@ export default function App() {
         }
         onBack={() => setCountryPlayStep("description")}
         onConfirm={confirmCountryPlay}
+      />
+      <AuthModal
+        open={authModalOpen}
+        profile={profile}
+        loading={authLoading}
+        nextPath={selection ? `/play/${selection.country.key}` : "/"}
+        onClose={() => setAuthModalOpen(false)}
+        onSignOut={async () => {
+          await signOut();
+          await refreshAuth();
+          setAuthModalOpen(false);
+        }}
       />
     </main>
   );
