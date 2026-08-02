@@ -1,0 +1,1489 @@
+{
+  "country-001": {
+    "name": "시어도어 루스벨트 주니어",
+    "effects": [
+      {
+        "id": "effect-001-01",
+        "name": "공산주의 혐오자",
+        "lines": [
+          {
+            "id": "line-001-01-01",
+            "text": "매턴마다 공산주의 지지도 -3",
+            "tone": "negative"
+          },
+          {
+            "id": "line-001-01-02",
+            "text": "공산주의 국가와의 관계도 -30",
+            "tone": "negative"
+          },
+          {
+            "id": "line-001-01-03",
+            "text": "안정도 -2",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-001-02",
+        "name": "재향군인회 설립자",
+        "lines": [
+          {
+            "id": "line-001-02-01",
+            "text": "핵심영토 방어 +2",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-001-03",
+        "name": "해군부 전 차관",
+        "lines": [
+          {
+            "id": "line-001-03-01",
+            "text": "해상보급 이익 + 20",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-001-04",
+        "name": "극렬한 식민주의자",
+        "lines": [
+          {
+            "id": "line-001-04-01",
+            "text": "안정도 - 5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-001-04-02",
+            "text": "매턴마다 얻는 정치력 -20",
+            "tone": "negative"
+          },
+          {
+            "id": "line-001-04-03",
+            "text": "군비 상승에 대한 모든 패널티 -10%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-002": {
+    "name": "램지 맥도널드",
+    "effects": [
+      {
+        "id": "effect-002-01",
+        "name": "최초의 사회주의자 총리",
+        "lines": [
+          {
+            "id": "line-002-01-01",
+            "text": "매턴 공산주의 지지도 + 1%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-002-01-02",
+            "text": "공산주의 국가들과의 관계 +5",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-002-02",
+        "name": "반식민주의자",
+        "lines": [
+          {
+            "id": "line-002-02-01",
+            "text": "식민지 유지비용 +5%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-002-03",
+        "name": "색깔론에 공격당하다",
+        "lines": [
+          {
+            "id": "line-002-03-01",
+            "text": "안정도 - 5",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-003": {
+    "name": "레프 트로츠키",
+    "effects": [
+      {
+        "id": "effect-003-01",
+        "name": "레닌후계자",
+        "lines": [
+          {
+            "id": "line-003-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-003-01-02",
+            "text": "매턴 공산주의 지지도 +2",
+            "tone": "positive"
+          },
+          {
+            "id": "line-003-01-03",
+            "text": "핵심영토 방어 + 10",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-003-02",
+        "name": "영구혁명주의자",
+        "lines": [
+          {
+            "id": "line-003-02-01",
+            "text": "공산주의 국가가 아닐경우 관계 - 50",
+            "tone": "negative"
+          },
+          {
+            "id": "line-003-02-02",
+            "text": "핵심영토 공격 + 5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-004": {
+    "name": "키릴 블라디미로비치",
+    "effects": [
+      {
+        "id": "effect-004-01",
+        "name": "생존자 로마노프",
+        "lines": [
+          {
+            "id": "line-004-01-01",
+            "text": "러시아인민공화국과의 관계 - 999",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-004-02",
+        "name": "자애로운 황제",
+        "lines": [
+          {
+            "id": "line-004-02-01",
+            "text": "안정도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-004-02-02",
+            "text": "매턴 로마노프 지지율 + 5%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-004-03",
+        "name": "전러시아의 적법한 황제",
+        "lines": [
+          {
+            "id": "line-004-03-01",
+            "text": "핵심영토 방어 + 15",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-005": {
+    "name": "토르발 스타우닝",
+    "effects": [
+      {
+        "id": "effect-005-01",
+        "name": "사회개혁가",
+        "lines": [
+          {
+            "id": "line-005-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-006": {
+    "name": "아우구스트 레이",
+    "effects": [
+      {
+        "id": "effect-006-01",
+        "name": "겁에 질린 소국지도자",
+        "lines": [
+          {
+            "id": "line-006-01-01",
+            "text": "핵심영토 방어 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-006-01-02",
+            "text": "핵심영토 공격 -2",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-006-02",
+        "name": "포병장교",
+        "lines": [
+          {
+            "id": "line-006-02-01",
+            "text": "포병 배치비용 - 5%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-007": {
+    "name": "플로이드 B. 올슨",
+    "effects": [
+      {
+        "id": "effect-007-01",
+        "name": "건전한 진보주의자",
+        "lines": [
+          {
+            "id": "line-007-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-007-02",
+        "name": "KKK단 학살자",
+        "lines": [
+          {
+            "id": "line-007-02-01",
+            "text": "핵심영토 방어 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-007-02-02",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-008": {
+    "name": "오토 벨스",
+    "effects": [
+      {
+        "id": "effect-008-01",
+        "name": "온건한 진보주의자",
+        "lines": [
+          {
+            "id": "line-008-01-01",
+            "text": "매일 안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-008-02",
+        "name": "양심적인 정치인",
+        "lines": [
+          {
+            "id": "line-008-02-01",
+            "text": "연방 내에 있는 극단주의자들이 노려보고 있습니다...",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-009": {
+    "name": "알리한 부케이하노프",
+    "effects": [
+      {
+        "id": "effect-009-01",
+        "name": "튀르크주의자",
+        "lines": [
+          {
+            "id": "line-009-01-01",
+            "text": "신강공화국, 오스만 제국과 관계도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-010": {
+    "name": "미하일 디테리흐스",
+    "effects": [
+      {
+        "id": "effect-010-01",
+        "name": "극단적인 반공주의자",
+        "lines": [
+          {
+            "id": "line-010-01-01",
+            "text": "모든 공산주의 국가와 관계도 -999",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-010-02",
+        "name": "군국주의자",
+        "lines": [
+          {
+            "id": "line-010-02-01",
+            "text": "핵심인구 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-010-02-02",
+            "text": "군비 상승에 대한 모든 패널티 -20%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-011": {
+    "name": "이그나치 다신스키",
+    "effects": [
+      {
+        "id": "effect-011-01",
+        "name": "애국주의자",
+        "lines": [
+          {
+            "id": "line-011-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-012": {
+    "name": "푸이",
+    "effects": [
+      {
+        "id": "effect-012-01",
+        "name": "우둔한 황제",
+        "lines": [
+          {
+            "id": "line-012-01-01",
+            "text": "안정도 -20%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-012-01-02",
+            "text": "핵심영토 공격 -2%",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-012-02",
+        "name": "대청황제",
+        "lines": [
+          {
+            "id": "line-012-02-01",
+            "text": "핵심영토 방어 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-013": {
+    "name": "레옹 블룸",
+    "effects": [
+      {
+        "id": "effect-013-01",
+        "name": "끔찍한 공산주의자",
+        "lines": [
+          {
+            "id": "line-013-01-01",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-013-01-02",
+            "text": "핵심인구 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-013-01-03",
+            "text": "핵심영토 방어 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-013-01-04",
+            "text": "핵심영토 공격 +20",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-014": {
+    "name": "네스토르 마흐노",
+    "effects": []
+  },
+  "country-015": {
+    "name": "차간바타르 에르데네",
+    "effects": [
+      {
+        "id": "effect-015-01",
+        "name": "아나키스트",
+        "lines": [
+          {
+            "id": "line-015-01-01",
+            "text": "매일 아나키즘 지지도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-016": {
+    "name": "보후미르 슈메랄",
+    "effects": [
+      {
+        "id": "effect-016-01",
+        "name": "경제천재",
+        "lines": [
+          {
+            "id": "line-016-01-01",
+            "text": "모든 긍정적인 경제효과 +5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-017": {
+    "name": "쿠르트 아이스너",
+    "effects": [
+      {
+        "id": "effect-017-01",
+        "name": "바이에른 독립주의자",
+        "lines": [
+          {
+            "id": "line-017-01-01",
+            "text": "독일민주공화국과 전쟁중일때: 핵심영토 방어 +20",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-018": {
+    "name": "히로히토",
+    "effects": [
+      {
+        "id": "effect-018-01",
+        "name": "메이지 황제",
+        "lines": [
+          {
+            "id": "line-018-01-01",
+            "text": "건설 속도: +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-018-01-02",
+            "text": "연구 속도: +2%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-018-02",
+        "name": "쇼와 천황",
+        "lines": [
+          {
+            "id": "line-018-02-01",
+            "text": "정치력 획득: +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-018-02-02",
+            "text": "안정도: +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-018-02-03",
+            "text": "전쟁 지지도: +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-018-02-04",
+            "text": "이념 변화 방어: +20%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-019": {
+    "name": "미하이 카로이",
+    "effects": [
+      {
+        "id": "effect-019-01",
+        "name": "열렬한 유럽사회주의자",
+        "lines": [
+          {
+            "id": "line-019-01-01",
+            "text": "핵심 영토 방어: +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-019-01-02",
+            "text": "이념 변화 방어: +50%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-019-01-03",
+            "text": "매턴마다 공산주의 지지도: +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-020": {
+    "name": "성스차이",
+    "effects": [
+      {
+        "id": "effect-020-01",
+        "name": "변절한 혁명가",
+        "lines": [
+          {
+            "id": "line-020-01-01",
+            "text": "전쟁 지지도: +5.00%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-020-01-02",
+            "text": "공산주의국가들과의 외교: -40",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-021": {
+    "name": "오토 바우어",
+    "effects": [
+      {
+        "id": "effect-021-01",
+        "name": "마르크스주의자",
+        "lines": [
+          {
+            "id": "line-021-01-01",
+            "text": "안정도 +5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-022": {
+    "name": "크리스티안 라코프스키",
+    "effects": [
+      {
+        "id": "effect-022-01",
+        "name": "루마니아인, 불가리아인, 러시아인?",
+        "lines": [
+          {
+            "id": "line-022-01-01",
+            "text": "핵심영토 방어 -5",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-023": {
+    "name": "로베르트 그림",
+    "effects": [
+      {
+        "id": "effect-023-01",
+        "name": "중립주의자",
+        "lines": [
+          {
+            "id": "line-023-01-01",
+            "text": "세력에 가입할 수 없습니다",
+            "tone": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "country-024": {
+    "name": "베니토 무솔리니",
+    "effects": [
+      {
+        "id": "effect-024-01",
+        "name": "일 두체 수령동지",
+        "lines": [
+          {
+            "id": "line-024-01-01",
+            "text": "정치력 획득: +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-024-01-02",
+            "text": "경제, 무역, 징병법 비용: -20%",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-024-02",
+        "name": "주유소 공포주의자",
+        "lines": [
+          {
+            "id": "line-024-02-01",
+            "text": "석유 -1",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-025": {
+    "name": "요시프 브로즈 티토",
+    "effects": [
+      {
+        "id": "effect-025-01",
+        "name": "카리스마있는 지도자",
+        "lines": [
+          {
+            "id": "line-025-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-025-02",
+        "name": "만민족 지도자",
+        "lines": [
+          {
+            "id": "line-025-02-01",
+            "text": "안정도 + 10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-025-02-02",
+            "text": "핵심영토 방어 + 20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-025-02-03",
+            "text": "핵심영토 공격 +30",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-025-03",
+        "name": "'티토'",
+        "lines": [
+          {
+            "id": "line-025-03-01",
+            "text": "이것보다 대단한 사람을 본적이 없습니다 (그냥 이 글만 남길것!)",
+            "tone": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "country-026": {
+    "name": "노에 조르다니아",
+    "effects": [
+      {
+        "id": "effect-026-01",
+        "name": "애국주의자",
+        "lines": [
+          {
+            "id": "line-026-01-01",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-027": {
+    "name": "무스타파 쇼카이",
+    "effects": [
+      {
+        "id": "effect-027-01",
+        "name": "열혈 민족주의자",
+        "lines": [
+          {
+            "id": "line-027-01-01",
+            "text": "정치력 획득 +15%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-028": {
+    "name": "의친왕 이강",
+    "effects": [
+      {
+        "id": "effect-028-01",
+        "name": "인기있는 얼굴마담",
+        "lines": [
+          {
+            "id": "line-028-01-01",
+            "text": "정치력획득 +20%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-028-01-02",
+            "text": "안정도 + 20",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-028-02",
+        "name": "경제천재",
+        "lines": [
+          {
+            "id": "line-028-02-01",
+            "text": "모든 긍정적인 경제효과 +5",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-028-03",
+        "name": "미국 유학파",
+        "lines": [
+          {
+            "id": "line-028-03-01",
+            "text": "컬럼비아 보전연방과의 관계도: +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-029": {
+    "name": "프란시스코 라르고 카바예로",
+    "effects": [
+      {
+        "id": "effect-029-01",
+        "name": "우둔한 공산주의자",
+        "lines": [
+          {
+            "id": "line-029-01-01",
+            "text": "안정도 - 5%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-030": {
+    "name": "부에나벤투라 두루티",
+    "effects": [
+      {
+        "id": "effect-030-01",
+        "name": "아나키스트 지도자",
+        "lines": [
+          {
+            "id": "line-030-01-01",
+            "text": "모든 사단 공격 + 10",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-031": {
+    "name": "압뒬메지드 2세",
+    "effects": [
+      {
+        "id": "effect-031-01",
+        "name": "성공적인 개혁가",
+        "lines": [
+          {
+            "id": "line-031-01-01",
+            "text": "안정도 + 20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-031-01-02",
+            "text": "정치력 획득 +10%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-031-02",
+        "name": "강력한 왕권주의자",
+        "lines": [
+          {
+            "id": "line-031-02-01",
+            "text": "정치력 획득 + 5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-032": {
+    "name": "모하마드 모사데그",
+    "effects": [
+      {
+        "id": "effect-032-01",
+        "name": "무능한 군주' 조련사",
+        "lines": [
+          {
+            "id": "line-032-01-01",
+            "text": "안정도 +5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-033": {
+    "name": "라사로 카르데나스",
+    "effects": [
+      {
+        "id": "effect-033-01",
+        "name": "복수심에 불탄 지도자",
+        "lines": [
+          {
+            "id": "line-033-01-01",
+            "text": "컬럼비아와의 전쟁중일때: 핵심영토 공격 +20 , 핵심영토 방어 +20",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-034": {
+    "name": "프리드리히 크리스티안 폰 작센",
+    "effects": [
+      {
+        "id": "effect-034-01",
+        "name": "귀족",
+        "lines": [
+          {
+            "id": "line-034-01-01",
+            "text": "정치력 획득 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-035": {
+    "name": "제13대 달라이 라마 툽텐 갸초",
+    "effects": [
+      {
+        "id": "effect-035-01",
+        "name": "달라이 라마",
+        "lines": [
+          {
+            "id": "line-035-01-01",
+            "text": "안정도 +10",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-036": {
+    "name": "빅토리아 루이제",
+    "effects": [
+      {
+        "id": "effect-036-01",
+        "name": "대독일의 적법한 지도자",
+        "lines": [
+          {
+            "id": "line-036-01-01",
+            "text": "핵심영토 공격 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-036-01-02",
+            "text": "핵심인구 + 20%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-036-02",
+        "name": "훌륭한 군주주의자",
+        "lines": [
+          {
+            "id": "line-036-02-01",
+            "text": "군주주의 지지도 + 5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-037": {
+    "name": "마커스 가비",
+    "effects": []
+  },
+  "country-038": {
+    "name": "류샹",
+    "effects": [
+      {
+        "id": "effect-038-01",
+        "name": "군벌지도자",
+        "lines": [
+          {
+            "id": "line-038-01-01",
+            "text": "안정도 -5%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-039": {
+    "name": "오토 폰 합스부르크",
+    "effects": [
+      {
+        "id": "effect-039-01",
+        "name": "젊은 황제",
+        "lines": [
+          {
+            "id": "line-039-01-01",
+            "text": "안정도 +10",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-039-02",
+        "name": "경험없는 지도자",
+        "lines": [
+          {
+            "id": "line-039-02-01",
+            "text": "모든 경제 이득 효과 -5%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-040": {
+    "name": "압둘아지즈 이븐 사우드",
+    "effects": [
+      {
+        "id": "effect-040-01",
+        "name": "이슬람주의자",
+        "lines": [
+          {
+            "id": "line-040-01-01",
+            "text": "메카,메디나를 탈환하기 위한 전쟁시 모든 전선에서 공격 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-041": {
+    "name": "트리부반",
+    "effects": [
+      {
+        "id": "effect-041-01",
+        "name": "네팔국왕",
+        "lines": []
+      }
+    ]
+  },
+  "country-042": {
+    "name": "장 3세(장 도를레앙)",
+    "effects": [
+      {
+        "id": "effect-042-01",
+        "name": "쫒겨나온 늙은 황제",
+        "lines": [
+          {
+            "id": "line-042-01-01",
+            "text": "안정도 -20",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-042-02",
+        "name": "인정사정없는 지도자",
+        "lines": [
+          {
+            "id": "line-042-02-01",
+            "text": "매턴 정치력 -5%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-042-02-02",
+            "text": "공격 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-042-02-03",
+            "text": "생활수준 -2",
+            "tone": "negative"
+          },
+          {
+            "id": "line-042-02-04",
+            "text": "! 경고: 군대가 민간인을 죽일 확률이 높아집니다",
+            "tone": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "country-043": {
+    "name": "비토리오 에마누엘레 3세",
+    "effects": [
+      {
+        "id": "effect-043-01",
+        "name": "바다없는 이탈리아왕",
+        "lines": [
+          {
+            "id": "line-043-01-01",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-043-01-02",
+            "text": "정치력 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-044": {
+    "name": "포데 시소코",
+    "effects": [
+      {
+        "id": "effect-044-01",
+        "name": "독립주의자",
+        "lines": [
+          {
+            "id": "line-044-01-01",
+            "text": "핵심영토 방어 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-045": {
+    "name": "천지탕",
+    "effects": [
+      {
+        "id": "effect-045-01",
+        "name": "기업주의자",
+        "lines": [
+          {
+            "id": "line-045-01-01",
+            "text": "모든 긍정적인 경제효과 +2",
+            "tone": "positive"
+          },
+          {
+            "id": "line-045-01-02",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-045-01-03",
+            "text": "생활수준 -2",
+            "tone": "negative"
+          },
+          {
+            "id": "line-045-01-04",
+            "text": "생산력 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-046": {
+    "name": "알폰소 로페스 푸마레호",
+    "effects": [
+      {
+        "id": "effect-046-01",
+        "name": "볼리바르의 후계자",
+        "lines": [
+          {
+            "id": "line-046-01-01",
+            "text": "정치력 획득 +15",
+            "tone": "positive"
+          },
+          {
+            "id": "line-046-01-02",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-047": {
+    "name": "우마루 단 아부바카르",
+    "effects": [
+      {
+        "id": "effect-047-01",
+        "name": "아프리카주의자",
+        "lines": [
+          {
+            "id": "line-047-01-01",
+            "text": "핵심영토 방어 +2",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-048": {
+    "name": "하일레 셀라시에",
+    "effects": [
+      {
+        "id": "effect-048-01",
+        "name": "유다 지파의 정복하는 사자, 하일레 셀라시에 1세 폐하, 왕중왕,",
+        "lines": [
+          {
+            "id": "line-048-01-01",
+            "text": "정치력 획득: +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-048-01-02",
+            "text": "동원 속도:",
+            "tone": "neutral"
+          },
+          {
+            "id": "line-048-01-03",
+            "text": "이념 변화 방어: +10%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-049": {
+    "name": "페드루 엔히키",
+    "effects": [
+      {
+        "id": "effect-049-01",
+        "name": "브라질황제, 포르투갈 왕의 군주, 스페인 왕의 군주",
+        "lines": [
+          {
+            "id": "line-049-01-01",
+            "text": "정치력획득 +20%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-049-01-02",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-049-01-03",
+            "text": "공산주의 지지도 -5%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-049-01-04",
+            "text": "포르투갈, 스페인이 핵심영토입니다!",
+            "tone": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "country-050": {
+    "name": "프렘페 2세",
+    "effects": [
+      {
+        "id": "effect-050-01",
+        "name": "나라를 판 황제인가, 독립을 지킨 황제인가?",
+        "lines": [
+          {
+            "id": "line-050-01-01",
+            "text": "아직 효과가 없습니다.",
+            "tone": "neutral"
+          }
+        ]
+      }
+    ]
+  },
+  "country-051": {
+    "name": "알베르 1세",
+    "effects": [
+      {
+        "id": "effect-051-01",
+        "name": "젠장, 또 손목이야?",
+        "lines": [
+          {
+            "id": "line-051-01-01",
+            "text": "안정도 -30",
+            "tone": "negative"
+          },
+          {
+            "id": "line-051-01-02",
+            "text": "모든 긍정적 경제효과 -20",
+            "tone": "negative"
+          },
+          {
+            "id": "line-051-01-03",
+            "text": "생산력 +10",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-052": {
+    "name": "알레한드로 비야로엘 데 라 토레",
+    "effects": [
+      {
+        "id": "effect-052-01",
+        "name": "군국주의론자",
+        "lines": [
+          {
+            "id": "line-052-01-01",
+            "text": "군대 증강에 들어가는 비용 -5",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-053": {
+    "name": "빌헬미나",
+    "effects": [
+      {
+        "id": "effect-053-01",
+        "name": "만민여제",
+        "lines": [
+          {
+            "id": "line-053-01-01",
+            "text": "안정도: +15%",
+            "tone": "positive"
+          }
+        ]
+      },
+      {
+        "id": "effect-053-02",
+        "name": "트라우마에 빠진 대혁명의 목격자",
+        "lines": [
+          {
+            "id": "line-053-02-01",
+            "text": "모병 가능 인구 변득치: -50%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-053-02-02",
+            "text": "생산력 -20%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-054": {
+    "name": "아르투로 알레산드리",
+    "effects": [
+      {
+        "id": "effect-054-01",
+        "name": "민주주의자",
+        "lines": [
+          {
+            "id": "line-054-01-01",
+            "text": "이념변화방어 +20%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-055": {
+    "name": "엘리어스 음포푸",
+    "effects": [
+      {
+        "id": "effect-055-01",
+        "name": "양심적인 인성주의자",
+        "lines": [
+          {
+            "id": "line-055-01-01",
+            "text": "안정도 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-055-01-02",
+            "text": "이념변화 방어 +40%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-056": {
+    "name": "아구스틴 페드로 후스토",
+    "effects": [
+      {
+        "id": "effect-056-01",
+        "name": "컬럼비아를 등에 업은 군국주의자",
+        "lines": [
+          {
+            "id": "line-056-01-01",
+            "text": "군비 증강에 들어가는 모든 디버프 -50%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-057": {
+    "name": "R. B. 베넷",
+    "effects": [
+      {
+        "id": "effect-057-01",
+        "name": "충실한 군주주의자",
+        "lines": [
+          {
+            "id": "line-057-01-01",
+            "text": "대영제국과의 관계 +20",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-058": {
+    "name": "윈스턴 처칠",
+    "effects": [
+      {
+        "id": "effect-058-01",
+        "name": "여기도 손목자르나요?...아 목을 치신다구요?",
+        "lines": [
+          {
+            "id": "line-058-01-01",
+            "text": "징병가능인구 -50%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-058-01-02",
+            "text": "생산능력 +50",
+            "tone": "positive"
+          },
+          {
+            "id": "line-058-01-03",
+            "text": "매턴마다 핵심인구증가 -1000",
+            "tone": "negative"
+          }
+        ]
+      },
+      {
+        "id": "effect-058-02",
+        "name": "폭군",
+        "lines": [
+          {
+            "id": "line-058-02-01",
+            "text": "생활수준 -20",
+            "tone": "negative"
+          },
+          {
+            "id": "line-058-02-02",
+            "text": "안정도 -20",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-059": {
+    "name": "마누엘 L. 케손",
+    "effects": [
+      {
+        "id": "effect-059-01",
+        "name": "컬럼비아의 총독",
+        "lines": [
+          {
+            "id": "line-059-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-060": {
+    "name": "조지프 라이언스",
+    "effects": [
+      {
+        "id": "effect-060-01",
+        "name": "연변가",
+        "lines": [
+          {
+            "id": "line-060-01-01",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  },
+  "country-061": {
+    "name": "J. B. M. 헤르초흐",
+    "effects": [
+      {
+        "id": "effect-061-01",
+        "name": "인종차별주의자",
+        "lines": [
+          {
+            "id": "line-061-01-01",
+            "text": "로디지아와의 관계도 -999",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
+  },
+  "country-062": {
+    "name": "조지 포브스",
+    "effects": [
+      {
+        "id": "effect-062-01",
+        "name": "사회복지 설계자",
+        "lines": [
+          {
+            "id": "line-062-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-062-01-02",
+            "text": "생활수준 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
+  }
+}

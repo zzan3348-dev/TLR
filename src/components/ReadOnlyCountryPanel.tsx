@@ -557,7 +557,39 @@ export function ReadOnlyCountryPanel({
                   className="hybrid-country-panel__leader-tooltip"
                   role="tooltip"
                 >
-                  {presentation.leader.name || "[지도자 정보 없음]"}
+                  <strong className="hybrid-country-panel__leader-name">
+                    {presentation.leader.name || "[지도자 정보 없음]"}
+                  </strong>
+                  {presentation.leader.effects.length > 0 ? (
+                    <ul className="hybrid-country-panel__leader-effects">
+                      {presentation.leader.effects.map((effect) => {
+                        const lines = effect.lines.filter((line) =>
+                          line.text.trim(),
+                        );
+                        if (!effect.name.trim() && lines.length === 0) {
+                          return null;
+                        }
+                        return (
+                          <li key={effect.id}>
+                            {effect.name.trim() ? (
+                              <span className="hybrid-country-panel__leader-effect-name">
+                                {effect.name}
+                              </span>
+                            ) : null}
+                            {lines.map((line) => (
+                              <span
+                                key={line.id}
+                                className="hybrid-country-panel__leader-effect-line"
+                                data-tone={line.tone}
+                              >
+                                {line.text}
+                              </span>
+                            ))}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : null}
                 </div>
               </CountryPanelSlot>
             ) : null}

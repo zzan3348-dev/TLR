@@ -1,6 +1,8 @@
 import rawCountryPresentation from "./countryPresentation.json";
+import rawLeaderEffects from "./leaderEffects.json";
 import type { MapCountryIndex } from "../types/mapCountry";
 import type {
+  CountryLeaderEffect,
   CountryPresentationData,
   CountryPresentationOverrides,
 } from "../types/countryPresentation";
@@ -10,6 +12,11 @@ const presentationOverrides = rawCountryPresentation as Record<
   CountryPresentationOverrides
 >;
 
+const leaderEffectOverrides = rawLeaderEffects as Record<
+  string,
+  { name: string; effects: CountryLeaderEffect[] }
+>;
+
 const DEFAULT_TEST_LEADER_PORTRAIT_PATH =
   "/assets/ui/leader-placeholder.png";
 
@@ -17,6 +24,7 @@ export function getCountryPresentation(
   country: MapCountryIndex,
 ): CountryPresentationData {
   const overrides = presentationOverrides[country.key] ?? {};
+  const leaderData = leaderEffectOverrides[country.key];
   const title =
     country.name.trim() ||
     country.shortName.trim() ||
@@ -37,11 +45,13 @@ export function getCountryPresentation(
     status: overrides.status?.trim() ?? "",
     flagPath: overrides.flagPath ?? country.flagPath,
     leader: {
-      name: overrides.leader?.name?.trim() ?? "",
+      name:
+        leaderData?.name?.trim() || overrides.leader?.name?.trim() || "",
       portraitPath:
         overrides.leader?.portraitPath ??
         DEFAULT_TEST_LEADER_PORTRAIT_PATH,
       title: overrides.leader?.title?.trim() ?? "",
+      effects: leaderData?.effects ?? overrides.leader?.effects ?? [],
     },
     politics: {
       government: overrides.politics?.government?.trim() ?? "",

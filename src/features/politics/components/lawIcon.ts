@@ -11,6 +11,18 @@ const lawIcons: Record<string, string> = {
   "womens-rights": "law/womens-rights", "industry-ownership": "law/industry-ownership",
   "land-system": "law/land-system", "ethnic-policy": "law/ethnic-policy", censorship: "law/censorship",
 };
+
+// The generated stage assets contain five states per law. Keep the renderer
+// bounded to the files that actually ship so an extended definition cannot
+// request a non-existent `*-6.png` asset.
+const MAX_GENERATED_STAGE = 5;
+
+const stageAliases: Record<string, string> = {
+  // Ethnic-policy uses the same border/registration visual language as the
+  // immigration law family. It is intentionally an alias, not a random icon.
+  "ethnic-policy": "immigration",
+  censorship: "press",
+};
 export function getLawIcon(lawId: string): string {
   const generatedFallbacks: Record<string, string> = {
     "ethnic-policy": "registration-system",
@@ -33,12 +45,8 @@ const lawStageGroups: Record<string, string> = {
 };
 
 export function getLawStageIcon(lawId: string, order: number): string {
-  const aliases: Record<string, string> = {
-    censorship: "press",
-    "ethnic-policy": "immigration",
-  };
-  const resolvedId = aliases[lawId] ?? lawId;
+  const resolvedId = stageAliases[lawId] ?? lawId;
   const group = lawStageGroups[resolvedId] ?? "political";
-  const stage = Math.max(1, Math.min(6, order + 1));
+  const stage = Math.max(1, Math.min(MAX_GENERATED_STAGE, order + 1));
   return `/assets/ui/generated-icons/stages/${group}/${resolvedId}-${stage}.png`;
 }

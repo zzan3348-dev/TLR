@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { credits, references } from "../data/credits";
 import type { AuthProfile } from "../services/authService";
 
@@ -13,6 +13,8 @@ type TitleScreenProps = {
   onCloseWindow: () => void;
   onLogin: () => void;
   onLogout: () => Promise<void>;
+  onOpenDirectorate: () => void;
+  directorateAccessOpen: boolean;
 };
 
 const cards = [
@@ -48,7 +50,10 @@ export function TitleScreen({
   onCloseWindow,
   onLogin,
   onLogout,
+  onOpenDirectorate,
+  directorateAccessOpen,
 }: TitleScreenProps) {
+  const stampClickRef = useRef({ count: 0, firstClickAt: 0 });
   useEffect(() => {
     if (!activeWindow) return;
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -58,8 +63,24 @@ export function TitleScreen({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeWindow, onCloseWindow]);
 
+  const handleDirectorateStampClick = () => {
+    const now = Date.now();
+    const current = stampClickRef.current;
+    if (now - current.firstClickAt > 2000) {
+      stampClickRef.current = { count: 1, firstClickAt: now };
+      return;
+    }
+    const count = current.count + 1;
+    if (count >= 3) {
+      stampClickRef.current = { count: 0, firstClickAt: 0 };
+      onOpenDirectorate();
+      return;
+    }
+    stampClickRef.current = { count, firstClickAt: current.firstClickAt };
+  };
+
   return (
-    <main className="title-screen">
+    <main className={`title-screen${directorateAccessOpen ? " title-screen--directorate-locked" : ""}`}>
       <div className="title-screen__scanlines" aria-hidden="true" />
       <div className="title-screen__vignette" aria-hidden="true" />
       <div className="title-screen__crt" aria-hidden="true" />
@@ -67,6 +88,11 @@ export function TitleScreen({
         <p className="title-screen__eyebrow">1932</p>
         <img className="title-screen__logo" src="/assets/title/tlr-logo.png" alt="The Long Revolution" />
       </header>
+      <aside className="title-screen__archive-decoration" aria-hidden="false">
+        <button className="title-screen__directorate-stamp" type="button" aria-label="기밀 도장" onClick={handleDirectorateStampClick}>
+          <img src="/assets/title/directorate-stamp.svg" alt="" />
+        </button>
+      </aside>
       <section className="title-screen__cards" aria-label="메인 메뉴">
         {cards.map((card, index) => (
           <button className="title-card" type="button" key={card.id} style={{ "--card-index": index } as React.CSSProperties} onClick={() => {

@@ -4,6 +4,21 @@ export type CountryLeaderPresentation = {
   name: string;
   portraitPath: string | null;
   title: string;
+  effects: readonly CountryLeaderEffect[];
+};
+
+/** Stable, display-ready leader modifier metadata. `id` values are reserved
+ * for the future rules engine; this release only renders the text. */
+export type CountryLeaderEffect = {
+  id: string;
+  name: string;
+  lines: readonly CountryLeaderEffectLine[];
+};
+
+export type CountryLeaderEffectLine = {
+  id: string;
+  text: string;
+  tone: "positive" | "negative" | "neutral";
 };
 
 export type CountryPartyPresentation = {

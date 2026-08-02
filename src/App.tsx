@@ -10,6 +10,8 @@ import { ReadOnlyCountryPanel } from "./components/ReadOnlyCountryPanel";
 import { TexturedActionButton } from "./components/TexturedActionButton";
 import { IconCatalog } from "./components/IconCatalog";
 import { TitleScreen, type TitleWindow } from "./components/TitleScreen";
+import { DirectorateAccessModal } from "./components/DirectorateAccessModal";
+import { DirectoratePanel } from "./components/DirectoratePanel";
 import { AuthModal } from "./components/AuthModal";
 import { AccessBlockedScreen } from "./components/AccessBlockedScreen";
 import { WorldMap, type WorldMapHandle } from "./components/WorldMap";
@@ -56,8 +58,8 @@ function readStoredPlayCountry(): MapCountryIndex | null {
 export default function App() {
   const { profile, loading: authLoading, refresh: refreshAuth } = useAuth();
   const mapRef = useRef<WorldMapHandle>(null);
-  const [screen, setScreen] = useState<"title" | "map">(
-    window.location.pathname.startsWith("/play/") ? "map" : "title",
+  const [screen, setScreen] = useState<"title" | "map" | "admin">(
+    window.location.pathname.startsWith("/play/") ? "map" : window.location.pathname === "/admin" || window.location.pathname === "/directorate" ? "admin" : "title",
   );
   const [isMapEntering, setIsMapEntering] = useState(false);
   const [titleWindow, setTitleWindow] = useState<TitleWindow>(null);
@@ -78,6 +80,37 @@ export default function App() {
   );
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
+  const [directorateAccessOpen, setDirectorateAccessOpen] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio("/audio/tlr-bgm.mp3");
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.volume = 0.34;
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener("pointerdown", startPlayback);
+      window.removeEventListener("keydown", startPlayback);
+    };
+    const startPlayback = () => {
+      void audio
+        .play()
+        .then(removeInteractionListeners)
+        .catch(() => {
+          // 브라우저 자동재생 정책이 허용할 때까지 다음 사용자 입력을 기다린다.
+        });
+    };
+
+    startPlayback();
+    window.addEventListener("pointerdown", startPlayback);
+    window.addEventListener("keydown", startPlayback);
+
+    return () => {
+      removeInteractionListeners();
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
@@ -253,6 +286,10 @@ export default function App() {
     );
   }
 
+  if (screen === "admin") {
+    return <DirectoratePanel onBackToTitle={() => { setScreen("title"); window.history.replaceState({}, "", "/"); }} />;
+  }
+
   if (screen === "title") {
     return (
       <>
@@ -274,6 +311,17 @@ export default function App() {
           onLogout={async () => {
             await signOut();
             await refreshAuth();
+          }}
+          onOpenDirectorate={() => setDirectorateAccessOpen(true)}
+          directorateAccessOpen={directorateAccessOpen}
+        />
+        <DirectorateAccessModal
+          open={directorateAccessOpen}
+          onClose={() => setDirectorateAccessOpen(false)}
+          onAuthorized={() => {
+            setDirectorateAccessOpen(false);
+            setScreen("admin");
+            window.history.replaceState({}, "", "/directorate");
           }}
         />
         <AuthModal
