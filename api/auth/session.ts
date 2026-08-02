@@ -17,6 +17,13 @@ type ProfileRow = {
   blocked_at: string | null;
 };
 
+type DeviceMatchRow = {
+  user_id: string;
+  device_install_hash: string | null;
+  ip_hash: string | null;
+  asn: string | null;
+};
+
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const env = getServerEnv();
   if (!env) {
@@ -67,16 +74,34 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     }
     const { data: match } = await admin
       .from("auth_devices")
-      .select("user_id")
+      .select("user_id, device_install_hash, ip_hash, asn")
       .eq("device_install_hash", signals.deviceHash)
       .eq("ip_hash", signals.ipHash)
       .eq("asn", signals.asn)
       .neq("user_id", user.id)
       .limit(1)
-      .maybeSingle<{ user_id: string }>();
+      .maybeSingle<DeviceMatchRow>();
+    const { data: relatedSignals } = await admin
+      .from("auth_devices")
+      .select("user_id, device_install_hash, ip_hash, asn")
+      .neq("user_id", user.id)
+      .or(`device_install_hash.eq.${signals.deviceHash},ip_hash.eq.${signals.ipHash},asn.eq.${signals.asn}`)
+      .limit(20)
+      .returns<DeviceMatchRow[]>();
     const shouldBlock = Boolean(match?.user_id && signals.deviceHash && signals.ipHash && signals.asn);
-    const accessStatus = shouldBlock ? "blocked" : "active";
-    const blockedReason = shouldBlock ? "MULTI_ACCOUNT_TRIPLE_MATCH" : null;
+    const hasReviewSignal = Boolean(
+      !shouldBlock && relatedSignals?.some((row) =>
+        row.device_install_hash === signals.deviceHash ||
+        (signals.ipHash !== null && row.ip_hash === signals.ipHash) ||
+        (signals.asn !== null && row.asn === signals.asn),
+      ),
+    );
+    const accessStatus = shouldBlock ? "blocked" : hasReviewSignal ? "review" : "active";
+    const blockedReason = shouldBlock
+      ? "MULTI_ACCOUNT_TRIPLE_MATCH"
+      : hasReviewSignal
+        ? "MULTI_ACCOUNT_REVIEW_SIGNAL"
+        : null;
     const { data: created, error: createError } = await admin
       .from("profiles")
       .upsert({
@@ -122,7 +147,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }, { onConflict: "user_id,device_install_hash" });
   await admin.from("auth_login_logs").insert({
     user_id: user.id,
-    outcome: profile.access_status === "blocked" ? "blocked" : "allowed",
+    outcome: profile.access_status === "blocked" ? "blocked" : profile.access_status === "review" ? "review" : "allowed",
     reason: profile.blocked_reason,
     device_install_hash: signals.deviceHash,
     ip_hash: signals.ipHash,
