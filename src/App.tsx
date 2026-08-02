@@ -255,25 +255,40 @@ export default function App() {
 
   if (screen === "title") {
     return (
-      <TitleScreen
-        activeWindow={titleWindow}
-        authProfile={profile}
-        authLoading={authLoading}
-        onOpenCountrySelection={() => {
-          setTitleWindow(null);
-          setIsMapEntering(true);
-          setScreen("map");
-        }}
-        onOpenWindow={setTitleWindow}
-        onCloseWindow={() => setTitleWindow(null)}
-        onLogin={() => {
-          void signInWithDiscord("/");
-        }}
-        onLogout={async () => {
-          await signOut();
-          await refreshAuth();
-        }}
-      />
+      <>
+        <TitleScreen
+          activeWindow={titleWindow}
+          authProfile={profile}
+          authLoading={authLoading}
+          onOpenCountrySelection={() => {
+            setTitleWindow(null);
+            setIsMapEntering(true);
+            setScreen("map");
+          }}
+          onOpenWindow={setTitleWindow}
+          onCloseWindow={() => setTitleWindow(null)}
+          onLogin={() => {
+            setTitleWindow(null);
+            setAuthModalOpen(true);
+          }}
+          onLogout={async () => {
+            await signOut();
+            await refreshAuth();
+          }}
+        />
+        <AuthModal
+          open={authModalOpen}
+          profile={profile}
+          loading={authLoading}
+          nextPath="/"
+          onClose={() => setAuthModalOpen(false)}
+          onSignOut={async () => {
+            await signOut();
+            await refreshAuth();
+            setAuthModalOpen(false);
+          }}
+        />
+      </>
     );
   }
 
