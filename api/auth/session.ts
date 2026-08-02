@@ -145,6 +145,16 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     country_code: signals.countryCode,
     last_seen_at: new Date().toISOString(),
   }, { onConflict: "user_id,device_install_hash" });
+  await admin.from("auth_networks").upsert({
+    user_id: user.id,
+    ip_hash: signals.ipHash,
+    asn: signals.asn,
+    network_name: signals.networkName,
+    network_type: signals.networkType,
+    mobile: null,
+    country_code: signals.countryCode,
+    last_seen_at: new Date().toISOString(),
+  }, { onConflict: "user_id,ip_hash,asn" });
   await admin.from("auth_login_logs").insert({
     user_id: user.id,
     outcome: profile.access_status === "blocked" ? "blocked" : profile.access_status === "review" ? "review" : "allowed",

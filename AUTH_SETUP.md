@@ -22,6 +22,8 @@ SITE_URL=https://the-long-revolution.vercel.app
 
 `SUPABASE_SECRET_KEY`, pepper, IPInfo 토큰은 브라우저 변수(`VITE_`)로 만들지 않습니다.
 
+접속 로그와 해시는 운영 목적에 필요한 기간(현재 기준 90일)만 보유하고 정기적으로 정리합니다. 원본 IP·OAuth access/refresh token은 DB나 로그에 저장하지 않습니다.
+
 ## Supabase / Discord
 
 1. SQL Editor에서 `supabase/migrations/202608020001_auth.sql`을 실행합니다.
