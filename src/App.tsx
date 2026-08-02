@@ -29,7 +29,7 @@ import type {
 } from "./types/mapCountry";
 import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
-import { rememberNextPath, signInWithDiscord, signOut } from "./services/authService";
+import { rememberNextPath, signOut } from "./services/authService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
