@@ -1,0 +1,14 @@
+.git/
+.codex-tmp/
+node_modules/
+dist/
+artifacts/
+work/
+deploy-optimized/
+public/maps/backups/
+public/maps/generated/generated/
+*.zip
+*.bat
+.tmp-*
+AGENTS.md
+tests/
