@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
-import { currentWorldDate, requireDiplomacyActor, type NotificationRow, type ProposalRow } from "../../server/diplomacy.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
+import { currentWorldDate, requireDiplomacyActor, type NotificationRow, type ProposalRow } from "../../diplomacy.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const env = getServerEnv();

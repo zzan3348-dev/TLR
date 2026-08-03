@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
-import { economyDatabaseError, economyWorldDate, requireEconomyActor } from "../../server/economy.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
+import { economyDatabaseError, economyWorldDate, requireEconomyActor } from "../../economy.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const env = getServerEnv();

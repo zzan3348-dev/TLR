@@ -1,9 +1,9 @@
 /// <reference types="node" />
 import { randomUUID } from "node:crypto";
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
-import { cleanCountryKey, cleanDate } from "../../server/diplomacy.js";
-import { cleanTradeLines, economyDatabaseError, economyWorldDate, requireEconomyActor, tradeReviewRoute } from "../../server/economy.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
+import { cleanCountryKey, cleanDate } from "../../diplomacy.js";
+import { cleanTradeLines, economyDatabaseError, economyWorldDate, requireEconomyActor, tradeReviewRoute } from "../../economy.js";
 
 type ProposalRow = { id: string; proposer_country_key: string; receiver_country_key: string; review_route: "PLAYER" | "ADMIN"; status: string };
 

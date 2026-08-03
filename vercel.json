@@ -3,6 +3,18 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/api/diplomacy/:route",
+      "destination": "/api/diplomacy-dispatch?route=:route"
+    },
+    {
+      "source": "/api/economy/:route",
+      "destination": "/api/economy-dispatch?route=:route"
+    },
+    {
+      "source": "/api/trade/:route",
+      "destination": "/api/trade-dispatch?route=:route"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

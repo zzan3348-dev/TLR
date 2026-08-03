@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
 import {
   cleanCountryKey,
   currentWorldDate,
@@ -7,7 +7,7 @@ import {
   reviewRouteForCountry,
   type AgreementRow,
   type ProposalRow,
-} from "../../server/diplomacy.js";
+} from "../../diplomacy.js";
 
 type RelationRow = { base_score: number };
 type ModifierRow = {

@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
-import { economyWorldDate, requireEconomyActor } from "../../server/economy.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
+import { economyWorldDate, requireEconomyActor } from "../../economy.js";
 
 type EconomyRow = Record<string, unknown> & { country_key: string };
 type ResourceRow = Record<string, unknown> & { resource_type_id: string };
