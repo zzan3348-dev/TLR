@@ -3131,6 +3131,11 @@ button:focus-visible,
   color: #d9d6cc;
 }
 
+.hybrid-country-panel__leader-effect-line[data-tone="flavor"] {
+  color: #8f9693;
+  font-weight: 550;
+}
+
 .hybrid-country-panel__slot--right-detail {
   top: 36.5949%;
   left: 61.4355%;

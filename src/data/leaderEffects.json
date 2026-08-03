@@ -8,8 +8,8 @@
         "lines": [
           {
             "id": "line-001-01-01",
-            "text": "매턴마다 공산주의 지지도 -3",
-            "tone": "negative"
+            "text": "매턴 공산주의 지지도 -2",
+            "tone": "positive"
           },
           {
             "id": "line-001-01-02",
@@ -29,7 +29,12 @@
         "lines": [
           {
             "id": "line-001-02-01",
-            "text": "핵심영토 방어 +2",
+            "text": "동원 속도 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-001-02-02",
+            "text": "모병 가능 인구 +2%",
             "tone": "positive"
           }
         ]
@@ -40,7 +45,7 @@
         "lines": [
           {
             "id": "line-001-03-01",
-            "text": "해상보급 이익 + 20",
+            "text": "해상 보급 효율 +15%",
             "tone": "positive"
           }
         ]
@@ -51,18 +56,18 @@
         "lines": [
           {
             "id": "line-001-04-01",
-            "text": "안정도 - 5",
+            "text": "안정도 -5",
             "tone": "negative"
           },
           {
             "id": "line-001-04-02",
-            "text": "매턴마다 얻는 정치력 -20",
+            "text": "정치력 획득 -10%",
             "tone": "negative"
           },
           {
             "id": "line-001-04-03",
-            "text": "군비 상승에 대한 모든 패널티 -10%",
-            "tone": "negative"
+            "text": "군비 증강으로 발생하는 모든 페널티 -15%",
+            "tone": "positive"
           }
         ]
       }
@@ -77,12 +82,12 @@
         "lines": [
           {
             "id": "line-002-01-01",
-            "text": "매턴 공산주의 지지도 + 1%",
+            "text": "매턴 공산주의 지지도 +1",
             "tone": "positive"
           },
           {
             "id": "line-002-01-02",
-            "text": "공산주의 국가들과의 관계 +5",
+            "text": "공산주의 국가와의 관계도 +5",
             "tone": "positive"
           }
         ]
@@ -94,7 +99,7 @@
           {
             "id": "line-002-02-01",
             "text": "식민지 유지비용 +5%",
-            "tone": "positive"
+            "tone": "negative"
           }
         ]
       },
@@ -104,7 +109,12 @@
         "lines": [
           {
             "id": "line-002-03-01",
-            "text": "안정도 - 5",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-002-03-02",
+            "text": "정치력 획득 -5%",
             "tone": "negative"
           }
         ]
@@ -116,7 +126,7 @@
     "effects": [
       {
         "id": "effect-003-01",
-        "name": "레닌후계자",
+        "name": "레닌의 후계자",
         "lines": [
           {
             "id": "line-003-01-01",
@@ -130,7 +140,7 @@
           },
           {
             "id": "line-003-01-03",
-            "text": "핵심영토 방어 + 10",
+            "text": "핵심영토 방어 +10%",
             "tone": "positive"
           }
         ]
@@ -141,12 +151,12 @@
         "lines": [
           {
             "id": "line-003-02-01",
-            "text": "공산주의 국가가 아닐경우 관계 - 50",
+            "text": "공산주의 국가가 아닌 국가와의 관계도 -40",
             "tone": "negative"
           },
           {
             "id": "line-003-02-02",
-            "text": "핵심영토 공격 + 5",
+            "text": "핵심영토 공격 +5%",
             "tone": "positive"
           }
         ]
@@ -158,11 +168,11 @@
     "effects": [
       {
         "id": "effect-004-01",
-        "name": "생존자 로마노프",
+        "name": "살아남은 로마노프",
         "lines": [
           {
             "id": "line-004-01-01",
-            "text": "러시아인민공화국과의 관계 - 999",
+            "text": "러시아 인민공화국과의 관계도 -999",
             "tone": "negative"
           }
         ]
@@ -178,7 +188,7 @@
           },
           {
             "id": "line-004-02-02",
-            "text": "매턴 로마노프 지지율 + 5%",
+            "text": "매턴 로마노프 지지도 +2",
             "tone": "positive"
           }
         ]
@@ -189,7 +199,12 @@
         "lines": [
           {
             "id": "line-004-03-01",
-            "text": "핵심영토 방어 + 15",
+            "text": "핵심영토 방어 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-004-03-02",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -207,6 +222,11 @@
             "id": "line-005-01-01",
             "text": "안정도 +5",
             "tone": "positive"
+          },
+          {
+            "id": "line-005-01-02",
+            "text": "생활수준 +1",
+            "tone": "positive"
           }
         ]
       }
@@ -217,16 +237,21 @@
     "effects": [
       {
         "id": "effect-006-01",
-        "name": "겁에 질린 소국지도자",
+        "name": "겁에 질린 소국 지도자",
         "lines": [
           {
             "id": "line-006-01-01",
-            "text": "핵심영토 방어 -5",
+            "text": "핵심영토 방어 -5%",
             "tone": "negative"
           },
           {
             "id": "line-006-01-02",
-            "text": "핵심영토 공격 -2",
+            "text": "핵심영토 공격 -2%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-006-01-03",
+            "text": "전쟁 지지도 -5",
             "tone": "negative"
           }
         ]
@@ -237,8 +262,8 @@
         "lines": [
           {
             "id": "line-006-02-01",
-            "text": "포병 배치비용 - 5%",
-            "tone": "negative"
+            "text": "포병 배치비용 -5%",
+            "tone": "positive"
           }
         ]
       }
@@ -255,6 +280,11 @@
             "id": "line-007-01-01",
             "text": "안정도 +5",
             "tone": "positive"
+          },
+          {
+            "id": "line-007-01-02",
+            "text": "생활수준 +1",
+            "tone": "positive"
           }
         ]
       },
@@ -264,12 +294,12 @@
         "lines": [
           {
             "id": "line-007-02-01",
-            "text": "핵심영토 방어 +20",
+            "text": "안정도 +5",
             "tone": "positive"
           },
           {
             "id": "line-007-02-02",
-            "text": "안정도 +5",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -285,7 +315,7 @@
         "lines": [
           {
             "id": "line-008-01-01",
-            "text": "매일 안정도 +5",
+            "text": "안정도 +5",
             "tone": "positive"
           }
         ]
@@ -296,6 +326,11 @@
         "lines": [
           {
             "id": "line-008-02-01",
+            "text": "이념 변화 방어 +15%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-008-02-02",
             "text": "연방 내에 있는 극단주의자들이 노려보고 있습니다...",
             "tone": "negative"
           }
@@ -312,7 +347,17 @@
         "lines": [
           {
             "id": "line-009-01-01",
-            "text": "신강공화국, 오스만 제국과 관계도 +5",
+            "text": "신강 공화국과의 관계도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-009-01-02",
+            "text": "오스만 제국과의 관계도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-009-01-03",
+            "text": "정치력 획득 +5%",
             "tone": "positive"
           }
         ]
@@ -328,8 +373,13 @@
         "lines": [
           {
             "id": "line-010-01-01",
-            "text": "모든 공산주의 국가와 관계도 -999",
+            "text": "모든 공산주의 국가와의 관계도 -999",
             "tone": "negative"
+          },
+          {
+            "id": "line-010-01-02",
+            "text": "매턴 공산주의 지지도 -3",
+            "tone": "positive"
           }
         ]
       },
@@ -339,12 +389,17 @@
         "lines": [
           {
             "id": "line-010-02-01",
-            "text": "핵심인구 +5%",
+            "text": "모병 가능 인구 +5%",
             "tone": "positive"
           },
           {
             "id": "line-010-02-02",
-            "text": "군비 상승에 대한 모든 패널티 -20%",
+            "text": "군비 증강으로 발생하는 모든 페널티 -20%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-010-02-03",
+            "text": "안정도 -5",
             "tone": "negative"
           }
         ]
@@ -362,6 +417,11 @@
             "id": "line-011-01-01",
             "text": "안정도 +5",
             "tone": "positive"
+          },
+          {
+            "id": "line-011-01-02",
+            "text": "핵심영토 방어 +5%",
+            "tone": "positive"
           }
         ]
       }
@@ -376,12 +436,17 @@
         "lines": [
           {
             "id": "line-012-01-01",
-            "text": "안정도 -20%",
+            "text": "안정도 -15",
             "tone": "negative"
           },
           {
             "id": "line-012-01-02",
-            "text": "핵심영토 공격 -2%",
+            "text": "정치력 획득 -10%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-012-01-03",
+            "text": "핵심영토 공격 -5%",
             "tone": "negative"
           }
         ]
@@ -392,7 +457,12 @@
         "lines": [
           {
             "id": "line-012-02-01",
-            "text": "핵심영토 방어 +5",
+            "text": "핵심영토 방어 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-012-02-02",
+            "text": "매턴 군주주의 지지도 +2",
             "tone": "positive"
           }
         ]
@@ -413,17 +483,17 @@
           },
           {
             "id": "line-013-01-02",
-            "text": "핵심인구 +10%",
+            "text": "모병 가능 인구 +8%",
             "tone": "positive"
           },
           {
             "id": "line-013-01-03",
-            "text": "핵심영토 방어 +10",
+            "text": "동원 속도 +10%",
             "tone": "positive"
           },
           {
             "id": "line-013-01-04",
-            "text": "핵심영토 공격 +20",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -432,7 +502,29 @@
   },
   "country-014": {
     "name": "네스토르 마흐노",
-    "effects": []
+    "effects": [
+      {
+        "id": "effect-014-01",
+        "name": "검은 군대의 바트코",
+        "lines": [
+          {
+            "id": "line-014-01-01",
+            "text": "모든 사단 공격 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-014-01-02",
+            "text": "모병 가능 인구 +3%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-014-01-03",
+            "text": "정치력 획득 -10%",
+            "tone": "negative"
+          }
+        ]
+      }
+    ]
   },
   "country-015": {
     "name": "차간바타르 에르데네",
@@ -443,8 +535,13 @@
         "lines": [
           {
             "id": "line-015-01-01",
-            "text": "매일 아나키즘 지지도 +5",
+            "text": "매턴 아나키즘 지지도 +2",
             "tone": "positive"
+          },
+          {
+            "id": "line-015-01-02",
+            "text": "안정도 -5",
+            "tone": "negative"
           }
         ]
       }
@@ -461,6 +558,11 @@
             "id": "line-016-01-01",
             "text": "모든 긍정적인 경제효과 +5%",
             "tone": "positive"
+          },
+          {
+            "id": "line-016-01-02",
+            "text": "연구 속도 +2%",
+            "tone": "positive"
           }
         ]
       }
@@ -475,7 +577,17 @@
         "lines": [
           {
             "id": "line-017-01-01",
-            "text": "독일민주공화국과 전쟁중일때: 핵심영토 방어 +20",
+            "text": "독일민주공화국과 전쟁 중일 때:",
+            "tone": "neutral"
+          },
+          {
+            "id": "line-017-01-02",
+            "text": "핵심영토 방어 +15%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-017-01-03",
+            "text": "전쟁 지지도 +10",
             "tone": "positive"
           }
         ]
@@ -487,16 +599,16 @@
     "effects": [
       {
         "id": "effect-018-01",
-        "name": "메이지 황제",
+        "name": "메이지의 유산",
         "lines": [
           {
             "id": "line-018-01-01",
-            "text": "건설 속도: +5%",
+            "text": "건설 속도 +5%",
             "tone": "positive"
           },
           {
             "id": "line-018-01-02",
-            "text": "연구 속도: +2%",
+            "text": "연구 속도 +2%",
             "tone": "positive"
           }
         ]
@@ -507,22 +619,22 @@
         "lines": [
           {
             "id": "line-018-02-01",
-            "text": "정치력 획득: +5%",
+            "text": "정치력 획득 +5%",
             "tone": "positive"
           },
           {
             "id": "line-018-02-02",
-            "text": "안정도: +5%",
+            "text": "안정도 +5",
             "tone": "positive"
           },
           {
             "id": "line-018-02-03",
-            "text": "전쟁 지지도: +5%",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           },
           {
             "id": "line-018-02-04",
-            "text": "이념 변화 방어: +20%",
+            "text": "이념 변화 방어 +15%",
             "tone": "positive"
           }
         ]
@@ -538,17 +650,17 @@
         "lines": [
           {
             "id": "line-019-01-01",
-            "text": "핵심 영토 방어: +10%",
+            "text": "안정도 +5",
             "tone": "positive"
           },
           {
             "id": "line-019-01-02",
-            "text": "이념 변화 방어: +50%",
+            "text": "이념 변화 방어 +25%",
             "tone": "positive"
           },
           {
             "id": "line-019-01-03",
-            "text": "매턴마다 공산주의 지지도: +5",
+            "text": "매턴 공산주의 지지도 +2",
             "tone": "positive"
           }
         ]
@@ -564,12 +676,17 @@
         "lines": [
           {
             "id": "line-020-01-01",
-            "text": "전쟁 지지도: +5.00%",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           },
           {
             "id": "line-020-01-02",
-            "text": "공산주의국가들과의 외교: -40",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-020-01-03",
+            "text": "공산주의 국가와의 관계도 -40",
             "tone": "negative"
           }
         ]
@@ -585,7 +702,12 @@
         "lines": [
           {
             "id": "line-021-01-01",
-            "text": "안정도 +5%",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-021-01-02",
+            "text": "매턴 공산주의 지지도 +1",
             "tone": "positive"
           }
         ]
@@ -601,7 +723,12 @@
         "lines": [
           {
             "id": "line-022-01-01",
-            "text": "핵심영토 방어 -5",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-022-01-02",
+            "text": "핵심영토 방어 -5%",
             "tone": "negative"
           }
         ]
@@ -617,8 +744,18 @@
         "lines": [
           {
             "id": "line-023-01-01",
-            "text": "세력에 가입할 수 없습니다",
-            "tone": "neutral"
+            "text": "안정도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-023-01-02",
+            "text": "전쟁 지지도 -10",
+            "tone": "negative"
+          },
+          {
+            "id": "line-023-01-03",
+            "text": "모든 국가와의 관계도 +5",
+            "tone": "positive"
           }
         ]
       }
@@ -633,13 +770,13 @@
         "lines": [
           {
             "id": "line-024-01-01",
-            "text": "정치력 획득: +10%",
+            "text": "정치력 획득 +10%",
             "tone": "positive"
           },
           {
             "id": "line-024-01-02",
-            "text": "경제, 무역, 징병법 비용: -20%",
-            "tone": "negative"
+            "text": "경제법·무역법·징병법 변경비용 -15%",
+            "tone": "positive"
           }
         ]
       },
@@ -661,7 +798,7 @@
     "effects": [
       {
         "id": "effect-025-01",
-        "name": "카리스마있는 지도자",
+        "name": "카리스마 있는 지도자",
         "lines": [
           {
             "id": "line-025-01-01",
@@ -676,17 +813,17 @@
         "lines": [
           {
             "id": "line-025-02-01",
-            "text": "안정도 + 10",
+            "text": "안정도 +10",
             "tone": "positive"
           },
           {
             "id": "line-025-02-02",
-            "text": "핵심영토 방어 + 20",
+            "text": "이념 변화 방어 +20%",
             "tone": "positive"
           },
           {
             "id": "line-025-02-03",
-            "text": "핵심영토 공격 +30",
+            "text": "모든 사단 방어 +5%",
             "tone": "positive"
           }
         ]
@@ -697,8 +834,8 @@
         "lines": [
           {
             "id": "line-025-03-01",
-            "text": "이것보다 대단한 사람을 본적이 없습니다 (그냥 이 글만 남길것!)",
-            "tone": "neutral"
+            "text": "이것보다 대단한 사람을 본 적이 없습니다.",
+            "tone": "flavor"
           }
         ]
       }
@@ -715,6 +852,11 @@
             "id": "line-026-01-01",
             "text": "정치력 획득 +5%",
             "tone": "positive"
+          },
+          {
+            "id": "line-026-01-02",
+            "text": "안정도 +5",
+            "tone": "positive"
           }
         ]
       }
@@ -729,7 +871,12 @@
         "lines": [
           {
             "id": "line-027-01-01",
-            "text": "정치력 획득 +15%",
+            "text": "정치력 획득 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-027-01-02",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -741,16 +888,16 @@
     "effects": [
       {
         "id": "effect-028-01",
-        "name": "인기있는 얼굴마담",
+        "name": "인기 있는 얼굴마담",
         "lines": [
           {
             "id": "line-028-01-01",
-            "text": "정치력획득 +20%",
+            "text": "정치력 획득 +15%",
             "tone": "positive"
           },
           {
             "id": "line-028-01-02",
-            "text": "안정도 + 20",
+            "text": "안정도 +10",
             "tone": "positive"
           }
         ]
@@ -761,7 +908,7 @@
         "lines": [
           {
             "id": "line-028-02-01",
-            "text": "모든 긍정적인 경제효과 +5",
+            "text": "모든 긍정적인 경제효과 +5%",
             "tone": "positive"
           }
         ]
@@ -772,7 +919,12 @@
         "lines": [
           {
             "id": "line-028-03-01",
-            "text": "컬럼비아 보전연방과의 관계도: +5",
+            "text": "콜럼비아 보전연방과의 관계도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-028-03-02",
+            "text": "연구 속도 +2%",
             "tone": "positive"
           }
         ]
@@ -788,7 +940,12 @@
         "lines": [
           {
             "id": "line-029-01-01",
-            "text": "안정도 - 5%",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-029-01-02",
+            "text": "정치력 획득 -5%",
             "tone": "negative"
           }
         ]
@@ -804,8 +961,18 @@
         "lines": [
           {
             "id": "line-030-01-01",
-            "text": "모든 사단 공격 + 10",
+            "text": "모든 사단 공격 +10%",
             "tone": "positive"
+          },
+          {
+            "id": "line-030-01-02",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-030-01-03",
+            "text": "정치력 획득 -10%",
+            "tone": "negative"
           }
         ]
       }
@@ -820,12 +987,17 @@
         "lines": [
           {
             "id": "line-031-01-01",
-            "text": "안정도 + 20",
+            "text": "안정도 +10",
             "tone": "positive"
           },
           {
             "id": "line-031-01-02",
             "text": "정치력 획득 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-031-01-03",
+            "text": "모든 긍정적인 경제효과 +3%",
             "tone": "positive"
           }
         ]
@@ -836,7 +1008,12 @@
         "lines": [
           {
             "id": "line-031-02-01",
-            "text": "정치력 획득 + 5%",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-031-02-02",
+            "text": "매턴 군주주의 지지도 +1",
             "tone": "positive"
           }
         ]
@@ -848,11 +1025,21 @@
     "effects": [
       {
         "id": "effect-032-01",
-        "name": "무능한 군주' 조련사",
+        "name": "'무능한 군주' 조련사",
         "lines": [
           {
             "id": "line-032-01-01",
-            "text": "안정도 +5%",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-032-01-02",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-032-01-03",
+            "text": "이념 변화 방어 +10%",
             "tone": "positive"
           }
         ]
@@ -868,7 +1055,22 @@
         "lines": [
           {
             "id": "line-033-01-01",
-            "text": "컬럼비아와의 전쟁중일때: 핵심영토 공격 +20 , 핵심영토 방어 +20",
+            "text": "콜럼비아 보전연방과 전쟁 중일 때:",
+            "tone": "neutral"
+          },
+          {
+            "id": "line-033-01-02",
+            "text": "핵심영토 공격 +15%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-033-01-03",
+            "text": "핵심영토 방어 +15%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-033-01-04",
+            "text": "전쟁 지지도 +10",
             "tone": "positive"
           }
         ]
@@ -884,7 +1086,12 @@
         "lines": [
           {
             "id": "line-034-01-01",
-            "text": "정치력 획득 +5",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-034-01-02",
+            "text": "안정도 +5",
             "tone": "positive"
           }
         ]
@@ -902,6 +1109,11 @@
             "id": "line-035-01-01",
             "text": "안정도 +10",
             "tone": "positive"
+          },
+          {
+            "id": "line-035-01-02",
+            "text": "이념 변화 방어 +10%",
+            "tone": "positive"
           }
         ]
       }
@@ -916,12 +1128,17 @@
         "lines": [
           {
             "id": "line-036-01-01",
-            "text": "핵심영토 공격 +20",
+            "text": "정치력 획득 +10%",
             "tone": "positive"
           },
           {
             "id": "line-036-01-02",
-            "text": "핵심인구 + 20%",
+            "text": "전쟁 지지도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-036-01-03",
+            "text": "독일계 군주국과의 관계도 +10",
             "tone": "positive"
           }
         ]
@@ -932,7 +1149,12 @@
         "lines": [
           {
             "id": "line-036-02-01",
-            "text": "군주주의 지지도 + 5%",
+            "text": "매턴 군주주의 지지도 +2",
+            "tone": "positive"
+          },
+          {
+            "id": "line-036-02-02",
+            "text": "이념 변화 방어 +20%",
             "tone": "positive"
           }
         ]
@@ -941,19 +1163,51 @@
   },
   "country-037": {
     "name": "마커스 가비",
-    "effects": []
+    "effects": [
+      {
+        "id": "effect-037-01",
+        "name": "범흑인주의 조직가",
+        "lines": [
+          {
+            "id": "line-037-01-01",
+            "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-037-01-02",
+            "text": "아프리카 자주회의 회원국과의 관계도 +10",
+            "tone": "positive"
+          },
+          {
+            "id": "line-037-01-03",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
+      }
+    ]
   },
   "country-038": {
     "name": "류샹",
     "effects": [
       {
         "id": "effect-038-01",
-        "name": "군벌지도자",
+        "name": "군벌 지도자",
         "lines": [
           {
             "id": "line-038-01-01",
-            "text": "안정도 -5%",
+            "text": "안정도 -5",
             "tone": "negative"
+          },
+          {
+            "id": "line-038-01-02",
+            "text": "군비 증강으로 발생하는 모든 페널티 -10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-038-01-03",
+            "text": "전쟁 지지도 +5",
+            "tone": "positive"
           }
         ]
       }
@@ -975,11 +1229,11 @@
       },
       {
         "id": "effect-039-02",
-        "name": "경험없는 지도자",
+        "name": "경험 없는 지도자",
         "lines": [
           {
             "id": "line-039-02-01",
-            "text": "모든 경제 이득 효과 -5%",
+            "text": "모든 긍정적인 경제효과 -5%",
             "tone": "negative"
           }
         ]
@@ -995,7 +1249,17 @@
         "lines": [
           {
             "id": "line-040-01-01",
-            "text": "메카,메디나를 탈환하기 위한 전쟁시 모든 전선에서 공격 +5",
+            "text": "메카와 메디나를 탈환하기 위한 전쟁에서만 적용:",
+            "tone": "neutral"
+          },
+          {
+            "id": "line-040-01-02",
+            "text": "모든 전선 공격 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-040-01-03",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -1008,20 +1272,31 @@
       {
         "id": "effect-041-01",
         "name": "네팔국왕",
-        "lines": []
+        "lines": [
+          {
+            "id": "line-041-01-01",
+            "text": "안정도 +5",
+            "tone": "positive"
+          }
+        ]
       }
     ]
   },
   "country-042": {
-    "name": "장 3세(장 도를레앙)",
+    "name": "장 3세",
     "effects": [
       {
         "id": "effect-042-01",
-        "name": "쫒겨나온 늙은 황제",
+        "name": "쫓겨난 늙은 황제",
         "lines": [
           {
             "id": "line-042-01-01",
-            "text": "안정도 -20",
+            "text": "안정도 -10",
+            "tone": "negative"
+          },
+          {
+            "id": "line-042-01-02",
+            "text": "정치력 획득 -5%",
             "tone": "negative"
           }
         ]
@@ -1032,23 +1307,23 @@
         "lines": [
           {
             "id": "line-042-02-01",
-            "text": "매턴 정치력 -5%",
+            "text": "정치력 획득 -5%",
             "tone": "negative"
           },
           {
             "id": "line-042-02-02",
-            "text": "공격 +20",
+            "text": "모든 사단 공격 +10%",
             "tone": "positive"
           },
           {
             "id": "line-042-02-03",
-            "text": "생활수준 -2",
+            "text": "생활수준 -5",
             "tone": "negative"
           },
           {
             "id": "line-042-02-04",
-            "text": "! 경고: 군대가 민간인을 죽일 확률이 높아집니다",
-            "tone": "neutral"
+            "text": "군대가 민간인을 살해할 가능성이 증가합니다.",
+            "tone": "negative"
           }
         ]
       }
@@ -1059,7 +1334,7 @@
     "effects": [
       {
         "id": "effect-043-01",
-        "name": "바다없는 이탈리아왕",
+        "name": "바다 없는 이탈리아왕",
         "lines": [
           {
             "id": "line-043-01-01",
@@ -1068,7 +1343,7 @@
           },
           {
             "id": "line-043-01-02",
-            "text": "정치력 +5",
+            "text": "정치력 획득 +5%",
             "tone": "positive"
           }
         ]
@@ -1084,7 +1359,12 @@
         "lines": [
           {
             "id": "line-044-01-01",
-            "text": "핵심영토 방어 +5",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-044-01-02",
+            "text": "핵심영토 방어 +5%",
             "tone": "positive"
           }
         ]
@@ -1100,23 +1380,23 @@
         "lines": [
           {
             "id": "line-045-01-01",
-            "text": "모든 긍정적인 경제효과 +2",
+            "text": "모든 긍정적인 경제효과 +2%",
             "tone": "positive"
           },
           {
             "id": "line-045-01-02",
+            "text": "생산력 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-045-01-03",
             "text": "안정도 -5",
             "tone": "negative"
           },
           {
-            "id": "line-045-01-03",
+            "id": "line-045-01-04",
             "text": "생활수준 -2",
             "tone": "negative"
-          },
-          {
-            "id": "line-045-01-04",
-            "text": "생산력 +5",
-            "tone": "positive"
           }
         ]
       }
@@ -1131,12 +1411,17 @@
         "lines": [
           {
             "id": "line-046-01-01",
-            "text": "정치력 획득 +15",
+            "text": "정치력 획득 +10%",
             "tone": "positive"
           },
           {
             "id": "line-046-01-02",
             "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-046-01-03",
+            "text": "전쟁 지지도 +5",
             "tone": "positive"
           }
         ]
@@ -1152,7 +1437,12 @@
         "lines": [
           {
             "id": "line-047-01-01",
-            "text": "핵심영토 방어 +2",
+            "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-047-01-02",
+            "text": "아프리카 자주회의 회원국과의 관계도 +10",
             "tone": "positive"
           }
         ]
@@ -1164,21 +1454,26 @@
     "effects": [
       {
         "id": "effect-048-01",
-        "name": "유다 지파의 정복하는 사자, 하일레 셀라시에 1세 폐하, 왕중왕,",
+        "name": "유다 지파의 정복하는 사자, 하일레 셀라시에 1세 폐하, 왕중왕, 지고의 군주, 하느님이 택한 자",
         "lines": [
           {
             "id": "line-048-01-01",
-            "text": "정치력 획득: +5%",
+            "text": "정치력 획득 +5%",
             "tone": "positive"
           },
           {
             "id": "line-048-01-02",
-            "text": "동원 속도:",
-            "tone": "neutral"
+            "text": "동원 속도 +10%",
+            "tone": "positive"
           },
           {
             "id": "line-048-01-03",
-            "text": "이념 변화 방어: +10%",
+            "text": "이념 변화 방어 +10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-048-01-04",
+            "text": "핵심영토 방어 +5%",
             "tone": "positive"
           }
         ]
@@ -1190,11 +1485,11 @@
     "effects": [
       {
         "id": "effect-049-01",
-        "name": "브라질황제, 포르투갈 왕의 군주, 스페인 왕의 군주",
+        "name": "브라질 황제, 포르투갈 왕의 군주, 스페인 왕의 군주",
         "lines": [
           {
             "id": "line-049-01-01",
-            "text": "정치력획득 +20%",
+            "text": "정치력 획득 +15%",
             "tone": "positive"
           },
           {
@@ -1204,12 +1499,12 @@
           },
           {
             "id": "line-049-01-03",
-            "text": "공산주의 지지도 -5%",
-            "tone": "negative"
+            "text": "매턴 공산주의 지지도 -2",
+            "tone": "positive"
           },
           {
             "id": "line-049-01-04",
-            "text": "포르투갈, 스페인이 핵심영토입니다!",
+            "text": "포르투갈과 스페인이 핵심영토로 지정됩니다.",
             "tone": "neutral"
           }
         ]
@@ -1226,7 +1521,7 @@
           {
             "id": "line-050-01-01",
             "text": "아직 효과가 없습니다.",
-            "tone": "neutral"
+            "tone": "flavor"
           }
         ]
       }
@@ -1241,18 +1536,23 @@
         "lines": [
           {
             "id": "line-051-01-01",
-            "text": "안정도 -30",
+            "text": "안정도 -20",
             "tone": "negative"
           },
           {
             "id": "line-051-01-02",
-            "text": "모든 긍정적 경제효과 -20",
+            "text": "모든 긍정적인 경제효과 -10%",
             "tone": "negative"
           },
           {
             "id": "line-051-01-03",
-            "text": "생산력 +10",
+            "text": "생산력 +10%",
             "tone": "positive"
+          },
+          {
+            "id": "line-051-01-04",
+            "text": "생활수준 -5",
+            "tone": "negative"
           }
         ]
       }
@@ -1267,8 +1567,13 @@
         "lines": [
           {
             "id": "line-052-01-01",
-            "text": "군대 증강에 들어가는 비용 -5",
-            "tone": "negative"
+            "text": "군비 증강으로 발생하는 모든 페널티 -10%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-052-01-02",
+            "text": "전쟁 지지도 +5",
+            "tone": "positive"
           }
         ]
       }
@@ -1283,7 +1588,7 @@
         "lines": [
           {
             "id": "line-053-01-01",
-            "text": "안정도: +15%",
+            "text": "안정도 +10",
             "tone": "positive"
           }
         ]
@@ -1294,12 +1599,17 @@
         "lines": [
           {
             "id": "line-053-02-01",
-            "text": "모병 가능 인구 변득치: -50%",
+            "text": "모병 가능 인구 변동치 -25%",
             "tone": "negative"
           },
           {
             "id": "line-053-02-02",
-            "text": "생산력 -20%",
+            "text": "생산력 -10%",
+            "tone": "negative"
+          },
+          {
+            "id": "line-053-02-03",
+            "text": "전쟁 지지도 -5",
             "tone": "negative"
           }
         ]
@@ -1315,7 +1625,12 @@
         "lines": [
           {
             "id": "line-054-01-01",
-            "text": "이념변화방어 +20%",
+            "text": "이념 변화 방어 +20%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-054-01-02",
+            "text": "안정도 +5",
             "tone": "positive"
           }
         ]
@@ -1331,12 +1646,17 @@
         "lines": [
           {
             "id": "line-055-01-01",
-            "text": "안정도 +20",
+            "text": "안정도 +10",
             "tone": "positive"
           },
           {
             "id": "line-055-01-02",
-            "text": "이념변화 방어 +40%",
+            "text": "이념 변화 방어 +25%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-055-01-03",
+            "text": "생활수준 +2",
             "tone": "positive"
           }
         ]
@@ -1348,11 +1668,21 @@
     "effects": [
       {
         "id": "effect-056-01",
-        "name": "컬럼비아를 등에 업은 군국주의자",
+        "name": "콜럼비아를 등에 업은 군국주의자",
         "lines": [
           {
             "id": "line-056-01-01",
-            "text": "군비 증강에 들어가는 모든 디버프 -50%",
+            "text": "군비 증강으로 발생하는 모든 페널티 -30%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-056-01-02",
+            "text": "콜럼비아 보전연방과의 관계도 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-056-01-03",
+            "text": "안정도 -5",
             "tone": "negative"
           }
         ]
@@ -1368,7 +1698,12 @@
         "lines": [
           {
             "id": "line-057-01-01",
-            "text": "대영제국과의 관계 +20",
+            "text": "대영제국과의 관계도 +20",
+            "tone": "positive"
+          },
+          {
+            "id": "line-057-01-02",
+            "text": "안정도 +5",
             "tone": "positive"
           }
         ]
@@ -1380,21 +1715,21 @@
     "effects": [
       {
         "id": "effect-058-01",
-        "name": "여기도 손목자르나요?...아 목을 치신다구요?",
+        "name": "여기도 손목 자르나요?… 아, 목을 치신다고요?",
         "lines": [
           {
             "id": "line-058-01-01",
-            "text": "징병가능인구 -50%",
+            "text": "모병 가능 인구 -30%",
             "tone": "negative"
           },
           {
             "id": "line-058-01-02",
-            "text": "생산능력 +50",
+            "text": "생산력 +20%",
             "tone": "positive"
           },
           {
             "id": "line-058-01-03",
-            "text": "매턴마다 핵심인구증가 -1000",
+            "text": "매턴 핵심인구 증가 -500",
             "tone": "negative"
           }
         ]
@@ -1405,12 +1740,12 @@
         "lines": [
           {
             "id": "line-058-02-01",
-            "text": "생활수준 -20",
+            "text": "생활수준 -10",
             "tone": "negative"
           },
           {
             "id": "line-058-02-02",
-            "text": "안정도 -20",
+            "text": "안정도 -15",
             "tone": "negative"
           }
         ]
@@ -1422,11 +1757,16 @@
     "effects": [
       {
         "id": "effect-059-01",
-        "name": "컬럼비아의 총독",
+        "name": "콜럼비아의 총독",
         "lines": [
           {
             "id": "line-059-01-01",
             "text": "안정도 +5",
+            "tone": "positive"
+          },
+          {
+            "id": "line-059-01-02",
+            "text": "콜럼비아 보전연방과의 관계도 +10",
             "tone": "positive"
           }
         ]
@@ -1438,11 +1778,16 @@
     "effects": [
       {
         "id": "effect-060-01",
-        "name": "연변가",
+        "name": "연설가",
         "lines": [
           {
             "id": "line-060-01-01",
             "text": "정치력 획득 +5%",
+            "tone": "positive"
+          },
+          {
+            "id": "line-060-01-02",
+            "text": "안정도 +5",
             "tone": "positive"
           }
         ]
@@ -1458,7 +1803,17 @@
         "lines": [
           {
             "id": "line-061-01-01",
-            "text": "로디지아와의 관계도 -999",
+            "text": "로디지아 인권동맹연방과의 관계도 -999",
+            "tone": "negative"
+          },
+          {
+            "id": "line-061-01-02",
+            "text": "안정도 -5",
+            "tone": "negative"
+          },
+          {
+            "id": "line-061-01-03",
+            "text": "생활수준 -2",
             "tone": "negative"
           }
         ]
@@ -1479,7 +1834,7 @@
           },
           {
             "id": "line-062-01-02",
-            "text": "생활수준 +5",
+            "text": "생활수준 +2",
             "tone": "positive"
           }
         ]

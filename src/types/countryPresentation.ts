@@ -18,7 +18,7 @@ export type CountryLeaderEffect = {
 export type CountryLeaderEffectLine = {
   id: string;
   text: string;
-  tone: "positive" | "negative" | "neutral";
+  tone: "positive" | "negative" | "neutral" | "flavor";
 };
 
 export type CountryPartyPresentation = {
