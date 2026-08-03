@@ -29,14 +29,14 @@ const cards = [
     id: "login",
     title: "로그인",
     subtitle: "Discord 계정으로 접속합니다",
-    image: null,
+    image: "/assets/title/login-passport-control.png",
     action: "open-login",
   },
   {
     id: "credits",
     title: "만든사람",
     subtitle: "프로젝트의 기록과 출처",
-    image: null,
+    image: "/assets/title/credits-workers.png",
     action: "open-credits",
   },
 ] as const;
