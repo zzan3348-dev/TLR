@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vercel/
+.codex-tmp/
+artifacts/
+work/
+deploy-optimized/
+.tlr_ready
+.tmp-*
+*.zip
+*.bat
+
+# 지도 생성 중 만들어지는 백업·중첩 산출물
+public/maps/backups/
+public/maps/generated/generated/

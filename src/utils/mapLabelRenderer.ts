@@ -48,18 +48,10 @@ type LayoutMapLabelsOptions = {
 };
 
 const MIN_SCREEN_FONT_SIZE = 7.5;
-const BASE_MAX_SCREEN_FONT_SIZE = 34;
-const MAX_AREA_FONT_BONUS = 16;
-const ZOOM_FONT_SCALE_EXPONENT = 0.48;
-const MAX_UNSELECTED_SCREEN_FONT_SIZE = 76;
-const MAX_SELECTED_SCREEN_FONT_SIZE = 80;
-const SELECTED_FONT_SCALE = 1.06;
-const MIN_RECOVERED_SCREEN_FONT_SIZE = 18;
-const MAX_RECOVERED_SCREEN_FONT_SIZE = 34;
+const LABELS_MIN_ZOOM = 1.28;
 const SCREEN_PATH_TRACKING = 1.045;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
-const COLLISION_SHRINK_STEPS = [0.92, 0.84, 0.76, 0.7];
 
 export function getRotatedLabelBounds(
   x: number,
@@ -166,14 +158,11 @@ function createScreenGlyphs(
   camera: MapCamera,
   viewport: ViewportSize,
   mapWidth: number,
-  maximumScreenFontSize: number,
+  fixedScreenFontSize: number,
 ): { glyphs: ScreenGlyph[]; screenFontSize: number } {
   const characters = [...label.text];
   const approximateGlyphWidth = label.fontSize * 0.9;
-  const screenFontSize = Math.min(
-    label.fontSize * camera.scale,
-    maximumScreenFontSize,
-  );
+  const screenFontSize = fixedScreenFontSize;
   const renderScale = screenFontSize / Math.max(1, label.fontSize);
   const pathScale =
     (renderScale / Math.max(0.0001, camera.scale)) *
@@ -276,7 +265,7 @@ function createScreenPlacement(
   camera: MapCamera,
   viewport: ViewportSize,
   mapWidth: number,
-  maximumScreenFontSize: number,
+  fixedScreenFontSize: number,
   selected: boolean,
 ): ScreenMapLabel | null {
   const { glyphs, screenFontSize } = createScreenGlyphs(
@@ -285,7 +274,7 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    maximumScreenFontSize,
+    fixedScreenFontSize,
   );
   if (glyphs.length === 0 || screenFontSize < MIN_SCREEN_FONT_SIZE) {
     return null;
@@ -329,10 +318,9 @@ export function layoutMapLabels({
   selectedComponentId,
 }: LayoutMapLabelsOptions): ScreenMapLabel[] {
   const zoom = camera.scale / fitScale;
-  const zoomFontScale = Math.pow(
-    Math.max(1, zoom),
-    ZOOM_FONT_SCALE_EXPONENT,
-  );
+  if (zoom < LABELS_MIN_ZOOM) {
+    return [];
+  }
   const candidates: ScreenMapLabel[] = [];
 
   for (const label of labels) {
@@ -349,8 +337,7 @@ export function layoutMapLabels({
       (!label.visible && !canRecoverAtCloserZoom) ||
       !label.text ||
       zoom < label.minZoom ||
-      (label.maxZoom !== null && zoom > label.maxZoom) ||
-      label.fontSize * camera.scale < MIN_SCREEN_FONT_SIZE
+      (label.maxZoom !== null && zoom > label.maxZoom)
     ) {
       continue;
     }
@@ -358,37 +345,9 @@ export function layoutMapLabels({
       const selected =
         label.countryId === selectedCountryId &&
         label.componentId === selectedComponentId;
-      const areaFontBonus = Math.min(
-        MAX_AREA_FONT_BONUS,
-        Math.max(
-          0,
-          Math.log2(Math.max(1, label.groupPixelCount / 70_000)) * 5,
-        ),
-      );
-      const unselectedMaximumScreenFontSize = Math.min(
-        MAX_UNSELECTED_SCREEN_FONT_SIZE,
-        (BASE_MAX_SCREEN_FONT_SIZE + areaFontBonus) * zoomFontScale,
-      );
-      const selectedMaximumScreenFontSize = selected
-        ? Math.min(
-            MAX_SELECTED_SCREEN_FONT_SIZE,
-            unselectedMaximumScreenFontSize * SELECTED_FONT_SCALE,
-          )
-        : unselectedMaximumScreenFontSize;
-      const recoveredFitCap =
-        MIN_RECOVERED_SCREEN_FONT_SIZE +
-        Math.min(1, label.ownershipFitRatio / 0.5) *
-          (MAX_RECOVERED_SCREEN_FONT_SIZE -
-            MIN_RECOVERED_SCREEN_FONT_SIZE);
-      const baseMaximumScreenFontSize = canRecoverAtCloserZoom
-        ? Math.min(selectedMaximumScreenFontSize, recoveredFitCap)
-        : selectedMaximumScreenFontSize;
-      const maximumScreenFontSize = Math.min(
-        selected
-          ? MAX_SELECTED_SCREEN_FONT_SIZE
-          : MAX_UNSELECTED_SCREEN_FONT_SIZE,
-        baseMaximumScreenFontSize *
-          getMapLabelScreenScale(label.countryId),
+      const fixedScreenFontSize = Math.max(
+        MIN_SCREEN_FONT_SIZE,
+        label.fontSize * fitScale * getMapLabelScreenScale(label.countryId),
       );
       const placement = createScreenPlacement(
         label,
@@ -396,7 +355,7 @@ export function layoutMapLabels({
         camera,
         viewport,
         mapWidth,
-        maximumScreenFontSize,
+        fixedScreenFontSize,
         selected,
       );
       if (placement) {
@@ -438,24 +397,7 @@ export function layoutMapLabels({
       continue;
     }
 
-    let recovered = false;
-    for (const scale of COLLISION_SHRINK_STEPS) {
-      const smaller = createScreenPlacement(
-        candidate.label,
-        candidate.copy,
-        camera,
-        viewport,
-        mapWidth,
-        candidate.screenFontSize * scale,
-        candidate.selected,
-      );
-      if (smaller && !collidesWithAccepted(smaller)) {
-        accepted.push(smaller);
-        recovered = true;
-        break;
-      }
-    }
-    if (!recovered && zoom >= 2) {
+    if (zoom >= 2) {
       accepted.push(candidate);
     }
   }

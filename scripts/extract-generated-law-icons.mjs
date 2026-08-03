@@ -30,14 +30,14 @@ const groups = {
     laws: ["service", "officers", "training", "exemptions"],
   },
   social: {
-    file: "social-law-sprite.png", cols: 5, rows: 5,
-    laws: ["healthcare", "education", "penal-system", "policing", "industry-regulation"],
+    // The social sprite is a six-row sheet: healthcare, education,
+    // penal-system, policing, industry-regulation, and womens-rights.
+    // Keeping all six rows in one definition prevents the fifth and sixth
+    // rows from being merged into a single crop and preserves each pictogram
+    // as its own transparent asset.
+    file: "social-law-sprite.png", cols: 5, rows: 6,
+    laws: ["healthcare", "education", "penal-system", "policing", "industry-regulation", "womens-rights"],
   },
-};
-
-const extra = {
-  file: "social-extra-sprite.png", cols: 6, rows: 5,
-  laws: ["womens-rights"],
 };
 
 function isChroma(r, g, b) {
@@ -72,7 +72,12 @@ function cropIcon(input, x0, y0, x1, y1) {
     for (let x = 0; x < width; x += 1) {
       const i = y * width + x;
       const p = ((y0 + y) * input.width + x0 + x) * 4;
-      foreground[i] = mask[i] === 0 && input.data[p + 3] > 8 ? 1 : 0;
+      // Remove chroma pixels everywhere, not only the flood-filled outer
+      // background. Some pictograms (notably the industry-regulation
+      // factory) enclose a small green-screen pocket inside their outline;
+      // retaining those pixels leaves a bright rectangular halo in the PNG.
+      foreground[i] = mask[i] === 0 && input.data[p + 3] > 8 &&
+        !isChroma(input.data[p], input.data[p + 1], input.data[p + 2]) ? 1 : 0;
     }
   }
   const visited = new Uint8Array(width * height);
@@ -138,6 +143,21 @@ function cropIcon(input, x0, y0, x1, y1) {
   return output;
 }
 
+function removeGreenScreenFringe(image) {
+  for (let i = 0; i < image.data.length; i += 4) {
+    const red = image.data[i];
+    const green = image.data[i + 1];
+    const blue = image.data[i + 2];
+    // The factory cell contains the bright green sprite background inside
+    // the outline. It is not part of the pictogram, so clear only the
+    // strongly green/yellow screen fringe while retaining dark line art.
+    if (image.data[i + 3] > 8 && green > 35 && green > red * 1.1 &&
+      green > blue * 1.1 && blue < 80) {
+      image.data[i + 3] = 0;
+    }
+  }
+}
+
 function writeGroup(groupName, definition) {
   const source = path.join(spriteDir, definition.file);
   if (!fs.existsSync(source)) throw new Error(`Missing sprite sheet: ${source}`);
@@ -159,6 +179,9 @@ function writeGroup(groupName, definition) {
       const y1 = Math.min(input.height, Math.floor((row + 1) * cellHeight) - gutterY);
       const icon = cropIcon(input, x0, y0, x1, y1);
       if (!icon) continue;
+      if (lawId === "industry-regulation" && order === 0) {
+        removeGreenScreenFringe(icon);
+      }
       fs.writeFileSync(path.join(groupDir, `${lawId}-${order + 1}.png`), PNG.sync.write(icon));
     }
     const first = path.join(groupDir, `${lawId}-1.png`);
@@ -167,7 +190,6 @@ function writeGroup(groupName, definition) {
 }
 
 for (const [name, definition] of Object.entries(groups)) writeGroup(name, definition);
-writeGroup("social", extra);
 
 // Legacy generated names remain available as aliases for existing callers.
 const aliases = {

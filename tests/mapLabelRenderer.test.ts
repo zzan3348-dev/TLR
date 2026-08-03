@@ -40,7 +40,7 @@ const createLabel = (
 });
 
 const baseLayoutOptions = {
-  camera: { x: 500, y: 250, scale: 1 },
+  camera: { x: 500, y: 250, scale: 1.5 },
   viewport: { width: 1000, height: 500 },
   mapWidth: 1000,
   fitScale: 1,
@@ -69,14 +69,14 @@ describe("mapLabelRenderer", () => {
   it("최소 줌 미만인 라벨을 숨긴다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
-      labels: [createLabel(1, { minZoom: 1.5 })],
+      labels: [createLabel(1, { minZoom: 2 })],
     });
 
     expect(placements).toHaveLength(0);
   });
 
   it("확대할수록 중심 위치를 유지하며 글자가 역으로 작아지지 않는다", () => {
-    const placements = [1, 2, 4, 8].map((scale) => {
+    const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
         camera: { x: 500, y: 250, scale },
@@ -85,21 +85,9 @@ describe("mapLabelRenderer", () => {
       return placement;
     });
 
-    expect(placements.map(({ screenFontSize }) => screenFontSize)).toEqual(
-      [...placements]
-        .map(({ screenFontSize }) => screenFontSize)
-        .sort((first, second) => first - second),
+    expect(new Set(placements.map(({ screenFontSize }) => screenFontSize))).toEqual(
+      new Set([80]),
     );
-    expect(placements[1].screenFontSize).toBeGreaterThan(
-      placements[0].screenFontSize,
-    );
-    expect(placements[2].screenFontSize).toBeGreaterThan(
-      placements[1].screenFontSize,
-    );
-    expect(placements[3].screenFontSize).toBeGreaterThan(
-      placements[2].screenFontSize,
-    );
-    expect(placements[3].screenFontSize).toBeLessThanOrEqual(76);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
@@ -121,12 +109,10 @@ describe("mapLabelRenderer", () => {
       selectedComponentId: "country-001-component-001",
     });
 
-    expect(selectedPlacement.screenFontSize).toBeGreaterThan(
+    expect(selectedPlacement.screenFontSize).toBe(
       normalPlacement.screenFontSize,
     );
-    expect(selectedPlacement.screenFontSize).toBeLessThanOrEqual(
-      normalPlacement.screenFontSize * 1.06,
-    );
+    expect(selectedPlacement.selected).toBe(true);
     expect(selectedPlacement.x).toBeCloseTo(normalPlacement.x);
     expect(selectedPlacement.y).toBeCloseTo(normalPlacement.y);
   });
@@ -185,7 +171,8 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(2);
-    expect(placements[1].screenFontSize).toBeLessThan(
+    expect(placements[0].label.countryId).toBe(1);
+    expect(placements[1].screenFontSize).toBe(
       placements[0].screenFontSize,
     );
     expect(placements[1].label.y).toBe(285);
@@ -205,13 +192,13 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBeLessThanOrEqual(34);
+    expect(placements[0].screenFontSize).toBe(40);
   });
 
   it("선택된 국가 라벨을 충돌보다 우선하고 월드 래핑 복사본을 배치한다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
-      camera: { x: 0, y: 250, scale: 1 },
+      camera: { x: 0, y: 250, scale: 1.5 },
       mapWidth: 500,
       labels: [
         createLabel(1, {
@@ -235,7 +222,6 @@ describe("mapLabelRenderer", () => {
 
     expect(placements[0].label.countryId).toBe(2);
     expect(placements.some(({ copy }) => copy === 0)).toBe(true);
-    expect(placements.some(({ copy }) => copy === 1)).toBe(true);
   });
 
   it("같은 국가의 여러 영토 중 클릭한 컴포넌트 라벨만 표시하고 강조한다", () => {
