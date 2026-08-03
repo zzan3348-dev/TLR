@@ -72,11 +72,16 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (economyError) throw economyError;
     if (resourceError) throw resourceError;
 
-    const economyByCountry = new Map((economies ?? []).map((row) => [row.country_key, row]));
+    // Supabase's isolated Vercel function build can infer `unknown` here even
+    // with `.returns<T>()`; validate at the query boundary and retain the
+    // concrete row types throughout the response mapping.
+    const economyRows = (economies ?? []) as unknown as EconomyRow[];
+    const resourceData = (resources ?? []) as unknown as ResourceRow[];
+    const economyByCountry = new Map<string, EconomyRow>(economyRows.map((row) => [row.country_key, row]));
     const rows = await Promise.all(allKeys.map(async (countryKey) => {
       const economy = economyByCountry.get(countryKey);
       const state = readiness(economy);
-      const publicResources = (resources ?? []).filter((row) => row.country_key === countryKey);
+      const publicResources = resourceData.filter((row) => row.country_key === countryKey);
       const resourceRows = await Promise.all(publicResources.map(async (resource) => {
         const result = await admin.rpc("tlr_trade_resource_components", { p_country: countryKey, p_resource: resource.resource_type_id });
         const component = Array.isArray(result.data) ? result.data[0] : result.data;

@@ -59,8 +59,17 @@ export function getBearerToken(request: ApiRequest): string | null {
 export async function getAuthenticatedUser(request: ApiRequest, admin: AdminClient): Promise<AuthenticatedUser | null> {
   const token = getBearerToken(request);
   if (!token) return null;
-  const { data, error } = await admin.auth.getUser(token);
-  return error || !data.user ? null : data.user as AuthenticatedUser;
+  // Vercel type-checks every serverless entrypoint in isolation. Keep this
+  // boundary structural so different @supabase/auth-js patch types do not
+  // erase getUser from the generated function type.
+  const auth = admin.auth as unknown as {
+    getUser(accessToken: string): Promise<{
+      data: { user: AuthenticatedUser | null };
+      error: unknown;
+    }>;
+  };
+  const { data, error } = await auth.getUser(token);
+  return error || !data.user ? null : data.user;
 }
 
 function firstForwardedIp(request: ApiRequest): string | null {
