@@ -1,11 +1,12 @@
 import type { MapCountryIndex } from "../../../types/mapCountry";
+import type { EconomySnapshot } from "../../economy/types";
 
 export type ProductionCapacity = {
-  total: number;
-  used: number;
-  fromDomesticEconomy: number;
-  fromTrade: number;
-  other: number;
+  total: number | null;
+  used: number | null;
+  fromDomesticEconomy: number | null;
+  fromTrade: number | null;
+  other: number | null;
 };
 
 export type PlaySimulationState = {
@@ -16,22 +17,22 @@ export type PlaySimulationState = {
   warSupport: number;
   manpower: number;
   productionCapacity: ProductionCapacity;
-  gdp: number;
-  nominalGrowth: number;
-  inflation: number;
-  realGrowth: number;
-  debt: number;
-  debtToGdp: number;
-  povertyRate: number;
-  unemploymentRate: number;
+  gdp: number | null;
+  nominalGrowth: number | null;
+  inflation: number | null;
+  realGrowth: number | null;
+  debt: number | null;
+  debtToGdp: number | null;
+  povertyRate: number | null;
+  unemploymentRate: number | null;
   graphs: {
     gdp: readonly number[];
     inflation: readonly number[];
     debtRatio: readonly number[];
     poverty: readonly number[];
   };
-  isPlaceholder: true;
-  dataStatus: "placeholder";
+  isPlaceholder: boolean;
+  dataStatus: "unconfigured" | "partial" | "ready";
 };
 
 export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
@@ -42,20 +43,20 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
   warSupport: 0,
   manpower: 0,
   productionCapacity: {
-    total: 0,
-    used: 0,
-    fromDomesticEconomy: 0,
-    fromTrade: 0,
-    other: 0,
+    total: null,
+    used: null,
+    fromDomesticEconomy: null,
+    fromTrade: null,
+    other: null,
   },
-  gdp: 0,
-  nominalGrowth: 0,
-  inflation: 0,
-  realGrowth: 0,
-  debt: 0,
-  debtToGdp: 0,
-  povertyRate: 0,
-  unemploymentRate: 0,
+  gdp: null,
+  nominalGrowth: null,
+  inflation: null,
+  realGrowth: null,
+  debt: null,
+  debtToGdp: null,
+  povertyRate: null,
+  unemploymentRate: null,
   graphs: {
     gdp: [0, 0, 0, 0, 0, 0],
     inflation: [0, 0, 0, 0, 0, 0],
@@ -63,33 +64,60 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
     poverty: [0, 0, 0, 0, 0, 0],
   },
   isPlaceholder: true,
-  dataStatus: "placeholder",
+  dataStatus: "unconfigured",
 };
 
 export function getPlaySimulationState(
   country: MapCountryIndex,
+  snapshot: EconomySnapshot | null = null,
 ): PlaySimulationState {
+  const economy = snapshot?.economy ?? null;
+  const capacity = snapshot?.productionCapacity ?? null;
+  const gdp = economy?.gdp ?? null;
+  const debt = economy?.national_debt ?? null;
   return {
     ...ZERO_PLAY_SIMULATION_STATE,
     countryKey: country.key,
-    productionCapacity: { ...ZERO_PLAY_SIMULATION_STATE.productionCapacity },
+    productionCapacity: capacity
+      ? {
+          total: capacity.effective_capacity,
+          used: capacity.domestic_used,
+          fromDomesticEconomy: capacity.effective_capacity,
+          fromTrade: capacity.received_in - capacity.committed_out,
+          other: 0,
+        }
+      : { ...ZERO_PLAY_SIMULATION_STATE.productionCapacity },
+    gdp,
+    nominalGrowth: economy?.nominal_growth_rate ?? null,
+    inflation: economy?.inflation_rate ?? null,
+    realGrowth:
+      economy?.nominal_growth_rate != null && economy.inflation_rate != null
+        ? economy.nominal_growth_rate - economy.inflation_rate
+        : null,
+    debt,
+    debtToGdp: debt != null && gdp != null && gdp !== 0 ? (debt / gdp) * 100 : null,
+    unemploymentRate: economy?.unemployment_rate ?? null,
     graphs: { ...ZERO_PLAY_SIMULATION_STATE.graphs },
+    isPlaceholder: !snapshot?.economy,
+    dataStatus: snapshot ? snapshot.readiness.toLowerCase() as PlaySimulationState["dataStatus"] : "unconfigured",
   };
 }
 
-export function formatPercent(value: number): string {
+export function formatPercent(value: number | null): string {
+  if (value == null) return "미설정";
   return `${value.toFixed(2)}%`;
 }
 
-export function formatSigned(value: number): string {
+export function formatSigned(value: number | null): string {
+  if (value == null) return "미설정";
   return `${value > 0 ? "+" : ""}${value.toFixed(2)}`;
 }
 
-export function formatBillions(value: number): string {
+export function formatBillions(value: number | null): string {
+  if (value == null) return "미설정";
   return `$${value.toFixed(2)}B`;
 }
 
 export function formatInteger(value: number): string {
   return new Intl.NumberFormat("ko-KR").format(value);
 }
-

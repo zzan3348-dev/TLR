@@ -51,7 +51,8 @@ const WINDOW_BUTTONS: readonly {
   { id: "intelligence", label: "첩보", icon: "menu/intelligence" },
 ];
 
-function signedTone(value: number): HudTone {
+function signedTone(value: number | null): HudTone {
+  if (value == null) return "neutral";
   if (value > 0) return "positive";
   if (value < 0) return "negative";
   return "neutral";
@@ -65,10 +66,17 @@ export function PlayHud({
   onExitPlayMode,
 }: PlayHudProps) {
   const presentation = getCountryPresentation(country);
-  const unusedProduction = Math.max(
-    state.productionCapacity.total - state.productionCapacity.used,
-    0,
-  );
+  const unusedProduction =
+    state.productionCapacity.total != null && state.productionCapacity.used != null
+      ? Math.max(
+          state.productionCapacity.total - state.productionCapacity.used,
+          0,
+        )
+      : null;
+  const productionSummary =
+    state.productionCapacity.used != null && state.productionCapacity.total != null
+      ? `${state.productionCapacity.used}/${state.productionCapacity.total}`
+      : "미설정";
 
   return (
     <header className="play-hud" aria-label="플레이 모드 HUD">
@@ -154,18 +162,18 @@ export function PlayHud({
           id="production"
           icon="hud/production"
           label="생산능력"
-          value={`${state.productionCapacity.used}/${state.productionCapacity.total}`}
+          value={productionSummary}
           intro="민간·군수·소비재 생산에 배분할 수 있는 국가 산업 역량입니다."
           lines={[
             {
               label: "사용 중",
-              value: `${state.productionCapacity.used}`,
+              value: state.productionCapacity.used?.toString() ?? "미설정",
             },
             {
               label: "전체 생산능력",
-              value: `${state.productionCapacity.total}`,
+              value: state.productionCapacity.total?.toString() ?? "미설정",
             },
-            { label: "미배치", value: `${unusedProduction}` },
+            { label: "미배치", value: unusedProduction?.toString() ?? "미설정" },
             { label: "무역 제공", value: "0", tone: "neutral" },
           ]}
           footer="생산능력은 산업시설과 경제법, 무역 상태의 영향을 받습니다."

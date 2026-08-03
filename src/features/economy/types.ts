@@ -1,0 +1,115 @@
+export type EconomyReadiness = "UNCONFIGURED" | "PARTIAL" | "READY";
+
+export type EconomyRecord = {
+  country_key: string;
+  gdp: number | null;
+  nominal_growth_rate: number | null;
+  inflation_rate: number | null;
+  unemployment_rate: number | null;
+  national_debt: number | null;
+  foreign_reserves: number | null;
+  national_income: number | null;
+  total_expenditure: number | null;
+  base_production_capacity: number | null;
+  production_capacity_modifier: number | null;
+  domestic_capacity_used: number | null;
+  research_capacity: number | null;
+  budget_fulfillment_rate: number | null;
+  nominal_tax_rate: number | null;
+  tax_collection_efficiency: number | null;
+  current_budget: Record<string, number> | null;
+  draft_budget: Record<string, number> | null;
+  next_budget: Record<string, number> | null;
+  next_budget_world_date: string | null;
+};
+
+export type ResourceRecord = {
+  country_key: string;
+  resource_type_id: TradeResourceId;
+  stockpile: number | null;
+  production_per_period: number | null;
+  domestic_use: number | null;
+  export_limit: number | null;
+  is_public: boolean;
+  available?: number | null;
+};
+
+export type CapacityRecord = {
+  effective_capacity: number;
+  domestic_used: number;
+  committed_out: number;
+  received_in: number;
+  available: number;
+};
+
+export type EconomySnapshot = {
+  countryKey: string;
+  worldDate: string;
+  readiness: EconomyReadiness;
+  economy: EconomyRecord | null;
+  productionCapacity: CapacityRecord | null;
+  resources: ResourceRecord[];
+  history: Array<Record<string, unknown>>;
+  rules: { settlement_interval_days: number; budget_min: number; budget_max: number; budget_step: number };
+};
+
+export type TradeResourceId = "STEEL" | "OIL" | "COAL" | "FOOD" | "RARE_MINERALS";
+export type TradeAssetType = "RESOURCE" | "PRODUCTION_CAPACITY";
+
+export type TradeCountrySummary = {
+  countryKey: string;
+  readiness: EconomyReadiness;
+  reviewRoute: "PLAYER" | "ADMIN";
+  productionCapacity: CapacityRecord[] | CapacityRecord | null;
+  resources: ResourceRecord[];
+  updatedAt: string | null;
+};
+
+export type TradeLine = {
+  fromCountryKey: string;
+  toCountryKey: string;
+  assetType: TradeAssetType;
+  resourceTypeId: TradeResourceId | null;
+  amount: number;
+};
+
+export type TradeProposal = {
+  id: string;
+  proposer_country_key: string;
+  receiver_country_key: string;
+  status: string;
+  review_route: "PLAYER" | "ADMIN";
+  proposed_start_world_date: string;
+  proposed_end_world_date: string;
+  response_deadline_world_date: string;
+  settlement_interval_days: number;
+  lines: Array<{ id: number; from_country_key: string; to_country_key: string; asset_type: TradeAssetType; resource_type_id: TradeResourceId | null; amount_per_settlement: number }>;
+};
+
+export type TradeAgreement = {
+  id: string;
+  country_a_key: string;
+  country_b_key: string;
+  status: string;
+  starts_world_date: string;
+  ends_world_date: string;
+  next_settlement_world_date: string | null;
+  allow_early_termination: boolean;
+  lines: TradeProposal["lines"];
+};
+
+export type TradeNotification = {
+  id: string;
+  country_key: string;
+  counterpart_country_key: string;
+  notification_type: "PROPOSAL_RECEIVED" | "PROPOSAL_ACCEPTED" | "PROPOSAL_REJECTED" | "AGREEMENT_BREACHED" | "AGREEMENT_TERMINATED";
+  read_at: string | null;
+  dismissed_at: string | null;
+  created_at: string;
+  proposal: TradeProposal | null;
+  agreement: TradeAgreement | null;
+};
+
+export const RESOURCE_LABELS: Record<TradeResourceId, string> = {
+  STEEL: "철강", OIL: "석유", COAL: "석탄", FOOD: "식량", RARE_MINERALS: "희귀광물",
+};

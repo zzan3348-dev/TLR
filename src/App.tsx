@@ -18,6 +18,9 @@ import { WorldMap, type WorldMapHandle } from "./components/WorldMap";
 import { mapCountries } from "./data/mapCountries";
 import { PlayHud } from "./features/play/components/PlayHud";
 import { PlayWindowManager } from "./features/play/components/PlayWindowManager";
+import { DiplomacyNotificationQueue } from "./features/diplomacy/components/DiplomacyNotificationQueue";
+import { loadEconomy } from "./features/economy/economyClient";
+import type { EconomySnapshot } from "./features/economy/types";
 import { getPlaySimulationState } from "./features/play/data/playSimulationState";
 import {
   clearPlayCountryKey,
@@ -85,6 +88,8 @@ export default function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
   const [directorateAccessOpen, setDirectorateAccessOpen] = useState(false);
+  const [economySnapshot, setEconomySnapshot] =
+    useState<EconomySnapshot | null>(null);
 
   useEffect(() => {
     const audio = new Audio("/audio/tlr-bgm.mp3");
@@ -242,8 +247,31 @@ export default function App() {
     setActivePlayWindow(null);
   }, []);
 
+  useEffect(() => {
+    if (!playCountry) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const refreshEconomy = () => {
+      void loadEconomy(playCountry.key, controller.signal)
+        .then(setEconomySnapshot)
+        .catch((error: unknown) => {
+          if (!(error instanceof DOMException && error.name === "AbortError")) {
+            setEconomySnapshot(null);
+          }
+        });
+    };
+    refreshEconomy();
+    window.addEventListener("tlr:economy-updated", refreshEconomy);
+    return () => {
+      controller.abort();
+      window.removeEventListener("tlr:economy-updated", refreshEconomy);
+    };
+  }, [playCountry]);
+
   const playSimulationState = playCountry
-    ? getPlaySimulationState(playCountry)
+    ? getPlaySimulationState(playCountry, economySnapshot)
     : null;
 
   const highlightedCountry = selection?.country ?? null;
@@ -444,6 +472,7 @@ export default function App() {
             onExitPlayMode={exitPlayMode}
           />
         ) : null}
+        {playCountry ? <DiplomacyNotificationQueue country={playCountry} /> : null}
       </section>
       <CountryPlayFlow
         country={selection?.country ?? null}
