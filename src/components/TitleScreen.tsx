@@ -97,7 +97,7 @@ export function TitleScreen({
         {cards.map((card, index) => (
           <button className="title-card" type="button" key={card.id} style={{ "--card-index": index } as React.CSSProperties} onClick={() => {
             if (card.action === "open-map") onOpenCountrySelection();
-            else if (card.action === "open-login") onOpenWindow("login");
+            else if (card.action === "open-login") onLogin();
             else onOpenWindow("credits");
           }}>
             <span className={`title-card__image-wrap${card.image ? "" : " title-card__image-wrap--blank"}`}>

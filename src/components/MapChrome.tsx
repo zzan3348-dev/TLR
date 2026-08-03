@@ -2,19 +2,19 @@ import { useEffect, useRef } from "react";
 
 type TopBarProps = {
   isSettingsOpen: boolean;
-  showProvinceBorders: boolean;
+  isBgmEnabled: boolean;
   onToggleSettings: () => void;
   onCloseSettings: () => void;
-  onProvinceBordersChange: (nextValue: boolean) => void;
+  onToggleBgm: () => void;
   onBackToTitle: () => void;
 };
 
 export function TopBar({
   isSettingsOpen,
-  showProvinceBorders,
+  isBgmEnabled,
   onToggleSettings,
   onCloseSettings,
-  onProvinceBordersChange,
+  onToggleBgm,
   onBackToTitle,
 }: TopBarProps) {
   const settingsRef = useRef<HTMLDivElement>(null);
@@ -67,19 +67,17 @@ export function TopBar({
           inert={!isSettingsOpen}
         >
           <div className="settings-menu__heading">
-            <strong>지도 표시 설정</strong>
+            <strong>음향 설정</strong>
           </div>
           <label className="settings-toggle">
             <span className="settings-toggle__copy">
-              <strong>프로빈스 경계</strong>
-              <small>세부 행정 경계선을 지도에 표시</small>
+              <strong>배경 음악</strong>
+              <small>{isBgmEnabled ? "BGM 재생 중" : "BGM 꺼짐"}</small>
             </span>
             <input
               type="checkbox"
-              checked={showProvinceBorders}
-              onChange={(event) =>
-                onProvinceBordersChange(event.currentTarget.checked)
-              }
+              checked={isBgmEnabled}
+              onChange={onToggleBgm}
             />
             <span className="settings-toggle__track" aria-hidden="true">
               <span />

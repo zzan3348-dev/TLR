@@ -31,7 +31,7 @@ import type {
 } from "./types/mapCountry";
 import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
-import { rememberNextPath, signOut } from "./services/authService";
+import { signOut } from "./services/authService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -58,6 +58,8 @@ function readStoredPlayCountry(): MapCountryIndex | null {
 export default function App() {
   const { profile, loading: authLoading, refresh: refreshAuth } = useAuth();
   const mapRef = useRef<WorldMapHandle>(null);
+  const bgmRef = useRef<HTMLAudioElement | null>(null);
+  const bgmEnabledRef = useRef(true);
   const [screen, setScreen] = useState<"title" | "map" | "admin">(
     window.location.pathname.startsWith("/play/") ? "map" : window.location.pathname === "/admin" || window.location.pathname === "/directorate" ? "admin" : "title",
   );
@@ -79,12 +81,14 @@ export default function App() {
     readStoredProvinceSetting,
   );
   const [showLabels, setShowLabels] = useState(true);
+  const [isBgmEnabled, setIsBgmEnabled] = useState(true);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
   const [directorateAccessOpen, setDirectorateAccessOpen] = useState(false);
 
   useEffect(() => {
     const audio = new Audio("/audio/tlr-bgm.mp3");
+    bgmRef.current = audio;
     audio.loop = true;
     audio.preload = "auto";
     audio.volume = 0.6;
@@ -94,6 +98,9 @@ export default function App() {
       window.removeEventListener("keydown", startPlayback);
     };
     const startPlayback = () => {
+      if (!bgmEnabledRef.current) {
+        return;
+      }
       void audio
         .play()
         .then(removeInteractionListeners)
@@ -110,7 +117,26 @@ export default function App() {
       removeInteractionListeners();
       audio.pause();
       audio.src = "";
+      bgmRef.current = null;
     };
+  }, []);
+
+  const toggleBgm = useCallback(() => {
+    setIsBgmEnabled((current) => {
+      const next = !current;
+      bgmEnabledRef.current = next;
+      const audio = bgmRef.current;
+      if (audio) {
+        if (next) {
+          void audio.play().catch(() => {
+            // 브라우저 자동재생 제한 시 다음 사용자 입력에서 다시 재생을 시도한다.
+          });
+        } else {
+          audio.pause();
+        }
+      }
+      return next;
+    });
   }, []);
 
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -128,12 +154,6 @@ export default function App() {
     }
     if (profile?.accessStatus === "blocked") {
       setAccessBlockedOpen(true);
-      return;
-    }
-    if (profile?.accessStatus !== "active") {
-      rememberNextPath(`/play/${country.key}`);
-      setScreen("title");
-      setAuthModalOpen(true);
       return;
     }
     setPlayCountry(country);
@@ -197,11 +217,6 @@ export default function App() {
     }
     if (profile?.accessStatus === "blocked") {
       setAccessBlockedOpen(true);
-      return;
-    }
-    if (profile?.accessStatus !== "active") {
-      rememberNextPath(`/play/${selection.country.key}`);
-      setAuthModalOpen(true);
       return;
     }
     setPlayCountry(selection.country);
@@ -307,7 +322,10 @@ export default function App() {
           onCloseWindow={() => setTitleWindow(null)}
           onLogin={() => {
             setTitleWindow(null);
-            setAuthModalOpen(true);
+            setAuthModalOpen(false);
+            setActivePlayWindow("politics");
+            setIsMapEntering(true);
+            setScreen("map");
           }}
           onLogout={async () => {
             await signOut();
@@ -351,10 +369,10 @@ export default function App() {
       ) : null}
       <TopBar
         isSettingsOpen={isSettingsOpen}
-        showProvinceBorders={showProvinceBorders}
+        isBgmEnabled={isBgmEnabled}
         onToggleSettings={() => setIsSettingsOpen((current) => !current)}
         onCloseSettings={() => setIsSettingsOpen(false)}
-        onProvinceBordersChange={updateProvinceBorders}
+        onToggleBgm={toggleBgm}
         onBackToTitle={() => {
           setIsSettingsOpen(false);
           setTitleWindow(null);
