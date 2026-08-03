@@ -1,11 +1,11 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
 import {
   collectRequestSignals,
   discordProviderId,
   getAdminClient,
   getAuthenticatedUser,
   getServerEnv,
-} from "../../server/auth";
+} from "../../server/auth.js";
 
 type ProfileRow = {
   id: string;

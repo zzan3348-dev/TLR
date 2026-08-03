@@ -1,7 +1,7 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { getAdminClient, getServerEnv } from "../../server/auth";
-import { requireAdminSession } from "../../server/adminAuth";
-import { currentWorldDate, databaseErrorCode, proposalById, type ProposalRow } from "../../server/diplomacy";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import { requireAdminSession } from "../../server/adminAuth.js";
+import { currentWorldDate, databaseErrorCode, proposalById, type ProposalRow } from "../../server/diplomacy.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const session = requireAdminSession(request, response);

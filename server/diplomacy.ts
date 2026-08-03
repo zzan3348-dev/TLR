@@ -1,6 +1,7 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
-import type { ApiRequest, ApiResponse } from "./types";
-import { requireActiveUser } from "./access";
+/// <reference types="node" />
+import type { ApiRequest, ApiResponse } from "./types.js";
+import { requireActiveUser } from "./access.js";
+import type { AdminClient } from "./auth.js";
 
 export const PROPOSAL_TYPES = [
   "NON_AGGRESSION",
@@ -95,7 +96,7 @@ function isDevelopmentRequest(request: ApiRequest): string | null {
   return expected && provided === expected && country?.startsWith("country-") ? country : null;
 }
 
-export async function currentWorldDate(admin: SupabaseClient): Promise<string> {
+export async function currentWorldDate(admin: AdminClient): Promise<string> {
   const { data, error } = await admin
     .from("world_state")
     .select("current_world_date")
@@ -107,7 +108,7 @@ export async function currentWorldDate(admin: SupabaseClient): Promise<string> {
 }
 
 async function activeAdminRestrictions(
-  admin: SupabaseClient,
+  admin: AdminClient,
   userId: string,
   countryKey: string,
 ): Promise<AdminActionRow[]> {
@@ -126,7 +127,7 @@ async function activeAdminRestrictions(
 export async function requireDiplomacyActor(
   request: ApiRequest,
   response: ApiResponse,
-  admin: SupabaseClient,
+  admin: AdminClient,
 ): Promise<DiplomacyActor | null> {
   const devCountry = isDevelopmentRequest(request);
   if (devCountry) return { userId: null, countryKey: devCountry, mode: "development" };
@@ -169,7 +170,7 @@ export async function requireDiplomacyActor(
   return { userId: auth.userId, countryKey: ownership.country_key, mode: "authenticated" };
 }
 
-export async function reviewRouteForCountry(admin: SupabaseClient, countryKey: string): Promise<ReviewRoute> {
+export async function reviewRouteForCountry(admin: AdminClient, countryKey: string): Promise<ReviewRoute> {
   const { data, error } = await admin
     .from("country_ownerships")
     .select("country_key")
@@ -214,7 +215,7 @@ export function databaseErrorCode(error: unknown): string {
   return known.find((code) => message.includes(code)) ?? "DATABASE_ERROR";
 }
 
-export async function proposalById(admin: SupabaseClient, id: string): Promise<ProposalRow | null> {
+export async function proposalById(admin: AdminClient, id: string): Promise<ProposalRow | null> {
   const { data, error } = await admin
     .from("diplomatic_proposals")
     .select("*")

@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { ensureDeviceCookie } from "../../server/auth";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { ensureDeviceCookie } from "../../server/auth.js";
 
 export default function handler(request: ApiRequest, response: ApiResponse): void {
   const device = ensureDeviceCookie(request);

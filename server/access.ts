@@ -1,6 +1,5 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
-import type { ApiRequest, ApiResponse } from "./types";
-import { getAuthenticatedUser } from "./auth";
+import type { ApiRequest, ApiResponse } from "./types.js";
+import { getAuthenticatedUser, type AdminClient } from "./auth.js";
 
 export type ActiveProfile = {
   id: string;
@@ -11,7 +10,7 @@ export type ActiveProfile = {
 export async function requireActiveUser(
   request: ApiRequest,
   response: ApiResponse,
-  admin: SupabaseClient,
+  admin: AdminClient,
 ): Promise<{ userId: string; profile: ActiveProfile } | null> {
   const user = await getAuthenticatedUser(request, admin);
   if (!user) {

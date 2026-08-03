@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { getAdminClient, getServerEnv } from "../../server/auth";
-import { cleanCountryKey, currentWorldDate, databaseErrorCode, requireDiplomacyActor } from "../../server/diplomacy";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import { cleanCountryKey, currentWorldDate, databaseErrorCode, requireDiplomacyActor } from "../../server/diplomacy.js";
 
 const actionTypes = new Set(["IMPROVE_RELATIONS", "WORSEN_RELATIONS"]);
 

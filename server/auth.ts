@@ -1,6 +1,18 @@
+/// <reference types="node" />
 import { createHmac, randomBytes } from "node:crypto";
-import { createClient, type SupabaseClient, type User } from "@supabase/supabase-js";
-import type { ApiRequest } from "./types";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { ApiRequest } from "./types.js";
+
+export type AdminClient = SupabaseClient;
+export type AuthenticatedUser = {
+  id: string;
+  identities?: Array<{
+    id?: string;
+    provider?: string;
+    identity_data?: unknown;
+  }> | null;
+  user_metadata?: Record<string, unknown>;
+};
 
 type ServerEnv = {
   url: string;
@@ -32,7 +44,7 @@ export function getServerEnv(): ServerEnv | null {
   };
 }
 
-export function getAdminClient(env: ServerEnv): SupabaseClient {
+export function getAdminClient(env: ServerEnv): AdminClient {
   return createClient(env.url, env.secretKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
@@ -44,11 +56,11 @@ export function getBearerToken(request: ApiRequest): string | null {
   return header.slice("Bearer ".length).trim() || null;
 }
 
-export async function getAuthenticatedUser(request: ApiRequest, admin: SupabaseClient): Promise<User | null> {
+export async function getAuthenticatedUser(request: ApiRequest, admin: AdminClient): Promise<AuthenticatedUser | null> {
   const token = getBearerToken(request);
   if (!token) return null;
   const { data, error } = await admin.auth.getUser(token);
-  return error ? null : data.user;
+  return error || !data.user ? null : data.user as AuthenticatedUser;
 }
 
 function firstForwardedIp(request: ApiRequest): string | null {
@@ -105,7 +117,7 @@ export async function collectRequestSignals(request: ApiRequest, env: ServerEnv)
   };
 }
 
-export function discordProviderId(user: User): string | null {
+export function discordProviderId(user: AuthenticatedUser): string | null {
   const identity = user.identities?.find((entry) => entry.provider === "discord");
   if (!identity) return null;
   const data = identity.identity_data;

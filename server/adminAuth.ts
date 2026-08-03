@@ -1,10 +1,11 @@
+/// <reference types="node" />
 import {
   createHmac,
   randomBytes,
   scryptSync,
   timingSafeEqual,
 } from "node:crypto";
-import type { ApiRequest, ApiResponse } from "./types";
+import type { ApiRequest, ApiResponse } from "./types.js";
 
 export const ADMIN_SESSION_COOKIE = "tlr_directorate_session";
 export const ADMIN_SESSION_MAX_AGE_SECONDS = 4 * 60 * 60;

@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { getAdminClient, getServerEnv } from "../../server/auth";
-import { requireAdminSession } from "../../server/adminAuth";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import { requireAdminSession } from "../../server/adminAuth.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",

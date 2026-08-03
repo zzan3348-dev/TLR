@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { requireAdminSession } from "../../server/adminAuth";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { requireAdminSession } from "../../server/adminAuth.js";
 
 export default function handler(request: ApiRequest, response: ApiResponse): void {
   if (request.method !== "GET") {

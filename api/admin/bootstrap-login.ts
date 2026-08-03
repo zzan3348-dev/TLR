@@ -1,4 +1,4 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
 import {
   adminSessionCookie,
   clearBootstrapFailures,
@@ -7,7 +7,7 @@ import {
   isRateLimited,
   recordBootstrapFailure,
   verifyBootstrapSecret,
-} from "../../server/adminAuth";
+} from "../../server/adminAuth.js";
 
 type BootstrapBody = { code?: unknown };
 

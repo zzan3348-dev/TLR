@@ -4,7 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 export default tseslint.config(
-  { ignores: [".codex-tmp", "dist", "node_modules", "deploy-optimized", "artifacts", "outputs", "work"] },
+  { ignores: [".codex-tmp", ".vercel", "dist", "node_modules", "deploy-optimized", "artifacts", "outputs", "work"] },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {

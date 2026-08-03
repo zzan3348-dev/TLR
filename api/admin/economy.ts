@@ -1,7 +1,7 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { getAdminClient, getServerEnv } from "../../server/auth";
-import { requireAdminSession } from "../../server/adminAuth";
-import { economyDatabaseError, economyWorldDate } from "../../server/economy";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import { requireAdminSession } from "../../server/adminAuth.js";
+import { economyDatabaseError, economyWorldDate } from "../../server/economy.js";
 
 const ECONOMY_FIELDS = new Set([
   "gdp", "nominal_growth_rate", "inflation_rate", "unemployment_rate", "national_debt",

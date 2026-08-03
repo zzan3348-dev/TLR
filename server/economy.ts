@@ -1,6 +1,6 @@
-import type { SupabaseClient } from "@supabase/supabase-js";
-import type { ApiRequest, ApiResponse } from "./types";
-import { cleanCountryKey, currentWorldDate, requireDiplomacyActor, reviewRouteForCountry } from "./diplomacy";
+import type { AdminClient } from "./auth.js";
+import type { ApiRequest, ApiResponse } from "./types.js";
+import { cleanCountryKey, currentWorldDate, requireDiplomacyActor, reviewRouteForCountry } from "./diplomacy.js";
 
 export const TRADE_ASSETS = ["RESOURCE", "PRODUCTION_CAPACITY"] as const;
 export const TRADE_RESOURCES = ["STEEL", "OIL", "COAL", "FOOD", "RARE_MINERALS"] as const;
@@ -9,11 +9,11 @@ export type TradeResource = (typeof TRADE_RESOURCES)[number];
 
 export type EconomyActor = Awaited<ReturnType<typeof requireDiplomacyActor>>;
 
-export async function requireEconomyActor(request: ApiRequest, response: ApiResponse, admin: SupabaseClient) {
+export async function requireEconomyActor(request: ApiRequest, response: ApiResponse, admin: AdminClient) {
   return requireDiplomacyActor(request, response, admin);
 }
 
-export async function economyWorldDate(admin: SupabaseClient): Promise<string> {
+export async function economyWorldDate(admin: AdminClient): Promise<string> {
   const date = await currentWorldDate(admin);
   const { error } = await admin.rpc("tlr_refresh_trade_state", { p_world_date: date });
   if (error) throw error;
@@ -77,7 +77,7 @@ export function cleanTradeLines(value: unknown, proposer: string, receiver: stri
   return result;
 }
 
-export async function tradeReviewRoute(admin: SupabaseClient, target: string) {
+export async function tradeReviewRoute(admin: AdminClient, target: string) {
   return reviewRouteForCountry(admin, target);
 }
 

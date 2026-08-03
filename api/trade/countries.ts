@@ -1,8 +1,8 @@
-import type { ApiRequest, ApiResponse } from "../../server/types";
-import { getAdminClient, getServerEnv } from "../../server/auth";
-import { cleanCountryKey, reviewRouteForCountry } from "../../server/diplomacy";
-import { economyWorldDate, requireEconomyActor } from "../../server/economy";
-import mapCountries from "../../src/data/mapCountries.json";
+import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import { cleanCountryKey, reviewRouteForCountry } from "../../server/diplomacy.js";
+import { economyWorldDate, requireEconomyActor } from "../../server/economy.js";
+import mapCountries from "../../src/data/mapCountries.json" with { type: "json" };
 
 type EconomyRow = {
   country_key: string;
