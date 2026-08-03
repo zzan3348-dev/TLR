@@ -87,7 +87,7 @@ export default function App() {
     const audio = new Audio("/audio/tlr-bgm.mp3");
     audio.loop = true;
     audio.preload = "auto";
-    audio.volume = 0.34;
+    audio.volume = 0.6;
 
     const removeInteractionListeners = () => {
       window.removeEventListener("pointerdown", startPlayback);

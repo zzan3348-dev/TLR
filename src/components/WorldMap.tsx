@@ -155,8 +155,6 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const factionMapLabelsRef = useRef<readonly MapCountryLabel[]>([]);
     const viewportRef = useRef<ViewportSize>({ width: 1, height: 1 });
     const cameraRef = useRef<MapCamera>({ x: 0, y: 0, scale: 1 });
-    const wheelTargetRef = useRef<MapCamera | null>(null);
-    const wheelFrameRef = useRef<number | null>(null);
     const fitScaleRef = useRef(1);
     const initializedRef = useRef(false);
     const drawFrameRef = useRef<number | null>(null);
@@ -471,18 +469,9 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       }
     }, []);
 
-    const cancelWheelZoom = useCallback(() => {
-      if (wheelFrameRef.current !== null) {
-        cancelAnimationFrame(wheelFrameRef.current);
-        wheelFrameRef.current = null;
-      }
-      wheelTargetRef.current = null;
-    }, []);
-
     const cancelAllCameraMotion = useCallback(() => {
       cancelCameraAnimation();
-      cancelWheelZoom();
-    }, [cancelCameraAnimation, cancelWheelZoom]);
+    }, [cancelCameraAnimation]);
 
     const setCamera = useCallback(
       (camera: MapCamera) => {
@@ -1059,58 +1048,17 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         x: event.clientX - bounds.left,
         y: event.clientY - bounds.top,
       };
-      const delta =
-        event.deltaMode === 1
-          ? event.deltaY * 16
-          : event.deltaMode === 2
-            ? event.deltaY * viewportRef.current.height
-            : event.deltaY;
-      const normalizedDelta =
-        Math.sign(delta) * Math.min(Math.abs(delta), 140);
-      const factor = Math.exp(-normalizedDelta * 0.0008);
-      const baseCamera = wheelTargetRef.current ?? cameraRef.current;
-      wheelTargetRef.current = zoomCameraAtPoint(
-        baseCamera,
-        point,
-        baseCamera.scale * factor,
-        viewportRef.current,
-        { width: assets.width, height: assets.height },
-        fitScaleRef.current,
+      const factor = Math.exp(-event.deltaY * 0.0015);
+      setCamera(
+        zoomCameraAtPoint(
+          cameraRef.current,
+          point,
+          cameraRef.current.scale * factor,
+          viewportRef.current,
+          { width: assets.width, height: assets.height },
+          fitScaleRef.current,
+        ),
       );
-      if (wheelFrameRef.current !== null) {
-        return;
-      }
-      const tick = () => {
-        const target = wheelTargetRef.current;
-        const currentAssets = assetsRef.current;
-        if (!target || !currentAssets) {
-          wheelFrameRef.current = null;
-          return;
-        }
-        const current = cameraRef.current;
-        const xDelta = shortestWrappedDelta(
-          current.x,
-          target.x,
-          currentAssets.width,
-        );
-        const next = {
-          x: current.x + xDelta * 0.2,
-          y: current.y + (target.y - current.y) * 0.2,
-          scale: current.scale + (target.scale - current.scale) * 0.2,
-        };
-        const settled =
-          Math.abs(xDelta) < 0.15 &&
-          Math.abs(target.y - current.y) < 0.15 &&
-          Math.abs(target.scale - current.scale) < 0.0005;
-        setCamera(settled ? target : next);
-        if (settled) {
-          wheelTargetRef.current = null;
-          wheelFrameRef.current = null;
-          return;
-        }
-        wheelFrameRef.current = requestAnimationFrame(tick);
-      };
-      wheelFrameRef.current = requestAnimationFrame(tick);
     };
 
     return (

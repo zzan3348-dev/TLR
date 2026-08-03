@@ -75,7 +75,7 @@ describe("mapLabelRenderer", () => {
     expect(placements).toHaveLength(0);
   });
 
-  it("확대할수록 중심 위치를 유지하며 글자가 역으로 작아지지 않는다", () => {
+  it("국명이 지도에 고정되어 확대율과 같은 비율로 커진다", () => {
     const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -85,9 +85,12 @@ describe("mapLabelRenderer", () => {
       return placement;
     });
 
-    expect(new Set(placements.map(({ screenFontSize }) => screenFontSize))).toEqual(
-      new Set([80]),
-    );
+    expect(placements.map(({ screenFontSize }) => screenFontSize)).toEqual([
+      120,
+      160,
+      320,
+      640,
+    ]);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
@@ -143,7 +146,7 @@ describe("mapLabelRenderer", () => {
     expect(zoomedPlacement.y).toBeCloseTo(250);
   });
 
-  it("겹치는 라벨은 우선순위대로 하나만 남긴다", () => {
+  it("겹치더라도 저장된 위치의 라벨을 임의로 숨기지 않는다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
@@ -152,7 +155,7 @@ describe("mapLabelRenderer", () => {
       ],
     });
 
-    expect(placements.map(({ label }) => label.countryId)).toEqual([2]);
+    expect(placements.map(({ label }) => label.countryId)).toEqual([2, 1]);
   });
 
   it("일부만 겹치는 라벨은 위치를 옮기지 않고 글자 크기를 줄여 복구한다", () => {
@@ -192,7 +195,24 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBe(40);
+    expect(placements[0].screenFontSize).toBe(160);
+  });
+
+  it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {
+    const [starting] = layoutMapLabels({
+      ...baseLayoutOptions,
+      camera: { x: 500, y: 250, scale: 1.2 },
+      labels: [createLabel(1)],
+    });
+    const [visible] = layoutMapLabels({
+      ...baseLayoutOptions,
+      camera: { x: 500, y: 250, scale: 1.6 },
+      labels: [createLabel(1)],
+    });
+
+    expect(starting.visibilityOpacity).toBeGreaterThan(0);
+    expect(starting.visibilityOpacity).toBeLessThan(0.1);
+    expect(visible.visibilityOpacity).toBe(1);
   });
 
   it("선택된 국가 라벨을 충돌보다 우선하고 월드 래핑 복사본을 배치한다", () => {

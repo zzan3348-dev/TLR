@@ -35,6 +35,7 @@ export type ScreenMapLabel = {
   glyphs: ScreenGlyph[];
   selected: boolean;
   centerDistance: number;
+  visibilityOpacity: number;
 };
 
 type LayoutMapLabelsOptions = {
@@ -48,7 +49,8 @@ type LayoutMapLabelsOptions = {
 };
 
 const MIN_SCREEN_FONT_SIZE = 7.5;
-const LABELS_MIN_ZOOM = 1.28;
+const LABEL_FADE_START_ZOOM = 1.18;
+const LABEL_FADE_DISTANCE = 0.36;
 const SCREEN_PATH_TRACKING = 1.045;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
@@ -245,28 +247,15 @@ function createScreenGlyphs(
   return { glyphs, screenFontSize };
 }
 
-function labelsCollide(
-  first: ScreenMapLabel,
-  second: ScreenMapLabel,
-): boolean {
-  if (!doLabelBoundsOverlap(first.bounds, second.bounds, 0)) {
-    return false;
-  }
-  return first.glyphs.some((firstGlyph) =>
-    second.glyphs.some((secondGlyph) =>
-      doLabelBoundsOverlap(firstGlyph.bounds, secondGlyph.bounds),
-    ),
-  );
-}
-
 function createScreenPlacement(
   label: MapCountryLabel,
   copy: number,
   camera: MapCamera,
   viewport: ViewportSize,
   mapWidth: number,
-  fixedScreenFontSize: number,
+  mapScaleMultiplier: number,
   selected: boolean,
+  visibilityOpacity: number,
 ): ScreenMapLabel | null {
   const { glyphs, screenFontSize } = createScreenGlyphs(
     label,
@@ -274,7 +263,7 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    fixedScreenFontSize,
+    label.fontSize * camera.scale * mapScaleMultiplier,
   );
   if (glyphs.length === 0 || screenFontSize < MIN_SCREEN_FONT_SIZE) {
     return null;
@@ -301,6 +290,7 @@ function createScreenPlacement(
     bounds,
     glyphs,
     selected,
+    visibilityOpacity,
     centerDistance: Math.hypot(
       x - viewport.width / 2,
       y - viewport.height / 2,
@@ -318,9 +308,6 @@ export function layoutMapLabels({
   selectedComponentId,
 }: LayoutMapLabelsOptions): ScreenMapLabel[] {
   const zoom = camera.scale / fitScale;
-  if (zoom < LABELS_MIN_ZOOM) {
-    return [];
-  }
   const candidates: ScreenMapLabel[] = [];
 
   for (const label of labels) {
@@ -336,7 +323,7 @@ export function layoutMapLabels({
       isUnselectedComponentOfSelectedCountry ||
       (!label.visible && !canRecoverAtCloserZoom) ||
       !label.text ||
-      zoom < label.minZoom ||
+      zoom < Math.max(LABEL_FADE_START_ZOOM, label.minZoom) ||
       (label.maxZoom !== null && zoom > label.maxZoom)
     ) {
       continue;
@@ -345,18 +332,23 @@ export function layoutMapLabels({
       const selected =
         label.countryId === selectedCountryId &&
         label.componentId === selectedComponentId;
-      const fixedScreenFontSize = Math.max(
-        MIN_SCREEN_FONT_SIZE,
-        label.fontSize * fitScale * getMapLabelScreenScale(label.countryId),
+      const mapScaleMultiplier = getMapLabelScreenScale(label.countryId);
+      const fadeStart = Math.max(LABEL_FADE_START_ZOOM, label.minZoom);
+      const fadeProgress = Math.min(
+        1,
+        Math.max(0, (zoom - fadeStart) / LABEL_FADE_DISTANCE),
       );
+      const visibilityOpacity =
+        fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
       const placement = createScreenPlacement(
         label,
         copy,
         camera,
         viewport,
         mapWidth,
-        fixedScreenFontSize,
+        mapScaleMultiplier,
         selected,
+        visibilityOpacity,
       );
       if (placement) {
         candidates.push(placement);
@@ -383,25 +375,7 @@ export function layoutMapLabels({
     return first.copy - second.copy;
   });
 
-  const accepted: ScreenMapLabel[] = [];
-  for (const candidate of candidates) {
-    const collidesWithAccepted = (placement: ScreenMapLabel) =>
-      accepted.some(
-        (placed) =>
-          placed.copy === placement.copy &&
-          labelsCollide(placed, placement),
-      );
-    const collides = collidesWithAccepted(candidate);
-    if (!collides || candidate.selected) {
-      accepted.push(candidate);
-      continue;
-    }
-
-    if (zoom >= 2) {
-      accepted.push(candidate);
-    }
-  }
-  return accepted;
+  return candidates;
 }
 
 export function drawMapLabels(
@@ -424,9 +398,11 @@ export function drawMapLabels(
         pixelRatio * glyph.y,
       );
       context.rotate((glyph.angle * Math.PI) / 180);
-      context.globalAlpha = selected
+      const selectionOpacity = selected
         ? 1
         : Math.max(0.24, 1 - presentationProgress * 0.68);
+      context.globalAlpha =
+        placement.visibilityOpacity * selectionOpacity;
       context.font = `700 ${fontSize}px "Noto Serif KR", "Nanum Myeongjo", "Batang", serif`;
       context.textAlign = "center";
       context.textBaseline = "middle";
