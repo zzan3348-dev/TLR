@@ -5,6 +5,8 @@ import { fetchMilitaryOverview, militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import { ConflictWindow } from "./ConflictWindow";
 import { WarReportWindow } from "./WarReportWindow";
+import { OfficerCorpsPanel } from "./OfficerCorpsPanel";
+import { militaryLabel } from "../militaryLabels";
 import type {
   AirWing,
   ConfigurationStatus,
@@ -17,13 +19,15 @@ import type {
   Vessel,
 } from "../types";
 
-type MilitaryTab = "overview" | "army" | "navy" | "airforce" | "fronts" | "actions";
+type MilitaryTab = "overview" | "thought" | "army" | "navy" | "airforce" | "production" | "fronts" | "actions";
 
 const TABS: Array<{ key: MilitaryTab; label: string }> = [
   { key: "overview", label: "군사 개요" },
+  { key: "thought", label: "군사사상" },
   { key: "army", label: "육군" },
   { key: "navy", label: "해군" },
   { key: "airforce", label: "공군" },
+  { key: "production", label: "편성·건조" },
   { key: "fronts", label: "전선" },
   { key: "actions", label: "작전" },
 ];
@@ -56,6 +60,7 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pendingForm, setPendingForm] = useState<string | null>(null);
+  const [formationNames, setFormationNames] = useState<Record<string, string>>({});
 
   const [frontsByConflict, setFrontsByConflict] = useState<Record<string, MilitaryFront[]>>({});
   const [frontsLoading, setFrontsLoading] = useState(false);
@@ -66,14 +71,14 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchMilitaryOverview();
+      const data = await fetchMilitaryOverview(countryKey);
       setOverview(data);
     } catch {
       setError("군사 개요를 불러오지 못했다. 통신선을 확인하라.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [countryKey]);
 
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
@@ -148,14 +153,14 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
   }, [overview]);
 
   const handleForm = useCallback(
-    async (template: MilitaryTemplate) => {
+    async (template: MilitaryTemplate, requestedName: string) => {
       if (!overview || overview.readiness === "DISABLED") return;
       if (template.configuration_status !== "READY") return;
       setPendingForm(template.id);
       try {
         await militaryMutation(
           MILITARY_ROUTES.forces,
-          { template_id: template.id, force_kind: template.force_kind },
+          { template_id: template.id, display_name: requestedName.trim() || template.display_name, idempotency_key: crypto.randomUUID() },
           "POST"
         );
         await loadOverview();
@@ -272,12 +277,15 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
             )}
 
             {activeTab === "overview" && <OverviewTab overview={overview} />}
+            {activeTab === "thought" && <OfficerCorpsPanel countryKey={countryKey} />}
             {activeTab === "army" && (
               <ForceListTab
                 title="육군 편제"
                 templates={templatesByKind.LAND_UNIT}
                 pendingForm={pendingForm}
                 disabled={overview.readiness === "DISABLED"}
+                formationNames={formationNames}
+                onNameChange={(templateId, value) => setFormationNames((current) => ({ ...current, [templateId]: value }))}
                 onForm={handleForm}
               >
                 <LandUnitTable units={overview.units} />
@@ -289,6 +297,8 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
                 templates={templatesByKind.VESSEL}
                 pendingForm={pendingForm}
                 disabled={overview.readiness === "DISABLED"}
+                formationNames={formationNames}
+                onNameChange={(templateId, value) => setFormationNames((current) => ({ ...current, [templateId]: value }))}
                 onForm={handleForm}
               >
                 <FleetTable fleets={overview.fleets} vessels={overview.vessels} />
@@ -300,11 +310,14 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
                 templates={templatesByKind.AIR_WING}
                 pendingForm={pendingForm}
                 disabled={overview.readiness === "DISABLED"}
+                formationNames={formationNames}
+                onNameChange={(templateId, value) => setFormationNames((current) => ({ ...current, [templateId]: value }))}
                 onForm={handleForm}
               >
                 <AirWingTable wings={overview.airWings} />
               </ForceListTab>
             )}
+            {activeTab === "production" && <ProductionTab overview={overview} />}
             {activeTab === "fronts" && (
               <FrontsTab
                 overview={overview}
@@ -375,7 +388,7 @@ function OverviewTab({ overview }: { overview: MilitaryOverview }) {
             {overview.conflicts.map((conflict) => (
               <li key={conflict.id} className="military-overview__conflict-item">
                 <span className="military-overview__conflict-name">{conflict.display_name}</span>
-                <span className="military-overview__conflict-status">{conflict.status}</span>
+                <span className="military-overview__conflict-status">{militaryLabel(conflict.status)}</span>
               </li>
             ))}
           </ul>
@@ -390,6 +403,8 @@ function ForceListTab({
   templates,
   pendingForm,
   disabled,
+  formationNames,
+  onNameChange,
   onForm,
   children,
 }: {
@@ -397,7 +412,9 @@ function ForceListTab({
   templates: MilitaryTemplate[];
   pendingForm: string | null;
   disabled: boolean;
-  onForm: (template: MilitaryTemplate) => void;
+  formationNames: Record<string, string>;
+  onNameChange: (templateId: string, value: string) => void;
+  onForm: (template: MilitaryTemplate, requestedName: string) => void;
   children: React.ReactNode;
 }) {
   return (
@@ -439,11 +456,20 @@ function ForceListTab({
                     <span>편성 {template.formation_days}일</span>
                   )}
                 </div>
+                <label className="military-template-card__name-field">
+                  <span>편성 명칭</span>
+                  <input
+                    type="text"
+                    maxLength={80}
+                    value={formationNames[template.id] ?? template.display_name}
+                    onChange={(event) => onNameChange(template.id, event.target.value)}
+                  />
+                </label>
                 <button
                   type="button"
                   className="military-template-card__form-button"
                   disabled={!canForm || pendingForm === template.id}
-                  onClick={() => onForm(template)}
+                  onClick={() => onForm(template, formationNames[template.id] ?? template.display_name)}
                 >
                   {pendingForm === template.id ? "요청 중…" : "양성/건조 명령"}
                 </button>
@@ -478,7 +504,7 @@ function LandUnitTable({ units }: { units: LandUnit[] }) {
         {units.map((unit) => (
           <tr key={unit.id}>
             <td>{unit.display_name}</td>
-            <td>{unit.status}</td>
+            <td>{militaryLabel(unit.status)}</td>
             <td>
               {formatNumber(unit.current_manpower)} / {formatNumber(unit.max_manpower)}
             </td>
@@ -503,7 +529,7 @@ function FleetTable({ fleets, vessels }: { fleets: Fleet[]; vessels: Vessel[] })
         <div key={fleet.id} className="military-fleet-card">
           <div className="military-fleet-card__header">
             <span>{fleet.display_name}</span>
-            <span>{fleet.status}</span>
+            <span>{militaryLabel(fleet.status)}</span>
           </div>
           <table className="military-roster-table">
             <thead>
@@ -517,7 +543,7 @@ function FleetTable({ fleets, vessels }: { fleets: Fleet[]; vessels: Vessel[] })
               {(fleet.vessels ?? vessels.filter((v) => v.fleet_id === fleet.id)).map((vessel) => (
                 <tr key={vessel.id}>
                   <td>{vessel.display_name}</td>
-                  <td>{vessel.status}</td>
+                  <td>{militaryLabel(vessel.status)}</td>
                   <td>{vessel.assigned_front_id ?? "미배속"}</td>
                 </tr>
               ))}
@@ -542,7 +568,7 @@ function FleetTable({ fleets, vessels }: { fleets: Fleet[]; vessels: Vessel[] })
               {unassigned.map((vessel) => (
                 <tr key={vessel.id}>
                   <td>{vessel.display_name}</td>
-                  <td>{vessel.status}</td>
+                  <td>{militaryLabel(vessel.status)}</td>
                   <td>{vessel.assigned_front_id ?? "미배속"}</td>
                 </tr>
               ))}
@@ -574,7 +600,7 @@ function AirWingTable({ wings }: { wings: AirWing[] }) {
         {wings.map((wing) => (
           <tr key={wing.id}>
             <td>{wing.display_name}</td>
-            <td>{wing.status}</td>
+            <td>{militaryLabel(wing.status)}</td>
             <td>
               {formatNumber(wing.current_personnel)} / {formatNumber(wing.max_personnel)}
             </td>
@@ -629,7 +655,7 @@ function FrontsTab({
                         {front.front_kind === "LAND_LINE" ? "지상전선" : "해상구역"}
                       </span>
                       <span className="military-front-item__name">{front.display_name}</span>
-                      <span className="military-front-item__status">{front.status}</span>
+                      <span className="military-front-item__status">{militaryLabel(front.status)}</span>
                     </li>
                   ))}
                 </ul>
@@ -682,12 +708,12 @@ function ActionsTab({
                           action.status.toLowerCase()
                         }
                       >
-                        {action.status}
+                        {militaryLabel(action.status)}
                       </span>
                       <span className="military-action-item__title">{action.title}</span>
                       {action.resolution && (
                         <span className="military-action-item__outcome">
-                          {action.resolution.outcome}
+                          {militaryLabel(action.resolution.outcome)}
                         </span>
                       )}
                     </li>
@@ -697,6 +723,32 @@ function ActionsTab({
             </div>
           );
         })}
+    </div>
+  );
+}
+
+function ProductionTab({ overview }: { overview: MilitaryOverview }) {
+  if (overview.queues.length === 0) {
+    return <p className="military-window__empty">진행 중인 편성·건조 명령이 없다.</p>;
+  }
+  return (
+    <div className="military-production">
+      <h3 className="military-window__section-title">편성·건조 대기열</h3>
+      <ul className="military-production__list">
+        {overview.queues.map((queue) => (
+          <li key={queue.id} className="military-production__item">
+            <div>
+              <strong>{queue.requested_name || "명칭 미설정"}</strong>
+              <span>{militaryLabel(queue.status)}</span>
+            </div>
+            <dl>
+              <dt>완료 예정</dt><dd>{queue.completion_world_date}</dd>
+              <dt>예약 인력</dt><dd>{formatNumber(queue.manpower_reserved)}</dd>
+              <dt>예약 생산력</dt><dd>{formatNumber(queue.production_capacity_reserved)}</dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

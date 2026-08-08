@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { mapCountries } from "../data/mapCountries";
 import { PROPOSAL_LABELS, type DiplomaticProposal } from "../features/diplomacy/types";
 import type { TradeAgreement, TradeProposal } from "../features/economy/types";
+import { MilitaryAdminSection, type MilitaryAdminData } from "../features/military/components/MilitaryAdminSection";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -24,22 +25,26 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [tradeAgreements, setTradeAgreements] = useState<TradeAgreement[]>([]);
   const [economies, setEconomies] = useState<Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }>>([]);
   const [worldDate, setWorldDate] = useState("");
+  const [militaryData, setMilitaryData] = useState<MilitaryAdminData | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const loadQueue = useCallback(async () => {
-    const [diplomacyResponse, economyResponse] = await Promise.all([
+    const [diplomacyResponse, economyResponse, militaryResponse] = await Promise.all([
       fetch("/api/admin/diplomacy", { credentials: "include" }),
       fetch("/api/admin/economy", { credentials: "include" }),
+      fetch("/api/admin/military", { credentials: "include" }),
     ]);
-    if (!diplomacyResponse.ok || !economyResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
+    if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
     const diplomacyPayload = await diplomacyResponse.json() as { worldDate: string; queue: DiplomaticProposal[] };
     const economyPayload = await economyResponse.json() as { worldDate: string; queue: TradeProposal[]; agreements: TradeAgreement[]; economies: Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }> };
+    const militaryPayload = await militaryResponse.json() as MilitaryAdminData;
     setQueue(diplomacyPayload.queue);
     setTradeQueue(economyPayload.queue);
     setTradeAgreements(economyPayload.agreements);
     setEconomies(economyPayload.economies);
-    setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate);
+    setMilitaryData(militaryPayload);
+    setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate || militaryPayload.worldDate);
   }, []);
 
   useEffect(() => {
@@ -120,6 +125,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <section className="directorate-page__status">
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
+      {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">
         <header>
           <div><span>ECONOMIC OFFICE / DATA READINESS</span><h2 id="directorate-economy-title">경제 데이터·계약 관제</h2></div>

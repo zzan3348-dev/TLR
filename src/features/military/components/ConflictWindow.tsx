@@ -3,11 +3,14 @@ import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
 import { militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
+import { fetchMilitaryOverview } from "../militaryClient";
+import { militaryLabel } from "../militaryLabels";
 import type {
   Conflict,
   ForceKind,
   MilitaryAction,
   MilitaryFront,
+  MilitaryOverview,
 } from "../types";
 
 function militaryQuery<T>(route: string): Promise<T> {
@@ -49,6 +52,7 @@ interface ConflictWindowProps {
 
 export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
   const [conflicts, setConflicts] = useState<Conflict[]>([]);
+  const [overview, setOverview] = useState<MilitaryOverview | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedConflictId, setSelectedConflictId] = useState<string | null>(null);
@@ -60,14 +64,18 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
   const [draft, setDraft] = useState<DraftState>(EMPTY_DRAFT);
   const [editingActionId, setEditingActionId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [assignInput, setAssignInput] = useState({ kind: "LAND_UNIT" as ForceKind | "FLEET", id: "" });
+  const [assignmentChoice, setAssignmentChoice] = useState("");
 
   const loadConflicts = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await militaryQuery<Conflict[]>(MILITARY_ROUTES.conflicts);
+      const [data, forceOverview] = await Promise.all([
+        militaryQuery<Conflict[]>(MILITARY_ROUTES.conflicts),
+        fetchMilitaryOverview(countryKey),
+      ]);
       setConflicts(data);
+      setOverview(forceOverview);
       if (data.length > 0) {
         setSelectedConflictId((prev) => prev ?? data[0].id);
       }
@@ -76,7 +84,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [countryKey]);
 
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
@@ -128,14 +136,27 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     });
   }, []);
 
+  const forceOptions = useMemo(() => {
+    if (!overview) return [];
+    return [
+      ...overview.units.map((item) => ({ kind: "LAND_UNIT" as const, id: item.id, name: item.display_name, status: item.status })),
+      ...overview.fleets.map((item) => ({ kind: "FLEET" as const, id: item.id, name: item.display_name, status: item.status })),
+      ...overview.vessels.map((item) => ({ kind: "VESSEL" as const, id: item.id, name: item.display_name, status: item.status })),
+      ...overview.airWings.map((item) => ({ kind: "AIR_WING" as const, id: item.id, name: item.display_name, status: item.status })),
+    ];
+  }, [overview]);
+
   const addAssignment = useCallback(() => {
-    if (!assignInput.id.trim()) return;
+    const selected = forceOptions.find((item) => `${item.kind}:${item.id}` === assignmentChoice);
+    if (!selected) return;
     setDraft((prev) => ({
       ...prev,
-      assignments: [...prev.assignments, { object_kind: assignInput.kind, object_id: assignInput.id.trim() }],
+      assignments: prev.assignments.some((entry) => entry.object_kind === selected.kind && entry.object_id === selected.id)
+        ? prev.assignments
+        : [...prev.assignments, { object_kind: selected.kind, object_id: selected.id }],
     }));
-    setAssignInput((prev) => ({ ...prev, id: "" }));
-  }, [assignInput]);
+    setAssignmentChoice("");
+  }, [assignmentChoice, forceOptions]);
 
   const removeAssignment = useCallback((index: number) => {
     setDraft((prev) => ({
@@ -159,7 +180,8 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
           status: submit ? "SUBMITTED" : "DRAFT",
         };
         if (editingActionId) {
-          await militaryMutation(MILITARY_ROUTES.actions, { id: editingActionId, ...payload }, "PATCH");
+          const action = actions.find((item) => item.id === editingActionId);
+          await militaryMutation(MILITARY_ROUTES.actions, { id: editingActionId, expected_version: action?.version, ...payload }, "PATCH");
         } else {
           await militaryMutation(MILITARY_ROUTES.actions, payload, "POST");
         }
@@ -171,7 +193,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
         setSubmitting(false);
       }
     },
-    [selectedConflict, draft, editingActionId, countryKey, resetDraft, loadDetail]
+    [selectedConflict, draft, editingActionId, countryKey, resetDraft, loadDetail, actions]
   );
 
   const actions_ = (
@@ -244,7 +266,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                           {(side.participants ?? []).map((participant) => (
                             <li key={participant.id}>
                               {participant.country_key ?? participant.internal_actor_id ?? "미상"} —{" "}
-                              {participant.role}
+                              {militaryLabel(participant.role)}
                             </li>
                           ))}
                           {(side.participants ?? []).length === 0 && (
@@ -281,7 +303,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                                 {front.front_kind === "LAND_LINE" ? "지상전선" : "해상구역"}
                               </span>
                               <span className="military-front-item__name">{front.display_name}</span>
-                              <span className="military-front-item__status">{front.status}</span>
+                              <span className="military-front-item__status">{militaryLabel(front.status)}</span>
                             </li>
                           ))}
                         </ul>
@@ -300,7 +322,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                                   action.status.toLowerCase()
                                 }
                               >
-                                {action.status}
+                                {militaryLabel(action.status)}
                               </span>
                               <span className="military-action-item__title">{action.title}</span>
                               {action.status === "DRAFT" && (
@@ -360,7 +382,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                           <ul>
                             {draft.assignments.map((assignment, index) => (
                               <li key={`${assignment.object_kind}-${assignment.object_id}-${index}`}>
-                                {assignment.object_kind} · {assignment.object_id}
+                                {forceOptions.find((item) => item.kind === assignment.object_kind && item.id === assignment.object_id)?.name ?? "배속 전력"}
                                 <button type="button" onClick={() => removeAssignment(index)}>
                                   <UiIcon name="close" />
                                 </button>
@@ -369,26 +391,17 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                           </ul>
                           <div className="conflict-window__assignment-input">
                             <select
-                              value={assignInput.kind}
-                              onChange={(e) =>
-                                setAssignInput((prev) => ({
-                                  ...prev,
-                                  kind: e.target.value as ForceKind | "FLEET",
-                                }))
-                              }
+                              value={assignmentChoice}
+                              onChange={(event) => setAssignmentChoice(event.target.value)}
                             >
-                              <option value="LAND_UNIT">사단</option>
-                              <option value="VESSEL">함선</option>
-                              <option value="FLEET">함대</option>
-                              <option value="AIR_WING">비행단</option>
+                              <option value="">보유 전력 선택</option>
+                              {forceOptions.map((item) => (
+                                <option key={`${item.kind}:${item.id}`} value={`${item.kind}:${item.id}`}>
+                                  {item.name} · {militaryLabel(item.status)}
+                                </option>
+                              ))}
                             </select>
-                            <input
-                              type="text"
-                              placeholder="개체 ID"
-                              value={assignInput.id}
-                              onChange={(e) => setAssignInput((prev) => ({ ...prev, id: e.target.value }))}
-                            />
-                            <button type="button" onClick={addAssignment}>
+                            <button type="button" disabled={!assignmentChoice} onClick={addAssignment}>
                               추가
                             </button>
                           </div>

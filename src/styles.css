@@ -7848,6 +7848,233 @@ button:focus-visible,
   padding-left: 1rem;
 }
 
+/* Officer corps — fixed HOI-style slots inside the existing TLR command window. */
+.officer-corps {
+  --officer-line: #3d4543;
+  --officer-ivory: #ddd6c8;
+  --officer-muted: #8f9894;
+  color: var(--officer-ivory);
+}
+
+.officer-corps__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid #665f50;
+}
+
+.officer-corps__header span,
+.officer-corps__header time {
+  color: #9b8e70;
+  font: 0.63rem/1.2 "IBM Plex Mono", monospace;
+  letter-spacing: 0.08em;
+}
+
+.officer-corps__header h3 {
+  margin: 0.18rem 0 0;
+  font: 700 1.05rem/1.2 "Noto Serif KR", Georgia, serif;
+}
+
+.officer-corps__board {
+  padding: 0.65rem;
+  border: 1px solid #4d504b;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.025), transparent 38%),
+    #121719;
+  box-shadow: inset 0 0 0 2px #080b0c, inset 0 0 18px rgba(0,0,0,0.65);
+}
+
+.officer-corps__doctrine,
+.officer-corps__slot,
+.officer-option {
+  color: inherit;
+  border: 1px solid var(--officer-line);
+  background: linear-gradient(#1d2222, #121616);
+  box-shadow: inset 0 1px rgba(255,255,255,0.04), 0 1px 2px #050606;
+}
+
+.officer-corps__doctrine {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 92px;
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+}
+
+.officer-corps__doctrine > img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px #000);
+}
+
+.officer-corps__slot-copy {
+  display: grid;
+  gap: 0.16rem;
+  min-width: 0;
+}
+
+.officer-corps__slot-copy small,
+.officer-corps__slot small {
+  color: #938a76;
+  font: 0.62rem "IBM Plex Mono", monospace;
+  letter-spacing: 0.05em;
+}
+
+.officer-corps__slot-copy strong,
+.officer-corps__slot strong {
+  font-family: "Noto Serif KR", Georgia, serif;
+}
+
+.officer-corps__slot-copy em {
+  overflow: hidden;
+  color: var(--officer-muted);
+  font: normal 0.7rem/1.45 "Noto Sans KR", sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.officer-corps__slot-command,
+.officer-corps__slot b {
+  color: #b8aa84;
+  font: 0.63rem "IBM Plex Mono", monospace;
+}
+
+.officer-corps__slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.officer-corps__slot {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 64px;
+  padding: 0.36rem 0.45rem;
+  text-align: left;
+}
+
+.officer-corps__slot img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.officer-corps__slot span {
+  display: grid;
+  gap: 0.14rem;
+  min-width: 0;
+}
+
+.officer-corps__slot strong {
+  overflow: hidden;
+  font-size: 0.76rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.officer-corps__doctrine:hover,
+.officer-corps__slot:hover,
+.officer-corps__doctrine:focus-visible,
+.officer-corps__slot:focus-visible {
+  border-color: #8c8065;
+  background: linear-gradient(#282c2a, #171a19);
+}
+
+.officer-corps__catalog {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.36fr);
+  gap: 0.65rem;
+  margin-top: 0.7rem;
+  padding: 0.65rem;
+  border: 1px solid #4b504d;
+  background: #0d1213;
+  box-shadow: inset 0 0 22px rgba(0,0,0,0.72);
+}
+
+.officer-corps__catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.4rem;
+  align-content: start;
+  max-height: 330px;
+  overflow-y: auto;
+  scrollbar-color: #65736f #101515;
+  scrollbar-width: thin;
+}
+
+.officer-option {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.42rem;
+  min-height: 62px;
+  padding: 0.34rem;
+  text-align: left;
+}
+
+.officer-option img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.officer-option span { display: grid; gap: 0.18rem; min-width: 0; }
+.officer-option strong { font: 700 0.72rem/1.25 "Noto Sans KR", sans-serif; }
+.officer-option small { color: #9ea39e; font: 0.58rem "IBM Plex Mono", monospace; }
+.officer-option i { position: absolute; top: 0.2rem; right: 0.28rem; color: #9a725d; font-style: normal; }
+
+.officer-option--ready:hover,
+.officer-option--ready:focus-visible {
+  border-color: #a48c57;
+  box-shadow: inset 0 0 0 1px #635531, 0 0 8px rgba(171,143,74,0.16);
+}
+
+.officer-option--selected { border-color: #b29b62; background: linear-gradient(#302d24, #191815); }
+.officer-option--locked,
+.officer-option--partial,
+.officer-option--disabled { filter: grayscale(0.7); opacity: 0.63; }
+
+.officer-option-detail {
+  min-height: 180px;
+  padding: 0.7rem;
+  border: 1px solid #3b4140;
+  background: linear-gradient(145deg, #171c1c, #0e1213);
+  box-shadow: inset 0 0 18px rgba(0,0,0,0.5);
+}
+
+.officer-option-detail > small { color: #92876f; font: 0.62rem "IBM Plex Mono", monospace; }
+.officer-option-detail h4 { margin: 0.25rem 0 0.4rem; color: #d6b85e; font: 700 0.95rem "Noto Serif KR", Georgia, serif; }
+.officer-option-detail p,
+.officer-option-detail > span { color: #a7ada9; font: 0.71rem/1.55 "Noto Sans KR", sans-serif; }
+.officer-option-detail ul { margin: 0.55rem 0 0; padding-left: 1.05rem; font: 0.67rem/1.5 "Noto Sans KR", sans-serif; }
+.officer-option-detail__effects { color: #74b788; }
+.officer-option-detail__requirements .is-met { color: #79ad83; }
+.officer-option-detail__requirements .is-unmet { color: #b56e69; }
+.officer-option-detail > b { display: block; margin-top: 0.6rem; color: #b07b50; font-size: 0.66rem; }
+
+.officer-corps__state,
+.officer-corps__error { padding: 0.8rem; color: #aab0ac; font: 0.72rem "IBM Plex Mono", monospace; }
+.officer-corps__state--error,
+.officer-corps__error { color: #bd7669; }
+
+@media (max-width: 760px) {
+  .officer-corps__slots { grid-template-columns: 1fr; }
+  .officer-corps__catalog { grid-template-columns: 1fr; }
+  .officer-corps__doctrine { grid-template-columns: 58px minmax(0, 1fr); }
+  .officer-corps__doctrine > img { width: 52px; height: 52px; }
+  .officer-corps__slot-command { display: none; }
+}
+
 /* ---- 개요 ---- */
 
 .military-overview__grid {
@@ -7965,6 +8192,58 @@ button:focus-visible,
   border-color: var(--tlr-steel-line, #3a3f3f);
   cursor: not-allowed;
 }
+
+.military-template-card__name-field {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.55rem 0;
+  color: #8f9693;
+  font: 0.68rem "IBM Plex Mono", monospace;
+}
+
+.military-template-card__name-field input {
+  min-width: 0;
+  border: 1px solid #3a4141;
+  background: #0c1112;
+  color: #ddd8cc;
+  padding: 0.45rem 0.55rem;
+  font: 0.75rem "IBM Plex Mono", monospace;
+}
+
+.military-production__list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.military-production__item {
+  border: 1px solid #3a4141;
+  border-left: 3px solid #698c8a;
+  background: linear-gradient(110deg, #151a1b, #0c1112);
+  padding: 0.7rem 0.8rem;
+}
+
+.military-production__item > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #ddd8cc;
+}
+
+.military-production__item > div span { color: #8fb0aa; }
+
+.military-production__item dl {
+  display: grid;
+  grid-template-columns: repeat(3, auto 1fr);
+  gap: 0.25rem 0.45rem;
+  margin: 0.55rem 0 0;
+  color: #8f9693;
+  font: 0.67rem "IBM Plex Mono", monospace;
+}
+
+.military-production__item dd { margin: 0; color: #c8c5ba; }
 
 /* ---- 로스터 테이블 ---- */
 
@@ -8241,6 +8520,11 @@ button:focus-visible,
 }
 
 .conflict-window__assignment-input input {
+  flex: 1;
+}
+
+.conflict-window__assignment-input select {
+  min-width: 0;
   flex: 1;
 }
 
@@ -8698,6 +8982,87 @@ button:disabled { opacity: 0.48; }
 .directorate-diplomacy__buttons button:first-child { border-color: #768052; color: #ddca70; }
 .directorate-diplomacy__error { margin: 8px; padding: 8px; border: 1px solid #734d49; color: #d67970; }
 .directorate-diplomacy__empty { padding: 24px; color: #78867f; text-align: center; }
+
+.directorate-military {
+  margin: 10px 12px 14px;
+  border: 1px solid #4b5451;
+  background: linear-gradient(180deg, #171c1c 0, #0b1010 48px, #080c0c 100%);
+  box-shadow: 0 8px 24px #0008, inset 0 1px #7b807a35;
+  color: #d8d5c9;
+}
+.directorate-military > header,
+.directorate-military__review > header {
+  min-height: 50px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #4c5551;
+  background: linear-gradient(180deg, #242a29, #151a19);
+}
+.directorate-military > header span,
+.directorate-military__review > header span { color: #758c84; font: 9px/1.2 monospace; letter-spacing: .16em; }
+.directorate-military > header h2,
+.directorate-military__review > header h3 { margin: 3px 0 0; color: #d7c36f; font-size: 18px; }
+.directorate-military > header strong { color: #9da59e; font-size: 11px; }
+.directorate-military__workspace { display: grid; grid-template-columns: minmax(190px, 24%) 1fr; min-height: 360px; }
+.directorate-military__catalog { padding: 12px; border-right: 1px solid #47514d; background: #101514; }
+.directorate-military__catalog label { display: block; margin-bottom: 6px; color: #a9a99f; font-size: 11px; }
+.directorate-military__catalog select,
+.directorate-military input,
+.directorate-military select,
+.directorate-military textarea,
+.directorate-military button {
+  border: 1px solid #4b615b;
+  border-radius: 0;
+  background: #09100f;
+  color: #d5d4c9;
+  font: inherit;
+}
+.directorate-military__catalog select { width: 100%; min-height: 34px; padding: 6px; }
+.directorate-military__catalog p { margin: 12px 0 0; color: #7f8a85; font-size: 10px; line-height: 1.6; }
+.directorate-military__editor { min-width: 0; padding: 10px; }
+.directorate-military__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.directorate-military__fields label { display: grid; gap: 4px; color: #8f9d96; font-size: 10px; }
+.directorate-military__fields input,
+.directorate-military__fields select { min-height: 32px; padding: 5px 7px; }
+.directorate-military__fields textarea { min-height: 72px; resize: vertical; padding: 7px; }
+.directorate-military__wide { grid-column: 1 / -1; }
+.directorate-military__subeditor { margin-top: 10px; border: 1px solid #3f4c48; background: #0d1312; }
+.directorate-military__subeditor > header { min-height: 34px; padding: 5px 7px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #3f4c48; background: #181d1c; }
+.directorate-military__subeditor h3 { margin: 0; color: #bcb9ad; font-size: 12px; }
+.directorate-military button { min-height: 28px; padding: 4px 9px; cursor: pointer; }
+.directorate-military button:hover { border-color: #9b8e56; color: #e1cc75; background: #171a14; }
+.directorate-military button:disabled { opacity: .5; cursor: wait; }
+.directorate-military__row { display: grid; grid-template-columns: minmax(100px, .8fr) minmax(130px, 1.5fr) 72px 70px auto; gap: 5px; padding: 5px; border-top: 1px solid #26322f; }
+.directorate-military__row:first-of-type { border-top: 0; }
+.directorate-military__row input,
+.directorate-military__row select { min-width: 0; min-height: 29px; padding: 4px 6px; }
+.directorate-military__group { margin: 6px; border-left: 2px solid #77704d; background: #0a0f0e; }
+.directorate-military__group > div:first-child { display: flex; gap: 5px; padding: 5px; }
+.directorate-military__group .directorate-military__row { grid-template-columns: minmax(150px, 1.3fr) minmax(110px, 1fr) 80px auto; }
+.directorate-military__save { padding-top: 10px; display: flex; justify-content: flex-end; }
+.directorate-military__save button { min-width: 150px; border-color: #857943; color: #e0ca6d; }
+.directorate-military__review { border-top: 1px solid #4a5350; }
+.directorate-military__review > p { margin: 0; padding: 22px; color: #76847e; text-align: center; }
+.directorate-military__review > article { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 38%); gap: 10px; padding: 10px; border-top: 1px solid #303b38; }
+.directorate-military__review > article small { color: #809089; }
+.directorate-military__review > article h4 { margin: 4px 0; color: #d7d2c3; }
+.directorate-military__review > article p { margin: 0 0 7px; color: #9fa49d; white-space: pre-wrap; }
+.directorate-military__review > article span { color: #948a61; font-size: 10px; }
+.directorate-military__resolution { display: grid; grid-template-columns: 110px 1fr; gap: 5px; }
+.directorate-military__resolution input,
+.directorate-military__resolution select,
+.directorate-military__resolution textarea { min-width: 0; padding: 5px 7px; }
+.directorate-military__resolution textarea { min-height: 52px; grid-column: 1 / -1; resize: vertical; }
+.directorate-military__resolution button { grid-column: 2; border-color: #857943; color: #dfc96c; }
+@media (max-width: 820px) {
+  .directorate-military__workspace,
+  .directorate-military__review > article { grid-template-columns: 1fr; }
+  .directorate-military__catalog { border-right: 0; border-bottom: 1px solid #47514d; }
+  .directorate-military__row,
+  .directorate-military__group .directorate-military__row { grid-template-columns: 1fr 1fr; }
+}
 
 @media (max-width: 650px) {
   .diplomacy-relations { grid-template-columns: 1fr; }

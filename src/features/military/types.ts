@@ -1,5 +1,65 @@
 export type ConfigurationStatus = "UNCONFIGURED" | "PARTIAL" | "READY" | "DISABLED";
 
+export type OfficerSpiritCategory = "ACADEMY" | "ARMY" | "DIVISION_COMMAND";
+export type MilitarySelectionState =
+  | "EMPTY"
+  | "READY"
+  | "LOCKED"
+  | "PARTIAL"
+  | "DISABLED"
+  | "SELECTED";
+
+export type MilitaryEffect = {
+  key: string;
+  value: number;
+  unit: "flat" | "percent";
+  displayText: string;
+  adminGuidance?: string;
+};
+
+export type RequirementResult = {
+  id: string;
+  description: string;
+  met: boolean;
+};
+
+export type OfficerSpirit = {
+  id: string;
+  key: string;
+  category: OfficerSpiritCategory;
+  displayName: string;
+  description: string;
+  iconPath: string | null;
+  configurationStatus: Exclude<ConfigurationStatus, "UNCONFIGURED">;
+  enabled: boolean;
+  selectionState: MilitarySelectionState;
+  effects: MilitaryEffect[];
+  requirements: RequirementResult[];
+};
+
+export type GrandDoctrine = {
+  id: string;
+  key: string;
+  displayName: string;
+  description: string;
+  iconPath: string | null;
+  configurationStatus: Exclude<ConfigurationStatus, "UNCONFIGURED">;
+  enabled: boolean;
+  selectionState: MilitarySelectionState;
+  effects: MilitaryEffect[];
+  requirements: RequirementResult[];
+};
+
+export type OfficerCorpsState = {
+  countryKey: string;
+  worldDate: string;
+  version: number;
+  doctrine: GrandDoctrine | null;
+  selectedSpirits: Partial<Record<OfficerSpiritCategory, OfficerSpirit>>;
+  doctrines: GrandDoctrine[];
+  spirits: OfficerSpirit[];
+};
+
 export type ForceKind = "LAND_UNIT" | "VESSEL" | "AIR_WING";
 export type FrontKind = "LAND_LINE" | "NAVAL_AREA";
 export type ConflictType =
@@ -207,6 +267,20 @@ export type MilitaryNotification = {
   read_at: string | null;
 };
 
+export type MilitaryCreationQueue = {
+  id: string;
+  country_key: string;
+  template_id: string;
+  force_kind: ForceKind;
+  requested_name: string | null;
+  status: "QUEUED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+  manpower_reserved: number;
+  production_capacity_reserved: number;
+  requested_world_date: string;
+  completion_world_date: string;
+  version: number;
+};
+
 export type MilitaryOverview = {
   countryKey: string;
   worldDate: string;
@@ -219,6 +293,6 @@ export type MilitaryOverview = {
   vessels: Vessel[];
   fleets: Fleet[];
   airWings: AirWing[];
-  queues: Array<Record<string, unknown>>;
+  queues: MilitaryCreationQueue[];
   conflicts: Conflict[];
 };

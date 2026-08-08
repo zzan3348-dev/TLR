@@ -1,0 +1,46 @@
+const LABELS: Record<string, string> = {
+  DRAFT: "초안",
+  DECLARED: "선전포고",
+  ACTIVE: "가동 중",
+  CEASEFIRE: "휴전",
+  NEGOTIATING: "협상 중",
+  ENDED: "종전",
+  CANCELLED: "취소됨",
+  SUBMITTED: "제출됨",
+  UNDER_REVIEW: "심의 중",
+  RESOLVED: "판정 완료",
+  REJECTED: "반려됨",
+  SUCCESS: "성공",
+  PARTIAL: "부분 성공",
+  FAILURE: "실패",
+  INVALID: "무효",
+  WITHDRAWN: "철회",
+  QUEUED: "대기 중",
+  IN_PROGRESS: "진행 중",
+  COMPLETED: "완료",
+  FORMING: "편성 중",
+  TRAINING: "훈련 중",
+  RESERVE: "예비",
+  REINFORCING: "보충 중",
+  ASSIGNED: "배속됨",
+  ASSIGNED_TO_FRONT: "전선 배속",
+  REORGANIZING: "재편 중",
+  DISBANDED: "해산",
+  UNDER_CONSTRUCTION: "건조 중",
+  AWAITING_COMMISSION: "취역 대기",
+  DAMAGED: "손상",
+  UNDER_REPAIR: "수리 중",
+  SUNK: "침몰",
+  RETIRED: "퇴역",
+  DISSOLVED: "해체",
+  BELLIGERENT: "교전국",
+  CO_BELLIGERENT: "공동 교전국",
+  SUPPORTER: "지원국",
+  MEDIATOR: "중재국",
+};
+
+export function militaryLabel(value: string | null | undefined): string {
+  if (!value) return "미설정";
+  return LABELS[value] ?? value;
+}
+

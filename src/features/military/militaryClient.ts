@@ -1,4 +1,4 @@
-import type { MilitaryOverview } from "./types";
+import type { MilitaryOverview, OfficerCorpsState, OfficerSpiritCategory } from "./types";
 
 async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api/military/${route}`, {
@@ -11,8 +11,30 @@ async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T>
   return payload;
 }
 
-export function fetchMilitaryOverview(): Promise<MilitaryOverview> {
-  return militaryRequest<MilitaryOverview>("overview");
+export function fetchMilitaryOverview(countryKey: string): Promise<MilitaryOverview> {
+  return militaryRequest<MilitaryOverview>(`overview?country_key=${encodeURIComponent(countryKey)}`);
+}
+
+export function fetchOfficerCorps(countryKey: string): Promise<OfficerCorpsState> {
+  return militaryRequest<OfficerCorpsState>(`officer-corps?country_key=${encodeURIComponent(countryKey)}`);
+}
+
+export function selectOfficerSpirit(
+  category: OfficerSpiritCategory,
+  spiritId: string,
+  expectedVersion: number,
+): Promise<OfficerCorpsState> {
+  return militaryRequest<OfficerCorpsState>("officer-corps", {
+    method: "POST",
+    body: JSON.stringify({ category, spiritId, expectedVersion }),
+  });
+}
+
+export function selectGrandDoctrine(doctrineId: string, expectedVersion: number): Promise<OfficerCorpsState> {
+  return militaryRequest<OfficerCorpsState>("officer-corps", {
+    method: "POST",
+    body: JSON.stringify({ doctrineId, expectedVersion }),
+  });
 }
 
 export function militaryMutation<T>(route: string, body: Record<string, unknown>, method = "POST"): Promise<T> {
