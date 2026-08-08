@@ -1,0 +1,3345 @@
+=(컬럼비아 개척 연방)=
+정부 형태: 워싱턴의 보전주의 연방정부·동부 금융·남부 보수·군부 세력
+집권 정당: 공화당(보전연립 핵심)
+집권 사상: 보수 공화주의·질서주의·비상국가주의
+대표 아이콘 경로: /assets/country-panels/country-001/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-001-party-01
+정당명: 공화당
+정당 사상: 보전 공화주의
+지지도(%): 33
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-001/party-01.png
+
+정당 2:
+정당 ID: country-001-party-02
+정당명: 민주당
+정당 사상: 신헌정 자유주의
+지지도(%): 41
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-001/party-02.png
+
+정당 3:
+정당 ID: country-001-party-03
+정당명: 사회당
+정당 사상: 산업민주사회주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-001/party-03.png
+
+정당 4:
+정당 ID: country-001-party-04
+정당명: 진보당
+정당 사상: 진보 연방주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-001/party-04.png
+
+정당 5:
+정당 ID: country-001-party-05
+정당명: 주권연맹
+정당 사상: 주권 보수주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-001/party-05.png
+
+=(대영제국)=
+정부 형태: 램지 맥도널드 국민정부
+집권 정당: 국민정부(보수당 중심)
+집권 사상: 국민연립·제국주의·재정보수 성향의 중도우파
+대표 아이콘 경로: /assets/country-panels/country-002/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-002-party-01
+정당명: 국민정부
+정당 사상: 제국 보전주의
+지지도(%): 44
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-002/party-01.png
+
+정당 2:
+정당 ID: country-002-party-02
+정당명: 노동당
+정당 사상: 의회 노동사회주의
+지지도(%): 26
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-002/party-02.png
+
+정당 3:
+정당 ID: country-002-party-03
+정당명: 자유당
+정당 사상: 자유 제국개혁주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-002/party-03.png
+
+정당 4:
+정당 ID: country-002-party-04
+정당명: 제국통합당
+정당 사상: 강경 제국연합주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-002/party-04.png
+
+정당 5:
+정당 ID: country-002-party-05
+정당명: 자치령개혁연맹
+정당 사상: 연방 개조 진보주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-002/party-05.png
+
+=(러시아 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-003/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-003-party-01
+정당명: 영구혁명론
+정당 사상: 미설정
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-01.png
+
+정당 2:
+정당 ID: country-003-party-02
+정당명: 농민사회주의
+정당 사상: 미설정
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-02.png
+
+정당 3:
+정당 ID: country-003-party-03
+정당명: 노동평의회주의
+정당 사상: 미설정
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-03.png
+
+정당 4:
+정당 ID: country-003-party-04
+정당명: 민주사회주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-04.png
+
+정당 5:
+정당 ID: country-003-party-05
+정당명: 사회혁명 인민주의
+정당 사상: 미설정
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-05.png
+
+정당 6:
+정당 ID: country-003-party-06
+정당명: 좌익공산주의
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-003/party-06.png
+
+=(러시아 제국)=
+정부 형태: 키릴 블라디미로비치 황실·귀족·장교단
+집권 정당: 로마노프 정통주의
+집권 사상: 왕정복고·군부·귀족주의
+대표 아이콘 경로: /assets/country-panels/country-004/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-004-party-01
+정당명: 로마노프 정통주의
+정당 사상: 전제 왕정복고
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-01.png
+
+정당 2:
+정당 ID: country-004-party-02
+정당명: 군관구 국가주의
+정당 사상: 장교단 국가주의
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-02.png
+
+정당 3:
+정당 ID: country-004-party-03
+정당명: 시베리아 개척 보수주의
+정당 사상: 개척 귀족보수주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-03.png
+
+정당 4:
+정당 ID: country-004-party-04
+정당명: 제헌군주 개량파
+정당 사상: 제헌 왕정개량주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-04.png
+
+정당 5:
+정당 ID: country-004-party-05
+정당명: 철도 관료국가주의
+정당 사상: 국가기술 관료주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-05.png
+
+정당 6:
+정당 ID: country-004-party-06
+정당명: 지하 인민공화주의
+정당 사상: 비밀 공화주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-004/party-06.png
+
+=(노르드 연방)=
+정부 형태: 토르발 스타우닝 중심 사회민주 세력
+집권 정당: 사회민주연합
+집권 사상: 사회민주주의·복지·노동조합·농민정당
+대표 아이콘 경로: /assets/country-panels/country-005/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-005-party-01
+정당명: 사회민주연합
+정당 사상: 노르드 사회민주주의
+지지도(%): 35
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-01.png
+
+정당 2:
+정당 ID: country-005-party-02
+정당명: 농민동맹
+정당 사상: 협동 농민주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-02.png
+
+정당 3:
+정당 ID: country-005-party-03
+정당명: 자유시민당
+정당 사상: 복지 자유주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-03.png
+
+정당 4:
+정당 ID: country-005-party-04
+정당명: 보수연합
+정당 사상: 왕실 협력 보수주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-04.png
+
+정당 5:
+정당 ID: country-005-party-05
+정당명: 노동좌파전선
+정당 사상: 생디칼리슴 좌파
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-05.png
+
+정당 6:
+정당 ID: country-005-party-06
+정당명: 국방중립당
+정당 사상: 무장중립 기술주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-005/party-06.png
+
+=(발트 연방)=
+정부 형태: 아우구스트 레이 중심 연방정부
+집권 정당: 발트 사회민주연합
+집권 사상: 온건 사회민주주의·의회연방주의
+대표 아이콘 경로: /assets/country-panels/country-006/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-006-party-01
+정당명: 발트 사회민주연합
+정당 사상: 발트 사회민주주의
+지지도(%): 33
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-01.png
+
+정당 2:
+정당 ID: country-006-party-02
+정당명: 연방자유당
+정당 사상: 연방 자유주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-02.png
+
+정당 3:
+정당 ID: country-006-party-03
+정당명: 농민동맹
+정당 사상: 농민 협동주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-03.png
+
+정당 4:
+정당 ID: country-006-party-04
+정당명: 국민보수전선
+정당 사상: 기독교 민족보수주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-04.png
+
+정당 5:
+정당 ID: country-006-party-05
+정당명: 자치권리회의
+정당 사상: 지방 자치주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-05.png
+
+정당 6:
+정당 ID: country-006-party-06
+정당명: 발트 방위동맹
+정당 사상: 방위 연방주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-006/party-06.png
+
+=(오대호 연방)=
+정부 형태: 로버트 라폴레트 주니어·진보주의자·노동조합·주정부 연합
+집권 정당: 진보당
+집권 사상: 진보주의·노동친화·규제자본주의
+대표 아이콘 경로: /assets/country-panels/country-007/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-007-party-01
+정당명: 진보당
+정당 사상: 호수권 진보주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-01.png
+
+정당 2:
+정당 ID: country-007-party-02
+정당명: 농민노동당
+정당 사상: 협동주의 농민노선
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-02.png
+
+정당 3:
+정당 ID: country-007-party-03
+정당명: 공화연방당
+정당 사상: 공화 자유주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-03.png
+
+정당 4:
+정당 ID: country-007-party-04
+정당명: 사회당
+정당 사상: 산업 사회주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-04.png
+
+정당 5:
+정당 ID: country-007-party-05
+정당명: 기업질서동맹
+정당 사상: 질서 자본주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-05.png
+
+정당 6:
+정당 ID: country-007-party-06
+정당명: 애국연합
+정당 사상: 시민 공화애국주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-007/party-06.png
+
+=(독일민주공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-008/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-008-party-01
+정당명: 베를린 사회민주주의
+정당 사상: 미설정
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-01.png
+
+정당 2:
+정당 ID: country-008-party-02
+정당명: 노동평의회주의
+정당 사상: 미설정
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-02.png
+
+정당 3:
+정당 ID: country-008-party-03
+정당명: 스파르타쿠스 맑스주의
+정당 사상: 미설정
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-03.png
+
+정당 4:
+정당 ID: country-008-party-04
+정당명: 사회공화주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-04.png
+
+정당 5:
+정당 ID: country-008-party-05
+정당명: 독일 통일사회주의
+정당 사상: 미설정
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-05.png
+
+정당 6:
+정당 ID: country-008-party-06
+정당명: 자유사회주의
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-008/party-06.png
+
+=(알라시 공화국)=
+정부 형태: 알리한 부케이하노프·알라시 자유주의 민족파
+집권 정당: 알라시당
+집권 사상: 자유주의·민족주의·세속 개혁의 중도우파
+대표 아이콘 경로: /assets/country-panels/country-009/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-009-party-01
+정당명: 알라시당
+정당 사상: 카자흐 민족자유주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-01.png
+
+정당 2:
+정당 ID: country-009-party-02
+정당명: 초원농민연맹
+정당 사상: 농민 자치주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-02.png
+
+정당 3:
+정당 ID: country-009-party-03
+정당명: 입헌개혁당
+정당 사상: 세속 헌정자유주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-03.png
+
+정당 4:
+정당 ID: country-009-party-04
+정당명: 무슬림협의회
+정당 사상: 이슬람 민주주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-04.png
+
+정당 5:
+정당 ID: country-009-party-05
+정당명: 사회공화연맹
+정당 사상: 사회공화주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-05.png
+
+정당 6:
+정당 ID: country-009-party-06
+정당명: 대초원통합회
+정당 사상: 초원 민족국가주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-009/party-06.png
+
+=(황러시아)=
+정부 형태: 드미트리 호르바트·장교·철도관료·상인 엘리트
+집권 정당: 철도관료 실용주의
+집권 사상: 관료권위주의·상업보수·백계 러시아계
+대표 아이콘 경로: /assets/country-panels/country-010/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-010-party-01
+정당명: 철도관료 실용주의
+정당 사상: 동청철도 관료국가주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-01.png
+
+정당 2:
+정당 ID: country-010-party-02
+정당명: 연해 백계보전주의
+정당 사상: 백계 러시아 보수주의
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-02.png
+
+정당 3:
+정당 ID: country-010-party-03
+정당명: 상인 자유보수주의
+정당 사상: 태평양 상업보수주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-03.png
+
+정당 4:
+정당 ID: country-010-party-04
+정당명: 태평양 러시아주의
+정당 사상: 연해 러시아 자주주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-04.png
+
+정당 5:
+정당 ID: country-010-party-05
+정당명: 제국재통합주의
+정당 사상: 로마노프 재통합론
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-05.png
+
+정당 6:
+정당 ID: country-010-party-06
+정당명: 연해 공화개혁론
+정당 사상: 러시아 자유공화주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-010/party-06.png
+
+=(폴란드 사회민주공화국)=
+정부 형태: 이그나치 다신스키 사회민주정부
+집권 정당: 사회민주당
+집권 사상: 사회민주주의·노동개혁·의회주의
+대표 아이콘 경로: /assets/country-panels/country-011/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-011-party-01
+정당명: 사회민주당
+정당 사상: 폴란드 사회민주주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-01.png
+
+정당 2:
+정당 ID: country-011-party-02
+정당명: 인민농민당
+정당 사상: 농민 공화주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-02.png
+
+정당 3:
+정당 ID: country-011-party-03
+정당명: 국민노동연합
+정당 사상: 노동 공화주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-03.png
+
+정당 4:
+정당 ID: country-011-party-04
+정당명: 자유공화당
+정당 사상: 헌정 자유주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-04.png
+
+정당 5:
+정당 ID: country-011-party-05
+정당명: 민족민주회
+정당 사상: 가톨릭 민족보수주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-05.png
+
+정당 6:
+정당 ID: country-011-party-06
+정당명: 혁명좌파전선
+정당 사상: 국제주의 공산주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-011/party-06.png
+
+=(대청제국)=
+정부 형태: 푸이 황실·만주 귀족·관료·군벌
+집권 정당: 만주 궁정전제주의
+집권 사상: 전제왕정·복고주의·보수
+대표 아이콘 경로: /assets/country-panels/country-012/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-012-party-01
+정당명: 만주 궁정전제주의
+정당 사상: 황실 전제주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-01.png
+
+정당 2:
+정당 ID: country-012-party-02
+정당명: 북양 관료국가주의
+정당 사상: 관료 국가실용주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-02.png
+
+정당 3:
+정당 ID: country-012-party-03
+정당명: 황도보전 유교보수주의
+정당 사상: 유교 복고보수주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-03.png
+
+정당 4:
+정당 ID: country-012-party-04
+정당명: 한인 공화주의
+정당 사상: 중화 공화개혁주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-04.png
+
+정당 5:
+정당 ID: country-012-party-05
+정당명: 군벌실용주의
+정당 사상: 무력 균형 실용주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-05.png
+
+정당 6:
+정당 ID: country-012-party-06
+정당명: 혁명민족주의
+정당 사상: 통일 민족혁명론
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-012/party-06.png
+
+=(프랑스 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-013/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-013-party-01
+정당명: 유럽사회주의
+정당 사상: 미설정
+지지도(%): 32
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-01.png
+
+정당 2:
+정당 ID: country-013-party-02
+정당명: 혁명적 생디칼리슴
+정당 사상: 미설정
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-02.png
+
+정당 3:
+정당 ID: country-013-party-03
+정당명: 코뮌 맑스주의
+정당 사상: 미설정
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-03.png
+
+정당 4:
+정당 ID: country-013-party-04
+정당명: 자유 코뮌주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-04.png
+
+정당 5:
+정당 ID: country-013-party-05
+정당명: 사회공화주의
+정당 사상: 미설정
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-05.png
+
+정당 6:
+정당 ID: country-013-party-06
+정당명: 자코뱅 사회주의
+정당 사상: 미설정
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-013/party-06.png
+
+=(우크라이나 농민연방공화국)=
+정부 형태: 네스토르 마흐노·자유농민군·지방 소비에트·농민조합
+집권 정당: 마흐노 자유농민주의
+집권 사상: 아나키즘·농민자치·극단적 분권주의
+대표 아이콘 경로: /assets/country-panels/country-014/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-014-party-01
+정당명: 마흐노 자유농민주의
+정당 사상: 농민 아나키즘
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-01.png
+
+정당 2:
+정당 ID: country-014-party-02
+정당명: 자유농촌 공동체주의
+정당 사상: 농민 집산자치주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-02.png
+
+정당 3:
+정당 ID: country-014-party-03
+정당명: 도시 노동생디칼리슴
+정당 사상: 노동자 생디칼리슴
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-03.png
+
+정당 4:
+정당 ID: country-014-party-04
+정당명: 우크라이나 사회공화주의
+정당 사상: 분권 사회공화주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-04.png
+
+정당 5:
+정당 ID: country-014-party-05
+정당명: 좌익 코뮌주의
+정당 사상: 반관료 공산주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-05.png
+
+정당 6:
+정당 ID: country-014-party-06
+정당명: 민족자치 방위론
+정당 사상: 좌익 우크라이나 민족주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-014/party-06.png
+
+=(몽골국)=
+정부 형태: 귀족·승려·신식 관료 연립지배
+집권 정당: 초원 보전왕정주의
+집권 사상: 전통주의·민족주의·보수적 국가건설
+대표 아이콘 경로: /assets/country-panels/country-015/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-015-party-01
+정당명: 초원 보전왕정주의
+정당 사상: 귀족-왕공 보전주의
+지지도(%): 27
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-01.png
+
+정당 2:
+정당 ID: country-015-party-02
+정당명: 불교 국정조화론
+정당 사상: 승려 보수주의
+지지도(%): 19
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-02.png
+
+정당 3:
+정당 ID: country-015-party-03
+정당명: 몽골 민족자강론
+정당 사상: 초원 민족국가주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-03.png
+
+정당 4:
+정당 ID: country-015-party-04
+정당명: 신관료 근대화론
+정당 사상: 국가개조 기술주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-04.png
+
+정당 5:
+정당 ID: country-015-party-05
+정당명: 유목 공동체주의
+정당 사상: 초원 자치주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-05.png
+
+정당 6:
+정당 ID: country-015-party-06
+정당명: 범아시아 협력론
+정당 사상: 완충외교 실용주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-015/party-06.png
+
+=(보헤미아 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-016/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-016-party-01
+정당명: 슈메랄 산업사회주의
+정당 사상: 미설정
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-01.png
+
+정당 2:
+정당 ID: country-016-party-02
+정당명: 노동공화 맑스주의
+정당 사상: 미설정
+지지도(%): 23
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-02.png
+
+정당 3:
+정당 ID: country-016-party-03
+정당명: 체코-독일 노동연방주의
+정당 사상: 미설정
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-03.png
+
+정당 4:
+정당 ID: country-016-party-04
+정당명: 공장평의회주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-04.png
+
+정당 5:
+정당 ID: country-016-party-05
+정당명: 민족사회공화주의
+정당 사상: 미설정
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-05.png
+
+정당 6:
+정당 ID: country-016-party-06
+정당명: 급진 코뮌주의
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-016/party-06.png
+
+=(바이에른사회주의공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-017/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-017-party-01
+정당명: 아이스너 사회주의
+정당 사상: 미설정
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-01.png
+
+정당 2:
+정당 ID: country-017-party-02
+정당명: 평의회 공화주의
+정당 사상: 미설정
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-02.png
+
+정당 3:
+정당 ID: country-017-party-03
+정당명: 자유사회주의
+정당 사상: 미설정
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-03.png
+
+정당 4:
+정당 ID: country-017-party-04
+정당명: 혁명 생디칼리슴
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-04.png
+
+정당 5:
+정당 ID: country-017-party-05
+정당명: 가톨릭 사회주의
+정당 사상: 미설정
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-05.png
+
+정당 6:
+정당 ID: country-017-party-06
+정당명: 남독일 연방사회주의
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-017/party-06.png
+
+=(대일본제국)=
+정부 형태: 황실·정당내각·군부 관료체제
+집권 정당: 입헌정우회
+집권 사상: 제국주의·군국주의·보수 민족주의
+대표 아이콘 경로: /assets/country-panels/country-018/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-018-party-01
+정당명: 입헌정우회
+정당 사상: 제국 보수정치
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-01.png
+
+정당 2:
+정당 ID: country-018-party-02
+정당명: 군부초월회
+정당 사상: 쇼와 국가주의
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-02.png
+
+정당 3:
+정당 ID: country-018-party-03
+정당명: 입헌민정당
+정당 사상: 입헌 자유주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-03.png
+
+정당 4:
+정당 ID: country-018-party-04
+정당명: 사회대중당
+정당 사상: 국민 사회민주주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-04.png
+
+정당 5:
+정당 ID: country-018-party-05
+정당명: 동방개척동맹
+정당 사상: 대륙 팽창주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-05.png
+
+정당 6:
+정당 ID: country-018-party-06
+정당명: 천황친정회
+정당 사상: 황도 직접통치론
+지지도(%): 5
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-018/party-06.png
+
+=(헝가리 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-019/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-019-party-01
+정당명: 카로이 사회공화주의
+정당 사상: 미설정
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-01.png
+
+정당 2:
+정당 ID: country-019-party-02
+정당명: 농민사회주의
+정당 사상: 미설정
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-02.png
+
+정당 3:
+정당 ID: country-019-party-03
+정당명: 다뉴브 연방사회주의
+정당 사상: 미설정
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-03.png
+
+정당 4:
+정당 ID: country-019-party-04
+정당명: 의회사회주의
+정당 사상: 미설정
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-04.png
+
+정당 5:
+정당 ID: country-019-party-05
+정당명: 헝가리 혁명애국주의
+정당 사상: 미설정
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-05.png
+
+정당 6:
+정당 ID: country-019-party-06
+정당명: 평의회 좌파
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-019/party-06.png
+
+=(신강 공화국)=
+정부 형태: 성스차이 군사·관료 정권
+집권 정당: 성씨 국가실용주의
+집권 사상: 군벌형 권위주의·기회주의적 국가주의
+대표 아이콘 경로: /assets/country-panels/country-020/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-020-party-01
+정당명: 성씨 국가실용주의
+정당 사상: 군정 행정실용주의
+지지도(%): 27
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-01.png
+
+정당 2:
+정당 ID: country-020-party-02
+정당명: 군벌 질서주의
+정당 사상: 국경 군벌권위주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-02.png
+
+정당 3:
+정당 ID: country-020-party-03
+정당명: 투르크 자치주의
+정당 사상: 위구르 자치민족주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-03.png
+
+정당 4:
+정당 ID: country-020-party-04
+정당명: 중화 공화주의
+정당 사상: 중국 공화통합주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-04.png
+
+정당 5:
+정당 ID: country-020-party-05
+정당명: 대상로 상업실용주의
+정당 사상: 오아시스 상업주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-05.png
+
+정당 6:
+정당 ID: country-020-party-06
+정당명: 이슬람 공동체주의
+정당 사상: 무슬림 공동체 보전주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-020/party-06.png
+
+=(오스트리아 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-021/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-021-party-01
+정당명: 오스트로마르크스주의
+정당 사상: 미설정
+지지도(%): 32
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-01.png
+
+정당 2:
+정당 ID: country-021-party-02
+정당명: 빈 시영사회주의
+정당 사상: 미설정
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-02.png
+
+정당 3:
+정당 ID: country-021-party-03
+정당명: 노동평의회주의
+정당 사상: 미설정
+지지도(%): 15
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-03.png
+
+정당 4:
+정당 ID: country-021-party-04
+정당명: 농민사회주의
+정당 사상: 미설정
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-04.png
+
+정당 5:
+정당 ID: country-021-party-05
+정당명: 독일계 사회공화주의
+정당 사상: 미설정
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-05.png
+
+정당 6:
+정당 ID: country-021-party-06
+정당명: 기독교사회주의
+정당 사상: 미설정
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-021/party-06.png
+
+=(루마니아 사회주의 공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-022/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-022-party-01
+정당명: 라코프스키 국제주의
+정당 사상: 미설정
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-01.png
+
+정당 2:
+정당 ID: country-022-party-02
+정당명: 농민사회주의
+정당 사상: 미설정
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-02.png
+
+정당 3:
+정당 ID: country-022-party-03
+정당명: 중앙계획 사회주의
+정당 사상: 미설정
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-03.png
+
+정당 4:
+정당 ID: country-022-party-04
+정당명: 다뉴브 연방주의
+정당 사상: 미설정
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-04.png
+
+정당 5:
+정당 ID: country-022-party-05
+정당명: 농촌 자치사회주의
+정당 사상: 미설정
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-05.png
+
+정당 6:
+정당 ID: country-022-party-06
+정당명: 루마니아 사회애국주의
+정당 사상: 미설정
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-022/party-06.png
+
+=(스위스 연방)=
+정부 형태: 로베르트 그림 중심 사회민주 연정
+집권 정당: 사회민주당
+집권 사상: 사회민주주의·노동조합주의·연방주의·무장중립
+대표 아이콘 경로: /assets/country-panels/country-023/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-023-party-01
+정당명: 사회민주당
+정당 사상: 스위스 사회민주주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-01.png
+
+정당 2:
+정당 ID: country-023-party-02
+정당명: 자유민주당
+정당 사상: 연방 자유주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-02.png
+
+정당 3:
+정당 ID: country-023-party-03
+정당명: 농민상공시민당
+정당 사상: 농촌 공화주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-03.png
+
+정당 4:
+정당 ID: country-023-party-04
+정당명: 보수인민당
+정당 사상: 가톨릭 보수주의
+지지도(%): 15
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-04.png
+
+정당 5:
+정당 ID: country-023-party-05
+정당명: 노동좌파연맹
+정당 사상: 노동 생디칼리슴
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-05.png
+
+정당 6:
+정당 ID: country-023-party-06
+정당명: 무장중립연방회
+정당 사상: 중립 공화애국주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-023/party-06.png
+
+=(이탈리아 인민공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-024/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-024-party-01
+정당명: 국민사회공화주의
+정당 사상: 미설정
+지지도(%): 32
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-01.png
+
+정당 2:
+정당 ID: country-024-party-02
+정당명: 혁명 생디칼리슴
+정당 사상: 미설정
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-02.png
+
+정당 3:
+정당 ID: country-024-party-03
+정당명: 정통 맑스주의
+정당 사상: 미설정
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-03.png
+
+정당 4:
+정당 ID: country-024-party-04
+정당명: 참전용사 사회애국주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-04.png
+
+정당 5:
+정당 ID: country-024-party-05
+정당명: 자유 코뮌주의
+정당 사상: 미설정
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-05.png
+
+정당 6:
+정당 ID: country-024-party-06
+정당명: 가톨릭 사회주의
+정당 사상: 미설정
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-024/party-06.png
+
+=(유고슬라비아 인민연방공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-025/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-025-party-01
+정당명: 티토주의 연방중앙주의
+정당 사상: 미설정
+지지도(%): 27
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-01.png
+
+정당 2:
+정당 ID: country-025-party-02
+정당명: 남슬라브 연방사회주의
+정당 사상: 미설정
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-02.png
+
+정당 3:
+정당 ID: country-025-party-03
+정당명: 노동자 자치 생디칼리슴
+정당 사상: 미설정
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-03.png
+
+정당 4:
+정당 ID: country-025-party-04
+정당명: 농민 공화주의
+정당 사상: 미설정
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-04.png
+
+정당 5:
+정당 ID: country-025-party-05
+정당명: 민족조정주의
+정당 사상: 미설정
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-05.png
+
+정당 6:
+정당 ID: country-025-party-06
+정당명: 왕당복고 지하주의
+정당 사상: 미설정
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-025/party-06.png
+
+=(캅카스 인민연방공화국)=
+정부 형태: 노에 조르다니아 중심 사회민주 연방정부
+집권 정당: 연방사회민주당
+집권 사상: 사회민주주의·연방주의
+대표 아이콘 경로: /assets/country-panels/country-026/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-026-party-01
+정당명: 연방사회민주당
+정당 사상: 캅카스 사회민주연방주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-01.png
+
+정당 2:
+정당 ID: country-026-party-02
+정당명: 아르메니아 사회혁명연맹
+정당 사상: 민족 사회공화주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-02.png
+
+정당 3:
+정당 ID: country-026-party-03
+정당명: 아제르바이잔 공화연합
+정당 사상: 세속 국민자유주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-03.png
+
+정당 4:
+정당 ID: country-026-party-04
+정당명: 산악자치연맹
+정당 사상: 민족자치 연방주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-04.png
+
+정당 5:
+정당 ID: country-026-party-05
+정당명: 석유노동당
+정당 사상: 산업 노동생디칼리슴
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-05.png
+
+정당 6:
+정당 ID: country-026-party-06
+정당명: 연방보전회의
+정당 사상: 종교·전통 보수연방주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-026/party-06.png
+
+=(투르키스탄 민주인민공화국)=
+정부 형태: 무스타파 쇼카이 중심 민주민족주의 연립정부
+집권 정당: 민주인민당
+집권 사상: 세속적 자유주의·민족주의·이슬람 개혁주의의 중도우파
+대표 아이콘 경로: /assets/country-panels/country-027/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-027-party-01
+정당명: 민주인민당
+정당 사상: 투르키스탄 민주민족주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-01.png
+
+정당 2:
+정당 ID: country-027-party-02
+정당명: 자디드 개혁당
+정당 사상: 이슬람 근대주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-02.png
+
+정당 3:
+정당 ID: country-027-party-03
+정당명: 농민사회연맹
+정당 사상: 농민 공화주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-03.png
+
+정당 4:
+정당 ID: country-027-party-04
+정당명: 민족통일당
+정당 사상: 투르크 민족공화주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-04.png
+
+정당 5:
+정당 ID: country-027-party-05
+정당명: 사회민주노동당
+정당 사상: 중앙아시아 사회민주주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-05.png
+
+정당 6:
+정당 ID: country-027-party-06
+정당명: 울라마 협의회
+정당 사상: 이슬람 공동체보수주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-027/party-06.png
+
+=(대한제국)=
+정부 형태: 의친왕 이강과 황실·개화 관료
+집권 정당: 광무개화 절충주의
+집권 사상: 왕정 중심의 보수적 근대화
+대표 아이콘 경로: /assets/country-panels/country-028/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-028-party-01
+정당명: 광무개화 절충주의
+정당 사상: 황실 주도 근대화
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-01.png
+
+정당 2:
+정당 ID: country-028-party-02
+정당명: 황도충성회
+정당 사상: 전통 왕조보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-02.png
+
+정당 3:
+정당 ID: country-028-party-03
+정당명: 자강민족주의
+정당 사상: 자강 국가주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-03.png
+
+정당 4:
+정당 ID: country-028-party-04
+정당명: 입헌개혁파
+정당 사상: 입헌 자유주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-04.png
+
+정당 5:
+정당 ID: country-028-party-05
+정당명: 사회민주청년파
+정당 사상: 청년 사회민주주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-05.png
+
+정당 6:
+정당 ID: country-028-party-06
+정당명: 농민자치회
+정당 사상: 농민 자치주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-028/party-06.png
+
+=(이베리아 사회주의 공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 좌파
+대표 아이콘 경로: /assets/country-panels/country-029/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-029-party-01
+정당명: 이베리아 혁명사회주의
+정당 사상: 미설정
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-01.png
+
+정당 2:
+정당 ID: country-029-party-02
+정당명: 노동연방 생디칼리슴
+정당 사상: 미설정
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-02.png
+
+정당 3:
+정당 ID: country-029-party-03
+정당명: 자유연합 코뮌주의
+정당 사상: 미설정
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-03.png
+
+정당 4:
+정당 ID: country-029-party-04
+정당명: 농민집산주의
+정당 사상: 미설정
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-04.png
+
+정당 5:
+정당 ID: country-029-party-05
+정당명: 적위대 사회애국주의
+정당 사상: 미설정
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-05.png
+
+정당 6:
+정당 ID: country-029-party-06
+정당명: 사회공화 연방주의
+정당 사상: 미설정
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-029/party-06.png
+
+=(아라곤 자유지대)=
+정부 형태: 부에나벤투라 두루티·무정부주의 노조·농민조합·민병대
+집권 정당: 아라곤 자유아나키즘
+집권 사상: 아나키즘·자치사회주의
+대표 아이콘 경로: /assets/country-panels/country-030/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-030-party-01
+정당명: 아라곤 자유아나키즘
+정당 사상: 무정부 코뮌주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-01.png
+
+정당 2:
+정당 ID: country-030-party-02
+정당명: 농민 조합공동체주의
+정당 사상: 농민 자치집산주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-02.png
+
+정당 3:
+정당 ID: country-030-party-03
+정당명: 혁명 생디칼리슴
+정당 사상: 노동조합 직접행동주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-03.png
+
+정당 4:
+정당 ID: country-030-party-04
+정당명: 이베리아 자유연방주의
+정당 사상: 자치 연방주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-04.png
+
+정당 5:
+정당 ID: country-030-party-05
+정당명: 반파시 전선주의
+정당 사상: 혁명 방위전선주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-05.png
+
+정당 6:
+정당 ID: country-030-party-06
+정당명: 정통 반국가주의
+정당 사상: 순수 반권위주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-030/party-06.png
+
+=(오스만 제국)=
+정부 형태: 압뒬메지드 2세 체제의 궁정·의회·군부 연합
+집권 정당: 오스만 입헌연맹
+집권 사상: 입헌군주제·제국보수·군부 영향
+대표 아이콘 경로: /assets/country-panels/country-031/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-031-party-01
+정당명: 오스만 입헌연맹
+정당 사상: 이슬람 입헌주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-01.png
+
+정당 2:
+정당 ID: country-031-party-02
+정당명: 질서와 진보당
+정당 사상: 오스만 개조 케말주의
+지지도(%): 23
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-02.png
+
+정당 3:
+정당 ID: country-031-party-03
+정당명: 궁정충성전선
+정당 사상: 왕조 보전주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-03.png
+
+정당 4:
+정당 ID: country-031-party-04
+정당명: 아나톨리아 재건회
+정당 사상: 보수 개혁주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-04.png
+
+정당 5:
+정당 ID: country-031-party-05
+정당명: 이슬람 보전당
+정당 사상: 전통 이슬람 보수주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-05.png
+
+정당 6:
+정당 ID: country-031-party-06
+정당명: 아랍 자치블록
+정당 사상: 제국 내 자치주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-031/party-06.png
+
+=(이란 입헌왕국)=
+정부 형태: 모하마드 모사데그 중심 입헌파
+집권 정당: 입헌국민연합
+집권 사상: 입헌자유주의·민족주의·개혁주의의 중도좌파
+대표 아이콘 경로: /assets/country-panels/country-032/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-032-party-01
+정당명: 입헌국민연합
+정당 사상: 입헌 민족개혁주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-01.png
+
+정당 2:
+정당 ID: country-032-party-02
+정당명: 입헌왕정당
+정당 사상: 왕관 협력 자유주의
+지지도(%): 23
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-02.png
+
+정당 3:
+정당 ID: country-032-party-03
+정당명: 성직자 보전회
+정당 사상: 전통 종교보수주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-03.png
+
+정당 4:
+정당 ID: country-032-party-04
+정당명: 사회정의당
+정당 사상: 민주 사회개혁주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-04.png
+
+정당 5:
+정당 ID: country-032-party-05
+정당명: 바자르 상인동맹
+정당 사상: 상인 실용보수주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-05.png
+
+정당 6:
+정당 ID: country-032-party-06
+정당명: 청년 이란당
+정당 사상: 근대 민족급진주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-032/party-06.png
+
+=(노바 메히코 연방)=
+정부 형태: 라사로 카르데나스 개혁파
+집권 정당: 혁명개혁당
+집권 사상: 농지개혁·지방자치·국가개입을 중시하는 개혁좌파
+대표 아이콘 경로: /assets/country-panels/country-033/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-033-party-01
+정당명: 혁명개혁당
+정당 사상: 카르데나스식 인민개혁주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-01.png
+
+정당 2:
+정당 ID: country-033-party-02
+정당명: 가톨릭 사회연합
+정당 사상: 가톨릭 사회개혁주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-02.png
+
+정당 3:
+정당 ID: country-033-party-03
+정당명: 농민연합당
+정당 사상: 농민 공동체주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-03.png
+
+정당 4:
+정당 ID: country-033-party-04
+정당명: 국민자유당
+정당 사상: 헌정 자유주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-04.png
+
+정당 5:
+정당 ID: country-033-party-05
+정당명: 혁명군단
+정당 사상: 국민 혁명주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-05.png
+
+정당 6:
+정당 ID: country-033-party-06
+정당명: 중앙아메리카 자치회의
+정당 사상: 지역 연방주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-033/party-06.png
+
+=(작센-초 연합왕국)=
+정부 형태: 프리드리히 크리스티안 왕실·작센계 귀족·현지 엘리트
+집권 정당: 작센-초 이중왕정주의
+집권 사상: 연합왕정·귀족주의·군사보수
+대표 아이콘 경로: /assets/country-panels/country-034/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-034-party-01
+정당명: 작센-초 이중왕정주의
+정당 사상: 혼합 왕조연합주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-01.png
+
+정당 2:
+정당 ID: country-034-party-02
+정당명: 작센 군사귀족주의
+정당 사상: 유럽식 군사보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-02.png
+
+정당 3:
+정당 ID: country-034-party-03
+정당명: 초 문관보전주의
+정당 사상: 현지 관료전통주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-03.png
+
+정당 4:
+정당 ID: country-034-party-04
+정당명: 동방 국가근대주의
+정당 사상: 기술관료 근대화주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-04.png
+
+정당 5:
+정당 ID: country-034-party-05
+정당명: 현지 자치개혁론
+정당 사상: 왕정 자치자유주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-05.png
+
+정당 6:
+정당 ID: country-034-party-06
+정당명: 드레스덴 복귀주의
+정당 사상: 망명 복고국가주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-034/party-06.png
+
+=(티베트 왕국)=
+정부 형태: 13대 달라이 라마 툽텐 갸초·사원·귀족
+집권 정당: 법왕정통주의
+집권 사상: 신정군주제·종교보수
+대표 아이콘 경로: /assets/country-panels/country-035/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-035-party-01
+정당명: 법왕정통주의
+정당 사상: 달라이 라마 신정군주주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-01.png
+
+정당 2:
+정당 ID: country-035-party-02
+정당명: 사원보전주의
+정당 사상: 사원 중심 종교보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-02.png
+
+정당 3:
+정당 ID: country-035-party-03
+정당명: 귀족평의 보수주의
+정당 사상: 티베트 귀족보수주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-03.png
+
+정당 4:
+정당 ID: country-035-party-04
+정당명: 라싸 점진개혁론
+정당 사상: 국가근대화 실용주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-04.png
+
+정당 5:
+정당 ID: country-035-party-05
+정당명: 산악자강 민족주의
+정당 사상: 티베트 자강국가주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-05.png
+
+정당 6:
+정당 ID: country-035-party-06
+정당명: 불교 공동체개혁론
+정당 사상: 불교 사회개혁주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-035/party-06.png
+
+=(신프로이센 왕국)=
+정부 형태: 빅토리아 루이제 왕실·귀족·장교단
+집권 정당: 프로이센 군주주의
+집권 사상: 프로이센 왕정·군사귀족주의
+대표 아이콘 경로: /assets/country-panels/country-036/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-036-party-01
+정당명: 프로이센 군주주의
+정당 사상: 호엔촐레른 왕정주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-01.png
+
+정당 2:
+정당 ID: country-036-party-02
+정당명: 융커 군사귀족주의
+정당 사상: 프로이센 군사보수주의
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-02.png
+
+정당 3:
+정당 ID: country-036-party-03
+정당명: 국가봉사 실용주의
+정당 사상: 프로이센 행정국가주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-03.png
+
+정당 4:
+정당 ID: country-036-party-04
+정당명: 귀향 복고주의
+정당 사상: 베를린 복귀복고론
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-04.png
+
+정당 5:
+정당 ID: country-036-party-05
+정당명: 현지 융합왕당파
+정당 사상: 동방 왕정실용주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-05.png
+
+정당 6:
+정당 ID: country-036-party-06
+정당명: 중국인 자치개혁론
+정당 사상: 현지 자치개혁주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-036/party-06.png
+
+=(카리브 연방)=
+정부 형태: 마커스 가비 영향 아래의 연방정부
+집권 정당: 흑성연방당
+집권 사상: 흑인 민족주의·자조경제·반식민주의의 비사회주의 우파
+대표 아이콘 경로: /assets/country-panels/country-037/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-037-party-01
+정당명: 흑성연방당
+정당 사상: 가비식 흑인자주주의
+지지도(%): 32
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-01.png
+
+정당 2:
+정당 ID: country-037-party-02
+정당명: 카리브 노동연맹
+정당 사상: 항만 노동사회주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-02.png
+
+정당 3:
+정당 ID: country-037-party-03
+정당명: 연방자유당
+정당 사상: 카리브 연방자유주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-03.png
+
+정당 4:
+정당 ID: country-037-party-04
+정당명: 섬자치회의
+정당 사상: 군도 지방자치주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-04.png
+
+정당 5:
+정당 ID: country-037-party-05
+정당명: 농장보전당
+정당 사상: 대농장 보수주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-05.png
+
+정당 6:
+정당 ID: country-037-party-06
+정당명: 카리브 사회공화동맹
+정당 사상: 반식민 사회공화주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-037/party-06.png
+
+=(사천 공화국)=
+정부 형태: 미설정
+집권 정당: 미설정
+집권 사상: 미설정
+대표 아이콘 경로: 미설정
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: 미설정
+정당명: 미설정
+정당 사상: 미설정
+지지도(%): 미설정
+표시 색상: 미설정
+아이콘 경로: 미설정
+
+=(신도나우 연합제국)=
+정부 형태: 오토 폰 합스부르크 황실·구귀족·군부
+집권 정당: 합스부르크 연방왕정주의
+집권 사상: 왕정복고·귀족주의·제국연방주의
+대표 아이콘 경로: /assets/country-panels/country-039/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-039-party-01
+정당명: 합스부르크 연방왕정주의
+정당 사상: 합스부르크 정통주의
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-01.png
+
+정당 2:
+정당 ID: country-039-party-02
+정당명: 귀족 제국보전주의
+정당 사상: 귀족 연방보수주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-02.png
+
+정당 3:
+정당 ID: country-039-party-03
+정당명: 군정 제국국가주의
+정당 사상: 제국 군부국가주의
+지지도(%): 15
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-03.png
+
+정당 4:
+정당 ID: country-039-party-04
+정당명: 현지 협력관료주의
+정당 사상: 다민족 실용제국주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-04.png
+
+정당 5:
+정당 ID: country-039-party-05
+정당명: 자치 연방개혁주의
+정당 사상: 제국 자치개혁주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-05.png
+
+정당 6:
+정당 ID: country-039-party-06
+정당명: 도나우 복귀복고론
+정당 사상: 반혁명 복고주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-039/party-06.png
+
+=(사우디아라비아 제2국가)=
+정부 형태: 압둘아지즈 이븐 사우드 왕실·와하브 성직자·부족세력
+집권 정당: 와하브 왕정주의
+집권 사상: 왕정·종교보수·부족주의
+대표 아이콘 경로: /assets/country-panels/country-040/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-040-party-01
+정당명: 와하브 왕정주의
+정당 사상: 사우드-와하브 보전주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-01.png
+
+정당 2:
+정당 ID: country-040-party-02
+정당명: 부족 충성연합
+정당 사상: 부족 연방주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-02.png
+
+정당 3:
+정당 ID: country-040-party-03
+정당명: 헤자즈 상업실용주의
+정당 사상: 항구 상업보수주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-03.png
+
+정당 4:
+정당 ID: country-040-party-04
+정당명: 범아라비아 국가주의
+정당 사상: 아라비아 통일국가주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-04.png
+
+정당 5:
+정당 ID: country-040-party-05
+정당명: 이슬람 개혁주의
+정당 사상: 정통 이슬람 개혁노선
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-05.png
+
+정당 6:
+정당 ID: country-040-party-06
+정당명: 도시 청년근대주의
+정당 사상: 도시 근대화주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-040/party-06.png
+
+=(네팔 왕국)=
+정부 형태: 트리부반 왕실·전통 귀족·군부
+집권 정당: 궁정 전통왕정주의
+집권 사상: 왕정·귀족주의·전통주의
+대표 아이콘 경로: /assets/country-panels/country-041/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-041-party-01
+정당명: 궁정 전통왕정주의
+정당 사상: 샤 왕조 전통왕정
+지지도(%): 33
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-01.png
+
+정당 2:
+정당 ID: country-041-party-02
+정당명: 라나 귀족보전주의
+정당 사상: 귀족 군벌보수주의
+지지도(%): 27
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-02.png
+
+정당 3:
+정당 ID: country-041-party-03
+정당명: 입헌개혁주의
+정당 사상: 입헌 자유주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-03.png
+
+정당 4:
+정당 ID: country-041-party-04
+정당명: 산악 민족자강론
+정당 사상: 네팔 민족국가주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-04.png
+
+정당 5:
+정당 ID: country-041-party-05
+정당명: 농민 보호주의
+정당 사상: 농촌 공동체주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-05.png
+
+정당 6:
+정당 ID: country-041-party-06
+정당명: 불교-힌두 조화개혁
+정당 사상: 종교 사회개량주의
+지지도(%): 5
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-041/party-06.png
+
+=(신프랑스 연방왕국)=
+정부 형태: 장 도를레앙 왕실·지역 군주·식민관료
+집권 정당: 오를레앙 왕정주의
+집권 사상: 왕당파·식민 엘리트·연방군주제
+대표 아이콘 경로: /assets/country-panels/country-042/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-042-party-01
+정당명: 오를레앙 왕정주의
+정당 사상: 프랑스 망명왕조 정통주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-01.png
+
+정당 2:
+정당 ID: country-042-party-02
+정당명: 식민연방 보수주의
+정당 사상: 식민 귀족보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-02.png
+
+정당 3:
+정당 ID: country-042-party-03
+정당명: 왕실사회가톨릭
+정당 사상: 가톨릭 사회보수주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-03.png
+
+정당 4:
+정당 ID: country-042-party-04
+정당명: 현지자치 왕당파
+정당 사상: 자치 왕당 자유주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-04.png
+
+정당 5:
+정당 ID: country-042-party-05
+정당명: 기술관료 제국주의
+정당 사상: 국가개발 실용주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-05.png
+
+정당 6:
+정당 ID: country-042-party-06
+정당명: 반혁명 군국주의
+정당 사상: 복수주의 군국노선
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-042/party-06.png
+
+=(신사보이 왕국)=
+정부 형태: 비토리오 에마누엘레 3세 왕실·망명귀족·장교
+집권 정당: 사보이 복고왕정주의
+집권 사상: 왕정복고·보수주의
+대표 아이콘 경로: /assets/country-panels/country-043/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-043-party-01
+정당명: 사보이 복고왕정주의
+정당 사상: 사보이 왕조정통주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-01.png
+
+정당 2:
+정당 ID: country-043-party-02
+정당명: 궁정 보수주의
+정당 사상: 왕실 관료보수주의
+지지도(%): 23
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-02.png
+
+정당 3:
+정당 ID: country-043-party-03
+정당명: 상업 입헌주의
+정당 사상: 부르주아 입헌자유주의
+지지도(%): 15
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-03.png
+
+정당 4:
+정당 ID: country-043-party-04
+정당명: 망명 이탈리아 민족주의
+정당 사상: 반혁명 귀향국가주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-04.png
+
+정당 5:
+정당 ID: country-043-party-05
+정당명: 현지 화합실용주의
+정당 사상: 현지 협력실용주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-05.png
+
+정당 6:
+정당 ID: country-043-party-06
+정당명: 기독사회 온건파
+정당 사상: 가톨릭 사회개혁주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-043/party-06.png
+
+=(만데 연방)=
+정부 형태: 전통 군주·이슬람 학자·상인·신식 지식인 연합
+집권 정당: 만데 연방보전주의
+집권 사상: 전통주의·지역자치·상업주의가 섞인 보수 연방주의
+대표 아이콘 경로: /assets/country-panels/country-044/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-044-party-01
+정당명: 만데 연방보전주의
+정당 사상: 전통 이슬람 연방주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-01.png
+
+정당 2:
+정당 ID: country-044-party-02
+정당명: 상인 실용주의
+정당 사상: 사헬 상업실용주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-02.png
+
+정당 3:
+정당 ID: country-044-party-03
+정당명: 세속 관료개혁주의
+정당 사상: 연방 근대개혁주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-03.png
+
+정당 4:
+정당 ID: country-044-party-04
+정당명: 판아프리카 공화주의
+정당 사상: 서아프리카 공화주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-04.png
+
+정당 5:
+정당 ID: country-044-party-05
+정당명: 말리 제국복고론
+정당 사상: 만데 전통왕정주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-05.png
+
+정당 6:
+정당 ID: country-044-party-06
+정당명: 농민 공동체주의
+정당 사상: 강변 농민자치주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-044/party-06.png
+
+=(광둥 해양공화국)=
+정부 형태: 천지탕 정부·군부·상인회의
+집권 정당: 광둥국민연합
+집권 사상: 상업주의·질서주의·군부 영향이 강한 보수적 공화파
+대표 아이콘 경로: /assets/country-panels/country-045/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-045-party-01
+정당명: 광둥국민연합
+정당 사상: 해양 상업공화주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-01.png
+
+정당 2:
+정당 ID: country-045-party-02
+정당명: 공화개혁당
+정당 사상: 헌정 개혁자유주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-02.png
+
+정당 3:
+정당 ID: country-045-party-03
+정당명: 연해자치연맹
+정당 사상: 연방 지방주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-03.png
+
+정당 4:
+정당 ID: country-045-party-04
+정당명: 항만노동당
+정당 사상: 노동 사회민주주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-04.png
+
+정당 5:
+정당 ID: country-045-party-05
+정당명: 중화재통일회
+정당 사상: 중화 국민주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-05.png
+
+정당 6:
+정당 ID: country-045-party-06
+정당명: 해군청년회
+정당 사상: 해양 국가주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-045/party-06.png
+
+=(그란콜롬비아 연방)=
+정부 형태: 알폰소 로페스 푸마레호 중심 자유주의·연방주의 정부
+집권 정당: 자유연방당
+집권 사상: 자유주의 개혁·토지개혁·교육개혁 중심의 중도좌파
+대표 아이콘 경로: /assets/country-panels/country-046/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-046-party-01
+정당명: 자유연방당
+정당 사상: 연방 개혁자유주의
+지지도(%): 32
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-01.png
+
+정당 2:
+정당 ID: country-046-party-02
+정당명: 국민보수당
+정당 사상: 질서 보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-02.png
+
+정당 3:
+정당 ID: country-046-party-03
+정당명: 사회개혁동맹
+정당 사상: 사회자유 개혁주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-03.png
+
+정당 4:
+정당 ID: country-046-party-04
+정당명: 노동민주당
+정당 사상: 민주 사회주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-04.png
+
+정당 5:
+정당 ID: country-046-party-05
+정당명: 볼리바르 연합
+정당 사상: 볼리바르식 공화애국주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-05.png
+
+정당 6:
+정당 ID: country-046-party-06
+정당명: 지역자치회의
+정당 사상: 지방 자치주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-046/party-06.png
+
+=(소코토 연방)=
+정부 형태: 칼리프·에미르·성직자 연방
+집권 정당: 칼리프 연방전통주의
+집권 사상: 이슬람 전통주의·세습 엘리트 연방
+대표 아이콘 경로: /assets/country-panels/country-047/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-047-party-01
+정당명: 칼리프 연방전통주의
+정당 사상: 소코토 이슬람 전통주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-01.png
+
+정당 2:
+정당 ID: country-047-party-02
+정당명: 에미르 자치주의
+정당 사상: 귀족 지역연방주의
+지지도(%): 19
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-02.png
+
+정당 3:
+정당 ID: country-047-party-03
+정당명: 이슬람 개혁행정주의
+정당 사상: 샤리아 행정개혁주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-03.png
+
+정당 4:
+정당 ID: country-047-party-04
+정당명: 상업 근대주의
+정당 사상: 사헬 상업실용주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-04.png
+
+정당 5:
+정당 ID: country-047-party-05
+정당명: 남부 권리운동
+정당 사상: 공동체 평등개혁주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-05.png
+
+정당 6:
+정당 ID: country-047-party-06
+정당명: 청년 범사헬주의
+정당 사상: 반식민 민족주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-047/party-06.png
+
+=(에티오피아 제국)=
+정부 형태: 하일레 셀라시에 황실·중앙관료
+집권 정당: 솔로몬 왕조 근대주의
+집권 사상: 군주제·중앙집권적 보수 근대화
+대표 아이콘 경로: /assets/country-panels/country-048/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-048-party-01
+정당명: 솔로몬 왕조 근대주의
+정당 사상: 황제주도 근대왕정주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-01.png
+
+정당 2:
+정당 ID: country-048-party-02
+정당명: 쇼아 관료개혁주의
+정당 사상: 국가기술 관료주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-02.png
+
+정당 3:
+정당 ID: country-048-party-03
+정당명: 지방귀족 보전주의
+정당 사상: 봉건 귀족보수주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-03.png
+
+정당 4:
+정당 ID: country-048-party-04
+정당명: 정교회 사회보수주의
+정당 사상: 기독교 보수주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-04.png
+
+정당 5:
+정당 ID: country-048-party-05
+정당명: 아프리카 자주왕정론
+정당 사상: 아프리카 자주주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-05.png
+
+정당 6:
+정당 ID: country-048-party-06
+정당명: 입헌개량파
+정당 사상: 왕정 입헌개혁주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-048/party-06.png
+
+=(대브라질 제국)=
+정부 형태: 브라간사 황실 중심 제국정부
+집권 정당: 제국보전당
+집권 사상: 왕정·귀족·자본 중심의 보수 우파
+대표 아이콘 경로: /assets/country-panels/country-049/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-049-party-01
+정당명: 제국보전당
+정당 사상: 황실 보수주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-01.png
+
+정당 2:
+정당 ID: country-049-party-02
+정당명: 자유입헌당
+정당 사상: 입헌 자유주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-02.png
+
+정당 3:
+정당 ID: country-049-party-03
+정당명: 국민노동당
+정당 사상: 온건 노동사회주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-03.png
+
+정당 4:
+정당 ID: country-049-party-04
+정당명: 공화연맹
+정당 사상: 공화 개혁주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-04.png
+
+정당 5:
+정당 ID: country-049-party-05
+정당명: 왕실산업전선
+정당 사상: 산업 기술보수주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-05.png
+
+정당 6:
+정당 ID: country-049-party-06
+정당명: 적도통합당
+정당 사상: 국민통합 자유주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-049/party-06.png
+
+=(아샨티 제국)=
+정부 형태: 프렘페 2세 왕실·지방 추장·신식 관료
+집권 정당: 황금의자 근대왕정주의
+집권 사상: 군주제·전통 엘리트·보수적 근대화
+대표 아이콘 경로: /assets/country-panels/country-050/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-050-party-01
+정당명: 황금의자 근대왕정주의
+정당 사상: 아샨티 왕정근대주의
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-01.png
+
+정당 2:
+정당 ID: country-050-party-02
+정당명: 추장연합 보전주의
+정당 사상: 전통 귀족연합주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-02.png
+
+정당 3:
+정당 ID: country-050-party-03
+정당명: 쿠마시 관료개혁주의
+정당 사상: 국가근대화 실용주의
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-03.png
+
+정당 4:
+정당 ID: country-050-party-04
+정당명: 황금해안 상업주의
+정당 사상: 상업 자유보수주의
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-04.png
+
+정당 5:
+정당 ID: country-050-party-05
+정당명: 서아프리카 자주주의
+정당 사상: 범아프리카 자주주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-05.png
+
+정당 6:
+정당 ID: country-050-party-06
+정당명: 농촌 공동체주의
+정당 사상: 농민 공동체보호론
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-050/party-06.png
+
+=(벨기에-콩고 왕령)=
+정부 형태: 알베르 1세 왕실·군부·식민관료·회사
+집권 정당: 식민 왕정주의
+집권 사상: 식민왕정·군부·기업 엘리트 중심의 우파
+대표 아이콘 경로: /assets/country-panels/country-051/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-051-party-01
+정당명: 식민 왕정주의
+정당 사상: 벨기에-콩고 왕정주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-01.png
+
+정당 2:
+정당 ID: country-051-party-02
+정당명: 회사 식민보수주의
+정당 사상: 재벌 식민실용주의
+지지도(%): 23
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-02.png
+
+정당 3:
+정당 ID: country-051-party-03
+정당명: 군정 질서주의
+정당 사상: 식민 군부권위주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-03.png
+
+정당 4:
+정당 ID: country-051-party-04
+정당명: 가톨릭 문명화론
+정당 사상: 선교 보수주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-04.png
+
+정당 5:
+정당 ID: country-051-party-05
+정당명: 콩고 권리개혁주의
+정당 사상: 식민 개혁 자유주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-05.png
+
+정당 6:
+정당 ID: country-051-party-06
+정당명: 반식민 민족해방론
+정당 사상: 콩고 민족공화주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-051/party-06.png
+
+=(페루-볼리비아 연방)=
+정부 형태: 리마·라파스의 공화국 엘리트 연방정부
+집권 정당: 안데스 국민연합
+집권 사상: 과두적 공화주의·광산 엘리트 중심 우파
+대표 아이콘 경로: /assets/country-panels/country-052/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-052-party-01
+정당명: 안데스 국민연합
+정당 사상: 과두적 연방공화주의
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-01.png
+
+정당 2:
+정당 ID: country-052-party-02
+정당명: 공화자유당
+정당 사상: 안데스 자유주의
+지지도(%): 20
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-02.png
+
+정당 3:
+정당 ID: country-052-party-03
+정당명: 아프리스타 인민동맹
+정당 사상: 인도아메리카 사회공화주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-03.png
+
+정당 4:
+정당 ID: country-052-party-04
+정당명: 광산공화당
+정당 사상: 광산 자유보수주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-04.png
+
+정당 5:
+정당 ID: country-052-party-05
+정당명: 안데스 농민연맹
+정당 사상: 원주민 농민주의
+지지도(%): 11
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-05.png
+
+정당 6:
+정당 ID: country-052-party-06
+정당명: 국민군사전선
+정당 사상: 군부 국가공화주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-052/party-06.png
+
+=(오라녜-누산타라 연합왕국)=
+정부 형태: 빌헬미나 왕실·누산타라 지방왕실·식민관료·상업세력
+집권 정당: 오라녜-누산타라 연합왕정주의
+집권 사상: 연합군주제·왕실 보수·상업주의
+대표 아이콘 경로: /assets/country-panels/country-053/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-053-party-01
+정당명: 오라녜-누산타라 연합왕정주의
+정당 사상: 다왕조 연합군주주의
+지지도(%): 28
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-01.png
+
+정당 2:
+정당 ID: country-053-party-02
+정당명: 해양 상업제국주의
+정당 사상: 항만 상업자본주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-02.png
+
+정당 3:
+정당 ID: country-053-party-03
+정당명: 군도 자치왕정론
+정당 사상: 지방 왕실자치주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-03.png
+
+정당 4:
+정당 ID: country-053-party-04
+정당명: 식민관료 실용주의
+정당 사상: 국가행정 실용주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-04.png
+
+정당 5:
+정당 ID: country-053-party-05
+정당명: 누산타라 민족자주론
+정당 사상: 군도 민족주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-05.png
+
+정당 6:
+정당 ID: country-053-party-06
+정당명: 이슬람 공동체 정치
+정당 사상: 이슬람 민주공동체주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-053/party-06.png
+
+=(칠레 공화국)=
+정부 형태: 아르투로 알레산드리 중심 자유주의 개혁파
+집권 정당: 자유개혁당
+집권 사상: 자유주의·사회개혁 성향의 중도좌파
+대표 아이콘 경로: /assets/country-panels/country-054/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-054-party-01
+정당명: 자유개혁당
+정당 사상: 알레산드리식 사회자유주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-01.png
+
+정당 2:
+정당 ID: country-054-party-02
+정당명: 보수당
+정당 사상: 가톨릭 보수주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-02.png
+
+정당 3:
+정당 ID: country-054-party-03
+정당명: 급진공화당
+정당 사상: 세속 급진공화주의
+지지도(%): 18
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-03.png
+
+정당 4:
+정당 ID: country-054-party-04
+정당명: 사회노동당
+정당 사상: 노동 사회주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-04.png
+
+정당 5:
+정당 ID: country-054-party-05
+정당명: 국민자유당
+정당 사상: 시장 자유주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-05.png
+
+정당 6:
+정당 ID: country-054-party-06
+정당명: 국가방위연맹
+정당 사상: 군부 국가주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-054/party-06.png
+
+=(로디지아 인권동맹연방)=
+정부 형태: 인권동맹: 자유주의자·선교계·노동조합·일부 토착 지도자
+집권 정당: 인권동맹
+집권 사상: 자유주의 개혁·노동권·점진적 권리확대의 중도좌파
+대표 아이콘 경로: /assets/country-panels/country-055/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-055-party-01
+정당명: 인권동맹
+정당 사상: 자유 인권개혁주의
+지지도(%): 30
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-01.png
+
+정당 2:
+정당 ID: country-055-party-02
+정당명: 정착민 보전당
+정당 사상: 식민 보수주의
+지지도(%): 22
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-02.png
+
+정당 3:
+정당 ID: country-055-party-03
+정당명: 노동권익당
+정당 사상: 노동 자유사회주의
+지지도(%): 15
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-03.png
+
+정당 4:
+정당 ID: country-055-party-04
+정당명: 아프리카 민족회의
+정당 사상: 아프리카 민족민주주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-04.png
+
+정당 5:
+정당 ID: country-055-party-05
+정당명: 선교사회당
+정당 사상: 기독교 사회개혁주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-05.png
+
+정당 6:
+정당 ID: country-055-party-06
+정당명: 광산질서전선
+정당 사상: 기업 질서보수주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-055/party-06.png
+
+=(아르헨티나 공화국)=
+정부 형태: 아구스틴 페드로 후스토 정부·군부·보수 엘리트·수출업자
+집권 정당: 국민민주당
+집권 사상: 보수주의·과두주의·군부 친화
+대표 아이콘 경로: /assets/country-panels/country-056/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-056-party-01
+정당명: 국민민주당
+정당 사상: 질서 보수주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-01.png
+
+정당 2:
+정당 ID: country-056-party-02
+정당명: 급진시민연합
+정당 사상: 중도 진보 공화주의
+지지도(%): 25
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-02.png
+
+정당 3:
+정당 ID: country-056-party-03
+정당명: 사회당
+정당 사상: 도시 사회민주주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-03.png
+
+정당 4:
+정당 ID: country-056-party-04
+정당명: 애국노동전선
+정당 사상: 국민사회 개혁주의
+지지도(%): 12
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-04.png
+
+정당 5:
+정당 ID: country-056-party-05
+정당명: 연방보수당
+정당 사상: 지방 과두보수주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-05.png
+
+정당 6:
+정당 ID: country-056-party-06
+정당명: 군부국민연맹
+정당 사상: 군부 국가주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-056/party-06.png
+
+=(캐나다 자치령)=
+정부 형태: R. B. 베넷 정부
+집권 정당: 보수당
+집권 사상: 보수주의·제국협력·재정보수
+대표 아이콘 경로: /assets/country-panels/country-057/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-057-party-01
+정당명: 보수당
+정당 사상: 제국 협력 보수주의
+지지도(%): 38
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-057/party-01.png
+
+정당 2:
+정당 ID: country-057-party-02
+정당명: 자유당
+정당 사상: 자치 자유주의
+지지도(%): 31
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-057/party-02.png
+
+정당 3:
+정당 ID: country-057-party-03
+정당명: 협동연방당
+정당 사상: 사회민주주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-057/party-03.png
+
+정당 4:
+정당 ID: country-057-party-04
+정당명: 진보농민당
+정당 사상: 농민 진보주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-057/party-04.png
+
+정당 5:
+정당 ID: country-057-party-05
+정당명: 제국연대당
+정당 사상: 왕당 제국주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-057/party-05.png
+
+=(영국령 인도)=
+정부 형태: 윈스턴 처칠 총독부·군·식민관료
+집권 정당: 제국치안주의
+집권 사상: 제국주의·비상통치·권위주의
+대표 아이콘 경로: /assets/country-panels/country-058/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-058-party-01
+정당명: 제국치안주의
+정당 사상: 처칠식 비상통치
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-01.png
+
+정당 2:
+정당 ID: country-058-party-02
+정당명: 인도자치 자유주의
+정당 사상: 헌정 자치주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-02.png
+
+정당 3:
+정당 ID: country-058-party-03
+정당명: 간디주의 대중민족주의
+정당 사상: 비폭력 민족동원론
+지지도(%): 17
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-03.png
+
+정당 4:
+정당 ID: country-058-party-04
+정당명: 혁명 공화사회주의
+정당 사상: 반제 사회혁명론
+지지도(%): 13
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-04.png
+
+정당 5:
+정당 ID: country-058-party-05
+정당명: 종교공동체 보전주의
+정당 사상: 종교 공동체 정치
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-05.png
+
+정당 6:
+정당 ID: country-058-party-06
+정당명: 급진 독립주의
+정당 사상: 무장 독립주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-058/party-06.png
+
+=(필리핀 제도정부)=
+정부 형태: 마누엘 L. 케손 자치파·필리핀 정치엘리트
+집권 정당: 국민당 통합파
+집권 사상: 민족주의·자치주의·엘리트 자유보수
+대표 아이콘 경로: /assets/country-panels/country-059/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-059-party-01
+정당명: 국민당 통합파
+정당 사상: 협상 독립주의
+지지도(%): 41
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-01.png
+
+정당 2:
+정당 ID: country-059-party-02
+정당명: 국민당 독립파
+정당 사상: 즉시 독립 공화주의
+지지도(%): 21
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-02.png
+
+정당 3:
+정당 ID: country-059-party-03
+정당명: 민주당
+정당 사상: 엘리트 자유공화주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-03.png
+
+정당 4:
+정당 ID: country-059-party-04
+정당명: 사크달당
+정당 사상: 급진 필리핀 민족주의
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-04.png
+
+정당 5:
+정당 ID: country-059-party-05
+정당명: 노동당
+정당 사상: 필리핀 노동사회주의
+지지도(%): 8
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-05.png
+
+정당 6:
+정당 ID: country-059-party-06
+정당명: 농민협동연맹
+정당 사상: 농민 협동주의
+지지도(%): 6
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-059/party-06.png
+
+=(오스트레일리아 연방)=
+정부 형태: 조지프 라이언스 정부
+집권 정당: 통합오스트레일리아당
+집권 사상: 자유보수·재정보수·제국협력
+대표 아이콘 경로: /assets/country-panels/country-060/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-060-party-01
+정당명: 통합오스트레일리아당
+정당 사상: 자유보수주의
+지지도(%): 36
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-01.png
+
+정당 2:
+정당 ID: country-060-party-02
+정당명: 노동당
+정당 사상: 오스트레일리아 노동사회주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-02.png
+
+정당 3:
+정당 ID: country-060-party-03
+정당명: 농촌당
+정당 사상: 농민 보수주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-03.png
+
+정당 4:
+정당 ID: country-060-party-04
+정당명: 제국방위연맹
+정당 사상: 제국 애국보수주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-04.png
+
+정당 5:
+정당 ID: country-060-party-05
+정당명: 사회신용연합
+정당 사상: 통화개혁 대중주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-05.png
+
+정당 6:
+정당 ID: country-060-party-06
+정당명: 공화자치회의
+정당 사상: 오스트레일리아 자치자유주의
+지지도(%): 5
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-060/party-06.png
+
+=(남아프리카 연방)=
+정부 형태: J. B. M. 헤르초흐 정부·아프리카너 민족주의 세력
+집권 정당: 국민당
+집권 사상: 보수·민족주의·백인 우위 질서
+대표 아이콘 경로: /assets/country-panels/country-061/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-061-party-01
+정당명: 국민당
+정당 사상: 아프리카너 민족보수주의
+지지도(%): 36
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-01.png
+
+정당 2:
+정당 ID: country-061-party-02
+정당명: 남아프리카당
+정당 사상: 제국 협력 보수주의
+지지도(%): 24
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-02.png
+
+정당 3:
+정당 ID: country-061-party-03
+정당명: 노동당
+정당 사상: 백인 노동조합주의
+지지도(%): 14
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-03.png
+
+정당 4:
+정당 ID: country-061-party-04
+정당명: 자유개혁당
+정당 사상: 자유주의 점진개혁
+지지도(%): 10
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-04.png
+
+정당 5:
+정당 ID: country-061-party-05
+정당명: 원주민 권리회의
+정당 사상: 인종평등 개혁주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-05.png
+
+정당 6:
+정당 ID: country-061-party-06
+정당명: 보어수호전선
+정당 사상: 강경 분리주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-061/party-06.png
+
+=(뉴질랜드 자치령)=
+정부 형태: 조지 포브스 정부
+집권 정당: 연합당
+집권 사상: 의회주의적 자유보수·재정긴축 계열
+대표 아이콘 경로: /assets/country-panels/country-062/ideology.png
+정당 지지도 합계(%): 미설정
+
+정당 1:
+정당 ID: country-062-party-01
+정당명: 연합당
+정당 사상: 자유보수 재정주의
+지지도(%): 34
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-01.png
+
+정당 2:
+정당 ID: country-062-party-02
+정당명: 노동당
+정당 사상: 노동 사회민주주의
+지지도(%): 29
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-02.png
+
+정당 3:
+정당 ID: country-062-party-03
+정당명: 개혁당
+정당 사상: 농촌 보수주의
+지지도(%): 16
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-03.png
+
+정당 4:
+정당 ID: country-062-party-04
+정당명: 제국충성회
+정당 사상: 제국 연대주의
+지지도(%): 9
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-04.png
+
+정당 5:
+정당 ID: country-062-party-05
+정당명: 통화개혁연맹
+정당 사상: 통화개혁 대중주의
+지지도(%): 7
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-05.png
+
+정당 6:
+정당 ID: country-062-party-06
+정당명: 마오리 협의회
+정당 사상: 원주민 자치개혁
+지지도(%): 5
+표시 색상: 미설정
+아이콘 경로: /assets/country-panels/country-062/party-06.png
