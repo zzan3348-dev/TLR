@@ -22,7 +22,7 @@ const cards = [
     id: "country-selection",
     title: "국가선택",
     subtitle: "1932년의 세계를 열람합니다",
-    image: "/maps/world-1932.png",
+    image: "/assets/title/country-selection-command-room.png",
     action: "open-map",
   },
   {

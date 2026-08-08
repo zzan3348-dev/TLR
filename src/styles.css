@@ -6353,7 +6353,42 @@ button:focus-visible,
 .strategy-metric-card header > .ui-icon { width: 18px; height: 18px; margin-right: 6px; display: inline-block; vertical-align: middle; }
 
 .strategic-window__actions {
+  display: flex;
+  min-height: 34px;
+  align-items: stretch;
   border-bottom: 1px solid #33413f;
+  background: #171c1d;
+}
+
+.strategic-window__action {
+  display: inline-flex;
+  min-width: 0;
+  padding: 5px 10px;
+  align-items: center;
+  gap: 5px;
+  color: #b9b9b0;
+  border: 0;
+  border-right: 1px solid #39413f;
+  background: #171c1d;
+  font: 700 0.72rem/1 "IBM Plex Mono", monospace;
+  cursor: pointer;
+}
+
+.strategic-window__action .ui-icon {
+  width: 14px;
+  height: 14px;
+  color: #9ba7a2;
+}
+
+.strategic-window__action:hover,
+.strategic-window__action:focus-visible {
+  color: #e1ddd2;
+  background: #252b2b;
+  outline: none;
+}
+
+.strategic-window__action:focus-visible {
+  box-shadow: inset 0 -2px #6b918c;
 }
 
 .strategic-window__body {
