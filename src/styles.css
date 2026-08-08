@@ -45,8 +45,9 @@
 .directorate-modal__rule { height: 1px; margin: 1rem 0; background: linear-gradient(90deg,#a22d35,transparent); }
 .directorate-modal__classification { margin: 0 0 1rem; color: #bfaf9c; font-size: .9rem; }
 .directorate-modal label { display: block; margin-bottom: .4rem; color: #c3b58f; font-size: .8rem; }
-.directorate-modal input { width: 100%; box-sizing: border-box; padding: .65rem .7rem; color: #f4e8cc; background: #050b0c; border: 1px solid #5e6b65; outline: none; font: 1rem ui-monospace,monospace; }
+.directorate-modal input { width: 100%; box-sizing: border-box; padding: .65rem .7rem; color: #f4e8cc; caret-color: #e3c36d; background: #050b0c; border: 1px solid #5e6b65; outline: none; font: 1rem ui-monospace,monospace; pointer-events: auto; user-select: text; }
 .directorate-modal input:focus { border-color: #b34a4e; box-shadow: 0 0 0 1px rgba(179,74,78,.35); }
+.directorate-modal__hint { display: block; margin-top: .42rem; color: #78827e; font: .68rem/1.4 ui-monospace,monospace; }
 .directorate-modal__error { margin: .55rem 0 0; color: #df7770; font-size: .78rem; }
 .directorate-modal__actions { display: flex; justify-content: flex-end; gap: .55rem; margin-top: 1.25rem; }
 .directorate-modal__actions button { padding: .52rem .9rem; color: #ded8ca; background: #151b1b; border: 1px solid #59605b; font: .78rem Georgia,serif; cursor: pointer; }

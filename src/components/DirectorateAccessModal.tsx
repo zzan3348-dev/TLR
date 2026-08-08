@@ -54,8 +54,8 @@ export function DirectorateAccessModal({ open, onClose, onAuthorized }: Director
   };
 
   return (
-    <div className="directorate-modal-backdrop" role="presentation">
-      <section className="directorate-modal" role="dialog" aria-modal="true" aria-labelledby="directorate-title">
+    <div className="directorate-modal-backdrop" role="presentation" onPointerDown={(event) => event.stopPropagation()}>
+      <section className="directorate-modal" role="dialog" aria-modal="true" aria-labelledby="directorate-title" onKeyDown={(event) => event.stopPropagation()}>
         <div className="directorate-modal__seal" aria-hidden="true">DIRECTORATE</div>
         <p className="directorate-modal__eyebrow">THE LONG REVOLUTION</p>
         <h2 id="directorate-title">DIRECTORATE CONTROL NETWORK</h2>
@@ -63,7 +63,19 @@ export function DirectorateAccessModal({ open, onClose, onAuthorized }: Director
         <p className="directorate-modal__classification">보안 등급: 미확인</p>
         <form onSubmit={(event) => void submit(event)}>
           <label htmlFor="directorate-code">관리 코드 입력</label>
-          <input ref={inputRef} id="directorate-code" type="password" value={code} onChange={(event) => setCode(event.target.value)} autoComplete="off" maxLength={128} />
+          <input
+            ref={inputRef}
+            id="directorate-code"
+            type="text"
+            value={code}
+            onChange={(event) => setCode(event.target.value)}
+            autoComplete="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            maxLength={128}
+            aria-describedby="directorate-code-hint"
+          />
+          <small id="directorate-code-hint" className="directorate-modal__hint">한글 관리 코드를 그대로 입력하십시오.</small>
           {status === "error" ? <p className="directorate-modal__error">인증 코드가 올바르지 않습니다</p> : null}
           <div className="directorate-modal__actions">
             <button type="submit" disabled={status === "submitting" || !code}>{status === "submitting" ? "접속 중" : "관제망 접속"}</button>
