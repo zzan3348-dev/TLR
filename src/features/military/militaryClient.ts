@@ -1,0 +1,23 @@
+import type { MilitaryOverview } from "./types";
+
+async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(`/api/military/${route}`, {
+    credentials: "include",
+    ...init,
+    headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
+  });
+  const payload = await response.json() as T & { error?: string };
+  if (!response.ok) throw new Error(payload.error ?? "MILITARY_REQUEST_FAILED");
+  return payload;
+}
+
+export function fetchMilitaryOverview(): Promise<MilitaryOverview> {
+  return militaryRequest<MilitaryOverview>("overview");
+}
+
+export function militaryMutation<T>(route: string, body: Record<string, unknown>, method = "POST"): Promise<T> {
+  return militaryRequest<T>(route, {
+    method,
+    ...(method === "GET" ? {} : { body: JSON.stringify(body) }),
+  });
+}

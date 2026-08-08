@@ -3,6 +3,7 @@ import { ForeignCountryWindow } from "../../diplomacy/components/ForeignCountryW
 import { EconomyWindow } from "../../economy/components/EconomyWindow";
 import { IntelligenceWindow } from "../../intelligence/components/IntelligenceWindow";
 import { PoliticsPanel } from "../../politics/components/PoliticsPanel";
+import { MilitaryWindow } from "../../military/components/MilitaryWindow";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import type { PlaySimulationState } from "../data/playSimulationState";
 import type { PrimaryWindow } from "../types";
@@ -63,6 +64,10 @@ export function PlayWindowManager({
 
   if (activeWindow === "decisions") {
     return <DecisionWindow country={playerCountry} onClose={onCloseWindow} />;
+  }
+
+  if (activeWindow === "military") {
+    return <MilitaryWindow countryKey={playerCountry.key} onClose={onCloseWindow} />;
   }
 
   return null;

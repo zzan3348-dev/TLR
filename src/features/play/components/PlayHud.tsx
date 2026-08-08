@@ -49,6 +49,7 @@ const WINDOW_BUTTONS: readonly {
   { id: "decisions", label: "디시전", icon: "menu/decisions" },
   { id: "diplomacy", label: "외교", icon: "menu/diplomacy" },
   { id: "intelligence", label: "첩보", icon: "menu/intelligence" },
+  { id: "military", label: "군사", icon: "sections/military" },
 ];
 
 function signedTone(value: number | null): HudTone {

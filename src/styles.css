@@ -7749,6 +7749,674 @@ button:focus-visible,
   z-index: 1000;
 }
 
+/* ============ 군사 사령부 (1930년대 관제판 톤) ============ */
+
+.military-window__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  background: var(--tlr-gunmetal-800, #1c2020);
+}
+
+.military-window__tab {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 0.85rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--tlr-steel-line, #3a3f3f);
+  cursor: pointer;
+}
+
+.military-window__tab--active {
+  color: var(--tlr-ivory, #eee7d6);
+  background: var(--tlr-gunmetal-700, #262b2b);
+  box-shadow: inset 0 -2px 0 var(--tlr-teal-accent, #4c8f8b);
+}
+
+.military-window__body {
+  padding: 0.85rem 1rem 1.25rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.military-window__section-title {
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.85rem;
+  color: var(--tlr-ivory, #eee7d6);
+  margin: 0.9rem 0 0.4rem;
+  border-left: 3px solid var(--tlr-teal-accent, #4c8f8b);
+  padding-left: 0.5rem;
+}
+
+.military-window__state {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.military-window__state--error {
+  color: var(--tlr-amber-warn, #c99a3d);
+}
+
+.military-window__retry {
+  margin-left: auto;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--tlr-ivory, #eee7d6);
+  background: var(--tlr-gunmetal-700, #262b2b);
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.military-window__empty,
+.military-window__hint {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  padding: 0.4rem 0;
+}
+
+.military-window__readiness-banner {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  border: 1px solid var(--tlr-amber-warn, #c99a3d);
+  background: rgba(201, 154, 61, 0.08);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.75rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-window__readiness-banner--disabled {
+  border-color: #8a3b3b;
+  background: rgba(138, 59, 59, 0.1);
+}
+
+.military-window__readiness-banner ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1rem;
+}
+
+/* ---- 개요 ---- */
+
+.military-overview__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--tlr-steel-line, #3a3f3f);
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+}
+
+.military-overview__stat {
+  background: var(--tlr-gunmetal-800, #1c2020);
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.military-overview__stat-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  text-transform: uppercase;
+}
+
+.military-overview__stat-value {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-overview__conflict-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+}
+
+.military-overview__conflict-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory, #eee7d6);
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+}
+
+.military-overview__conflict-item:last-child {
+  border-bottom: none;
+}
+
+/* ---- 편제 템플릿 카드 ---- */
+
+.military-force-tab__templates {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.military-template-card {
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  background: var(--tlr-gunmetal-800, #1c2020);
+  padding: 0.55rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.military-template-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.8rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-template-card__badge {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--tlr-amber-warn, #c99a3d);
+  color: var(--tlr-amber-warn, #c99a3d);
+}
+
+.military-template-card__badge--disabled {
+  border-color: #8a3b3b;
+  color: #c96a6a;
+}
+
+.military-template-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+}
+
+.military-template-card__form-button {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--tlr-ivory, #eee7d6);
+  background: var(--tlr-gunmetal-700, #262b2b);
+  border: 1px solid var(--tlr-teal-accent, #4c8f8b);
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+}
+
+.military-template-card__form-button:disabled {
+  color: var(--tlr-ivory-dim, #6f6d63);
+  border-color: var(--tlr-steel-line, #3a3f3f);
+  cursor: not-allowed;
+}
+
+/* ---- 로스터 테이블 ---- */
+
+.military-roster-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-roster-table th,
+.military-roster-table td {
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.3rem 0.45rem;
+  text-align: left;
+}
+
+.military-roster-table th {
+  background: var(--tlr-gunmetal-700, #262b2b);
+  color: var(--tlr-ivory-dim, #a9a79a);
+  font-weight: 400;
+}
+
+.military-fleet-card {
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  margin-bottom: 0.6rem;
+}
+
+.military-fleet-card__header {
+  display: flex;
+  justify-content: space-between;
+  background: var(--tlr-gunmetal-700, #262b2b);
+  padding: 0.35rem 0.5rem;
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.78rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+/* ---- 전선 ---- */
+
+.military-front-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.military-front-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-front-item__kind {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--tlr-teal-accent, #4c8f8b);
+  color: var(--tlr-teal-accent, #4c8f8b);
+}
+
+.military-front-item__kind--naval_area {
+  border-color: #4c6f8f;
+  color: #4c6f8f;
+}
+
+/* ---- 작전 ---- */
+
+.military-action-list {
+  list-style: none;
+  margin: 0 0 0.6rem;
+  padding: 0;
+}
+
+.military-action-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.military-action-item__status {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--tlr-ivory-dim, #a9a79a);
+  color: var(--tlr-ivory-dim, #a9a79a);
+}
+
+.military-action-item__status--submitted,
+.military-action-item__status--under_review {
+  border-color: var(--tlr-amber-warn, #c99a3d);
+  color: var(--tlr-amber-warn, #c99a3d);
+}
+
+.military-action-item__status--resolved {
+  border-color: var(--tlr-teal-accent, #4c8f8b);
+  color: var(--tlr-teal-accent, #4c8f8b);
+}
+
+.military-action-item__locked {
+  margin-left: auto;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  font-size: 0.65rem;
+}
+
+.military-action-item__edit {
+  margin-left: auto;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  background: transparent;
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  color: var(--tlr-ivory, #eee7d6);
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+}
+
+/* ---- 분쟁창 레이아웃 ---- */
+
+.conflict-window__layout {
+  display: flex;
+  gap: 0;
+  min-height: 0;
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+}
+
+.conflict-window__list {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--tlr-steel-line, #3a3f3f);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.conflict-window__list-item {
+  text-align: left;
+  background: var(--tlr-gunmetal-800, #1c2020);
+  border: none;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.conflict-window__list-item--active {
+  background: var(--tlr-gunmetal-700, #262b2b);
+  box-shadow: inset 3px 0 0 var(--tlr-teal-accent, #4c8f8b);
+}
+
+.conflict-window__list-name {
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.78rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.conflict-window__list-meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+}
+
+.conflict-window__detail {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  overflow-y: auto;
+}
+
+.conflict-window__detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: "Noto Serif KR", Georgia, serif;
+  color: var(--tlr-ivory, #eee7d6);
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.conflict-window__sides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.conflict-window__side h4 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  margin: 0 0 0.25rem;
+}
+
+.conflict-window__side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+/* ---- 작전 초안 폼 ---- */
+
+.conflict-window__draft {
+  border-top: 1px solid var(--tlr-steel-line, #3a3f3f);
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.conflict-window__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+}
+
+.conflict-window__field input,
+.conflict-window__field textarea,
+.conflict-window__field select {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--tlr-ivory, #eee7d6);
+  background: var(--tlr-gunmetal-800, #1c2020);
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.35rem 0.5rem;
+}
+
+.conflict-window__assignments ul {
+  list-style: none;
+  margin: 0.2rem 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.conflict-window__assignments li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.2rem 0;
+}
+
+.conflict-window__assignments button {
+  background: transparent;
+  border: none;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  cursor: pointer;
+}
+
+.conflict-window__assignment-input {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.conflict-window__assignment-input input {
+  flex: 1;
+}
+
+.conflict-window__draft-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.conflict-window__draft-actions button {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  background: var(--tlr-gunmetal-700, #262b2b);
+  color: var(--tlr-ivory, #eee7d6);
+  cursor: pointer;
+}
+
+.conflict-window__draft-actions--submit {
+  border-color: var(--tlr-teal-accent, #4c8f8b);
+  color: var(--tlr-teal-accent, #4c8f8b);
+}
+
+/* ---- 전쟁 보고서 ---- */
+
+.war-report-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.war-report-card {
+  border: 1px solid var(--tlr-steel-line, #3a3f3f);
+  background: var(--tlr-gunmetal-800, #1c2020);
+}
+
+.war-report-card--win {
+  border-left: 3px solid var(--tlr-teal-accent, #4c8f8b);
+}
+
+.war-report-card--loss {
+  border-left: 3px solid #8a3b3b;
+}
+
+.war-report-card--neutral {
+  border-left: 3px solid var(--tlr-ivory-dim, #a9a79a);
+}
+
+.war-report-card__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  text-align: left;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.war-report-card__marker {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid currentColor;
+}
+
+.war-report-card__title {
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+.war-report-card__date {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+}
+
+.war-report-card__body {
+  padding: 0 0.6rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.war-report-card__text {
+  font-family: "Noto Serif KR", Georgia, serif;
+  font-size: 0.78rem;
+  color: var(--tlr-ivory, #eee7d6);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.war-report-card__territory-summary {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--tlr-amber-warn, #c99a3d);
+  margin: 0;
+}
+
+.war-report-card__section h4 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  margin: 0 0 0.2rem;
+  text-transform: uppercase;
+}
+
+.war-report-card__section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--tlr-ivory, #eee7d6);
+}
+
+.war-report-card__section li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding: 0.15rem 0;
+}
+
+.war-report-card__footer {
+  display: flex;
+  gap: 0.8rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  color: var(--tlr-ivory-dim, #a9a79a);
+  border-top: 1px solid var(--tlr-steel-line, #3a3f3f);
+  padding-top: 0.35rem;
+}
+
+/* ---- 모바일: 전체 화면 슬라이드 패널 (기존 strategic-window 모바일 규칙과 동일 문법 유지) ---- */
+
+@media (max-width: 720px) {
+  .conflict-window__layout {
+    flex-direction: column;
+  }
+
+  .conflict-window__list {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-right: none;
+    border-bottom: 1px solid var(--tlr-steel-line, #3a3f3f);
+  }
+
+  .conflict-window__list-item {
+    border-bottom: none;
+    border-right: 1px solid var(--tlr-steel-line, #3a3f3f);
+    min-width: 160px;
+  }
+
+  .military-window__tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .military-window__tab {
+    flex-shrink: 0;
+  }
+
+  .military-overview__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Economy and trade operations */
 .trade-filters{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0}.trade-filters button{padding:4px 7px;font-size:11px}.trade-filters button[aria-pressed="true"]{border-color:#c6a94a;color:#ead78c}.trade-country-list button{grid-template-columns:1fr auto}.trade-country-list button>span{grid-column:1/-1}.trade-country-identity{display:flex;align-items:center;gap:8px;min-width:0}.trade-country-identity>.country-flag,.trade-country-identity>.country-flag-placeholder{width:36px;height:23px;flex:0 0 36px;object-fit:cover;border:1px solid #4b5b57}.trade-country-identity strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.trade-readiness{grid-column:2;grid-row:1;width:8px;height:8px;border-radius:50%;align-self:center;background:#7c4744;box-shadow:0 0 5px currentColor}.trade-readiness--ready{background:#58c999}.trade-readiness--partial{background:#c8a959}.trade-partners{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px;border-block:1px solid #334a47}.trade-public-data{display:grid;gap:3px;margin:8px 0;color:#92a49f;font-size:12px}.trade-blocked{border-left:3px solid #a9584f;padding-left:8px;color:#cf8177!important}.trade-line-group{border:1px solid #2e4844;margin:10px 0;padding:8px}.trade-line-group legend{padding:0 6px;color:#d7c875}.trade-form-row{grid-template-columns:minmax(100px,1fr) minmax(100px,1fr) 74px 34px}.trade-form-row button{padding:4px}.trade-line-placeholder{display:flex;align-items:center;color:#7e8d89;border:1px solid #2e4642;padding:0 8px}.trade-add-line{padding:4px 8px!important;font-size:11px}.trade-terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.trade-terms label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px;color:#98aaa5;font-size:11px}.trade-terms input{width:128px}.trade-checkboxes{display:flex;gap:14px;margin:10px 0;color:#b7c0ba}.trade-preview{display:grid;gap:3px;border:1px solid #394b45;background:#0b1412;padding:8px;color:#9dac9f;font-size:11px}.trade-preview h4{margin:0 0 3px;color:#d2bf70}.trade-submit{display:block;margin:10px auto 0;min-width:128px}.trade-records article small{color:#aeb7ae}.trade-composer small{overflow-wrap:anywhere}
 @media(max-width:560px){.trade-form-row{grid-template-columns:1fr 1fr 64px 32px}.trade-terms{grid-template-columns:1fr}.trade-partners{align-items:flex-start}.trade-country-identity strong{white-space:normal}}

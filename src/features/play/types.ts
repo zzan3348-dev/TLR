@@ -4,5 +4,5 @@ export type PrimaryWindow =
   | "diplomacy"
   | "intelligence"
   | "decisions"
+  | "military"
   | null;
-
