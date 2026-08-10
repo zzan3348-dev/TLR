@@ -1,6 +1,6 @@
 import type { LawDefinition, LawOption } from "../types/laws";
 import { UiIcon } from "../../../components/UiIcon";
-import { getLawIcon } from "./lawIcon";
+import { getLawDisplayIcon } from "./lawIcon";
 
 type LawCardProps = {
   definition: LawDefinition;
@@ -27,7 +27,11 @@ export function LawCard({
       onClick={() => onOpen(definition)}
       aria-label={`${definition.name}: ${selectedOption?.name ?? "미설정"}`}
     >
-      <span className="law-card__icon"><UiIcon name={getLawIcon(definition.id)} /></span>
+      <span className="law-card__icon">
+        <UiIcon
+          name={getLawDisplayIcon(definition.id, selectedOption?.order)}
+        />
+      </span>
       <span className="law-card__copy">
         <strong>{definition.name}</strong>
         <b data-unset={!selectedOption}>

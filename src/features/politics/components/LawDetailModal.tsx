@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import type { LawDefinition } from "../types/laws";
 import { UiIcon } from "../../../components/UiIcon";
-import { getLawIcon, getLawStageIcon } from "./lawIcon";
+import { getLawDisplayIcon, getLawStageIcon } from "./lawIcon";
 
 type LawDetailModalProps = {
   definition: LawDefinition | null;
@@ -53,7 +53,9 @@ export function LawDetailModal({
         aria-labelledby="law-detail-title"
       >
         <header>
-          <UiIcon name={getLawIcon(definition.id)} />
+          <UiIcon
+            name={getLawDisplayIcon(definition.id, selectedOption?.order)}
+          />
           <div>
             <small>법률 분야</small>
             <h2 id="law-detail-title">{definition.name}</h2>

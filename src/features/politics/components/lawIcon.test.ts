@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getLawStageIcon } from "./lawIcon";
+import { getLawDisplayIcon, getLawIcon, getLawStageIcon } from "./lawIcon";
 
 describe("law stage icon mapping", () => {
   it("uses the final generated stage instead of requesting stage six", () => {
@@ -14,6 +14,15 @@ describe("law stage icon mapping", () => {
     );
     expect(getLawStageIcon("censorship", 2)).toBe(
       "/assets/ui/generated-icons/stages/political/press-3.png",
+    );
+  });
+
+  it("uses the selected stage icon for the current law display", () => {
+    expect(getLawDisplayIcon("education", 2)).toBe(
+      "/assets/ui/generated-icons/stages/social/education-3.png",
+    );
+    expect(getLawDisplayIcon("education", null)).toBe(
+      getLawIcon("education"),
     );
   });
 });

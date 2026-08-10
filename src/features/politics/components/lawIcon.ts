@@ -50,3 +50,12 @@ export function getLawStageIcon(lawId: string, order: number): string {
   const stage = Math.max(1, Math.min(MAX_GENERATED_STAGE, order + 1));
   return `/assets/ui/generated-icons/stages/${group}/${resolvedId}-${stage}.png`;
 }
+
+export function getLawDisplayIcon(
+  lawId: string,
+  selectedOrder: number | null | undefined,
+): string {
+  return typeof selectedOrder === "number"
+    ? getLawStageIcon(lawId, selectedOrder)
+    : getLawIcon(lawId);
+}
