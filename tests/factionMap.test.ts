@@ -77,7 +77,7 @@ describe("faction map data", () => {
       color: "#9A5436",
     });
     expect(members).toEqual(
-      ["컬럼비아 개척 연방", "아르헨티나 공화국"].sort(),
+      ["컬럼비아 개척연방", "아르헨티나 공화국"].sort(),
     );
     expect(
       Object.values(countryFactionMemberships).filter(

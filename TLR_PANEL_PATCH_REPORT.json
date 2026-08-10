@@ -417,8 +417,8 @@
   },
   {
     "key": "country-001",
-    "map_name_before": "컬럼비아 개척 연방",
-    "panel_source": "콜럼비아 보전연방",
+    "map_name_before": "컬럼비아 개척연방",
+    "panel_source": "컬럼비아 개척연방",
     "parties": 5,
     "leader_named": true,
     "election": "실시"

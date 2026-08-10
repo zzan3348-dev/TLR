@@ -1,4 +1,4 @@
-﻿TLR PANEL PATCH
+TLR PANEL PATCH
 
 Applied:
 - 61 country descriptions
@@ -10,7 +10,7 @@ Applied:
 - leader tooltip now shows a source-provided leader name when available
 
 Name handling:
-- Current TLR name `컬럼비아 개척 연방` is preserved. Stale `콜럼비아 보전연방` references inside panel descriptions were normalized to it.
+- Current TLR name `컬럼비아 개척연방` is preserved. Stale `컬럼비아 개척연방` references inside panel descriptions were normalized to it.
 - FINAL pack naming applied to: 영국령 인도, 필리핀 제도정부, 오스트레일리아 연방, 남아프리카 연방, 뉴질랜드 자치령. Map labels stay compact where appropriate.
 
 Not in the 61-country panel pack:
