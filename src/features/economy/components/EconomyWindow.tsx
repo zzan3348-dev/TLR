@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { getCountryPresentation } from "../../../data/countryPresentation";
 import mapCountries from "../../../data/mapCountries.json";
 import { CountryFlag } from "../../../components/CountryFlag";
+import { UiIcon } from "../../../components/UiIcon";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import type { PlaySimulationState } from "../../play/data/playSimulationState";
@@ -86,7 +87,7 @@ export function EconomyWindow({ country, onClose }: Props) {
   }, [reload]);
 
   return (
-    <StrategicWindow title="경제" eyebrow={getCountryPresentation(country).title} onClose={onClose} actions={
+    <StrategicWindow className="strategic-window--economy" title="경제" eyebrow={getCountryPresentation(country).title} onClose={onClose} actions={
       <div className="strategic-window__tabs" role="tablist">
         {([['overview', '경제 개요'], ['society', '사회'], ['trade', '무역']] as const).map(([id, label]) => <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => setTab(id)}>{label}</button>)}
       </div>
@@ -104,31 +105,77 @@ function EconomyOverview({ snapshot, countryKey, onSaved }: { snapshot: EconomyS
   const economy = snapshot.economy;
   const [budget, setBudget] = useState<Record<string, number>>(() => economy?.draft_budget ?? economy?.current_budget ?? {});
   const [saving, setSaving] = useState(false);
-  if (!economy || snapshot.readiness === "UNCONFIGURED") return <div className="economy-state-message"><strong>경제 데이터 미설정</strong><span>국가별 경제 기록이 입력되기 전에는 0으로 추정하지 않습니다.</span></div>;
   const budgetReady = BUDGET_KEYS.every((key) => typeof budget[key] === "number" && Number.isFinite(budget[key]));
   const save = async (confirm: boolean) => { if (!budgetReady) return; setSaving(true); try { await saveBudget(countryKey, budget); if (confirm) await confirmBudget(countryKey); announceEconomyUpdate(); onSaved(); } finally { setSaving(false); } };
-  return <>
-    {snapshot.readiness === "PARTIAL" ? <div className="economy-readiness">일부 경제 지표만 설정되어 있습니다.</div> : null}
-    <div className="economy-metric-grid">
-      <Metric label="GDP" value={showNumber(economy.gdp, "B")} />
-      <Metric label="명목 성장률" value={showNumber(economy.nominal_growth_rate, "%")} />
-      <Metric label="인플레이션" value={showNumber(economy.inflation_rate, "%")} />
-      <Metric label="실업률" value={showNumber(economy.unemployment_rate, "%")} />
-      <Metric label="국가부채" value={showNumber(economy.national_debt, "B")} />
-      <Metric label="외환보유액" value={showNumber(economy.foreign_reserves, "B")} />
-      <Metric label="국가수입" value={showNumber(economy.national_income, "B")} />
-      <Metric label="총지출" value={showNumber(economy.total_expenditure, "B")} />
+  const capacity = snapshot.productionCapacity;
+  const metrics = [
+    ["GDP", showNumber(economy?.gdp, "B"), "hud/gdp", "neutral"],
+    ["명목 성장률", showNumber(economy?.nominal_growth_rate, "%"), "ui/trend-up", "positive"],
+    ["인플레이션", showNumber(economy?.inflation_rate, "%"), "economy/inflation", "warning"],
+    ["실업률", showNumber(economy?.unemployment_rate, "%"), "law/unemployment", "negative"],
+    ["국가부채", showNumber(economy?.national_debt, "B"), "hud/national-debt", "warning"],
+    ["외환보유액", showNumber(economy?.foreign_reserves, "B"), "economy/credit", "positive"],
+    ["국가수입", showNumber(economy?.national_income, "B"), "economy/budget", "positive"],
+    ["총지출", showNumber(economy?.total_expenditure, "B"), "economy/debt", "negative"],
+  ] as const;
+  return <div className="economy-console">
+    <div className={`economy-console__status economy-console__status--${snapshot.readiness.toLowerCase()}`}>
+      <UiIcon name="sections/economy" />
+      <div><strong>{snapshot.readiness === "READY" ? "국가 경제 기록" : snapshot.readiness === "PARTIAL" ? "일부 경제 기록 입력됨" : "경제 데이터 입력 대기"}</strong><span>{snapshot.worldDate} 기준 국가 회계 원장</span></div>
+      <b>{snapshot.readiness === "READY" ? "정상" : snapshot.readiness === "PARTIAL" ? "부분" : "미설정"}</b>
     </div>
-    <section className="strategy-section economy-budget"><header><h3>다음 예산안</h3><span>{economy.next_budget_world_date ? `${economy.next_budget_world_date} 적용 예정` : budgetReady ? "초안" : "예산 정보 미설정"}</span></header>
-      {budgetReady ? <>{BUDGET_KEYS.map((key) => <label key={key}><span>{BUDGET_LABELS[key]}</span><input type="range" min={snapshot.rules.budget_min} max={snapshot.rules.budget_max} step={snapshot.rules.budget_step} value={budget[key]} onChange={(event) => setBudget((current) => ({ ...current, [key]: Number(event.target.value) }))} /><b>{budget[key]}%</b></label>)}
-        <div className="economy-actions"><button disabled={saving} onClick={() => void save(false)}>초안 저장</button><button disabled={saving} onClick={() => void save(true)}>예산 확정</button></div></> : <p className="trade-blocked">예산 기준값이 입력되기 전에는 예산안을 계산하지 않습니다.</p>}
+
+    <section className="economy-console__section">
+      <EconomySectionTitle icon="hud/gdp" title="국가 경제 지표" meta="NATIONAL ACCOUNTS" />
+      <div className="economy-instrument-grid">
+        {metrics.map(([label, value, icon, tone]) => <EconomyInstrument key={label} label={label} value={value} icon={icon} tone={tone} />)}
+      </div>
     </section>
-  </>;
+
+    <div className="economy-console__split">
+      <section className="economy-console__section">
+        <EconomySectionTitle icon="hud/production" title="생산 능력" meta="INDUSTRIAL CAPACITY" />
+        <div className="economy-capacity-board">
+          <EconomyGauge label="유효 생산력" value={capacity?.effective_capacity} max={capacity?.effective_capacity} />
+          <EconomyGauge label="국내 사용" value={capacity?.domestic_used} max={capacity?.effective_capacity} />
+          <EconomyGauge label="대외 제공" value={capacity?.committed_out} max={capacity?.effective_capacity} />
+          <EconomyGauge label="가용 생산력" value={capacity?.available} max={capacity?.effective_capacity} />
+        </div>
+      </section>
+      <section className="economy-console__section">
+        <EconomySectionTitle icon="economy/trade" title="전략 자원" meta="RESOURCE LEDGER" />
+        <div className="economy-resource-board">
+          {RESOURCES.map((resourceId) => {
+            const resource = snapshot.resources.find((row) => row.resource_type_id === resourceId);
+            return <div className="economy-resource-row" key={resourceId}><span>{RESOURCE_LABELS[resourceId]}</span><i><em style={{ width: resource?.stockpile == null ? "0%" : `${Math.min(100, Math.max(4, resource.stockpile))}%` }} /></i><b>{showNumber(resource?.stockpile)}</b><small>+{showNumber(resource?.production_per_period)}</small></div>;
+          })}
+        </div>
+      </section>
+    </div>
+
+    <section className="economy-console__section economy-budget">
+      <EconomySectionTitle icon="economy/budget" title="국가 예산" meta={economy?.next_budget_world_date ? `${economy.next_budget_world_date} 적용 예정` : budgetReady ? "BUDGET DRAFT" : "예산 기준값 미설정"} />
+      <div className="economy-budget__rows">
+        {BUDGET_KEYS.map((key) => <label key={key} className={!budgetReady ? "is-unset" : undefined}><span>{BUDGET_LABELS[key]}</span><input disabled={!budgetReady} type="range" min={snapshot.rules.budget_min} max={snapshot.rules.budget_max} step={snapshot.rules.budget_step} value={budgetReady ? budget[key] : 0} onChange={(event) => setBudget((current) => ({ ...current, [key]: Number(event.target.value) }))} /><b>{budgetReady ? `${budget[key]}%` : "미설정"}</b></label>)}
+      </div>
+      <div className="economy-actions"><button disabled={!budgetReady || saving} onClick={() => void save(false)}>초안 저장</button><button disabled={!budgetReady || saving} onClick={() => void save(true)}>예산 확정</button></div>
+    </section>
+  </div>;
 }
 
 function SocietyOverview({ snapshot }: { snapshot: EconomySnapshot }) {
   const economy = snapshot.economy;
-  return <div className="economy-metric-grid"><Metric label="실업률" value={showNumber(economy?.unemployment_rate, "%")} /><Metric label="연구 역량" value={showNumber(economy?.research_capacity)} /><Metric label="조세율" value={showNumber(economy?.nominal_tax_rate, "%")} /><Metric label="징세 효율" value={showNumber(economy?.tax_collection_efficiency, "%")} /></div>;
+  return <div className="economy-console economy-console--society">
+    <div className="economy-console__status"><UiIcon name="sections/social" /><div><strong>사회·생활 경제 지표</strong><span>노동, 조세, 연구와 행정 효율</span></div><b>{snapshot.readiness === "READY" ? "정상" : "미설정"}</b></div>
+    <section className="economy-console__section"><EconomySectionTitle icon="sections/social" title="사회 경제 현황" meta="SOCIAL DEVELOPMENT" /><div className="economy-instrument-grid economy-instrument-grid--society">
+      <EconomyInstrument label="실업률" value={showNumber(economy?.unemployment_rate, "%")} icon="law/unemployment" tone="negative" />
+      <EconomyInstrument label="연구 역량" value={showNumber(economy?.research_capacity)} icon="development/research-facilities" tone="positive" />
+      <EconomyInstrument label="명목 조세율" value={showNumber(economy?.nominal_tax_rate, "%")} icon="law/income-tax" tone="warning" />
+      <EconomyInstrument label="징세 효율" value={showNumber(economy?.tax_collection_efficiency, "%")} icon="development/administration" tone="positive" />
+      <EconomyInstrument label="예산 집행률" value={showNumber(economy?.budget_fulfillment_rate, "%")} icon="economy/budget" tone="neutral" />
+      <EconomyInstrument label="연구 생산력" value={showNumber(economy?.research_capacity)} icon="development/academic-foundation" tone="neutral" />
+    </div></section>
+  </div>;
 }
 
 type DraftTradeLine = { localId: number; assetType: TradeAssetType; resourceTypeId: TradeResourceId; amount: number };
@@ -248,4 +295,22 @@ function TradeOverview({ snapshot, countries, proposals, agreements, onChanged }
   </div>;
 }
 
-function Metric({ label, value }: { label: string; value: string }) { return <article className="economy-metric"><span>{label}</span><strong>{value}</strong></article>; }
+type EconomyTone = "neutral" | "positive" | "warning" | "negative";
+
+function EconomySectionTitle({ icon, title, meta }: { icon: string; title: string; meta: string }) {
+  return <header className="economy-section-title"><UiIcon name={icon} /><h3>{title}</h3><span>{meta}</span></header>;
+}
+
+function EconomyInstrument({ label, value, icon, tone }: { label: string; value: string; icon: string; tone: EconomyTone }) {
+  const isUnset = value === "미설정";
+  return <article className={`economy-instrument economy-instrument--${isUnset ? "unset" : tone}`}>
+    <span className="economy-instrument__icon"><UiIcon name={icon} /></span>
+    <span className="economy-instrument__copy"><small>{label}</small><strong>{value}</strong></span>
+    <i aria-hidden="true"><em /></i>
+  </article>;
+}
+
+function EconomyGauge({ label, value, max }: { label: string; value: number | null | undefined; max: number | null | undefined }) {
+  const ratio = value == null || !max || max <= 0 ? 0 : Math.min(100, Math.max(0, (value / max) * 100));
+  return <div className={value == null ? "economy-gauge is-unset" : "economy-gauge"}><span>{label}</span><i><em style={{ width: `${ratio}%` }} /></i><b>{showNumber(value)}</b></div>;
+}

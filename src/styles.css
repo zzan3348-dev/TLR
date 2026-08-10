@@ -8796,6 +8796,442 @@ button:focus-visible,
   }
 }
 
+/* ECONOMY COMMAND CONSOLE — dense TLR/TNO-style instrument panel */
+.strategic-window--economy {
+  width: clamp(650px, 52vw, 830px);
+  max-height: calc(100dvh - 96px);
+  border-color: #48524f;
+  background:
+    repeating-linear-gradient(0deg, rgb(124 183 173 / 2%) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, #070c0d, #0a1112 54%, #060b0c);
+}
+
+.strategic-window--economy .strategic-window__chrome {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 7%), transparent 52%),
+    #272b2b;
+}
+
+.strategic-window--economy .strategic-window__body {
+  padding: 7px;
+  background:
+    repeating-linear-gradient(0deg, rgb(80 150 142 / 2%) 0 1px, transparent 1px 3px),
+    #070d0e;
+}
+
+.strategic-window--economy .strategic-window__tabs {
+  width: 100%;
+  gap: 0;
+}
+
+.strategic-window--economy .strategic-window__tabs button {
+  min-width: 108px;
+  border-width: 0 1px 0 0;
+  border-color: #3c4845;
+  background: #141919;
+  font: 700 11px/1 "Noto Sans KR", sans-serif;
+  letter-spacing: .04em;
+}
+
+.strategic-window--economy .strategic-window__tabs button[aria-selected="true"] {
+  color: #e8dfc6;
+  background: linear-gradient(180deg, #28302e, #17201f);
+  box-shadow: inset 0 -2px #5cc9bd;
+}
+
+.economy-console {
+  display: grid;
+  gap: 7px;
+}
+
+.economy-console__status {
+  display: grid;
+  min-height: 48px;
+  padding: 6px 10px;
+  align-items: center;
+  gap: 9px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  border: 1px solid #50736e;
+  background:
+    linear-gradient(90deg, rgb(70 169 157 / 10%), transparent 50%),
+    #0b1314;
+  box-shadow: inset 0 0 0 1px #030606;
+}
+
+.economy-console__status > .ui-icon {
+  width: 29px;
+  height: 29px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgb(80 208 195 / 28%));
+}
+
+.economy-console__status div {
+  display: grid;
+  min-width: 0;
+}
+
+.economy-console__status strong {
+  color: #dfdbcf;
+  font-size: 13px;
+}
+
+.economy-console__status span {
+  color: #738681;
+  font: 9px/1.5 "IBM Plex Mono", monospace;
+}
+
+.economy-console__status > b {
+  padding: 3px 7px;
+  color: #d8c46d;
+  border-left: 2px solid #b49b45;
+  font: 700 10px/1 "IBM Plex Mono", monospace;
+}
+
+.economy-console__status--ready > b { color: #84d28d; border-color: #5ea568; }
+.economy-console__status--partial > b { color: #dfc35d; }
+.economy-console__status--unconfigured > b { color: #9aa29e; border-color: #59635f; }
+
+.economy-console__section {
+  overflow: hidden;
+  border: 1px solid #3d615c;
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 1.5%) 0 1px, transparent 1px 4px),
+    #081011;
+  box-shadow: inset 0 0 0 1px #020405;
+}
+
+.economy-section-title {
+  display: grid;
+  min-height: 31px;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 7px;
+  grid-template-columns: 22px auto 1fr;
+  border-bottom: 1px solid #3a5551;
+  background: linear-gradient(180deg, #212727, #151a1a);
+}
+
+.economy-section-title .ui-icon {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.economy-section-title h3 {
+  margin: 0;
+  color: #d8d5ca;
+  font-family: "Noto Serif KR", "Nanum Myeongjo", serif;
+  font-size: 13px;
+}
+
+.economy-section-title span {
+  overflow: hidden;
+  color: #6f817c;
+  font: 8px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .08em;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.economy-instrument-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.economy-instrument {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 67px;
+  padding: 7px 7px 10px;
+  align-items: center;
+  gap: 7px;
+  grid-template-columns: 35px minmax(0, 1fr);
+  border-right: 1px solid #2c4945;
+  border-bottom: 1px solid #2c4945;
+  background: linear-gradient(135deg, rgb(84 158 149 / 6%), transparent 58%);
+}
+
+.economy-instrument:nth-child(4n) { border-right: 0; }
+.economy-instrument:nth-last-child(-n + 4) { border-bottom: 0; }
+
+.economy-instrument__icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-right: 1px solid #34504c;
+}
+
+.economy-instrument__icon .ui-icon {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+  filter: saturate(.82) brightness(.9);
+}
+
+.economy-instrument__copy {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.economy-instrument__copy small {
+  overflow: hidden;
+  color: #96a39f;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.economy-instrument__copy strong {
+  overflow: hidden;
+  color: #ddd8ca;
+  font: 700 15px/1 "IBM Plex Mono", monospace;
+  text-shadow: 0 1px #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.economy-instrument--positive .economy-instrument__copy strong { color: #79d986; }
+.economy-instrument--warning .economy-instrument__copy strong { color: #e2ca63; }
+.economy-instrument--negative .economy-instrument__copy strong { color: #dc746e; }
+.economy-instrument--unset .economy-instrument__copy strong { color: #727f7b; font-size: 11px; }
+
+.economy-instrument > i {
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  left: 48px;
+  height: 3px;
+  overflow: hidden;
+  background: #1a2826;
+  box-shadow: inset 0 0 0 1px #101817;
+}
+
+.economy-instrument > i em {
+  display: block;
+  width: 64%;
+  height: 100%;
+  background: repeating-linear-gradient(135deg, #61c9bd 0 3px, #315e59 3px 5px);
+}
+
+.economy-instrument--unset > i em { width: 0; }
+.economy-instrument--negative > i em { background: repeating-linear-gradient(135deg, #b85d58 0 3px, #542f2d 3px 5px); }
+.economy-instrument--warning > i em { background: repeating-linear-gradient(135deg, #c8ad51 0 3px, #5f532d 3px 5px); }
+
+.economy-console__split {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.economy-capacity-board,
+.economy-resource-board {
+  display: grid;
+  padding: 6px 8px;
+  gap: 5px;
+}
+
+.economy-gauge,
+.economy-resource-row {
+  display: grid;
+  min-height: 22px;
+  align-items: center;
+  gap: 7px;
+  grid-template-columns: 76px minmax(50px, 1fr) 54px;
+  color: #9da8a4;
+  font-size: 9px;
+}
+
+.economy-gauge i,
+.economy-resource-row i {
+  display: block;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid #36514c;
+  background: #0b1615;
+}
+
+.economy-gauge i em,
+.economy-resource-row i em {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(135deg, #6bd6c6 0 4px, #3d756d 4px 6px);
+}
+
+.economy-gauge b,
+.economy-resource-row b {
+  color: #d8d4c8;
+  font: 700 9px/1 "IBM Plex Mono", monospace;
+  text-align: right;
+}
+
+.economy-gauge.is-unset b,
+.economy-resource-row b:has(+ small) { color: #818d89; }
+
+.economy-resource-row {
+  grid-template-columns: 48px minmax(45px, 1fr) 48px 44px;
+}
+
+.economy-resource-row small {
+  color: #6fba7a;
+  font: 8px/1 "IBM Plex Mono", monospace;
+  text-align: right;
+}
+
+.economy-budget__rows {
+  display: grid;
+  padding: 5px 9px 3px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 16px;
+}
+
+.economy-budget label {
+  display: grid;
+  min-height: 29px;
+  padding: 4px 0;
+  align-items: center;
+  gap: 8px;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  border-bottom: 1px solid #1e302d;
+}
+
+.economy-budget label span {
+  color: #aab2ae;
+  font-size: 9px;
+}
+
+.economy-budget label b {
+  color: #d9c45e;
+  font: 700 9px/1 "IBM Plex Mono", monospace;
+  text-align: right;
+}
+
+.economy-budget label.is-unset b { color: #6f7c78; }
+.economy-budget input[type="range"] { width: 100%; height: 8px; accent-color: #56bfb4; }
+.economy-budget input[type="range"]:disabled { opacity: .3; }
+
+.economy-actions {
+  display: flex;
+  padding: 6px 9px 8px;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.economy-actions button,
+.trade-submit,
+.trade-add-line {
+  min-width: 88px;
+  padding: 5px 10px;
+  color: #c7d1cc;
+  border: 1px solid #45635e;
+  background: linear-gradient(180deg, #1b2927, #0c1414);
+  font-size: 9px;
+}
+
+.economy-actions button:disabled { color: #5e6966; border-color: #303a38; background: #0b1011; }
+
+.economy-instrument-grid--society {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.economy-instrument-grid--society .economy-instrument:nth-child(3n) { border-right: 0; }
+.economy-instrument-grid--society .economy-instrument:nth-child(4n) { border-right: 1px solid #2c4945; }
+.economy-instrument-grid--society .economy-instrument:nth-last-child(-n + 4) { border-bottom: 1px solid #2c4945; }
+.economy-instrument-grid--society .economy-instrument:nth-last-child(-n + 3) { border-bottom: 0; }
+
+.strategic-window--economy .trade-workspace {
+  gap: 7px;
+  grid-template-columns: minmax(210px, .72fr) minmax(330px, 1.28fr);
+}
+
+.strategic-window--economy .trade-country-browser,
+.strategic-window--economy .trade-composer,
+.strategic-window--economy .trade-records {
+  padding: 7px;
+  border-color: #3d615c;
+  background: #071011;
+  box-shadow: inset 0 0 0 1px #020405;
+}
+
+.strategic-window--economy .trade-country-browser h3,
+.strategic-window--economy .trade-composer h3,
+.strategic-window--economy .trade-records h3 {
+  margin: 0;
+  color: #dad5c8;
+  font-family: "Noto Serif KR", serif;
+  font-size: 12px;
+}
+
+.strategic-window--economy .trade-country-browser input,
+.strategic-window--economy .trade-composer input,
+.strategic-window--economy .trade-composer select {
+  color: #c4cec9;
+  border: 1px solid #3c5c57;
+  background: #091313;
+}
+
+.strategic-window--economy .trade-country-list {
+  gap: 2px;
+}
+
+.strategic-window--economy .trade-country-list > button {
+  min-height: 40px;
+  padding: 4px 7px;
+  align-items: center;
+  gap: 2px 7px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  color: #cbd1cc;
+  border: 1px solid #2e4642;
+  border-radius: 0;
+  background: linear-gradient(90deg, #0e1818, #080e0f);
+  box-shadow: none;
+}
+
+.strategic-window--economy .trade-country-list > button:hover,
+.strategic-window--economy .trade-country-list > button[aria-pressed="true"] {
+  border-color: #9a8849;
+  background: linear-gradient(90deg, rgb(151 126 54 / 16%), #0b1111 64%);
+}
+
+.strategic-window--economy .trade-country-list button > span:not(.trade-country-identity) {
+  color: #72837e;
+  font-size: 8px;
+}
+
+.strategic-window--economy .trade-country-list .country-flag,
+.strategic-window--economy .trade-country-list .country-flag-placeholder {
+  width: 32px;
+  height: 20px;
+  flex-basis: 32px;
+}
+
+.strategic-window--economy .trade-readiness {
+  border-radius: 0;
+}
+
+@media (max-width: 860px) {
+  .strategic-window--economy { right: 6px; left: 6px; width: auto; }
+  .economy-instrument-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .economy-instrument:nth-child(2n) { border-right: 0; }
+  .economy-instrument:nth-child(4n) { border-right: 0; }
+  .economy-instrument:nth-last-child(-n + 4) { border-bottom: 1px solid #2c4945; }
+  .economy-instrument:nth-last-child(-n + 2) { border-bottom: 0; }
+  .economy-console__split,
+  .strategic-window--economy .trade-workspace { grid-template-columns: 1fr; }
+  .economy-budget__rows { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .economy-instrument-grid,
+  .economy-instrument-grid--society { grid-template-columns: 1fr; }
+  .economy-instrument,
+  .economy-instrument:nth-child(n) { border-right: 0; border-bottom: 1px solid #2c4945; }
+  .economy-instrument:last-child { border-bottom: 0; }
+}
+
 /* Economy and trade operations */
 .trade-filters{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0}.trade-filters button{padding:4px 7px;font-size:11px}.trade-filters button[aria-pressed="true"]{border-color:#c6a94a;color:#ead78c}.trade-country-list button{grid-template-columns:1fr auto}.trade-country-list button>span{grid-column:1/-1}.trade-country-identity{display:flex;align-items:center;gap:8px;min-width:0}.trade-country-identity>.country-flag,.trade-country-identity>.country-flag-placeholder{width:36px;height:23px;flex:0 0 36px;object-fit:cover;border:1px solid #4b5b57}.trade-country-identity strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.trade-readiness{grid-column:2;grid-row:1;width:8px;height:8px;border-radius:50%;align-self:center;background:#7c4744;box-shadow:0 0 5px currentColor}.trade-readiness--ready{background:#58c999}.trade-readiness--partial{background:#c8a959}.trade-partners{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px;border-block:1px solid #334a47}.trade-public-data{display:grid;gap:3px;margin:8px 0;color:#92a49f;font-size:12px}.trade-blocked{border-left:3px solid #a9584f;padding-left:8px;color:#cf8177!important}.trade-line-group{border:1px solid #2e4844;margin:10px 0;padding:8px}.trade-line-group legend{padding:0 6px;color:#d7c875}.trade-form-row{grid-template-columns:minmax(100px,1fr) minmax(100px,1fr) 74px 34px}.trade-form-row button{padding:4px}.trade-line-placeholder{display:flex;align-items:center;color:#7e8d89;border:1px solid #2e4642;padding:0 8px}.trade-add-line{padding:4px 8px!important;font-size:11px}.trade-terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.trade-terms label{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px;color:#98aaa5;font-size:11px}.trade-terms input{width:128px}.trade-checkboxes{display:flex;gap:14px;margin:10px 0;color:#b7c0ba}.trade-preview{display:grid;gap:3px;border:1px solid #394b45;background:#0b1412;padding:8px;color:#9dac9f;font-size:11px}.trade-preview h4{margin:0 0 3px;color:#d2bf70}.trade-submit{display:block;margin:10px auto 0;min-width:128px}.trade-records article small{color:#aeb7ae}.trade-composer small{overflow-wrap:anywhere}
 @media(max-width:560px){.trade-form-row{grid-template-columns:1fr 1fr 64px 32px}.trade-terms{grid-template-columns:1fr}.trade-partners{align-items:flex-start}.trade-country-identity strong{white-space:normal}}
@@ -9033,6 +9469,246 @@ button:disabled { opacity: 0.48; }
   border: 1px solid #a28e4e;
   background: #151a18;
   color: #dec768;
+}
+
+/* Compact foreign diplomacy console */
+.strategic-window--diplomacy {
+  width: clamp(440px, 32vw, 510px);
+  height: min(650px, calc(100vh - 98px));
+  max-height: min(700px, calc(100vh - 98px));
+  grid-template-rows: 44px minmax(0, 1fr);
+  border-color: #59615d;
+  background: #090e0f;
+}
+
+.strategic-window--diplomacy .strategic-window__chrome {
+  min-height: 44px;
+  background:
+    linear-gradient(90deg, rgb(178 153 75 / 8%), transparent 52%),
+    #242928;
+}
+
+.strategic-window--diplomacy .strategic-window__body {
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.foreign-diplomacy {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  color: #d4d2c8;
+  background:
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 1%) 0 1px, transparent 1px 4px),
+    #080d0e;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.foreign-diplomacy__identity {
+  display: grid;
+  min-height: 92px;
+  padding: 9px;
+  align-items: center;
+  border-bottom: 1px solid #404a46;
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--country-accent) 14%, transparent), transparent 48%),
+    #111717;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.foreign-diplomacy__flag,
+.foreign-diplomacy__identity .country-flag-placeholder {
+  width: 116px;
+  height: 72px;
+  border: 3px solid #1b201f;
+  outline: 1px solid #666b64;
+  object-fit: cover;
+  box-shadow: inset 0 0 18px #000a, 0 2px 5px #0008;
+}
+
+.foreign-diplomacy__identity > div { min-width: 0; }
+.foreign-diplomacy__identity small { color: #71817a; font: 700 8px/1.2 "IBM Plex Mono", monospace; letter-spacing: .14em; }
+.foreign-diplomacy__identity h1 { margin: 3px 0 2px; overflow: hidden; color: #e2ddd0; font: 700 19px/1.15 "Noto Serif KR", Batang, serif; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 2px #000; }
+.foreign-diplomacy__identity p { margin: 0; color: #d1b75e; font-size: 11px; font-weight: 700; }
+.foreign-diplomacy__identity span { display: block; margin-top: 5px; overflow: hidden; color: #939d97; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+
+.foreign-diplomacy__aux-nav {
+  display: grid;
+  min-height: 32px;
+  border-bottom: 1px solid #39433f;
+  background: #151a1a;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.foreign-diplomacy__aux-nav button {
+  display: flex;
+  min-width: 0;
+  padding: 5px 7px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 0;
+  border-right: 1px solid #343d3a;
+  background: transparent;
+  color: #929c96;
+  font: 700 9px/1 "IBM Plex Mono", monospace;
+}
+
+.foreign-diplomacy__aux-nav button:last-child { border-right: 0; }
+.foreign-diplomacy__aux-nav button:hover,
+.foreign-diplomacy__aux-nav button[aria-pressed="true"] { color: #ded3a5; background: #222724; box-shadow: inset 0 -2px #a18b4c; }
+.foreign-diplomacy__aux-nav .ui-icon { width: 14px; height: 14px; object-fit: contain; }
+.foreign-diplomacy__aux-nav b { min-width: 15px; color: #d5be62; font-size: 8px; text-align: center; }
+
+.foreign-diplomacy__main {
+  display: grid;
+  min-height: 0;
+  padding: 8px;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 41%) minmax(0, 59%);
+  gap: 7px;
+}
+
+.diplomacy-status-board,
+.diplomacy-action-stack {
+  min-height: 0;
+  border: 1px solid #46514c;
+  background: #080e0f;
+  box-shadow: inset 0 0 15px #0009;
+}
+
+.diplomacy-status-board > header,
+.diplomacy-action-stack > header {
+  display: flex;
+  min-height: 34px;
+  padding: 0 8px;
+  align-items: center;
+  border-bottom: 1px solid #46514c;
+  background: #1b201f;
+  gap: 7px;
+}
+
+.diplomacy-status-board > header .ui-icon,
+.diplomacy-action-stack > header .ui-icon { width: 18px; height: 18px; }
+.diplomacy-status-board > header strong,
+.diplomacy-action-stack > header strong { color: #d8d5c8; font-size: 11px; }
+
+.diplomacy-status-list {
+  display: grid;
+  min-height: 180px;
+  max-height: 318px;
+  align-content: start;
+  overflow: auto;
+  scrollbar-color: #596b64 #0a1010;
+}
+
+.diplomacy-status-list article {
+  display: grid;
+  min-height: 50px;
+  padding: 7px;
+  align-items: center;
+  border-bottom: 1px solid #2f3c38;
+  grid-template-columns: 25px minmax(0, 1fr);
+  gap: 5px;
+}
+
+.diplomacy-status-list article > .ui-icon { width: 22px; height: 22px; }
+.diplomacy-status-list article > div { min-width: 0; }
+.diplomacy-status-list article strong { display: block; overflow: hidden; color: #d2cfC4; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.diplomacy-status-list article small { display: block; color: #73827b; font-size: 8px; }
+.diplomacy-status-list article > span { display: flex; margin-top: 5px; grid-column: 1 / -1; gap: 3px; }
+.diplomacy-mini-flag,
+.diplomacy-status-list .country-flag-placeholder { width: 32px; height: 19px; border: 1px solid #60645d; object-fit: cover; background: #050707; }
+.diplomacy-status-empty { margin: 0; padding: 22px 8px; color: #6f7c77; font-size: 9px; text-align: center; }
+
+.diplomacy-relation-strip { margin: 0; border-top: 1px solid #3a4541; }
+.diplomacy-relation-strip > div { display: flex; min-width: 0; padding: 6px 8px; justify-content: space-between; border-bottom: 1px solid #27332f; gap: 5px; }
+.diplomacy-relation-strip dt { overflow: hidden; color: #778781; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.diplomacy-relation-strip dd { margin: 0; color: #d4bd63; font: 700 9px/1 "IBM Plex Mono", monospace; }
+
+.diplomacy-action-stack { display: grid; align-content: start; overflow: auto; scrollbar-color: #596b64 #0a1010; }
+.diplomacy-action-stack > button {
+  display: grid;
+  min-height: 43px;
+  padding: 5px 8px;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid #35423d;
+  background: linear-gradient(90deg, rgb(123 144 132 / 8%), transparent 60%), #0c1212;
+  color: #cbc9bf;
+  grid-template-columns: 27px minmax(0, 1fr) 16px;
+  gap: 7px;
+  text-align: left;
+}
+.diplomacy-action-stack > button .ui-icon { width: 24px; height: 24px; object-fit: contain; }
+.diplomacy-action-stack > button span { font-size: 10px; font-weight: 700; }
+.diplomacy-action-stack > button b { color: #ccb75f; font-size: 17px; font-weight: 400; text-align: center; }
+.diplomacy-action-stack > button:hover:not(:disabled) { background: linear-gradient(90deg, rgb(189 164 81 / 14%), transparent 65%), #151a18; color: #efe0a7; }
+.diplomacy-action-stack > button:disabled { opacity: .5; }
+
+.diplomacy-auxiliary-panel {
+  position: absolute;
+  z-index: 6;
+  inset: 133px 8px 8px;
+  display: grid;
+  min-height: 0;
+  border: 1px solid #59635e;
+  background: #080e0f;
+  box-shadow: 0 12px 30px #000d, inset 0 0 16px #0008;
+  grid-template-rows: 35px minmax(0, 1fr);
+}
+.diplomacy-auxiliary-panel > header { display: flex; padding-left: 10px; align-items: center; justify-content: space-between; border-bottom: 1px solid #48534e; background: #202524; }
+.diplomacy-auxiliary-panel > header strong { color: #dfd5ac; font-size: 11px; }
+.diplomacy-auxiliary-panel > header button,
+.diplomacy-secondary-popup > header button { display: grid; width: 34px; height: 34px; padding: 0; border: 0; border-left: 1px solid #4a534f; background: #111616; place-items: center; }
+.diplomacy-auxiliary-panel > header .ui-icon,
+.diplomacy-secondary-popup > header .ui-icon { width: 15px; height: 15px; }
+.diplomacy-auxiliary-panel > div { min-height: 0; padding: 6px; overflow: auto; }
+.diplomacy-auxiliary-panel > div > p { color: #73817b; font-size: 10px; text-align: center; }
+
+.diplomacy-compact-record {
+  display: grid;
+  min-height: 48px;
+  padding: 6px 8px;
+  align-items: center;
+  border-bottom: 1px solid #34423d;
+  background: #0a1010;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+}
+.diplomacy-compact-record > .ui-icon { width: 22px; height: 22px; }
+.diplomacy-compact-record__flags { display: flex; align-items: center; gap: 3px; }
+.diplomacy-compact-record strong { display: block; color: #d5d1c5; font-size: 10px; }
+.diplomacy-compact-record small { display: block; margin-top: 2px; color: #75847e; font-size: 8px; }
+.diplomacy-compact-record > span { color: #c1aa55; font-size: 8px; }
+.diplomacy-compact-record > span[data-tone="positive"] { color: #78b67b; }
+.diplomacy-compact-record > span[data-tone="negative"] { color: #c96d63; }
+.diplomacy-compact-record footer { display: flex; gap: 3px; }
+.diplomacy-compact-record footer button { min-height: 24px; padding: 0 8px; border: 1px solid #4d5b55; background: #151b1a; color: #c9c7bc; font-size: 8px; }
+
+.diplomacy-secondary-layer { position: absolute; z-index: 8; inset: 0; display: grid; padding: 16px; place-items: center; background: rgb(0 0 0 / 55%); }
+.diplomacy-secondary-popup { width: min(330px, 100%); border: 1px solid #606760; background: #0d1313; box-shadow: 0 16px 35px #000e, inset 0 0 15px #0008; }
+.diplomacy-secondary-popup > header { display: flex; min-height: 42px; padding-left: 10px; align-items: center; justify-content: space-between; border-bottom: 1px solid #4a544f; background: #242928; }
+.diplomacy-secondary-popup > header div { display: grid; gap: 2px; }
+.diplomacy-secondary-popup > header small { color: #72827b; font-size: 8px; letter-spacing: .12em; }
+.diplomacy-secondary-popup > header strong { color: #dfd3a3; font-size: 12px; }
+.diplomacy-secondary-popup label { display: grid; margin: 12px; color: #9ba59f; font-size: 9px; gap: 5px; }
+.diplomacy-secondary-popup select { min-height: 30px; border: 1px solid #475850; background: #081010; color: #d5d2c7; }
+.diplomacy-secondary-popup p { margin: 0 12px 12px; color: #798981; font-size: 8px; }
+.diplomacy-secondary-popup > footer { display: grid; padding: 7px; border-top: 1px solid #3d4743; grid-template-columns: 1fr 1fr; gap: 5px; }
+.diplomacy-secondary-popup > footer button { min-height: 29px; border: 1px solid #4d5b55; background: #151b1a; color: #c9c7bc; font-size: 9px; }
+.diplomacy-secondary-popup > footer button:last-child { border-color: #887744; color: #e2cc75; }
+
+@media (max-width: 620px) {
+  .strategic-window--diplomacy { right: 6px; left: 6px; width: auto; height: calc(100vh - 92px); max-height: calc(100vh - 92px); }
+  .foreign-diplomacy__identity { grid-template-columns: 96px minmax(0, 1fr); }
+  .foreign-diplomacy__flag,
+  .foreign-diplomacy__identity .country-flag-placeholder { width: 96px; height: 60px; }
+  .foreign-diplomacy__main { grid-template-columns: 39% 61%; }
 }
 
 @keyframes diplomacy-request-enter {
