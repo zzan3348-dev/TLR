@@ -19,6 +19,10 @@
       "destination": "/api/military-dispatch?route=:route"
     },
     {
+      "source": "/api/research/:route",
+      "destination": "/api/research-dispatch?route=:route"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

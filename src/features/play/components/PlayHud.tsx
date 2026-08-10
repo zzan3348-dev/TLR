@@ -50,6 +50,7 @@ const WINDOW_BUTTONS: readonly {
   { id: "diplomacy", label: "외교", icon: "menu/diplomacy" },
   { id: "intelligence", label: "첩보", icon: "menu/intelligence" },
   { id: "military", label: "군사", icon: "sections/military" },
+  { id: "research", label: "연구", icon: "menu/research" },
 ];
 
 function signedTone(value: number | null): HudTone {

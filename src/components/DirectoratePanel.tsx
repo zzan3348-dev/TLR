@@ -3,6 +3,7 @@ import { mapCountries } from "../data/mapCountries";
 import { PROPOSAL_LABELS, type DiplomaticProposal } from "../features/diplomacy/types";
 import type { TradeAgreement, TradeProposal } from "../features/economy/types";
 import { MilitaryAdminSection, type MilitaryAdminData } from "../features/military/components/MilitaryAdminSection";
+import { ResearchAdminSection, type ResearchAdminData } from "../features/research/components/ResearchAdminSection";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -26,24 +27,28 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [economies, setEconomies] = useState<Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }>>([]);
   const [worldDate, setWorldDate] = useState("");
   const [militaryData, setMilitaryData] = useState<MilitaryAdminData | null>(null);
+  const [researchData, setResearchData] = useState<ResearchAdminData | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const loadQueue = useCallback(async () => {
-    const [diplomacyResponse, economyResponse, militaryResponse] = await Promise.all([
+    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse] = await Promise.all([
       fetch("/api/admin/diplomacy", { credentials: "include" }),
       fetch("/api/admin/economy", { credentials: "include" }),
       fetch("/api/admin/military", { credentials: "include" }),
+      fetch("/api/admin/research", { credentials: "include" }),
     ]);
-    if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
+    if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok || !researchResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
     const diplomacyPayload = await diplomacyResponse.json() as { worldDate: string; queue: DiplomaticProposal[] };
     const economyPayload = await economyResponse.json() as { worldDate: string; queue: TradeProposal[]; agreements: TradeAgreement[]; economies: Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }> };
     const militaryPayload = await militaryResponse.json() as MilitaryAdminData;
+    const researchPayload = await researchResponse.json() as ResearchAdminData;
     setQueue(diplomacyPayload.queue);
     setTradeQueue(economyPayload.queue);
     setTradeAgreements(economyPayload.agreements);
     setEconomies(economyPayload.economies);
     setMilitaryData(militaryPayload);
+    setResearchData(researchPayload);
     setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate || militaryPayload.worldDate);
   }, []);
 
@@ -86,6 +91,20 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
     }
   };
 
+  const reviewResearch = async (body: Record<string, unknown>, actionId: string) => {
+    setBusyId(actionId);
+    setQueueError(null);
+    try {
+      const response = await fetch("/api/admin/research", {
+        method: "POST", credentials: "include", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) throw new Error("ADMIN_RESEARCH_REVIEW_FAILED");
+      await loadQueue();
+    } catch { setQueueError("연구 심사 상태를 변경하지 못했습니다."); }
+    finally { setBusyId(null); }
+  };
+
   const reviewTrade = async (proposalId: string, action: "ACCEPT" | "REJECT") => {
     setBusyId(proposalId);
     setQueueError(null);
@@ -125,6 +144,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <section className="directorate-page__status">
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
+      {researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
       {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">
         <header>

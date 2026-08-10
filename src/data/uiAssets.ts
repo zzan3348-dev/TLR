@@ -14,6 +14,7 @@ export const uiIconAssets = {
     decisions: "/assets/ui/icons/menu/decisions.svg",
     diplomacy: "/assets/ui/icons/menu/diplomacy.svg",
     intelligence: "/assets/ui/icons/menu/intelligence.svg",
+    research: "/assets/ui/icons/research/laboratory.svg",
     exit: "/assets/ui/icons/menu/exit.svg",
     handshake: "/assets/ui/icons/menu/handshake.svg",
     layers: "/assets/ui/icons/menu/layers.svg",
@@ -22,6 +23,11 @@ export const uiIconAssets = {
     fit: "/assets/ui/icons/menu/fit.svg",
     zoomIn: "/assets/ui/icons/menu/zoom-in.svg",
     zoomOut: "/assets/ui/icons/menu/zoom-out.svg",
+  },
+  research: {
+    laboratory: "/assets/ui/icons/research/laboratory.svg",
+    request: "/assets/ui/icons/research/request.svg",
+    investment: "/assets/ui/icons/research/investment.svg",
   },
   ui: {
     close: "/assets/ui/icons/ui/close.svg",
