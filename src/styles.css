@@ -2840,6 +2840,7 @@ button:focus-visible,
   object-fit: cover;
   object-position: center;
   border-radius: 14% / 23%;
+  clip-path: inset(2.5% 2.5% 3.5% round 18% / 27%);
   user-select: none;
   filter:
     brightness(0.84)
@@ -6747,6 +6748,7 @@ button:focus-visible,
   object-fit: cover;
   object-position: center;
   border-radius: 17% / 25%;
+  clip-path: inset(2.5% 2.5% 3.5% round 19% / 28%);
   filter: brightness(0.82) contrast(0.96) saturate(0.66) blur(0.2px);
   animation: hybrid-crt-flicker 5.4s steps(1, end) infinite;
 }
@@ -7537,7 +7539,11 @@ button:focus-visible,
 
 .play-hud__flag img,
 .play-hud__flag .country-flag-placeholder {
+  position: relative;
+  z-index: 1;
   filter: brightness(0.84) contrast(0.96) saturate(0.68) sepia(0.05);
+  border-radius: 12px / 9px;
+  clip-path: inset(2px round 12px / 9px);
   animation: hybrid-crt-flicker 5.4s steps(1, end) infinite;
 }
 
@@ -7548,6 +7554,8 @@ button:focus-visible,
   inset: 3px;
   content: "";
   pointer-events: none;
+  border-radius: 12px / 9px;
+  clip-path: inset(1px round 12px / 9px);
 }
 
 .play-hud__flag::before {
