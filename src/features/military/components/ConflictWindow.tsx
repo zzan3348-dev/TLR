@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
-import { militaryMutation } from "../militaryClient";
+import { MilitaryApiError, militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import { fetchMilitaryOverview } from "../militaryClient";
 import { militaryLabel } from "../militaryLabels";
@@ -79,8 +79,15 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
       if (data.length > 0) {
         setSelectedConflictId((prev) => prev ?? data[0].id);
       }
-    } catch {
-      setError("분쟁 목록을 불러오지 못했다.");
+    } catch (requestError) {
+      if (requestError instanceof MilitaryApiError && requestError.code === "MILITARY_SERVER_NOT_CONFIGURED") {
+        setConflicts([]);
+        setOverview(null);
+        setSelectedConflictId(null);
+        setError(null);
+      } else {
+        setError("분쟁 목록을 불러오지 못했다.");
+      }
     } finally {
       setLoading(false);
     }

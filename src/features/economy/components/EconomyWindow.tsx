@@ -5,7 +5,7 @@ import { CountryFlag } from "../../../components/CountryFlag";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import type { PlaySimulationState } from "../../play/data/playSimulationState";
-import { announceEconomyUpdate, confirmBudget, createTradeProposal, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
+import { announceEconomyUpdate, confirmBudget, createTradeProposal, EconomyApiError, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
 import { RESOURCE_LABELS, type EconomySnapshot, type TradeAgreement, type TradeAssetType, type TradeCountrySummary, type TradeLine, type TradeProposal, type TradeResourceId } from "../types";
 
 type EconomyTab = "overview" | "society" | "trade";
@@ -14,6 +14,24 @@ const BUDGET_KEYS = ["administration", "defense", "industry", "welfare", "educat
 const BUDGET_LABELS: Record<(typeof BUDGET_KEYS)[number], string> = { administration: "행정", defense: "국방", industry: "산업", welfare: "복지", education: "교육" };
 const RESOURCES = Object.keys(RESOURCE_LABELS) as TradeResourceId[];
 const COUNTRY_MAP = new Map((mapCountries as unknown as MapCountryIndex[]).map((entry) => [entry.key, entry]));
+
+function emptyEconomySnapshot(countryKey: string): EconomySnapshot {
+  return {
+    countryKey,
+    worldDate: "1932-01-01",
+    readiness: "UNCONFIGURED",
+    economy: null,
+    productionCapacity: null,
+    resources: [],
+    history: [],
+    rules: {
+      settlement_interval_days: 30,
+      budget_min: 0,
+      budget_max: 100,
+      budget_step: 1,
+    },
+  };
+}
 
 function displayCountry(key: string): string {
   const country = COUNTRY_MAP.get(key);
@@ -46,7 +64,18 @@ export function EconomyWindow({ country, onClose }: Props) {
       setSnapshot(economy); setCountries(partners.countries); setProposals(proposalRows.proposals); setAgreements(agreementRows.agreements);
     } catch (reason) {
       if (reason instanceof DOMException && reason.name === "AbortError") return;
-      setError(reason instanceof Error ? reason.message : "ECONOMY_DATA_UNAVAILABLE");
+      if (
+        reason instanceof EconomyApiError &&
+        reason.code === "ECONOMY_SERVER_NOT_CONFIGURED"
+      ) {
+        setSnapshot(emptyEconomySnapshot(country.key));
+        setCountries([]);
+        setProposals([]);
+        setAgreements([]);
+        setError(null);
+      } else {
+        setError(reason instanceof Error ? reason.message : "ECONOMY_DATA_UNAVAILABLE");
+      }
     } finally { setLoading(false); }
   }, [country.key]);
 

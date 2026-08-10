@@ -53,6 +53,37 @@ function errorMessage(error: unknown): string {
     : "외교 통신 중 예상하지 못한 오류가 발생했습니다.";
 }
 
+function emptyDiplomacyOverview(
+  actorCountryKey: string,
+  targetCountryKey: string,
+): DiplomacyOverview {
+  const unavailable = { available: false, reason: "외교 데이터 입력 대기" };
+  return {
+    actorCountryKey,
+    targetCountryKey,
+    worldDate: "1932-01-01",
+    targetReviewRoute: "ADMIN",
+    relations: {
+      outgoing: { available: false, baseScore: null, score: null, modifiers: [] },
+      incoming: { available: false, baseScore: null, score: null, modifiers: [] },
+    },
+    actions: {
+      IMPROVE_RELATIONS: unavailable,
+      WORSEN_RELATIONS: unavailable,
+      NON_AGGRESSION: unavailable,
+      TRADE_AGREEMENT: unavailable,
+      FACTION_INVITATION: unavailable,
+      MILITARY_ACCESS: unavailable,
+      INDEPENDENCE_GUARANTEE: unavailable,
+      SEND_MESSAGE: unavailable,
+      INTELLIGENCE_NETWORK: unavailable,
+    },
+    proposals: [],
+    agreements: [],
+    history: [],
+  };
+}
+
 function addDays(date: string, days: number): string {
   const value = new Date(`${date}T00:00:00Z`);
   value.setUTCDate(value.getUTCDate() + days);
@@ -186,8 +217,18 @@ function DiplomacyWorkspace({ playerCountry, targetCountry }: { playerCountry: M
       setError(null);
     } catch (requestError) {
       if (requestError instanceof DOMException && requestError.name === "AbortError") return;
-      setError(errorMessage(requestError));
-      setOverview(null);
+      if (
+        requestError instanceof DiplomacyApiError &&
+        requestError.code === "DIPLOMACY_SERVER_NOT_CONFIGURED"
+      ) {
+        setOverview(
+          emptyDiplomacyOverview(playerCountry.key, targetCountry.key),
+        );
+        setError(null);
+      } else {
+        setError(errorMessage(requestError));
+        setOverview(null);
+      }
     } finally {
       if (!signal?.aborted) setLoading(false);
     }

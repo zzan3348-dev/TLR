@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { fetchOfficerCorps, selectGrandDoctrine, selectOfficerSpirit } from "../militaryClient";
+import { fetchOfficerCorps, MilitaryApiError, selectGrandDoctrine, selectOfficerSpirit } from "../militaryClient";
 import type { GrandDoctrine, MilitarySelectionState, OfficerCorpsState, OfficerSpirit, OfficerSpiritCategory } from "../types";
 
 const CATEGORY_META: Record<OfficerSpiritCategory, { label: string; fallback: string }> = {
@@ -25,7 +25,21 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
   const load = useCallback(async () => {
     setLoading(true); setError(null);
     try { setState(await fetchOfficerCorps(countryKey)); }
-    catch { setError("군사사상 기록을 불러오지 못했습니다."); }
+    catch (requestError) {
+      if (requestError instanceof MilitaryApiError && requestError.code === "MILITARY_SERVER_NOT_CONFIGURED") {
+        setState({
+          countryKey,
+          worldDate: "1932-01-01",
+          version: 0,
+          doctrine: null,
+          selectedSpirits: {},
+          doctrines: [],
+          spirits: [],
+        });
+      } else {
+        setError("군사사상 기록을 불러오지 못했습니다.");
+      }
+    }
     finally { setLoading(false); }
   }, [countryKey]);
 

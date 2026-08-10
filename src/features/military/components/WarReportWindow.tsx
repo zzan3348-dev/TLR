@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
-import { militaryMutation } from "../militaryClient";
+import { MilitaryApiError, militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import type { WarReport } from "../types";
 
@@ -48,8 +48,13 @@ export function WarReportWindow({ onClose }: WarReportWindowProps) {
     try {
       const data = await militaryQuery<WarReport[]>(MILITARY_ROUTES.reports);
       setReports(data);
-    } catch {
-      setError("전쟁 보고서를 불러오지 못했다.");
+    } catch (requestError) {
+      if (requestError instanceof MilitaryApiError && requestError.code === "MILITARY_SERVER_NOT_CONFIGURED") {
+        setReports([]);
+        setError(null);
+      } else {
+        setError("전쟁 보고서를 불러오지 못했다.");
+      }
     } finally {
       setLoading(false);
     }

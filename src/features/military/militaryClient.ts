@@ -1,5 +1,15 @@
 import type { MilitaryOverview, OfficerCorpsState, OfficerSpiritCategory } from "./types";
 
+export class MilitaryApiError extends Error {
+  constructor(
+    public readonly code: string,
+    public readonly status: number,
+  ) {
+    super(code);
+    this.name = "MilitaryApiError";
+  }
+}
+
 async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`/api/military/${route}`, {
     credentials: "include",
@@ -7,7 +17,9 @@ async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T>
     headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
   });
   const payload = await response.json() as T & { error?: string };
-  if (!response.ok) throw new Error(payload.error ?? "MILITARY_REQUEST_FAILED");
+  if (!response.ok) {
+    throw new MilitaryApiError(payload.error ?? "MILITARY_REQUEST_FAILED", response.status);
+  }
   return payload;
 }
 

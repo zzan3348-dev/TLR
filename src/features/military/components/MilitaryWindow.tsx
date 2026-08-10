@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
-import { fetchMilitaryOverview, militaryMutation } from "../militaryClient";
+import { fetchMilitaryOverview, MilitaryApiError, militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import { ConflictWindow } from "./ConflictWindow";
 import { WarReportWindow } from "./WarReportWindow";
@@ -48,6 +48,24 @@ function militaryQuery<T>(route: string): Promise<T> {
   return militaryMutation<T>(route, {}, "GET");
 }
 
+function emptyMilitaryOverview(countryKey: string): MilitaryOverview {
+  return {
+    countryKey,
+    worldDate: "1932-01-01",
+    readiness: "UNCONFIGURED",
+    reasons: ["군사 데이터 입력 대기"],
+    manpower: { available: null, reserved: 0 },
+    productionCapacity: { available: null, reserved: 0 },
+    templates: [],
+    units: [],
+    vessels: [],
+    fleets: [],
+    airWings: [],
+    queues: [],
+    conflicts: [],
+  };
+}
+
 interface MilitaryWindowProps {
   countryKey: string;
   onClose: () => void;
@@ -73,8 +91,16 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
     try {
       const data = await fetchMilitaryOverview(countryKey);
       setOverview(data);
-    } catch {
-      setError("군사 개요를 불러오지 못했다. 통신선을 확인하라.");
+    } catch (requestError) {
+      if (
+        requestError instanceof MilitaryApiError &&
+        requestError.code === "MILITARY_SERVER_NOT_CONFIGURED"
+      ) {
+        setOverview(emptyMilitaryOverview(countryKey));
+        setError(null);
+      } else {
+        setError("군사 개요를 불러오지 못했다. 통신선을 확인하라.");
+      }
     } finally {
       setLoading(false);
     }

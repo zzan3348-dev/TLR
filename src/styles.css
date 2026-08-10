@@ -1246,11 +1246,11 @@ button:focus-visible,
   bottom: var(--space-4);
   display: grid;
   padding: 3px;
-  border: 1px solid #555651;
+  border: 1px solid #3d4b48;
   border-radius: 1px;
   background:
-    linear-gradient(145deg, rgb(255 248 230 / 3%), transparent 44%),
-    var(--bg-toolbar);
+    linear-gradient(145deg, rgb(116 182 170 / 4%), transparent 44%),
+    #111817;
   box-shadow:
     inset 0 0 0 2px #101415,
     inset 0 1px rgb(255 248 230 / 5%),
@@ -1266,8 +1266,8 @@ button:focus-visible,
   height: 5px;
   pointer-events: none;
   content: "";
-  border-top: 1px solid var(--accent-danger);
-  border-right: 1px solid var(--accent-danger);
+  border-top: 1px solid #638f87;
+  border-right: 1px solid #638f87;
 }
 
 .map-controls button {
@@ -1276,14 +1276,14 @@ button:focus-visible,
   width: 44px;
   height: 44px;
   padding: 0;
-  color: #a8a69e;
+  color: #9aaca7;
   cursor: pointer;
   place-items: center;
   border: 0;
   border: 1px solid transparent;
-  border-bottom-color: rgb(85 86 81 / 48%);
-  background: #171b1c;
-  box-shadow: inset 0 1px rgb(255 248 230 / 2.5%);
+  border-bottom-color: rgb(61 75 72 / 72%);
+  background: #151b1a;
+  box-shadow: inset 0 1px rgb(132 184 174 / 3%);
   transition:
     color var(--duration-fast) ease,
     background-color var(--duration-fast) ease;
@@ -1295,9 +1295,9 @@ button:focus-visible,
 
 .map-controls button:hover,
 .map-controls button[aria-pressed="true"] {
-  color: #e1dccf;
-  border-color: rgb(138 119 82 / 38%);
-  background: #232728;
+  color: #c4ded7;
+  border-color: rgb(105 149 140 / 55%);
+  background: #1c2725;
 }
 
 .map-controls button[aria-pressed="true"]::after {
@@ -1307,7 +1307,7 @@ button:focus-visible,
   width: 2px;
   height: 30px;
   content: "";
-  background: #8a7752;
+  background: #69a095;
 }
 
 .map-controls svg,
