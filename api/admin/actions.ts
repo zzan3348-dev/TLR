@@ -1,6 +1,7 @@
 import type { ApiRequest, ApiResponse } from "../../server/types.js";
 import { getAdminClient, getServerEnv } from "../../server/auth.js";
 import { requireAdminSession } from "../../server/adminAuth.js";
+import researchAdmin from "../../server/routes/admin/research.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",
@@ -19,6 +20,12 @@ type ActionBody = {
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
+  const rawDomain = request.query?.domain;
+  const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
+  if (domain === "research") {
+    await researchAdmin(request, response);
+    return;
+  }
   if (request.method !== "POST") {
     response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     return;

@@ -20,7 +20,11 @@
     },
     {
       "source": "/api/research/:route",
-      "destination": "/api/research-dispatch?route=:route"
+      "destination": "/api/economy-dispatch?domain=research&route=:route"
+    },
+    {
+      "source": "/api/admin/research",
+      "destination": "/api/admin/actions?domain=research"
     },
     {
       "source": "/((?!api/).*)",
