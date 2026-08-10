@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import { CountryFlag } from "../../../components/CountryFlag";
-import { PartySupportChart } from "../../../components/PartySupportChart";
 import { UiIcon } from "../../../components/UiIcon";
 import { mapCountries } from "../../../data/mapCountries";
 import { getCountryPresentation } from "../../../data/countryPresentation";
 import type { MapCountryIndex } from "../../../types/mapCountry";
-import { PoliticsWindowShell } from "../../politics/components/PoliticsWindowShell";
+import { StrategicWindow } from "../../play/components/StrategicWindow";
 import {
   announceDiplomacyUpdate,
   createProposal,
@@ -178,27 +177,6 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
   );
 }
 
-function DiplomacyNationalSpirits({ targetCountry }: { targetCountry: MapCountryIndex }) {
-  const spirits = getCountryPresentation(targetCountry).nationalSpirits;
-  return (
-    <>
-      <header><strong>국민정신</strong><span>{spirits.length}</span></header>
-      <div className="foreign-diplomacy__spirits">
-        {spirits.map((spirit) => (
-          <article key={spirit.id} tabIndex={0}>
-            {spirit.imagePath ? <img src={spirit.imagePath} alt="" draggable={false} /> : null}
-            <div role="tooltip">
-              <strong>{spirit.name}</strong>
-              <p>{spirit.description}</p>
-              {spirit.effects.map((effect) => <span key={effect.text} data-tone={effect.tone}>{effect.text}</span>)}
-            </div>
-          </article>
-        ))}
-      </div>
-    </>
-  );
-}
-
 function ProposalComposer({ proposalType, overview, busy, onClose, onSubmit }: {
   proposalType: ProposalType;
   overview: DiplomacyOverview;
@@ -317,36 +295,34 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
     return overview.history.length;
   };
 
-  const diplomacyBody = (
-    <div className="foreign-diplomacy__law-replacement">
-      <header><div><strong>외교</strong><span>{playerCountry.name} 외무 기록</span></div></header>
-      {error ? <div className="diplomacy-error" role="alert">{error}<button type="button" onClick={() => void reload()}>재시도</button></div> : null}
-      {playerCountry.key === targetCountry.key ? <div className="diplomacy-state diplomacy-state--empty"><strong>외교 대상 선택</strong><p>지도에서 자국이 아닌 국가를 선택하십시오.</p></div> : null}
-      {loading && !overview ? <div className="diplomacy-state"><span className="diplomacy-signal" />외교 기록 수신 중</div> : null}
-      {overview && playerCountry.key !== targetCountry.key ? <div className="foreign-diplomacy__main"><StatusBoard overview={overview} playerCountry={playerCountry} targetCountry={targetCountry} /><section className="diplomacy-action-stack" aria-label="외교 행동"><header><UiIcon name="diplomacy/dispatch" /><strong>외교 행동</strong></header>{ACTIONS.map((action) => { const availability = overview.actions[action.id]; return <button key={action.id} type="button" disabled={busy || !availability?.available} title={availability?.reason ?? undefined} onClick={() => runAction(action.id, action.proposal)}><UiIcon name={action.icon} /><span>{action.label}</span><b>{availability?.available ? "›" : "—"}</b></button>; })}</section></div> : null}
-      {overview && auxiliary ? <AuxiliaryPanel view={auxiliary} overview={overview} playerCountry={playerCountry} busy={busy} onClose={() => setAuxiliary(null)} onProposalAction={proposalAction} /> : null}
-    </div>
+  return (
+    <StrategicWindow title="외교" eyebrow={`${playerCountry.name} → ${presentation.title}`} className="strategic-window--diplomacy" onClose={onClose}>
+      <div className="foreign-diplomacy" style={panelStyle}>
+        <header className="foreign-diplomacy__identity">
+          <CountryFlag country={targetCountry} flagPath={presentation.flagPath} className="foreign-diplomacy__flag" />
+          <div><small>외교 대상국</small><h1>{presentation.title}</h1><p>{presentation.leader.name || "지도자 미설정"}</p><span>{partyName} · {ideology}{presentation.politics.faction ? ` · ${presentation.politics.faction}` : ""}</span></div>
+        </header>
+        <nav className="foreign-diplomacy__aux-nav" aria-label="외교 보조 기록">
+          {AUXILIARY.map((item) => <button key={item.id} type="button" aria-pressed={auxiliary === item.id} onClick={() => setAuxiliary(auxiliary === item.id ? null : item.id)}><UiIcon name={item.icon} /><span>{item.label}</span><b>{auxiliaryCount(item.id)}</b></button>)}
+        </nav>
+        {error ? <div className="diplomacy-error" role="alert">{error}<button type="button" onClick={() => void reload()}>재시도</button></div> : null}
+        {playerCountry.key === targetCountry.key ? <div className="diplomacy-state diplomacy-state--empty"><strong>외교 대상 선택</strong><p>지도에서 자국이 아닌 국가를 선택하십시오.</p></div> : null}
+        {loading && !overview ? <div className="diplomacy-state"><span className="diplomacy-signal" />외교 기록 수신 중</div> : null}
+        {overview && playerCountry.key !== targetCountry.key ? (
+          <main className="foreign-diplomacy__main">
+            <StatusBoard overview={overview} playerCountry={playerCountry} targetCountry={targetCountry} />
+            <section className="diplomacy-action-stack" aria-label="외교 행동">
+              <header><UiIcon name="menu/handshake" /><strong>외교 행동</strong></header>
+              {ACTIONS.map((action) => {
+                const availability = overview.actions[action.id];
+                return <button key={action.id} type="button" disabled={busy || !availability?.available} title={availability?.reason ?? undefined} onClick={() => runAction(action.id, action.proposal)}><UiIcon name={action.icon} /><span>{action.label}</span><b>{availability?.available ? "›" : "—"}</b></button>;
+              })}
+            </section>
+          </main>
+        ) : null}
+        {overview && auxiliary ? <AuxiliaryPanel view={auxiliary} overview={overview} playerCountry={playerCountry} busy={busy} onClose={() => setAuxiliary(null)} onProposalAction={proposalAction} /> : null}
+        {overview && composer ? <ProposalComposer proposalType={composer} overview={overview} busy={busy} onClose={() => setComposer(null)} onSubmit={(duration) => sendProposal(composer, duration)} /> : null}
+      </div>
+    </StrategicWindow>
   );
-
-  return <>
-    <PoliticsWindowShell
-      ariaLabel={`${presentation.title} 외교`}
-      style={panelStyle}
-      flag={<CountryFlag country={targetCountry} flagPath={presentation.flagPath} className="politics-template__flag-underlay" />}
-      portraitPath={presentation.leader.portraitPath}
-      closeLabel="외교창 닫기"
-      regions={{
-        ideology: <><UiIcon name="diplomacy/dispatch" /><small>{presentation.politics.ideology || "비동맹"}</small></>,
-        identity: <><small>외교 대상국</small><h1 title={presentation.title}>{presentation.title}</h1><p>{presentation.secondaryNames[0] || presentation.politics.government || "국가 표기 미설정"}</p><strong>{presentation.politics.faction || "세력에 소속되지 않음"}</strong></>,
-        nationalSpirits: <DiplomacyNationalSpirits targetCountry={targetCountry} />,
-        leaderCaption: <div className="foreign-diplomacy__leader-caption"><strong>{presentation.leader.name || "지도자 미설정"}</strong><span>{presentation.leader.title}</span></div>,
-        partySupport: <><div className="politics-template__party-heading"><UiIcon name="diplomacy/relations" /><div><strong>{partyName}</strong><span>{ideology}</span></div></div><PartySupportChart parties={presentation.politics.parties} /></>,
-        governmentSystem: <nav className="foreign-diplomacy__aux-nav" aria-label="외교 보조 기록">{AUXILIARY.slice(0, 2).map((item) => <button key={item.id} type="button" aria-pressed={auxiliary === item.id} onClick={() => setAuxiliary(auxiliary === item.id ? null : item.id)}><UiIcon name={item.icon} /><span>{item.label}</span><b>{auxiliaryCount(item.id)}</b></button>)}</nav>,
-        powerBase: <nav className="foreign-diplomacy__aux-nav" aria-label="외교 협정과 기록">{AUXILIARY.slice(2).map((item) => <button key={item.id} type="button" aria-pressed={auxiliary === item.id} onClick={() => setAuxiliary(auxiliary === item.id ? null : item.id)}><UiIcon name={item.icon} /><span>{item.label}</span><b>{auxiliaryCount(item.id)}</b></button>)}</nav>,
-        lawScroll: diplomacyBody,
-      }}
-      onClose={onClose}
-    />
-    {overview && composer ? <ProposalComposer proposalType={composer} overview={overview} busy={busy} onClose={() => setComposer(null)} onSubmit={(duration) => sendProposal(composer, duration)} /> : null}
-  </>;
 }

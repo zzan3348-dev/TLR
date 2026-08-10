@@ -18,7 +18,6 @@ type PoliticsWindowShellProps = {
   portraitPath: string | null;
   regions: PoliticsWindowRegions;
   onClose: () => void;
-  closeLabel?: string;
 };
 
 export function PoliticsWindowShell({
@@ -28,7 +27,6 @@ export function PoliticsWindowShell({
   portraitPath,
   regions,
   onClose,
-  closeLabel = "정치창 닫기",
 }: PoliticsWindowShellProps) {
   return (
     <aside
@@ -97,7 +95,7 @@ export function PoliticsWindowShell({
           type="button"
           className="hybrid-country-panel__close politics-template__close"
           onClick={onClose}
-          aria-label={closeLabel}
+          aria-label="정치창 닫기"
         />
       </div>
     </aside>

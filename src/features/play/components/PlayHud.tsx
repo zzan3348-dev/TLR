@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CountryFlag } from "../../../components/CountryFlag";
 import { UiIcon } from "../../../components/UiIcon";
 import { getCountryPresentation } from "../../../data/countryPresentation";
@@ -10,6 +11,7 @@ import {
   type PlaySimulationState,
 } from "../data/playSimulationState";
 import type { PrimaryWindow } from "../types";
+import { loadResearchOverview } from "../../research/researchClient";
 
 type PlayHudProps = {
   country: MapCountryIndex;
@@ -37,6 +39,7 @@ type HudMetricProps = {
   intro: string;
   lines: readonly HudDetailLine[];
   footer: string;
+  onActivate?: () => void;
 };
 
 const WINDOW_BUTTONS: readonly {
@@ -68,6 +71,25 @@ export function PlayHud({
   onExitPlayMode,
 }: PlayHudProps) {
   const presentation = getCountryPresentation(country);
+  const [researchPower, setResearchPower] = useState(0);
+  const [researchIncome, setResearchIncome] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    void loadResearchOverview(controller.signal)
+      .then((overview) => {
+        setResearchPower(overview.balance);
+        setResearchIncome(overview.incomePerPeriod);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setResearchPower(0);
+          setResearchIncome(0);
+        }
+      });
+    return () => controller.abort();
+  }, [country.key]);
+
   const unusedProduction =
     state.productionCapacity.total != null && state.productionCapacity.used != null
       ? Math.max(
@@ -181,6 +203,24 @@ export function PlayHud({
           footer="생산능력은 산업시설과 경제법, 무역 상태의 영향을 받습니다."
         />
         <HudMetric
+          id="research-power"
+          icon="hud/research-power"
+          label="연구력"
+          value={researchPower.toFixed(2)}
+          intro="국가 연구 계획을 제안하고 승인된 연구에 투자하는 데 사용하는 자원입니다."
+          lines={[
+            { label: "현재 연구력", value: researchPower.toFixed(2) },
+            {
+              label: "정산당 획득",
+              value: formatSigned(researchIncome),
+              tone: signedTone(researchIncome),
+            },
+            { label: "연구 계획", value: "연구창에서 확인" },
+          ]}
+          footer="선택하면 연구 계획과 투자 현황을 확인할 수 있습니다."
+          onActivate={() => onOpenWindow("research")}
+        />
+        <HudMetric
           id="gdp"
           icon="hud/gdp"
           label="GDP"
@@ -263,14 +303,25 @@ function HudMetric({
   intro,
   lines,
   footer,
+  onActivate,
 }: HudMetricProps) {
   const tooltipId = `hud-tooltip-${id}`;
 
   return (
     <div
       className="play-hud__metric"
+      data-metric-id={id}
       data-tone={tone}
       data-tooltip-align={align}
+      onClick={onActivate}
+      onKeyDown={(event) => {
+        if (onActivate && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          onActivate();
+        }
+      }}
+      role={onActivate ? "button" : undefined}
+      tabIndex={onActivate ? 0 : undefined}
     >
       <UiIcon name={icon} />
       <b>{value}</b>
