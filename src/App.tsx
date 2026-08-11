@@ -350,10 +350,7 @@ export default function App() {
           onCloseWindow={() => setTitleWindow(null)}
           onLogin={() => {
             setTitleWindow(null);
-            setAuthModalOpen(false);
-            setActivePlayWindow("politics");
-            setIsMapEntering(true);
-            setScreen("map");
+            setAuthModalOpen(true);
           }}
           onLogout={async () => {
             await signOut();
