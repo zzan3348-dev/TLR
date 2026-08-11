@@ -66,7 +66,11 @@ export async function loadDiplomacyOverview(countryKey: string, targetCountryKey
   return parseDiplomacyOverview(payload);
 }
 
-export function runRelationAction(countryKey: string, targetCountryKey: string, actionType: "IMPROVE_RELATIONS" | "WORSEN_RELATIONS"): Promise<{ score: number }> {
+export function runRelationAction(
+  countryKey: string,
+  targetCountryKey: string,
+  actionType: "IMPROVE_RELATIONS" | "WORSEN_RELATIONS" | "DECLARE_WAR",
+): Promise<{ score?: number; conflictId?: string }> {
   return requestJson("/api/diplomacy/actions", countryKey, {
     method: "POST",
     body: JSON.stringify({ targetCountryKey, actionType }),

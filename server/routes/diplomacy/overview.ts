@@ -132,6 +132,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         FACTION_INVITATION: actionState("FACTION_INVITATION", "FACTION_INVITATION"),
         MILITARY_ACCESS: actionState("MILITARY_ACCESS", "MILITARY_ACCESS"),
         INDEPENDENCE_GUARANTEE: actionState("INDEPENDENCE_GUARANTEE", "INDEPENDENCE_GUARANTEE"),
+        DECLARE_WAR: { available: true, reason: null },
         SEND_MESSAGE: { available: false, reason: "공식 전문 시스템은 아직 개통되지 않았습니다." },
         INTELLIGENCE_NETWORK: { available: false, reason: "첩보망 구축은 정보기관 기능과 함께 제공됩니다." },
       },

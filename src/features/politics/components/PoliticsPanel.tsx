@@ -43,7 +43,7 @@ const SECTION_META: readonly {
   { category: "social", title: "사회법", icon: "sections/social" },
 ];
 
-function PoliticsNationalSpirits({
+export function PoliticsNationalSpirits({
   spirits,
 }: {
   spirits: readonly CountryNationalSpirit[];
@@ -117,7 +117,7 @@ function PoliticsNationalSpirits({
   );
 }
 
-function PoliticsLeaderInfo({
+export function PoliticsLeaderInfo({
   leader,
 }: {
   leader: CountryLeaderPresentation;

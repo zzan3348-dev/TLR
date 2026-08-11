@@ -7695,6 +7695,53 @@ button:focus-visible,
   padding: 0.9cqw;
 }
 
+.diplomacy-template__record-nav {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.35cqw;
+}
+
+.diplomacy-template__record-nav button {
+  display: grid;
+  width: 4.8cqw;
+  min-width: 24px;
+  height: 3.7cqw;
+  min-height: 20px;
+  padding: 0.35cqw;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #3e5552;
+  background: #0b1414;
+  grid-template-columns: 1fr auto;
+}
+
+.diplomacy-template__record-nav button[aria-pressed="true"] {
+  border-color: #b8a45d;
+  background: #1a1a13;
+}
+
+.diplomacy-template__record-nav .ui-icon {
+  width: 2.3cqw;
+  height: 2.3cqw;
+}
+
+.diplomacy-template__record-nav b {
+  color: #d0b76a;
+  font-size: clamp(6px, 1cqw, 8px);
+}
+
+.diplomacy-template__relation-summary {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: 0.7cqw 1cqw;
+  align-content: center;
+  color: #92b7ae;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(7px, 1.45cqw, 10px);
+  gap: 0.45cqw;
+}
+
 .diplomacy-template__actions-intro {
   display: grid;
   min-height: 8cqw;
@@ -7755,6 +7802,11 @@ button:focus-visible,
   background: linear-gradient(90deg, rgb(188 161 78 / 14%), transparent 64%), #0d1515;
 }
 
+.diplomacy-template__action-list button:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.35) brightness(0.62);
+}
+
 .diplomacy-template__action-list button > .ui-icon {
   width: 3.8cqw;
   height: 3.8cqw;
@@ -7790,6 +7842,24 @@ button:focus-visible,
   font-size: clamp(7px, 1.2cqw, 9px);
   font-style: normal;
   white-space: nowrap;
+}
+
+.diplomacy-template__action-list .diplomacy-template__action--danger {
+  border-color: #70423f;
+  background: linear-gradient(90deg, rgb(150 57 48 / 13%), transparent 64%), #120d0d;
+}
+
+.diplomacy-template__action-list .diplomacy-template__action--danger:hover {
+  border-color: #bd6b62;
+  background: linear-gradient(90deg, rgb(178 65 54 / 21%), transparent 70%), #180d0d;
+}
+
+.diplomacy-template__action-list .diplomacy-template__action--danger i {
+  color: #cf7a70;
+}
+
+.diplomacy-template__actions .diplomacy-status-board {
+  margin-top: 1cqw;
 }
 
 .politics-template__spirits > div > button {
@@ -8289,7 +8359,7 @@ button:focus-visible,
 .military-template-card__form-button:disabled {
   color: var(--tlr-ivory-dim, #6f6d63);
   border-color: var(--tlr-steel-line, #3a3f3f);
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 .military-template-card__name-field {
