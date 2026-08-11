@@ -8,6 +8,8 @@ import unittest
 
 from navi_bot.bot import NaviBot
 from navi_bot.affection_system import affection_score_text
+from navi_bot.commands.admin import AdminCommands
+from navi_bot.commands.help import HelpCommands
 from navi_bot.commands.social import SocialCommands
 from navi_bot.commands.tlr import TlrCommands
 from navi_bot.commands_restaurant import RestaurantCommands
@@ -32,6 +34,24 @@ class RuntimeTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual(result.response, "음...좋은곳이였죠. 아마도요")
         self.assertNotIn("discord.gg", result.response)
+
+    def test_owner_and_special_user_dialogue_routes_are_restored(self) -> None:
+        manager = ChatReactionManager(
+            Path(__file__).parents[1] / "navi_bot" / "assets" / "chat_reactions.json",
+            object(),
+        )
+        manager.load()
+        owner = SimpleNamespace(id=886955387893477417, name="owner", display_name="owner", roles=[])
+        tier, owner_result = manager.test("나비야 안녕", owner)
+        self.assertEqual(tier, "owner")
+        self.assertIsNotNone(owner_result)
+        self.assertIn("아빠", owner_result.response)
+
+        special = SimpleNamespace(id=1264868190647750657, name="special", display_name="special", roles=[])
+        tier, special_result = manager.test("나비야", special)
+        self.assertEqual(tier, "special")
+        self.assertIsNotNone(special_result)
+        self.assertEqual(special_result.response, "우와! 오리너구리다!")
 
     def test_awakening_image_is_packaged(self) -> None:
         image = Path(__file__).parents[1] / "navi_bot" / "assets" / "navi-awakening.png"
@@ -61,6 +81,8 @@ class RuntimeTests(unittest.TestCase):
                 )
                 bot = NaviBot(config)
                 bot.db.init_db()
+                await bot.add_cog(AdminCommands(bot, bot.db))
+                await bot.add_cog(HelpCommands())
                 await bot.add_cog(TlrCommands(bot, bot.tlr, bot.db, config.tlr_base_url))
                 await bot.add_cog(SocialCommands(bot, bot.db))
                 await bot.add_cog(RestaurantCommands(bot, bot.db, config))
@@ -73,6 +95,12 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(
             registered,
             {
+                "관리자채널",
+                "관리자역할",
+                "대사채널",
+                "블랙리스트",
+                "나비상태",
+                "도움",
                 "경제",
                 "끝말잇기",
                 "나비식당",

@@ -308,6 +308,13 @@ class Database:
     def remove_chat_blacklist_user(self, user_id: int, *, added_by: int | None = None) -> bool:
         return self.set_chat_blacklist_user(user_id=user_id, enabled=False, reason="removed", added_by=added_by)
 
+    def list_chat_blacklist_users(self) -> list[int]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT user_id FROM navi_chat_blacklist WHERE enabled=1 ORDER BY user_id"
+            ).fetchall()
+        return [int(row["user_id"]) for row in rows]
+
     def _ensure_affection_profile_conn(self, conn: sqlite3.Connection, user_id: int) -> sqlite3.Row:
         first = (int(user_id) % 11) - 5
         initial = AFFECTION_LEVEL_5_THRESHOLD if NAVI_OWNER_USER_ID and user_id == NAVI_OWNER_USER_ID else first

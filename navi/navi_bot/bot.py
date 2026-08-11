@@ -11,6 +11,8 @@ from discord.ext import commands, tasks
 from .affection_system import affection_summary, apply_affection_to_chat_response
 from .badge_system import handle_badge_owner_command, handle_boost_member_update, is_owner_badge_command
 from .chat_reactions import ChatReactionManager
+from .commands.admin import AdminCommands
+from .commands.help import HelpCommands
 from .commands.social import SocialCommands
 from .commands.tlr import TlrCommands
 from .commands_restaurant import RestaurantCommands, is_restaurant_owner_grant_command, handle_restaurant_owner_grant_command
@@ -48,6 +50,8 @@ class NaviBot(commands.Bot):
         self.db.init_db()
         self.chat_reactions.load()
         await self.tlr.start()
+        await self.add_cog(AdminCommands(self, self.db))
+        await self.add_cog(HelpCommands())
         await self.add_cog(TlrCommands(self, self.tlr, self.db, self.config.tlr_base_url))
         await self.add_cog(SocialCommands(self, self.db))
         await self.add_cog(RestaurantCommands(self, self.db, self.config))
@@ -191,7 +195,7 @@ class NaviBot(commands.Bot):
             f"국가 `{country_key}` · 연구 `{project_id}`\n"
             f"{self.config.tlr_base_url}/play/{country_key}"
         )
-        if action == "SUBMITTED" and self.config.notification_channel_id:
+        if action == "SUBMITTED" and self._notification_channel_id():
             await self._send_notification_channel(text)
         discord_user_id = event.get("discordUserId")
         if discord_user_id and action != "SUBMITTED":
@@ -203,13 +207,17 @@ class NaviBot(commands.Bot):
                 await self._send_notification_channel(text)
 
     async def _send_notification_channel(self, text: str) -> None:
-        if not self.config.notification_channel_id:
+        channel_id = self._notification_channel_id()
+        if not channel_id:
             return
-        channel = self.get_channel(self.config.notification_channel_id)
+        channel = self.get_channel(channel_id)
         if channel is None:
-            channel = await self.fetch_channel(self.config.notification_channel_id)
+            channel = await self.fetch_channel(channel_id)
         if isinstance(channel, discord.abc.Messageable):
             await channel.send(text, allowed_mentions=no_mentions())
+
+    def _notification_channel_id(self) -> int | None:
+        return self.db.get_int_setting("notification_channel_id") or self.config.notification_channel_id
 
 
 async def run_bot(config: Config) -> None:
