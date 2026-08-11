@@ -82,7 +82,7 @@ class NaviBot(commands.Bot):
                 text_channel
                 for guild in guilds
                 for text_channel in guild.text_channels
-                if text_channel.name == AWAKENING_CHANNEL_NAME
+                if AWAKENING_CHANNEL_NAME in text_channel.name
             ),
             None,
         )
