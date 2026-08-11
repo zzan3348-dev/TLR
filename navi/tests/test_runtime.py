@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 from navi_bot.bot import NaviBot
@@ -12,10 +13,31 @@ from navi_bot.commands.tlr import TlrCommands
 from navi_bot.commands_restaurant import RestaurantCommands
 from navi_bot.commands_word_chain import WordChainCommands
 from navi_bot.config import Config
+from navi_bot.chat_reactions import ChatReactionManager
 from navi_bot.navi_emojis import EMOJI_ALIASES, EMOJI_FALLBACKS
 
 
 class RuntimeTests(unittest.TestCase):
+    def test_lcw_call_uses_the_new_text_without_an_invite_link(self) -> None:
+        manager = ChatReactionManager(
+            Path(__file__).parents[1] / "navi_bot" / "assets" / "chat_reactions.json",
+            object(),
+        )
+        manager.load()
+        message = SimpleNamespace(
+            content="나비야 LCW",
+            author=SimpleNamespace(id=123456789012345678, name="tester", display_name="tester"),
+        )
+        result = manager.evaluate_message(message, affection_level=1)
+        self.assertIsNotNone(result)
+        self.assertEqual(result.response, "음...좋은곳이였죠. 아마도요")
+        self.assertNotIn("discord.gg", result.response)
+
+    def test_awakening_image_is_packaged(self) -> None:
+        image = Path(__file__).parents[1] / "navi_bot" / "assets" / "navi-awakening.png"
+        self.assertTrue(image.is_file())
+        self.assertGreater(image.stat().st_size, 1000)
+
     def test_affection_uses_one_unicode_heart_and_signed_numbers(self) -> None:
         self.assertEqual(affection_score_text(5), "❤️ +5")
         self.assertEqual(affection_score_text(0), "❤️ 0")

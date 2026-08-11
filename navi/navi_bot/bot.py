@@ -21,6 +21,11 @@ from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
 
+AWAKENING_CHANNEL_NAME = "자유지대"
+AWAKENING_SETTING_KEY = "awakening_announcement_v1"
+AWAKENING_IMAGE_PATH = Path(__file__).with_name("assets") / "navi-awakening.png"
+AWAKENING_MESSAGE = "@here\n\n음냐..뭔가 오래 잔 느낌이네요"
+
 
 class NaviBot(commands.Bot):
     def __init__(self, config: Config) -> None:
@@ -63,6 +68,46 @@ class NaviBot(commands.Bot):
 
     async def on_ready(self) -> None:
         log.info("NEW NAVI 로그인 완료: %s (%s)", self.user, getattr(self.user, "id", None))
+        await self._send_awakening_announcement()
+
+    async def _send_awakening_announcement(self) -> None:
+        if self.db.get_setting_value(AWAKENING_SETTING_KEY) == "sent":
+            return
+        guilds = self.guilds
+        if self.config.guild_id:
+            configured_guild = self.get_guild(self.config.guild_id)
+            guilds = [configured_guild] if configured_guild is not None else []
+        channel = next(
+            (
+                text_channel
+                for guild in guilds
+                for text_channel in guild.text_channels
+                if text_channel.name == AWAKENING_CHANNEL_NAME
+            ),
+            None,
+        )
+        if channel is None:
+            log.warning("부활 메시지 채널을 찾지 못했습니다: %s", AWAKENING_CHANNEL_NAME)
+            return
+        if not AWAKENING_IMAGE_PATH.is_file():
+            log.error("부활 메시지 이미지를 찾지 못했습니다: %s", AWAKENING_IMAGE_PATH)
+            return
+        try:
+            await channel.send(
+                AWAKENING_MESSAGE,
+                file=discord.File(AWAKENING_IMAGE_PATH, filename=AWAKENING_IMAGE_PATH.name),
+                allowed_mentions=discord.AllowedMentions(
+                    everyone=True,
+                    users=False,
+                    roles=False,
+                    replied_user=False,
+                ),
+            )
+        except discord.HTTPException:
+            log.exception("부활 메시지 전송 실패: channel=%s", channel.id)
+            return
+        self.db.set_setting(key=AWAKENING_SETTING_KEY, value="sent", updated_by=None)
+        log.info("부활 메시지 전송 완료: channel=%s", channel.id)
 
     async def on_member_update(self, before: discord.Member, after: discord.Member) -> None:
         await handle_boost_member_update(self.db, before, after)

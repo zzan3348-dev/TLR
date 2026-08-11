@@ -5,6 +5,11 @@
   "special_user_reactions": {},
   "priority_reactions": [
     {
+      "keywords": ["나비야 LCW"],
+      "responses": ["음...좋은곳이였죠. 아마도요"],
+      "affection_delta": 0
+    },
+    {
       "keywords": ["나비야 TLR", "나비야 사이트"],
       "responses": ["TLR의 국가 운영 정보를 찾아볼게요. `/내국가`나 `/내연구`를 사용해 주세요!"],
       "affection_delta": 1
