@@ -7826,13 +7826,15 @@ button:focus-visible,
 
 .diplomacy-template__relations-content .diplomacy-status-row__flags {
   display: flex;
+  width: 100%;
   min-width: 0;
   margin: 0;
   align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  overflow: visible;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
   gap: 3px;
+  scrollbar-width: none;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-row__flags::-webkit-scrollbar {
@@ -7842,16 +7844,7 @@ button:focus-visible,
 .diplomacy-template__relations-content .diplomacy-status-row--alliance {
   border-left: 2px solid #bba753;
   background: linear-gradient(90deg, rgb(188 164 77 / 14%), transparent 72%), #0a1111;
-  grid-template-columns: 28px minmax(0, 1fr) auto;
-}
-
-.diplomacy-template__relations-content .diplomacy-status-row__badge {
-  padding: 3px 5px;
-  border: 1px solid #73683d;
-  color: #e1cf83;
-  background: #242217;
-  font-size: 10px;
-  white-space: nowrap;
+  grid-template-columns: 28px minmax(0, 1fr);
 }
 
 .diplomacy-template__relations-content .diplomacy-mini-flag,

@@ -152,7 +152,6 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
             <div className="diplomacy-status-row__flags">
               {factionMembers.map((country) => <Flag key={country.key} countryKey={country.key} />)}
             </div>
-            <strong className="diplomacy-status-row__badge">동맹</strong>
           </article>
         ) : null}
         {agreements.map((agreement) => (
