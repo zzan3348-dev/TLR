@@ -7803,24 +7803,25 @@ button:focus-visible,
 }
 
 .diplomacy-template__relations-content .diplomacy-status-list article {
-  min-height: 8.2cqw;
-  padding: 0.7cqw 0.9cqw;
-  grid-template-columns: 4.2cqw 2.5cqw minmax(0, 1fr) auto;
-  gap: 0.55cqw;
+  min-height: 42px;
+  padding: 5px 6px;
+  grid-template-columns: 28px 20px minmax(0, 1fr) auto;
+  gap: 4px;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-list article > .ui-icon {
-  width: 3.6cqw;
-  height: 3.6cqw;
+  width: 25px;
+  height: 25px;
+  filter: drop-shadow(0 1px 1px #000) brightness(1.08);
 }
 
-.diplomacy-template__relations-content .diplomacy-status-row__direction {
+.diplomacy-template__relations-content .diplomacy-status-list article > .diplomacy-status-row__direction {
   display: block;
+  width: 18px;
+  height: 18px;
   margin: 0;
-  color: #c2ae63;
-  font: 700 clamp(11px, 2.15cqw, 15px)/1 "IBM Plex Mono", monospace;
   grid-column: auto;
-  text-align: center;
+  filter: sepia(0.35) saturate(0.75) brightness(1.18);
 }
 
 .diplomacy-template__relations-content .diplomacy-status-row__flags {
@@ -7828,9 +7829,10 @@ button:focus-visible,
   min-width: 0;
   margin: 0;
   align-items: center;
-  overflow-x: auto;
-  scrollbar-width: none;
-  gap: 0.35cqw;
+  align-content: center;
+  flex-wrap: wrap;
+  overflow: visible;
+  gap: 3px;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-row__flags::-webkit-scrollbar {
@@ -7840,23 +7842,28 @@ button:focus-visible,
 .diplomacy-template__relations-content .diplomacy-status-row--alliance {
   border-left: 2px solid #bba753;
   background: linear-gradient(90deg, rgb(188 164 77 / 14%), transparent 72%), #0a1111;
-  grid-template-columns: 4.2cqw minmax(0, 1fr) auto;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-row__badge {
-  padding: 0.55cqw 0.7cqw;
+  padding: 3px 5px;
   border: 1px solid #73683d;
   color: #e1cf83;
   background: #242217;
-  font-size: clamp(9px, 1.55cqw, 11px);
+  font-size: 10px;
   white-space: nowrap;
 }
 
 .diplomacy-template__relations-content .diplomacy-mini-flag,
 .diplomacy-template__relations-content .country-flag-placeholder {
-  width: 5.2cqw;
-  height: 3.2cqw;
-  flex: 0 0 auto;
+  display: block;
+  width: 30px;
+  height: 19px;
+  flex: 0 0 30px;
+  border: 1px solid #7a786c;
+  object-fit: cover;
+  background: #050707;
+  box-shadow: 0 1px 2px #000, inset 0 0 0 1px rgb(255 255 255 / 5%);
 }
 
 .diplomacy-template__relations-content .diplomacy-status-empty {

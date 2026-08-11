@@ -158,7 +158,7 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
         {agreements.map((agreement) => (
           <article className="diplomacy-status-row" key={agreement.id} title={AGREEMENT_LABELS[agreement.agreement_type]}>
             <UiIcon name={agreement.agreement_type === "TRADE_AGREEMENT" ? "diplomacy/trade" : "diplomacy/treaty"} />
-            <span className="diplomacy-status-row__direction" aria-hidden="true">→</span>
+            <UiIcon name="diplomacy/direction-arrow" className="diplomacy-status-row__direction" />
             <div className="diplomacy-status-row__flags">
               <Flag countryKey={agreement.country_a_key} />
               <Flag countryKey={agreement.country_b_key} />
