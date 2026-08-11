@@ -138,30 +138,35 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
     && playerFaction.factionId === targetFaction.factionId
     ? getFaction(playerFaction.factionId)
     : null;
+  const factionMembers = sharedFaction
+    ? mapCountries.filter((country) => country.factionMembership?.status === "member"
+      && country.factionMembership.factionId === sharedFaction.id)
+    : [];
   return (
     <section className="diplomacy-status-board" aria-label="외교 상태">
       <header><UiIcon name="menu/diplomacy" /><strong>외교 상태</strong></header>
       <div className="diplomacy-status-list">
         {sharedFaction ? (
-          <article className="diplomacy-status-list__alliance">
+          <article className="diplomacy-status-row diplomacy-status-row--alliance" title={`${sharedFaction.name} 동맹`}>
             <UiIcon name="diplomacy/faction-invitation" />
-            <div><strong>{sharedFaction.name} · 동맹</strong></div>
-            <span><Flag countryKey={playerCountry.key} /><Flag countryKey={targetCountry.key} /></span>
+            <div className="diplomacy-status-row__flags">
+              {factionMembers.map((country) => <Flag key={country.key} countryKey={country.key} />)}
+            </div>
+            <strong className="diplomacy-status-row__badge">동맹</strong>
           </article>
         ) : null}
         {agreements.map((agreement) => (
-          <article key={agreement.id}>
+          <article className="diplomacy-status-row" key={agreement.id} title={AGREEMENT_LABELS[agreement.agreement_type]}>
             <UiIcon name={agreement.agreement_type === "TRADE_AGREEMENT" ? "diplomacy/trade" : "diplomacy/treaty"} />
-            <div><strong>{AGREEMENT_LABELS[agreement.agreement_type]}</strong></div>
-            <span><Flag countryKey={agreement.country_a_key} /><Flag countryKey={agreement.country_b_key} /></span>
+            <span className="diplomacy-status-row__direction" aria-hidden="true">→</span>
+            <div className="diplomacy-status-row__flags">
+              <Flag countryKey={agreement.country_a_key} />
+              <Flag countryKey={agreement.country_b_key} />
+            </div>
           </article>
         ))}
         {!sharedFaction && !agreements.length ? <p className="diplomacy-status-empty">체결된 협정 없음</p> : null}
       </div>
-      <dl className="diplomacy-relation-strip">
-        <div><dt>{playerCountry.name} →</dt><dd>{overview.relations.outgoing.available ? signed(overview.relations.outgoing.score) : "—"}</dd></div>
-        <div><dt>{targetCountry.name} →</dt><dd>{overview.relations.incoming.available ? signed(overview.relations.incoming.score) : "—"}</dd></div>
-      </dl>
     </section>
   );
 }
@@ -315,13 +320,13 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
                 {overview ? (
                   <>
                     <section className="diplomacy-template__relations-column" aria-label="대상국 외교 관계">
-                      <header><UiIcon name="diplomacy/treaty" /><div><strong>외교 현황</strong></div></header>
+                      <header><UiIcon name="diplomacy/treaty" /><div><strong>외교</strong></div></header>
                       <div className="diplomacy-template__relations-content">
                         <StatusBoard overview={overview} playerCountry={playerCountry} targetCountry={targetCountry} />
                       </div>
                     </section>
                     <section className="diplomacy-template__requests-column" aria-label="외교 요청">
-                      <header><UiIcon name="diplomacy/message" /><div><strong>외교 행동</strong></div></header>
+                      <header><UiIcon name="diplomacy/message" /><div><strong>자세히</strong></div></header>
                       <div className="politics-template__law-scroll diplomacy-template__actions">
                     <div className="diplomacy-template__action-list">
                       {ACTIONS.map((action) => {

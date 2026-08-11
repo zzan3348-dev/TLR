@@ -7733,11 +7733,11 @@ button:focus-visible,
 }
 
 .diplomacy-template__relations-column {
-  grid-template-rows: 9cqw minmax(0, 1fr);
+  grid-template-rows: 6.8cqw minmax(0, 1fr);
 }
 
 .diplomacy-template__requests-column {
-  grid-template-rows: 9cqw minmax(0, 1fr);
+  grid-template-rows: 6.8cqw minmax(0, 1fr);
 }
 
 .diplomacy-template__relations-column > header,
@@ -7748,14 +7748,14 @@ button:focus-visible,
   align-items: center;
   border-bottom: 1px solid #465550;
   background: linear-gradient(90deg, rgb(117 150 139 / 12%), transparent 68%), #1a201e;
-  grid-template-columns: 4.8cqw minmax(0, 1fr);
-  gap: 1cqw;
+  grid-template-columns: 3.8cqw minmax(0, 1fr);
+  gap: 0.7cqw;
 }
 
 .diplomacy-template__relations-column > header > .ui-icon,
 .diplomacy-template__requests-column > header > .ui-icon {
-  width: 4cqw;
-  height: 4cqw;
+  width: 3.2cqw;
+  height: 3.2cqw;
 }
 
 .diplomacy-template__relations-column > header div,
@@ -7768,7 +7768,7 @@ button:focus-visible,
 .diplomacy-template__relations-column > header strong,
 .diplomacy-template__requests-column > header strong {
   color: #ddd8ca;
-  font-size: clamp(12px, 2.45cqw, 17px);
+  font-size: clamp(11px, 2.1cqw, 15px);
 }
 
 .diplomacy-template__relations-column > header span,
@@ -7803,53 +7803,65 @@ button:focus-visible,
 }
 
 .diplomacy-template__relations-content .diplomacy-status-list article {
-  min-height: 12cqw;
-  padding: 1.25cqw;
-  grid-template-columns: 4.6cqw minmax(0, 1fr) auto;
-  gap: 1cqw;
+  min-height: 8.2cqw;
+  padding: 0.7cqw 0.9cqw;
+  grid-template-columns: 4.2cqw 2.5cqw minmax(0, 1fr) auto;
+  gap: 0.55cqw;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-list article > .ui-icon {
-  width: 4cqw;
-  height: 4cqw;
+  width: 3.6cqw;
+  height: 3.6cqw;
 }
 
-.diplomacy-template__relations-content .diplomacy-status-list article strong {
-  color: #e0ddd2;
-  font-size: clamp(11px, 2.15cqw, 15px);
-  text-overflow: clip;
-  white-space: normal;
-}
-
-.diplomacy-template__relations-content .diplomacy-status-list article > span {
-  margin-top: 0;
-  align-items: center;
+.diplomacy-template__relations-content .diplomacy-status-row__direction {
+  display: block;
+  margin: 0;
+  color: #c2ae63;
+  font: 700 clamp(11px, 2.15cqw, 15px)/1 "IBM Plex Mono", monospace;
   grid-column: auto;
+  text-align: center;
 }
 
-.diplomacy-template__relations-content .diplomacy-status-list__alliance {
+.diplomacy-template__relations-content .diplomacy-status-row__flags {
+  display: flex;
+  min-width: 0;
+  margin: 0;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0.35cqw;
+}
+
+.diplomacy-template__relations-content .diplomacy-status-row__flags::-webkit-scrollbar {
+  display: none;
+}
+
+.diplomacy-template__relations-content .diplomacy-status-row--alliance {
   border-left: 2px solid #bba753;
   background: linear-gradient(90deg, rgb(188 164 77 / 14%), transparent 72%), #0a1111;
+  grid-template-columns: 4.2cqw minmax(0, 1fr) auto;
+}
+
+.diplomacy-template__relations-content .diplomacy-status-row__badge {
+  padding: 0.55cqw 0.7cqw;
+  border: 1px solid #73683d;
+  color: #e1cf83;
+  background: #242217;
+  font-size: clamp(9px, 1.55cqw, 11px);
+  white-space: nowrap;
 }
 
 .diplomacy-template__relations-content .diplomacy-mini-flag,
 .diplomacy-template__relations-content .country-flag-placeholder {
-  width: 4.8cqw;
-  height: 3cqw;
+  width: 5.2cqw;
+  height: 3.2cqw;
+  flex: 0 0 auto;
 }
 
 .diplomacy-template__relations-content .diplomacy-status-empty {
   padding: 5cqw 1cqw;
   font-size: clamp(10px, 1.9cqw, 13px);
-}
-
-.diplomacy-template__relations-content .diplomacy-relation-strip > div {
-  padding: 1.2cqw 1.4cqw;
-}
-
-.diplomacy-template__relations-content .diplomacy-relation-strip dt,
-.diplomacy-template__relations-content .diplomacy-relation-strip dd {
-  font-size: clamp(10px, 1.85cqw, 13px);
 }
 
 .diplomacy-template__requests-column .diplomacy-template__actions {
@@ -7942,21 +7954,21 @@ button:focus-visible,
 
 .diplomacy-template__action-list {
   display: grid;
-  margin-top: 1cqw;
-  gap: 0.9cqw;
+  margin-top: 0;
+  gap: 0.45cqw;
 }
 
 .diplomacy-template__action-list button {
   display: grid;
-  min-height: 12cqw;
-  padding: 1cqw 1.2cqw;
+  min-height: 6.8cqw;
+  padding: 0.55cqw 0.8cqw;
   align-items: center;
   cursor: not-allowed;
   border: 1px solid #385b58;
-  background: linear-gradient(90deg, rgb(58 125 116 / 9%), transparent 64%), #081011;
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 55%);
-  grid-template-columns: 5.6cqw minmax(0, 1fr) auto;
-  gap: 1.2cqw;
+  background: linear-gradient(180deg, #313735 0%, #202624 48%, #151a19 52%, #242a28 100%);
+  box-shadow: inset 0 1px rgb(255 255 255 / 8%), inset 0 -1px #050707;
+  grid-template-columns: 4.4cqw minmax(0, 1fr) auto;
+  gap: 0.75cqw;
   text-align: left;
 }
 
@@ -7967,15 +7979,16 @@ button:focus-visible,
 
 .diplomacy-template__action-list button:disabled {
   cursor: not-allowed;
-  filter: saturate(0.35) brightness(0.62);
+  opacity: 0.72;
+  filter: saturate(0.65) brightness(0.86);
 }
 
 .diplomacy-template__action-list button > .ui-icon {
-  width: 4.5cqw;
-  height: 4.5cqw;
-  padding: 0.45cqw;
-  border: 1px solid #4d7772;
-  background: #0b1717;
+  width: 3.4cqw;
+  height: 3.4cqw;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .diplomacy-template__action-list button > span {
@@ -7987,7 +8000,7 @@ button:focus-visible,
 .diplomacy-template__action-list strong {
   overflow: hidden;
   color: #dedbd1;
-  font-size: clamp(12px, 2.3cqw, 16px);
+  font-size: clamp(11px, 2.05cqw, 14px);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
