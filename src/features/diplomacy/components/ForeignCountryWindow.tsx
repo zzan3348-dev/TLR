@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import { CountryFlag } from "../../../components/CountryFlag";
 import { PartySupportChart } from "../../../components/PartySupportChart";
 import { UiIcon } from "../../../components/UiIcon";
@@ -70,6 +71,15 @@ const AGREEMENT_LABELS: Record<DiplomaticAgreement["agreement_type"], string> = 
   FACTION_MEMBERSHIP: "세력 회원국",
 };
 
+const AGREEMENT_ICONS: Record<DiplomaticAgreement["agreement_type"], string> = {
+  NON_AGGRESSION: "diplomacy/non-aggression",
+  TRADE_AGREEMENT: "diplomacy/trade-agreement",
+  FACTION_INVITATION: "diplomacy/faction-invitation",
+  MILITARY_ACCESS: "diplomacy/military-access",
+  INDEPENDENCE_GUARANTEE: "diplomacy/independence-guarantee",
+  FACTION_MEMBERSHIP: "diplomacy/alliance",
+};
+
 function errorMessage(error: unknown): string {
   return error instanceof DiplomacyApiError
     ? ERROR_MESSAGES[error.code] ?? `외교 요청이 거부되었습니다. (${error.code})`
@@ -130,6 +140,12 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
   playerCountry: MapCountryIndex;
   targetCountry: MapCountryIndex;
 }) {
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    title: string;
+    countries: MapCountryIndex[];
+  } | null>(null);
   const agreements = overview.agreements.filter((agreement) => agreement.status === "ACTIVE" || agreement.status === "SCHEDULED");
   const playerFaction = playerCountry.factionMembership;
   const targetFaction = targetCountry.factionMembership;
@@ -142,30 +158,109 @@ function StatusBoard({ overview, playerCountry, targetCountry }: {
     ? mapCountries.filter((country) => country.factionMembership?.status === "member"
       && country.factionMembership.factionId === sharedFaction.id)
     : [];
+  const alliedCountries = factionMembers.filter((country) => country.key !== targetCountry.key);
+
+  const positionTooltip = (clientX: number, clientY: number) => {
+    const width = 300;
+    const height = Math.min(340, 74 + Math.max(1, alliedCountries.length) * 29);
+    return {
+      x: Math.max(12, Math.min(clientX + 16, window.innerWidth - width - 12)),
+      y: Math.max(12, Math.min(clientY + 16, window.innerHeight - height - 12)),
+    };
+  };
+
+  const showTooltip = (
+    title: string,
+    countries: MapCountryIndex[],
+    clientX: number,
+    clientY: number,
+  ) => {
+    const position = positionTooltip(clientX, clientY);
+    setTooltip({ ...position, title, countries });
+  };
+
   return (
     <section className="diplomacy-status-board" aria-label="외교 상태">
       <header><UiIcon name="menu/diplomacy" /><strong>외교 상태</strong></header>
       <div className="diplomacy-status-list">
         {sharedFaction ? (
-          <article className="diplomacy-status-row diplomacy-status-row--alliance" title={`${sharedFaction.name} 동맹`}>
-            <UiIcon name="diplomacy/faction-invitation" />
+          <article
+            className="diplomacy-status-row diplomacy-status-row--alliance"
+            aria-label={`${sharedFaction.name} 동맹국 목록`}
+            onPointerEnter={(event) => showTooltip(
+              `${targetCountry.name}(은)는 다음 국가와 동맹 중:`,
+              alliedCountries,
+              event.clientX,
+              event.clientY,
+            )}
+            onPointerMove={(event) => showTooltip(
+              `${targetCountry.name}(은)는 다음 국가와 동맹 중:`,
+              alliedCountries,
+              event.clientX,
+              event.clientY,
+            )}
+            onPointerLeave={() => setTooltip(null)}
+          >
+            <UiIcon name="diplomacy/alliance" />
             <div className="diplomacy-status-row__flags">
               {factionMembers.map((country) => <Flag key={country.key} countryKey={country.key} />)}
             </div>
           </article>
         ) : null}
-        {agreements.map((agreement) => (
-          <article className="diplomacy-status-row" key={agreement.id} title={AGREEMENT_LABELS[agreement.agreement_type]}>
-            <UiIcon name={agreement.agreement_type === "TRADE_AGREEMENT" ? "diplomacy/trade" : "diplomacy/treaty"} />
-            <UiIcon name="diplomacy/direction-arrow" className="diplomacy-status-row__direction" />
-            <div className="diplomacy-status-row__flags">
-              <Flag countryKey={agreement.country_a_key} />
-              <Flag countryKey={agreement.country_b_key} />
-            </div>
-          </article>
-        ))}
+        {agreements.map((agreement) => {
+          const counterpartKey = agreement.country_a_key === targetCountry.key
+            ? agreement.country_b_key
+            : agreement.country_a_key;
+          const counterpart = countryByKey(counterpartKey);
+          const tooltipCountries = counterpart ? [counterpart] : [];
+          return (
+            <article
+              className="diplomacy-status-row"
+              key={agreement.id}
+              aria-label={`${AGREEMENT_LABELS[agreement.agreement_type]} 상대국`}
+              onPointerEnter={(event) => showTooltip(
+                `${targetCountry.name}(은)는 다음 국가와 ${AGREEMENT_LABELS[agreement.agreement_type]} 관계:`,
+                tooltipCountries,
+                event.clientX,
+                event.clientY,
+              )}
+              onPointerMove={(event) => showTooltip(
+                `${targetCountry.name}(은)는 다음 국가와 ${AGREEMENT_LABELS[agreement.agreement_type]} 관계:`,
+                tooltipCountries,
+                event.clientX,
+                event.clientY,
+              )}
+              onPointerLeave={() => setTooltip(null)}
+            >
+              <UiIcon name={AGREEMENT_ICONS[agreement.agreement_type]} />
+              <UiIcon name="diplomacy/direction-arrow" className="diplomacy-status-row__direction" />
+              <div className="diplomacy-status-row__flags">
+                <Flag countryKey={agreement.country_a_key} />
+                <Flag countryKey={agreement.country_b_key} />
+              </div>
+            </article>
+          );
+        })}
         {!sharedFaction && !agreements.length ? <p className="diplomacy-status-empty">체결된 협정 없음</p> : null}
       </div>
+      {tooltip && typeof document !== "undefined" ? createPortal(
+        <aside
+          className="diplomacy-relation-tooltip"
+          role="tooltip"
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          <strong>{tooltip.title}</strong>
+          <ul>
+            {tooltip.countries.map((country) => (
+              <li key={country.key}>
+                <Flag countryKey={country.key} />
+                <span>{country.name}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>,
+        document.body,
+      ) : null}
     </section>
   );
 }
