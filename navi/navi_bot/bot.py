@@ -23,7 +23,7 @@ log = logging.getLogger(__name__)
 
 AWAKENING_GUILD_ID = 1535589795617833021
 AWAKENING_CHANNEL_ID = 1535589796301373444
-AWAKENING_SETTING_KEY = "awakening_announcement_v1"
+AWAKENING_SETTING_KEY = "awakening_announcement_channel_1535589796301373444_v1"
 AWAKENING_IMAGE_PATH = Path(__file__).with_name("assets") / "navi-awakening.png"
 AWAKENING_MESSAGE = "@here\n\n음냐..뭔가 오래 잔 느낌이네요"
 
