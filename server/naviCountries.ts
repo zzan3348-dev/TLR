@@ -1,4 +1,4 @@
-import mapCountryData from "../src/data/mapCountries.json";
+import mapCountryData from "../src/data/mapCountries.json" with { type: "json" };
 
 export type NaviCountry = {
   id: number;
