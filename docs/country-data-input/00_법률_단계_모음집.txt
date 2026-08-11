@@ -1,0 +1,286 @@
+TLR 법률·사회발전 단계 모음집
+===============================
+
+기준: 현재 사이트의 lawDefinitions.ts / developmentDefinitions.ts
+작성 규칙:
+- 국가별 데이터에는 각 분야에서 현재 적용할 단계 하나를 선택한다.
+- 괄호 안 값은 코드에서 사용하는 정확한 내부 ID다.
+- 법률 선택지는 현재 코드에 등록된 순서대로 적었다.
+- 사회발전은 아래에 적힌 순서대로 1단계부터 5단계다.
+
+
+============================================================
+[정치법]
+============================================================
+
+1. 정당 제도 (party-system)
+- 일당제 (party-system:single-party)
+- 우세정당제 (party-system:dominant-party)
+- 다당제 (party-system:multiparty)
+- 비당파 체제 (party-system:nonpartisan)
+- 군정·임시행정 (party-system:military)
+
+2. 종교 정책 (religion-policy)
+- 국교 우선 (religion-policy:state-faith)
+- 종교 다원주의 (religion-policy:pluralism)
+- 세속주의 (religion-policy:secularism)
+- 우대 종교 (religion-policy:favored)
+- 국가 무신론 (religion-policy:atheism)
+
+3. 노동조합 (trade-unions)
+- 금지 (trade-unions:banned)
+- 허가제 (trade-unions:controlled)
+- 모두 허용 (trade-unions:allowed)
+- 산별 교섭 (trade-unions:sectoral)
+- 국가 노동조합 (trade-unions:state-union)
+
+4. 이민 정책 (immigration)
+- 국경 폐쇄 (immigration:closed)
+- 선별 이민 (immigration:selective)
+- 개방 이민 (immigration:open)
+- 할당 이민 (immigration:quota)
+- 정착 장려 (immigration:settlement)
+
+5. 강제노동 (forced-labor)
+- 광범위 동원 (forced-labor:extensive)
+- 형벌 노동 (forced-labor:penal-only)
+- 금지 (forced-labor:prohibited)
+- 비상 노동 (forced-labor:emergency)
+- 계약 노동 (forced-labor:contract)
+
+6. 집회·결사의 자유 (assembly)
+- 엄격 제한 (assembly:restricted)
+- 허가제 (assembly:licensed)
+- 법적 보장 (assembly:protected)
+- 등록제 (assembly:registered)
+- 전면 보장 (assembly:free)
+
+7. 언론의 자유 (press)
+- 국영 언론 (press:state-media)
+- 검열 언론 (press:censored)
+- 언론의 자유 (press:free-press)
+- 허가 언론 (press:licensed)
+- 다원 언론 (press:plural)
+
+8. 선거권 (franchise)
+- 선거 없음 (franchise:none)
+- 제한 선거 (franchise:restricted)
+- 보통 선거 (franchise:universal)
+- 재산·계층 선거 (franchise:class)
+- 불평등 보통선거 (franchise:equal)
+
+
+============================================================
+[군사법]
+============================================================
+
+1. 군 복무 제도 (service)
+- 지원병제 (service:volunteer)
+- 제한 징병 (service:limited)
+- 전면 징병 (service:mass)
+- 표준 징병 (service:standard)
+- 총동원 (service:total)
+
+2. 군사 훈련 (training)
+- 기초 훈련 (training:basic)
+- 전투 교육 (training:combat)
+- 전문 교육 (training:professional)
+- 예비군 훈련 (training:reserve)
+- 교리 훈련 (training:doctrine)
+
+3. 장교 제도 (officers)
+- 신분 임명 (officers:appointed)
+- 사관학교제 (officers:academy)
+- 능력 중심 (officers:merit)
+- 정치 장교단 (officers:political)
+- 전문 직업군 (officers:professional)
+
+4. 병역 면제 (exemptions)
+- 광범위 면제 (exemptions:broad)
+- 엄격 심사 (exemptions:regulated)
+- 최소 면제 (exemptions:minimal)
+- 사회적 면제 (exemptions:social)
+- 면제 없음 (exemptions:none)
+
+
+============================================================
+[경제법]
+============================================================
+
+1. 무역법 (trade)
+- 자급 우선 (trade:autarky)
+- 전략적 관세 (trade:tariffs)
+- 개방 무역 (trade:open-trade)
+- 제한적 자유무역 (trade:limited)
+- 자유무역 (trade:free)
+
+2. 소득세법 (income-tax)
+- 낮은 소득세 (income-tax:low)
+- 균형 과세 (income-tax:balanced)
+- 고소득층 중심 (income-tax:progressive)
+- 단일세율 (income-tax:flat)
+- 고율 누진세 (income-tax:high)
+
+3. 최저임금법 (minimum-wage)
+- 미설정 (minimum-wage:none)
+- 지역 기준 (minimum-wage:regional)
+- 전국 기준 (minimum-wage:national)
+- 산업별 기준 (minimum-wage:sectoral)
+- 생활임금 (minimum-wage:living)
+
+4. 법정 노동시간 (working-hours)
+- 장시간 노동 (working-hours:long)
+- 표준 노동시간 (working-hours:standard)
+- 단축 노동시간 (working-hours:short)
+- 탄력 노동시간 (working-hours:flexible)
+- 6시간 노동 (working-hours:six-hour)
+
+5. 실업급여 (unemployment)
+- 지원 없음 (unemployment:none)
+- 제한 지원 (unemployment:limited)
+- 보편 지원 (unemployment:comprehensive)
+- 고용보험 (unemployment:insurance)
+- 국가 고용보장 (unemployment:guaranteed)
+
+6. 연금 (pensions)
+- 가족 부양 (pensions:family)
+- 직역 연금 (pensions:occupational)
+- 공적 연금 (pensions:public)
+- 기여 연금 (pensions:contributory)
+- 보편 연금 (pensions:universal)
+
+7. 산업 소유 구조 (industry-ownership)
+- 자유 기업 (industry-ownership:private)
+- 국가 감독 자본주의 (industry-ownership:supervised)
+- 조합주의 경제 (industry-ownership:corporate)
+- 혼합경제 (industry-ownership:mixed-economy)
+- 계획경제 (industry-ownership:planned)
+
+8. 토지 제도 (land-system)
+- 대지주 체제 (land-system:estate)
+- 혼합 소유 (land-system:mixed)
+- 소농 자영 (land-system:smallholder)
+- 협동농장 (land-system:cooperative)
+- 국유 농업 (land-system:national)
+
+
+============================================================
+[사회법]
+============================================================
+
+1. 의료보험 (healthcare)
+- 민간 중심 (healthcare:private)
+- 혼합 보장 (healthcare:mixed)
+- 보편 의료 (healthcare:universal)
+- 국민건강보험 (healthcare:insurance)
+- 국가 의료 (healthcare:state-service)
+
+2. 교육 정책 (education)
+- 선별 교육 (education:elite)
+- 기초교육 지원 (education:primary)
+- 공교육 보장 (education:public)
+- 중등교육 보장 (education:secondary)
+- 전면 공교육 (education:universal)
+
+3. 형벌 제도 (penal-system)
+- 엄벌 중심 (penal-system:punitive)
+- 처벌과 교정 (penal-system:mixed)
+- 교정 중심 (penal-system:rehabilitative)
+- 사형 유지 (penal-system:capital)
+- 사형 폐지 (penal-system:abolished)
+
+4. 치안 정책 (policing)
+- 군사 치안 (policing:militarized)
+- 중앙 치안 (policing:centralized)
+- 민간 통제 (policing:civilian)
+- 지방 치안 (policing:local)
+- 공동체 치안 (policing:community)
+
+5. 산업 규제 (industry-regulation)
+- 최소 규제 (industry-regulation:minimal)
+- 표준 규제 (industry-regulation:standard)
+- 강한 규제 (industry-regulation:strict)
+- 협의 규제 (industry-regulation:corporate)
+- 계획 규제 (industry-regulation:planning)
+
+6. 여성 권리 (womens-rights)
+- 제한적 권리 (womens-rights:restricted)
+- 시민권 보장 (womens-rights:civil)
+- 법적 평등 (womens-rights:equal)
+- 여성 참정권 (womens-rights:suffrage)
+- 완전한 평등 (womens-rights:equal-access)
+
+7. 민족 정책 (ethnic-policy)
+- 강제 동화 (ethnic-policy:assimilation)
+- 차별적 공존 (ethnic-policy:coexistence)
+- 제한 자치 (ethnic-policy:autonomy)
+- 다민족 인정 (ethnic-policy:recognition)
+- 연방적 공존 (ethnic-policy:federal)
+
+8. 검열 (censorship)
+- 전면 검열 (censorship:total)
+- 정치 검열 (censorship:political)
+- 전시 검열 (censorship:wartime)
+- 제한 검열 (censorship:limited)
+- 언론 자유 (censorship:free)
+
+
+============================================================
+[사회발전]
+============================================================
+
+1. 학문적 기반 (academic-foundation)
+- 1단계: 교육 기반 미비
+- 2단계: 초등교육 보급
+- 3단계: 중등교육 확장
+- 4단계: 고등교육 체계
+- 5단계: 대중 고등교육
+
+2. 연구 시설 (research-facilities)
+- 1단계: 개인 연구실
+- 2단계: 기초 연구기관
+- 3단계: 고급 연구 시설
+- 4단계: 국가 연구망
+- 5단계: 첨단 연구단지
+
+3. 농업 방식 (agriculture)
+- 1단계: 생계형 농업
+- 2단계: 전통 집약농업
+- 3단계: 대규모 기계화
+- 4단계: 과학적 농업
+- 5단계: 고도 자동화
+
+4. 보건 수준 (health)
+- 1단계: 지역 구휼
+- 2단계: 기초 보건망
+- 3단계: 발전된 보건
+- 4단계: 전국 의료망
+- 5단계: 예방의학 체계
+
+5. 행정 효율 (administration)
+- 1단계: 파편화된 행정
+- 2단계: 기초 관료제
+- 3단계: 간결한 국가기구
+- 4단계: 전문화된 행정
+- 5단계: 통합 행정망
+
+6. 산업 전문성 (industry-specialization)
+- 1단계: 가내 수공업
+- 2단계: 초기 공장제
+- 3단계: 효율적인 산업 방식
+- 4단계: 전문화된 산업
+- 5단계: 고도 분업 체계
+
+7. 공업 장비 (industrial-equipment)
+- 1단계: 수공업 중심
+- 2단계: 초기 산업 장비
+- 3단계: 표준 산업 장비
+- 4단계: 현대 공업 장비
+- 5단계: 첨단 산업 장비
+
+8. 군 전문성 (military-professionalism)
+- 1단계: 비정규 병력
+- 2단계: 기초 상비군
+- 3단계: 전문직업군
+- 4단계: 통합 전문군
+- 5단계: 고도 전문군
