@@ -3,7 +3,7 @@ import { requireNaviActor, requireNaviAdminClient } from "../../naviAuth.js";
 import { cleanPositiveNumber, cleanText, researchWorldDate } from "../../research.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
-  const admin = requireNaviAdminClient(response);
+  const admin = requireNaviAdminClient(request, response);
   if (!admin) return;
   const actor = await requireNaviActor(request, response, admin);
   if (!actor) return;

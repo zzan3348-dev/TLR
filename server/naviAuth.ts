@@ -52,8 +52,10 @@ export function requireNaviService(
 }
 
 export function requireNaviAdminClient(
+  request: ApiRequest,
   response: ApiResponse,
 ): AdminClient | null {
+  if (!requireNaviService(request, response)) return null;
   const env = getServerEnv();
   if (!env) {
     response.status(503).json({ error: "NAVI_SERVER_NOT_CONFIGURED" });

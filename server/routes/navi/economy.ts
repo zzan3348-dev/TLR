@@ -7,7 +7,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     return;
   }
-  const admin = requireNaviAdminClient(response);
+  const admin = requireNaviAdminClient(request, response);
   if (!admin) return;
   const actor = await requireNaviActor(request, response, admin);
   if (!actor) return;

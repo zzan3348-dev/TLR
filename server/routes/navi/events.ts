@@ -1,14 +1,12 @@
 import type { ApiRequest, ApiResponse } from "../../types.js";
-import { requireNaviAdminClient, requireNaviService } from "../../naviAuth.js";
+import { requireNaviAdminClient } from "../../naviAuth.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   if (request.method !== "GET") {
     response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     return;
   }
-  const service = requireNaviService(request, response);
-  if (!service) return;
-  const admin = requireNaviAdminClient(response);
+  const admin = requireNaviAdminClient(request, response);
   if (!admin) return;
   const rawAfter = request.query?.after;
   const afterText = Array.isArray(rawAfter) ? rawAfter[0] : rawAfter;
