@@ -32,9 +32,11 @@ TLR 사이트에 맡긴 정본 영역은 국가 목록·표시명, profile, 국�
 7. 새 Discord Application의 `DISCORD_BOT_TOKEN`, `DISCORD_APPLICATION_ID`를 환경변수로
    넣는다. 대사와 게임에 Message Content, 부스트 배지에 Members intent만 요청한다.
 8. 신규 SQLite에는 식당, 끝말잇기, 호감도, blacklist, 배지, 설정, 알림 cursor만 있다.
-9. 옛 `nation_bot.sqlite3`, Railway DB, 사용자 행, guild/channel mapping은 복사하지 않았다.
-10. 최초 실행 시 빈 SQLite schema를 만들고 정적 TSV 단어만 seed한다. 식당·호감도·배지
-    진행도는 사용자 첫 이용 때 기본값에서 시작한다.
+9. 옛 `nation_bot.sqlite3` 전체를 복사하지 않고, 기존 Railway 볼륨에서 캐릭터 영역인 호감도,
+   일별 호감도, 호감도 로그, 배지 정의·보유·대표 배지, 연동 blacklist만 선별 복원했다.
+   국가·경제·연구·디시전·첩보와 guild/channel mapping은 복사하지 않았다.
+10. 신규 SQLite schema와 정적 TSV 단어를 먼저 seed한 뒤 캐릭터 데이터를 키 기준으로
+    멱등 병합했다. 병합 직전 DB 백업과 완료 영수증을 같은 Railway 볼륨에 보관한다.
 11. 전용 `TLR_NAVI_SERVICE_TOKEN` Bearer 인증을 쓰며 Bot에는 Supabase 관리자 키가 없다.
 12. TLR 서버가 인증된 요청의 Discord ID로 active profile과 active country ownership을
     매번 찾는다. username, nickname, 입력 국가명은 신뢰하지 않는다.
@@ -49,8 +51,8 @@ TLR 사이트에 맡긴 정본 영역은 국가 목록·표시명, profile, 국�
     승인 RPC 또는 동일 정본 상태 변경을 사용해 승인·반려·취소·즉시완료를 처리한다.
 16. `/연구력추가투입`은 먼저 TLR preview RPC 결과를 표시하고 확정 시 같은 TLR invest RPC를
     고정 멱등 키로 호출한다. NAVI는 완료일이나 연구력 차감을 계산하지 않는다.
-17. 사이트와 NAVI가 동일한 Supabase 행·RPC·감사 로그를 사용하므로 별도 동기화 DB가 없다.
-    사이트 발생 이벤트도 감사 로그 polling으로 Discord에 전달할 수 있다.
+17. NAVI는 TLR 서버 API만 호출하고 별도 국가 정본을 갖지 않는다. 사이트 발생 이벤트도
+    TLR 감사 로그 polling으로 Discord에 전달할 수 있도록 경계를 구현했다.
 
 ## 18–23. NAVI 기능 이식
 
@@ -59,8 +61,9 @@ TLR 사이트에 맡긴 정본 영역은 국가 목록·표시명, profile, 국�
 19. 끝말잇기의 세션, 참가자, 턴, 중복 단어, 통계와 정적 사전을 이식했다. 옛 통계는 없다.
 20. UTF-8 정적 대사팩의 1,200개 반응과 5단계 호감도 칭호, 호출 반응, dialogue runtime,
     호감도·일일 제한, blacklist 연동을 전량 이식했다. LCW 초대 링크와 고유 사용자 ID는 없다.
-21. 구 정적 배지 정의 3종과 NEW NAVI 배지 1종, 신규 배지 보유·대표 배지 및 3페이지
-    `/상태창`을 이식했다. 과거 사용자별 지급 기록은 복사하지 않았고 국가 페이지는 TLR API다.
+21. 구 정적 배지 3종과 과거 운영 배지 `카레가루마스터`, `NAVI의 선생님`, `그림쟁이`,
+    NEW NAVI 배지 `끝말잇기 달인`을 보존했다. 과거 사용자별 보유·대표 배지 기록도 복원했고
+    국가 페이지는 TLR API만 사용한다.
 22. 옛 국가 DB/repository, 국가별 JSON·이미지, 경제 자동 이벤트, 연구·디시전·국민정신,
     Discord 채널 매핑, server reset, espionage runtime과 secret을 가져오지 않았다.
 23. 첩보 분석은 `docs/legacy-navi-espionage-analysis.md`에 별도로 남겼다.
@@ -84,28 +87,25 @@ TLR 사이트에 맡긴 정본 영역은 국가 목록·표시명, profile, 국�
 - TLR 현재 국가 catalog의 stable key·표시명 조회 확인
 - 정적 대사 1,200개와 구 칭호·배지 정의 보존, LCW route/초대 링크 및 전용 호감도 emoji 제거 확인
 - 식당 manifest와 이미지로 실제 화면 PNG 렌더 확인
+- 기존 Railway 캐릭터 데이터 복원: 호감도 사용자 74명, 일별 기록 501건, 로그 2,151건,
+  배지 정의 6개, 보유 14건, 프로필 설정 14건, 연동 blacklist 4건
+- 복원 후 Railway SQLite `PRAGMA integrity_check=ok`, 멱등 marker 1건, 백업·영수증 존재 확인
 
 Vite build에는 기존 단일 JavaScript chunk가 500 kB를 넘는 성능 경고가 있지만 빌드는
 성공했다.
 
 ## 26. 실제 테스트 Discord 명령 스크린샷
 
-미제공. 새 Discord Application token, 테스트 guild, TLR production service token과
-Supabase migration 적용 권한이 이 작업 환경에 제공되지 않았다. 코드가 command tree를
-동기화하는 것과 로컬 import·테스트는 검증하지만, 실제 Discord 서버 스크린샷을
-생성했다고 보고하지 않는다.
+스크린샷은 별도로 저장하지 않았다. 새 Discord Application `NAVI`를 테스트 guild에 설치했고,
+Railway 운영 로그에서 Gateway 연결, `NAVI#6038` 로그인, Slash Command 동기화를 확인했다.
 
 ## 27. 아직 연결되지 않은 부분
 
-- 새 Discord Application 생성, production token 등록, 테스트 guild에서 실제 명령 확인
-- production Supabase에 `202608110001_navi_integration.sql` 적용 및 관리자 profile 등록
-- TLR과 Bot hosting 양쪽에 동일한 새 service token 설정
-- Bot worker 상시 배포와 실제 알림 DM/관리자 채널 smoke test
+- 기존 TLR 운영 DB 연결 및 NAVI 관리자 profile 등록
+- 실제 알림 DM/관리자 채널 smoke test
 - TLR 정본 디시전 백엔드·API가 생긴 뒤 `/내디시전` 결과 연결
 - TLR 사이트의 첩보 임무 UI·도메인 구현과 향후 알림 이벤트 추가
 - 실제 새 Discord 서버 구조가 결정된 뒤 연재방 기능을 KEEP/MODIFY/REMOVE로 재검토
-- 현재 환경에 GitHub CLI `gh`가 없어 안전한 branch push·draft PR 게시를 완료하지 못함
-- Vercel CLI와 `.vercel/project.json` 연결이 없어 production/preview 배포 상태를 확인하지 못함
 
-이 항목들은 자격증명과 운영 환경 또는 별도 사이트 기능이 필요한 작업이며, 옛 데이터를
-가져와 임시로 메우지 않았다.
+이 항목들은 기존 TLR 운영 DB 연결 또는 별도 사이트 기능이 필요한 작업이다. NEW NAVI의
+캐릭터 데이터는 Railway에서 복원했지만 TLR 정본 영역을 옛 데이터로 임시 대체하지 않았다.
