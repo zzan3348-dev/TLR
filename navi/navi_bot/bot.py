@@ -21,7 +21,8 @@ from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
 
-AWAKENING_CHANNEL_NAME = "자유지대"
+AWAKENING_GUILD_ID = 1535589795617833021
+AWAKENING_CHANNEL_ID = 1535589796301373444
 AWAKENING_SETTING_KEY = "awakening_announcement_v1"
 AWAKENING_IMAGE_PATH = Path(__file__).with_name("assets") / "navi-awakening.png"
 AWAKENING_MESSAGE = "@here\n\n음냐..뭔가 오래 잔 느낌이네요"
@@ -73,17 +74,19 @@ class NaviBot(commands.Bot):
     async def _send_awakening_announcement(self) -> None:
         if self.db.get_setting_value(AWAKENING_SETTING_KEY) == "sent":
             return
-        channel = next(
-            (
-                text_channel
-                for guild in self.guilds
-                for text_channel in guild.text_channels
-                if AWAKENING_CHANNEL_NAME in text_channel.name
-            ),
-            None,
-        )
+        channel = self.get_channel(AWAKENING_CHANNEL_ID)
         if channel is None:
-            log.warning("부활 메시지 채널을 찾지 못했습니다: %s", AWAKENING_CHANNEL_NAME)
+            try:
+                channel = await self.fetch_channel(AWAKENING_CHANNEL_ID)
+            except discord.HTTPException:
+                log.exception(
+                    "부활 메시지 채널을 가져오지 못했습니다: guild=%s channel=%s",
+                    AWAKENING_GUILD_ID,
+                    AWAKENING_CHANNEL_ID,
+                )
+                return
+        if channel is None:
+            log.warning("부활 메시지 채널을 찾지 못했습니다: %s", AWAKENING_CHANNEL_ID)
             return
         if not AWAKENING_IMAGE_PATH.is_file():
             log.error("부활 메시지 이미지를 찾지 못했습니다: %s", AWAKENING_IMAGE_PATH)
