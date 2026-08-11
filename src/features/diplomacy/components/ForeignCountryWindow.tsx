@@ -35,6 +35,7 @@ type ForeignCountryWindowProps = {
 };
 
 type AuxiliaryView = "incoming" | "outgoing" | "agreements" | "history";
+type DiplomacyOverviewView = "status" | AuxiliaryView;
 type RelationAction = "IMPROVE_RELATIONS" | "WORSEN_RELATIONS" | "DECLARE_WAR";
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -206,20 +207,19 @@ function ProposalComposer({ proposalType, overview, busy, onClose, onSubmit }: {
   );
 }
 
-function AuxiliaryPanel({ view, overview, playerCountry, busy, onClose, onProposalAction }: {
+function DiplomacyRecordPane({ view, overview, playerCountry, busy, onProposalAction }: {
   view: AuxiliaryView;
   overview: DiplomacyOverview;
   playerCountry: MapCountryIndex;
   busy: boolean;
-  onClose: () => void;
   onProposalAction: (proposal: DiplomaticProposal, action: "ACCEPT" | "REJECT" | "WITHDRAW") => void;
 }) {
   const title = AUXILIARY.find((item) => item.id === view)?.label ?? "외교 기록";
   const proposals = overview.proposals.filter((proposal) => view === "incoming" ? proposal.receiver_country_key === playerCountry.key : proposal.proposer_country_key === playerCountry.key);
   return (
-    <section className="diplomacy-auxiliary-panel" aria-label={title}>
-      <header><strong>{title}</strong><button type="button" onClick={onClose} aria-label={`${title} 닫기`}><UiIcon name="ui/close" /></button></header>
-      <div>
+    <section className="diplomacy-record-pane" aria-label={title}>
+      <header><strong>{title}</strong><span>{view === "incoming" || view === "outgoing" ? proposals.length : view === "agreements" ? overview.agreements.length : overview.history.length}건</span></header>
+      <div className="diplomacy-record-pane__list">
         {(view === "incoming" || view === "outgoing") ? (proposals.length ? proposals.map((proposal) => <ProposalRow key={proposal.id} proposal={proposal} actorKey={playerCountry.key} busy={busy} onAction={onProposalAction} />) : <p>기록 없음</p>) : null}
         {view === "agreements" ? (overview.agreements.length ? overview.agreements.map((agreement) => <article className="diplomacy-compact-record" key={agreement.id}><UiIcon name="diplomacy/treaty" /><div><strong>{AGREEMENT_LABELS[agreement.agreement_type]}</strong><small>{agreement.starts_world_date} — {agreement.ends_world_date ?? "기한 없음"}</small></div><span>{agreement.status}</span></article>) : <p>협정 없음</p>) : null}
         {view === "history" ? (overview.history.length ? overview.history.map((entry) => <article className="diplomacy-compact-record" key={entry.id}><UiIcon name="diplomacy/archive" /><div><strong>{entry.reason}</strong><small>{entry.world_date} · {entry.previous_score} → {entry.next_score}</small></div><span data-tone={entry.change_amount >= 0 ? "positive" : "negative"}>{signed(entry.change_amount)}</span></article>) : <p>기록 없음</p>) : null}
@@ -238,7 +238,7 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [composer, setComposer] = useState<ProposalType | null>(null);
-  const [auxiliary, setAuxiliary] = useState<AuxiliaryView | null>(null);
+  const [leftView, setLeftView] = useState<DiplomacyOverviewView>("status");
   const panelStyle = useMemo(() => ({ "--country-accent": targetCountry.color }) as CSSProperties, [targetCountry.color]);
 
   const reload = useCallback(async (signal?: AbortSignal) => {
@@ -362,47 +362,60 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
           lawScroll: (
             <>
               <header>
-                <div><strong>외교 행동</strong><span>{playerCountry.name} → {presentation.title}</span></div>
-                <nav className="diplomacy-template__record-nav" aria-label="외교 기록">
-                  {AUXILIARY.map((item) => (
-                    <button key={item.id} type="button" aria-pressed={auxiliary === item.id} onClick={() => setAuxiliary(auxiliary === item.id ? null : item.id)} title={item.label}>
-                      <UiIcon name={item.icon} /><b>{auxiliaryCount(item.id)}</b>
-                    </button>
-                  ))}
-                </nav>
+                <div><strong>외교 관제</strong><span>{playerCountry.name} → {presentation.title}</span></div>
+                <span className="diplomacy-template__target-label">관계 현황 / 외교 요청</span>
               </header>
-              <div className="politics-template__law-scroll diplomacy-template__actions">
+              <div className="diplomacy-template__split">
                 {error ? <div className="diplomacy-error" role="alert">{error}<button type="button" onClick={() => void reload()}>재시도</button></div> : null}
                 {loading && !overview ? <div className="diplomacy-state"><span className="diplomacy-signal" />외교 기록 수신 중</div> : null}
                 {overview ? (
-                  <div className="diplomacy-template__action-list">
-                    {ACTIONS.map((action) => {
-                      const availability = overview.actions[action.id];
-                      return (
-                        <button
-                          key={action.id}
-                          type="button"
-                          className={action.id === "DECLARE_WAR" ? "diplomacy-template__action--danger" : undefined}
-                          disabled={busy || !availability?.available}
-                          title={availability?.reason ?? undefined}
-                          onClick={() => runAction(action.id, action.proposal)}
-                        >
-                          <UiIcon name={action.icon} />
-                          <span><strong>{action.label}</strong><small>{availability?.reason ?? (action.proposal ? "외교 제안서 작성" : action.id === "DECLARE_WAR" ? "즉시 무력분쟁 개시" : "즉시 실행")}</small></span>
-                          <i>{availability?.available ? "선택" : "—"}</i>
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <>
+                    <section className="diplomacy-template__relations-column" aria-label="대상국 외교 관계">
+                      <header><UiIcon name="diplomacy/treaty" /><div><strong>협정·관계</strong><span>대상국이 맺고 있는 외교 현황</span></div></header>
+                      <nav className="diplomacy-template__overview-tabs" aria-label="외교 현황 종류">
+                        <button type="button" aria-pressed={leftView === "status"} onClick={() => setLeftView("status")}><UiIcon name="menu/diplomacy" /><span>현황</span></button>
+                        {AUXILIARY.map((item) => (
+                          <button key={item.id} type="button" aria-pressed={leftView === item.id} onClick={() => setLeftView(item.id)}>
+                            <UiIcon name={item.icon} /><span>{item.label}</span><b>{auxiliaryCount(item.id)}</b>
+                          </button>
+                        ))}
+                      </nav>
+                      <div className="diplomacy-template__relations-content">
+                        {leftView === "status" ? <StatusBoard overview={overview} playerCountry={playerCountry} targetCountry={targetCountry} /> : <DiplomacyRecordPane view={leftView} overview={overview} playerCountry={playerCountry} busy={busy} onProposalAction={proposalAction} />}
+                      </div>
+                    </section>
+                    <section className="diplomacy-template__requests-column" aria-label="외교 요청">
+                      <header><UiIcon name="diplomacy/message" /><div><strong>외교 행동</strong><span>선택 국가에 요청 발신</span></div></header>
+                      <div className="politics-template__law-scroll diplomacy-template__actions">
+                    <div className="diplomacy-template__action-list">
+                      {ACTIONS.map((action) => {
+                        const availability = overview.actions[action.id];
+                        return (
+                          <button
+                            key={action.id}
+                            type="button"
+                            className={action.id === "DECLARE_WAR" ? "diplomacy-template__action--danger" : undefined}
+                            disabled={busy || !availability?.available}
+                            title={availability?.reason ?? undefined}
+                            onClick={() => runAction(action.id, action.proposal)}
+                          >
+                            <UiIcon name={action.icon} />
+                            <span><strong>{action.label}</strong><small>{availability?.reason ?? (action.proposal ? "외교 제안서 작성" : action.id === "DECLARE_WAR" ? "즉시 무력분쟁 개시" : "즉시 실행")}</small></span>
+                            <i>{availability?.available ? "선택" : "—"}</i>
+                          </button>
+                        );
+                      })}
+                    </div>
+                      </div>
+                    </section>
+                  </>
                 ) : null}
-                {overview ? <StatusBoard overview={overview} playerCountry={playerCountry} targetCountry={targetCountry} /> : null}
               </div>
             </>
           ),
         }}
         onClose={onClose}
       />
-      {overview && auxiliary ? <AuxiliaryPanel view={auxiliary} overview={overview} playerCountry={playerCountry} busy={busy} onClose={() => setAuxiliary(null)} onProposalAction={proposalAction} /> : null}
       {overview && composer ? <ProposalComposer proposalType={composer} overview={overview} busy={busy} onClose={() => setComposer(null)} onSubmit={(duration) => sendProposal(composer, duration)} /> : null}
     </>
   );

@@ -7695,6 +7695,172 @@ button:focus-visible,
   padding: 0.9cqw;
 }
 
+.diplomacy-template__split {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  padding: 0.9cqw;
+  overflow: hidden;
+  background: rgb(5 9 10 / 48%);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.9cqw;
+}
+
+.diplomacy-template__split > .diplomacy-error,
+.diplomacy-template__split > .diplomacy-state {
+  position: absolute;
+  z-index: 4;
+  top: 0.8cqw;
+  right: 0.8cqw;
+  left: 0.8cqw;
+}
+
+.diplomacy-template__relations-column,
+.diplomacy-template__requests-column {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #465550;
+  background: #080e0f;
+  box-shadow: inset 0 0 1.8cqw rgb(0 0 0 / 72%);
+}
+
+.diplomacy-template__relations-column {
+  grid-template-rows: 7cqw 7.5cqw minmax(0, 1fr);
+}
+
+.diplomacy-template__requests-column {
+  grid-template-rows: 7cqw minmax(0, 1fr);
+}
+
+.diplomacy-template__relations-column > header,
+.diplomacy-template__requests-column > header {
+  display: grid;
+  min-width: 0;
+  padding: 0.8cqw 1cqw;
+  align-items: center;
+  border-bottom: 1px solid #465550;
+  background: linear-gradient(90deg, rgb(117 150 139 / 12%), transparent 68%), #1a201e;
+  grid-template-columns: 3.8cqw minmax(0, 1fr);
+  gap: 0.8cqw;
+}
+
+.diplomacy-template__relations-column > header > .ui-icon,
+.diplomacy-template__requests-column > header > .ui-icon {
+  width: 3cqw;
+  height: 3cqw;
+}
+
+.diplomacy-template__relations-column > header div,
+.diplomacy-template__requests-column > header div {
+  display: grid;
+  min-width: 0;
+  gap: 0.2cqw;
+}
+
+.diplomacy-template__relations-column > header strong,
+.diplomacy-template__requests-column > header strong {
+  color: #ddd8ca;
+  font-size: clamp(9px, 1.85cqw, 13px);
+}
+
+.diplomacy-template__relations-column > header span,
+.diplomacy-template__requests-column > header span {
+  overflow: hidden;
+  color: #7c8c85;
+  font-size: clamp(7px, 1.15cqw, 9px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.diplomacy-template__overview-tabs {
+  display: grid;
+  min-width: 0;
+  border-bottom: 1px solid #3d4b46;
+  background: #101615;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.diplomacy-template__overview-tabs button {
+  display: grid;
+  min-width: 0;
+  padding: 0.55cqw 0.2cqw;
+  cursor: pointer;
+  border: 0;
+  border-right: 1px solid #35413d;
+  background: transparent;
+  color: #8f9993;
+  grid-template-columns: 2.2cqw minmax(0, 1fr);
+  gap: 0.25cqw;
+  place-items: center;
+}
+
+.diplomacy-template__overview-tabs button:last-child { border-right: 0; }
+.diplomacy-template__overview-tabs button[aria-pressed="true"] {
+  color: #e3d8a5;
+  background: #25261d;
+  box-shadow: inset 0 -2px #b09b52;
+}
+.diplomacy-template__overview-tabs .ui-icon { width: 2cqw; height: 2cqw; }
+.diplomacy-template__overview-tabs span { overflow: hidden; font-size: clamp(6px, 1.05cqw, 8px); text-overflow: clip; white-space: nowrap; }
+.diplomacy-template__overview-tabs b { display: none; }
+
+.diplomacy-template__relations-content,
+.diplomacy-record-pane,
+.diplomacy-record-pane__list {
+  min-height: 0;
+}
+
+.diplomacy-template__relations-content {
+  overflow: hidden;
+}
+
+.diplomacy-template__relations-content > .diplomacy-status-board {
+  height: 100%;
+  border: 0;
+}
+
+.diplomacy-template__relations-content .diplomacy-status-board > header {
+  display: none;
+}
+
+.diplomacy-template__relations-content .diplomacy-status-list {
+  min-height: 0;
+  max-height: none;
+}
+
+.diplomacy-record-pane {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 5.5cqw minmax(0, 1fr);
+}
+
+.diplomacy-record-pane > header {
+  display: flex;
+  padding: 0 1cqw;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #36433e;
+  background: #111716;
+}
+
+.diplomacy-record-pane > header strong { color: #d5d1c5; font-size: clamp(8px, 1.55cqw, 11px); }
+.diplomacy-record-pane > header span { color: #b8a45d; font: 700 clamp(7px, 1.2cqw, 9px)/1 "IBM Plex Mono", monospace; }
+.diplomacy-record-pane__list { overflow: auto; scrollbar-color: #596b64 #0a1010; scrollbar-width: thin; }
+.diplomacy-record-pane__list > p { padding: 3cqw 1cqw; color: #74817c; font-size: clamp(8px, 1.4cqw, 10px); text-align: center; }
+.diplomacy-record-pane .diplomacy-compact-record { min-height: 9cqw; padding: 0.9cqw 1cqw; }
+.diplomacy-record-pane .diplomacy-compact-record > .ui-icon { width: 3.4cqw; height: 3.4cqw; }
+.diplomacy-record-pane .diplomacy-compact-record strong { font-size: clamp(8px, 1.55cqw, 11px); }
+.diplomacy-record-pane .diplomacy-compact-record small,
+.diplomacy-record-pane .diplomacy-compact-record > span { font-size: clamp(7px, 1.15cqw, 9px); }
+
+.diplomacy-template__requests-column .diplomacy-template__actions {
+  height: 100%;
+  padding: 0.7cqw;
+  overflow-y: auto;
+}
+
 .diplomacy-template__record-nav {
   display: flex;
   flex: 0 0 auto;
