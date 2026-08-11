@@ -73,14 +73,10 @@ class NaviBot(commands.Bot):
     async def _send_awakening_announcement(self) -> None:
         if self.db.get_setting_value(AWAKENING_SETTING_KEY) == "sent":
             return
-        guilds = self.guilds
-        if self.config.guild_id:
-            configured_guild = self.get_guild(self.config.guild_id)
-            guilds = [configured_guild] if configured_guild is not None else []
         channel = next(
             (
                 text_channel
-                for guild in guilds
+                for guild in self.guilds
                 for text_channel in guild.text_channels
                 if AWAKENING_CHANNEL_NAME in text_channel.name
             ),
