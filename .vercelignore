@@ -12,3 +12,4 @@ public/maps/generated/generated/
 .tmp-*
 AGENTS.md
 tests/
+navi/
