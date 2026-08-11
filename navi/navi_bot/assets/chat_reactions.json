@@ -1,0 +1,22 @@
+{
+  "owner_user_ids": [],
+  "admin_role_ids": [],
+  "blacklist_user_ids": [],
+  "special_user_reactions": {},
+  "priority_reactions": [
+    {
+      "keywords": ["나비야 TLR", "나비야 사이트"],
+      "responses": ["TLR의 국가 운영 정보를 찾아볼게요. `/내국가`나 `/내연구`를 사용해 주세요!"],
+      "affection_delta": 1
+    },
+    {
+      "keywords": ["나비야 쿠키"],
+      "responses": ["쿠키요? 나비식당에서 만들 수 있을지도 몰라요!"],
+      "affection_delta": 1
+    }
+  ],
+  "reactions": [],
+  "cooldown_seconds": 5,
+  "profanity_cooldown_seconds": 30,
+  "safety_response": "그 말은 가볍게 넘기기 어려워요. 지금은 혼자 있지 말고 가까운 사람이나 도움을 받을 수 있는 곳에 바로 말해 주세요."
+}

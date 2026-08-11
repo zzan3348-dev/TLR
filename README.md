@@ -3,6 +3,11 @@
 React 19, TypeScript, Vite, HTML Canvas로 구현한 인터랙티브 지도 MVP입니다.
 원본 지도는 `public/maps/world-1932.png`이며 생성 스크립트는 이 파일을 수정하지 않습니다.
 
+Discord 연동 NEW NAVI의 설치·운영 방법은 [`navi/README.md`](navi/README.md),
+데이터 경계와 API는 [`docs/new-navi-architecture.md`](docs/new-navi-architecture.md),
+재구축 결과는 [`docs/new-navi-completion-report.md`](docs/new-navi-completion-report.md)를
+참고하세요.
+
 ## 실행
 
 ```sh

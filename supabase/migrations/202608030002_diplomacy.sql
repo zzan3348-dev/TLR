@@ -540,7 +540,7 @@ revoke execute on function public.tlr_relation_total(text, text, date) from publ
 revoke execute on function public.tlr_change_relation(text, text, integer, text, text, text, date) from public, anon, authenticated;
 revoke execute on function public.tlr_expire_diplomacy(date) from public, anon, authenticated;
 revoke execute on function public.tlr_apply_diplomatic_action(text, text, text, date) from public, anon, authenticated;
-revoke execute on function public.tlr_create_diplomatic_proposal(text, text, text, text, jsonb, date, date, date) from public, anon, authenticated;
+revoke execute on function public.tlr_create_diplomatic_proposal(text, text, text, text, jsonb, date, date, date, date) from public, anon, authenticated;
 revoke execute on function public.tlr_respond_diplomatic_proposal(uuid, text, text, uuid, date) from public, anon, authenticated;
 revoke execute on function public.tlr_withdraw_diplomatic_proposal(uuid, text, date) from public, anon, authenticated;
 revoke execute on function public.tlr_admin_respond_diplomatic_proposal(uuid, text, date, text, text) from public, anon, authenticated;
