@@ -28,7 +28,7 @@
     },
     {
       "source": "/api/navi/:route",
-      "destination": "/api/navi-dispatch?route=:route"
+      "destination": "/api/economy-dispatch?domain=navi&route=:route"
     },
     {
       "source": "/((?!api/).*)",
