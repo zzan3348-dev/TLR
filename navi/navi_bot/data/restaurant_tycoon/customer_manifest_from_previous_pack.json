@@ -1,0 +1,248 @@
+{
+  "assetPack": "navi_restaurant_customer_assets",
+  "version": "prototype_01",
+  "count": 24,
+  "usage": "Use individual PNG files in customers/ rather than reading the combined sheet.",
+  "customers": [
+    {
+      "index": 1,
+      "customerId": "customer_01_happy_young_man",
+      "displayNameKo": "배고픈 학생",
+      "imageKey": "customer_01_happy_young_man",
+      "assetFileName": "customers/customer_01_happy_young_man.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 2,
+      "customerId": "customer_02_soft_cute_portrait",
+      "displayNameKo": "부드러운 학생 손님",
+      "imageKey": "customer_02_soft_cute_portrait",
+      "assetFileName": "customers/customer_02_soft_cute_portrait.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 3,
+      "customerId": "customer_03_worried_student",
+      "displayNameKo": "돈 없는 학생",
+      "imageKey": "customer_03_worried_student",
+      "assetFileName": "customers/customer_03_worried_student.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 4,
+      "customerId": "customer_04_studious_girl",
+      "displayNameKo": "시험 끝난 학생",
+      "imageKey": "customer_04_studious_girl",
+      "assetFileName": "customers/customer_04_studious_girl.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 5,
+      "customerId": "customer_05_urgent_student",
+      "displayNameKo": "급한 학생",
+      "imageKey": "customer_05_urgent_student",
+      "assetFileName": "customers/customer_05_urgent_student.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 6,
+      "customerId": "customer_06_tired_office_worker",
+      "displayNameKo": "피곤한 직장인",
+      "imageKey": "customer_06_tired_office_worker",
+      "assetFileName": "customers/customer_06_tired_office_worker.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 7,
+      "customerId": "customer_07_thinking_business_woman",
+      "displayNameKo": "생각 많은 직장인",
+      "imageKey": "customer_07_thinking_business_woman",
+      "assetFileName": "customers/customer_07_thinking_business_woman.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 8,
+      "customerId": "customer_08_relaxed_after_work",
+      "displayNameKo": "퇴근 후 직장인",
+      "imageKey": "customer_08_relaxed_after_work",
+      "assetFileName": "customers/customer_08_relaxed_after_work.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 9,
+      "customerId": "customer_09_smiling_boy",
+      "displayNameKo": "동네 소년 손님",
+      "imageKey": "customer_09_smiling_boy",
+      "assetFileName": "customers/customer_09_smiling_boy.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 10,
+      "customerId": "customer_10_soft_smile_character",
+      "displayNameKo": "조용한 안경 손님",
+      "imageKey": "customer_10_soft_smile_character",
+      "assetFileName": "customers/customer_10_soft_smile_character.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 11,
+      "customerId": "customer_11_kind_grandmother",
+      "displayNameKo": "친절한 할머니",
+      "imageKey": "customer_11_kind_grandmother",
+      "assetFileName": "customers/customer_11_kind_grandmother.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 12,
+      "customerId": "customer_12_simple_casual_portrait",
+      "displayNameKo": "무뚝뚝한 학생",
+      "imageKey": "customer_12_simple_casual_portrait",
+      "assetFileName": "customers/customer_12_simple_casual_portrait.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 13,
+      "customerId": "customer_13_casual_cream_portrait",
+      "displayNameKo": "캐주얼한 번화가 손님",
+      "imageKey": "customer_13_casual_cream_portrait",
+      "assetFileName": "customers/customer_13_casual_cream_portrait.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 14,
+      "customerId": "customer_14_relaxed_everyday_man",
+      "displayNameKo": "느슨한 넥타이 손님",
+      "imageKey": "customer_14_relaxed_everyday_man",
+      "assetFileName": "customers/customer_14_relaxed_everyday_man.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 15,
+      "customerId": "customer_15_warm_smile_man",
+      "displayNameKo": "따뜻한 미소의 남성",
+      "imageKey": "customer_15_warm_smile_man",
+      "assetFileName": "customers/customer_15_warm_smile_man.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 16,
+      "customerId": "customer_16_cheerful_casual_girl",
+      "displayNameKo": "활기찬 운동 손님",
+      "imageKey": "customer_16_cheerful_casual_girl",
+      "assetFileName": "customers/customer_16_cheerful_casual_girl.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 17,
+      "customerId": "customer_17_cute_smile_character",
+      "displayNameKo": "웃는 후드티 손님",
+      "imageKey": "customer_17_cute_smile_character",
+      "assetFileName": "customers/customer_17_cute_smile_character.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 18,
+      "customerId": "customer_18_warm_smile_woman",
+      "displayNameKo": "따뜻한 안경 여성",
+      "imageKey": "customer_18_warm_smile_woman",
+      "assetFileName": "customers/customer_18_warm_smile_woman.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 19,
+      "customerId": "customer_19_tired_expression",
+      "displayNameKo": "피곤한 표정의 손님",
+      "imageKey": "customer_19_tired_expression",
+      "assetFileName": "customers/customer_19_tired_expression.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 20,
+      "customerId": "customer_20_kind_casual_woman",
+      "displayNameKo": "수다쟁이 손님",
+      "imageKey": "customer_20_kind_casual_woman",
+      "assetFileName": "customers/customer_20_kind_casual_woman.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 21,
+      "customerId": "customer_21_cardigan_girl",
+      "displayNameKo": "조용한 헤드폰 손님",
+      "imageKey": "customer_21_cardigan_girl",
+      "assetFileName": "customers/customer_21_cardigan_girl.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 22,
+      "customerId": "customer_22_young_delivery_worker",
+      "displayNameKo": "젊은 배달원",
+      "imageKey": "customer_22_young_delivery_worker",
+      "assetFileName": "customers/customer_22_young_delivery_worker.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 23,
+      "customerId": "customer_23_friendly_grandfather",
+      "displayNameKo": "친근한 할아버지",
+      "imageKey": "customer_23_friendly_grandfather",
+      "assetFileName": "customers/customer_23_friendly_grandfather.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    },
+    {
+      "index": 24,
+      "customerId": "customer_24_streetwear_portrait",
+      "displayNameKo": "스트리트웨어 손님",
+      "imageKey": "customer_24_streetwear_portrait",
+      "assetFileName": "customers/customer_24_streetwear_portrait.png",
+      "recommendedUse": "upper_body_counter_customer_sprite",
+      "background": "transparent_png",
+      "notes": "카운터형 UI에서 배경 위에 합성할 상반신 손님 스프라이트"
+    }
+  ]
+}

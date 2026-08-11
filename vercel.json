@@ -27,6 +27,10 @@
       "destination": "/api/admin/actions?domain=research"
     },
     {
+      "source": "/api/navi/:route",
+      "destination": "/api/navi-dispatch?route=:route"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

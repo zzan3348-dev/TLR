@@ -1,0 +1,87 @@
+{
+  "assetPack": "navi_restaurant_property_backgrounds",
+  "count": 8,
+  "note": "부동산/상권별 배경 이미지. 가게 레벨업 이미지가 아니라 매물별 배경이다.",
+  "properties": [
+    {
+      "propertyId": "backalley_shop",
+      "displayNameKo": "낡은 골목 점포",
+      "backgroundImageKey": "backalley_shop",
+      "assetFileName": "assets/restaurant/properties/property_01_backalley_shop.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "normal_commercial",
+      "displayNameKo": "일반상가",
+      "backgroundImageKey": "normal_commercial",
+      "assetFileName": "assets/restaurant/properties/property_02_normal_commercial.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "school_zone",
+      "displayNameKo": "학원가 / 학교 앞 상가",
+      "backgroundImageKey": "school_zone",
+      "assetFileName": "assets/restaurant/properties/property_03_school_zone.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "station_area",
+      "displayNameKo": "역세권 소형 점포",
+      "backgroundImageKey": "station_area",
+      "assetFileName": "assets/restaurant/properties/property_04_station_area.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "downtown_first_floor",
+      "displayNameKo": "번화가 1층 상가",
+      "backgroundImageKey": "downtown_first_floor",
+      "assetFileName": "assets/restaurant/properties/property_05_downtown_first_floor.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "office_district",
+      "displayNameKo": "오피스 상권 식당",
+      "backgroundImageKey": "office_district",
+      "assetFileName": "assets/restaurant/properties/property_06_office_district.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "luxury_restaurant",
+      "displayNameKo": "고급 레스토랑 자리",
+      "backgroundImageKey": "luxury_restaurant",
+      "assetFileName": "assets/restaurant/properties/property_07_luxury_restaurant.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    },
+    {
+      "propertyId": "food_court",
+      "displayNameKo": "복합몰 / 푸드코트 입점",
+      "backgroundImageKey": "food_court",
+      "assetFileName": "assets/restaurant/properties/property_08_food_court.png",
+      "width": 1672,
+      "height": 941,
+      "viewpoint": "staff_counter_pov",
+      "usage": "restaurant_property_background"
+    }
+  ]
+}

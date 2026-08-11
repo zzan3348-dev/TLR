@@ -9,6 +9,13 @@ deploy-optimized/
 .tmp-*
 *.zip
 *.bat
+navi/.venv/
+navi/data/
+navi/**/*.sqlite3
+navi/**/*.sqlite3-*
+navi/navi_bot/assets/restaurant/previews/
+navi/**/__pycache__/
+navi/**/*.py[cod]
 
 # 지도 생성 중 만들어지는 백업·중첩 산출물
 public/maps/backups/
