@@ -287,7 +287,12 @@ function ProposalComposer({ proposalType, overview, busy, onClose, onSubmit }: {
 
 export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: ForeignCountryWindowProps) {
   const presentation = getCountryPresentation(targetCountry);
-  const primaryParty = presentation.politics.parties[0] ?? null;
+  const primaryParty =
+    presentation.politics.parties.find(
+      (party) => party.name === presentation.politics.rulingParty,
+    ) ??
+    presentation.politics.parties[0] ??
+    null;
   const partyName = primaryParty?.name || presentation.politics.rulingParty || "미설정";
   const ideology =
     primaryParty?.subIdeology || presentation.politics.subIdeology || "미설정";
@@ -383,12 +388,27 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
           ),
           leaderCaption: <PoliticsLeaderInfo leader={presentation.leader} />,
           partySupport: (
-            <>
+            <div className="politics-template__party-content">
+              <header className="politics-template__party-heading">
+                {presentation.politics.symbolPath ? (
+                  <img
+                    src={presentation.politics.symbolPath}
+                    alt=""
+                    draggable={false}
+                  />
+                ) : (
+                  <span className="politics-template__party-sigil" aria-hidden="true" />
+                )}
+                <div>
+                  <strong title={partyName}>{partyName}</strong>
+                  <span title={ideology}>{ideology}</span>
+                </div>
+              </header>
               <PartySupportChart
                 parties={presentation.politics.parties}
                 rulingPartyName={partyName}
               />
-            </>
+            </div>
           ),
           governmentSystem: (
             <div className="diplomacy-template__relation-summary">

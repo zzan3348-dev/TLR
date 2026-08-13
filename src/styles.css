@@ -3817,13 +3817,12 @@ button:focus-visible,
   place-items: center;
 }
 
-.hybrid-country-panel__party-chart {
+.hybrid-country-panel__party-panel .hybrid-country-panel__party-chart {
   position: relative;
   display: grid;
-  width: 78px;
-  min-width: 78px;
-  max-width: 78px;
-  max-width: 100%;
+  width: min(22cqw, 94px);
+  min-width: min(22cqw, 94px);
+  max-width: min(22cqw, 94px);
   margin: 0;
   aspect-ratio: 1;
   place-items: center;
@@ -3832,7 +3831,7 @@ button:focus-visible,
   border-radius: 50%;
   background: #050809;
   box-shadow:
-    0 3px 5px rgb(0 0 0 / 72%),
+    0 2px 7px rgb(0 0 0 / 76%),
     inset 0 0 2px rgb(0 0 0 / 80%);
 }
 
@@ -7449,16 +7448,16 @@ button:focus-visible,
 }
 
 .politics-template__party .party-support-chart {
-  width: 78px;
-  min-width: 78px;
-  max-width: 78px;
+  width: min(29cqw, 150px);
+  min-width: min(29cqw, 150px);
+  max-width: min(29cqw, 150px);
   align-self: center;
   justify-self: center;
   border: 1px solid #111516;
   border-radius: 50%;
   background: #050809;
   box-shadow:
-    0 3px 5px rgb(0 0 0 / 72%),
+    0 2px 7px rgb(0 0 0 / 76%),
     inset 0 0 2px rgb(0 0 0 / 80%);
 }
 
