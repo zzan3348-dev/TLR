@@ -75,7 +75,7 @@ describe("mapLabelRenderer", () => {
     expect(placements).toHaveLength(0);
   });
 
-  it("국명은 화면상 범위 안에서만 완만하게 조절되고 무한히 커지지 않는다", () => {
+  it("국명은 지도와 같은 배율로 확대되어 저장된 영토 좌표에 고정된다", () => {
     const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -86,11 +86,26 @@ describe("mapLabelRenderer", () => {
     });
 
     const sizes = placements.map(({ screenFontSize }) => screenFontSize);
-    expect(Math.max(...sizes) / Math.min(...sizes)).toBeLessThan(1.25);
-    expect(Math.max(...sizes)).toBeLessThan(90);
+    expect(sizes).toEqual([120, 160, 320, 640]);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
+  });
+
+  it("지도를 이동하면 국명 전체가 동일한 화면 거리만큼 이동한다", () => {
+    const [before] = layoutMapLabels({
+      ...baseLayoutOptions,
+      labels: [createLabel(1)],
+    });
+    const [after] = layoutMapLabels({
+      ...baseLayoutOptions,
+      camera: { x: 450, y: 230, scale: 1.5 },
+      labels: [createLabel(1)],
+    });
+
+    expect(after.x - before.x).toBeCloseTo(75);
+    expect(after.y - before.y).toBeCloseTo(30);
+    expect(after.screenFontSize).toBe(before.screenFontSize);
   });
 
   it("선택된 국가 라벨은 기본 크기보다 최대 6%만 확대한다", () => {
@@ -155,7 +170,7 @@ describe("mapLabelRenderer", () => {
     expect(placements.map(({ label }) => label.countryId)).toEqual([2]);
   });
 
-  it("일부만 겹치는 라벨은 위치를 옮기지 않고 글자 크기를 줄여 복구한다", () => {
+  it("겹치는 라벨을 화면 기준으로 옮기거나 축소하지 않는다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
@@ -170,12 +185,8 @@ describe("mapLabelRenderer", () => {
       ],
     });
 
-    expect(placements).toHaveLength(2);
+    expect(placements).toHaveLength(1);
     expect(placements[0].label.countryId).toBe(1);
-    expect(placements[1].screenFontSize).toBe(
-      placements[0].screenFontSize,
-    );
-    expect(placements[1].label.y).toBe(285);
   });
 
   it("영토 적합도 때문에 숨겨진 라벨은 충분히 확대하면 다시 표시한다", () => {
@@ -192,8 +203,7 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBeGreaterThanOrEqual(36);
-    expect(placements[0].screenFontSize).toBeLessThanOrEqual(44);
+    expect(placements[0].screenFontSize).toBe(160);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {

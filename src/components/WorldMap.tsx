@@ -126,9 +126,49 @@ type MapOverlayView = {
   fitScale: number;
 };
 
+type CapitalPositionDrafts = Record<string, ImagePoint>;
+
+type CapitalDragState = {
+  countryKey: string;
+  pointerId: number;
+};
+
 const CLICK_MOVEMENT_LIMIT = 8;
 const CLICK_DURATION_LIMIT = 700;
 const CAMERA_ANIMATION_DURATION = 460;
+const CAPITAL_POSITION_DRAFT_STORAGE_KEY = "tlr-map-capital-position-drafts-v1";
+
+function loadCapitalPositionDrafts(): CapitalPositionDrafts {
+  try {
+    const saved = window.localStorage.getItem(
+      CAPITAL_POSITION_DRAFT_STORAGE_KEY,
+    );
+    if (!saved) return {};
+    const parsed: unknown = JSON.parse(saved);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+    return Object.fromEntries(
+      Object.entries(parsed).flatMap(([countryKey, value]) => {
+        if (
+          !value ||
+          typeof value !== "object" ||
+          !("x" in value) ||
+          !("y" in value) ||
+          typeof value.x !== "number" ||
+          typeof value.y !== "number" ||
+          !Number.isFinite(value.x) ||
+          !Number.isFinite(value.y)
+        ) {
+          return [];
+        }
+        return [[countryKey, { x: value.x, y: value.y }]];
+      }),
+    );
+  } catch {
+    return {};
+  }
+}
 
 function easeOutCubic(progress: number): number {
   return 1 - (1 - progress) ** 3;
@@ -185,6 +225,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const pointersRef = useRef(new Map<number, PointerPosition>());
     const dragGestureRef = useRef<DragGesture | null>(null);
     const pinchGestureRef = useRef<PinchGesture | null>(null);
+    const capitalDragRef = useRef<CapitalDragState | null>(null);
     const hadMultiplePointersRef = useRef(false);
     const selectedCountryRef = useRef(selectedCountry);
     const selectedComponentRef = useRef(selectedComponent);
@@ -200,8 +241,28 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       useState<HoveredMapCountry | null>(null);
     const [mapCapitals, setMapCapitals] =
       useState<readonly MapCapitalRecord[]>(initialMapCapitals);
+    const [capitalPositionDrafts, setCapitalPositionDrafts] =
+      useState<CapitalPositionDrafts>(loadCapitalPositionDrafts);
+    const [capitalEditorEnabled, setCapitalEditorEnabled] = useState(false);
+    const [draggedCapitalKey, setDraggedCapitalKey] = useState<string | null>(
+      null,
+    );
+    const [capitalEditorNotice, setCapitalEditorNotice] = useState(
+      "별을 드래그하면 즉시 저장됩니다.",
+    );
     const [overlayView, setOverlayView] = useState<MapOverlayView | null>(null);
-    const mapMarkers = useMemo(() => capitalsToMarkers(mapCapitals), [mapCapitals]);
+    const effectiveMapCapitals = useMemo(
+      () =>
+        mapCapitals.map((capital) => {
+          const draft = capitalPositionDrafts[capital.countryKey];
+          return draft ? { ...capital, ...draft, enabled: true } : capital;
+        }),
+      [capitalPositionDrafts, mapCapitals],
+    );
+    const mapMarkers = useMemo(
+      () => capitalsToMarkers(effectiveMapCapitals),
+      [effectiveMapCapitals],
+    );
     const mapMarkersRef = useRef<readonly MapMarker[]>(mapMarkers);
     mapMarkersRef.current = mapMarkers;
 
@@ -212,8 +273,15 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         ...overlayView,
         selectedCountryKey: selectedCountry?.key ?? null,
         mobile: overlayView.viewport.width <= 720,
+        forceVisible: capitalEditorEnabled,
       });
-    }, [mapMarkers, mapMode, overlayView, selectedCountry?.key]);
+    }, [
+      capitalEditorEnabled,
+      mapMarkers,
+      mapMode,
+      overlayView,
+      selectedCountry?.key,
+    ]);
 
     const drawMap = useCallback(() => {
       drawFrameRef.current = null;
@@ -633,6 +701,91 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       }),
       [resetView, zoomBy],
     );
+
+    useEffect(() => {
+      window.localStorage.setItem(
+        CAPITAL_POSITION_DRAFT_STORAGE_KEY,
+        JSON.stringify(capitalPositionDrafts),
+      );
+    }, [capitalPositionDrafts]);
+
+    const updateCapitalDraftFromPointer = useCallback(
+      (event: ReactPointerEvent<HTMLButtonElement>) => {
+        const drag = capitalDragRef.current;
+        const assets = assetsRef.current;
+        const canvas = canvasRef.current;
+        if (!drag || drag.pointerId !== event.pointerId || !assets || !canvas) {
+          return;
+        }
+        const bounds = canvas.getBoundingClientRect();
+        const point = {
+          x: event.clientX - bounds.left,
+          y: event.clientY - bounds.top,
+        };
+        const worldPoint = screenPointToWorldPoint(
+          point,
+          cameraRef.current,
+          viewportRef.current,
+          { width: assets.width, height: assets.height },
+        );
+        if (!worldPoint) return;
+        setCapitalPositionDrafts((current) => ({
+          ...current,
+          [drag.countryKey]: {
+            x: Math.round(worldPoint.x * 10) / 10,
+            y: Math.round(worldPoint.y * 10) / 10,
+          },
+        }));
+        setCapitalEditorNotice("저장됨");
+      },
+      [],
+    );
+
+    const beginCapitalDrag = useCallback(
+      (
+        event: ReactPointerEvent<HTMLButtonElement>,
+        marker: MapMarker,
+      ) => {
+        if (!capitalEditorEnabled || event.button !== 0) return;
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        capitalDragRef.current = {
+          countryKey: marker.countryKey,
+          pointerId: event.pointerId,
+        };
+        setDraggedCapitalKey(marker.countryKey);
+        setCapitalEditorNotice(`${marker.name} 이동 중`);
+        updateCapitalDraftFromPointer(event);
+      },
+      [capitalEditorEnabled, updateCapitalDraftFromPointer],
+    );
+
+    const finishCapitalDrag = useCallback(
+      (event: ReactPointerEvent<HTMLButtonElement>) => {
+        if (capitalDragRef.current?.pointerId !== event.pointerId) return;
+        updateCapitalDraftFromPointer(event);
+        capitalDragRef.current = null;
+        setDraggedCapitalKey(null);
+        setCapitalEditorNotice("저장됨 · 새로고침해도 유지됩니다.");
+      },
+      [updateCapitalDraftFromPointer],
+    );
+
+    const copyCapitalDrafts = useCallback(async () => {
+      const payload = JSON.stringify(capitalPositionDrafts, null, 2);
+      try {
+        await navigator.clipboard.writeText(payload);
+        setCapitalEditorNotice("편집 위치 JSON을 복사했습니다.");
+      } catch {
+        setCapitalEditorNotice("복사에 실패했습니다. 브라우저 권한을 확인하세요.");
+      }
+    }, [capitalPositionDrafts]);
+
+    const clearCapitalDrafts = useCallback(() => {
+      setCapitalPositionDrafts({});
+      setCapitalEditorNotice("임시 위치를 초기화했습니다.");
+    }, []);
 
     const focusComponent = useCallback(
       (component: MapCountryComponent) => {
@@ -1184,7 +1337,13 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             <button
               key={`${screenMarker.marker.id}:${screenMarker.copy}`}
               type="button"
-              className="map-marker map-marker--capital"
+              className={`map-marker map-marker--capital${
+                capitalEditorEnabled ? " map-marker--editable" : ""
+              }${
+                draggedCapitalKey === screenMarker.marker.countryKey
+                  ? " map-marker--dragging"
+                  : ""
+              }`}
               data-map-marker-type={screenMarker.marker.type}
               data-map-marker-id={screenMarker.marker.id}
               style={{
@@ -1194,7 +1353,25 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
                 height: screenMarker.size,
                 opacity: screenMarker.markerOpacity,
               }}
-              onClick={() => selectMapMarker(screenMarker.marker)}
+              onPointerDown={(event) =>
+                beginCapitalDrag(event, screenMarker.marker)
+              }
+              onPointerMove={(event) => {
+                if (capitalEditorEnabled) {
+                  event.preventDefault();
+                  updateCapitalDraftFromPointer(event);
+                }
+              }}
+              onPointerUp={finishCapitalDrag}
+              onPointerCancel={finishCapitalDrag}
+              onClick={(event) => {
+                if (capitalEditorEnabled) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  return;
+                }
+                selectMapMarker(screenMarker.marker);
+              }}
               aria-label={`${screenMarker.marker.name} 수도 선택`}
               title={screenMarker.marker.name}
             >
@@ -1215,6 +1392,46 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             </button>
           ))}
         </div>
+        <div
+          className="capital-position-editor-toggle"
+          data-active={capitalEditorEnabled}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              setCapitalEditorEnabled((current) => !current);
+              setCapitalEditorNotice(
+                capitalEditorEnabled
+                  ? "수도 위치 편집을 종료했습니다."
+                  : "별을 드래그하면 즉시 저장됩니다.",
+              );
+            }}
+            aria-pressed={capitalEditorEnabled}
+          >
+            {capitalEditorEnabled ? "수도 편집 종료" : "수도 위치 편집"}
+          </button>
+        </div>
+        {capitalEditorEnabled ? (
+          <aside className="capital-position-editor" aria-live="polite">
+            <header>
+              <strong>수도 위치 임시 편집</strong>
+              <span>{Object.keys(capitalPositionDrafts).length}개 수정</span>
+            </header>
+            <p>{capitalEditorNotice}</p>
+            <div>
+              <button type="button" onClick={() => void copyCapitalDrafts()}>
+                위치 복사
+              </button>
+              <button
+                type="button"
+                onClick={clearCapitalDrafts}
+                disabled={Object.keys(capitalPositionDrafts).length === 0}
+              >
+                임시값 초기화
+              </button>
+            </div>
+          </aside>
+        ) : null}
         {mapMode === "faction" && hoveredMapCountry ? (
           <div
             className="map-hover-tooltip"

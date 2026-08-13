@@ -26,8 +26,18 @@ export function projectMapMarkers(options: {
   fitScale: number;
   selectedCountryKey: string | null;
   mobile: boolean;
+  forceVisible?: boolean;
 }): ScreenMapMarker[] {
-  const { markers, camera, viewport, mapWidth, fitScale, selectedCountryKey, mobile } = options;
+  const {
+    markers,
+    camera,
+    viewport,
+    mapWidth,
+    fitScale,
+    selectedCountryKey,
+    mobile,
+    forceVisible = false,
+  } = options;
   const zoom = normalizedMapZoom(camera.scale, fitScale);
   const size = mobile ? MAP_LOD_POLICY.markerScreenSizeMobile : MAP_LOD_POLICY.markerScreenSize;
   const result: ScreenMapMarker[] = [];
@@ -36,16 +46,20 @@ export function projectMapMarkers(options: {
     if (!marker.enabled) continue;
     const selected = marker.countryKey === selectedCountryKey;
     const advance = selected ? MAP_LOD_POLICY.selectedRevealAdvance : 0;
-    const markerOpacity = smoothLodVisibility(
-      zoom,
-      MAP_LOD_POLICY.capitalMarkerEnter - advance,
-      MAP_LOD_POLICY.capitalMarkerFadeDistance,
-    );
-    const labelOpacity = smoothLodVisibility(
-      zoom,
-      MAP_LOD_POLICY.capitalLabelEnter - advance,
-      MAP_LOD_POLICY.capitalLabelFadeDistance,
-    );
+    const markerOpacity = forceVisible
+      ? 1
+      : smoothLodVisibility(
+          zoom,
+          MAP_LOD_POLICY.capitalMarkerEnter - advance,
+          MAP_LOD_POLICY.capitalMarkerFadeDistance,
+        );
+    const labelOpacity = forceVisible
+      ? 1
+      : smoothLodVisibility(
+          zoom,
+          MAP_LOD_POLICY.capitalLabelEnter - advance,
+          MAP_LOD_POLICY.capitalLabelFadeDistance,
+        );
     if (markerOpacity <= 0) continue;
 
     for (let copy = -1; copy <= 1; copy += 1) {

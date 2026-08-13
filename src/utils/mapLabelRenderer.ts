@@ -55,7 +55,6 @@ type LayoutMapLabelsOptions = {
 };
 
 const MIN_SCREEN_FONT_SIZE = 7.5;
-const SCREEN_PATH_TRACKING = 1.045;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
 
@@ -164,15 +163,11 @@ function createScreenGlyphs(
   camera: MapCamera,
   viewport: ViewportSize,
   mapWidth: number,
-  fixedScreenFontSize: number,
+  screenFontSize: number,
 ): { glyphs: ScreenGlyph[]; screenFontSize: number } {
   const characters = [...label.text];
   const approximateGlyphWidth = label.fontSize * 0.9;
-  const screenFontSize = fixedScreenFontSize;
   const renderScale = screenFontSize / Math.max(1, label.fontSize);
-  const pathScale =
-    (renderScale / Math.max(0.0001, camera.scale)) *
-    SCREEN_PATH_TRACKING;
   const pathWorldCenter = quadraticPoint(
     label.start,
     label.control,
@@ -183,13 +178,6 @@ function createScreenGlyphs(
     x: label.x - pathWorldCenter.x,
     y: label.y - pathWorldCenter.y,
   };
-  const screenPathCenter = worldToScreen(
-    { x: label.x, y: label.y },
-    copy,
-    camera,
-    viewport,
-    mapWidth,
-  );
   const totalWidth =
     characters.length * approximateGlyphWidth +
     Math.max(0, characters.length - 1) * label.letterSpacing;
@@ -216,12 +204,8 @@ function createScreenGlyphs(
       mapWidth,
     );
     const screenPoint = {
-      x:
-        screenPathCenter.x +
-        (unscaledScreenPoint.x - screenPathCenter.x) * pathScale,
-      y:
-        screenPathCenter.y +
-        (unscaledScreenPoint.y - screenPathCenter.y) * pathScale,
+      x: unscaledScreenPoint.x,
+      y: unscaledScreenPoint.y,
     };
     const angle = quadraticAngle(
       label.start,
@@ -258,7 +242,6 @@ function createScreenPlacement(
   viewport: ViewportSize,
   mapWidth: number,
   mapScaleMultiplier: number,
-  fitScale: number,
   semanticFontScale: number,
   selected: boolean,
   visibilityOpacity: number,
@@ -269,7 +252,7 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    label.fontSize * fitScale * mapScaleMultiplier * semanticFontScale,
+    label.fontSize * camera.scale * mapScaleMultiplier * semanticFontScale,
   );
   if (glyphs.length === 0 || screenFontSize < MIN_SCREEN_FONT_SIZE) {
     return null;
@@ -365,12 +348,9 @@ export function layoutMapLabels({
           projectedArea / MAP_LOD_POLICY.countryLabelMinimumProjectedArea,
         ),
       );
-      // 국명은 영토의 화면상 여유에 따라 좁은 범위에서만 조절한다.
-      // 카메라 scale을 직접 곱하지 않아 확대 시 무한히 커지는 현상을 막는다.
-      const semanticFontScale = Math.min(
-        1.1,
-        0.88 + projectedOpacity * 0.14 + normalizedZoom * 0.08,
-      );
+      // 국명 글자와 곡선을 지도 좌표계에 고정한다. 줌은 가시성만 바꾸며
+      // 영토에 대한 글자의 상대 크기·방향·간격은 다시 계산하지 않는다.
+      const semanticFontScale = 1;
       const visibilityOpacity = enterOpacity * closeOpacity * projectedOpacity;
       if (visibilityOpacity <= 0.01) continue;
       const placement = createScreenPlacement(
@@ -380,7 +360,6 @@ export function layoutMapLabels({
         viewport,
         mapWidth,
         mapScaleMultiplier,
-        fitScale,
         semanticFontScale,
         selected,
         visibilityOpacity,
