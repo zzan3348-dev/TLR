@@ -181,7 +181,12 @@ export function PoliticsPanel({
     [country.key],
   );
 
-  const primaryParty = presentation.politics.parties[0] ?? null;
+  const primaryParty =
+    presentation.politics.parties.find(
+      (party) => party.name === presentation.politics.rulingParty,
+    ) ??
+    presentation.politics.parties[0] ??
+    null;
   const rulingIdeology =
     primaryParty?.subIdeology || presentation.politics.subIdeology || "미설정";
   const panelStyle = {

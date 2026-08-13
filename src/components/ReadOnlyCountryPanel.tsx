@@ -309,7 +309,12 @@ function MajorPartyPanel({
   const parties = usesExampleParties
     ? EXAMPLE_PARTIES
     : presentation.politics.parties;
-  const primaryParty = parties[0] ?? null;
+  const primaryParty =
+    parties.find(
+      (party) => party.name === presentation.politics.rulingParty,
+    ) ??
+    parties[0] ??
+    null;
   const primaryName =
     primaryParty?.name ||
     presentation.politics.rulingParty ||

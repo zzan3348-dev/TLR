@@ -3797,8 +3797,9 @@ button:focus-visible,
 }
 
 .hybrid-country-panel__primary-party span {
-  color: #777d79;
-  font-size: clamp(9px, 1.7cqw, 12px);
+  color: #adb4af;
+  font-size: clamp(10px, 1.85cqw, 13px);
+  font-weight: 620;
 }
 
 .hybrid-country-panel__party-support {
@@ -3819,7 +3820,7 @@ button:focus-visible,
 .hybrid-country-panel__party-chart {
   position: relative;
   display: grid;
-  width: min(22cqw, 94px);
+  width: min(17cqw, 72px);
   max-width: 100%;
   margin: 0;
   aspect-ratio: 1;
@@ -3828,7 +3829,7 @@ button:focus-visible,
   border: 1px solid #111516;
   border-radius: 50%;
   background: #050809;
-  box-shadow: 0 0 9px 4px rgb(0 0 0 / 84%);
+  box-shadow: none;
 }
 
 .hybrid-country-panel__party-chart::before {
@@ -3838,16 +3839,7 @@ button:focus-visible,
   border-radius: inherit;
   content: "";
   pointer-events: none;
-  opacity: 0.88;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgb(222 221 211 / 5%) 0,
-    rgb(222 221 211 / 5%) 1px,
-    rgb(0 0 0 / 10%) 1px,
-    rgb(0 0 0 / 10%) 2px,
-    rgb(0 0 0 / 30%) 2px,
-    rgb(0 0 0 / 30%) 3px
-  );
+  display: none;
 }
 
 .hybrid-country-panel__party-chart > span {
@@ -4714,7 +4706,7 @@ button:focus-visible,
 .party-support-chart__segment {
   position: relative;
   min-width: 2px;
-  cursor: help;
+  cursor: default;
   border: 0;
   border-right: 1px solid rgb(3 6 7 / 60%);
   background:
@@ -4834,18 +4826,15 @@ button:focus-visible,
   display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 4px 5px rgb(0 0 0 / 82%));
+  overflow: hidden;
+  filter: none;
 }
 
 .party-support-chart path {
-  cursor: help;
+  cursor: default;
   stroke: rgb(3 6 8 / 52%);
   stroke-width: 0.35;
-  transition:
-    filter 120ms ease,
-    transform 120ms ease;
-  transform-origin: 50px 50px;
+  transition: filter 120ms ease;
 }
 
 .party-support-chart path[data-ruling="true"] {
@@ -4857,9 +4846,8 @@ button:focus-visible,
 .party-support-chart path:focus,
 .party-support-chart path:focus-visible {
   z-index: 2;
-  filter: brightness(1.2) saturate(1.06);
+  filter: brightness(1.12) saturate(1.04);
   outline: none;
-  transform: scale(1.018);
 }
 
 .party-support-chart__empty {
@@ -4869,24 +4857,16 @@ button:focus-visible,
 .party-support-chart > span {
   position: absolute;
   z-index: 3;
-  inset: 4%;
+  inset: 2%;
   border-radius: 50%;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgb(224 221 209 / 8%) 0 1px,
-      rgb(0 0 0 / 7%) 1px 2px,
-      rgb(0 0 0 / 28%) 2px 3px
-    ),
-    radial-gradient(
-      circle at 43% 36%,
-      rgb(255 255 255 / 7%),
-      transparent 38%,
-      rgb(0 0 0 / 42%) 78%
-    );
-  box-shadow:
-    inset 0 0 9px rgb(0 0 0 / 84%),
-    0 0 8px 3px rgb(0 0 0 / 68%);
+  opacity: 0.45;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(224 221 209 / 7%) 0 1px,
+    transparent 1px 2px,
+    rgb(0 0 0 / 16%) 2px 3px
+  );
+  box-shadow: none;
   pointer-events: none;
 }
 
@@ -7444,7 +7424,7 @@ button:focus-visible,
 }
 
 .politics-template__party .party-support-chart {
-  width: min(29cqw, 150px);
+  width: min(20cqw, 104px);
   align-self: center;
   justify-self: center;
 }
