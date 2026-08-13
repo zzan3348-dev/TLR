@@ -6,6 +6,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { CountryFlag } from "../../../components/CountryFlag";
+import { CountryLeaderInfo } from "../../../components/CountryLeaderInfo";
 import { PartySupportChart } from "../../../components/PartySupportChart";
 import { getCountryPresentation } from "../../../data/countryPresentation";
 import type { MapCountryIndex } from "../../../types/mapCountry";
@@ -122,76 +123,14 @@ export function PoliticsLeaderInfo({
 }: {
   leader: CountryLeaderPresentation;
 }) {
-  const [tooltip, setTooltip] = useState<{ x: number; y: number } | null>(null);
-
-  const showTooltip = (clientX: number, clientY: number) => {
-    const width = Math.min(360, window.innerWidth - 24);
-    const height = Math.min(440, window.innerHeight - 24);
-    setTooltip({
-      x: Math.max(12, Math.min(clientX + 16, window.innerWidth - width - 12)),
-      y: Math.max(12, Math.min(clientY + 16, window.innerHeight - height - 12)),
-    });
-  };
-
   return (
-    <>
-      <button
-        type="button"
-        className="politics-template__leader-trigger"
-        aria-describedby={tooltip ? "politics-leader-tooltip" : undefined}
-        onPointerEnter={(event) => showTooltip(event.clientX, event.clientY)}
-        onPointerMove={(event) => showTooltip(event.clientX, event.clientY)}
-        onPointerLeave={() => setTooltip(null)}
-        onFocus={(event) => {
-          const bounds = event.currentTarget.getBoundingClientRect();
-          showTooltip(bounds.right, bounds.top);
-        }}
-        onBlur={() => setTooltip(null)}
-      >
-        <strong>{leader.name || "지도자 미설정"}</strong>
-      </button>
-
-      {tooltip
-        ? createPortal(
-            <aside
-              id="politics-leader-tooltip"
-              className="politics-leader-tooltip"
-              style={{ left: tooltip.x, top: tooltip.y }}
-              role="tooltip"
-            >
-              <strong className="hybrid-country-panel__leader-name">
-                {leader.name || "지도자 미설정"}
-              </strong>
-              {leader.title ? (
-                <span className="politics-leader-tooltip__title">
-                  {leader.title}
-                </span>
-              ) : null}
-              {leader.effects.length > 0 ? (
-                <ul className="hybrid-country-panel__leader-effects">
-                  {leader.effects.map((effect) => (
-                    <li key={effect.id}>
-                      <strong className="hybrid-country-panel__leader-effect-name">
-                        {effect.name}
-                      </strong>
-                      {effect.lines.map((line) => (
-                        <span
-                          key={line.id}
-                          className="hybrid-country-panel__leader-effect-line"
-                          data-tone={line.tone}
-                        >
-                          {line.text}
-                        </span>
-                      ))}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </aside>,
-            document.body,
-          )
-        : null}
-    </>
+    <CountryLeaderInfo
+      leader={leader}
+      triggerClassName="politics-template__leader-trigger"
+      triggerLabel="지도자 설명 보기"
+    >
+      <strong>{leader.name || "지도자 미설정"}</strong>
+    </CountryLeaderInfo>
   );
 }
 

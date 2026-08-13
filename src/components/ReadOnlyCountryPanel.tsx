@@ -1,6 +1,5 @@
 import type {
   CSSProperties,
-  PointerEvent as ReactPointerEvent,
   ReactNode,
 } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +12,7 @@ import type {
 } from "../types/countryPresentation";
 import type { MapCountryIndex } from "../types/mapCountry";
 import { CountryFlag } from "./CountryFlag";
+import { CountryLeaderInfo } from "./CountryLeaderInfo";
 import { getPartyDisplayColor } from "../utils/partyColors";
 import { PartySupportChart } from "./PartySupportChart";
 
@@ -48,25 +48,6 @@ function CountryPanelSlot({
     >
       {children}
     </section>
-  );
-}
-
-function positionLeaderTooltip(
-  event: ReactPointerEvent<HTMLButtonElement>,
-): void {
-  const portraitSlot = event.currentTarget.parentElement;
-  if (!portraitSlot) {
-    return;
-  }
-
-  const bounds = event.currentTarget.getBoundingClientRect();
-  portraitSlot.style.setProperty(
-    "--leader-tooltip-x",
-    `${event.clientX - bounds.left + 14}px`,
-  );
-  portraitSlot.style.setProperty(
-    "--leader-tooltip-y",
-    `${event.clientY - bounds.top + 14}px`,
   );
 }
 
@@ -447,10 +428,6 @@ export function ReadOnlyCountryPanel({
   const panelStyle = country
     ? ({ "--country-accent": country.color } as CSSProperties)
     : undefined;
-  const leaderTooltipId = presentation
-    ? `leader-tooltip-${presentation.country.key}`
-    : undefined;
-
   return (
     <aside
       className="country-panel country-panel--hybrid"
@@ -544,53 +521,11 @@ export function ReadOnlyCountryPanel({
 
             {presentation.leader.portraitPath ? (
               <CountryPanelSlot name="portrait">
-                <button
-                  type="button"
-                  className="hybrid-country-panel__portrait-trigger"
-                  aria-label="지도자 설명 보기"
-                  aria-describedby={leaderTooltipId}
-                  onPointerEnter={positionLeaderTooltip}
-                  onPointerMove={positionLeaderTooltip}
+                <CountryLeaderInfo
+                  leader={presentation.leader}
+                  triggerClassName="hybrid-country-panel__portrait-trigger"
+                  triggerLabel="지도자 설명 보기"
                 />
-                <div
-                  id={leaderTooltipId}
-                  className="hybrid-country-panel__leader-tooltip"
-                  role="tooltip"
-                >
-                  <strong className="hybrid-country-panel__leader-name">
-                    {presentation.leader.name || "[지도자 정보 없음]"}
-                  </strong>
-                  {presentation.leader.effects.length > 0 ? (
-                    <ul className="hybrid-country-panel__leader-effects">
-                      {presentation.leader.effects.map((effect) => {
-                        const lines = effect.lines.filter((line) =>
-                          line.text.trim(),
-                        );
-                        if (!effect.name.trim() && lines.length === 0) {
-                          return null;
-                        }
-                        return (
-                          <li key={effect.id}>
-                            {effect.name.trim() ? (
-                              <span className="hybrid-country-panel__leader-effect-name">
-                                {effect.name}
-                              </span>
-                            ) : null}
-                            {lines.map((line) => (
-                              <span
-                                key={line.id}
-                                className="hybrid-country-panel__leader-effect-line"
-                                data-tone={line.tone}
-                              >
-                                {line.text}
-                              </span>
-                            ))}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : null}
-                </div>
               </CountryPanelSlot>
             ) : null}
 
