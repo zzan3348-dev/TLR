@@ -525,6 +525,7 @@ export function ReadOnlyCountryPanel({
                   leader={presentation.leader}
                   triggerClassName="hybrid-country-panel__portrait-trigger"
                   triggerLabel="지도자 설명 보기"
+                  mode="embedded"
                 />
               </CountryPanelSlot>
             ) : null}
