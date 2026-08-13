@@ -1,7 +1,7 @@
-import type { ApiRequest, ApiResponse } from "../server/types.js";
-import { getAdminClient, getServerEnv } from "../server/auth.js";
+import type { ApiRequest, ApiResponse } from "../types.js";
+import { getAdminClient, getServerEnv } from "../auth.js";
 
-export default async function handler(
+export default async function mapCapitals(
   request: ApiRequest,
   response: ApiResponse,
 ): Promise<void> {

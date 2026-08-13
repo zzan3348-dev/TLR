@@ -1,6 +1,6 @@
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
-import { requireAdminSession } from "../../server/adminAuth.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
+import { requireAdminSession } from "../../adminAuth.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
 
 type CapitalBody = {
   countryKey?: unknown;
@@ -10,7 +10,7 @@ type CapitalBody = {
   enabled?: unknown;
 };
 
-export default async function handler(
+export default async function mapCapitalsAdmin(
   request: ApiRequest,
   response: ApiResponse,
 ): Promise<void> {

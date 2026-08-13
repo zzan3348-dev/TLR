@@ -27,6 +27,14 @@
       "destination": "/api/admin/actions?domain=research"
     },
     {
+      "source": "/api/map-capitals",
+      "destination": "/api/economy-dispatch?domain=map&route=capitals"
+    },
+    {
+      "source": "/api/admin/map-capitals",
+      "destination": "/api/admin/actions?domain=map-capitals"
+    },
+    {
       "source": "/api/navi/:route",
       "destination": "/api/economy-dispatch?domain=navi&route=:route"
     },

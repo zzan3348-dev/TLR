@@ -11,6 +11,7 @@ import naviEvents from "../server/routes/navi/events.js";
 import naviMe from "../server/routes/navi/me.js";
 import naviResearch from "../server/routes/navi/research.js";
 import naviResearchInvestments from "../server/routes/navi/researchInvestments.js";
+import mapCapitals from "../server/routes/mapCapitals.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   budget,
@@ -39,7 +40,11 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const rawDomain = request.query?.domain;
   const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
   const routeHandler = route
-    ? domain === "navi"
+    ? domain === "map"
+      ? route === "capitals"
+        ? mapCapitals
+        : undefined
+      : domain === "navi"
       ? naviHandlers[route]
       : domain === "research"
         ? researchHandlers[route]

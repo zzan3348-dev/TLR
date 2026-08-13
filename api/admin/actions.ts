@@ -2,6 +2,7 @@ import type { ApiRequest, ApiResponse } from "../../server/types.js";
 import { getAdminClient, getServerEnv } from "../../server/auth.js";
 import { requireAdminSession } from "../../server/adminAuth.js";
 import researchAdmin from "../../server/routes/admin/research.js";
+import mapCapitalsAdmin from "../../server/routes/admin/mapCapitals.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",
@@ -24,6 +25,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
   if (domain === "research") {
     await researchAdmin(request, response);
+    return;
+  }
+  if (domain === "map-capitals") {
+    await mapCapitalsAdmin(request, response);
     return;
   }
   if (request.method !== "POST") {
