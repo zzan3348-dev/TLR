@@ -314,6 +314,12 @@ function MajorPartyPanel({
     primaryParty?.name ||
     presentation.politics.rulingParty ||
     "정당 정보 없음";
+  const primaryIdeology =
+    primaryParty?.subIdeology ||
+    presentation.politics.subIdeology ||
+    "사상 미설정";
+  const primarySymbol =
+    primaryParty?.symbolPath ?? presentation.politics.symbolPath;
   const chartStyle = {
     "--primary-party-color":
       primaryParty
@@ -327,6 +333,19 @@ function MajorPartyPanel({
       data-example={usesExampleParties}
       style={chartStyle}
     >
+      <header className="hybrid-country-panel__primary-party">
+        {primarySymbol ? (
+          <img src={primarySymbol} alt="" draggable={false} />
+        ) : (
+          <span className="hybrid-country-panel__party-sigil" aria-hidden="true">
+            <b>{primaryName.slice(0, 1)}</b>
+          </span>
+        )}
+        <div>
+          <strong>{primaryName}</strong>
+          <span>{primaryIdeology}</span>
+        </div>
+      </header>
       <section className="hybrid-country-panel__party-support">
         <div className="hybrid-country-panel__support-visual">
           <PartySupportChart

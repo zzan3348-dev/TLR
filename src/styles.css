@@ -3679,9 +3679,10 @@ button:focus-visible,
 }
 
 .hybrid-country-panel__party-panel {
-  display: block;
+  display: grid;
   height: 100%;
   min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
   background:
     linear-gradient(145deg, rgb(255 255 255 / 1.5%), transparent 38%),
@@ -3771,16 +3772,18 @@ button:focus-visible,
 }
 
 .hybrid-country-panel__party-support {
-  display: block;
+  display: grid;
   height: 100%;
   min-height: 0;
-  padding: 0;
+  padding: 0.75cqw 1.1cqw 1cqw;
+  place-items: center;
 }
 
 .hybrid-country-panel__support-visual {
-  display: block;
+  display: grid;
   height: 100%;
   min-height: 0;
+  place-items: center;
 }
 
 .hybrid-country-panel__party-chart {
