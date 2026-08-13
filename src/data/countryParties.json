@@ -1,0 +1,3512 @@
+{
+  "country-001": {
+    "government": "워싱턴의 보전주의 연방정부·동부 금융·남부 보수·군부 세력",
+    "rulingParty": "공화당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-001/ideology.png",
+    "parties": [
+      {
+        "id": "country-001-party-01",
+        "name": "공화당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 36,
+        "symbolPath": "/assets/country-panels/country-001/party-01.png"
+      },
+      {
+        "id": "country-001-party-02",
+        "name": "민주당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-001/party-02.png"
+      },
+      {
+        "id": "country-001-party-03",
+        "name": "사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-001/party-03.png"
+      },
+      {
+        "id": "country-001-party-04",
+        "name": "진보당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-001/party-04.png"
+      },
+      {
+        "id": "country-001-party-05",
+        "name": "주권연맹",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-001/party-05.png"
+      }
+    ]
+  },
+  "country-002": {
+    "government": "램지 맥도널드 국민정부",
+    "rulingParty": "국민정부",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-002/ideology.png",
+    "parties": [
+      {
+        "id": "country-002-party-01",
+        "name": "국민정부",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 44,
+        "symbolPath": "/assets/country-panels/country-002/party-01.png"
+      },
+      {
+        "id": "country-002-party-02",
+        "name": "노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 26,
+        "symbolPath": "/assets/country-panels/country-002/party-02.png"
+      },
+      {
+        "id": "country-002-party-03",
+        "name": "자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-002/party-03.png"
+      },
+      {
+        "id": "country-002-party-04",
+        "name": "제국통합당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-002/party-04.png"
+      },
+      {
+        "id": "country-002-party-05",
+        "name": "자치령개혁연맹",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-002/party-05.png"
+      }
+    ]
+  },
+  "country-003": {
+    "government": "미설정",
+    "rulingParty": "러시아 혁명사회당",
+    "ideologyCategory": "전위사회주의",
+    "subIdeology": "영구혁명론",
+    "symbolPath": "/assets/country-panels/country-003/ideology.png",
+    "parties": [
+      {
+        "id": "country-003-party-01",
+        "name": "러시아 혁명사회당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "영구혁명론",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-003/party-01.png"
+      },
+      {
+        "id": "country-003-party-02",
+        "name": "농민사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-003/party-02.png"
+      },
+      {
+        "id": "country-003-party-03",
+        "name": "노동평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "평의회공산주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-003/party-03.png"
+      },
+      {
+        "id": "country-003-party-04",
+        "name": "사회민주노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-003/party-04.png"
+      },
+      {
+        "id": "country-003-party-05",
+        "name": "사회혁명당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-003/party-05.png"
+      },
+      {
+        "id": "country-003-party-06",
+        "name": "좌익공산동맹",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "정통 마르크스주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-003/party-06.png"
+      }
+    ]
+  },
+  "country-004": {
+    "government": "키릴 블라디미로비치 황실·귀족·장교단",
+    "rulingParty": "전러시아 왕정연맹",
+    "ideologyCategory": "반동주의",
+    "subIdeology": "전제복고주의",
+    "symbolPath": "/assets/country-panels/country-004/ideology.png",
+    "parties": [
+      {
+        "id": "country-004-party-01",
+        "name": "전러시아 왕정연맹",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "전제복고주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-004/party-01.png"
+      },
+      {
+        "id": "country-004-party-02",
+        "name": "군관구연합",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-004/party-02.png"
+      },
+      {
+        "id": "country-004-party-03",
+        "name": "시베리아 보수당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-004/party-03.png"
+      },
+      {
+        "id": "country-004-party-04",
+        "name": "제헌군주연맹",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-004/party-04.png"
+      },
+      {
+        "id": "country-004-party-05",
+        "name": "국가행정회",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-004/party-05.png"
+      },
+      {
+        "id": "country-004-party-06",
+        "name": "인민공화지하회",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-004/party-06.png"
+      }
+    ]
+  },
+  "country-005": {
+    "government": "토르발 스타우닝 중심 사회민주 세력",
+    "rulingParty": "사회민주연합",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-005/ideology.png",
+    "parties": [
+      {
+        "id": "country-005-party-01",
+        "name": "사회민주연합",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 35,
+        "symbolPath": "/assets/country-panels/country-005/party-01.png"
+      },
+      {
+        "id": "country-005-party-02",
+        "name": "농민동맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-005/party-02.png"
+      },
+      {
+        "id": "country-005-party-03",
+        "name": "자유시민당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-005/party-03.png"
+      },
+      {
+        "id": "country-005-party-04",
+        "name": "보수연합",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-005/party-04.png"
+      },
+      {
+        "id": "country-005-party-05",
+        "name": "노동좌파전선",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-005/party-05.png"
+      },
+      {
+        "id": "country-005-party-06",
+        "name": "국방중립당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-005/party-06.png"
+      }
+    ]
+  },
+  "country-006": {
+    "government": "아우구스트 레이 중심 연방정부",
+    "rulingParty": "발트 사회민주연합",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-006/ideology.png",
+    "parties": [
+      {
+        "id": "country-006-party-01",
+        "name": "발트 사회민주연합",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 33,
+        "symbolPath": "/assets/country-panels/country-006/party-01.png"
+      },
+      {
+        "id": "country-006-party-02",
+        "name": "연방자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-006/party-02.png"
+      },
+      {
+        "id": "country-006-party-03",
+        "name": "농민동맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-006/party-03.png"
+      },
+      {
+        "id": "country-006-party-04",
+        "name": "국민보수전선",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-006/party-04.png"
+      },
+      {
+        "id": "country-006-party-05",
+        "name": "자치권리회의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-006/party-05.png"
+      },
+      {
+        "id": "country-006-party-06",
+        "name": "발트 방위동맹",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-006/party-06.png"
+      }
+    ]
+  },
+  "country-007": {
+    "government": "로버트 라폴레트 주니어·진보주의자·노동조합·주정부 연합",
+    "rulingParty": "진보당",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "사회자유주의",
+    "symbolPath": "/assets/country-panels/country-007/ideology.png",
+    "parties": [
+      {
+        "id": "country-007-party-01",
+        "name": "진보당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-007/party-01.png"
+      },
+      {
+        "id": "country-007-party-02",
+        "name": "농민노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-007/party-02.png"
+      },
+      {
+        "id": "country-007-party-03",
+        "name": "공화연방당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-007/party-03.png"
+      },
+      {
+        "id": "country-007-party-04",
+        "name": "사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-007/party-04.png"
+      },
+      {
+        "id": "country-007-party-05",
+        "name": "기업질서동맹",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "국가조합주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-007/party-05.png"
+      },
+      {
+        "id": "country-007-party-06",
+        "name": "애국연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 6,
+        "symbolPath": "/assets/country-panels/country-007/party-06.png"
+      }
+    ]
+  },
+  "country-008": {
+    "government": "미설정",
+    "rulingParty": "독일 사회민주노동당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "신사회주의",
+    "symbolPath": "/assets/country-panels/country-008/ideology.png",
+    "parties": [
+      {
+        "id": "country-008-party-01",
+        "name": "독일 사회민주노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 38,
+        "symbolPath": "/assets/country-panels/country-008/party-01.png"
+      },
+      {
+        "id": "country-008-party-02",
+        "name": "독일 노동평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "민주평의회주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-008/party-02.png"
+      },
+      {
+        "id": "country-008-party-03",
+        "name": "스파르타쿠스 연맹",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "정통 마르크스주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-008/party-03.png"
+      },
+      {
+        "id": "country-008-party-04",
+        "name": "사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-008/party-04.png"
+      },
+      {
+        "id": "country-008-party-05",
+        "name": "독일통일사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-008/party-05.png"
+      },
+      {
+        "id": "country-008-party-06",
+        "name": "자유사회주의연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-008/party-06.png"
+      }
+    ]
+  },
+  "country-009": {
+    "government": "알리한 부케이하노프·알라시 자유주의 민족파",
+    "rulingParty": "알라시당",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "국민자유주의",
+    "symbolPath": "/assets/country-panels/country-009/ideology.png",
+    "parties": [
+      {
+        "id": "country-009-party-01",
+        "name": "알라시당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-009/party-01.png"
+      },
+      {
+        "id": "country-009-party-02",
+        "name": "초원농민연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-009/party-02.png"
+      },
+      {
+        "id": "country-009-party-03",
+        "name": "입헌개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-009/party-03.png"
+      },
+      {
+        "id": "country-009-party-04",
+        "name": "무슬림협의회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-009/party-04.png"
+      },
+      {
+        "id": "country-009-party-05",
+        "name": "사회공화연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-009/party-05.png"
+      },
+      {
+        "id": "country-009-party-06",
+        "name": "대초원통합회",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-009/party-06.png"
+      }
+    ]
+  },
+  "country-010": {
+    "government": "드미트리 호르바트·장교·철도관료·상인 엘리트",
+    "rulingParty": "철도관료 실용주의",
+    "ideologyCategory": "권위주의",
+    "subIdeology": "관료권위주의",
+    "symbolPath": "/assets/country-panels/country-010/ideology.png",
+    "parties": [
+      {
+        "id": "country-010-party-01",
+        "name": "철도관료 실용주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-010/party-01.png"
+      },
+      {
+        "id": "country-010-party-02",
+        "name": "연해 백계보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-010/party-02.png"
+      },
+      {
+        "id": "country-010-party-03",
+        "name": "상인 자유보수주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-010/party-03.png"
+      },
+      {
+        "id": "country-010-party-04",
+        "name": "태평양 러시아주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-010/party-04.png"
+      },
+      {
+        "id": "country-010-party-05",
+        "name": "제국재통합주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-010/party-05.png"
+      },
+      {
+        "id": "country-010-party-06",
+        "name": "연해 공화개혁론",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-010/party-06.png"
+      }
+    ]
+  },
+  "country-011": {
+    "government": "이그나치 다신스키 사회민주정부",
+    "rulingParty": "사회민주당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-011/ideology.png",
+    "parties": [
+      {
+        "id": "country-011-party-01",
+        "name": "사회민주당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-011/party-01.png"
+      },
+      {
+        "id": "country-011-party-02",
+        "name": "인민농민당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-011/party-02.png"
+      },
+      {
+        "id": "country-011-party-03",
+        "name": "국민노동연합",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-011/party-03.png"
+      },
+      {
+        "id": "country-011-party-04",
+        "name": "자유공화당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-011/party-04.png"
+      },
+      {
+        "id": "country-011-party-05",
+        "name": "민족민주회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-011/party-05.png"
+      },
+      {
+        "id": "country-011-party-06",
+        "name": "혁명좌파전선",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "혁명적 국제주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-011/party-06.png"
+      }
+    ]
+  },
+  "country-012": {
+    "government": "푸이 황실·만주 귀족·관료·군벌",
+    "rulingParty": "만주 궁정전제주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-012/ideology.png",
+    "parties": [
+      {
+        "id": "country-012-party-01",
+        "name": "만주 궁정전제주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-012/party-01.png"
+      },
+      {
+        "id": "country-012-party-02",
+        "name": "북양 관료국가주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-012/party-02.png"
+      },
+      {
+        "id": "country-012-party-03",
+        "name": "황도보전 유교보수주의",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "전제복고주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-012/party-03.png"
+      },
+      {
+        "id": "country-012-party-04",
+        "name": "한인 공화주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-012/party-04.png"
+      },
+      {
+        "id": "country-012-party-05",
+        "name": "군벌실용주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-012/party-05.png"
+      },
+      {
+        "id": "country-012-party-06",
+        "name": "혁명민족주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-012/party-06.png"
+      }
+    ]
+  },
+  "country-013": {
+    "government": "미설정",
+    "rulingParty": "프랑스 사회주의공화당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-013/ideology.png",
+    "parties": [
+      {
+        "id": "country-013-party-01",
+        "name": "프랑스 사회주의공화당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 32,
+        "symbolPath": "/assets/country-panels/country-013/party-01.png"
+      },
+      {
+        "id": "country-013-party-02",
+        "name": "혁명노동총연맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-013/party-02.png"
+      },
+      {
+        "id": "country-013-party-03",
+        "name": "프랑스 노동자당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "정통 마르크스주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-013/party-03.png"
+      },
+      {
+        "id": "country-013-party-04",
+        "name": "코뮌자치연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-013/party-04.png"
+      },
+      {
+        "id": "country-013-party-05",
+        "name": "사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-013/party-05.png"
+      },
+      {
+        "id": "country-013-party-06",
+        "name": "자코뱅사회동맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "자코뱅주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-013/party-06.png"
+      }
+    ]
+  },
+  "country-014": {
+    "government": "네스토르 마흐노·자유농민군·지방 소비에트·농민조합",
+    "rulingParty": "마흐노 자유농민주의",
+    "ideologyCategory": "자유사회주의",
+    "subIdeology": "무정부공산주의",
+    "symbolPath": "/assets/country-panels/country-014/ideology.png",
+    "parties": [
+      {
+        "id": "country-014-party-01",
+        "name": "마흐노 자유농민주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "무정부공산주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-014/party-01.png"
+      },
+      {
+        "id": "country-014-party-02",
+        "name": "자유농촌 공동체주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "농민집산주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-014/party-02.png"
+      },
+      {
+        "id": "country-014-party-03",
+        "name": "도시 노동생디칼리슴",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "산업조합주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-014/party-03.png"
+      },
+      {
+        "id": "country-014-party-04",
+        "name": "우크라이나 사회공화주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-014/party-04.png"
+      },
+      {
+        "id": "country-014-party-05",
+        "name": "좌익 코뮌주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-014/party-05.png"
+      },
+      {
+        "id": "country-014-party-06",
+        "name": "민족자치 방위론",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-014/party-06.png"
+      }
+    ]
+  },
+  "country-015": {
+    "government": "귀족·승려·신식 관료 연립지배",
+    "rulingParty": "초원 보전왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-015/ideology.png",
+    "parties": [
+      {
+        "id": "country-015-party-01",
+        "name": "초원 보전왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 27,
+        "symbolPath": "/assets/country-panels/country-015/party-01.png"
+      },
+      {
+        "id": "country-015-party-02",
+        "name": "불교 국정조화론",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 19,
+        "symbolPath": "/assets/country-panels/country-015/party-02.png"
+      },
+      {
+        "id": "country-015-party-03",
+        "name": "몽골 민족자강론",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-015/party-03.png"
+      },
+      {
+        "id": "country-015-party-04",
+        "name": "신관료 근대화론",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-015/party-04.png"
+      },
+      {
+        "id": "country-015-party-05",
+        "name": "유목 공동체주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-015/party-05.png"
+      },
+      {
+        "id": "country-015-party-06",
+        "name": "범아시아 협력론",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-015/party-06.png"
+      }
+    ]
+  },
+  "country-016": {
+    "government": "미설정",
+    "rulingParty": "보헤미아 사회노동당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "신사회주의",
+    "symbolPath": "/assets/country-panels/country-016/ideology.png",
+    "parties": [
+      {
+        "id": "country-016-party-01",
+        "name": "보헤미아 사회노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-016/party-01.png"
+      },
+      {
+        "id": "country-016-party-02",
+        "name": "노동공화당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "정통 마르크스주의",
+        "support": 23,
+        "symbolPath": "/assets/country-panels/country-016/party-02.png"
+      },
+      {
+        "id": "country-016-party-03",
+        "name": "체코-독일 노동연맹",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-016/party-03.png"
+      },
+      {
+        "id": "country-016-party-04",
+        "name": "공장평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "생산자공화주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-016/party-04.png"
+      },
+      {
+        "id": "country-016-party-05",
+        "name": "민족사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-016/party-05.png"
+      },
+      {
+        "id": "country-016-party-06",
+        "name": "급진코뮌연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-016/party-06.png"
+      }
+    ]
+  },
+  "country-017": {
+    "government": "미설정",
+    "rulingParty": "바이에른 사회공화당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-017/ideology.png",
+    "parties": [
+      {
+        "id": "country-017-party-01",
+        "name": "바이에른 사회공화당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-017/party-01.png"
+      },
+      {
+        "id": "country-017-party-02",
+        "name": "바이에른 평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "민주평의회주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-017/party-02.png"
+      },
+      {
+        "id": "country-017-party-03",
+        "name": "자유사회주의연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-017/party-03.png"
+      },
+      {
+        "id": "country-017-party-04",
+        "name": "혁명노동총연맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-017/party-04.png"
+      },
+      {
+        "id": "country-017-party-05",
+        "name": "기독사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-017/party-05.png"
+      },
+      {
+        "id": "country-017-party-06",
+        "name": "남독일 사회연방당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-017/party-06.png"
+      }
+    ]
+  },
+  "country-018": {
+    "government": "황실·정당내각·군부 관료체제",
+    "rulingParty": "입헌정우회",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-018/ideology.png",
+    "parties": [
+      {
+        "id": "country-018-party-01",
+        "name": "입헌정우회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-018/party-01.png"
+      },
+      {
+        "id": "country-018-party-02",
+        "name": "군부초월회",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "총력국가주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-018/party-02.png"
+      },
+      {
+        "id": "country-018-party-03",
+        "name": "입헌민정당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-018/party-03.png"
+      },
+      {
+        "id": "country-018-party-04",
+        "name": "사회대중당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-018/party-04.png"
+      },
+      {
+        "id": "country-018-party-05",
+        "name": "동방개척동맹",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "군국재생주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-018/party-05.png"
+      },
+      {
+        "id": "country-018-party-06",
+        "name": "천황친정회",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "전제복고주의",
+        "support": 5,
+        "symbolPath": "/assets/country-panels/country-018/party-06.png"
+      }
+    ]
+  },
+  "country-019": {
+    "government": "미설정",
+    "rulingParty": "헝가리 사회공화당",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "사회급진주의",
+    "symbolPath": "/assets/country-panels/country-019/ideology.png",
+    "parties": [
+      {
+        "id": "country-019-party-01",
+        "name": "헝가리 사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-019/party-01.png"
+      },
+      {
+        "id": "country-019-party-02",
+        "name": "농민사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-019/party-02.png"
+      },
+      {
+        "id": "country-019-party-03",
+        "name": "다뉴브 사회연방당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-019/party-03.png"
+      },
+      {
+        "id": "country-019-party-04",
+        "name": "사회민주당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-019/party-04.png"
+      },
+      {
+        "id": "country-019-party-05",
+        "name": "혁명애국연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-019/party-05.png"
+      },
+      {
+        "id": "country-019-party-06",
+        "name": "노동평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "민주평의회주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-019/party-06.png"
+      }
+    ]
+  },
+  "country-020": {
+    "government": "성스차이 군사·관료 정권",
+    "rulingParty": "성씨 국가실용주의",
+    "ideologyCategory": "권위주의",
+    "subIdeology": "군부권위주의",
+    "symbolPath": "/assets/country-panels/country-020/ideology.png",
+    "parties": [
+      {
+        "id": "country-020-party-01",
+        "name": "성씨 국가실용주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 27,
+        "symbolPath": "/assets/country-panels/country-020/party-01.png"
+      },
+      {
+        "id": "country-020-party-02",
+        "name": "군벌 질서주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-020/party-02.png"
+      },
+      {
+        "id": "country-020-party-03",
+        "name": "투르크 자치주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-020/party-03.png"
+      },
+      {
+        "id": "country-020-party-04",
+        "name": "중화 공화주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-020/party-04.png"
+      },
+      {
+        "id": "country-020-party-05",
+        "name": "대상로 상업실용주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-020/party-05.png"
+      },
+      {
+        "id": "country-020-party-06",
+        "name": "이슬람 공동체주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-020/party-06.png"
+      }
+    ]
+  },
+  "country-021": {
+    "government": "미설정",
+    "rulingParty": "오스트리아 사회민주노동당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "신사회주의",
+    "symbolPath": "/assets/country-panels/country-021/ideology.png",
+    "parties": [
+      {
+        "id": "country-021-party-01",
+        "name": "오스트리아 사회민주노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 32,
+        "symbolPath": "/assets/country-panels/country-021/party-01.png"
+      },
+      {
+        "id": "country-021-party-02",
+        "name": "빈 사회주의연맹",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "복지사회주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-021/party-02.png"
+      },
+      {
+        "id": "country-021-party-03",
+        "name": "노동평의회연맹",
+        "ideologyCategory": "평의회사회주의",
+        "subIdeology": "평의회공산주의",
+        "support": 15,
+        "symbolPath": "/assets/country-panels/country-021/party-03.png"
+      },
+      {
+        "id": "country-021-party-04",
+        "name": "농민사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-021/party-04.png"
+      },
+      {
+        "id": "country-021-party-05",
+        "name": "독일계 사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-021/party-05.png"
+      },
+      {
+        "id": "country-021-party-06",
+        "name": "기독사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-021/party-06.png"
+      }
+    ]
+  },
+  "country-022": {
+    "government": "미설정",
+    "rulingParty": "루마니아 국제사회당",
+    "ideologyCategory": "전위사회주의",
+    "subIdeology": "혁명적 국제주의",
+    "symbolPath": "/assets/country-panels/country-022/ideology.png",
+    "parties": [
+      {
+        "id": "country-022-party-01",
+        "name": "루마니아 국제사회당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "혁명적 국제주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-022/party-01.png"
+      },
+      {
+        "id": "country-022-party-02",
+        "name": "농민사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-022/party-02.png"
+      },
+      {
+        "id": "country-022-party-03",
+        "name": "사회주의계획당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "전위당주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-022/party-03.png"
+      },
+      {
+        "id": "country-022-party-04",
+        "name": "다뉴브 연방당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-022/party-04.png"
+      },
+      {
+        "id": "country-022-party-05",
+        "name": "농촌사회연맹",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-022/party-05.png"
+      },
+      {
+        "id": "country-022-party-06",
+        "name": "사회애국전선",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-022/party-06.png"
+      }
+    ]
+  },
+  "country-023": {
+    "government": "로베르트 그림 중심 사회민주 연정",
+    "rulingParty": "사회민주당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-023/ideology.png",
+    "parties": [
+      {
+        "id": "country-023-party-01",
+        "name": "사회민주당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-023/party-01.png"
+      },
+      {
+        "id": "country-023-party-02",
+        "name": "자유민주당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-023/party-02.png"
+      },
+      {
+        "id": "country-023-party-03",
+        "name": "농민상공시민당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-023/party-03.png"
+      },
+      {
+        "id": "country-023-party-04",
+        "name": "보수인민당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 15,
+        "symbolPath": "/assets/country-panels/country-023/party-04.png"
+      },
+      {
+        "id": "country-023-party-05",
+        "name": "노동좌파연맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-023/party-05.png"
+      },
+      {
+        "id": "country-023-party-06",
+        "name": "무장중립연방회",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-023/party-06.png"
+      }
+    ]
+  },
+  "country-024": {
+    "government": "미설정",
+    "rulingParty": "이탈리아 사회공화당",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "사회급진주의",
+    "symbolPath": "/assets/country-panels/country-024/ideology.png",
+    "parties": [
+      {
+        "id": "country-024-party-01",
+        "name": "이탈리아 사회공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 32,
+        "symbolPath": "/assets/country-panels/country-024/party-01.png"
+      },
+      {
+        "id": "country-024-party-02",
+        "name": "혁명노동총연맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-024/party-02.png"
+      },
+      {
+        "id": "country-024-party-03",
+        "name": "이탈리아 노동자당",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "정통 마르크스주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-024/party-03.png"
+      },
+      {
+        "id": "country-024-party-04",
+        "name": "참전노동자연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-024/party-04.png"
+      },
+      {
+        "id": "country-024-party-05",
+        "name": "자유코뮌연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-024/party-05.png"
+      },
+      {
+        "id": "country-024-party-06",
+        "name": "기독사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-024/party-06.png"
+      }
+    ]
+  },
+  "country-025": {
+    "government": "미설정",
+    "rulingParty": "유고슬라비아 연방사회당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "신사회주의",
+    "symbolPath": "/assets/country-panels/country-025/ideology.png",
+    "parties": [
+      {
+        "id": "country-025-party-01",
+        "name": "유고슬라비아 연방사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "신사회주의",
+        "support": 27,
+        "symbolPath": "/assets/country-panels/country-025/party-01.png"
+      },
+      {
+        "id": "country-025-party-02",
+        "name": "남슬라브 사회주의연맹",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-025/party-02.png"
+      },
+      {
+        "id": "country-025-party-03",
+        "name": "노동자자치연맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "노동자 자치주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-025/party-03.png"
+      },
+      {
+        "id": "country-025-party-04",
+        "name": "농민공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-025/party-04.png"
+      },
+      {
+        "id": "country-025-party-05",
+        "name": "민족조정연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-025/party-05.png"
+      },
+      {
+        "id": "country-025-party-06",
+        "name": "왕당복고회",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-025/party-06.png"
+      }
+    ]
+  },
+  "country-026": {
+    "government": "노에 조르다니아 중심 사회민주 연방정부",
+    "rulingParty": "연방사회민주당",
+    "ideologyCategory": "사회민주주의",
+    "subIdeology": "정통 사회민주주의",
+    "symbolPath": "/assets/country-panels/country-026/ideology.png",
+    "parties": [
+      {
+        "id": "country-026-party-01",
+        "name": "연방사회민주당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-026/party-01.png"
+      },
+      {
+        "id": "country-026-party-02",
+        "name": "아르메니아 사회혁명연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-026/party-02.png"
+      },
+      {
+        "id": "country-026-party-03",
+        "name": "아제르바이잔 공화연합",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-026/party-03.png"
+      },
+      {
+        "id": "country-026-party-04",
+        "name": "산악자치연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-026/party-04.png"
+      },
+      {
+        "id": "country-026-party-05",
+        "name": "석유노동당",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "산업조합주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-026/party-05.png"
+      },
+      {
+        "id": "country-026-party-06",
+        "name": "연방보전회의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-026/party-06.png"
+      }
+    ]
+  },
+  "country-027": {
+    "government": "무스타파 쇼카이 중심 민주민족주의 연립정부",
+    "rulingParty": "민주인민당",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "민족공화주의",
+    "symbolPath": "/assets/country-panels/country-027/ideology.png",
+    "parties": [
+      {
+        "id": "country-027-party-01",
+        "name": "민주인민당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-027/party-01.png"
+      },
+      {
+        "id": "country-027-party-02",
+        "name": "자디드 개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-027/party-02.png"
+      },
+      {
+        "id": "country-027-party-03",
+        "name": "농민사회연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-027/party-03.png"
+      },
+      {
+        "id": "country-027-party-04",
+        "name": "민족통일당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-027/party-04.png"
+      },
+      {
+        "id": "country-027-party-05",
+        "name": "사회민주노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-027/party-05.png"
+      },
+      {
+        "id": "country-027-party-06",
+        "name": "울라마 협의회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-027/party-06.png"
+      }
+    ]
+  },
+  "country-028": {
+    "government": "의친왕 이강과 황실·개화 관료",
+    "rulingParty": "광무개화 절충주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "입헌군주주의",
+    "symbolPath": "/assets/country-panels/country-028/ideology.png",
+    "parties": [
+      {
+        "id": "country-028-party-01",
+        "name": "광무개화 절충주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-028/party-01.png"
+      },
+      {
+        "id": "country-028-party-02",
+        "name": "황도충성회",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-028/party-02.png"
+      },
+      {
+        "id": "country-028-party-03",
+        "name": "자강민족주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-028/party-03.png"
+      },
+      {
+        "id": "country-028-party-04",
+        "name": "입헌개혁파",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-028/party-04.png"
+      },
+      {
+        "id": "country-028-party-05",
+        "name": "사회민주청년파",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-028/party-05.png"
+      },
+      {
+        "id": "country-028-party-06",
+        "name": "농민자치회",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-028/party-06.png"
+      }
+    ]
+  },
+  "country-029": {
+    "government": "미설정",
+    "rulingParty": "이베리아 사회주의연맹",
+    "ideologyCategory": "전위사회주의",
+    "subIdeology": "전위당주의",
+    "symbolPath": "/assets/country-panels/country-029/ideology.png",
+    "parties": [
+      {
+        "id": "country-029-party-01",
+        "name": "이베리아 사회주의연맹",
+        "ideologyCategory": "전위사회주의",
+        "subIdeology": "전위당주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-029/party-01.png"
+      },
+      {
+        "id": "country-029-party-02",
+        "name": "노동연방총동맹",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-029/party-02.png"
+      },
+      {
+        "id": "country-029-party-03",
+        "name": "자유코뮌연합",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "자유코뮌주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-029/party-03.png"
+      },
+      {
+        "id": "country-029-party-04",
+        "name": "농민집산연맹",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "농민집산주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-029/party-04.png"
+      },
+      {
+        "id": "country-029-party-05",
+        "name": "혁명방위전선",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-029/party-05.png"
+      },
+      {
+        "id": "country-029-party-06",
+        "name": "사회공화연방당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-029/party-06.png"
+      }
+    ]
+  },
+  "country-030": {
+    "government": "부에나벤투라 두루티·무정부주의 노조·농민조합·민병대",
+    "rulingParty": "아라곤 자유아나키즘",
+    "ideologyCategory": "자유사회주의",
+    "subIdeology": "무정부공산주의",
+    "symbolPath": "/assets/country-panels/country-030/ideology.png",
+    "parties": [
+      {
+        "id": "country-030-party-01",
+        "name": "아라곤 자유아나키즘",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "무정부공산주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-030/party-01.png"
+      },
+      {
+        "id": "country-030-party-02",
+        "name": "농민 조합공동체주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "농민집산주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-030/party-02.png"
+      },
+      {
+        "id": "country-030-party-03",
+        "name": "혁명 생디칼리슴",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "혁명적 생디칼리슴",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-030/party-03.png"
+      },
+      {
+        "id": "country-030-party-04",
+        "name": "이베리아 자유연방주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "상호주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-030/party-04.png"
+      },
+      {
+        "id": "country-030-party-05",
+        "name": "반파시 전선주의",
+        "ideologyCategory": "생디칼리슴",
+        "subIdeology": "조합공화주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-030/party-05.png"
+      },
+      {
+        "id": "country-030-party-06",
+        "name": "정통 반국가주의",
+        "ideologyCategory": "자유사회주의",
+        "subIdeology": "무정부공산주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-030/party-06.png"
+      }
+    ]
+  },
+  "country-031": {
+    "government": "압뒬메지드 2세 체제의 궁정·의회·군부 연합",
+    "rulingParty": "오스만 입헌연맹",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "입헌군주주의",
+    "symbolPath": "/assets/country-panels/country-031/ideology.png",
+    "parties": [
+      {
+        "id": "country-031-party-01",
+        "name": "오스만 입헌연맹",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-031/party-01.png"
+      },
+      {
+        "id": "country-031-party-02",
+        "name": "질서와 진보당",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "보나파르티즘",
+        "support": 23,
+        "symbolPath": "/assets/country-panels/country-031/party-02.png"
+      },
+      {
+        "id": "country-031-party-03",
+        "name": "궁정충성전선",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-031/party-03.png"
+      },
+      {
+        "id": "country-031-party-04",
+        "name": "아나톨리아 재건회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-031/party-04.png"
+      },
+      {
+        "id": "country-031-party-05",
+        "name": "이슬람 보전당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-031/party-05.png"
+      },
+      {
+        "id": "country-031-party-06",
+        "name": "아랍 자치블록",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-031/party-06.png"
+      }
+    ]
+  },
+  "country-032": {
+    "government": "모하마드 모사데그 중심 입헌파",
+    "rulingParty": "입헌국민연합",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "국민자유주의",
+    "symbolPath": "/assets/country-panels/country-032/ideology.png",
+    "parties": [
+      {
+        "id": "country-032-party-01",
+        "name": "입헌국민연합",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-032/party-01.png"
+      },
+      {
+        "id": "country-032-party-02",
+        "name": "입헌왕정당",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 23,
+        "symbolPath": "/assets/country-panels/country-032/party-02.png"
+      },
+      {
+        "id": "country-032-party-03",
+        "name": "성직자 보전회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-032/party-03.png"
+      },
+      {
+        "id": "country-032-party-04",
+        "name": "사회정의당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-032/party-04.png"
+      },
+      {
+        "id": "country-032-party-05",
+        "name": "바자르 상인동맹",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-032/party-05.png"
+      },
+      {
+        "id": "country-032-party-06",
+        "name": "청년 이란당",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-032/party-06.png"
+      }
+    ]
+  },
+  "country-033": {
+    "government": "라사로 카르데나스 개혁파",
+    "rulingParty": "혁명개혁당",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "사회급진주의",
+    "symbolPath": "/assets/country-panels/country-033/ideology.png",
+    "parties": [
+      {
+        "id": "country-033-party-01",
+        "name": "혁명개혁당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-033/party-01.png"
+      },
+      {
+        "id": "country-033-party-02",
+        "name": "가톨릭 사회연합",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-033/party-02.png"
+      },
+      {
+        "id": "country-033-party-03",
+        "name": "농민연합당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-033/party-03.png"
+      },
+      {
+        "id": "country-033-party-04",
+        "name": "국민자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-033/party-04.png"
+      },
+      {
+        "id": "country-033-party-05",
+        "name": "혁명군단",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-033/party-05.png"
+      },
+      {
+        "id": "country-033-party-06",
+        "name": "중앙아메리카 자치회의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-033/party-06.png"
+      }
+    ]
+  },
+  "country-034": {
+    "government": "프리드리히 크리스티안 왕실·작센계 귀족·현지 엘리트",
+    "rulingParty": "작센-초 이중왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "연방군주주의",
+    "symbolPath": "/assets/country-panels/country-034/ideology.png",
+    "parties": [
+      {
+        "id": "country-034-party-01",
+        "name": "작센-초 이중왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "연방군주주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-034/party-01.png"
+      },
+      {
+        "id": "country-034-party-02",
+        "name": "작센 군사귀족주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-034/party-02.png"
+      },
+      {
+        "id": "country-034-party-03",
+        "name": "초 문관보전주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-034/party-03.png"
+      },
+      {
+        "id": "country-034-party-04",
+        "name": "동방 국가근대주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-034/party-04.png"
+      },
+      {
+        "id": "country-034-party-05",
+        "name": "현지 자치개혁론",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-034/party-05.png"
+      },
+      {
+        "id": "country-034-party-06",
+        "name": "드레스덴 복귀주의",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-034/party-06.png"
+      }
+    ]
+  },
+  "country-035": {
+    "government": "13대 달라이 라마 툽텐 갸초·사원·귀족",
+    "rulingParty": "법왕정통주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "신정군주주의",
+    "symbolPath": "/assets/country-panels/country-035/ideology.png",
+    "parties": [
+      {
+        "id": "country-035-party-01",
+        "name": "법왕정통주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "신정군주주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-035/party-01.png"
+      },
+      {
+        "id": "country-035-party-02",
+        "name": "사원보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-035/party-02.png"
+      },
+      {
+        "id": "country-035-party-03",
+        "name": "귀족평의 보수주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-035/party-03.png"
+      },
+      {
+        "id": "country-035-party-04",
+        "name": "라싸 점진개혁론",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-035/party-04.png"
+      },
+      {
+        "id": "country-035-party-05",
+        "name": "산악자강 민족주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-035/party-05.png"
+      },
+      {
+        "id": "country-035-party-06",
+        "name": "불교 공동체개혁론",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 6,
+        "symbolPath": "/assets/country-panels/country-035/party-06.png"
+      }
+    ]
+  },
+  "country-036": {
+    "government": "빅토리아 루이제 왕실·귀족·장교단",
+    "rulingParty": "프로이센 왕정연맹",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-036/ideology.png",
+    "parties": [
+      {
+        "id": "country-036-party-01",
+        "name": "프로이센 왕정연맹",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-036/party-01.png"
+      },
+      {
+        "id": "country-036-party-02",
+        "name": "보수국가당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-036/party-02.png"
+      },
+      {
+        "id": "country-036-party-03",
+        "name": "국가봉사회",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-036/party-03.png"
+      },
+      {
+        "id": "country-036-party-04",
+        "name": "귀향정통회",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-036/party-04.png"
+      },
+      {
+        "id": "country-036-party-05",
+        "name": "동방입헌회",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-036/party-05.png"
+      },
+      {
+        "id": "country-036-party-06",
+        "name": "현지자치개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-036/party-06.png"
+      }
+    ]
+  },
+  "country-037": {
+    "government": "마커스 가비 영향 아래의 연방정부",
+    "rulingParty": "흑성연방당",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "민족공화주의",
+    "symbolPath": "/assets/country-panels/country-037/ideology.png",
+    "parties": [
+      {
+        "id": "country-037-party-01",
+        "name": "흑성연방당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 32,
+        "symbolPath": "/assets/country-panels/country-037/party-01.png"
+      },
+      {
+        "id": "country-037-party-02",
+        "name": "카리브 노동연맹",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-037/party-02.png"
+      },
+      {
+        "id": "country-037-party-03",
+        "name": "연방자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-037/party-03.png"
+      },
+      {
+        "id": "country-037-party-04",
+        "name": "섬자치회의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-037/party-04.png"
+      },
+      {
+        "id": "country-037-party-05",
+        "name": "농장보전당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-037/party-05.png"
+      },
+      {
+        "id": "country-037-party-06",
+        "name": "카리브 사회공화동맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-037/party-06.png"
+      }
+    ]
+  },
+  "country-038": {
+    "government": "지방 공화연정·성도 관료·지역 군사세력·상공인 연합",
+    "rulingParty": "사천 공화연합",
+    "ideologyCategory": "급진공화주의",
+    "subIdeology": "민주공화주의",
+    "symbolPath": "/assets/country-panels/country-038/ideology.png",
+    "parties": [
+      {
+        "id": "country-038-party-01",
+        "name": "사천 공화연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-038/party-01.png"
+      },
+      {
+        "id": "country-038-party-02",
+        "name": "지방자치연맹",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-038/party-02.png"
+      },
+      {
+        "id": "country-038-party-03",
+        "name": "농민협동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-038/party-03.png"
+      },
+      {
+        "id": "country-038-party-04",
+        "name": "상공자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-038/party-04.png"
+      },
+      {
+        "id": "country-038-party-05",
+        "name": "군정질서회",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-038/party-05.png"
+      },
+      {
+        "id": "country-038-party-06",
+        "name": "중화통일전선",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-038/party-06.png"
+      }
+    ]
+  },
+  "country-039": {
+    "government": "오토 폰 합스부르크 황실·구귀족·군부",
+    "rulingParty": "합스부르크 연방당",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "연방군주주의",
+    "symbolPath": "/assets/country-panels/country-039/ideology.png",
+    "parties": [
+      {
+        "id": "country-039-party-01",
+        "name": "합스부르크 연방당",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "연방군주주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-039/party-01.png"
+      },
+      {
+        "id": "country-039-party-02",
+        "name": "제국보수연합",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-039/party-02.png"
+      },
+      {
+        "id": "country-039-party-03",
+        "name": "제국군정회",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-039/party-03.png"
+      },
+      {
+        "id": "country-039-party-04",
+        "name": "제국행정연맹",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-039/party-04.png"
+      },
+      {
+        "id": "country-039-party-05",
+        "name": "연방개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-039/party-05.png"
+      },
+      {
+        "id": "country-039-party-06",
+        "name": "왕조복고전선",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-039/party-06.png"
+      }
+    ]
+  },
+  "country-040": {
+    "government": "압둘아지즈 이븐 사우드 왕실·와하브 성직자·부족세력",
+    "rulingParty": "와하브 왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "신정군주주의",
+    "symbolPath": "/assets/country-panels/country-040/ideology.png",
+    "parties": [
+      {
+        "id": "country-040-party-01",
+        "name": "와하브 왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "신정군주주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-040/party-01.png"
+      },
+      {
+        "id": "country-040-party-02",
+        "name": "부족 충성연합",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-040/party-02.png"
+      },
+      {
+        "id": "country-040-party-03",
+        "name": "헤자즈 상업실용주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-040/party-03.png"
+      },
+      {
+        "id": "country-040-party-04",
+        "name": "범아라비아 국가주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-040/party-04.png"
+      },
+      {
+        "id": "country-040-party-05",
+        "name": "이슬람 개혁주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-040/party-05.png"
+      },
+      {
+        "id": "country-040-party-06",
+        "name": "도시 청년근대주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-040/party-06.png"
+      }
+    ]
+  },
+  "country-041": {
+    "government": "트리부반 왕실·전통 귀족·군부",
+    "rulingParty": "궁정 전통왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-041/ideology.png",
+    "parties": [
+      {
+        "id": "country-041-party-01",
+        "name": "궁정 전통왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 33,
+        "symbolPath": "/assets/country-panels/country-041/party-01.png"
+      },
+      {
+        "id": "country-041-party-02",
+        "name": "라나 귀족보전주의",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "귀족복고주의",
+        "support": 27,
+        "symbolPath": "/assets/country-panels/country-041/party-02.png"
+      },
+      {
+        "id": "country-041-party-03",
+        "name": "입헌개혁주의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-041/party-03.png"
+      },
+      {
+        "id": "country-041-party-04",
+        "name": "산악 민족자강론",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-041/party-04.png"
+      },
+      {
+        "id": "country-041-party-05",
+        "name": "농민 보호주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "사회보수주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-041/party-05.png"
+      },
+      {
+        "id": "country-041-party-06",
+        "name": "불교-힌두 조화개혁",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 5,
+        "symbolPath": "/assets/country-panels/country-041/party-06.png"
+      }
+    ]
+  },
+  "country-042": {
+    "government": "장 도를레앙 왕실·지역 군주·식민관료",
+    "rulingParty": "오를레앙 왕당연합",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "입헌군주주의",
+    "symbolPath": "/assets/country-panels/country-042/ideology.png",
+    "parties": [
+      {
+        "id": "country-042-party-01",
+        "name": "오를레앙 왕당연합",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 26,
+        "symbolPath": "/assets/country-panels/country-042/party-01.png"
+      },
+      {
+        "id": "country-042-party-02",
+        "name": "귀족복고연맹",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "귀족복고주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-042/party-02.png"
+      },
+      {
+        "id": "country-042-party-03",
+        "name": "가톨릭 사회연맹",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-042/party-03.png"
+      },
+      {
+        "id": "country-042-party-04",
+        "name": "현지자치 입헌회",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-042/party-04.png"
+      },
+      {
+        "id": "country-042-party-05",
+        "name": "연방행정동맹",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-042/party-05.png"
+      },
+      {
+        "id": "country-042-party-06",
+        "name": "반혁명 국민전선",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 23,
+        "symbolPath": "/assets/country-panels/country-042/party-06.png"
+      }
+    ]
+  },
+  "country-043": {
+    "government": "비토리오 에마누엘레 3세 왕실·망명귀족·장교",
+    "rulingParty": "사보이 왕정연합",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-043/ideology.png",
+    "parties": [
+      {
+        "id": "country-043-party-01",
+        "name": "사보이 왕정연합",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 26,
+        "symbolPath": "/assets/country-panels/country-043/party-01.png"
+      },
+      {
+        "id": "country-043-party-02",
+        "name": "귀족질서동맹",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "귀족복고주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-043/party-02.png"
+      },
+      {
+        "id": "country-043-party-03",
+        "name": "상업입헌당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-043/party-03.png"
+      },
+      {
+        "id": "country-043-party-04",
+        "name": "이탈리아 귀향전선",
+        "ideologyCategory": "반동주의",
+        "subIdeology": "반혁명주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-043/party-04.png"
+      },
+      {
+        "id": "country-043-party-05",
+        "name": "현지협력당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-043/party-05.png"
+      },
+      {
+        "id": "country-043-party-06",
+        "name": "기독사회당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-043/party-06.png"
+      }
+    ]
+  },
+  "country-044": {
+    "government": "전통 군주·이슬람 학자·상인·신식 지식인 연합",
+    "rulingParty": "만데 연방보전주의",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "종교보수주의",
+    "symbolPath": "/assets/country-panels/country-044/ideology.png",
+    "parties": [
+      {
+        "id": "country-044-party-01",
+        "name": "만데 연방보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-044/party-01.png"
+      },
+      {
+        "id": "country-044-party-02",
+        "name": "상인 실용주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-044/party-02.png"
+      },
+      {
+        "id": "country-044-party-03",
+        "name": "세속 관료개혁주의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-044/party-03.png"
+      },
+      {
+        "id": "country-044-party-04",
+        "name": "판아프리카 공화주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-044/party-04.png"
+      },
+      {
+        "id": "country-044-party-05",
+        "name": "말리 제국복고론",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-044/party-05.png"
+      },
+      {
+        "id": "country-044-party-06",
+        "name": "농민 공동체주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-044/party-06.png"
+      }
+    ]
+  },
+  "country-045": {
+    "government": "천지탕 정부·군부·상인회의",
+    "rulingParty": "광둥국민연합",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "자유보수주의",
+    "symbolPath": "/assets/country-panels/country-045/ideology.png",
+    "parties": [
+      {
+        "id": "country-045-party-01",
+        "name": "광둥국민연합",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-045/party-01.png"
+      },
+      {
+        "id": "country-045-party-02",
+        "name": "공화개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-045/party-02.png"
+      },
+      {
+        "id": "country-045-party-03",
+        "name": "연해자치연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-045/party-03.png"
+      },
+      {
+        "id": "country-045-party-04",
+        "name": "항만노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-045/party-04.png"
+      },
+      {
+        "id": "country-045-party-05",
+        "name": "중화재통일회",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-045/party-05.png"
+      },
+      {
+        "id": "country-045-party-06",
+        "name": "해군청년회",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "군국재생주의",
+        "support": 6,
+        "symbolPath": "/assets/country-panels/country-045/party-06.png"
+      }
+    ]
+  },
+  "country-046": {
+    "government": "알폰소 로페스 푸마레호 중심 자유주의·연방주의 정부",
+    "rulingParty": "자유연방당",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "사회자유주의",
+    "symbolPath": "/assets/country-panels/country-046/ideology.png",
+    "parties": [
+      {
+        "id": "country-046-party-01",
+        "name": "자유연방당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 32,
+        "symbolPath": "/assets/country-panels/country-046/party-01.png"
+      },
+      {
+        "id": "country-046-party-02",
+        "name": "국민보수당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-046/party-02.png"
+      },
+      {
+        "id": "country-046-party-03",
+        "name": "사회개혁동맹",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-046/party-03.png"
+      },
+      {
+        "id": "country-046-party-04",
+        "name": "노동민주당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-046/party-04.png"
+      },
+      {
+        "id": "country-046-party-05",
+        "name": "볼리바르 연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-046/party-05.png"
+      },
+      {
+        "id": "country-046-party-06",
+        "name": "지역자치회의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-046/party-06.png"
+      }
+    ]
+  },
+  "country-047": {
+    "government": "칼리프·에미르·성직자 연방",
+    "rulingParty": "칼리프 연방전통주의",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "종교보수주의",
+    "symbolPath": "/assets/country-panels/country-047/ideology.png",
+    "parties": [
+      {
+        "id": "country-047-party-01",
+        "name": "칼리프 연방전통주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-047/party-01.png"
+      },
+      {
+        "id": "country-047-party-02",
+        "name": "에미르 자치주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "연방군주주의",
+        "support": 19,
+        "symbolPath": "/assets/country-panels/country-047/party-02.png"
+      },
+      {
+        "id": "country-047-party-03",
+        "name": "이슬람 개혁행정주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-047/party-03.png"
+      },
+      {
+        "id": "country-047-party-04",
+        "name": "상업 근대주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-047/party-04.png"
+      },
+      {
+        "id": "country-047-party-05",
+        "name": "남부 권리운동",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-047/party-05.png"
+      },
+      {
+        "id": "country-047-party-06",
+        "name": "청년 범사헬주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-047/party-06.png"
+      }
+    ]
+  },
+  "country-048": {
+    "government": "하일레 셀라시에 황실·중앙관료",
+    "rulingParty": "솔로몬 왕조 근대주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-048/ideology.png",
+    "parties": [
+      {
+        "id": "country-048-party-01",
+        "name": "솔로몬 왕조 근대주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-048/party-01.png"
+      },
+      {
+        "id": "country-048-party-02",
+        "name": "쇼아 관료개혁주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-048/party-02.png"
+      },
+      {
+        "id": "country-048-party-03",
+        "name": "지방귀족 보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-048/party-03.png"
+      },
+      {
+        "id": "country-048-party-04",
+        "name": "정교회 사회보수주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-048/party-04.png"
+      },
+      {
+        "id": "country-048-party-05",
+        "name": "아프리카 자주왕정론",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-048/party-05.png"
+      },
+      {
+        "id": "country-048-party-06",
+        "name": "입헌개량파",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-048/party-06.png"
+      }
+    ]
+  },
+  "country-049": {
+    "government": "브라간사 황실 중심 제국정부",
+    "rulingParty": "제국보전당",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "입헌군주주의",
+    "symbolPath": "/assets/country-panels/country-049/ideology.png",
+    "parties": [
+      {
+        "id": "country-049-party-01",
+        "name": "제국보전당",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "입헌군주주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-049/party-01.png"
+      },
+      {
+        "id": "country-049-party-02",
+        "name": "자유입헌당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-049/party-02.png"
+      },
+      {
+        "id": "country-049-party-03",
+        "name": "국민노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-049/party-03.png"
+      },
+      {
+        "id": "country-049-party-04",
+        "name": "공화연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민주공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-049/party-04.png"
+      },
+      {
+        "id": "country-049-party-05",
+        "name": "왕실산업전선",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-049/party-05.png"
+      },
+      {
+        "id": "country-049-party-06",
+        "name": "적도통합당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-049/party-06.png"
+      }
+    ]
+  },
+  "country-050": {
+    "government": "프렘페 2세 왕실·지방 추장·신식 관료",
+    "rulingParty": "황금의자 근대왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-050/ideology.png",
+    "parties": [
+      {
+        "id": "country-050-party-01",
+        "name": "황금의자 근대왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-050/party-01.png"
+      },
+      {
+        "id": "country-050-party-02",
+        "name": "추장연합 보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-050/party-02.png"
+      },
+      {
+        "id": "country-050-party-03",
+        "name": "쿠마시 관료개혁주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-050/party-03.png"
+      },
+      {
+        "id": "country-050-party-04",
+        "name": "황금해안 상업주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-050/party-04.png"
+      },
+      {
+        "id": "country-050-party-05",
+        "name": "서아프리카 자주주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-050/party-05.png"
+      },
+      {
+        "id": "country-050-party-06",
+        "name": "농촌 공동체주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "사회보수주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-050/party-06.png"
+      }
+    ]
+  },
+  "country-051": {
+    "government": "알베르 1세 왕실·군부·식민관료·회사",
+    "rulingParty": "식민 왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "정통왕조주의",
+    "symbolPath": "/assets/country-panels/country-051/ideology.png",
+    "parties": [
+      {
+        "id": "country-051-party-01",
+        "name": "식민 왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "정통왕조주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-051/party-01.png"
+      },
+      {
+        "id": "country-051-party-02",
+        "name": "회사 식민보수주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "과두권위주의",
+        "support": 23,
+        "symbolPath": "/assets/country-panels/country-051/party-02.png"
+      },
+      {
+        "id": "country-051-party-03",
+        "name": "군정 질서주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-051/party-03.png"
+      },
+      {
+        "id": "country-051-party-04",
+        "name": "가톨릭 문명화론",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-051/party-04.png"
+      },
+      {
+        "id": "country-051-party-05",
+        "name": "콩고 권리개혁주의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-051/party-05.png"
+      },
+      {
+        "id": "country-051-party-06",
+        "name": "반식민 민족해방론",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-051/party-06.png"
+      }
+    ]
+  },
+  "country-052": {
+    "government": "리마·라파스의 공화국 엘리트 연방정부",
+    "rulingParty": "안데스 국민연합",
+    "ideologyCategory": "권위주의",
+    "subIdeology": "과두권위주의",
+    "symbolPath": "/assets/country-panels/country-052/ideology.png",
+    "parties": [
+      {
+        "id": "country-052-party-01",
+        "name": "안데스 국민연합",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "과두권위주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-052/party-01.png"
+      },
+      {
+        "id": "country-052-party-02",
+        "name": "공화자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 20,
+        "symbolPath": "/assets/country-panels/country-052/party-02.png"
+      },
+      {
+        "id": "country-052-party-03",
+        "name": "아프리스타 인민동맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-052/party-03.png"
+      },
+      {
+        "id": "country-052-party-04",
+        "name": "광산공화당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-052/party-04.png"
+      },
+      {
+        "id": "country-052-party-05",
+        "name": "안데스 농민연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 11,
+        "symbolPath": "/assets/country-panels/country-052/party-05.png"
+      },
+      {
+        "id": "country-052-party-06",
+        "name": "국민군사전선",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-052/party-06.png"
+      }
+    ]
+  },
+  "country-053": {
+    "government": "빌헬미나 왕실·누산타라 지방왕실·식민관료·상업세력",
+    "rulingParty": "오라녜-누산타라 연합왕정주의",
+    "ideologyCategory": "군주주의",
+    "subIdeology": "연방군주주의",
+    "symbolPath": "/assets/country-panels/country-053/ideology.png",
+    "parties": [
+      {
+        "id": "country-053-party-01",
+        "name": "오라녜-누산타라 연합왕정주의",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "연방군주주의",
+        "support": 28,
+        "symbolPath": "/assets/country-panels/country-053/party-01.png"
+      },
+      {
+        "id": "country-053-party-02",
+        "name": "해양 상업제국주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-053/party-02.png"
+      },
+      {
+        "id": "country-053-party-03",
+        "name": "군도 자치왕정론",
+        "ideologyCategory": "군주주의",
+        "subIdeology": "연방군주주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-053/party-03.png"
+      },
+      {
+        "id": "country-053-party-04",
+        "name": "식민관료 실용주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "관료권위주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-053/party-04.png"
+      },
+      {
+        "id": "country-053-party-05",
+        "name": "누산타라 민족자주론",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-053/party-05.png"
+      },
+      {
+        "id": "country-053-party-06",
+        "name": "이슬람 공동체 정치",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-053/party-06.png"
+      }
+    ]
+  },
+  "country-054": {
+    "government": "아르투로 알레산드리 중심 자유주의 개혁파",
+    "rulingParty": "자유개혁당",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "사회자유주의",
+    "symbolPath": "/assets/country-panels/country-054/ideology.png",
+    "parties": [
+      {
+        "id": "country-054-party-01",
+        "name": "자유개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-054/party-01.png"
+      },
+      {
+        "id": "country-054-party-02",
+        "name": "보수당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-054/party-02.png"
+      },
+      {
+        "id": "country-054-party-03",
+        "name": "급진공화당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 18,
+        "symbolPath": "/assets/country-panels/country-054/party-03.png"
+      },
+      {
+        "id": "country-054-party-04",
+        "name": "사회노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-054/party-04.png"
+      },
+      {
+        "id": "country-054-party-05",
+        "name": "국민자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-054/party-05.png"
+      },
+      {
+        "id": "country-054-party-06",
+        "name": "국가방위연맹",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-054/party-06.png"
+      }
+    ]
+  },
+  "country-055": {
+    "government": "인권동맹: 자유주의자·선교계·노동조합·일부 토착 지도자",
+    "rulingParty": "인권동맹",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "사회자유주의",
+    "symbolPath": "/assets/country-panels/country-055/ideology.png",
+    "parties": [
+      {
+        "id": "country-055-party-01",
+        "name": "인권동맹",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 30,
+        "symbolPath": "/assets/country-panels/country-055/party-01.png"
+      },
+      {
+        "id": "country-055-party-02",
+        "name": "정착민 보전당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 22,
+        "symbolPath": "/assets/country-panels/country-055/party-02.png"
+      },
+      {
+        "id": "country-055-party-03",
+        "name": "노동권익당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 15,
+        "symbolPath": "/assets/country-panels/country-055/party-03.png"
+      },
+      {
+        "id": "country-055-party-04",
+        "name": "아프리카 민족회의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-055/party-04.png"
+      },
+      {
+        "id": "country-055-party-05",
+        "name": "선교사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-055/party-05.png"
+      },
+      {
+        "id": "country-055-party-06",
+        "name": "광산질서전선",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "국가조합주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-055/party-06.png"
+      }
+    ]
+  },
+  "country-056": {
+    "government": "아구스틴 페드로 후스토 정부·군부·보수 엘리트·수출업자",
+    "rulingParty": "국민민주당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-056/ideology.png",
+    "parties": [
+      {
+        "id": "country-056-party-01",
+        "name": "국민민주당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-056/party-01.png"
+      },
+      {
+        "id": "country-056-party-02",
+        "name": "급진시민연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 25,
+        "symbolPath": "/assets/country-panels/country-056/party-02.png"
+      },
+      {
+        "id": "country-056-party-03",
+        "name": "사회당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-056/party-03.png"
+      },
+      {
+        "id": "country-056-party-04",
+        "name": "애국노동전선",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "국가조합주의",
+        "support": 12,
+        "symbolPath": "/assets/country-panels/country-056/party-04.png"
+      },
+      {
+        "id": "country-056-party-05",
+        "name": "연방보수당",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "과두권위주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-056/party-05.png"
+      },
+      {
+        "id": "country-056-party-06",
+        "name": "군부국민연맹",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "군부권위주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-056/party-06.png"
+      }
+    ]
+  },
+  "country-057": {
+    "government": "R. B. 베넷 정부",
+    "rulingParty": "보수당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-057/ideology.png",
+    "parties": [
+      {
+        "id": "country-057-party-01",
+        "name": "보수당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 38,
+        "symbolPath": "/assets/country-panels/country-057/party-01.png"
+      },
+      {
+        "id": "country-057-party-02",
+        "name": "자유당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 31,
+        "symbolPath": "/assets/country-panels/country-057/party-02.png"
+      },
+      {
+        "id": "country-057-party-03",
+        "name": "협동연방당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-057/party-03.png"
+      },
+      {
+        "id": "country-057-party-04",
+        "name": "진보농민당",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-057/party-04.png"
+      },
+      {
+        "id": "country-057-party-05",
+        "name": "제국연대당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-057/party-05.png"
+      }
+    ]
+  },
+  "country-058": {
+    "government": "윈스턴 처칠 총독부·군·식민관료",
+    "rulingParty": "제국치안주의",
+    "ideologyCategory": "권위주의",
+    "subIdeology": "보나파르티즘",
+    "symbolPath": "/assets/country-panels/country-058/ideology.png",
+    "parties": [
+      {
+        "id": "country-058-party-01",
+        "name": "제국치안주의",
+        "ideologyCategory": "권위주의",
+        "subIdeology": "보나파르티즘",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-058/party-01.png"
+      },
+      {
+        "id": "country-058-party-02",
+        "name": "인도자치 자유주의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "입헌자유주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-058/party-02.png"
+      },
+      {
+        "id": "country-058-party-03",
+        "name": "간디주의 대중민족주의",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 17,
+        "symbolPath": "/assets/country-panels/country-058/party-03.png"
+      },
+      {
+        "id": "country-058-party-04",
+        "name": "혁명 공화사회주의",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 13,
+        "symbolPath": "/assets/country-panels/country-058/party-04.png"
+      },
+      {
+        "id": "country-058-party-05",
+        "name": "종교공동체 보전주의",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "종교보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-058/party-05.png"
+      },
+      {
+        "id": "country-058-party-06",
+        "name": "급진 독립주의",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 6,
+        "symbolPath": "/assets/country-panels/country-058/party-06.png"
+      }
+    ]
+  },
+  "country-059": {
+    "government": "마누엘 L. 케손 자치파·필리핀 정치엘리트",
+    "rulingParty": "국민당 통합파",
+    "ideologyCategory": "자유주의",
+    "subIdeology": "국민자유주의",
+    "symbolPath": "/assets/country-panels/country-059/ideology.png",
+    "parties": [
+      {
+        "id": "country-059-party-01",
+        "name": "국민당 통합파",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 41,
+        "symbolPath": "/assets/country-panels/country-059/party-01.png"
+      },
+      {
+        "id": "country-059-party-02",
+        "name": "국민당 독립파",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "민족공화주의",
+        "support": 21,
+        "symbolPath": "/assets/country-panels/country-059/party-02.png"
+      },
+      {
+        "id": "country-059-party-03",
+        "name": "민주당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-059/party-03.png"
+      },
+      {
+        "id": "country-059-party-04",
+        "name": "사크달당",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-059/party-04.png"
+      },
+      {
+        "id": "country-059-party-05",
+        "name": "노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 8,
+        "symbolPath": "/assets/country-panels/country-059/party-05.png"
+      },
+      {
+        "id": "country-059-party-06",
+        "name": "농민협동연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 6,
+        "symbolPath": "/assets/country-panels/country-059/party-06.png"
+      }
+    ]
+  },
+  "country-060": {
+    "government": "조지프 라이언스 정부",
+    "rulingParty": "통합오스트레일리아당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "자유보수주의",
+    "symbolPath": "/assets/country-panels/country-060/ideology.png",
+    "parties": [
+      {
+        "id": "country-060-party-01",
+        "name": "통합오스트레일리아당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 36,
+        "symbolPath": "/assets/country-panels/country-060/party-01.png"
+      },
+      {
+        "id": "country-060-party-02",
+        "name": "노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-060/party-02.png"
+      },
+      {
+        "id": "country-060-party-03",
+        "name": "농촌당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-060/party-03.png"
+      },
+      {
+        "id": "country-060-party-04",
+        "name": "제국방위연맹",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-060/party-04.png"
+      },
+      {
+        "id": "country-060-party-05",
+        "name": "사회신용연합",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-060/party-05.png"
+      },
+      {
+        "id": "country-060-party-06",
+        "name": "공화자치회의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "국민자유주의",
+        "support": 5,
+        "symbolPath": "/assets/country-panels/country-060/party-06.png"
+      }
+    ]
+  },
+  "country-061": {
+    "government": "J. B. M. 헤르초흐 정부·아프리카너 민족주의 세력",
+    "rulingParty": "국민당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "전통보수주의",
+    "symbolPath": "/assets/country-panels/country-061/ideology.png",
+    "parties": [
+      {
+        "id": "country-061-party-01",
+        "name": "국민당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 36,
+        "symbolPath": "/assets/country-panels/country-061/party-01.png"
+      },
+      {
+        "id": "country-061-party-02",
+        "name": "남아프리카당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 24,
+        "symbolPath": "/assets/country-panels/country-061/party-02.png"
+      },
+      {
+        "id": "country-061-party-03",
+        "name": "노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "노동개혁주의",
+        "support": 14,
+        "symbolPath": "/assets/country-panels/country-061/party-03.png"
+      },
+      {
+        "id": "country-061-party-04",
+        "name": "자유개혁당",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "고전적 자유주의",
+        "support": 10,
+        "symbolPath": "/assets/country-panels/country-061/party-04.png"
+      },
+      {
+        "id": "country-061-party-05",
+        "name": "원주민 권리회의",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-061/party-05.png"
+      },
+      {
+        "id": "country-061-party-06",
+        "name": "보어수호전선",
+        "ideologyCategory": "국가재생주의",
+        "subIdeology": "민족혁명주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-061/party-06.png"
+      }
+    ]
+  },
+  "country-062": {
+    "government": "조지 포브스 정부",
+    "rulingParty": "연합당",
+    "ideologyCategory": "보수주의",
+    "subIdeology": "자유보수주의",
+    "symbolPath": "/assets/country-panels/country-062/ideology.png",
+    "parties": [
+      {
+        "id": "country-062-party-01",
+        "name": "연합당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "자유보수주의",
+        "support": 34,
+        "symbolPath": "/assets/country-panels/country-062/party-01.png"
+      },
+      {
+        "id": "country-062-party-02",
+        "name": "노동당",
+        "ideologyCategory": "사회민주주의",
+        "subIdeology": "정통 사회민주주의",
+        "support": 29,
+        "symbolPath": "/assets/country-panels/country-062/party-02.png"
+      },
+      {
+        "id": "country-062-party-03",
+        "name": "개혁당",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 16,
+        "symbolPath": "/assets/country-panels/country-062/party-03.png"
+      },
+      {
+        "id": "country-062-party-04",
+        "name": "제국충성회",
+        "ideologyCategory": "보수주의",
+        "subIdeology": "전통보수주의",
+        "support": 9,
+        "symbolPath": "/assets/country-panels/country-062/party-04.png"
+      },
+      {
+        "id": "country-062-party-05",
+        "name": "통화개혁연맹",
+        "ideologyCategory": "급진공화주의",
+        "subIdeology": "사회급진주의",
+        "support": 7,
+        "symbolPath": "/assets/country-panels/country-062/party-05.png"
+      },
+      {
+        "id": "country-062-party-06",
+        "name": "마오리 협의회",
+        "ideologyCategory": "자유주의",
+        "subIdeology": "사회자유주의",
+        "support": 5,
+        "symbolPath": "/assets/country-panels/country-062/party-06.png"
+      }
+    ]
+  }
+}

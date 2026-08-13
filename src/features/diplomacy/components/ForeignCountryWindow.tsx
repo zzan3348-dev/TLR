@@ -5,6 +5,7 @@ import { PartySupportChart } from "../../../components/PartySupportChart";
 import { UiIcon } from "../../../components/UiIcon";
 import { mapCountries } from "../../../data/mapCountries";
 import { getCountryPresentation } from "../../../data/countryPresentation";
+import { formatPartyIdeology } from "../../../data/partyIdeologies";
 import { getFaction } from "../../../data/factions";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import { getPartyDisplayColor } from "../../../utils/partyColors";
@@ -289,7 +290,12 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
   const presentation = getCountryPresentation(targetCountry);
   const primaryParty = presentation.politics.parties[0] ?? null;
   const partyName = primaryParty?.name || presentation.politics.rulingParty || "미설정";
-  const ideology = primaryParty?.ideology || presentation.politics.ideology || "미설정";
+  const ideology = primaryParty
+    ? formatPartyIdeology(primaryParty.ideologyCategory, primaryParty.subIdeology)
+    : formatPartyIdeology(
+        presentation.politics.ideologyCategory,
+        presentation.politics.subIdeology,
+      );
   const [overview, setOverview] = useState<DiplomacyOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);

@@ -18,6 +18,7 @@
     "generate-law-icons": "node scripts/extract-generated-law-icons.mjs",
     "generate-admin-bootstrap-hash": "node scripts/generate-admin-bootstrap-hash.mjs",
     "generate-status-icons": "node scripts/extract-status-icons.mjs",
+    "import-party-data": "node scripts/import-party-data.mjs",
     "merge-western-papua": "node scripts/merge-western-papua.mjs",
     "split-selected-colonies": "node scripts/split-selected-colonies.mjs",
     "update-map-source": "node scripts/update-map-source.mjs"

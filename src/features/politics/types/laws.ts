@@ -1,4 +1,5 @@
 import type { Modifier } from "./modifiers";
+import type { PartyIdeologyCategory } from "../../../data/partyIdeologies";
 
 export type LawCategory =
   | "political"
@@ -9,7 +10,19 @@ export type LawCategory =
 export type LawRequirement = {
   key: string;
   label: string;
+  /** 정치 성향 제한은 국가별 문자열이 아닌 공통 대분류로만 판정한다. */
+  allowedIdeologyCategories?: readonly PartyIdeologyCategory[];
 };
+
+export function meetsLawIdeologyRequirement(
+  requirement: LawRequirement,
+  ideologyCategory: PartyIdeologyCategory,
+): boolean {
+  return (
+    !requirement.allowedIdeologyCategories ||
+    requirement.allowedIdeologyCategories.includes(ideologyCategory)
+  );
+}
 
 export type LawOption = {
   id: string;

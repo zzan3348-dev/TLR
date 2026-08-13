@@ -1,4 +1,5 @@
 import type { MapCountryIndex } from "./mapCountry";
+import type { PartyIdeologyCategory } from "../data/partyIdeologies";
 
 export type CountryLeaderPresentation = {
   name: string;
@@ -24,7 +25,8 @@ export type CountryLeaderEffectLine = {
 export type CountryPartyPresentation = {
   id: string;
   name: string;
-  ideology: string;
+  ideologyCategory: PartyIdeologyCategory;
+  subIdeology: string;
   support: number;
   color?: string;
   symbolPath: string | null;
@@ -32,7 +34,8 @@ export type CountryPartyPresentation = {
 
 export type CountryPoliticsPresentation = {
   government: string;
-  ideology: string;
+  ideologyCategory: PartyIdeologyCategory;
+  subIdeology: string;
   rulingParty: string;
   faction: string;
   symbolPath: string | null;

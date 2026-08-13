@@ -5,6 +5,7 @@ import type {
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getCountryPresentation } from "../data/countryPresentation";
+import { formatPartyIdeology } from "../data/partyIdeologies";
 import type {
   CountryNationalSpirit,
   CountryPartyPresentation,
@@ -274,7 +275,8 @@ const EXAMPLE_PARTIES: readonly CountryPartyPresentation[] = [
   {
     id: "example-party-1",
     name: "예시 정당 1",
-    ideology: "제1 정치노선",
+    ideologyCategory: "자유주의",
+    subIdeology: "고전적 자유주의",
     support: 46,
     color: "#87234c",
     symbolPath: null,
@@ -282,7 +284,8 @@ const EXAMPLE_PARTIES: readonly CountryPartyPresentation[] = [
   {
     id: "example-party-2",
     name: "예시 정당 2",
-    ideology: "제2 정치노선",
+    ideologyCategory: "보수주의",
+    subIdeology: "전통보수주의",
     support: 32,
     color: "#394c8f",
     symbolPath: null,
@@ -290,7 +293,8 @@ const EXAMPLE_PARTIES: readonly CountryPartyPresentation[] = [
   {
     id: "example-party-3",
     name: "예시 정당 3",
-    ideology: "제3 정치노선",
+    ideologyCategory: "사회민주주의",
+    subIdeology: "정통 사회민주주의",
     support: 22,
     color: "#79501e",
     symbolPath: null,
@@ -311,10 +315,15 @@ function MajorPartyPanel({
     primaryParty?.name ||
     presentation.politics.rulingParty ||
     "정당 정보 없음";
-  const primaryIdeology =
-    primaryParty?.ideology ||
-    presentation.politics.ideology ||
-    "지지도 자료 없음";
+  const primaryIdeology = primaryParty
+    ? formatPartyIdeology(
+        primaryParty.ideologyCategory,
+        primaryParty.subIdeology,
+      )
+    : formatPartyIdeology(
+        presentation.politics.ideologyCategory,
+        presentation.politics.subIdeology,
+      );
   const primarySymbol =
     primaryParty?.symbolPath ?? presentation.politics.symbolPath;
   const chartStyle = {
@@ -494,7 +503,7 @@ export function ReadOnlyCountryPanel({
               name="header-small"
               empty={
                 !presentation.politics.symbolPath &&
-                !presentation.politics.ideology
+                !presentation.politics.subIdeology
               }
             >
               {presentation.politics.symbolPath ? (
@@ -504,9 +513,12 @@ export function ReadOnlyCountryPanel({
                   alt=""
                   draggable={false}
                 />
-              ) : presentation.politics.ideology ? (
+              ) : presentation.politics.subIdeology ? (
                 <span className="hybrid-country-panel__ideology-name">
-                  {presentation.politics.ideology}
+                  {formatPartyIdeology(
+                    presentation.politics.ideologyCategory,
+                    presentation.politics.subIdeology,
+                  )}
                 </span>
               ) : null}
             </CountryPanelSlot>

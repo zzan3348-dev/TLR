@@ -72,7 +72,7 @@ function getTooltipPosition(
   event: MouseEvent<SVGPathElement>,
 ): Pick<PartyTooltipState, "x" | "y"> {
   const width = 224;
-  const height = 122;
+  const height = 142;
   return {
     x: Math.max(
       12,
@@ -179,7 +179,10 @@ export function PartySupportChart({
             >
               <strong>{tooltip.party.name}</strong>
               <span>
-                정당 사상: {tooltip.party.ideology || "미설정"}
+                대분류: {tooltip.party.ideologyCategory}
+              </span>
+              <span>
+                하위사상: {tooltip.party.subIdeology}
               </span>
               <b>지지도 {tooltip.party.support.toFixed(1)}%</b>
             </aside>,

@@ -1,12 +1,5 @@
 import type { CountryPartyPresentation } from "../types/countryPresentation";
 
-const MONARCHY_PATTERN =
-  /왕정|왕실|황실|황제|군주|제국|귀족|왕당|royal|monarch|imperial|aristocrat/iu;
-const CONSERVATIVE_PATTERN =
-  /보수|우파|우익|질서|전통|국민|민족|자유보수|기독|가톨릭|conserv|right|national|christian/iu;
-const PROGRESSIVE_PATTERN =
-  /진보|좌파|좌익|사회|공산|노동|농민|생디칼|코뮌|마르크스|혁명|아나키|social|commun|labor|labour|progress|syndical|marx|anarch/iu;
-
 const PARTY_PALETTES = {
   monarchy: [
     "#343941",
@@ -41,14 +34,27 @@ const PARTY_PALETTES = {
 function classifyParty(
   party: CountryPartyPresentation,
 ): keyof typeof PARTY_PALETTES {
-  const text = `${party.name} ${party.ideology}`;
-  if (MONARCHY_PATTERN.test(text)) {
+  if (
+    party.ideologyCategory === "군주주의" ||
+    party.ideologyCategory === "반동주의"
+  ) {
     return "monarchy";
   }
-  if (CONSERVATIVE_PATTERN.test(text)) {
+  if (
+    party.ideologyCategory === "보수주의" ||
+    party.ideologyCategory === "권위주의" ||
+    party.ideologyCategory === "국가재생주의"
+  ) {
     return "conservative";
   }
-  if (PROGRESSIVE_PATTERN.test(text)) {
+  if (
+    party.ideologyCategory === "전위사회주의" ||
+    party.ideologyCategory === "평의회사회주의" ||
+    party.ideologyCategory === "생디칼리슴" ||
+    party.ideologyCategory === "자유사회주의" ||
+    party.ideologyCategory === "사회민주주의" ||
+    party.ideologyCategory === "급진공화주의"
+  ) {
     return "progressive";
   }
   return "other";
@@ -58,6 +64,9 @@ export function getPartyDisplayColor(
   party: CountryPartyPresentation,
   index: number,
 ): string {
+  if (party.color) {
+    return party.color;
+  }
   const palette = PARTY_PALETTES[classifyParty(party)];
   return palette[index % palette.length];
 }

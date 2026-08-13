@@ -1,13 +1,15 @@
 import rawCountryPresentation from "./countryPresentation.json";
+import rawCountryParties from "./countryParties.json";
 import rawLeaderEffects from "./leaderEffects.json";
 import type { MapCountryIndex } from "../types/mapCountry";
 import type {
   CountryLeaderEffect,
+  CountryPoliticsPresentation,
   CountryPresentationData,
   CountryPresentationOverrides,
 } from "../types/countryPresentation";
 
-const presentationOverrides = rawCountryPresentation as Record<
+const presentationOverrides = rawCountryPresentation as unknown as Record<
   string,
   CountryPresentationOverrides
 >;
@@ -17,6 +19,11 @@ const leaderEffectOverrides = rawLeaderEffects as Record<
   { name: string; effects: CountryLeaderEffect[] }
 >;
 
+const partyOverrides = rawCountryParties as unknown as Record<
+  string,
+  Omit<CountryPoliticsPresentation, "faction">
+>;
+
 const DEFAULT_TEST_LEADER_PORTRAIT_PATH =
   "/assets/ui/leader-placeholder.png";
 
@@ -24,6 +31,7 @@ export function getCountryPresentation(
   country: MapCountryIndex,
 ): CountryPresentationData {
   const overrides = presentationOverrides[country.key] ?? {};
+  const partyData = partyOverrides[country.key];
   const leaderData = leaderEffectOverrides[country.key];
   const title =
     country.name.trim() ||
@@ -54,12 +62,20 @@ export function getCountryPresentation(
       effects: leaderData?.effects ?? overrides.leader?.effects ?? [],
     },
     politics: {
-      government: overrides.politics?.government?.trim() ?? "",
-      ideology: overrides.politics?.ideology?.trim() ?? "",
-      rulingParty: overrides.politics?.rulingParty?.trim() ?? "",
+      government:
+        partyData?.government?.trim() ??
+        overrides.politics?.government?.trim() ??
+        "",
+      ideologyCategory: partyData?.ideologyCategory ?? "자유주의",
+      subIdeology: partyData?.subIdeology?.trim() ?? "",
+      rulingParty:
+        partyData?.rulingParty?.trim() ??
+        overrides.politics?.rulingParty?.trim() ??
+        "",
       faction: overrides.politics?.faction?.trim() ?? "",
-      symbolPath: overrides.politics?.symbolPath ?? null,
-      parties: overrides.politics?.parties ?? [],
+      symbolPath:
+        partyData?.symbolPath ?? overrides.politics?.symbolPath ?? null,
+      parties: partyData?.parties ?? [],
     },
     motto: overrides.motto?.trim() ?? "",
     description: overrides.description?.trim() ?? "",

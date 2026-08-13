@@ -9,6 +9,7 @@ import { CountryFlag } from "../../../components/CountryFlag";
 import { CountryLeaderInfo } from "../../../components/CountryLeaderInfo";
 import { PartySupportChart } from "../../../components/PartySupportChart";
 import { getCountryPresentation } from "../../../data/countryPresentation";
+import { formatPartyIdeology } from "../../../data/partyIdeologies";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import type {
   CountryLeaderPresentation,
@@ -186,6 +187,15 @@ export function PoliticsPanel({
   );
 
   const primaryParty = presentation.politics.parties[0] ?? null;
+  const rulingIdeology = primaryParty
+    ? formatPartyIdeology(
+        primaryParty.ideologyCategory,
+        primaryParty.subIdeology,
+      )
+    : formatPartyIdeology(
+        presentation.politics.ideologyCategory,
+        presentation.politics.subIdeology,
+      );
   const panelStyle = {
     "--country-accent": country.color,
     "--primary-party-color": primaryParty
@@ -216,7 +226,7 @@ export function PoliticsPanel({
                   draggable={false}
                 />
               ) : null}
-              <small>{presentation.politics.ideology || "사상 미설정"}</small>
+              <small>{rulingIdeology}</small>
             </>
           ),
           identity: (
@@ -275,14 +285,10 @@ export function PoliticsPanel({
                   </strong>
                   <span
                     title={
-                      primaryParty?.ideology ||
-                      presentation.politics.ideology ||
-                      undefined
+                      rulingIdeology
                     }
                   >
-                    {primaryParty?.ideology ||
-                      presentation.politics.ideology ||
-                      "사상 미설정"}
+                    {rulingIdeology}
                   </span>
                 </div>
               </div>
