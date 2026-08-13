@@ -3820,7 +3820,9 @@ button:focus-visible,
 .hybrid-country-panel__party-chart {
   position: relative;
   display: grid;
-  width: min(17cqw, 72px);
+  width: 78px;
+  min-width: 78px;
+  max-width: 78px;
   max-width: 100%;
   margin: 0;
   aspect-ratio: 1;
@@ -3829,7 +3831,9 @@ button:focus-visible,
   border: 1px solid #111516;
   border-radius: 50%;
   background: #050809;
-  box-shadow: none;
+  box-shadow:
+    0 3px 5px rgb(0 0 0 / 72%),
+    inset 0 0 2px rgb(0 0 0 / 80%);
 }
 
 .hybrid-country-panel__party-chart::before {
@@ -4827,7 +4831,7 @@ button:focus-visible,
   width: 100%;
   height: 100%;
   overflow: hidden;
-  filter: none;
+  filter: saturate(0.86) contrast(1.04);
 }
 
 .party-support-chart path {
@@ -4857,16 +4861,16 @@ button:focus-visible,
 .party-support-chart > span {
   position: absolute;
   z-index: 3;
-  inset: 2%;
+  inset: 0;
   border-radius: 50%;
-  opacity: 0.45;
+  opacity: 0.62;
   background: repeating-linear-gradient(
     to bottom,
-    rgb(224 221 209 / 7%) 0 1px,
+    rgb(225 229 218 / 8%) 0 1px,
     transparent 1px 2px,
-    rgb(0 0 0 / 16%) 2px 3px
+    rgb(0 0 0 / 24%) 2px 3px
   );
-  box-shadow: none;
+  box-shadow: inset 0 0 4px rgb(0 0 0 / 76%);
   pointer-events: none;
 }
 
@@ -7381,9 +7385,21 @@ button:focus-visible,
 }
 
 .politics-template__party {
-  display: block;
-  padding: 0;
+  display: grid;
+  padding: 1.1cqw;
   overflow: hidden;
+  place-items: center;
+}
+
+.politics-template__party-content {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1cqw;
 }
 
 .politics-template__party-heading {
@@ -7391,13 +7407,14 @@ button:focus-visible,
   min-width: 0;
   align-items: center;
   gap: 1cqw;
-  grid-template-columns: 6.5cqw minmax(0, 1fr);
+  width: 100%;
+  grid-template-columns: min(7.4cqw, 34px) minmax(0, 1fr);
 }
 
 .politics-template__party-heading img {
   display: block;
-  width: 6.5cqw;
-  height: 6.5cqw;
+  width: min(7.4cqw, 34px);
+  height: min(7.4cqw, 34px);
   object-fit: contain;
 }
 
@@ -7415,18 +7432,34 @@ button:focus-visible,
 
 .politics-template__party-heading strong {
   color: #d9b64d;
-  font-size: clamp(9px, 2.3cqw, 13px);
+  font-size: clamp(11px, 2.65cqw, 15px);
 }
 
 .politics-template__party-heading span {
   color: #b4b8b1;
-  font-size: clamp(8px, 1.9cqw, 11px);
+  font-size: clamp(9px, 2.05cqw, 12px);
+}
+
+.politics-template__party-sigil {
+  display: block;
+  width: min(7.4cqw, 34px);
+  aspect-ratio: 1;
+  border: 1px solid #4b5350;
+  background: #0a1011;
 }
 
 .politics-template__party .party-support-chart {
-  width: min(20cqw, 104px);
+  width: 78px;
+  min-width: 78px;
+  max-width: 78px;
   align-self: center;
   justify-self: center;
+  border: 1px solid #111516;
+  border-radius: 50%;
+  background: #050809;
+  box-shadow:
+    0 3px 5px rgb(0 0 0 / 72%),
+    inset 0 0 2px rgb(0 0 0 / 80%);
 }
 
 .politics-template__economy-launch {

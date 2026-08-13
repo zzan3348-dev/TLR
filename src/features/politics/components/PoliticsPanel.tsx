@@ -255,12 +255,31 @@ export function PoliticsPanel({
           ),
           leaderCaption: <PoliticsLeaderInfo leader={presentation.leader} />,
           partySupport: (
-            <>
+            <div className="politics-template__party-content">
+              <header className="politics-template__party-heading">
+                {presentation.politics.symbolPath ? (
+                  <img
+                    src={presentation.politics.symbolPath}
+                    alt=""
+                    draggable={false}
+                  />
+                ) : (
+                  <span className="politics-template__party-sigil" aria-hidden="true" />
+                )}
+                <div>
+                  <strong>
+                    {primaryParty?.name ||
+                      presentation.politics.rulingParty ||
+                      "정당 미설정"}
+                  </strong>
+                  <span>{rulingIdeology}</span>
+                </div>
+              </header>
               <PartySupportChart
                 parties={presentation.politics.parties}
                 rulingPartyName={presentation.politics.rulingParty}
               />
-            </>
+            </div>
           ),
           governmentSystem: <span>업데이트 예정</span>,
           powerBase: (
