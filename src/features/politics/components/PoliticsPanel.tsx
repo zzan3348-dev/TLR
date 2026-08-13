@@ -26,6 +26,7 @@ import { DevelopmentSection } from "./DevelopmentSection";
 import { LawDetailModal } from "./LawDetailModal";
 import { LawSection } from "./LawSection";
 import { PoliticsWindowShell } from "./PoliticsWindowShell";
+import { createUnsetDevelopmentState } from "../utils/developmentState";
 
 type PoliticsPanelProps = {
   country: MapCountryIndex;
@@ -149,12 +150,7 @@ export function PoliticsPanel({
     actualDevelopmentState ??
     (usesDevelopmentFixture
       ? DEV_DEVELOPMENT_SAMPLE
-      : {
-          countryId: country.key,
-          povertyRate: null,
-          povertyChange: null,
-          items: [],
-        });
+      : createUnsetDevelopmentState(country.key));
   const [choices, setChoices] = useState<Record<string, string>>(() => ({
     ...(baseLawState?.laws ?? {}),
     ...readSessionLawChoices(country.key),

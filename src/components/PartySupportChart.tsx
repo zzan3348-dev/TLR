@@ -3,21 +3,23 @@ import {
   useMemo,
   useState,
   type CSSProperties,
+  type FocusEvent,
   type MouseEvent,
 } from "react";
 import { createPortal } from "react-dom";
 import type { CountryPartyPresentation } from "../types/countryPresentation";
 import { getPartyDisplayColor } from "../utils/partyColors";
 
-type PartyDisplayItem = {
+type PartySlice = {
   party: CountryPartyPresentation;
   color: string;
-  normalizedSupport: number;
+  startAngle: number;
+  endAngle: number;
   isRuling: boolean;
 };
 
 type PartyTooltipState = {
-  item: PartyDisplayItem;
+  slice: PartySlice;
   x: number;
   y: number;
 };
@@ -28,14 +30,49 @@ type PartySupportChartProps = {
   rulingPartyName?: string;
 };
 
+function polarPoint(angle: number, radius = 48) {
+  const radians = ((angle - 90) * Math.PI) / 180;
+  return {
+    x: 50 + radius * Math.cos(radians),
+    y: 50 + radius * Math.sin(radians),
+  };
+}
+
+function buildSlicePath(startAngle: number, endAngle: number) {
+  if (endAngle - startAngle >= 359.999) {
+    return "M 50 2 A 48 48 0 1 1 49.999 2 Z";
+  }
+
+  const start = polarPoint(startAngle);
+  const end = polarPoint(endAngle);
+  const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+
+  return [
+    "M 50 50",
+    `L ${start.x.toFixed(3)} ${start.y.toFixed(3)}`,
+    `A 48 48 0 ${largeArc} 1 ${end.x.toFixed(3)} ${end.y.toFixed(3)}`,
+    "Z",
+  ].join(" ");
+}
+
 function getTooltipPosition(
-  event: MouseEvent<HTMLElement>,
+  event: MouseEvent<SVGPathElement>,
 ): Pick<PartyTooltipState, "x" | "y"> {
   const width = 224;
   const height = 104;
   return {
     x: Math.max(12, Math.min(event.clientX + 16, window.innerWidth - width - 12)),
     y: Math.max(12, Math.min(event.clientY + 16, window.innerHeight - height - 12)),
+  };
+}
+
+function getFocusTooltipPosition(
+  event: FocusEvent<SVGPathElement>,
+): Pick<PartyTooltipState, "x" | "y"> {
+  const bounds = event.currentTarget.getBoundingClientRect();
+  return {
+    x: Math.max(12, Math.min(bounds.right + 10, window.innerWidth - 236)),
+    y: Math.max(12, Math.min(bounds.top, window.innerHeight - 116)),
   };
 }
 
@@ -46,132 +83,67 @@ export function PartySupportChart({
 }: PartySupportChartProps) {
   const tooltipId = useId();
   const [tooltip, setTooltip] = useState<PartyTooltipState | null>(null);
-  const [focusedPartyId, setFocusedPartyId] = useState<string | null>(null);
-  const items = useMemo<readonly PartyDisplayItem[]>(() => {
+  const slices = useMemo<readonly PartySlice[]>(() => {
     const visible = parties.filter((party) => party.support > 0);
     const total = visible.reduce((sum, party) => sum + party.support, 0);
-    const ruling =
-      visible.find((party) => party.name === rulingPartyName) ?? visible[0] ?? null;
+    if (total <= 0) return [];
 
-    return visible
-      .map((party, index) => ({
+    let cursor = 0;
+    return visible.map((party, index) => {
+      const startAngle = cursor;
+      cursor += (party.support / total) * 360;
+      return {
         party,
         color: getPartyDisplayColor(party, index),
-        normalizedSupport: total > 0 ? (party.support / total) * 100 : 0,
-        isRuling: party.id === ruling?.id,
-      }))
-      .sort((left, right) => {
-        if (left.isRuling !== right.isRuling) return left.isRuling ? -1 : 1;
-        return right.party.support - left.party.support;
-      });
+        startAngle,
+        endAngle: index === visible.length - 1 ? 360 : cursor,
+        isRuling: party.name === rulingPartyName,
+      };
+    });
   }, [parties, rulingPartyName]);
-  const ruling = items.find((item) => item.isRuling) ?? items[0] ?? null;
-  const leading = items.reduce<PartyDisplayItem | null>(
-    (best, candidate) =>
-      !best || candidate.party.support > best.party.support ? candidate : best,
-    null,
-  );
 
   const showTooltip = (
-    event: MouseEvent<HTMLElement>,
-    item: PartyDisplayItem,
+    event: MouseEvent<SVGPathElement>,
+    slice: PartySlice,
   ) => {
-    setTooltip({ item, ...getTooltipPosition(event) });
+    setTooltip({ slice, ...getTooltipPosition(event) });
   };
-
-  if (!ruling) {
-    return (
-      <section className={`${className ?? ""} party-support-chart party-support-chart--empty`}>
-        <strong>정당 미설정</strong>
-      </section>
-    );
-  }
 
   return (
     <>
-      <section
+      <figure
         className={`${className ?? ""} party-support-chart`}
-        aria-label="정당 지지도"
+        aria-label="정당 지지도 원형 그래프"
       >
-        <article
-          className="party-support-chart__ruling"
-          style={{ "--party-color": ruling.color } as CSSProperties}
-        >
-          {ruling.party.symbolPath ? (
-            <img src={ruling.party.symbolPath} alt="" draggable={false} />
+        <svg viewBox="0 0 100 100" role="img" aria-label="정당별 지지도">
+          {slices.length > 0 ? (
+            slices.map((slice) => (
+              <path
+                key={slice.party.id}
+                d={buildSlicePath(slice.startAngle, slice.endAngle)}
+                fill={slice.color}
+                tabIndex={0}
+                data-ruling={slice.isRuling}
+                aria-describedby={tooltipId}
+                aria-label={`${slice.party.name}, ${slice.party.subIdeology || "미설정"}, 지지도 ${slice.party.support.toFixed(1)}%`}
+                onMouseEnter={(event) => showTooltip(event, slice)}
+                onMouseMove={(event) => showTooltip(event, slice)}
+                onMouseLeave={() => setTooltip(null)}
+                onFocus={(event) =>
+                  setTooltip({
+                    slice,
+                    ...getFocusTooltipPosition(event),
+                  })
+                }
+                onBlur={() => setTooltip(null)}
+              />
+            ))
           ) : (
-            <span className="party-support-chart__emblem" aria-hidden="true">
-              {ruling.party.name.slice(0, 1)}
-            </span>
+            <circle cx="50" cy="50" r="48" className="party-support-chart__empty" />
           )}
-          <div>
-            <small>집권 정당</small>
-            <strong>{ruling.party.name}</strong>
-            <span>{ruling.party.subIdeology || "미설정"}</span>
-          </div>
-          <b>지지도 {ruling.party.support.toFixed(1)}%</b>
-        </article>
-
-        <div className="party-support-chart__stack" aria-label="정당별 지지도 분포">
-          {items.map((item) => (
-            <button
-              key={item.party.id}
-              type="button"
-              className="party-support-chart__segment"
-              style={
-                {
-                  width: `${item.normalizedSupport}%`,
-                  "--party-color": item.color,
-                } as CSSProperties
-              }
-              aria-describedby={tooltipId}
-              aria-label={`${item.party.name}, ${item.party.subIdeology || "미설정"}, 지지도 ${item.party.support.toFixed(1)}%`}
-              data-leading={item === leading}
-              onMouseEnter={(event) => showTooltip(event, item)}
-              onMouseMove={(event) => showTooltip(event, item)}
-              onMouseLeave={() => setTooltip(null)}
-              onFocus={(event) => {
-                const bounds = event.currentTarget.getBoundingClientRect();
-                setTooltip({
-                  item,
-                  x: Math.min(bounds.left, window.innerWidth - 236),
-                  y: Math.max(12, bounds.bottom + 8),
-                });
-              }}
-              onBlur={() => setTooltip(null)}
-            />
-          ))}
-        </div>
-
-        <div className="party-support-chart__list">
-          {items.map((item) => (
-            <button
-              key={item.party.id}
-              type="button"
-              className="party-support-chart__row"
-              data-ruling={item.isRuling}
-              data-active={focusedPartyId === item.party.id}
-              style={{ "--party-color": item.color } as CSSProperties}
-              onClick={() =>
-                setFocusedPartyId((current) =>
-                  current === item.party.id ? null : item.party.id,
-                )
-              }
-              onMouseEnter={(event) => showTooltip(event, item)}
-              onMouseMove={(event) => showTooltip(event, item)}
-              onMouseLeave={() => setTooltip(null)}
-            >
-              <span className="party-support-chart__swatch" aria-hidden="true" />
-              <span className="party-support-chart__identity">
-                <strong>{item.party.name}</strong>
-                <small>{item.party.subIdeology || "미설정"}</small>
-              </span>
-              {item.isRuling ? <em>집권</em> : null}
-              <b>{item.party.support.toFixed(1)}%</b>
-            </button>
-          ))}
-        </div>
-      </section>
+        </svg>
+        <span aria-hidden="true" />
+      </figure>
 
       {tooltip
         ? createPortal(
@@ -182,14 +154,14 @@ export function PartySupportChart({
                 {
                   left: tooltip.x,
                   top: tooltip.y,
-                  "--tooltip-party-color": tooltip.item.color,
+                  "--tooltip-party-color": tooltip.slice.color,
                 } as CSSProperties
               }
               role="tooltip"
             >
-              <strong>{tooltip.item.party.name}</strong>
-              <span>{tooltip.item.party.subIdeology || "미설정"}</span>
-              <b>지지도 {tooltip.item.party.support.toFixed(1)}%</b>
+              <strong>{tooltip.slice.party.name}</strong>
+              <span>{tooltip.slice.party.subIdeology || "미설정"}</span>
+              <b>지지도 {tooltip.slice.party.support.toFixed(1)}%</b>
             </aside>,
             document.body,
           )

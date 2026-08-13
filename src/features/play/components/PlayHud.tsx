@@ -73,13 +73,22 @@ export function PlayHud({
   const presentation = getCountryPresentation(country);
   const [researchPower, setResearchPower] = useState(0);
   const [researchIncome, setResearchIncome] = useState(0);
+  const politicalPower = Number.isFinite(state.politicalPower)
+    ? state.politicalPower
+    : 0;
 
   useEffect(() => {
     const controller = new AbortController();
     void loadResearchOverview(controller.signal)
       .then((overview) => {
-        setResearchPower(overview.balance);
-        setResearchIncome(overview.incomePerPeriod);
+        setResearchPower(
+          Number.isFinite(overview.balance) ? overview.balance : 0,
+        );
+        setResearchIncome(
+          Number.isFinite(overview.incomePerPeriod)
+            ? overview.incomePerPeriod
+            : 0,
+        );
       })
       .catch(() => {
         if (!controller.signal.aborted) {
@@ -119,12 +128,12 @@ export function PlayHud({
           id="political-power"
           icon="hud/political-power"
           label="정치력"
-          value={state.politicalPower.toFixed(2)}
+          value={politicalPower.toFixed(2)}
           intro="정부가 법률·인사·국가과제와 외교 행동에 사용할 수 있는 정치 자원입니다."
           lines={[
             {
               label: "현재 정치력",
-              value: state.politicalPower.toFixed(2),
+              value: politicalPower.toFixed(2),
             },
             {
               label: "이번 정산 변화",

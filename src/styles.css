@@ -3784,19 +3784,37 @@ button:focus-visible,
 }
 
 .hybrid-country-panel__party-chart {
-  width: 100%;
-  height: 100%;
+  position: relative;
+  display: grid;
+  width: min(22cqw, 94px);
   max-width: 100%;
   margin: 0;
-  overflow: auto;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #111516;
+  border-radius: 50%;
+  background: #050809;
+  box-shadow: 0 0 9px 4px rgb(0 0 0 / 84%);
 }
 
 .hybrid-country-panel__party-chart::before {
-  display: none;
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+  opacity: 0.88;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(222 221 211 / 5%) 0,
+    rgb(222 221 211 / 5%) 1px,
+    rgb(0 0 0 / 10%) 1px,
+    rgb(0 0 0 / 10%) 2px,
+    rgb(0 0 0 / 30%) 2px,
+    rgb(0 0 0 / 30%) 3px
+  );
 }
 
 .hybrid-country-panel__party-chart > span {
@@ -3806,7 +3824,7 @@ button:focus-visible,
 
 .hybrid-country-panel__party-panel[data-example="true"]
   .hybrid-country-panel__party-chart {
-  filter: none;
+  filter: saturate(0.78) brightness(0.88) contrast(1.03);
 }
 
 .hybrid-country-panel__politics {
@@ -4762,6 +4780,83 @@ button:focus-visible,
   white-space: nowrap;
 }
 
+/* 정당 정보의 기본 시각화는 프레임 안에 맞는 원형 지지도 그래프다. */
+.party-support-chart {
+  position: relative;
+  display: grid;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  align-content: normal;
+  gap: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.party-support-chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 5px rgb(0 0 0 / 82%));
+}
+
+.party-support-chart path {
+  cursor: help;
+  stroke: rgb(3 6 8 / 52%);
+  stroke-width: 0.35;
+  transition:
+    filter 120ms ease,
+    transform 120ms ease;
+  transform-origin: 50px 50px;
+}
+
+.party-support-chart path[data-ruling="true"] {
+  stroke: rgb(235 222 181 / 70%);
+  stroke-width: 0.7;
+}
+
+.party-support-chart path:hover,
+.party-support-chart path:focus,
+.party-support-chart path:focus-visible {
+  z-index: 2;
+  filter: brightness(1.2) saturate(1.06);
+  outline: none;
+  transform: scale(1.018);
+}
+
+.party-support-chart__empty {
+  fill: #313736;
+}
+
+.party-support-chart > span {
+  position: absolute;
+  z-index: 3;
+  inset: 4%;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgb(224 221 209 / 8%) 0 1px,
+      rgb(0 0 0 / 7%) 1px 2px,
+      rgb(0 0 0 / 28%) 2px 3px
+    ),
+    radial-gradient(
+      circle at 43% 36%,
+      rgb(255 255 255 / 7%),
+      transparent 38%,
+      rgb(0 0 0 / 42%) 78%
+    );
+  box-shadow:
+    inset 0 0 9px rgb(0 0 0 / 84%),
+    0 0 8px 3px rgb(0 0 0 / 68%);
+  pointer-events: none;
+}
+
 .party-support-tooltip {
   position: fixed;
   z-index: 240;
@@ -5387,10 +5482,11 @@ button:focus-visible,
 .development-section__rows {
   display: grid;
   padding: 6px 8px 10px;
-  gap: 4px;
+  gap: 3px;
 }
 
 .development-row {
+  position: relative;
   display: grid;
   min-height: 38px;
   align-items: center;
@@ -5409,6 +5505,11 @@ button:focus-visible,
   font-size: 18px;
   grid-row: 1 / 3;
   place-items: center;
+}
+
+.development-row:focus-visible {
+  outline: 1px solid #72c9c2;
+  outline-offset: -2px;
 }
 
 .development-row > strong {
@@ -5444,6 +5545,10 @@ button:focus-visible,
   color: #bf6966;
 }
 
+.development-row__trend[data-trend="unset"] {
+  color: #58605e;
+}
+
 .development-row__levels {
   display: grid;
   height: 5px;
@@ -5460,6 +5565,40 @@ button:focus-visible,
 
 .development-row__levels i[data-active="true"] {
   background: #4ca8a4;
+}
+
+.development-row__tooltip {
+  position: absolute;
+  z-index: 12;
+  right: 8px;
+  bottom: calc(100% + 4px);
+  display: none;
+  min-width: 156px;
+  max-width: 240px;
+  padding: 7px 9px;
+  color: #bfc6c1;
+  border: 1px solid #438f8c;
+  background: rgb(4 13 15 / 97%);
+  box-shadow: 3px 5px 12px rgb(0 0 0 / 70%);
+  font-size: 10px;
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.development-row__tooltip strong,
+.development-row__tooltip span {
+  display: block;
+}
+
+.development-row__tooltip strong {
+  margin-bottom: 3px;
+  color: #e2c768;
+  font-size: 11px;
+}
+
+.development-row:hover .development-row__tooltip,
+.development-row:focus-visible .development-row__tooltip {
+  display: block;
 }
 
 .politics-panel__return {
@@ -7272,8 +7411,9 @@ button:focus-visible,
 }
 
 .politics-template__party .party-support-chart {
-  width: 100%;
-  height: 100%;
+  width: min(29cqw, 150px);
+  align-self: center;
+  justify-self: center;
 }
 
 .politics-template__economy-launch {

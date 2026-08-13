@@ -1,6 +1,6 @@
-import { developmentDefinitionById } from "../data/developmentDefinitions";
 import { UiIcon } from "../../../components/UiIcon";
 import type { CountryDevelopmentState } from "../types/development";
+import { resolveDevelopmentRows } from "../utils/developmentState";
 
 type DevelopmentSectionProps = {
   state: CountryDevelopmentState;
@@ -26,6 +26,8 @@ const DEVELOPMENT_ICON_BY_ID: Record<string, string> = {
 export function DevelopmentSection({
   state,
 }: DevelopmentSectionProps) {
+  const rows = resolveDevelopmentRows(state);
+
   return (
     <section className="development-section">
       <header>
@@ -59,38 +61,59 @@ export function DevelopmentSection({
         </span>
       </div>
       <div className="development-section__rows">
-        {state.items.map((item) => {
-          const definition = developmentDefinitionById.get(item.id);
-          const level =
-            item.level === null
-              ? null
-              : definition?.levels.find(
-                  (candidate) => candidate.level === item.level,
-                ) ?? null;
-          const trend = TREND_LABELS[item.trend];
+        {rows.map(({ definition, item, level }) => {
+          const trend = item ? TREND_LABELS[item.trend] : null;
+          const tooltipId = `development-${state.countryId}-${definition.id}`;
           return (
-            <div key={item.id} className="development-row">
+            <div
+              key={definition.id}
+              className="development-row"
+              tabIndex={0}
+              aria-describedby={tooltipId}
+            >
               <span className="development-row__icon" aria-hidden="true">
-                <UiIcon name={DEVELOPMENT_ICON_BY_ID[item.id] ?? "sections/development"} />
+                <UiIcon
+                  name={
+                    DEVELOPMENT_ICON_BY_ID[definition.id] ??
+                    "sections/development"
+                  }
+                />
               </span>
-              <strong>{definition?.label ?? item.id}</strong>
+              <strong>{definition.label}</strong>
               <b data-unset={!level}>{level?.name ?? "미설정"}</b>
               <span
                 className="development-row__trend"
-                data-trend={item.trend}
-                aria-label={`추세: ${trend.label}`}
+                data-trend={item?.trend ?? "unset"}
+                aria-label={trend ? `추세: ${trend.label}` : "추세: 미설정"}
               >
-                <UiIcon name={trend.icon} />
+                {trend ? <UiIcon name={trend.icon} /> : <span>—</span>}
               </span>
               <span className="development-row__levels" aria-hidden="true">
-                {(definition?.levels ?? []).map((candidate) => (
+                {definition.levels.map((candidate) => (
                   <i
                     key={candidate.level}
                     data-active={
-                      item.level !== null &&
+                      item?.level !== null &&
+                      item?.level !== undefined &&
                       candidate.level <= item.level
                     }
                   />
+                ))}
+              </span>
+              <span
+                id={tooltipId}
+                className="development-row__tooltip"
+                role="tooltip"
+              >
+                <strong>{definition.label}</strong>
+                <span>현재 단계: {level?.name ?? "미설정"}</span>
+                {trend ? <span>추세: {trend.label}</span> : null}
+                {level?.modifiers.map((modifier) => (
+                  <span key={`${modifier.key}-${modifier.value}`}>
+                    {modifier.key}: {modifier.value > 0 ? "+" : ""}
+                    {modifier.value}
+                    {modifier.unit === "percent" ? "%" : ""}
+                  </span>
                 ))}
               </span>
             </div>

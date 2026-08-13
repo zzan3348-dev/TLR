@@ -6,6 +6,11 @@ import { countryLawStates } from "../src/features/politics/data/countryLawStates
 import { DEV_DEVELOPMENT_SAMPLE } from "../src/features/politics/data/devDevelopmentSample";
 import { DEV_LAW_SAMPLE } from "../src/features/politics/data/devLawSample";
 import { lawDefinitions } from "../src/features/politics/data/lawDefinitions";
+import { mapCountries } from "../src/data/mapCountries";
+import {
+  createUnsetDevelopmentState,
+  resolveDevelopmentRows,
+} from "../src/features/politics/utils/developmentState";
 
 describe("정치·법률 데이터 구조", () => {
   it("요구된 카테고리별 법률 수와 선택지를 유지한다", () => {
@@ -51,6 +56,59 @@ describe("정치·법률 데이터 구조", () => {
     expect(developmentDefinitions).toHaveLength(8);
     for (const definition of developmentDefinitions) {
       expect(definition.levels).toHaveLength(5);
+    }
+  });
+
+  it("전체·부분·미설정 상태에서도 정의된 8개 항목을 같은 순서로 해석한다", () => {
+    const fullRows = resolveDevelopmentRows(DEV_DEVELOPMENT_SAMPLE);
+    const partialRows = resolveDevelopmentRows({
+      countryId: "partial-country",
+      povertyRate: 19.5,
+      povertyChange: null,
+      items: [
+        { id: "academic-foundation", level: 2, trend: "up" },
+        { id: "health", level: 999, trend: "down" },
+      ],
+    });
+    const unsetRows = resolveDevelopmentRows(
+      createUnsetDevelopmentState("unset-country"),
+    );
+    const definitionIds = developmentDefinitions.map(({ id }) => id);
+
+    expect(fullRows.map(({ definition }) => definition.id)).toEqual(
+      definitionIds,
+    );
+    expect(fullRows.every(({ level }) => level !== null)).toBe(true);
+    expect(partialRows.map(({ definition }) => definition.id)).toEqual(
+      definitionIds,
+    );
+    expect(partialRows[0]?.level?.name).toBe("초등교육 보급");
+    expect(partialRows[3]?.item?.trend).toBe("down");
+    expect(partialRows[3]?.level).toBeNull();
+    expect(partialRows[1]?.item).toBeNull();
+    expect(unsetRows).toHaveLength(8);
+    expect(unsetRows.every(({ item, level }) => item === null && level === null)).toBe(
+      true,
+    );
+  });
+
+  it("62개 국가 모두 누락 없이 8개 사회 발전 정의로 해석된다", () => {
+    expect(mapCountries).toHaveLength(62);
+
+    for (const country of mapCountries) {
+      const state =
+        countryDevelopmentStates[country.key] ??
+        createUnsetDevelopmentState(country.key);
+      const rows = resolveDevelopmentRows(state);
+
+      expect(rows).toHaveLength(8);
+      expect(new Set(rows.map(({ definition }) => definition.id)).size).toBe(8);
+      expect(
+        rows.every(
+          ({ item, level }) =>
+            item === null || item.level === null || level !== null,
+        ),
+      ).toBe(true);
     }
   });
 
