@@ -10,6 +10,8 @@ type MapControlsProps = {
   onToggleProvinceBorders: () => void;
   showLabels: boolean;
   onToggleLabels: () => void;
+  showCapitalLabels: boolean;
+  onToggleCapitalLabels: () => void;
 };
 
 export function MapControls({
@@ -20,6 +22,8 @@ export function MapControls({
   onToggleProvinceBorders,
   showLabels,
   onToggleLabels,
+  showCapitalLabels,
+  onToggleCapitalLabels,
 }: MapControlsProps) {
   return (
     <div
@@ -63,6 +67,15 @@ export function MapControls({
       >
         <StrategyIcon name="layers" />
         <small>{showLabels ? "국명" : "국명 꺼짐"}</small>
+      </button>
+      <button
+        type="button"
+        onClick={onToggleCapitalLabels}
+        aria-label={showCapitalLabels ? "수도명 숨기기" : "수도명 표시"}
+        aria-pressed={showCapitalLabels}
+      >
+        <StrategyIcon name="capital" />
+        <small>{showCapitalLabels ? "수도명" : "수도명 꺼짐"}</small>
       </button>
       <button
         type="button"

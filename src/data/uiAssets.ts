@@ -21,6 +21,7 @@ export const uiIconAssets = {
     layers: "/assets/ui/icons/menu/layers.svg",
     provinceToggle: "/assets/ui/icons/menu/province-toggle.svg",
     factionMap: "/assets/ui/icons/menu/faction-map.svg",
+    capital: "/assets/ui/icons/menu/capital.svg",
     fit: "/assets/ui/icons/menu/fit.svg",
     zoomIn: "/assets/ui/icons/menu/zoom-in.svg",
     zoomOut: "/assets/ui/icons/menu/zoom-out.svg",

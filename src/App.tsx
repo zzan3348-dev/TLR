@@ -84,6 +84,7 @@ export default function App() {
     readStoredProvinceSetting,
   );
   const [showLabels, setShowLabels] = useState(true);
+  const [showCapitalLabels, setShowCapitalLabels] = useState(true);
   const [isBgmEnabled, setIsBgmEnabled] = useState(true);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
@@ -416,6 +417,7 @@ export default function App() {
           mapMode={mapMode}
           showProvinceBorders={showProvinceBorders}
           showLabels={showLabels}
+          showCapitalLabels={showCapitalLabels}
           selectedCountry={highlightedCountry}
           selectedComponent={highlightedComponent}
           onCountrySelect={selectCountry}
@@ -443,6 +445,10 @@ export default function App() {
           }
           showLabels={showLabels}
           onToggleLabels={() => setShowLabels((current) => !current)}
+          showCapitalLabels={showCapitalLabels}
+          onToggleCapitalLabels={() =>
+            setShowCapitalLabels((current) => !current)
+          }
         />
         {mapMode === "faction" ? <FactionLegend /> : null}
         <ReadOnlyCountryPanel

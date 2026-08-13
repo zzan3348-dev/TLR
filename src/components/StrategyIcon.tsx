@@ -3,7 +3,7 @@ import { UiIcon } from "./UiIcon";
 export type StrategyIconName =
   | "country" | "politics" | "economy" | "military" | "diplomacy"
   | "intelligence" | "layers" | "handshake" | "province" | "faction"
-  | "fit" | "plus" | "minus";
+  | "capital" | "fit" | "plus" | "minus";
 
 type StrategyIconProps = { name: StrategyIconName; className?: string };
 
@@ -18,6 +18,7 @@ const ICON_MAP: Record<StrategyIconName, string> = {
   handshake: "menu/handshake",
   province: "menu/province-toggle",
   faction: "menu/faction-map",
+  capital: "menu/capital",
   fit: "menu/fit",
   plus: "ui/open",
   minus: "ui/collapse",
