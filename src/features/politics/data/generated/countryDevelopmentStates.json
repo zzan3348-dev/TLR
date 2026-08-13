@@ -1,0 +1,2916 @@
+{
+  "country-001": {
+    "countryId": "country-001",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-002": {
+    "countryId": "country-002",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-003": {
+    "countryId": "country-003",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-004": {
+    "countryId": "country-004",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-005": {
+    "countryId": "country-005",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-006": {
+    "countryId": "country-006",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-007": {
+    "countryId": "country-007",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-008": {
+    "countryId": "country-008",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-009": {
+    "countryId": "country-009",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-010": {
+    "countryId": "country-010",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-011": {
+    "countryId": "country-011",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-012": {
+    "countryId": "country-012",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-013": {
+    "countryId": "country-013",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-014": {
+    "countryId": "country-014",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-015": {
+    "countryId": "country-015",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-016": {
+    "countryId": "country-016",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-017": {
+    "countryId": "country-017",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-018": {
+    "countryId": "country-018",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-019": {
+    "countryId": "country-019",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-020": {
+    "countryId": "country-020",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-021": {
+    "countryId": "country-021",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-022": {
+    "countryId": "country-022",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-023": {
+    "countryId": "country-023",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-024": {
+    "countryId": "country-024",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-025": {
+    "countryId": "country-025",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-026": {
+    "countryId": "country-026",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-027": {
+    "countryId": "country-027",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-028": {
+    "countryId": "country-028",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-029": {
+    "countryId": "country-029",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-030": {
+    "countryId": "country-030",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-031": {
+    "countryId": "country-031",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-032": {
+    "countryId": "country-032",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-033": {
+    "countryId": "country-033",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-034": {
+    "countryId": "country-034",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-035": {
+    "countryId": "country-035",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-036": {
+    "countryId": "country-036",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 5,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-037": {
+    "countryId": "country-037",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-038": {
+    "countryId": "country-038",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-039": {
+    "countryId": "country-039",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 5,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-040": {
+    "countryId": "country-040",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-041": {
+    "countryId": "country-041",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-042": {
+    "countryId": "country-042",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-043": {
+    "countryId": "country-043",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-044": {
+    "countryId": "country-044",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-045": {
+    "countryId": "country-045",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-046": {
+    "countryId": "country-046",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-047": {
+    "countryId": "country-047",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-048": {
+    "countryId": "country-048",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-049": {
+    "countryId": "country-049",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-050": {
+    "countryId": "country-050",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 2,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-051": {
+    "countryId": "country-051",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-052": {
+    "countryId": "country-052",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-053": {
+    "countryId": "country-053",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-054": {
+    "countryId": "country-054",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-055": {
+    "countryId": "country-055",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-056": {
+    "countryId": "country-056",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-057": {
+    "countryId": "country-057",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-058": {
+    "countryId": "country-058",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 1,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-059": {
+    "countryId": "country-059",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 3,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-060": {
+    "countryId": "country-060",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-061": {
+    "countryId": "country-061",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 2,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  },
+  "country-062": {
+    "countryId": "country-062",
+    "povertyRate": null,
+    "povertyChange": null,
+    "items": [
+      {
+        "id": "academic-foundation",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "research-facilities",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "agriculture",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "health",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "administration",
+        "level": 4,
+        "trend": "stable"
+      },
+      {
+        "id": "industry-specialization",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "industrial-equipment",
+        "level": 3,
+        "trend": "stable"
+      },
+      {
+        "id": "military-professionalism",
+        "level": 4,
+        "trend": "stable"
+      }
+    ]
+  }
+}

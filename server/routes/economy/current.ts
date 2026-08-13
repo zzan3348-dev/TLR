@@ -1,6 +1,7 @@
 import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { economyWorldDate, requireEconomyActor } from "../../economy.js";
+import { mergeStartingResources } from "../../startingResources.js";
 
 type EconomyRow = Record<string, unknown> & { country_key: string };
 type ResourceRow = Record<string, unknown> & { resource_type_id: string };
@@ -25,7 +26,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     ]);
     const failed = [economy, readiness, resources, capacity, history, rules].find((result) => result.error);
     if (failed?.error) throw failed.error;
-    const resourceComponents = await Promise.all((resources.data ?? []).map(async (resource) => {
+    const databaseResources = (resources.data ?? []) as Array<ResourceRow & { country_key: string; export_limit?: number; production_per_period?: number; domestic_use?: number }>;
+    const mergedResources = mergeStartingResources(actor.countryKey, databaseResources);
+    const resourceComponents = await Promise.all(mergedResources.map(async (resource) => {
+      if ("available" in resource && typeof resource.available === "number") return resource;
       const result = await admin.rpc("tlr_trade_resource_components", { p_country: actor.countryKey, p_resource: resource.resource_type_id });
       if (result.error) throw result.error;
       const component = Array.isArray(result.data) ? result.data[0] : result.data;

@@ -6,6 +6,7 @@ import { countryLawStates } from "../src/features/politics/data/countryLawStates
 import { DEV_DEVELOPMENT_SAMPLE } from "../src/features/politics/data/devDevelopmentSample";
 import { DEV_LAW_SAMPLE } from "../src/features/politics/data/devLawSample";
 import { lawDefinitions } from "../src/features/politics/data/lawDefinitions";
+import { countryResourceStates } from "../src/features/economy/data/countryResourceStates";
 import { mapCountries } from "../src/data/mapCountries";
 import {
   createUnsetDevelopmentState,
@@ -35,8 +36,7 @@ describe("정치·법률 데이터 구조", () => {
     expect(counts.social).toHaveLength(8);
 
     for (const definition of lawDefinitions) {
-      expect(definition.options.length).toBeGreaterThanOrEqual(5);
-      expect(definition.options.length).toBeLessThanOrEqual(6);
+      expect(definition.options).toHaveLength(5);
       expect(new Set(definition.options.map(({ id }) => id)).size).toBe(
         definition.options.length,
       );
@@ -45,11 +45,17 @@ describe("정치·법률 데이터 구조", () => {
 
   it("실제 국가 상태와 개발용 예시 상태를 분리한다", () => {
     expect(Object.keys(countryLawStates)).toHaveLength(0);
-    expect(Object.keys(countryDevelopmentStates)).toHaveLength(0);
+    expect(Object.keys(countryDevelopmentStates)).toHaveLength(62);
     expect(DEV_LAW_SAMPLE.countryId).toBe("__development_fixture__");
     expect(DEV_DEVELOPMENT_SAMPLE.countryId).toBe(
       "__development_fixture__",
     );
+  });
+
+  it("통합 기준본의 140개 법률 선택지와 62개국 자원 시작값을 제공한다", () => {
+    expect(lawDefinitions.flatMap(({ options }) => options)).toHaveLength(140);
+    expect(Object.keys(countryResourceStates)).toHaveLength(62);
+    expect(Object.values(countryResourceStates).every((rows) => rows.length === 5)).toBe(true);
   });
 
   it("사회 발전 항목 8개와 단계 데이터를 제공한다", () => {
@@ -102,6 +108,7 @@ describe("정치·법률 데이터 구조", () => {
       const rows = resolveDevelopmentRows(state);
 
       expect(rows).toHaveLength(8);
+      expect(rows.every(({ level }) => level !== null)).toBe(true);
       expect(new Set(rows.map(({ definition }) => definition.id)).size).toBe(8);
       expect(
         rows.every(

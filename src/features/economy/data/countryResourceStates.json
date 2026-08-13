@@ -1,0 +1,2916 @@
+{
+  "country-001": [
+    {
+      "country_key": "country-001",
+      "resource_type_id": "STEEL",
+      "stockpile": 212,
+      "production_per_period": 167,
+      "domestic_use": 132,
+      "export_limit": 28,
+      "is_public": true
+    },
+    {
+      "country_key": "country-001",
+      "resource_type_id": "COAL",
+      "stockpile": 170,
+      "production_per_period": 180,
+      "domestic_use": 118,
+      "export_limit": 48,
+      "is_public": true
+    },
+    {
+      "country_key": "country-001",
+      "resource_type_id": "OIL",
+      "stockpile": 760,
+      "production_per_period": 1000,
+      "domestic_use": 625,
+      "export_limit": 300,
+      "is_public": true
+    },
+    {
+      "country_key": "country-001",
+      "resource_type_id": "FOOD",
+      "stockpile": 118,
+      "production_per_period": 148,
+      "domestic_use": 100,
+      "export_limit": 36,
+      "is_public": true
+    },
+    {
+      "country_key": "country-001",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 52,
+      "production_per_period": 24,
+      "domestic_use": 58,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-002": [
+    {
+      "country_key": "country-002",
+      "resource_type_id": "STEEL",
+      "stockpile": 128,
+      "production_per_period": 81,
+      "domestic_use": 78,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-002",
+      "resource_type_id": "COAL",
+      "stockpile": 128,
+      "production_per_period": 119,
+      "domestic_use": 82,
+      "export_limit": 31,
+      "is_public": true
+    },
+    {
+      "country_key": "country-002",
+      "resource_type_id": "OIL",
+      "stockpile": 230,
+      "production_per_period": 20,
+      "domestic_use": 150,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-002",
+      "resource_type_id": "FOOD",
+      "stockpile": 105,
+      "production_per_period": 89,
+      "domestic_use": 88,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-002",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 65,
+      "production_per_period": 62,
+      "domestic_use": 55,
+      "export_limit": 5,
+      "is_public": true
+    }
+  ],
+  "country-003": [
+    {
+      "country_key": "country-003",
+      "resource_type_id": "STEEL",
+      "stockpile": 58,
+      "production_per_period": 44,
+      "domestic_use": 35,
+      "export_limit": 7,
+      "is_public": true
+    },
+    {
+      "country_key": "country-003",
+      "resource_type_id": "COAL",
+      "stockpile": 27,
+      "production_per_period": 14,
+      "domestic_use": 18,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-003",
+      "resource_type_id": "OIL",
+      "stockpile": 120,
+      "production_per_period": 20,
+      "domestic_use": 80,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-003",
+      "resource_type_id": "FOOD",
+      "stockpile": 82,
+      "production_per_period": 72,
+      "domestic_use": 74,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-003",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 28,
+      "production_per_period": 15,
+      "domestic_use": 24,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-004": [
+    {
+      "country_key": "country-004",
+      "resource_type_id": "STEEL",
+      "stockpile": 24,
+      "production_per_period": 14,
+      "domestic_use": 12,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-004",
+      "resource_type_id": "COAL",
+      "stockpile": 12,
+      "production_per_period": 8,
+      "domestic_use": 6,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-004",
+      "resource_type_id": "OIL",
+      "stockpile": 42,
+      "production_per_period": 10,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-004",
+      "resource_type_id": "FOOD",
+      "stockpile": 25,
+      "production_per_period": 24,
+      "domestic_use": 20,
+      "export_limit": 3,
+      "is_public": true
+    },
+    {
+      "country_key": "country-004",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 12,
+      "production_per_period": 12,
+      "domestic_use": 8,
+      "export_limit": 3,
+      "is_public": true
+    }
+  ],
+  "country-005": [
+    {
+      "country_key": "country-005",
+      "resource_type_id": "STEEL",
+      "stockpile": 28,
+      "production_per_period": 18,
+      "domestic_use": 13,
+      "export_limit": 4,
+      "is_public": true
+    },
+    {
+      "country_key": "country-005",
+      "resource_type_id": "COAL",
+      "stockpile": 14,
+      "production_per_period": 2,
+      "domestic_use": 9,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-005",
+      "resource_type_id": "OIL",
+      "stockpile": 52,
+      "production_per_period": 0,
+      "domestic_use": 35,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-005",
+      "resource_type_id": "FOOD",
+      "stockpile": 20,
+      "production_per_period": 19,
+      "domestic_use": 16,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-005",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 4,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-006": [
+    {
+      "country_key": "country-006",
+      "resource_type_id": "STEEL",
+      "stockpile": 10,
+      "production_per_period": 4,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-006",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-006",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 0,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-006",
+      "resource_type_id": "FOOD",
+      "stockpile": 8,
+      "production_per_period": 8,
+      "domestic_use": 6,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-006",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 4,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-007": [
+    {
+      "country_key": "country-007",
+      "resource_type_id": "STEEL",
+      "stockpile": 118,
+      "production_per_period": 128,
+      "domestic_use": 73,
+      "export_limit": 44,
+      "is_public": true
+    },
+    {
+      "country_key": "country-007",
+      "resource_type_id": "COAL",
+      "stockpile": 56,
+      "production_per_period": 44,
+      "domestic_use": 36,
+      "export_limit": 6,
+      "is_public": true
+    },
+    {
+      "country_key": "country-007",
+      "resource_type_id": "OIL",
+      "stockpile": 190,
+      "production_per_period": 35,
+      "domestic_use": 145,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-007",
+      "resource_type_id": "FOOD",
+      "stockpile": 32,
+      "production_per_period": 31,
+      "domestic_use": 28,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-007",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 28,
+      "production_per_period": 7,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-008": [
+    {
+      "country_key": "country-008",
+      "resource_type_id": "STEEL",
+      "stockpile": 126,
+      "production_per_period": 101,
+      "domestic_use": 79,
+      "export_limit": 17,
+      "is_public": true
+    },
+    {
+      "country_key": "country-008",
+      "resource_type_id": "COAL",
+      "stockpile": 105,
+      "production_per_period": 90,
+      "domestic_use": 72,
+      "export_limit": 14,
+      "is_public": true
+    },
+    {
+      "country_key": "country-008",
+      "resource_type_id": "OIL",
+      "stockpile": 210,
+      "production_per_period": 5,
+      "domestic_use": 150,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-008",
+      "resource_type_id": "FOOD",
+      "stockpile": 62,
+      "production_per_period": 43,
+      "domestic_use": 57,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-008",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 38,
+      "production_per_period": 4,
+      "domestic_use": 35,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-009": [
+    {
+      "country_key": "country-009",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 3,
+      "domestic_use": 2,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-009",
+      "resource_type_id": "COAL",
+      "stockpile": 4,
+      "production_per_period": 2,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-009",
+      "resource_type_id": "OIL",
+      "stockpile": 18,
+      "production_per_period": 5,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-009",
+      "resource_type_id": "FOOD",
+      "stockpile": 10,
+      "production_per_period": 11,
+      "domestic_use": 6,
+      "export_limit": 4,
+      "is_public": true
+    },
+    {
+      "country_key": "country-009",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 6,
+      "production_per_period": 6,
+      "domestic_use": 2,
+      "export_limit": 3,
+      "is_public": true
+    }
+  ],
+  "country-010": [
+    {
+      "country_key": "country-010",
+      "resource_type_id": "STEEL",
+      "stockpile": 13,
+      "production_per_period": 7,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-010",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 5,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-010",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 5,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-010",
+      "resource_type_id": "FOOD",
+      "stockpile": 29,
+      "production_per_period": 33,
+      "domestic_use": 27,
+      "export_limit": 4,
+      "is_public": true
+    },
+    {
+      "country_key": "country-010",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 12,
+      "domestic_use": 5,
+      "export_limit": 5,
+      "is_public": true
+    }
+  ],
+  "country-011": [
+    {
+      "country_key": "country-011",
+      "resource_type_id": "STEEL",
+      "stockpile": 24,
+      "production_per_period": 16,
+      "domestic_use": 15,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-011",
+      "resource_type_id": "COAL",
+      "stockpile": 15,
+      "production_per_period": 12,
+      "domestic_use": 8,
+      "export_limit": 3,
+      "is_public": true
+    },
+    {
+      "country_key": "country-011",
+      "resource_type_id": "OIL",
+      "stockpile": 45,
+      "production_per_period": 4,
+      "domestic_use": 30,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-011",
+      "resource_type_id": "FOOD",
+      "stockpile": 13,
+      "production_per_period": 14,
+      "domestic_use": 10,
+      "export_limit": 3,
+      "is_public": true
+    },
+    {
+      "country_key": "country-011",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 7,
+      "production_per_period": 3,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-012": [
+    {
+      "country_key": "country-012",
+      "resource_type_id": "STEEL",
+      "stockpile": 18,
+      "production_per_period": 9,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-012",
+      "resource_type_id": "COAL",
+      "stockpile": 13,
+      "production_per_period": 8,
+      "domestic_use": 9,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-012",
+      "resource_type_id": "OIL",
+      "stockpile": 38,
+      "production_per_period": 5,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-012",
+      "resource_type_id": "FOOD",
+      "stockpile": 225,
+      "production_per_period": 215,
+      "domestic_use": 245,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-012",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 16,
+      "production_per_period": 18,
+      "domestic_use": 12,
+      "export_limit": 4,
+      "is_public": true
+    }
+  ],
+  "country-013": [
+    {
+      "country_key": "country-013",
+      "resource_type_id": "STEEL",
+      "stockpile": 110,
+      "production_per_period": 81,
+      "domestic_use": 67,
+      "export_limit": 10,
+      "is_public": true
+    },
+    {
+      "country_key": "country-013",
+      "resource_type_id": "COAL",
+      "stockpile": 75,
+      "production_per_period": 24,
+      "domestic_use": 58,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-013",
+      "resource_type_id": "OIL",
+      "stockpile": 180,
+      "production_per_period": 2,
+      "domestic_use": 120,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-013",
+      "resource_type_id": "FOOD",
+      "stockpile": 70,
+      "production_per_period": 72,
+      "domestic_use": 60,
+      "export_limit": 8,
+      "is_public": true
+    },
+    {
+      "country_key": "country-013",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 32,
+      "production_per_period": 22,
+      "domestic_use": 30,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-014": [
+    {
+      "country_key": "country-014",
+      "resource_type_id": "STEEL",
+      "stockpile": 29,
+      "production_per_period": 29,
+      "domestic_use": 16,
+      "export_limit": 10,
+      "is_public": true
+    },
+    {
+      "country_key": "country-014",
+      "resource_type_id": "COAL",
+      "stockpile": 17,
+      "production_per_period": 14,
+      "domestic_use": 8,
+      "export_limit": 5,
+      "is_public": true
+    },
+    {
+      "country_key": "country-014",
+      "resource_type_id": "OIL",
+      "stockpile": 52,
+      "production_per_period": 5,
+      "domestic_use": 35,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-014",
+      "resource_type_id": "FOOD",
+      "stockpile": 58,
+      "production_per_period": 80,
+      "domestic_use": 32,
+      "export_limit": 38,
+      "is_public": true
+    },
+    {
+      "country_key": "country-014",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 8,
+      "production_per_period": 4,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-015": [
+    {
+      "country_key": "country-015",
+      "resource_type_id": "STEEL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-015",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 1,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-015",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-015",
+      "resource_type_id": "FOOD",
+      "stockpile": 2,
+      "production_per_period": 2,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-015",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 2,
+      "production_per_period": 2,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-016": [
+    {
+      "country_key": "country-016",
+      "resource_type_id": "STEEL",
+      "stockpile": 32,
+      "production_per_period": 25,
+      "domestic_use": 20,
+      "export_limit": 4,
+      "is_public": true
+    },
+    {
+      "country_key": "country-016",
+      "resource_type_id": "COAL",
+      "stockpile": 18,
+      "production_per_period": 10,
+      "domestic_use": 12,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-016",
+      "resource_type_id": "OIL",
+      "stockpile": 68,
+      "production_per_period": 0,
+      "domestic_use": 45,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-016",
+      "resource_type_id": "FOOD",
+      "stockpile": 12,
+      "production_per_period": 10,
+      "domestic_use": 11,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-016",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 11,
+      "production_per_period": 3,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-017": [
+    {
+      "country_key": "country-017",
+      "resource_type_id": "STEEL",
+      "stockpile": 25,
+      "production_per_period": 17,
+      "domestic_use": 16,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-017",
+      "resource_type_id": "COAL",
+      "stockpile": 20,
+      "production_per_period": 5,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-017",
+      "resource_type_id": "OIL",
+      "stockpile": 68,
+      "production_per_period": 0,
+      "domestic_use": 45,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-017",
+      "resource_type_id": "FOOD",
+      "stockpile": 9,
+      "production_per_period": 9,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-017",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 9,
+      "production_per_period": 2,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-018": [
+    {
+      "country_key": "country-018",
+      "resource_type_id": "STEEL",
+      "stockpile": 55,
+      "production_per_period": 32,
+      "domestic_use": 44,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-018",
+      "resource_type_id": "COAL",
+      "stockpile": 30,
+      "production_per_period": 14,
+      "domestic_use": 22,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-018",
+      "resource_type_id": "OIL",
+      "stockpile": 150,
+      "production_per_period": 8,
+      "domestic_use": 110,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-018",
+      "resource_type_id": "FOOD",
+      "stockpile": 70,
+      "production_per_period": 46,
+      "domestic_use": 68,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-018",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 28,
+      "production_per_period": 1,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-019": [
+    {
+      "country_key": "country-019",
+      "resource_type_id": "STEEL",
+      "stockpile": 12,
+      "production_per_period": 5,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-019",
+      "resource_type_id": "COAL",
+      "stockpile": 10,
+      "production_per_period": 3,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-019",
+      "resource_type_id": "OIL",
+      "stockpile": 30,
+      "production_per_period": 0,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-019",
+      "resource_type_id": "FOOD",
+      "stockpile": 17,
+      "production_per_period": 19,
+      "domestic_use": 11,
+      "export_limit": 6,
+      "is_public": true
+    },
+    {
+      "country_key": "country-019",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 15,
+      "production_per_period": 18,
+      "domestic_use": 7,
+      "export_limit": 8,
+      "is_public": true
+    }
+  ],
+  "country-020": [
+    {
+      "country_key": "country-020",
+      "resource_type_id": "STEEL",
+      "stockpile": 3,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-020",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 1,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-020",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-020",
+      "resource_type_id": "FOOD",
+      "stockpile": 6,
+      "production_per_period": 7,
+      "domestic_use": 4,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-020",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 5,
+      "production_per_period": 6,
+      "domestic_use": 1,
+      "export_limit": 3,
+      "is_public": true
+    }
+  ],
+  "country-021": [
+    {
+      "country_key": "country-021",
+      "resource_type_id": "STEEL",
+      "stockpile": 16,
+      "production_per_period": 9,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-021",
+      "resource_type_id": "COAL",
+      "stockpile": 13,
+      "production_per_period": 2,
+      "domestic_use": 9,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-021",
+      "resource_type_id": "OIL",
+      "stockpile": 40,
+      "production_per_period": 0,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-021",
+      "resource_type_id": "FOOD",
+      "stockpile": 8,
+      "production_per_period": 5,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-021",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 4,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-022": [
+    {
+      "country_key": "country-022",
+      "resource_type_id": "STEEL",
+      "stockpile": 10,
+      "production_per_period": 5,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-022",
+      "resource_type_id": "COAL",
+      "stockpile": 9,
+      "production_per_period": 3,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-022",
+      "resource_type_id": "OIL",
+      "stockpile": 48,
+      "production_per_period": 50,
+      "domestic_use": 27,
+      "export_limit": 18,
+      "is_public": true
+    },
+    {
+      "country_key": "country-022",
+      "resource_type_id": "FOOD",
+      "stockpile": 21,
+      "production_per_period": 25,
+      "domestic_use": 14,
+      "export_limit": 8,
+      "is_public": true
+    },
+    {
+      "country_key": "country-022",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 6,
+      "production_per_period": 3,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-023": [
+    {
+      "country_key": "country-023",
+      "resource_type_id": "STEEL",
+      "stockpile": 14,
+      "production_per_period": 3,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-023",
+      "resource_type_id": "COAL",
+      "stockpile": 9,
+      "production_per_period": 0,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-023",
+      "resource_type_id": "OIL",
+      "stockpile": 40,
+      "production_per_period": 0,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-023",
+      "resource_type_id": "FOOD",
+      "stockpile": 5,
+      "production_per_period": 3,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-023",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 7,
+      "production_per_period": 0,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-024": [
+    {
+      "country_key": "country-024",
+      "resource_type_id": "STEEL",
+      "stockpile": 42,
+      "production_per_period": 24,
+      "domestic_use": 29,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-024",
+      "resource_type_id": "COAL",
+      "stockpile": 26,
+      "production_per_period": 2,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-024",
+      "resource_type_id": "OIL",
+      "stockpile": 100,
+      "production_per_period": 1,
+      "domestic_use": 65,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-024",
+      "resource_type_id": "FOOD",
+      "stockpile": 45,
+      "production_per_period": 35,
+      "domestic_use": 42,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-024",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 17,
+      "production_per_period": 2,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-025": [
+    {
+      "country_key": "country-025",
+      "resource_type_id": "STEEL",
+      "stockpile": 12,
+      "production_per_period": 6,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-025",
+      "resource_type_id": "COAL",
+      "stockpile": 11,
+      "production_per_period": 4,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-025",
+      "resource_type_id": "OIL",
+      "stockpile": 40,
+      "production_per_period": 1,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-025",
+      "resource_type_id": "FOOD",
+      "stockpile": 26,
+      "production_per_period": 31,
+      "domestic_use": 21,
+      "export_limit": 7,
+      "is_public": true
+    },
+    {
+      "country_key": "country-025",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 13,
+      "production_per_period": 15,
+      "domestic_use": 8,
+      "export_limit": 5,
+      "is_public": true
+    }
+  ],
+  "country-026": [
+    {
+      "country_key": "country-026",
+      "resource_type_id": "STEEL",
+      "stockpile": 8,
+      "production_per_period": 3,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-026",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-026",
+      "resource_type_id": "OIL",
+      "stockpile": 165,
+      "production_per_period": 180,
+      "domestic_use": 45,
+      "export_limit": 105,
+      "is_public": true
+    },
+    {
+      "country_key": "country-026",
+      "resource_type_id": "FOOD",
+      "stockpile": 11,
+      "production_per_period": 11,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-026",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 20,
+      "production_per_period": 25,
+      "domestic_use": 4,
+      "export_limit": 16,
+      "is_public": true
+    }
+  ],
+  "country-027": [
+    {
+      "country_key": "country-027",
+      "resource_type_id": "STEEL",
+      "stockpile": 6,
+      "production_per_period": 2,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-027",
+      "resource_type_id": "COAL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-027",
+      "resource_type_id": "OIL",
+      "stockpile": 16,
+      "production_per_period": 2,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-027",
+      "resource_type_id": "FOOD",
+      "stockpile": 16,
+      "production_per_period": 18,
+      "domestic_use": 11,
+      "export_limit": 5,
+      "is_public": true
+    },
+    {
+      "country_key": "country-027",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 7,
+      "production_per_period": 8,
+      "domestic_use": 2,
+      "export_limit": 4,
+      "is_public": true
+    }
+  ],
+  "country-028": [
+    {
+      "country_key": "country-028",
+      "resource_type_id": "STEEL",
+      "stockpile": 27,
+      "production_per_period": 14,
+      "domestic_use": 19,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-028",
+      "resource_type_id": "COAL",
+      "stockpile": 15,
+      "production_per_period": 4,
+      "domestic_use": 11,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-028",
+      "resource_type_id": "OIL",
+      "stockpile": 60,
+      "production_per_period": 2,
+      "domestic_use": 40,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-028",
+      "resource_type_id": "FOOD",
+      "stockpile": 24,
+      "production_per_period": 24,
+      "domestic_use": 23,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-028",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 10,
+      "domestic_use": 8,
+      "export_limit": 1,
+      "is_public": true
+    }
+  ],
+  "country-029": [
+    {
+      "country_key": "country-029",
+      "resource_type_id": "STEEL",
+      "stockpile": 20,
+      "production_per_period": 10,
+      "domestic_use": 13,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-029",
+      "resource_type_id": "COAL",
+      "stockpile": 16,
+      "production_per_period": 3,
+      "domestic_use": 11,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-029",
+      "resource_type_id": "OIL",
+      "stockpile": 52,
+      "production_per_period": 1,
+      "domestic_use": 35,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-029",
+      "resource_type_id": "FOOD",
+      "stockpile": 31,
+      "production_per_period": 28,
+      "domestic_use": 29,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-029",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 10,
+      "domestic_use": 8,
+      "export_limit": 1,
+      "is_public": true
+    }
+  ],
+  "country-030": [
+    {
+      "country_key": "country-030",
+      "resource_type_id": "STEEL",
+      "stockpile": 3,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-030",
+      "resource_type_id": "COAL",
+      "stockpile": 3,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-030",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-030",
+      "resource_type_id": "FOOD",
+      "stockpile": 2,
+      "production_per_period": 1,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-030",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 2,
+      "production_per_period": 1,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-031": [
+    {
+      "country_key": "country-031",
+      "resource_type_id": "STEEL",
+      "stockpile": 24,
+      "production_per_period": 8,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-031",
+      "resource_type_id": "COAL",
+      "stockpile": 18,
+      "production_per_period": 6,
+      "domestic_use": 12,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-031",
+      "resource_type_id": "OIL",
+      "stockpile": 55,
+      "production_per_period": 18,
+      "domestic_use": 35,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-031",
+      "resource_type_id": "FOOD",
+      "stockpile": 35,
+      "production_per_period": 39,
+      "domestic_use": 31,
+      "export_limit": 5,
+      "is_public": true
+    },
+    {
+      "country_key": "country-031",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 15,
+      "production_per_period": 18,
+      "domestic_use": 8,
+      "export_limit": 7,
+      "is_public": true
+    }
+  ],
+  "country-032": [
+    {
+      "country_key": "country-032",
+      "resource_type_id": "STEEL",
+      "stockpile": 7,
+      "production_per_period": 2,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-032",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-032",
+      "resource_type_id": "OIL",
+      "stockpile": 75,
+      "production_per_period": 80,
+      "domestic_use": 22,
+      "export_limit": 45,
+      "is_public": true
+    },
+    {
+      "country_key": "country-032",
+      "resource_type_id": "FOOD",
+      "stockpile": 17,
+      "production_per_period": 18,
+      "domestic_use": 15,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-032",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 5,
+      "production_per_period": 5,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-033": [
+    {
+      "country_key": "country-033",
+      "resource_type_id": "STEEL",
+      "stockpile": 12,
+      "production_per_period": 6,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-033",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-033",
+      "resource_type_id": "OIL",
+      "stockpile": 62,
+      "production_per_period": 65,
+      "domestic_use": 32,
+      "export_limit": 24,
+      "is_public": true
+    },
+    {
+      "country_key": "country-033",
+      "resource_type_id": "FOOD",
+      "stockpile": 21,
+      "production_per_period": 25,
+      "domestic_use": 17,
+      "export_limit": 6,
+      "is_public": true
+    },
+    {
+      "country_key": "country-033",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 7,
+      "production_per_period": 8,
+      "domestic_use": 5,
+      "export_limit": 2,
+      "is_public": true
+    }
+  ],
+  "country-034": [
+    {
+      "country_key": "country-034",
+      "resource_type_id": "STEEL",
+      "stockpile": 17,
+      "production_per_period": 8,
+      "domestic_use": 11,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-034",
+      "resource_type_id": "COAL",
+      "stockpile": 14,
+      "production_per_period": 3,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-034",
+      "resource_type_id": "OIL",
+      "stockpile": 38,
+      "production_per_period": 2,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-034",
+      "resource_type_id": "FOOD",
+      "stockpile": 27,
+      "production_per_period": 21,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-034",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 26,
+      "production_per_period": 34,
+      "domestic_use": 10,
+      "export_limit": 18,
+      "is_public": true
+    }
+  ],
+  "country-035": [
+    {
+      "country_key": "country-035",
+      "resource_type_id": "STEEL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-035",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-035",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-035",
+      "resource_type_id": "FOOD",
+      "stockpile": 3,
+      "production_per_period": 3,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-035",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 3,
+      "production_per_period": 3,
+      "domestic_use": 1,
+      "export_limit": 1,
+      "is_public": true
+    }
+  ],
+  "country-036": [
+    {
+      "country_key": "country-036",
+      "resource_type_id": "STEEL",
+      "stockpile": 32,
+      "production_per_period": 19,
+      "domestic_use": 21,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-036",
+      "resource_type_id": "COAL",
+      "stockpile": 19,
+      "production_per_period": 5,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-036",
+      "resource_type_id": "OIL",
+      "stockpile": 68,
+      "production_per_period": 2,
+      "domestic_use": 45,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-036",
+      "resource_type_id": "FOOD",
+      "stockpile": 42,
+      "production_per_period": 35,
+      "domestic_use": 40,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-036",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 20,
+      "production_per_period": 24,
+      "domestic_use": 12,
+      "export_limit": 8,
+      "is_public": true
+    }
+  ],
+  "country-037": [
+    {
+      "country_key": "country-037",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-037",
+      "resource_type_id": "COAL",
+      "stockpile": 4,
+      "production_per_period": 0,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-037",
+      "resource_type_id": "OIL",
+      "stockpile": 22,
+      "production_per_period": 15,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-037",
+      "resource_type_id": "FOOD",
+      "stockpile": 12,
+      "production_per_period": 14,
+      "domestic_use": 8,
+      "export_limit": 4,
+      "is_public": true
+    },
+    {
+      "country_key": "country-037",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 3,
+      "production_per_period": 2,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-038": [
+    {
+      "country_key": "country-038",
+      "resource_type_id": "STEEL",
+      "stockpile": 8,
+      "production_per_period": 3,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-038",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 1,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-038",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 1,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-038",
+      "resource_type_id": "FOOD",
+      "stockpile": 52,
+      "production_per_period": 46,
+      "domestic_use": 50,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-038",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 7,
+      "production_per_period": 8,
+      "domestic_use": 4,
+      "export_limit": 3,
+      "is_public": true
+    }
+  ],
+  "country-039": [
+    {
+      "country_key": "country-039",
+      "resource_type_id": "STEEL",
+      "stockpile": 21,
+      "production_per_period": 10,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-039",
+      "resource_type_id": "COAL",
+      "stockpile": 11,
+      "production_per_period": 2,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-039",
+      "resource_type_id": "OIL",
+      "stockpile": 45,
+      "production_per_period": 2,
+      "domestic_use": 30,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-039",
+      "resource_type_id": "FOOD",
+      "stockpile": 16,
+      "production_per_period": 12,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-039",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 9,
+      "production_per_period": 3,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-040": [
+    {
+      "country_key": "country-040",
+      "resource_type_id": "STEEL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-040",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-040",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-040",
+      "resource_type_id": "FOOD",
+      "stockpile": 4,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-040",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-041": [
+    {
+      "country_key": "country-041",
+      "resource_type_id": "STEEL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-041",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-041",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-041",
+      "resource_type_id": "FOOD",
+      "stockpile": 6,
+      "production_per_period": 6,
+      "domestic_use": 6,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-041",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 2,
+      "production_per_period": 1,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-042": [
+    {
+      "country_key": "country-042",
+      "resource_type_id": "STEEL",
+      "stockpile": 14,
+      "production_per_period": 5,
+      "domestic_use": 9,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-042",
+      "resource_type_id": "COAL",
+      "stockpile": 14,
+      "production_per_period": 4,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-042",
+      "resource_type_id": "OIL",
+      "stockpile": 60,
+      "production_per_period": 12,
+      "domestic_use": 40,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-042",
+      "resource_type_id": "FOOD",
+      "stockpile": 68,
+      "production_per_period": 76,
+      "domestic_use": 63,
+      "export_limit": 9,
+      "is_public": true
+    },
+    {
+      "country_key": "country-042",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 65,
+      "production_per_period": 86,
+      "domestic_use": 18,
+      "export_limit": 52,
+      "is_public": true
+    }
+  ],
+  "country-043": [
+    {
+      "country_key": "country-043",
+      "resource_type_id": "STEEL",
+      "stockpile": 6,
+      "production_per_period": 2,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-043",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-043",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 0,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-043",
+      "resource_type_id": "FOOD",
+      "stockpile": 15,
+      "production_per_period": 14,
+      "domestic_use": 14,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-043",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 17,
+      "production_per_period": 22,
+      "domestic_use": 4,
+      "export_limit": 14,
+      "is_public": true
+    }
+  ],
+  "country-044": [
+    {
+      "country_key": "country-044",
+      "resource_type_id": "STEEL",
+      "stockpile": 3,
+      "production_per_period": 0,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-044",
+      "resource_type_id": "COAL",
+      "stockpile": 3,
+      "production_per_period": 0,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-044",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-044",
+      "resource_type_id": "FOOD",
+      "stockpile": 12,
+      "production_per_period": 13,
+      "domestic_use": 10,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-044",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 5,
+      "production_per_period": 6,
+      "domestic_use": 2,
+      "export_limit": 3,
+      "is_public": true
+    }
+  ],
+  "country-045": [
+    {
+      "country_key": "country-045",
+      "resource_type_id": "STEEL",
+      "stockpile": 14,
+      "production_per_period": 5,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-045",
+      "resource_type_id": "COAL",
+      "stockpile": 9,
+      "production_per_period": 1,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-045",
+      "resource_type_id": "OIL",
+      "stockpile": 38,
+      "production_per_period": 1,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-045",
+      "resource_type_id": "FOOD",
+      "stockpile": 44,
+      "production_per_period": 29,
+      "domestic_use": 42,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-045",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 25,
+      "production_per_period": 32,
+      "domestic_use": 12,
+      "export_limit": 15,
+      "is_public": true
+    }
+  ],
+  "country-046": [
+    {
+      "country_key": "country-046",
+      "resource_type_id": "STEEL",
+      "stockpile": 7,
+      "production_per_period": 2,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-046",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-046",
+      "resource_type_id": "OIL",
+      "stockpile": 190,
+      "production_per_period": 220,
+      "domestic_use": 50,
+      "export_limit": 140,
+      "is_public": true
+    },
+    {
+      "country_key": "country-046",
+      "resource_type_id": "FOOD",
+      "stockpile": 21,
+      "production_per_period": 25,
+      "domestic_use": 14,
+      "export_limit": 8,
+      "is_public": true
+    },
+    {
+      "country_key": "country-046",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 6,
+      "production_per_period": 6,
+      "domestic_use": 4,
+      "export_limit": 1,
+      "is_public": true
+    }
+  ],
+  "country-047": [
+    {
+      "country_key": "country-047",
+      "resource_type_id": "STEEL",
+      "stockpile": 3,
+      "production_per_period": 0,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-047",
+      "resource_type_id": "COAL",
+      "stockpile": 3,
+      "production_per_period": 0,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-047",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-047",
+      "resource_type_id": "FOOD",
+      "stockpile": 17,
+      "production_per_period": 18,
+      "domestic_use": 15,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-047",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 10,
+      "production_per_period": 12,
+      "domestic_use": 3,
+      "export_limit": 6,
+      "is_public": true
+    }
+  ],
+  "country-048": [
+    {
+      "country_key": "country-048",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-048",
+      "resource_type_id": "COAL",
+      "stockpile": 3,
+      "production_per_period": 0,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-048",
+      "resource_type_id": "OIL",
+      "stockpile": 15,
+      "production_per_period": 0,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-048",
+      "resource_type_id": "FOOD",
+      "stockpile": 13,
+      "production_per_period": 12,
+      "domestic_use": 12,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-048",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 4,
+      "production_per_period": 3,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-049": [
+    {
+      "country_key": "country-049",
+      "resource_type_id": "STEEL",
+      "stockpile": 18,
+      "production_per_period": 8,
+      "domestic_use": 12,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-049",
+      "resource_type_id": "COAL",
+      "stockpile": 14,
+      "production_per_period": 2,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-049",
+      "resource_type_id": "OIL",
+      "stockpile": 45,
+      "production_per_period": 8,
+      "domestic_use": 30,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-049",
+      "resource_type_id": "FOOD",
+      "stockpile": 48,
+      "production_per_period": 57,
+      "domestic_use": 36,
+      "export_limit": 15,
+      "is_public": true
+    },
+    {
+      "country_key": "country-049",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 18,
+      "production_per_period": 22,
+      "domestic_use": 10,
+      "export_limit": 8,
+      "is_public": true
+    }
+  ],
+  "country-050": [
+    {
+      "country_key": "country-050",
+      "resource_type_id": "STEEL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-050",
+      "resource_type_id": "COAL",
+      "stockpile": 2,
+      "production_per_period": 0,
+      "domestic_use": 1,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-050",
+      "resource_type_id": "OIL",
+      "stockpile": 8,
+      "production_per_period": 0,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-050",
+      "resource_type_id": "FOOD",
+      "stockpile": 5,
+      "production_per_period": 6,
+      "domestic_use": 4,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-050",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 4,
+      "production_per_period": 4,
+      "domestic_use": 1,
+      "export_limit": 2,
+      "is_public": true
+    }
+  ],
+  "country-051": [
+    {
+      "country_key": "country-051",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-051",
+      "resource_type_id": "COAL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-051",
+      "resource_type_id": "OIL",
+      "stockpile": 15,
+      "production_per_period": 0,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-051",
+      "resource_type_id": "FOOD",
+      "stockpile": 14,
+      "production_per_period": 12,
+      "domestic_use": 13,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-051",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 30,
+      "production_per_period": 40,
+      "domestic_use": 4,
+      "export_limit": 28,
+      "is_public": true
+    }
+  ],
+  "country-052": [
+    {
+      "country_key": "country-052",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-052",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-052",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 12,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-052",
+      "resource_type_id": "FOOD",
+      "stockpile": 10,
+      "production_per_period": 11,
+      "domestic_use": 9,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-052",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 26,
+      "production_per_period": 35,
+      "domestic_use": 3,
+      "export_limit": 25,
+      "is_public": true
+    }
+  ],
+  "country-053": [
+    {
+      "country_key": "country-053",
+      "resource_type_id": "STEEL",
+      "stockpile": 12,
+      "production_per_period": 3,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-053",
+      "resource_type_id": "COAL",
+      "stockpile": 11,
+      "production_per_period": 2,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-053",
+      "resource_type_id": "OIL",
+      "stockpile": 68,
+      "production_per_period": 70,
+      "domestic_use": 34,
+      "export_limit": 26,
+      "is_public": true
+    },
+    {
+      "country_key": "country-053",
+      "resource_type_id": "FOOD",
+      "stockpile": 68,
+      "production_per_period": 76,
+      "domestic_use": 59,
+      "export_limit": 13,
+      "is_public": true
+    },
+    {
+      "country_key": "country-053",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 50,
+      "production_per_period": 65,
+      "domestic_use": 14,
+      "export_limit": 40,
+      "is_public": true
+    }
+  ],
+  "country-054": [
+    {
+      "country_key": "country-054",
+      "resource_type_id": "STEEL",
+      "stockpile": 6,
+      "production_per_period": 2,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-054",
+      "resource_type_id": "COAL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-054",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 1,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-054",
+      "resource_type_id": "FOOD",
+      "stockpile": 6,
+      "production_per_period": 5,
+      "domestic_use": 5,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-054",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 5,
+      "production_per_period": 5,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-055": [
+    {
+      "country_key": "country-055",
+      "resource_type_id": "STEEL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-055",
+      "resource_type_id": "COAL",
+      "stockpile": 5,
+      "production_per_period": 1,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-055",
+      "resource_type_id": "OIL",
+      "stockpile": 15,
+      "production_per_period": 0,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-055",
+      "resource_type_id": "FOOD",
+      "stockpile": 7,
+      "production_per_period": 8,
+      "domestic_use": 5,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-055",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 22,
+      "production_per_period": 30,
+      "domestic_use": 3,
+      "export_limit": 20,
+      "is_public": true
+    }
+  ],
+  "country-056": [
+    {
+      "country_key": "country-056",
+      "resource_type_id": "STEEL",
+      "stockpile": 13,
+      "production_per_period": 6,
+      "domestic_use": 8,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-056",
+      "resource_type_id": "COAL",
+      "stockpile": 10,
+      "production_per_period": 0,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-056",
+      "resource_type_id": "OIL",
+      "stockpile": 38,
+      "production_per_period": 12,
+      "domestic_use": 25,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-056",
+      "resource_type_id": "FOOD",
+      "stockpile": 36,
+      "production_per_period": 48,
+      "domestic_use": 12,
+      "export_limit": 29,
+      "is_public": true
+    },
+    {
+      "country_key": "country-056",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 5,
+      "production_per_period": 3,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ],
+  "country-057": [
+    {
+      "country_key": "country-057",
+      "resource_type_id": "STEEL",
+      "stockpile": 18,
+      "production_per_period": 11,
+      "domestic_use": 10,
+      "export_limit": 1,
+      "is_public": true
+    },
+    {
+      "country_key": "country-057",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 4,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-057",
+      "resource_type_id": "OIL",
+      "stockpile": 30,
+      "production_per_period": 5,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-057",
+      "resource_type_id": "FOOD",
+      "stockpile": 28,
+      "production_per_period": 37,
+      "domestic_use": 10,
+      "export_limit": 20,
+      "is_public": true
+    },
+    {
+      "country_key": "country-057",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 20,
+      "production_per_period": 21,
+      "domestic_use": 12,
+      "export_limit": 7,
+      "is_public": true
+    }
+  ],
+  "country-058": [
+    {
+      "country_key": "country-058",
+      "resource_type_id": "STEEL",
+      "stockpile": 25,
+      "production_per_period": 13,
+      "domestic_use": 17,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-058",
+      "resource_type_id": "COAL",
+      "stockpile": 14,
+      "production_per_period": 7,
+      "domestic_use": 7,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-058",
+      "resource_type_id": "OIL",
+      "stockpile": 30,
+      "production_per_period": 5,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-058",
+      "resource_type_id": "FOOD",
+      "stockpile": 300,
+      "production_per_period": 303,
+      "domestic_use": 330,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-058",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 25,
+      "production_per_period": 28,
+      "domestic_use": 15,
+      "export_limit": 10,
+      "is_public": true
+    }
+  ],
+  "country-059": [
+    {
+      "country_key": "country-059",
+      "resource_type_id": "STEEL",
+      "stockpile": 6,
+      "production_per_period": 1,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-059",
+      "resource_type_id": "COAL",
+      "stockpile": 4,
+      "production_per_period": 0,
+      "domestic_use": 3,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-059",
+      "resource_type_id": "OIL",
+      "stockpile": 24,
+      "production_per_period": 0,
+      "domestic_use": 15,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-059",
+      "resource_type_id": "FOOD",
+      "stockpile": 16,
+      "production_per_period": 18,
+      "domestic_use": 13,
+      "export_limit": 3,
+      "is_public": true
+    },
+    {
+      "country_key": "country-059",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 12,
+      "production_per_period": 15,
+      "domestic_use": 4,
+      "export_limit": 8,
+      "is_public": true
+    }
+  ],
+  "country-060": [
+    {
+      "country_key": "country-060",
+      "resource_type_id": "STEEL",
+      "stockpile": 13,
+      "production_per_period": 9,
+      "domestic_use": 7,
+      "export_limit": 2,
+      "is_public": true
+    },
+    {
+      "country_key": "country-060",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 4,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-060",
+      "resource_type_id": "OIL",
+      "stockpile": 30,
+      "production_per_period": 2,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-060",
+      "resource_type_id": "FOOD",
+      "stockpile": 20,
+      "production_per_period": 25,
+      "domestic_use": 7,
+      "export_limit": 14,
+      "is_public": true
+    },
+    {
+      "country_key": "country-060",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 16,
+      "production_per_period": 18,
+      "domestic_use": 8,
+      "export_limit": 7,
+      "is_public": true
+    }
+  ],
+  "country-061": [
+    {
+      "country_key": "country-061",
+      "resource_type_id": "STEEL",
+      "stockpile": 7,
+      "production_per_period": 2,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-061",
+      "resource_type_id": "COAL",
+      "stockpile": 7,
+      "production_per_period": 4,
+      "domestic_use": 4,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-061",
+      "resource_type_id": "OIL",
+      "stockpile": 30,
+      "production_per_period": 1,
+      "domestic_use": 20,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-061",
+      "resource_type_id": "FOOD",
+      "stockpile": 10,
+      "production_per_period": 10,
+      "domestic_use": 9,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-061",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 32,
+      "production_per_period": 40,
+      "domestic_use": 7,
+      "export_limit": 25,
+      "is_public": true
+    }
+  ],
+  "country-062": [
+    {
+      "country_key": "country-062",
+      "resource_type_id": "STEEL",
+      "stockpile": 4,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-062",
+      "resource_type_id": "COAL",
+      "stockpile": 3,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-062",
+      "resource_type_id": "OIL",
+      "stockpile": 15,
+      "production_per_period": 0,
+      "domestic_use": 10,
+      "export_limit": 0,
+      "is_public": true
+    },
+    {
+      "country_key": "country-062",
+      "resource_type_id": "FOOD",
+      "stockpile": 7,
+      "production_per_period": 8,
+      "domestic_use": 2,
+      "export_limit": 5,
+      "is_public": true
+    },
+    {
+      "country_key": "country-062",
+      "resource_type_id": "RARE_MINERALS",
+      "stockpile": 3,
+      "production_per_period": 1,
+      "domestic_use": 2,
+      "export_limit": 0,
+      "is_public": true
+    }
+  ]
+}

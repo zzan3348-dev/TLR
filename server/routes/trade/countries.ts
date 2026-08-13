@@ -3,6 +3,7 @@ import { getAdminClient, getServerEnv } from "../../auth.js";
 import { cleanCountryKey, reviewRouteForCountry } from "../../diplomacy.js";
 import { economyWorldDate, requireEconomyActor } from "../../economy.js";
 import mapCountries from "../../../src/data/mapCountries.json" with { type: "json" };
+import { mergeStartingResources } from "../../startingResources.js";
 
 type EconomyRow = {
   country_key: string;
@@ -81,8 +82,9 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const rows = await Promise.all(allKeys.map(async (countryKey) => {
       const economy = economyByCountry.get(countryKey);
       const state = readiness(economy);
-      const publicResources = resourceData.filter((row) => row.country_key === countryKey);
+      const publicResources = mergeStartingResources(countryKey, resourceData.filter((row) => row.country_key === countryKey));
       const resourceRows = await Promise.all(publicResources.map(async (resource) => {
+        if ("available" in resource && typeof resource.available === "number") return resource;
         const result = await admin.rpc("tlr_trade_resource_components", { p_country: countryKey, p_resource: resource.resource_type_id });
         const component = Array.isArray(result.data) ? result.data[0] : result.data;
         return { ...resource, available: component && typeof component === "object" && "available" in component ? Number(component.available) : null };

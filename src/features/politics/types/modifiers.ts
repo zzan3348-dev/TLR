@@ -1,7 +1,8 @@
-export type ModifierUnit = "flat" | "percent";
+export type ModifierUnit = "flat" | "percent" | "percentagePoint";
 
 export type Modifier = {
   key: string;
+  label?: string;
   value: number;
   unit?: ModifierUnit;
 };

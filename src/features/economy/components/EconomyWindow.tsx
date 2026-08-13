@@ -8,6 +8,7 @@ import { StrategicWindow } from "../../play/components/StrategicWindow";
 import type { PlaySimulationState } from "../../play/data/playSimulationState";
 import { announceEconomyUpdate, confirmBudget, createTradeProposal, EconomyApiError, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
 import { RESOURCE_LABELS, type EconomySnapshot, type TradeAgreement, type TradeAssetType, type TradeCountrySummary, type TradeLine, type TradeProposal, type TradeResourceId } from "../types";
+import { getStartingResources } from "../data/countryResourceStates";
 
 type EconomyTab = "overview" | "society" | "trade";
 type Props = { country: MapCountryIndex; state: PlaySimulationState; onClose: () => void };
@@ -23,7 +24,7 @@ function emptyEconomySnapshot(countryKey: string): EconomySnapshot {
     readiness: "UNCONFIGURED",
     economy: null,
     productionCapacity: null,
-    resources: [],
+    resources: getStartingResources(countryKey),
     history: [],
     rules: {
       settlement_interval_days: 30,

@@ -90,15 +90,8 @@ export function LawDetailModal({
                   <strong>{option.name}</strong>
                   <p>{option.description}</p>
                   <small>
-                    {option.modifiers.length > 0
-                      ? option.modifiers
-                          .map(
-                            (modifier) =>
-                              `${modifier.key} ${modifier.value}${
-                                modifier.unit === "percent" ? "%" : ""
-                              }`,
-                          )
-                          .join(" · ")
+                    {option.effectLines && option.effectLines.length > 0
+                      ? option.effectLines.join(" · ")
                       : "효과 수치는 향후 국가 계산 시스템과 연결됩니다."}
                   </small>
                 </div>

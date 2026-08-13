@@ -33,6 +33,11 @@ export type LawOption = {
   modifiers: readonly Modifier[];
   requirements: readonly LawRequirement[];
   incompatibilities: readonly string[];
+  conditionalIdeologyCategories?: readonly PartyIdeologyCategory[];
+  politicalPowerCost?: number;
+  requiresAdminApproval?: boolean;
+  effectLines?: readonly string[];
+  notes?: string | null;
 };
 
 export type LawDefinition = {
