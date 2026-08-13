@@ -4,6 +4,7 @@ import { PROPOSAL_LABELS, type DiplomaticProposal } from "../features/diplomacy/
 import type { TradeAgreement, TradeProposal } from "../features/economy/types";
 import { MilitaryAdminSection, type MilitaryAdminData } from "../features/military/components/MilitaryAdminSection";
 import { ResearchAdminSection, type ResearchAdminData } from "../features/research/components/ResearchAdminSection";
+import { MapCapitalAdminSection } from "./MapCapitalAdminSection";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -144,6 +145,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <section className="directorate-page__status">
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
+      <MapCapitalAdminSection />
       {researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
       {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">

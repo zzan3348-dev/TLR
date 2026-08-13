@@ -3,11 +3,17 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
   type WheelEvent as ReactWheelEvent,
 } from "react";
+import {
+  capitalsToMarkers,
+  initialMapCapitals,
+  mergeMapCapitals,
+} from "../data/mapCapitals";
 import { mapCountries } from "../data/mapCountries";
 import { mapCountryComponents } from "../data/mapCountryComponents";
 import { mapCountryLabels } from "../data/mapCountryLabels";
@@ -20,6 +26,7 @@ import type {
   MapCountryLabel,
   ViewportSize,
 } from "../types/mapCountry";
+import type { MapCapitalRecord, MapMarker } from "../types/mapMarker";
 import {
   createFactionMapLayer,
   createFactionMapLabels,
@@ -46,6 +53,7 @@ import {
   drawMapLabels,
   layoutMapLabels,
 } from "../utils/mapLabelRenderer";
+import { projectMapMarkers } from "../utils/mapMarkerUtils";
 import {
   drawDimmedWorldOverlay,
   drawMapThemeOverlay,
@@ -109,6 +117,13 @@ type SelectionPresentationState = {
   progress: number;
   target: 0 | 1;
   lastTimestamp: number | null;
+};
+
+type MapOverlayView = {
+  camera: MapCamera;
+  viewport: ViewportSize;
+  mapWidth: number;
+  fitScale: number;
 };
 
 const CLICK_MOVEMENT_LIMIT = 8;
@@ -183,6 +198,22 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const [assetError, setAssetError] = useState<string | null>(null);
     const [hoveredMapCountry, setHoveredMapCountry] =
       useState<HoveredMapCountry | null>(null);
+    const [mapCapitals, setMapCapitals] =
+      useState<readonly MapCapitalRecord[]>(initialMapCapitals);
+    const [overlayView, setOverlayView] = useState<MapOverlayView | null>(null);
+    const mapMarkers = useMemo(() => capitalsToMarkers(mapCapitals), [mapCapitals]);
+    const mapMarkersRef = useRef<readonly MapMarker[]>(mapMarkers);
+    mapMarkersRef.current = mapMarkers;
+
+    const screenMarkers = useMemo(() => {
+      if (!overlayView || mapMode !== "political") return [];
+      return projectMapMarkers({
+        markers: mapMarkers,
+        ...overlayView,
+        selectedCountryKey: selectedCountry?.key ?? null,
+        mobile: overlayView.viewport.width <= 720,
+      });
+    }, [mapMarkers, mapMode, overlayView, selectedCountry?.key]);
 
     const drawMap = useCallback(() => {
       drawFrameRef.current = null;
@@ -385,6 +416,15 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       }
 
       if (showLabelsRef.current) {
+        const projectedMarkers = projectMapMarkers({
+          markers: mapMarkersRef.current,
+          camera,
+          viewport,
+          mapWidth,
+          fitScale: fitScaleRef.current,
+          selectedCountryKey: country?.key ?? null,
+          mobile: viewport.width <= 720,
+        });
         const labelPlacements = layoutMapLabels({
           labels:
             mapModeRef.current === "faction"
@@ -400,6 +440,11 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             mapModeRef.current === "faction"
               ? null
               : component?.componentId ?? null,
+          reservedBounds: projectedMarkers.flatMap((marker) =>
+            marker.labelBounds && marker.labelOpacity > 0.05
+              ? [marker.labelBounds]
+              : [],
+          ),
         });
         drawMapLabels(context, labelPlacements, pixelRatio, progress);
       }
@@ -410,6 +455,17 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         drawFrameRef.current = requestAnimationFrame(drawMap);
       }
     }, [drawMap]);
+
+    const publishOverlayView = useCallback(() => {
+      const assets = assetsRef.current;
+      if (!assets) return;
+      setOverlayView({
+        camera: { ...cameraRef.current },
+        viewport: { ...viewportRef.current },
+        mapWidth: assets.width,
+        fitScale: fitScaleRef.current,
+      });
+    }, []);
 
     const animateSelectionPresentation = useCallback(() => {
       if (presentationFrameRef.current !== null) {
@@ -485,9 +541,10 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
           { width: assets.width, height: assets.height },
           fitScaleRef.current,
         );
+        publishOverlayView();
         requestDraw();
       },
-      [requestDraw],
+      [publishOverlayView, requestDraw],
     );
 
     const animateCamera = useCallback(
@@ -610,7 +667,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         }
         targetScale = Math.min(
           targetScale,
-          fitScaleRef.current * 8,
+          fitScaleRef.current * 16,
         );
 
         const visibleCenterX = panelWidth + availableWidth / 2;
@@ -696,6 +753,30 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       [findMapTarget, focusComponent, onCountrySelect],
     );
 
+    const selectMapMarker = useCallback(
+      (marker: MapMarker) => {
+        if (!marker.selectable) return;
+        const assets = assetsRef.current;
+        const country = mapCountries.find(
+          (candidate) => candidate.key === marker.countryKey,
+        );
+        if (!assets || !country) return;
+        const component = findComponentForPoint(
+          country.id,
+          marker.position,
+          mapCountryComponents,
+          assets.width,
+        );
+        if (!component) return;
+        if (selectionKeyRef.current !== country.key) {
+          selectionKeyRef.current = country.key;
+          focusComponent(component);
+        }
+        onCountrySelect(country, component);
+      },
+      [focusComponent, onCountrySelect],
+    );
+
     useEffect(() => {
       selectedCountryRef.current = selectedCountry;
       selectedComponentRef.current = selectedComponent;
@@ -742,6 +823,24 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
 
     useEffect(() => {
       let active = true;
+      void fetch("/api/map-capitals")
+        .then(async (response) => {
+          if (!response.ok) return { capitals: [] as MapCapitalRecord[] };
+          return response.json() as Promise<{ capitals?: MapCapitalRecord[] }>;
+        })
+        .then((payload) => {
+          if (active) {
+            setMapCapitals(
+              mergeMapCapitals(initialMapCapitals, payload.capitals ?? []),
+            );
+          }
+        })
+        .catch(() => undefined);
+      return () => { active = false; };
+    }, []);
+
+    useEffect(() => {
+      let active = true;
       loadMapAssets()
         .then((assets) => {
           if (!active) {
@@ -772,6 +871,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             scale: fitScale,
           };
           initializedRef.current = true;
+          publishOverlayView();
           requestDraw();
         })
         .catch((error: unknown) => {
@@ -791,7 +891,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         factionMapLayerRef.current = null;
         factionMapLabelsRef.current = [];
       };
-    }, [requestDraw]);
+    }, [publishOverlayView, requestDraw]);
 
     useEffect(() => {
       const canvas = canvasRef.current;
@@ -833,6 +933,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
               nextFit,
             );
           }
+          publishOverlayView();
         }
         requestDraw();
       };
@@ -841,7 +942,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       const observer = new ResizeObserver(resize);
       observer.observe(canvas);
       return () => observer.disconnect();
-    }, [requestDraw]);
+    }, [publishOverlayView, requestDraw]);
 
     useEffect(
       () => () => {
@@ -1078,6 +1179,42 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
           aria-label="확대, 이동, 국가 선택이 가능한 1932년 세계지도"
           role="img"
         />
+        <div className="map-marker-layer" aria-label="지도 전략 마커">
+          {screenMarkers.map((screenMarker) => (
+            <button
+              key={`${screenMarker.marker.id}:${screenMarker.copy}`}
+              type="button"
+              className="map-marker map-marker--capital"
+              data-map-marker-type={screenMarker.marker.type}
+              data-map-marker-id={screenMarker.marker.id}
+              style={{
+                left: screenMarker.x,
+                top: screenMarker.y,
+                width: screenMarker.size,
+                height: screenMarker.size,
+                opacity: screenMarker.markerOpacity,
+              }}
+              onClick={() => selectMapMarker(screenMarker.marker)}
+              aria-label={`${screenMarker.marker.name} 수도 선택`}
+              title={screenMarker.marker.name}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="m12 2.8 2.15 5.04 5.46.48-4.13 3.61 1.24 5.34L12 14.48l-4.72 2.79 1.24-5.34-4.13-3.61 5.46-.48L12 2.8Z"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+              {screenMarker.labelOpacity > 0 ? (
+                <span
+                  className="map-marker__label"
+                  style={{ opacity: screenMarker.labelOpacity }}
+                >
+                  {screenMarker.marker.name}
+                </span>
+              ) : null}
+            </button>
+          ))}
+        </div>
         {mapMode === "faction" && hoveredMapCountry ? (
           <div
             className="map-hover-tooltip"

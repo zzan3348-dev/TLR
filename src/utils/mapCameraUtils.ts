@@ -3,8 +3,9 @@ import type {
   MapCamera,
   ViewportSize,
 } from "../types/mapCountry";
+import { MAP_LOD_POLICY } from "./mapLodPolicy";
 
-export const MAX_ZOOM_MULTIPLIER = 8;
+export const MAX_ZOOM_MULTIPLIER = MAP_LOD_POLICY.maxZoomMultiplier;
 
 export function clamp(value: number, minimum: number, maximum: number): number {
   return Math.min(maximum, Math.max(minimum, value));

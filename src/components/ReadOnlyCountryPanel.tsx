@@ -5,7 +5,6 @@ import type {
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { getCountryPresentation } from "../data/countryPresentation";
-import { formatPartyIdeology } from "../data/partyIdeologies";
 import type {
   CountryNationalSpirit,
   CountryPartyPresentation,
@@ -315,17 +314,6 @@ function MajorPartyPanel({
     primaryParty?.name ||
     presentation.politics.rulingParty ||
     "정당 정보 없음";
-  const primaryIdeology = primaryParty
-    ? formatPartyIdeology(
-        primaryParty.ideologyCategory,
-        primaryParty.subIdeology,
-      )
-    : formatPartyIdeology(
-        presentation.politics.ideologyCategory,
-        presentation.politics.subIdeology,
-      );
-  const primarySymbol =
-    primaryParty?.symbolPath ?? presentation.politics.symbolPath;
   const chartStyle = {
     "--primary-party-color":
       primaryParty
@@ -339,25 +327,12 @@ function MajorPartyPanel({
       data-example={usesExampleParties}
       style={chartStyle}
     >
-      <div className="hybrid-country-panel__primary-party">
-        {primarySymbol ? (
-          <img src={primarySymbol} alt="" draggable={false} />
-        ) : (
-          <span className="hybrid-country-panel__party-sigil">
-            <b>{primaryParty ? "01" : "–"}</b>
-          </span>
-        )}
-        <div>
-          <strong title={primaryName}>{primaryName}</strong>
-          <span title={primaryIdeology}>{primaryIdeology}</span>
-        </div>
-      </div>
-
       <section className="hybrid-country-panel__party-support">
         <div className="hybrid-country-panel__support-visual">
           <PartySupportChart
             parties={parties}
             className="hybrid-country-panel__party-chart"
+            rulingPartyName={primaryName}
           />
         </div>
       </section>
@@ -515,10 +490,7 @@ export function ReadOnlyCountryPanel({
                 />
               ) : presentation.politics.subIdeology ? (
                 <span className="hybrid-country-panel__ideology-name">
-                  {formatPartyIdeology(
-                    presentation.politics.ideologyCategory,
-                    presentation.politics.subIdeology,
-                  )}
+                  {presentation.politics.subIdeology}
                 </span>
               ) : null}
             </CountryPanelSlot>

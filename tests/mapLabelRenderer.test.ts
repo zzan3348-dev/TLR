@@ -75,7 +75,7 @@ describe("mapLabelRenderer", () => {
     expect(placements).toHaveLength(0);
   });
 
-  it("국명이 지도에 고정되어 확대율과 같은 비율로 커진다", () => {
+  it("국명은 화면상 범위 안에서만 완만하게 조절되고 무한히 커지지 않는다", () => {
     const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -85,12 +85,9 @@ describe("mapLabelRenderer", () => {
       return placement;
     });
 
-    expect(placements.map(({ screenFontSize }) => screenFontSize)).toEqual([
-      120,
-      160,
-      320,
-      640,
-    ]);
+    const sizes = placements.map(({ screenFontSize }) => screenFontSize);
+    expect(Math.max(...sizes) / Math.min(...sizes)).toBeLessThan(1.25);
+    expect(Math.max(...sizes)).toBeLessThan(90);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
@@ -146,7 +143,7 @@ describe("mapLabelRenderer", () => {
     expect(zoomedPlacement.y).toBeCloseTo(250);
   });
 
-  it("겹치더라도 저장된 위치의 라벨을 임의로 숨기지 않는다", () => {
+  it("겹치는 라벨은 우선순위가 높은 라벨만 유지한다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
@@ -155,7 +152,7 @@ describe("mapLabelRenderer", () => {
       ],
     });
 
-    expect(placements.map(({ label }) => label.countryId)).toEqual([2, 1]);
+    expect(placements.map(({ label }) => label.countryId)).toEqual([2]);
   });
 
   it("일부만 겹치는 라벨은 위치를 옮기지 않고 글자 크기를 줄여 복구한다", () => {
@@ -195,18 +192,19 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBe(160);
+    expect(placements[0].screenFontSize).toBeGreaterThanOrEqual(36);
+    expect(placements[0].screenFontSize).toBeLessThanOrEqual(44);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {
     const [starting] = layoutMapLabels({
       ...baseLayoutOptions,
-      camera: { x: 500, y: 250, scale: 1.2 },
+      camera: { x: 500, y: 250, scale: 1.08 },
       labels: [createLabel(1)],
     });
     const [visible] = layoutMapLabels({
       ...baseLayoutOptions,
-      camera: { x: 500, y: 250, scale: 1.6 },
+      camera: { x: 500, y: 250, scale: 1.35 },
       labels: [createLabel(1)],
     });
 

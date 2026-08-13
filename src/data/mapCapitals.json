@@ -1,0 +1,436 @@
+[
+  {
+    "countryKey": "country-001",
+    "name": "워싱턴 D.C.",
+    "x": 1547,
+    "y": 734,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-002",
+    "name": "런던",
+    "x": 2785,
+    "y": 517,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-003",
+    "name": "모스크바",
+    "x": 3373,
+    "y": 447,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-004",
+    "name": "옴스크",
+    "x": 3939,
+    "y": 444,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-005",
+    "name": "스톡홀름",
+    "x": 3067,
+    "y": 387,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-006",
+    "name": "리가",
+    "x": 3162,
+    "y": 426,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-007",
+    "name": "시카고",
+    "x": 1449,
+    "y": 554,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-008",
+    "name": "베를린",
+    "x": 2995,
+    "y": 501,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-009",
+    "name": "세미팔라틴스크",
+    "x": 4038,
+    "y": 536,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-010",
+    "name": "블라디보스토크",
+    "x": 4855,
+    "y": 656,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-011",
+    "name": "바르샤바",
+    "x": 3114,
+    "y": 506,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-012",
+    "name": "베이징",
+    "x": 4602,
+    "y": 713,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-013",
+    "name": "파리",
+    "x": 2823,
+    "y": 563,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-014",
+    "name": "키이우",
+    "x": 3262,
+    "y": 536,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-015",
+    "name": "울란바토르",
+    "x": 4454,
+    "y": 579,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-016",
+    "name": "프라하",
+    "x": 3011,
+    "y": 542,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-017",
+    "name": "뮌헨",
+    "x": 2967,
+    "y": 575,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-018",
+    "name": "도쿄",
+    "x": 4965,
+    "y": 784,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-019",
+    "name": "부다페스트",
+    "x": 3083,
+    "y": 585,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-020",
+    "name": "디화",
+    "x": 4153,
+    "y": 647,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-021",
+    "name": "빈",
+    "x": 3041,
+    "y": 573,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-022",
+    "name": "부쿠레슈티",
+    "x": 3193,
+    "y": 637,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-023",
+    "name": "베른",
+    "x": 2905,
+    "y": 597,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-024",
+    "name": "로마",
+    "x": 2981,
+    "y": 679,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-025",
+    "name": "베오그라드",
+    "x": 3105,
+    "y": 631,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-026",
+    "name": "트빌리시",
+    "x": 3485,
+    "y": 683,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-027",
+    "name": "타슈켄트",
+    "x": 3866,
+    "y": 690,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-028",
+    "name": "한성",
+    "x": 4767,
+    "y": 752,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-029",
+    "name": "마드리드",
+    "x": 2728,
+    "y": 704,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-030",
+    "name": "사라고사",
+    "x": 2772,
+    "y": 684,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-031",
+    "name": "콘스탄티니예",
+    "x": 3238,
+    "y": 694,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-032",
+    "name": "테헤란",
+    "x": 3588,
+    "y": 784,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-033",
+    "name": "멕시코시티",
+    "x": 1282,
+    "y": 947,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-034",
+    "name": "시안",
+    "x": 4485,
+    "y": 806,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-035",
+    "name": "라싸",
+    "x": 4208,
+    "y": 885,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-036",
+    "name": "난징",
+    "x": 4639,
+    "y": 845,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-037",
+    "name": "아바나",
+    "x": 1536,
+    "y": 893,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-038",
+    "name": "청두",
+    "x": 4409,
+    "y": 870,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-039",
+    "name": "난창",
+    "x": 4593,
+    "y": 901,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-040",
+    "name": "리야드",
+    "x": 3514,
+    "y": 968,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-041",
+    "name": "카트만두",
+    "x": 4117,
+    "y": 918,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-042",
+    "name": "하노이",
+    "x": 4436,
+    "y": 1035,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-043",
+    "name": "쿤밍",
+    "x": 4390,
+    "y": 965,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-044",
+    "name": "바마코",
+    "x": 2661,
+    "y": 1171,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-045",
+    "name": "광저우",
+    "x": 4553,
+    "y": 995,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-046",
+    "name": "보고타",
+    "x": 1625,
+    "y": 1284,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-047",
+    "name": "소코토",
+    "x": 2880,
+    "y": 1147,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-048",
+    "name": "아디스아바바",
+    "x": 3391,
+    "y": 1232,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-049",
+    "name": "리우데자네이루",
+    "x": 2021,
+    "y": 1705,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-050",
+    "name": "쿠마시",
+    "x": 2801,
+    "y": 1260,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-051",
+    "name": "레오폴드빌",
+    "x": 3024,
+    "y": 1458,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-052",
+    "name": "리마",
+    "x": 1653,
+    "y": 1462,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-053",
+    "name": "바타비아",
+    "x": 4453,
+    "y": 1488,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-054",
+    "name": "산티아고",
+    "x": 1684,
+    "y": 1945,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-055",
+    "name": "솔즈베리",
+    "x": 3270,
+    "y": 1683,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-056",
+    "name": "부에노스아이레스",
+    "x": 1813,
+    "y": 1921,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-057",
+    "name": "오타와",
+    "x": 1572,
+    "y": 475,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-058",
+    "name": "뉴델리",
+    "x": 3990,
+    "y": 903,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-059",
+    "name": "마닐라",
+    "x": 4675,
+    "y": 1140,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-060",
+    "name": "캔버라",
+    "x": 5112,
+    "y": 1976,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-061",
+    "name": "프리토리아",
+    "x": 3226,
+    "y": 1816,
+    "enabled": true
+  },
+  {
+    "countryKey": "country-062",
+    "name": "웰링턴",
+    "x": 5513,
+    "y": 2077,
+    "enabled": true
+  }
+]

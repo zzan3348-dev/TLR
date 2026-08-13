@@ -9,7 +9,6 @@ import { CountryFlag } from "../../../components/CountryFlag";
 import { CountryLeaderInfo } from "../../../components/CountryLeaderInfo";
 import { PartySupportChart } from "../../../components/PartySupportChart";
 import { getCountryPresentation } from "../../../data/countryPresentation";
-import { formatPartyIdeology } from "../../../data/partyIdeologies";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import type {
   CountryLeaderPresentation,
@@ -187,15 +186,8 @@ export function PoliticsPanel({
   );
 
   const primaryParty = presentation.politics.parties[0] ?? null;
-  const rulingIdeology = primaryParty
-    ? formatPartyIdeology(
-        primaryParty.ideologyCategory,
-        primaryParty.subIdeology,
-      )
-    : formatPartyIdeology(
-        presentation.politics.ideologyCategory,
-        presentation.politics.subIdeology,
-      );
+  const rulingIdeology =
+    primaryParty?.subIdeology || presentation.politics.subIdeology || "미설정";
   const panelStyle = {
     "--country-accent": country.color,
     "--primary-party-color": primaryParty
@@ -263,36 +255,10 @@ export function PoliticsPanel({
           leaderCaption: <PoliticsLeaderInfo leader={presentation.leader} />,
           partySupport: (
             <>
-              <div className="politics-template__party-heading">
-                {presentation.politics.symbolPath ? (
-                  <img
-                    src={presentation.politics.symbolPath}
-                    alt=""
-                    draggable={false}
-                  />
-                ) : null}
-                <div>
-                  <strong
-                    title={
-                      primaryParty?.name ||
-                      presentation.politics.rulingParty ||
-                      undefined
-                    }
-                  >
-                    {primaryParty?.name ||
-                      presentation.politics.rulingParty ||
-                      "정당 미설정"}
-                  </strong>
-                  <span
-                    title={
-                      rulingIdeology
-                    }
-                  >
-                    {rulingIdeology}
-                  </span>
-                </div>
-              </div>
-              <PartySupportChart parties={presentation.politics.parties} />
+              <PartySupportChart
+                parties={presentation.politics.parties}
+                rulingPartyName={presentation.politics.rulingParty}
+              />
             </>
           ),
           governmentSystem: <span>업데이트 예정</span>,

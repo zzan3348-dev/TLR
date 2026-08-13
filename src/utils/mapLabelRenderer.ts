@@ -5,6 +5,11 @@ import type {
   ViewportSize,
 } from "../types/mapCountry";
 import { getMapLabelScreenScale } from "../data/mapLabelDisplayOverrides";
+import {
+  MAP_LOD_POLICY,
+  normalizedMapZoom,
+  smoothLodVisibility,
+} from "./mapLodPolicy";
 
 export type LabelBounds = {
   left: number;
@@ -46,11 +51,10 @@ type LayoutMapLabelsOptions = {
   fitScale: number;
   selectedCountryId: number | null;
   selectedComponentId: string | null;
+  reservedBounds?: readonly LabelBounds[];
 };
 
 const MIN_SCREEN_FONT_SIZE = 7.5;
-const LABEL_FADE_START_ZOOM = 1.18;
-const LABEL_FADE_DISTANCE = 0.36;
 const SCREEN_PATH_TRACKING = 1.045;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
@@ -254,6 +258,8 @@ function createScreenPlacement(
   viewport: ViewportSize,
   mapWidth: number,
   mapScaleMultiplier: number,
+  fitScale: number,
+  semanticFontScale: number,
   selected: boolean,
   visibilityOpacity: number,
 ): ScreenMapLabel | null {
@@ -263,7 +269,7 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    label.fontSize * camera.scale * mapScaleMultiplier,
+    label.fontSize * fitScale * mapScaleMultiplier * semanticFontScale,
   );
   if (glyphs.length === 0 || screenFontSize < MIN_SCREEN_FONT_SIZE) {
     return null;
@@ -306,8 +312,10 @@ export function layoutMapLabels({
   fitScale,
   selectedCountryId,
   selectedComponentId,
+  reservedBounds = [],
 }: LayoutMapLabelsOptions): ScreenMapLabel[] {
   const zoom = camera.scale / fitScale;
+  const normalizedZoom = normalizedMapZoom(camera.scale, fitScale);
   const candidates: ScreenMapLabel[] = [];
 
   for (const label of labels) {
@@ -323,7 +331,7 @@ export function layoutMapLabels({
       isUnselectedComponentOfSelectedCountry ||
       (!label.visible && !canRecoverAtCloserZoom) ||
       !label.text ||
-      zoom < Math.max(LABEL_FADE_START_ZOOM, label.minZoom) ||
+      zoom < label.minZoom ||
       (label.maxZoom !== null && zoom > label.maxZoom)
     ) {
       continue;
@@ -333,13 +341,38 @@ export function layoutMapLabels({
         label.countryId === selectedCountryId &&
         label.componentId === selectedComponentId;
       const mapScaleMultiplier = getMapLabelScreenScale(label.countryId);
-      const fadeStart = Math.max(LABEL_FADE_START_ZOOM, label.minZoom);
-      const fadeProgress = Math.min(
-        1,
-        Math.max(0, (zoom - fadeStart) / LABEL_FADE_DISTANCE),
+      const selectedAdvance = selected
+        ? MAP_LOD_POLICY.selectedRevealAdvance
+        : 0;
+      const enterOpacity = smoothLodVisibility(
+        normalizedZoom,
+        MAP_LOD_POLICY.countryLabelEnter - selectedAdvance,
+        MAP_LOD_POLICY.countryLabelFadeDistance,
       );
-      const visibilityOpacity =
-        fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+      const closeOpacity = selected
+        ? 1
+        : 1 - smoothLodVisibility(
+            normalizedZoom,
+            MAP_LOD_POLICY.countryLabelCloseFadeStart,
+            MAP_LOD_POLICY.countryLabelCloseFadeDistance,
+          );
+      const projectedWidth = label.maxWidth * camera.scale;
+      const projectedArea = label.groupPixelCount * camera.scale ** 2;
+      const projectedOpacity = Math.min(
+        1,
+        Math.max(
+          projectedWidth / MAP_LOD_POLICY.countryLabelMinimumProjectedWidth,
+          projectedArea / MAP_LOD_POLICY.countryLabelMinimumProjectedArea,
+        ),
+      );
+      // 국명은 영토의 화면상 여유에 따라 좁은 범위에서만 조절한다.
+      // 카메라 scale을 직접 곱하지 않아 확대 시 무한히 커지는 현상을 막는다.
+      const semanticFontScale = Math.min(
+        1.1,
+        0.88 + projectedOpacity * 0.14 + normalizedZoom * 0.08,
+      );
+      const visibilityOpacity = enterOpacity * closeOpacity * projectedOpacity;
+      if (visibilityOpacity <= 0.01) continue;
       const placement = createScreenPlacement(
         label,
         copy,
@@ -347,6 +380,8 @@ export function layoutMapLabels({
         viewport,
         mapWidth,
         mapScaleMultiplier,
+        fitScale,
+        semanticFontScale,
         selected,
         visibilityOpacity,
       );
@@ -359,6 +394,9 @@ export function layoutMapLabels({
   candidates.sort((first, second) => {
     if (first.selected !== second.selected) {
       return first.selected ? -1 : 1;
+    }
+    if (first.label.mode !== second.label.mode) {
+      return first.label.mode === "manual" ? -1 : 1;
     }
     if (first.label.groupPixelCount !== second.label.groupPixelCount) {
       return second.label.groupPixelCount - first.label.groupPixelCount;
@@ -375,7 +413,21 @@ export function layoutMapLabels({
     return first.copy - second.copy;
   });
 
-  return candidates;
+  const occupied = [...reservedBounds];
+  const accepted: ScreenMapLabel[] = [];
+  for (const candidate of candidates) {
+    const collides = occupied.some((bounds) =>
+      doLabelBoundsOverlap(
+        candidate.bounds,
+        bounds,
+        MAP_LOD_POLICY.countryLabelCollisionPadding,
+      ),
+    );
+    if (collides && !candidate.selected) continue;
+    accepted.push(candidate);
+    occupied.push(candidate.bounds);
+  }
+  return accepted;
 }
 
 export function drawMapLabels(

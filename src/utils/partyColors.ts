@@ -1,72 +1,26 @@
+import type { PartyIdeologyCategory } from "../data/partyIdeologies";
 import type { CountryPartyPresentation } from "../types/countryPresentation";
 
-const PARTY_PALETTES = {
-  monarchy: [
-    "#343941",
-    "#57545a",
-    "#74685b",
-    "#454c50",
-    "#292d34",
-  ],
-  conservative: [
-    "#18365f",
-    "#28537d",
-    "#3f6687",
-    "#293e70",
-    "#172944",
-  ],
-  progressive: [
-    "#78233b",
-    "#9b3834",
-    "#a83f5c",
-    "#5d2443",
-    "#8b2b22",
-  ],
-  other: [
-    "#386466",
-    "#6b5840",
-    "#605274",
-    "#486052",
-    "#756a3e",
-  ],
-} as const;
+export const PARTY_CATEGORY_COLORS: Readonly<Record<PartyIdeologyCategory, string>> = {
+  전위사회주의: "#C83A3A",
+  평의회사회주의: "#E05A47",
+  생디칼리슴: "#D96B2B",
+  자유사회주의: "#B84AD7",
+  사회민주주의: "#E878A7",
+  급진공화주의: "#F0B34A",
+  자유주의: "#4AA3FF",
+  보수주의: "#3E6FD1",
+  권위주의: "#6E7B8B",
+  군주주의: "#7E57C2",
+  반동주의: "#8C3C3C",
+  국가재생주의: "#2F4F4F",
+};
 
-function classifyParty(
-  party: CountryPartyPresentation,
-): keyof typeof PARTY_PALETTES {
-  if (
-    party.ideologyCategory === "군주주의" ||
-    party.ideologyCategory === "반동주의"
-  ) {
-    return "monarchy";
-  }
-  if (
-    party.ideologyCategory === "보수주의" ||
-    party.ideologyCategory === "권위주의" ||
-    party.ideologyCategory === "국가재생주의"
-  ) {
-    return "conservative";
-  }
-  if (
-    party.ideologyCategory === "전위사회주의" ||
-    party.ideologyCategory === "평의회사회주의" ||
-    party.ideologyCategory === "생디칼리슴" ||
-    party.ideologyCategory === "자유사회주의" ||
-    party.ideologyCategory === "사회민주주의" ||
-    party.ideologyCategory === "급진공화주의"
-  ) {
-    return "progressive";
-  }
-  return "other";
-}
-
+/** 대분류는 화면 텍스트가 아니라 색상·법률 판정 같은 내부 로직에만 쓴다. */
 export function getPartyDisplayColor(
   party: CountryPartyPresentation,
-  index: number,
+  index = 0,
 ): string {
-  if (party.color) {
-    return party.color;
-  }
-  const palette = PARTY_PALETTES[classifyParty(party)];
-  return palette[index % palette.length];
+  void index;
+  return PARTY_CATEGORY_COLORS[party.ideologyCategory];
 }
