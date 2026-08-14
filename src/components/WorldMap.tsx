@@ -50,7 +50,10 @@ import {
   drawMapLabels,
   layoutMapLabels,
 } from "../utils/mapLabelRenderer";
-import { projectMapMarkers } from "../utils/mapMarkerUtils";
+import {
+  drawMapMarkers,
+  projectMapMarkers,
+} from "../utils/mapMarkerUtils";
 import {
   drawDimmedWorldOverlay,
   drawMapThemeOverlay,
@@ -189,7 +192,9 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const selectedComponentRef = useRef(selectedComponent);
     const showProvinceBordersRef = useRef(showProvinceBorders);
     const showLabelsRef = useRef(showLabels);
+    const showCapitalLabelsRef = useRef(showCapitalLabels);
     const mapModeRef = useRef(mapMode);
+    const hostileCountryKeysRef = useRef<ReadonlySet<string>>(new Set());
     const selectionKeyRef = useRef<string | null>(
       selectedCountry?.key ?? null,
     );
@@ -439,7 +444,24 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         });
         drawMapLabels(context, labelPlacements, pixelRatio, progress);
       }
-    }, []);
+
+      if (mapModeRef.current === "political") {
+        const projectedMarkers = projectMapMarkers({
+          markers: mapMarkers,
+          camera,
+          viewport,
+          mapWidth,
+          fitScale: fitScaleRef.current,
+          selectedCountryKey: selectedCountryRef.current?.key ?? null,
+          mobile: viewport.width <= 720,
+        });
+        drawMapMarkers(context, projectedMarkers, pixelRatio, {
+          selectedCountryKey: selectedCountryRef.current?.key ?? null,
+          hostileCountryKeys: hostileCountryKeysRef.current,
+          showLabels: showCapitalLabelsRef.current,
+        });
+      }
+    }, [mapMarkers]);
 
     const requestDraw = useCallback(() => {
       if (drawFrameRef.current === null) {
@@ -803,6 +825,16 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       showLabelsRef.current = showLabels;
       requestDraw();
     }, [requestDraw, showLabels]);
+
+    useEffect(() => {
+      showCapitalLabelsRef.current = showCapitalLabels;
+      requestDraw();
+    }, [requestDraw, showCapitalLabels]);
+
+    useEffect(() => {
+      hostileCountryKeysRef.current = hostileCountryKeys;
+      requestDraw();
+    }, [hostileCountryKeys, requestDraw]);
 
     useEffect(() => {
       mapModeRef.current = mapMode;
@@ -1181,7 +1213,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
               <button
                 key={`${screenMarker.marker.id}:${screenMarker.copy}`}
                 type="button"
-                className={`map-marker map-marker--capital${
+                className={`map-marker map-marker--capital map-marker--hit-target${
                   selected ? " map-marker--selected" : ""
                 }${hostile ? " map-marker--hostile" : ""}`}
                 data-map-marker-type={screenMarker.marker.type}
@@ -1191,27 +1223,11 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
                   top: screenMarker.y,
                   width: screenMarker.size,
                   height: screenMarker.size,
-                  opacity: screenMarker.markerOpacity,
                 }}
                 onClick={() => selectMapMarker(screenMarker.marker)}
                 aria-label={`${screenMarker.marker.name} 수도 선택`}
                 title={screenMarker.marker.name}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="m12 2.8 2.15 5.04 5.46.48-4.13 3.61 1.24 5.34L12 14.48l-4.72 2.79 1.24-5.34-4.13-3.61 5.46-.48L12 2.8Z"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </svg>
-                {showCapitalLabels && screenMarker.labelOpacity > 0 ? (
-                  <span
-                    className="map-marker__label"
-                    style={{ opacity: screenMarker.labelOpacity }}
-                  >
-                    {screenMarker.marker.name}
-                  </span>
-                ) : null}
-              </button>
+              />
             );
           })}
         </div>

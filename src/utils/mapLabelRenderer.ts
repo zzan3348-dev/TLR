@@ -39,7 +39,6 @@ export type ScreenMapLabel = {
   bounds: LabelBounds;
   glyphs: ScreenGlyph[];
   selected: boolean;
-  centerDistance: number;
   visibilityOpacity: number;
 };
 
@@ -164,6 +163,7 @@ function createScreenGlyphs(
   viewport: ViewportSize,
   mapWidth: number,
   screenFontSize: number,
+  fixedLayoutScale: number,
 ): { glyphs: ScreenGlyph[]; screenFontSize: number } {
   const characters = [...label.text];
   const approximateGlyphWidth = label.fontSize * 0.9;
@@ -178,6 +178,13 @@ function createScreenGlyphs(
     x: label.x - pathWorldCenter.x,
     y: label.y - pathWorldCenter.y,
   };
+  const labelAnchor = worldToScreen(
+    { x: label.x, y: label.y },
+    copy,
+    camera,
+    viewport,
+    mapWidth,
+  );
   const totalWidth =
     characters.length * approximateGlyphWidth +
     Math.max(0, characters.length - 1) * label.letterSpacing;
@@ -196,16 +203,9 @@ function createScreenGlyphs(
       x: worldPoint.x + pathAnchorOffset.x,
       y: worldPoint.y + pathAnchorOffset.y,
     };
-    const unscaledScreenPoint = worldToScreen(
-      anchoredWorldPoint,
-      copy,
-      camera,
-      viewport,
-      mapWidth,
-    );
     const screenPoint = {
-      x: unscaledScreenPoint.x,
-      y: unscaledScreenPoint.y,
+      x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * fixedLayoutScale,
+      y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * fixedLayoutScale,
     };
     const angle = quadraticAngle(
       label.start,
@@ -242,6 +242,7 @@ function createScreenPlacement(
   viewport: ViewportSize,
   mapWidth: number,
   mapScaleMultiplier: number,
+  fitScale: number,
   semanticFontScale: number,
   selected: boolean,
   visibilityOpacity: number,
@@ -252,9 +253,16 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    label.fontSize * camera.scale * mapScaleMultiplier * semanticFontScale,
+    Math.max(
+      MIN_SCREEN_FONT_SIZE,
+      label.fontSize * fitScale * mapScaleMultiplier * semanticFontScale,
+    ),
+    Math.max(
+      MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize),
+      fitScale * mapScaleMultiplier * semanticFontScale,
+    ),
   );
-  if (glyphs.length === 0 || screenFontSize < MIN_SCREEN_FONT_SIZE) {
+  if (glyphs.length === 0) {
     return null;
   }
   const bounds = unionBounds(glyphs.map((glyph) => glyph.bounds));
@@ -280,10 +288,6 @@ function createScreenPlacement(
     glyphs,
     selected,
     visibilityOpacity,
-    centerDistance: Math.hypot(
-      x - viewport.width / 2,
-      y - viewport.height / 2,
-    ),
   };
 }
 
@@ -332,13 +336,9 @@ export function layoutMapLabels({
         MAP_LOD_POLICY.countryLabelEnter - selectedAdvance,
         MAP_LOD_POLICY.countryLabelFadeDistance,
       );
-      const closeOpacity = selected
-        ? 1
-        : 1 - smoothLodVisibility(
-            normalizedZoom,
-            MAP_LOD_POLICY.countryLabelCloseFadeStart,
-            MAP_LOD_POLICY.countryLabelCloseFadeDistance,
-          );
+      // 수도가 표시되는 근거리에서도 국명을 유지한다. 줌은 국명을 다시
+      // 숨기거나 크기를 바꾸지 않고, 처음 나타나는 시점만 결정한다.
+      const closeOpacity = 1;
       const projectedWidth = label.maxWidth * camera.scale;
       const projectedArea = label.groupPixelCount * camera.scale ** 2;
       const projectedOpacity = Math.min(
@@ -360,6 +360,7 @@ export function layoutMapLabels({
         viewport,
         mapWidth,
         mapScaleMultiplier,
+        fitScale,
         semanticFontScale,
         selected,
         visibilityOpacity,
@@ -383,9 +384,8 @@ export function layoutMapLabels({
     if (first.label.priority !== second.label.priority) {
       return second.label.priority - first.label.priority;
     }
-    if (first.centerDistance !== second.centerDistance) {
-      return first.centerDistance - second.centerDistance;
-    }
+    // 화면 중심과의 거리는 pan마다 달라지므로 충돌 우선순위로 쓰지 않는다.
+    // 동일한 지도 상태에서 국명이 번갈아 사라지는 현상을 방지한다.
     if (first.label.countryId !== second.label.countryId) {
       return first.label.countryId - second.label.countryId;
     }
@@ -394,6 +394,7 @@ export function layoutMapLabels({
 
   const occupied = [...reservedBounds];
   const accepted: ScreenMapLabel[] = [];
+  const acceptedCountryIds = new Set<number>();
   for (const candidate of candidates) {
     const collides = occupied.some((bounds) =>
       doLabelBoundsOverlap(
@@ -402,9 +403,18 @@ export function layoutMapLabels({
         MAP_LOD_POLICY.countryLabelCollisionPadding,
       ),
     );
-    if (collides && !candidate.selected) continue;
+    // 충돌 회피 때문에 한 국가의 국명이 전부 사라지는 일은 막는다.
+    // 이미 같은 국가의 라벨이 하나 보이는 경우에만 추가 라벨을 생략한다.
+    if (
+      collides &&
+      !candidate.selected &&
+      acceptedCountryIds.has(candidate.label.countryId)
+    ) {
+      continue;
+    }
     accepted.push(candidate);
     occupied.push(candidate.bounds);
+    acceptedCountryIds.add(candidate.label.countryId);
   }
   return accepted;
 }

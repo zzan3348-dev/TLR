@@ -75,7 +75,7 @@ describe("mapLabelRenderer", () => {
     expect(placements).toHaveLength(0);
   });
 
-  it("국명은 지도와 같은 배율로 확대되어 저장된 영토 좌표에 고정된다", () => {
+  it("국명은 확대 배율과 무관하게 같은 화면 크기로 영토 좌표에 고정된다", () => {
     const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -86,7 +86,7 @@ describe("mapLabelRenderer", () => {
     });
 
     const sizes = placements.map(({ screenFontSize }) => screenFontSize);
-    expect(sizes).toEqual([120, 160, 320, 640]);
+    expect(sizes).toEqual([80, 80, 80, 80]);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
@@ -158,7 +158,7 @@ describe("mapLabelRenderer", () => {
     expect(zoomedPlacement.y).toBeCloseTo(250);
   });
 
-  it("겹치는 라벨은 우선순위가 높은 라벨만 유지한다", () => {
+  it("겹쳐도 국가마다 최소 한 개의 국명을 유지한다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
@@ -167,20 +167,21 @@ describe("mapLabelRenderer", () => {
       ],
     });
 
-    expect(placements.map(({ label }) => label.countryId)).toEqual([2]);
+    expect(placements.map(({ label }) => label.countryId)).toEqual([2, 1]);
   });
 
-  it("겹치는 라벨을 화면 기준으로 옮기거나 축소하지 않는다", () => {
+  it("같은 국가의 겹치는 추가 라벨은 화면 기준으로 옮기거나 축소하지 않는다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
         createLabel(1, { priority: 20 }),
-        createLabel(2, {
+        createLabel(1, {
+          componentId: "country-001-component-002",
           priority: 10,
-          y: 285,
-          start: { x: 420, y: 285 },
-          control: { x: 500, y: 285 },
-          end: { x: 580, y: 285 },
+          y: 270,
+          start: { x: 420, y: 270 },
+          control: { x: 500, y: 270 },
+          end: { x: 580, y: 270 },
         }),
       ],
     });
@@ -203,7 +204,7 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBe(160);
+    expect(placements[0].screenFontSize).toBe(40);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {

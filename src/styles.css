@@ -3062,6 +3062,10 @@ button:focus-visible,
   pointer-events: auto;
 }
 
+.map-marker--hit-target {
+  opacity: 0;
+}
+
 .map-marker svg {
   display: block;
   width: 100%;
