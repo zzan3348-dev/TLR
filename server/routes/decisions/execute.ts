@@ -1,6 +1,7 @@
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { decisionError, executeCommonDecision } from "../../decisions.js";
 import { requireDiplomacyActor } from "../../diplomacy.js";
+import { executeColonialDecision, isColonialDecisionCountry } from "../../colonialDecisions.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
 
 type ExecuteBody = { decisionId?: unknown; targetPartyId?: unknown };
@@ -16,6 +17,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const decisionId = typeof body.decisionId === "string" ? body.decisionId : "";
   const targetPartyId = typeof body.targetPartyId === "string" ? body.targetPartyId : undefined;
   try {
+    if (isColonialDecisionCountry(actor.countryKey)) {
+      response.status(200).json(await executeColonialDecision(admin, actor.countryKey, actor.userId, decisionId));
+      return;
+    }
     response.status(200).json(await executeCommonDecision(admin, actor.countryKey, actor.userId, decisionId, targetPartyId));
   } catch (error) {
     const code = decisionError(error);

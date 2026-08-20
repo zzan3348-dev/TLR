@@ -1,5 +1,12 @@
 import { supabase } from "../../lib/supabaseClient";
 import type { DecisionOverview } from "./data/commonDecisions";
+import type { ColonialDecisionOverview } from "./data/colonialDecisions";
+
+export type DecisionApiOverview = DecisionOverview | ColonialDecisionOverview;
+
+export function isColonialDecisionOverview(value: DecisionApiOverview): value is ColonialDecisionOverview {
+  return "mode" in value && value.mode === "colonial";
+}
 
 export class DecisionApiError extends Error {
   constructor(public readonly code: string, public readonly status: number) { super(code); }
@@ -17,14 +24,14 @@ async function decisionHeaders(countryKey: string): Promise<HeadersInit> {
   return headers;
 }
 
-async function request(path: string, countryKey: string, init?: RequestInit): Promise<DecisionOverview> {
+async function request(path: string, countryKey: string, init?: RequestInit): Promise<DecisionApiOverview> {
   const response = await fetch(path, { ...init, credentials: "include", headers: { ...(await decisionHeaders(countryKey)), ...init?.headers } });
   const payload: unknown = await response.json().catch(() => ({}));
   if (!response.ok) {
     const code = payload && typeof payload === "object" && "error" in payload && typeof payload.error === "string" ? payload.error : "DECISION_REQUEST_FAILED";
     throw new DecisionApiError(code, response.status);
   }
-  return payload as DecisionOverview;
+  return payload as DecisionApiOverview;
 }
 
 export const loadDecisions = (countryKey: string, signal?: AbortSignal) => request("/api/decisions/current", countryKey, { signal });

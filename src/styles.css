@@ -7564,6 +7564,197 @@ button:focus-visible,
   .decision-row__icon { width: 32px; height: 32px; }
 }
 
+/* 사건과 결정 — 실제 이미지 조각을 9-slice처럼 사용하는 철제 전략 UI. */
+.strategic-window--decisions {
+  width: min(720px, calc(100vw - 20px));
+  max-height: min(900px, calc(100vh - 30px));
+  border-image: url("/assets/ui/decision-shell/title-frame.png") 26 fill / 13px / 0 stretch;
+  background: #111413;
+  box-shadow: 0 18px 46px #000, inset 0 0 32px rgb(0 0 0 / 65%);
+}
+
+.strategic-window--decisions .strategic-window__body {
+  display: block;
+  padding: 7px 9px 10px;
+  overflow-y: auto;
+  scrollbar-color: #77715e #121514;
+  scrollbar-width: thin;
+}
+
+.strategic-window--decisions .strategic-window__body::-webkit-scrollbar { width: 13px; }
+.strategic-window--decisions .strategic-window__body::-webkit-scrollbar-track { background: #101211 url("/assets/ui/decision-shell/scrollbar.png") center / 100% 100% no-repeat; }
+.strategic-window--decisions .strategic-window__body::-webkit-scrollbar-thumb { border: 3px solid transparent; background: linear-gradient(#7b796d, #393c38); background-clip: padding-box; }
+
+.decision-game-shell { display: grid; gap: 7px; color: #d9d7ce; font-family: "Noto Sans KR", sans-serif; }
+.decision-game-status,
+.decision-ledger__status {
+  display: grid;
+  min-height: 29px;
+  padding: 0 10px;
+  align-items: center;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 8px;
+  color: #8d938b;
+  border: 1px solid #56594f;
+  border-image: url("/assets/ui/decision-shell/action-row-disabled.png") 18 fill / 8px / 0 stretch;
+  background: #151817;
+  font: 700 10px/1 "IBM Plex Mono", monospace;
+}
+.decision-game-status strong,
+.decision-ledger__status strong { color: #e1bf54; font-size: 12px; }
+
+.decision-game-hero {
+  position: relative;
+  display: grid;
+  min-height: 126px;
+  padding: 9px;
+  overflow: hidden;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 10px;
+  border: 1px solid #676656;
+  border-image: url("/assets/ui/decision-shell/description-panel.png") 22 fill / 11px / 0 stretch;
+  background: #101311;
+  box-shadow: inset 0 0 24px #000;
+}
+.decision-game-hero--large { min-height: 186px; grid-template-columns: 235px minmax(0, 1fr); }
+.decision-game-hero--political { min-height: 150px; grid-template-columns: 172px minmax(0, 1fr); }
+.decision-game-hero::after { position: absolute; inset: 0; content: ""; pointer-events: none; background: repeating-linear-gradient(0deg, rgb(255 255 255 / 2%) 0 1px, transparent 1px 4px); }
+.decision-game-hero__image { width: 100%; height: 100%; min-height: 108px; object-fit: cover; object-position: center; border: 1px solid #77705d; filter: grayscale(.55) sepia(.28) contrast(1.13) brightness(.72); box-shadow: inset 0 0 12px #000, 0 2px 5px #000; }
+.decision-game-hero--large .decision-game-hero__image { min-height: 168px; }
+.decision-game-hero__emblem { display: grid; min-height: 108px; place-items: center; border: 1px solid #5f6259; border-image: url("/assets/ui/decision-shell/icon-bezel.png") 24 fill / 12px / 0 stretch; background: radial-gradient(circle, #252a26, #090c0b 70%); }
+.decision-game-hero__emblem img { width: 82px; height: 82px; object-fit: contain; filter: drop-shadow(0 3px 3px #000); }
+.decision-game-hero__copy { position: relative; z-index: 1; display: grid; min-width: 0; align-content: start; gap: 5px; }
+.decision-game-hero__copy > span { color: #8c8c79; font: 700 9px/1.2 "IBM Plex Mono", monospace; letter-spacing: .12em; }
+.decision-game-hero__copy h3 { margin: 0; color: #e6c35b; font: 900 20px/1.2 "Noto Serif KR", Batang, serif; text-shadow: 0 2px #000; }
+.decision-game-hero__copy p { margin: 0; color: #d0d0c7; font-size: 11px; line-height: 1.55; white-space: pre-line; }
+.decision-game-hero__effects { display: flex; margin-top: 2px; flex-wrap: wrap; gap: 3px 10px; }
+.decision-game-hero__effects b { font: 700 10px/1.35 "IBM Plex Mono", monospace; }
+.decision-effect--good { color: #74d890 !important; }
+.decision-effect--bad { color: #e47468 !important; }
+.decision-effect--neutral { color: #d6c655 !important; }
+
+.decision-policy-board { border: 1px solid #55584e; background: #090c0b; }
+.decision-policy-board > header,
+.decision-active-modifiers > header { display: flex; min-height: 31px; padding: 0 10px; align-items: center; justify-content: space-between; border-bottom: 1px solid #56594f; background: linear-gradient(#34352f, #1b1e1b); }
+.decision-policy-board > header span,
+.decision-active-modifiers > header { color: #ded9c8; font: 900 13px/1 "Noto Serif KR", Batang, serif; }
+.decision-policy-board > header small { color: #7f877f; font-size: 9px; }
+.decision-policy-board > div { display: grid; padding: 4px; grid-template-columns: 1fr 1fr; gap: 3px; }
+.decision-policy-board article { display: grid; min-height: 37px; padding: 4px 8px; align-items: center; grid-template-columns: minmax(0, 1fr) auto; border: 1px solid #42473f; background: #151916; }
+.decision-policy-board article strong { color: #d5d3c9; font-size: 11px; }
+.decision-policy-board__stages { display: grid; align-items: center; grid-template-columns: auto repeat(4, 11px); gap: 3px; }
+.decision-policy-board__stages span { margin-right: 3px; color: #d9bc55; font-size: 9px; }
+.decision-policy-board__stages i { width: 9px; height: 9px; border: 1px solid #555b53; background: #151917; box-shadow: inset 0 0 2px #000; }
+.decision-policy-board__stages i[data-active="true"] { border-color: #c8ad4a; background: #8e813b; box-shadow: 0 0 4px rgb(213 183 70 / 55%); }
+
+.decision-game-category,
+.decision-category { border: 1px solid #57594f; background: #080b0a; box-shadow: 0 4px 10px #000; }
+.decision-game-category__header,
+.decision-category__header {
+  display: grid;
+  width: 100%;
+  min-height: 42px;
+  padding: 3px 8px;
+  cursor: pointer;
+  align-items: center;
+  grid-template-columns: 38px minmax(0, 1fr) 22px 25px;
+  gap: 7px;
+  color: #e4dfd0;
+  border: 0;
+  border-bottom: 1px solid #4e5049;
+  border-image: url("/assets/ui/decision-shell/title-frame.png") 24 fill / 9px / 0 stretch;
+  background: #262823;
+  text-align: left;
+}
+.decision-category__header { grid-template-columns: 36px minmax(0, 1fr) 25px; }
+.decision-game-category__header strong,
+.decision-category__header strong { overflow: hidden; font: 900 15px/1.2 "Noto Serif KR", Batang, serif; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 2px #000; }
+.decision-game-category__medallion { display: grid; width: 36px; height: 36px; place-items: center; border-image: url("/assets/ui/decision-shell/icon-bezel.png") 20 fill / 8px / 0 stretch; }
+.decision-game-category__medallion img,
+.decision-category__header img { width: 29px; height: 29px; object-fit: contain; }
+.decision-game-category__lamp,
+.decision-game-row__lamp { display: block; width: 18px; height: 18px; background: url("/assets/ui/decision-shell/status-lamp.png") center / contain no-repeat; filter: grayscale(1) brightness(.55); }
+.decision-game-category__lamp[data-active="true"],
+.decision-game-row__lamp[data-active="true"] { filter: hue-rotate(38deg) saturate(1.25) brightness(1.12); }
+.decision-game-category__toggle { display: grid; width: 23px; height: 23px; place-items: center; color: #bbb6a3; border: 1px solid #68695e; background: #20231f; font-size: 16px; }
+
+.decision-game-rows,
+.decision-category__rows { display: grid; padding: 4px; gap: 3px; }
+.decision-game-row,
+.decision-row {
+  position: relative;
+  display: grid;
+  min-height: 49px;
+  padding: 3px 5px;
+  align-items: center;
+  grid-template-columns: 39px minmax(0, 1fr) auto 19px 35px;
+  gap: 6px;
+  color: #d8d5ca;
+  border: 1px solid #4a4e45;
+  border-image: url("/assets/ui/decision-shell/action-row-disabled.png") 18 fill / 7px / 0 stretch;
+  background: #171a17;
+  box-shadow: none;
+  outline: none;
+}
+.decision-game-row[data-available="true"],
+.decision-row[data-available="true"] { border-color: #6b684a; border-image-source: url("/assets/ui/decision-shell/action-row.png"); }
+.decision-game-row:focus-visible,
+.decision-game-row:hover,
+.decision-row:hover { filter: brightness(1.13); }
+.decision-game-row__icon,
+.decision-row__icon { width: 37px; height: 37px; object-fit: contain; filter: drop-shadow(0 2px 2px #000); }
+.decision-game-row__copy,
+.decision-row__copy { display: grid; min-width: 0; gap: 2px; }
+.decision-game-row__copy strong,
+.decision-row__copy strong { overflow: hidden; color: #e1ddd0; font: 800 12px/1.2 "Noto Sans KR", sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.decision-game-row__copy small,
+.decision-row__copy small { overflow: hidden; color: #8e938a; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.decision-game-row__cost,
+.decision-row__cost { color: #d0ae43; font: 800 10px/1 "IBM Plex Mono", monospace; white-space: nowrap; }
+.decision-game-row__execute,
+.decision-row__execute { display: grid; width: 33px; height: 28px; min-height: 0; padding: 0; cursor: pointer; place-items: center; color: #b9b6a9; border: 0; background: url("/assets/ui/decision-shell/envelope-button.png") center / contain no-repeat; filter: brightness(.9); }
+.decision-game-row__execute:hover,
+.decision-row__execute:hover { filter: brightness(1.25); }
+.decision-game-row__execute:disabled,
+.decision-row__execute:disabled { cursor: not-allowed; background: url("/assets/ui/decision-shell/envelope-button.png") center / contain no-repeat; filter: grayscale(1) brightness(.44); }
+.decision-game-row__execute span { font-size: 9px; }
+.decision-game-row .decision-game-tooltip { position: absolute; z-index: 95; right: 7px; bottom: calc(100% + 5px); display: none; width: min(390px, calc(100vw - 48px)); }
+.decision-game-row:hover .decision-game-tooltip,
+.decision-game-row:focus-within .decision-game-tooltip,
+.decision-game-row:focus-visible .decision-game-tooltip { display: block; }
+.decision-game-tooltip,
+.decision-tooltip { padding: 11px; color: #d6d9d2; border: 1px solid #8b8a74; background: #050807; box-shadow: 9px 12px 25px rgb(0 0 0 / 85%), inset 0 0 18px #000; font-size: 10px; }
+.decision-game-tooltip > strong,
+.decision-tooltip > strong { color: #e7c654; font: 900 14px/1.2 "Noto Serif KR", Batang, serif; }
+.decision-game-tooltip p { margin: 6px 0 8px; color: #c2c5bd; line-height: 1.45; }
+.decision-game-tooltip dl { display: grid; margin: 0; grid-template-columns: 54px 1fr; gap: 3px 8px; }
+.decision-game-tooltip dt { color: #777f78; }
+.decision-game-tooltip dd { display: grid; margin: 0; gap: 2px; }
+
+.decision-active-modifiers { border: 1px solid #4d5148; background: #090c0b; }
+.decision-active-modifiers > div { display: grid; min-height: 27px; padding: 0 9px; align-items: center; grid-template-columns: 1fr auto 42px; gap: 8px; border-top: 1px solid #272c28; font-size: 10px; }
+.decision-active-modifiers b { color: #78d891; font-family: "IBM Plex Mono", monospace; }
+.decision-active-modifiers small { color: #d1b14d; text-align: right; }
+
+.decision-row__details { width: 28px; height: 28px; background: url("/assets/ui/decision-shell/envelope-button.png") center / contain no-repeat; }
+.decision-row__details > img { display: none; }
+
+@media (max-width: 720px) {
+  .decision-game-hero,
+  .decision-game-hero--large,
+  .decision-game-hero--political { min-height: 0; grid-template-columns: 104px minmax(0, 1fr); }
+  .decision-game-hero__image,
+  .decision-game-hero--large .decision-game-hero__image,
+  .decision-game-hero__emblem { min-height: 104px; }
+  .decision-game-hero__emblem img { width: 64px; height: 64px; }
+  .decision-game-hero__copy p { font-size: 9px; line-height: 1.35; }
+  .decision-policy-board > div { grid-template-columns: 1fr; }
+  .decision-game-row,
+  .decision-row { grid-template-columns: 36px minmax(0, 1fr) 18px 33px; }
+  .decision-game-row__cost,
+  .decision-row__cost { grid-column: 2; }
+}
+
 /* 유럽인민연방 연방의회 — 기존 결정창의 철제 프레임과 얇은 행 문법을 유지한다. */
 .strategic-window--eul {
   --eul-window-width: min(790px, calc(100vw - 24px));
