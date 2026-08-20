@@ -56,6 +56,9 @@ type LayoutMapLabelsOptions = {
 const MIN_SCREEN_FONT_SIZE = 7.5;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
+// 원본 5632px 지도를 1920px 기준 화면에 표시하던 기존 시각 크기다.
+// 뷰포트와 카메라 배율 대신 이 기준값만 사용해 국명 크기를 고정한다.
+const REFERENCE_MAP_SCREEN_SCALE = 1920 / 5632;
 
 export function getRotatedLabelBounds(
   x: number,
@@ -242,11 +245,13 @@ function createScreenPlacement(
   viewport: ViewportSize,
   mapWidth: number,
   mapScaleMultiplier: number,
-  fitScale: number,
-  semanticFontScale: number,
   selected: boolean,
   visibilityOpacity: number,
 ): ScreenMapLabel | null {
+  // 국명은 지도 위의 좌표를 따르지만, 글꼴과 곡선 간격은 화면 픽셀로
+  // 고정한다. fitScale/camera.scale을 섞으면 창 크기와 줌에 따라 글씨가
+  // 커졌다 작아지는 회귀가 생긴다.
+  const fixedScreenScale = REFERENCE_MAP_SCREEN_SCALE * mapScaleMultiplier;
   const { glyphs, screenFontSize } = createScreenGlyphs(
     label,
     copy,
@@ -255,11 +260,11 @@ function createScreenPlacement(
     mapWidth,
     Math.max(
       MIN_SCREEN_FONT_SIZE,
-      label.fontSize * fitScale * mapScaleMultiplier * semanticFontScale,
+      label.fontSize * fixedScreenScale,
     ),
     Math.max(
       MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize),
-      fitScale * mapScaleMultiplier * semanticFontScale,
+      fixedScreenScale,
     ),
   );
   if (glyphs.length === 0) {
@@ -350,7 +355,6 @@ export function layoutMapLabels({
       );
       // 국명 글자와 곡선을 지도 좌표계에 고정한다. 줌은 가시성만 바꾸며
       // 영토에 대한 글자의 상대 크기·방향·간격은 다시 계산하지 않는다.
-      const semanticFontScale = 1;
       const visibilityOpacity = enterOpacity * closeOpacity * projectedOpacity;
       if (visibilityOpacity <= 0.01) continue;
       const placement = createScreenPlacement(
@@ -360,8 +364,6 @@ export function layoutMapLabels({
         viewport,
         mapWidth,
         mapScaleMultiplier,
-        fitScale,
-        semanticFontScale,
         selected,
         visibilityOpacity,
       );

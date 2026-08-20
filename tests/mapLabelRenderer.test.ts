@@ -86,10 +86,32 @@ describe("mapLabelRenderer", () => {
     });
 
     const sizes = placements.map(({ screenFontSize }) => screenFontSize);
-    expect(sizes).toEqual([80, 80, 80, 80]);
+    expect(sizes.every((size) => size === sizes[0])).toBe(true);
+    expect(sizes[0]).toBeCloseTo((80 * 1920) / 5632);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
+  });
+
+  it("화면 비율과 fitScale이 달라도 국명은 같은 화면 픽셀 크기를 유지한다", () => {
+    const [wide] = layoutMapLabels({
+      ...baseLayoutOptions,
+      viewport: { width: 1600, height: 900 },
+      fitScale: 0.5,
+      camera: { x: 500, y: 250, scale: 0.75 },
+      labels: [createLabel(1, { fontSize: 80 })],
+    });
+    const [compact] = layoutMapLabels({
+      ...baseLayoutOptions,
+      viewport: { width: 800, height: 450 },
+      fitScale: 1,
+      camera: { x: 500, y: 250, scale: 1.5 },
+      labels: [createLabel(1, { fontSize: 80 })],
+    });
+
+    expect(wide.screenFontSize).toBeCloseTo(compact.screenFontSize);
+    expect(wide.glyphs[0].width).toBeCloseTo(compact.glyphs[0].width);
+    expect(wide.glyphs[0].height).toBeCloseTo(compact.glyphs[0].height);
   });
 
   it("지도를 이동하면 국명 전체가 동일한 화면 거리만큼 이동한다", () => {
@@ -178,10 +200,10 @@ describe("mapLabelRenderer", () => {
         createLabel(1, {
           componentId: "country-001-component-002",
           priority: 10,
-          y: 270,
-          start: { x: 420, y: 270 },
-          control: { x: 500, y: 270 },
-          end: { x: 580, y: 270 },
+          y: 255,
+          start: { x: 420, y: 255 },
+          control: { x: 500, y: 255 },
+          end: { x: 580, y: 255 },
         }),
       ],
     });
@@ -204,7 +226,7 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBe(40);
+    expect(placements[0].screenFontSize).toBeCloseTo((40 * 1920) / 5632);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {

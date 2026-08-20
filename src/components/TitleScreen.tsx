@@ -81,35 +81,46 @@ export function TitleScreen({
 
   return (
     <main className={`title-screen${directorateAccessOpen ? " title-screen--directorate-locked" : ""}`}>
-      <div className="title-screen__scanlines" aria-hidden="true" />
-      <div className="title-screen__vignette" aria-hidden="true" />
-      <div className="title-screen__crt" aria-hidden="true" />
-      <header className="title-screen__masthead">
-        <p className="title-screen__eyebrow">1932</p>
-        <img className="title-screen__logo" src="/assets/title/tlr-logo.png" alt="The Long Revolution" />
-      </header>
-      <aside className="title-screen__archive-decoration" aria-hidden="false">
-        <button className="title-screen__directorate-stamp" type="button" aria-label="기밀 도장" onClick={handleDirectorateStampClick}>
-          <img src="/assets/title/directorate-stamp.svg" alt="" />
-        </button>
-      </aside>
-      <section className="title-screen__cards" aria-label="메인 메뉴">
-        {cards.map((card, index) => (
-          <button className="title-card" type="button" key={card.id} style={{ "--card-index": index } as React.CSSProperties} onClick={() => {
-            if (card.action === "open-map") onOpenCountrySelection();
-            else if (card.action === "open-login") onLogin();
-            else onOpenWindow("credits");
-          }}>
-            <span className={`title-card__image-wrap${card.image ? "" : " title-card__image-wrap--blank"}`}>
-              {card.image ? <img src={card.image} alt="" className="title-card__image" /> : null}
-              <span className="title-card__image-wash" aria-hidden="true" />
-              <span className="title-card__index" aria-hidden="true">0{index + 1}</span>
-            </span>
-            <span className="title-card__button-panel"><strong>{card.title}</strong><small>{card.subtitle}</small></span>
+      <svg className="title-screen__filter-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="tlr-title-crt-barrel" x="-3%" y="-3%" width="106%" height="106%" colorInterpolationFilters="sRGB">
+            <feImage href="/assets/title/crt-barrel-displacement.png" preserveAspectRatio="none" result="barrel-map" />
+            <feDisplacementMap in="SourceGraphic" in2="barrel-map" scale="18" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
+      <div className="title-screen__lens">
+        <div className="title-screen__scanlines" aria-hidden="true" />
+        <div className="title-screen__vignette" aria-hidden="true" />
+        <div className="title-screen__crt" aria-hidden="true" />
+        <header className="title-screen__masthead">
+          <p className="title-screen__eyebrow">1932</p>
+          <img className="title-screen__logo" src="/assets/title/tlr-logo.png" alt="The Long Revolution" />
+        </header>
+        <aside className="title-screen__archive-decoration" aria-hidden="false">
+          <button className="title-screen__directorate-stamp" type="button" aria-label="기밀 도장" onClick={handleDirectorateStampClick}>
+            <img src="/assets/title/directorate-stamp.svg" alt="" />
           </button>
-        ))}
-      </section>
-      <footer className="title-screen__footer"><span>THE LONG REVOLUTION · CONTINUOUS WORLD</span><span>BUILD 1932.01</span></footer>
+        </aside>
+        <section className="title-screen__cards" aria-label="메인 메뉴">
+          {cards.map((card, index) => (
+            <button className="title-card" type="button" key={card.id} style={{ "--card-index": index } as React.CSSProperties} onClick={() => {
+              if (card.action === "open-map") onOpenCountrySelection();
+              else if (card.action === "open-login") onLogin();
+              else onOpenWindow("credits");
+            }}>
+              <span className={`title-card__image-wrap${card.image ? "" : " title-card__image-wrap--blank"}`}>
+                {card.image ? <img src={card.image} alt="" className="title-card__image" /> : null}
+                <span className="title-card__image-wash" aria-hidden="true" />
+                <span className="title-card__index" aria-hidden="true">0{index + 1}</span>
+              </span>
+              <span className="title-card__button-panel"><strong>{card.title}</strong><small>{card.subtitle}</small></span>
+            </button>
+          ))}
+        </section>
+        <footer className="title-screen__footer"><span>THE LONG REVOLUTION · CONTINUOUS WORLD</span><span>BUILD 1932.01</span></footer>
+      </div>
+      <div className="title-screen__glass" aria-hidden="true" />
       {activeWindow ? (
         <div className="title-window-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) onCloseWindow(); }}>
           <section className="title-window" role="dialog" aria-modal="true" aria-labelledby="title-window-heading">

@@ -3,6 +3,7 @@ import { getAdminClient, getServerEnv } from "../../server/auth.js";
 import { requireAdminSession } from "../../server/adminAuth.js";
 import researchAdmin from "../../server/routes/admin/research.js";
 import mapCapitalsAdmin from "../../server/routes/admin/mapCapitals.js";
+import provinceRegionsAdmin from "../../server/routes/admin/provinceRegions.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",
@@ -29,6 +30,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
   if (domain === "map-capitals") {
     await mapCapitalsAdmin(request, response);
+    return;
+  }
+  if (domain === "province-regions") {
+    await provinceRegionsAdmin(request, response);
     return;
   }
   if (request.method !== "POST") {

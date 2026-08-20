@@ -23,6 +23,10 @@
       "destination": "/api/economy-dispatch?domain=research&route=:route"
     },
     {
+      "source": "/api/decisions/:route",
+      "destination": "/api/economy-dispatch?domain=decisions&route=:route"
+    },
+    {
       "source": "/api/admin/research",
       "destination": "/api/admin/actions?domain=research"
     },
@@ -33,6 +37,10 @@
     {
       "source": "/api/admin/map-capitals",
       "destination": "/api/admin/actions?domain=map-capitals"
+    },
+    {
+      "source": "/api/admin/province-regions",
+      "destination": "/api/admin/actions?domain=province-regions"
     },
     {
       "source": "/api/navi/:route",
