@@ -93,6 +93,28 @@ describe("mapLabelRenderer", () => {
     );
   });
 
+  it("줌 단계가 달라도 국명 전체와 각 글자의 화면 경계가 변하지 않는다", () => {
+    const placements = [1.5, 3, 5.5, 8].map((scale) => {
+      const [placement] = layoutMapLabels({
+        ...baseLayoutOptions,
+        camera: { x: 500, y: 250, scale },
+        labels: [createLabel(1, { text: "독일민주공화국", fontSize: 72, letterSpacing: 3 })],
+      });
+      return placement;
+    });
+    const first = placements[0];
+
+    for (const placement of placements.slice(1)) {
+      expect(placement.width).toBeCloseTo(first.width, 5);
+      expect(placement.height).toBeCloseTo(first.height, 5);
+      expect(placement.glyphs).toHaveLength(first.glyphs.length);
+      placement.glyphs.forEach((glyph, index) => {
+        expect(glyph.width).toBeCloseTo(first.glyphs[index].width, 5);
+        expect(glyph.height).toBeCloseTo(first.glyphs[index].height, 5);
+      });
+    }
+  });
+
   it("화면 비율과 fitScale이 달라도 국명은 같은 화면 픽셀 크기를 유지한다", () => {
     const [wide] = layoutMapLabels({
       ...baseLayoutOptions,

@@ -3,6 +3,8 @@ import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { executeDecision, loadDecisions } from "../decisionsClient";
 import { DECISION_CATEGORY_LABELS, type DecisionCategoryId, type DecisionOverview, type DecisionPartyOption, type DecisionView } from "../data/commonDecisions";
+import { isEulFullMember } from "../data/eulParliament";
+import { EulParliamentPanel } from "./EulParliamentPanel";
 
 type DecisionWindowProps = { country: MapCountryIndex; onClose: () => void };
 const CATEGORIES: DecisionCategoryId[] = ["political", "economy", "wartime"];
@@ -15,7 +17,19 @@ function DecisionTooltip({ decision, unmet }: { decision: DecisionView; unmet: s
   return <div className="decision-tooltip" role="tooltip"><strong>{decision.title}</strong><p>{decision.description}</p><dl><dt>비용</dt><dd>정치력 {decision.politicalPowerCost}</dd><dt>조건</dt><dd>{decision.conditions.map((value) => <span key={value}>{value}</span>)}</dd><dt>효과</dt><dd>{decision.effects.map((value) => <span key={value}>{value}</span>)}</dd>{decision.durationTurns ? <><dt>기간</dt><dd>{decision.durationTurns}턴</dd></> : null}<dt>재사용 대기</dt><dd>{decision.cooldownTurns}턴</dd></dl>{unmet.length ? <div className="decision-tooltip__blocked">{unmet.map((value) => <span key={value}>✕ {value}</span>)}</div> : <div className="decision-tooltip__ready">실행 가능</div>}</div>;
 }
 
-export function DecisionWindow({ country, onClose }: DecisionWindowProps) {
+export function DecisionWindow(props: DecisionWindowProps) {
+  if (isEulFullMember(props.country)) {
+    return (
+      <StrategicWindow title="유럽인민연방 연방의회" eyebrow={props.country.name} onClose={props.onClose} className="strategic-window--decisions strategic-window--eul">
+        <EulParliamentPanel country={props.country} />
+      </StrategicWindow>
+    );
+  }
+
+  return <GenericDecisionWindow {...props} />;
+}
+
+function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
   const [overview, setOverview] = useState<DecisionOverview | null>(null);
   const [targets, setTargets] = useState<Record<string, string>>({});
   const [collapsed, setCollapsed] = useState<Record<DecisionCategoryId, boolean>>({ political: false, economy: false, wartime: false });
