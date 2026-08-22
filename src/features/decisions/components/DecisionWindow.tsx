@@ -4,6 +4,7 @@ import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { executeDecision, isColonialDecisionOverview, loadDecisions } from "../decisionsClient";
 import {
+  COMMON_DECISIONS,
   DECISION_CATEGORY_LABELS,
   type DecisionCategoryId,
   type DecisionOverview,
@@ -19,6 +20,25 @@ type HoveredDecision = { decision: DecisionView; unmet: string[]; x: number; y: 
 const CATEGORIES: DecisionCategoryId[] = ["political", "economy", "wartime"];
 const TOOLTIP_WIDTH = 382;
 const TOOLTIP_MARGIN = 14;
+
+function unavailableOverview(countryKey: string): DecisionOverview {
+  return {
+    countryKey,
+    worldDate: "",
+    turn: 0,
+    politicalPower: null,
+    parties: [],
+    decisions: COMMON_DECISIONS.map((decision) => ({
+      ...decision,
+      visible: true,
+      available: false,
+      unmetConditions: ["서버에서 현재 국가 상태를 확인해야 함"],
+      cooldownRemaining: 0,
+      status: "locked" as const,
+    })),
+    activeModifiers: [],
+  };
+}
 
 const STATUS_LABEL: Record<DecisionView["status"], string> = {
   ready: "실행 가능",
@@ -128,7 +148,10 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
         if (isColonialDecisionOverview(value)) throw new Error("INVALID_GENERIC_DECISION_RESPONSE");
         setOverview(value);
       } catch {
-        if (!controller.signal.aborted) setError("결정 데이터를 불러오지 못했습니다.");
+        if (!controller.signal.aborted) {
+          setOverview(unavailableOverview(country.key));
+          setError("현재 국가 상태를 확인할 수 없어 결정 실행이 잠겨 있습니다.");
+        }
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
