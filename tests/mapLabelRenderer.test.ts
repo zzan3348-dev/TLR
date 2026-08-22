@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { MapCountryLabel } from "../src/types/mapCountry";
 import {
   doLabelBoundsOverlap,
-  getMapAnchoredCountryLabelScreenMetrics,
+  getFixedCountryLabelScreenMetrics,
   getRotatedLabelBounds,
   layoutMapLabels,
 } from "../src/utils/mapLabelRenderer";
@@ -50,12 +50,12 @@ const baseLayoutOptions = {
 };
 
 describe("mapLabelRenderer", () => {
-  it("국명 도형 전체에 같은 지도 배율을 적용한다", () => {
+  it("국명 화면 크기 계산은 카메라나 뷰포트 값을 받을 수 없는 고정 계산이다", () => {
     const label = createLabel(1, { fontSize: 80 });
-    const metrics = getMapAnchoredCountryLabelScreenMetrics(label, 1.5);
+    const metrics = getFixedCountryLabelScreenMetrics(label);
 
-    expect(metrics.fontSize).toBeCloseTo(120);
-    expect(metrics.layoutScale).toBeCloseTo(1.5);
+    expect(metrics.fontSize).toBeCloseTo((80 * 1920) / 5632);
+    expect(metrics.layoutScale).toBeCloseTo(1920 / 5632);
   });
 
   it("회전된 라벨의 화면 경계와 겹침을 계산한다", () => {
@@ -84,7 +84,7 @@ describe("mapLabelRenderer", () => {
     expect(placements).toHaveLength(0);
   });
 
-  it("국명은 줌마다 영토와 같은 비율로 투영된다", () => {
+  it("국명은 확대 배율과 무관하게 같은 화면 크기로 영토 좌표에 고정된다", () => {
     const placements = [1.5, 2, 4, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -94,19 +94,15 @@ describe("mapLabelRenderer", () => {
       return placement;
     });
 
-    const normalizedSizes = placements.map(
-      ({ screenFontSize }, index) => screenFontSize / [1.5, 2, 4, 8][index],
-    );
-    expect(normalizedSizes.every((size) => size === normalizedSizes[0])).toBe(
-      true,
-    );
-    expect(normalizedSizes[0]).toBeCloseTo(80);
+    const sizes = placements.map(({ screenFontSize }) => screenFontSize);
+    expect(sizes.every((size) => size === sizes[0])).toBe(true);
+    expect(sizes[0]).toBeCloseTo((80 * 1920) / 5632);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
   });
 
-  it("줌 단계가 달라도 국명 전체와 각 글자의 지도상 크기는 변하지 않는다", () => {
+  it("줌 단계가 달라도 국명 전체와 각 글자의 화면 크기가 변하지 않는다", () => {
     const placements = [1.5, 3, 5.5, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -116,40 +112,26 @@ describe("mapLabelRenderer", () => {
       return placement;
     });
     const first = placements[0];
-    const scales = [1.5, 3, 5.5, 8];
 
-    placements.forEach((placement, placementIndex) => {
-      const scale = scales[placementIndex];
-      expect(placement.width / scale).toBeCloseTo(first.width / scales[0], 5);
-      expect(placement.height / scale).toBeCloseTo(first.height / scales[0], 5);
+    placements.forEach((placement) => {
+      expect(placement.width).toBeCloseTo(first.width, 5);
+      expect(placement.height).toBeCloseTo(first.height, 5);
       expect(placement.glyphs).toHaveLength(first.glyphs.length);
       placement.glyphs.forEach((glyph, index) => {
-        expect(glyph.width / scale).toBeCloseTo(
-          first.glyphs[index].width / scales[0],
-          5,
-        );
-        expect(glyph.height / scale).toBeCloseTo(
-          first.glyphs[index].height / scales[0],
-          5,
-        );
-        expect((glyph.x - placement.x) / scale).toBeCloseTo(
-          (first.glyphs[index].x - first.x) / scales[0],
-          5,
-        );
-        expect((glyph.y - placement.y) / scale).toBeCloseTo(
-          (first.glyphs[index].y - first.y) / scales[0],
-          5,
-        );
+        expect(glyph.width).toBeCloseTo(first.glyphs[index].width, 5);
+        expect(glyph.height).toBeCloseTo(first.glyphs[index].height, 5);
+        expect(glyph.x).toBeCloseTo(first.glyphs[index].x, 5);
+        expect(glyph.y).toBeCloseTo(first.glyphs[index].y, 5);
       });
     });
   });
 
-  it("화면 비율과 fitScale이 달라도 동일 카메라 배율에서는 같은 크기다", () => {
+  it("화면 비율과 fitScale이 달라도 국명은 같은 화면 픽셀 크기를 유지한다", () => {
     const [wide] = layoutMapLabels({
       ...baseLayoutOptions,
       viewport: { width: 1600, height: 900 },
       fitScale: 0.5,
-      camera: { x: 500, y: 250, scale: 1.5 },
+      camera: { x: 500, y: 250, scale: 0.75 },
       labels: [createLabel(1, { fontSize: 80 })],
     });
     const [compact] = layoutMapLabels({
@@ -277,7 +259,7 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBeCloseTo(160);
+    expect(placements[0].screenFontSize).toBeCloseTo((40 * 1920) / 5632);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {

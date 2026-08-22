@@ -53,31 +53,36 @@ type LayoutMapLabelsOptions = {
   reservedBounds?: readonly LabelBounds[];
 };
 
+const MIN_SCREEN_FONT_SIZE = 7.5;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
+// 원본 5632px 지도를 1920px 기준 화면에 표시하던 기존 시각 크기다.
+// 뷰포트와 카메라 배율 대신 이 기준값만 사용해 국명 크기를 고정한다.
+const REFERENCE_MAP_SCREEN_SCALE = 1920 / 5632;
 
-export type MapAnchoredCountryLabelScreenMetrics = {
+export type FixedCountryLabelScreenMetrics = {
   fontSize: number;
   layoutScale: number;
 };
 
 /**
- * 저장된 국명 도형을 현재 카메라로 화면에 투영한다.
+ * 국명의 화면상 크기를 결정한다.
  *
- * 글꼴, 곡선, 자간에 모두 같은 지도 배율을 적용한다. 따라서 줌 중에 글자만
- * 화면 픽셀 크기로 남거나 곡선 기준점 쪽으로 몰리는 일이 없고, 국명 전체가
- * 지도에 인쇄된 하나의 도형처럼 영토와 정확히 함께 움직인다.
+ * 이 함수에는 의도적으로 camera.scale, fitScale, viewport를 전달하지 않는다.
+ * 줌과 창 크기는 월드 앵커의 화면 위치만 바꿀 수 있고 글꼴 크기와 글자 간격은
+ * 절대로 바꾸지 못하게 하기 위한 경계다.
  */
-export function getMapAnchoredCountryLabelScreenMetrics(
+export function getFixedCountryLabelScreenMetrics(
   label: Pick<MapCountryLabel, "fontSize">,
-  cameraScale: number,
   countryScaleMultiplier = 1,
-): MapAnchoredCountryLabelScreenMetrics {
-  const layoutScale = cameraScale * countryScaleMultiplier;
+): FixedCountryLabelScreenMetrics {
+  const layoutScale = REFERENCE_MAP_SCREEN_SCALE * countryScaleMultiplier;
+  const minimumLayoutScale =
+    MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize);
 
   return {
-    fontSize: label.fontSize * layoutScale,
-    layoutScale,
+    fontSize: Math.max(MIN_SCREEN_FONT_SIZE, label.fontSize * layoutScale),
+    layoutScale: Math.max(minimumLayoutScale, layoutScale),
   };
 }
 
@@ -187,7 +192,7 @@ function createScreenGlyphs(
   viewport: ViewportSize,
   mapWidth: number,
   screenFontSize: number,
-  mapLayoutScale: number,
+  fixedLayoutScale: number,
 ): { glyphs: ScreenGlyph[]; screenFontSize: number } {
   const characters = [...label.text];
   const approximateGlyphWidth = label.fontSize * 0.9;
@@ -227,12 +232,12 @@ function createScreenGlyphs(
       x: worldPoint.x + pathAnchorOffset.x,
       y: worldPoint.y + pathAnchorOffset.y,
     };
-    // 중심점과 각 글자의 곡선 오프셋에 동일한 지도 배율을 적용한다. 이 둘을
-    // 서로 다른 배율로 계산하면 줌할 때 글자가 기준점으로 몰리거나 영토에서
-    // 미끄러지는 것처럼 보인다.
+    // 국명 전체를 하나의 고정 screen-space 표식으로 취급한다. 지도 좌표에는
+    // 중심 앵커만 고정하고 글자별 곡선 오프셋은 고정 픽셀 배율로 계산해야
+    // 줌할 때 글자 크기와 자간, 전체 국명 폭이 함께 커지거나 작아지지 않는다.
     const screenPoint = {
-      x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * mapLayoutScale,
-      y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * mapLayoutScale,
+      x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * fixedLayoutScale,
+      y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * fixedLayoutScale,
     };
     const angle = quadraticAngle(
       label.start,
@@ -272,11 +277,11 @@ function createScreenPlacement(
   selected: boolean,
   visibilityOpacity: number,
 ): ScreenMapLabel | null {
-  // 저장된 월드 좌표와 크기를 한 번도 재계산하지 않고 현재 카메라로만
-  // 투영한다. 국명의 위치·방향·자간·영토 대비 크기는 모든 줌에서 동일하다.
-  const mapAnchoredMetrics = getMapAnchoredCountryLabelScreenMetrics(
+  // 국명은 지도 위의 좌표를 따르지만, 글꼴과 곡선 간격은 화면 픽셀로
+  // 고정한다. fitScale/camera.scale을 섞으면 창 크기와 줌에 따라 글씨가
+  // 커졌다 작아지는 회귀가 생긴다.
+  const fixedMetrics = getFixedCountryLabelScreenMetrics(
     label,
-    camera.scale,
     mapScaleMultiplier,
   );
   const { glyphs, screenFontSize } = createScreenGlyphs(
@@ -285,8 +290,8 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    mapAnchoredMetrics.fontSize,
-    mapAnchoredMetrics.layoutScale,
+    fixedMetrics.fontSize,
+    fixedMetrics.layoutScale,
   );
   if (glyphs.length === 0) {
     return null;
