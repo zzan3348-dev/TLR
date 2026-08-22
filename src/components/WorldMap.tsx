@@ -166,6 +166,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     forwardedRef,
   ) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const labelCanvasRef = useRef<HTMLCanvasElement>(null);
     const assetsRef = useRef<LoadedMapAssets | null>(null);
     const steelBackdropLayerRef = useRef<HTMLCanvasElement | null>(null);
     const factionMapLayerRef = useRef<HTMLCanvasElement | null>(null);
@@ -228,6 +229,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const drawMap = useCallback(() => {
       drawFrameRef.current = null;
       const canvas = canvasRef.current;
+      const labelCanvas = labelCanvasRef.current;
       const assets = assetsRef.current;
       if (!canvas || !assets) {
         return;
@@ -236,6 +238,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       if (!context) {
         return;
       }
+      const labelContext = labelCanvas?.getContext("2d") ?? null;
 
       const viewport = viewportRef.current;
       const camera = cameraRef.current;
@@ -243,6 +246,10 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       const mapWidth = assets.width;
       const mapHeight = assets.height;
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      if (labelContext && labelCanvas) {
+        labelContext.setTransform(1, 0, 0, 1, 0, 0);
+        labelContext.clearRect(0, 0, labelCanvas.width, labelCanvas.height);
+      }
       const steelBackdrop = steelBackdropLayerRef.current;
       if (steelBackdrop) {
         context.drawImage(
@@ -425,7 +432,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         }
       }
 
-      if (showLabelsRef.current) {
+      if (showLabelsRef.current && labelContext) {
         const labelPlacements = layoutMapLabels({
           labels:
             mapModeRef.current === "faction"
@@ -442,7 +449,9 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
               ? null
               : component?.componentId ?? null,
         });
-        drawMapLabels(context, labelPlacements, pixelRatio, progress);
+        // 국명은 지도 지오메트리와 분리된 screen-space 캔버스에 그린다.
+        // 카메라 줌은 글자의 위치에만 반영되고 글꼴 픽셀 크기에는 영향을 주지 않는다.
+        drawMapLabels(labelContext, labelPlacements, pixelRatio, progress);
       }
 
       if (mapModeRef.current === "political") {
@@ -918,7 +927,8 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
 
     useEffect(() => {
       const canvas = canvasRef.current;
-      if (!canvas) {
+      const labelCanvas = labelCanvasRef.current;
+      if (!canvas || !labelCanvas) {
         return;
       }
 
@@ -934,6 +944,8 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
           1,
           Math.round(nextViewport.height * pixelRatio),
         );
+        labelCanvas.width = canvas.width;
+        labelCanvas.height = canvas.height;
         steelBackdropLayerRef.current = createMapSteelBackdropLayer(
           nextViewport.width * pixelRatio,
           nextViewport.height * pixelRatio,
@@ -1201,6 +1213,11 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
           onContextMenu={(event) => event.preventDefault()}
           aria-label="확대, 이동, 국가 선택이 가능한 1932년 세계지도"
           role="img"
+        />
+        <canvas
+          ref={labelCanvasRef}
+          className="world-map-labels"
+          aria-hidden="true"
         />
         <div className="map-marker-layer" aria-label="지도 전략 마커">
           {screenMarkers.map((screenMarker) => {

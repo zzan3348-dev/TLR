@@ -1289,7 +1289,8 @@ button:focus-visible,
 }
 
 .world-map-container,
-.world-map {
+.world-map,
+.world-map-labels {
   display: block;
   width: 100%;
   height: 100%;
@@ -3104,6 +3105,13 @@ button:focus-visible,
 .world-map-container {
   position: relative;
   overflow: hidden;
+}
+
+.world-map-labels {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
 }
 
 .map-marker-layer {
