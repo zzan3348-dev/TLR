@@ -26,6 +26,10 @@ async function decisionHeaders(countryKey: string): Promise<HeadersInit> {
 
 async function request(path: string, countryKey: string, init?: RequestInit): Promise<DecisionApiOverview> {
   const response = await fetch(path, { ...init, credentials: "include", headers: { ...(await decisionHeaders(countryKey)), ...init?.headers } });
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    throw new DecisionApiError("INVALID_DECISION_RESPONSE", response.status);
+  }
   const payload: unknown = await response.json().catch(() => ({}));
   if (!response.ok) {
     const code = payload && typeof payload === "object" && "error" in payload && typeof payload.error === "string" ? payload.error : "DECISION_REQUEST_FAILED";

@@ -38,7 +38,12 @@ type ModifierRow = {
   expires_turn: number;
 };
 
-type ExecutionRow = { decision_id: string; cooldown_until_turn: number };
+type ExecutionRow = {
+  decision_id: string;
+  started_turn: number;
+  cooldown_until_turn: number;
+  temporary_until_turn: number | null;
+};
 type PartyOverrideRow = { party_id: string; support: number };
 
 type PartySource = {
@@ -102,7 +107,7 @@ export async function loadDecisionRuntime(admin: AdminClient, countryKey: string
     admin.from("country_military_resources").select("available_manpower").eq("country_key", countryKey).maybeSingle<{ available_manpower: number | null }>(),
     admin.from("country_decision_party_support").select("party_id,support").eq("country_key", countryKey).returns<PartyOverrideRow[]>(),
     admin.from("country_decision_modifiers").select("decision_id,effect_key,value,unit,expires_turn").eq("country_key", countryKey).gt("expires_turn", turn).returns<ModifierRow[]>(),
-    admin.from("country_decision_executions").select("decision_id,cooldown_until_turn").eq("country_key", countryKey).gt("cooldown_until_turn", turn).returns<ExecutionRow[]>(),
+    admin.from("country_decision_executions").select("decision_id,started_turn,cooldown_until_turn,temporary_until_turn").eq("country_key", countryKey).gt("cooldown_until_turn", turn).order("started_turn", { ascending: false }).returns<ExecutionRow[]>(),
     admin.from("military_conflict_participants").select("conflict_id,military_conflicts!inner(status)").eq("country_key", countryKey).is("left_world_date", null).not("military_conflicts.status", "in", "(ENDED,CANCELLED)").limit(1),
   ]);
   const failed = [metricsResult, economyResult, manpowerResult, partyResult, modifierResult, executionResult, warResult].find((result) => result.error);
@@ -221,13 +226,37 @@ function isVisible(definition: CommonDecisionDefinition, state: DecisionRuntimeS
 export function decisionOverview(countryKey: string, state: DecisionRuntimeState, selectedTargets: Record<string, string | undefined> = {}): DecisionOverview {
   const decisions: DecisionView[] = COMMON_DECISIONS.map((definition) => {
     const unmetConditions = decisionUnmetConditions(definition, state, selectedTargets[definition.id]);
+    const execution = state.executions.find((row) => row.decision_id === definition.id);
+    const running = Boolean(execution?.temporary_until_turn && execution.temporary_until_turn > state.turn);
+    const cooldownRemaining = Math.max(0, (execution?.cooldown_until_turn ?? state.turn) - state.turn);
+    const progress = running && execution?.temporary_until_turn
+      ? {
+          startedTurn: execution.started_turn,
+          endTurn: execution.temporary_until_turn,
+          elapsedTurns: Math.max(0, state.turn - execution.started_turn),
+          totalTurns: Math.max(1, execution.temporary_until_turn - execution.started_turn),
+          turnsRemaining: Math.max(0, execution.temporary_until_turn - state.turn),
+          fraction: Math.min(1, Math.max(0, (state.turn - execution.started_turn) / Math.max(1, execution.temporary_until_turn - execution.started_turn))),
+        }
+      : undefined;
+    const status: DecisionView["status"] = running
+      ? "running"
+      : cooldownRemaining > 0
+        ? "cooldown"
+        : unmetConditions.some((value) => value.startsWith("정치력"))
+          ? "insufficient"
+          : unmetConditions.length > 0
+            ? "locked"
+            : "ready";
     return {
       ...definition,
       visible: isVisible(definition, state),
       available: unmetConditions.length === 0,
       unmetConditions,
-      cooldownRemaining: Math.max(0, (state.executions.find((row) => row.decision_id === definition.id)?.cooldown_until_turn ?? state.turn) - state.turn),
+      cooldownRemaining,
       selectedTargetId: selectedTargets[definition.id],
+      status,
+      progress,
     };
   });
   return {

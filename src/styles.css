@@ -5927,6 +5927,422 @@ button:focus-visible,
   }
 }
 
+/* Generic 사건과 결정: compact strategy-game list. Special mechanics keep their own panels. */
+.strategic-window--generic-decisions {
+  width: min(790px, calc(100vw - 36px));
+}
+
+.strategic-window--generic-decisions .strategic-window__body {
+  padding: 5px 6px 7px;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 2%), transparent 13%, transparent 87%, rgb(0 0 0 / 28%)),
+    #080d0e;
+}
+
+.generic-decision-shell {
+  display: grid;
+  gap: 7px;
+  min-height: 0;
+  color: #d7d8cf;
+}
+
+.generic-decision-status {
+  display: grid;
+  grid-template-columns: auto minmax(52px, auto) auto minmax(92px, auto);
+  justify-content: end;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 8px;
+  border: 1px solid #38413c;
+  background: linear-gradient(#1c211f, #111614 56%, #080b0a);
+  box-shadow: inset 0 1px rgb(255 255 255 / 9%), inset 0 -2px rgb(0 0 0 / 70%);
+  font: 700 10px/1 "Malgun Gothic", sans-serif;
+  letter-spacing: .04em;
+}
+
+.generic-decision-status span {
+  color: #89918b;
+  padding-left: 13px;
+}
+
+.generic-decision-status strong {
+  color: #d8bd62;
+  padding-left: 6px;
+  font-size: 11px;
+}
+
+.generic-decision-category {
+  display: grid;
+  gap: 3px;
+}
+
+.generic-decision-category__header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 31px;
+  align-items: center;
+  min-height: 38px;
+  padding: 0;
+  overflow: hidden;
+  color: #e6e2d6;
+  border: 1px solid #4a4f48;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgb(118 91 45 / 20%), transparent 38%),
+    linear-gradient(#31322e, #1c1e1b 51%, #101210 52%, #181a17);
+  box-shadow: inset 0 1px rgb(255 255 255 / 14%), inset 0 -2px #070807, 0 1px 2px #000;
+  text-align: left;
+}
+
+.generic-decision-category__header::after {
+  content: "";
+  position: absolute;
+  left: 39px;
+  right: 31px;
+  bottom: 3px;
+  height: 1px;
+  background: linear-gradient(90deg, #947d44, transparent 72%);
+  opacity: .7;
+}
+
+.generic-decision-category__header > img {
+  width: 29px;
+  height: 29px;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px #000);
+}
+
+.generic-decision-category__header > strong {
+  padding-left: 8px;
+  font: 800 14px/1 "Malgun Gothic", sans-serif;
+  text-shadow: 0 1px #000;
+}
+
+.generic-decision-category__toggle {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: auto;
+  border: 1px solid #5b6058;
+  background: linear-gradient(#292c28, #0b0d0b);
+  box-shadow: inset 0 1px rgb(255 255 255 / 8%);
+}
+
+.generic-decision-category__toggle::before,
+.generic-decision-category__toggle::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  width: 8px;
+  height: 2px;
+  background: #c3c5b8;
+}
+
+.generic-decision-category__toggle[data-collapsed="true"]::after {
+  transform: rotate(90deg);
+}
+
+.generic-decision-category__rows {
+  display: grid;
+  gap: 3px;
+}
+
+.generic-decision-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 78px 42px 34px;
+  align-items: center;
+  min-height: 47px;
+  overflow: hidden;
+  color: #d8d8cf;
+  border: 1px solid #454a43;
+  outline: none;
+  background:
+    linear-gradient(90deg, rgb(88 102 70 / 17%), transparent 36%),
+    linear-gradient(#282b27, #171a17 48%, #0b0d0c 50%, #131512);
+  box-shadow: inset 0 1px rgb(255 255 255 / 9%), inset 0 -2px #030403, 0 1px 2px #000;
+  transition: filter 90ms linear, border-color 90ms linear;
+}
+
+.generic-decision-row:hover,
+.generic-decision-row:focus-within {
+  z-index: 1;
+  border-color: #8a825f;
+  filter: brightness(1.1);
+}
+
+.generic-decision-row[data-status="ready"] {
+  border-left: 3px solid #718d48;
+  background:
+    linear-gradient(90deg, rgb(91 122 58 / 28%), transparent 45%),
+    linear-gradient(#30342c, #1a2117 48%, #0c100b 50%, #151912);
+}
+
+.generic-decision-row[data-status="running"] {
+  border-left: 3px solid #bf9b42;
+}
+
+.generic-decision-row[data-status="locked"],
+.generic-decision-row[data-status="insufficient"],
+.generic-decision-row[data-status="cooldown"] {
+  filter: saturate(.45) brightness(.72);
+}
+
+.generic-decision-row[data-status="completed"] {
+  border-left: 3px solid #5f756d;
+}
+
+.generic-decision-row__icon {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  border-right: 1px solid #3e443e;
+  background: rgb(0 0 0 / 26%);
+}
+
+.generic-decision-row__icon img {
+  width: 33px;
+  height: 33px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 1px #000);
+}
+
+.generic-decision-row__main {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding: 4px 9px;
+}
+
+.generic-decision-row__main > strong {
+  overflow: hidden;
+  color: #e4e2d8;
+  font: 800 12px/1.15 "Malgun Gothic", sans-serif;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px #000;
+  white-space: nowrap;
+}
+
+.generic-decision-row__main select {
+  width: min(250px, 100%);
+  height: 18px;
+  padding: 0 18px 0 5px;
+  color: #c9c9bd;
+  border: 1px solid #56594d;
+  border-radius: 0;
+  background: #090c0a;
+  font: 700 9px/1 "Malgun Gothic", sans-serif;
+}
+
+.generic-decision-row__state {
+  color: #91988f;
+  font: 700 9px/1 "Malgun Gothic", sans-serif;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.generic-decision-row[data-status="ready"] .generic-decision-row__state { color: #a9c077; }
+.generic-decision-row[data-status="running"] .generic-decision-row__state { color: #dbbc63; }
+.generic-decision-row[data-status="insufficient"] .generic-decision-row__state,
+.generic-decision-row[data-status="locked"] .generic-decision-row__state { color: #b77b73; }
+
+.generic-decision-row__cost {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  color: #d2b760;
+  font: 800 10px/1 "Malgun Gothic", sans-serif;
+}
+
+.generic-decision-row__cost i {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: url("/assets/ui/generated-icons/status/political-power.png") center / contain no-repeat;
+}
+
+.generic-decision-row__execute {
+  width: 28px;
+  height: 24px;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: url("/assets/ui/decision-shell/envelope-button.png") center / contain no-repeat;
+  filter: drop-shadow(0 1px 1px #000);
+}
+
+.generic-decision-row__execute:not(:disabled):hover {
+  filter: brightness(1.28) drop-shadow(0 0 2px #9c8d54);
+}
+
+.generic-decision-row__execute:disabled {
+  cursor: not-allowed;
+  filter: grayscale(.85) brightness(.5);
+}
+
+.generic-decision-row__progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #050706;
+}
+
+.generic-decision-row__progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #506f3a, #b89d4f);
+  box-shadow: 0 0 3px rgb(192 164 80 / 48%);
+}
+
+.generic-decision-modifiers {
+  display: grid;
+  gap: 2px;
+  margin-top: 1px;
+  border: 1px solid #424941;
+  background: #090d0b;
+}
+
+.generic-decision-modifiers > header {
+  padding: 6px 9px;
+  color: #d6c06d;
+  border-bottom: 1px solid #3a403a;
+  background: linear-gradient(#262a25, #131613);
+  font: 800 11px/1 "Malgun Gothic", sans-serif;
+}
+
+.generic-decision-modifiers > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 9px;
+  color: #bec4bb;
+  font: 700 10px/1.2 "Malgun Gothic", sans-serif;
+}
+
+.generic-decision-tooltip {
+  position: fixed;
+  z-index: 100000;
+  width: 382px;
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  padding: 0 11px 11px;
+  color: #d6d8d0;
+  border: 2px solid #20231f;
+  border-top-color: #5c5d51;
+  border-left-color: #4a4b42;
+  border-radius: 0;
+  background: #030605;
+  box-shadow: 0 5px 16px #000, inset 0 0 0 1px #080c0a;
+  pointer-events: none;
+  font: 700 11px/1.5 "Malgun Gothic", sans-serif;
+}
+
+.generic-decision-tooltip > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 -11px 9px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #45483e;
+  background: linear-gradient(#2c2e29, #111411);
+  box-shadow: inset 0 1px rgb(255 255 255 / 10%);
+}
+
+.generic-decision-tooltip > header strong {
+  color: #e0c25b;
+  font-size: 14px;
+}
+
+.generic-decision-tooltip > header span {
+  color: #999e96;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.generic-decision-tooltip > header span[data-status="ready"] { color: #8fc568; }
+.generic-decision-tooltip > header span[data-status="running"] { color: #ddbb57; }
+.generic-decision-tooltip > header span[data-status="locked"],
+.generic-decision-tooltip > header span[data-status="insufficient"] { color: #d06b64; }
+
+.generic-decision-tooltip > p {
+  margin: 0 0 10px;
+  color: #d3d4cd;
+}
+
+.generic-decision-tooltip section {
+  margin-top: 8px;
+}
+
+.generic-decision-tooltip h4 {
+  margin: 0 0 4px;
+  color: #d7b94f;
+  font-size: 10px;
+  letter-spacing: .05em;
+}
+
+.generic-decision-tooltip__cost,
+.generic-decision-tooltip__effect,
+.generic-decision-tooltip__condition {
+  padding-left: 11px;
+}
+
+.generic-decision-tooltip__cost b { color: #e0c45c; }
+.generic-decision-tooltip__effect { color: #8fc97b; }
+
+.generic-decision-tooltip__condition {
+  position: relative;
+  color: #c9cbc4;
+}
+
+.generic-decision-tooltip__condition i {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.generic-decision-tooltip__condition[data-state="met"] { color: #86c375; }
+.generic-decision-tooltip__condition[data-state="unmet"] { color: #d86e65; }
+.generic-decision-tooltip__condition[data-state="pending"] { color: #b3a875; }
+
+.generic-decision-tooltip dl {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 2px 8px;
+  margin: 9px 0 0;
+  padding-top: 7px;
+  border-top: 1px solid #353a34;
+}
+
+.generic-decision-tooltip dt { color: #90968f; }
+.generic-decision-tooltip dd { margin: 0; color: #d7d8cf; }
+
+.generic-decision-tooltip__warning {
+  margin-top: 7px;
+  padding: 5px 7px;
+  color: #dd766d;
+  border-left: 2px solid #a64b45;
+  background: rgb(97 28 24 / 22%);
+}
+
+@media (max-width: 720px) {
+  .generic-decision-row {
+    grid-template-columns: 38px minmax(0, 1fr) 36px 31px;
+  }
+
+  .generic-decision-row__state { display: none; }
+  .generic-decision-tooltip { width: min(360px, calc(100vw - 28px)); }
+}
+
 .auth-modal-backdrop {
   position: fixed;
   inset: 0;

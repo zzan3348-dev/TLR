@@ -140,6 +140,15 @@ export type DecisionView = CommonDecisionDefinition & {
   unmetConditions: string[];
   cooldownRemaining: number;
   selectedTargetId?: string;
+  status: "ready" | "running" | "locked" | "insufficient" | "cooldown" | "completed";
+  progress?: {
+    startedTurn: number;
+    endTurn: number;
+    elapsedTurns: number;
+    totalTurns: number;
+    turnsRemaining: number;
+    fraction: number;
+  };
 };
 
 export type DecisionOverview = {
