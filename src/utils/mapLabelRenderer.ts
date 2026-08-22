@@ -370,18 +370,10 @@ export function layoutMapLabels({
       // 수도가 표시되는 근거리에서도 국명을 유지한다. 줌은 국명을 다시
       // 숨기거나 크기를 바꾸지 않고, 처음 나타나는 시점만 결정한다.
       const closeOpacity = 1;
-      const projectedWidth = label.maxWidth * camera.scale;
-      const projectedArea = label.groupPixelCount * camera.scale ** 2;
-      const projectedOpacity = Math.min(
-        1,
-        Math.max(
-          projectedWidth / MAP_LOD_POLICY.countryLabelMinimumProjectedWidth,
-          projectedArea / MAP_LOD_POLICY.countryLabelMinimumProjectedArea,
-        ),
-      );
-      // 국명 글자와 곡선을 지도 좌표계에 고정한다. 줌은 가시성만 바꾸며
-      // 영토에 대한 글자의 상대 크기·방향·간격은 다시 계산하지 않는다.
-      const visibilityOpacity = enterOpacity * closeOpacity * projectedOpacity;
+      // 투영 폭/면적을 opacity에 다시 곱하면 축소 중 글자의 획이 옅어져
+      // 실제 글꼴 크기가 줄어드는 것처럼 보인다. 줌은 최초 LOD 진입 여부만
+      // 결정하며, 나타난 국명의 픽셀 크기와 농도는 이후 완전히 고정한다.
+      const visibilityOpacity = enterOpacity * closeOpacity;
       if (visibilityOpacity <= 0.01) continue;
       const placement = createScreenPlacement(
         label,

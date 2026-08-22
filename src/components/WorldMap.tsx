@@ -928,17 +928,28 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     useEffect(() => {
       const canvas = canvasRef.current;
       const labelCanvas = labelCanvasRef.current;
-      if (!canvas || !labelCanvas) {
+      const container = canvas?.parentElement;
+      if (!canvas || !labelCanvas || !container) {
         return;
       }
 
       const resize = () => {
-        const bounds = canvas.getBoundingClientRect();
+        // 캔버스 자체를 관찰하면 width/height 버퍼를 갱신하는 순간의 이전
+        // CSS 크기가 남아 브라우저가 캔버스 전체(국명 포함)를 다시 축소할 수
+        // 있다. 실제 viewport인 컨테이너를 기준으로 두 캔버스를 항상 같은
+        // CSS 픽셀 크기와 버퍼 크기로 맞춘다.
+        const bounds = container.getBoundingClientRect();
         const nextViewport = {
           width: Math.max(1, bounds.width),
           height: Math.max(1, bounds.height),
         };
         const pixelRatio = window.devicePixelRatio || 1;
+        const cssWidth = `${nextViewport.width}px`;
+        const cssHeight = `${nextViewport.height}px`;
+        canvas.style.width = cssWidth;
+        canvas.style.height = cssHeight;
+        labelCanvas.style.width = cssWidth;
+        labelCanvas.style.height = cssHeight;
         canvas.width = Math.max(1, Math.round(nextViewport.width * pixelRatio));
         canvas.height = Math.max(
           1,
@@ -975,7 +986,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
 
       resize();
       const observer = new ResizeObserver(resize);
-      observer.observe(canvas);
+      observer.observe(container);
       return () => observer.disconnect();
     }, [publishOverlayView, requestDraw]);
 
