@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { MapCountryLabel } from "../src/types/mapCountry";
 import {
   doLabelBoundsOverlap,
+  getFixedCountryLabelScreenMetrics,
   getRotatedLabelBounds,
   layoutMapLabels,
 } from "../src/utils/mapLabelRenderer";
@@ -49,6 +50,14 @@ const baseLayoutOptions = {
 };
 
 describe("mapLabelRenderer", () => {
+  it("국명 화면 크기 계산은 카메라나 뷰포트 값을 받을 수 없는 고정 계산이다", () => {
+    const label = createLabel(1, { fontSize: 80 });
+    const metrics = getFixedCountryLabelScreenMetrics(label);
+
+    expect(metrics.fontSize).toBeCloseTo((80 * 1920) / 5632);
+    expect(metrics.layoutScale).toBeCloseTo(1920 / 5632);
+  });
+
   it("회전된 라벨의 화면 경계와 겹침을 계산한다", () => {
     const horizontal = getRotatedLabelBounds(100, 100, 80, 20, 0);
     const vertical = getRotatedLabelBounds(100, 100, 80, 20, 90);
@@ -152,7 +161,7 @@ describe("mapLabelRenderer", () => {
     expect(after.screenFontSize).toBe(before.screenFontSize);
   });
 
-  it("선택된 국가 라벨은 기본 크기보다 최대 6%만 확대한다", () => {
+  it("선택된 국가 라벨도 기본 크기에서 확대하지 않는다", () => {
     const camera = { x: 500, y: 250, scale: 4 };
     const labels = [createLabel(1, { fontSize: 80 })];
     const [normalPlacement] = layoutMapLabels({

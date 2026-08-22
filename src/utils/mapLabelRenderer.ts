@@ -60,6 +60,32 @@ const VIEWPORT_MARGIN = 12;
 // 뷰포트와 카메라 배율 대신 이 기준값만 사용해 국명 크기를 고정한다.
 const REFERENCE_MAP_SCREEN_SCALE = 1920 / 5632;
 
+export type FixedCountryLabelScreenMetrics = {
+  fontSize: number;
+  layoutScale: number;
+};
+
+/**
+ * 국명의 화면상 크기를 결정한다.
+ *
+ * 이 함수에는 의도적으로 camera.scale, fitScale, viewport를 전달하지 않는다.
+ * 줌과 창 크기는 월드 앵커의 화면 위치만 바꿀 수 있고 글꼴 크기와 글자 간격은
+ * 절대로 바꾸지 못하게 하기 위한 경계다.
+ */
+export function getFixedCountryLabelScreenMetrics(
+  label: Pick<MapCountryLabel, "fontSize">,
+  countryScaleMultiplier = 1,
+): FixedCountryLabelScreenMetrics {
+  const layoutScale = REFERENCE_MAP_SCREEN_SCALE * countryScaleMultiplier;
+  const minimumLayoutScale =
+    MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize);
+
+  return {
+    fontSize: Math.max(MIN_SCREEN_FONT_SIZE, label.fontSize * layoutScale),
+    layoutScale: Math.max(minimumLayoutScale, layoutScale),
+  };
+}
+
 export function getRotatedLabelBounds(
   x: number,
   y: number,
@@ -251,21 +277,18 @@ function createScreenPlacement(
   // 국명은 지도 위의 좌표를 따르지만, 글꼴과 곡선 간격은 화면 픽셀로
   // 고정한다. fitScale/camera.scale을 섞으면 창 크기와 줌에 따라 글씨가
   // 커졌다 작아지는 회귀가 생긴다.
-  const fixedScreenScale = REFERENCE_MAP_SCREEN_SCALE * mapScaleMultiplier;
+  const fixedMetrics = getFixedCountryLabelScreenMetrics(
+    label,
+    mapScaleMultiplier,
+  );
   const { glyphs, screenFontSize } = createScreenGlyphs(
     label,
     copy,
     camera,
     viewport,
     mapWidth,
-    Math.max(
-      MIN_SCREEN_FONT_SIZE,
-      label.fontSize * fixedScreenScale,
-    ),
-    Math.max(
-      MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize),
-      fixedScreenScale,
-    ),
+    fixedMetrics.fontSize,
+    fixedMetrics.layoutScale,
   );
   if (glyphs.length === 0) {
     return null;
