@@ -27,6 +27,7 @@ from .llm_chat import (
     parse_memory_command,
     strip_bot_mentions,
 )
+from .navi_safety import NaviSafety
 from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
@@ -53,6 +54,10 @@ class NaviBot(commands.Bot):
             self.db,
             bot=self,
         )
+        self.navi_safety = NaviSafety(
+            self.db,
+            Path(__file__).with_name("assets") / "navi_safety_reactions.json",
+        )
         self.llm_chat: LLMChatService | None = None
         if config.gemini_api_key:
             self.llm_chat = LLMChatService(
@@ -62,6 +67,7 @@ class NaviBot(commands.Bot):
                     timeout_seconds=config.llm_timeout_seconds,
                 ),
                 db=self.db,
+                safety=self.navi_safety,
             )
 
     async def setup_hook(self) -> None:
@@ -158,6 +164,18 @@ class NaviBot(commands.Bot):
                 return
             memory_command = parse_memory_command(prompt)
             if memory_command is not None:
+                safety_decision = self.navi_safety.screen_input(
+                    user_id=message.author.id,
+                    guild_id=getattr(message.guild, "id", None),
+                    text=prompt,
+                )
+                if safety_decision.blocked:
+                    await message.reply(
+                        safety_decision.response,
+                        allowed_mentions=no_mentions(),
+                        mention_author=False,
+                    )
+                    return
                 await self._handle_llm_memory_command(message, memory_command.action, memory_command.keyword)
                 return
             if self.llm_chat is None:

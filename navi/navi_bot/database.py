@@ -2,13 +2,14 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import dataclass, field
+from datetime import timedelta
 import os
 from pathlib import Path
 import sqlite3
 from typing import Any, Iterator
 
 from .config import ensure_parent_dir
-from .utils_time import now_db_time, now_kst
+from .utils_time import now_db_time, now_kst, parse_db_time, to_db_time
 
 NAVI_OWNER_USER_ID = int(os.getenv("NAVI_OWNER_USER_ID", "0") or 0)
 AFFECTION_DAILY_GAIN_LIMIT = 30
@@ -220,6 +221,56 @@ class Database:
                 (int(user_id), date_key),
             ).fetchone()
         return int(row["request_count"] or 0) if row else 0
+
+    def record_safety_violation(self, *, user_id: int, guild_id: int | None, violation_type: str) -> None:
+        """원문 없이 위반 분류와 발생 시각만 저장한다."""
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO navi_safety_violations(user_id,guild_id,violation_type,created_at)
+                VALUES(?,?,?,?)""",
+                (int(user_id), int(guild_id) if guild_id is not None else None, str(violation_type)[:80], now_db_time()),
+            )
+
+    def get_recent_safety_violation_count(self, user_id: int, *, minutes: int = 10) -> int:
+        since = to_db_time(now_kst() - timedelta(minutes=max(1, int(minutes))))
+        with self._connect() as conn:
+            row = conn.execute(
+                """SELECT COUNT(*) AS count FROM navi_safety_violations
+                WHERE user_id=? AND created_at>=? AND violation_type NOT LIKE 'output_%'""",
+                (int(user_id), since),
+            ).fetchone()
+        return int(row["count"] or 0) if row else 0
+
+    def restrict_llm_user(self, user_id: int, *, minutes: int = 30, reason: str = "") -> None:
+        now = now_kst()
+        requested_until = now + timedelta(minutes=max(1, int(minutes)))
+        with self._connect() as conn:
+            current = conn.execute(
+                "SELECT restricted_until FROM navi_llm_restrictions WHERE user_id=?",
+                (int(user_id),),
+            ).fetchone()
+            if current:
+                requested_until = max(requested_until, parse_db_time(str(current["restricted_until"])))
+            conn.execute(
+                """INSERT INTO navi_llm_restrictions(user_id,restricted_until,reason,updated_at)
+                VALUES(?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET
+                restricted_until=excluded.restricted_until,reason=excluded.reason,updated_at=excluded.updated_at""",
+                (int(user_id), to_db_time(requested_until), str(reason)[:120], to_db_time(now)),
+            )
+
+    def get_llm_restriction_remaining(self, user_id: int) -> int:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT restricted_until FROM navi_llm_restrictions WHERE user_id=?",
+                (int(user_id),),
+            ).fetchone()
+            if not row:
+                return 0
+            remaining = int((parse_db_time(str(row["restricted_until"])) - now_kst()).total_seconds())
+            if remaining <= 0:
+                conn.execute("DELETE FROM navi_llm_restrictions WHERE user_id=?", (int(user_id),))
+                return 0
+        return remaining
 
     def list_llm_keywords(self, user_id: int) -> list[str]:
         with self._connect() as conn:
@@ -509,6 +560,9 @@ CREATE TABLE IF NOT EXISTS bot_settings(key TEXT PRIMARY KEY,value TEXT NOT NULL
 CREATE TABLE IF NOT EXISTS chat_message_claims(message_id INTEGER PRIMARY KEY,created_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS llm_daily_usage(user_id INTEGER NOT NULL,usage_date TEXT NOT NULL,request_count INTEGER NOT NULL DEFAULT 0,last_used_at TEXT,PRIMARY KEY(user_id,usage_date));
 CREATE TABLE IF NOT EXISTS llm_user_keywords(user_id INTEGER NOT NULL,slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 2),keyword TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,slot));
+CREATE TABLE IF NOT EXISTS navi_safety_violations(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,guild_id INTEGER,violation_type TEXT NOT NULL,created_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_navi_safety_violations_user_created ON navi_safety_violations(user_id,created_at);
+CREATE TABLE IF NOT EXISTS navi_llm_restrictions(user_id INTEGER PRIMARY KEY,restricted_until TEXT NOT NULL,reason TEXT,updated_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS global_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,badge_key TEXT UNIQUE NOT NULL,name TEXT NOT NULL,icon TEXT,description TEXT,rarity TEXT DEFAULT 'common',special_reaction TEXT,priority INTEGER DEFAULT 100,system_locked INTEGER DEFAULT 0,created_by INTEGER,created_at TEXT NOT NULL,updated_at TEXT);
 CREATE TABLE IF NOT EXISTS global_user_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,badge_key TEXT NOT NULL,granted_by INTEGER,granted_reason TEXT,granted_at TEXT NOT NULL,source TEXT DEFAULT 'manual',UNIQUE(user_id,badge_key));
 CREATE TABLE IF NOT EXISTS global_user_profile_settings(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER UNIQUE NOT NULL,active_badge_key TEXT,badge_reactions_enabled INTEGER DEFAULT 1,updated_at TEXT NOT NULL);
