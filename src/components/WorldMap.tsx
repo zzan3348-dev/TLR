@@ -449,8 +449,8 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
               ? null
               : component?.componentId ?? null,
         });
-        // 국명은 지도 지오메트리와 분리된 screen-space 캔버스에 그린다.
-        // 카메라 줌은 글자의 위치에만 반영되고 글꼴 픽셀 크기에는 영향을 주지 않는다.
+        // 별도 캔버스를 쓰되 국명 도형 전체에는 지도와 동일한 카메라 투영을
+        // 적용한다. 위치·곡선·자간·글꼴이 영토와 한 몸처럼 움직여야 한다.
         drawMapLabels(labelContext, labelPlacements, pixelRatio, progress);
       }
 
