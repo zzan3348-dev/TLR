@@ -102,7 +102,7 @@ describe("mapLabelRenderer", () => {
     );
   });
 
-  it("줌 단계가 달라도 국명 전체와 각 글자의 화면 경계가 변하지 않는다", () => {
+  it("줌 단계가 달라도 국명 전체와 각 글자의 화면 크기가 변하지 않는다", () => {
     const placements = [1.5, 3, 5.5, 8].map((scale) => {
       const [placement] = layoutMapLabels({
         ...baseLayoutOptions,
@@ -113,15 +113,17 @@ describe("mapLabelRenderer", () => {
     });
     const first = placements[0];
 
-    for (const placement of placements.slice(1)) {
+    placements.forEach((placement) => {
       expect(placement.width).toBeCloseTo(first.width, 5);
       expect(placement.height).toBeCloseTo(first.height, 5);
       expect(placement.glyphs).toHaveLength(first.glyphs.length);
       placement.glyphs.forEach((glyph, index) => {
         expect(glyph.width).toBeCloseTo(first.glyphs[index].width, 5);
         expect(glyph.height).toBeCloseTo(first.glyphs[index].height, 5);
+        expect(glyph.x).toBeCloseTo(first.glyphs[index].x, 5);
+        expect(glyph.y).toBeCloseTo(first.glyphs[index].y, 5);
       });
-    }
+    });
   });
 
   it("화면 비율과 fitScale이 달라도 국명은 같은 화면 픽셀 크기를 유지한다", () => {
@@ -223,7 +225,7 @@ describe("mapLabelRenderer", () => {
     expect(placements.map(({ label }) => label.countryId)).toEqual([2, 1]);
   });
 
-  it("같은 국가의 겹치는 추가 라벨은 화면 기준으로 옮기거나 축소하지 않는다", () => {
+  it("같은 국가의 여러 고정 라벨을 화면 충돌 때문에 숨기지 않는다", () => {
     const placements = layoutMapLabels({
       ...baseLayoutOptions,
       labels: [
@@ -239,8 +241,8 @@ describe("mapLabelRenderer", () => {
       ],
     });
 
-    expect(placements).toHaveLength(1);
-    expect(placements[0].label.countryId).toBe(1);
+    expect(placements).toHaveLength(2);
+    expect(placements.every(({ label }) => label.countryId === 1)).toBe(true);
   });
 
   it("영토 적합도 때문에 숨겨진 라벨은 충분히 확대하면 다시 표시한다", () => {

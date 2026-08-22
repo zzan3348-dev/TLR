@@ -232,6 +232,9 @@ function createScreenGlyphs(
       x: worldPoint.x + pathAnchorOffset.x,
       y: worldPoint.y + pathAnchorOffset.y,
     };
+    // 국명 전체를 하나의 고정 screen-space 표식으로 취급한다. 지도 좌표에는
+    // 중심 앵커만 고정하고 글자별 곡선 오프셋은 고정 픽셀 배율로 계산해야
+    // 줌할 때 글자 크기와 자간, 전체 국명 폭이 함께 커지거나 작아지지 않는다.
     const screenPoint = {
       x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * fixedLayoutScale,
       y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * fixedLayoutScale,
@@ -417,31 +420,11 @@ export function layoutMapLabels({
     return first.copy - second.copy;
   });
 
-  const occupied = [...reservedBounds];
-  const accepted: ScreenMapLabel[] = [];
-  const acceptedCountryIds = new Set<number>();
-  for (const candidate of candidates) {
-    const collides = occupied.some((bounds) =>
-      doLabelBoundsOverlap(
-        candidate.bounds,
-        bounds,
-        MAP_LOD_POLICY.countryLabelCollisionPadding,
-      ),
-    );
-    // 충돌 회피 때문에 한 국가의 국명이 전부 사라지는 일은 막는다.
-    // 이미 같은 국가의 라벨이 하나 보이는 경우에만 추가 라벨을 생략한다.
-    if (
-      collides &&
-      !candidate.selected &&
-      acceptedCountryIds.has(candidate.label.countryId)
-    ) {
-      continue;
-    }
-    accepted.push(candidate);
-    occupied.push(candidate.bounds);
-    acceptedCountryIds.add(candidate.label.countryId);
-  }
-  return accepted;
+  // 화면 기준 충돌 판정은 줌마다 결과가 달라져 같은 국명이 사라지거나 다른
+  // 영토 조각으로 순간 이동하는 원인이 된다. 위치가 확정된 국명은 재배치나
+  // 축소 없이 그대로 렌더링한다. reservedBounds는 호출부 호환을 위해 유지한다.
+  void reservedBounds;
+  return candidates;
 }
 
 export function drawMapLabels(
