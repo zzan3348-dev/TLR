@@ -17,9 +17,93 @@ from navi_bot.commands_word_chain import WordChainCommands
 from navi_bot.config import Config
 from navi_bot.chat_reactions import ChatReactionManager
 from navi_bot.navi_emojis import EMOJI_ALIASES, EMOJI_FALLBACKS
+from navi_bot.llm_chat import (
+    LLMChatService,
+    build_navi_system_prompt,
+    is_direct_bot_mention,
+    parse_memory_command,
+    sanitize_llm_output,
+    strip_bot_mentions,
+)
 
 
 class RuntimeTests(unittest.TestCase):
+    def test_direct_mention_parsing_and_memory_commands(self) -> None:
+        message = SimpleNamespace(
+            content="<@!1234> 오늘 뭐해?",
+            mentions=[SimpleNamespace(id=1234)],
+        )
+        self.assertTrue(is_direct_bot_mention(message, 1234))
+        self.assertEqual(strip_bot_mentions(message.content, 1234), "오늘 뭐해?")
+        self.assertFalse(is_direct_bot_mention(SimpleNamespace(content="안녕", mentions=[]), 1234))
+        self.assertEqual(strip_bot_mentions("<@1234>", 1234), "")
+        self.assertEqual(parse_memory_command("기억해: 민트초코").action, "remember")
+        self.assertEqual(parse_memory_command("기억 목록").action, "list")
+        self.assertIsNone(parse_memory_command("이거 기억해줄래?"))
+
+    def test_llm_prompt_uses_existing_navi_tone_and_mentions_are_safe(self) -> None:
+        prompt = build_navi_system_prompt(username="tester", is_owner=True, memories=["고양이 집사"])
+        self.assertIn("네에! 나비 여기 있어요!", prompt)
+        self.assertIn("아빠", prompt)
+        self.assertIn("고양이 집사", prompt)
+        sanitized = sanitize_llm_output("@everyone <@1234> 안녕하세요")
+        self.assertNotIn("@everyone", sanitized)
+        self.assertNotIn("<@1234>", sanitized)
+
+    def test_llm_provider_failure_refunds_reserved_usage(self) -> None:
+        class FailingProvider:
+            async def generate(self, *, system_prompt: str, message: str) -> str:
+                raise RuntimeError("temporary failure")
+
+            async def close(self) -> None:
+                return None
+
+        async def exercise() -> int:
+            with tempfile.TemporaryDirectory() as directory:
+                database = __import__("navi_bot.database", fromlist=["Database"]).Database(
+                    str(Path(directory) / "new-navi.sqlite3")
+                )
+                database.init_db()
+                service = LLMChatService(provider=FailingProvider(), db=database)
+                result = await service.generate_reply(
+                    user_id=77,
+                    username="tester",
+                    guild_id=1,
+                    message="안녕",
+                )
+                self.assertEqual(result.status, "error")
+                return database.get_llm_daily_usage(77)
+
+        self.assertEqual(asyncio.run(exercise()), 0)
+
+    def test_llm_service_allows_five_requests_then_limits_the_sixth(self) -> None:
+        class SuccessProvider:
+            async def generate(self, *, system_prompt: str, message: str) -> str:
+                return "네에, 대답할게요!"
+
+            async def close(self) -> None:
+                return None
+
+        async def exercise() -> list[str]:
+            with tempfile.TemporaryDirectory() as directory:
+                database = __import__("navi_bot.database", fromlist=["Database"]).Database(
+                    str(Path(directory) / "new-navi.sqlite3")
+                )
+                database.init_db()
+                service = LLMChatService(provider=SuccessProvider(), db=database)
+                replies = [
+                    await service.generate_reply(
+                        user_id=88,
+                        username="tester",
+                        guild_id=1,
+                        message="안녕",
+                    )
+                    for _ in range(6)
+                ]
+                return [reply.status for reply in replies]
+
+        self.assertEqual(asyncio.run(exercise()), ["success"] * 5 + ["limit"])
+
     def test_lcw_call_uses_the_new_text_without_an_invite_link(self) -> None:
         manager = ChatReactionManager(
             Path(__file__).parents[1] / "navi_bot" / "assets" / "chat_reactions.json",

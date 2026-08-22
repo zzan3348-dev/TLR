@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import closing
+from concurrent.futures import ThreadPoolExecutor
 import sqlite3
 import tempfile
 from pathlib import Path
@@ -42,6 +43,44 @@ class NewDatabaseTests(unittest.TestCase):
             self.assertIn("restaurant_profiles", tables)
             self.assertIn("word_chain_words", tables)
             self.assertIn("global_user_affection", tables)
+            self.assertIn("llm_daily_usage", tables)
+            self.assertIn("llm_user_keywords", tables)
+
+    def test_llm_usage_is_global_persistent_daily_and_atomic(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            path = Path(directory) / "new-navi.sqlite3"
+            database = Database(str(path))
+            database.init_db()
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                results = list(
+                    executor.map(
+                        lambda _: database.try_consume_llm_usage(100, usage_date="2026-08-23"),
+                        range(10),
+                    )
+                )
+            self.assertEqual(sum(1 for consumed, _ in results if consumed), 5)
+            self.assertEqual(database.get_llm_daily_usage(100, usage_date="2026-08-23"), 5)
+            self.assertEqual(database.try_consume_llm_usage(200, usage_date="2026-08-23"), (True, 1))
+
+            restarted = Database(str(path))
+            restarted.init_db()
+            self.assertEqual(restarted.get_llm_daily_usage(100, usage_date="2026-08-23"), 5)
+            self.assertEqual(restarted.try_consume_llm_usage(100, usage_date="2026-08-24"), (True, 1))
+            self.assertEqual(restarted.refund_llm_usage(100, usage_date="2026-08-24"), 0)
+
+    def test_llm_memory_keeps_two_keywords_per_user(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            database = Database(str(Path(directory) / "new-navi.sqlite3"))
+            database.init_db()
+            database.remember_llm_keyword(100, "민트초코 좋아함")
+            database.remember_llm_keyword(100, "고양이 집사")
+            result = database.remember_llm_keyword(100, "야간 활동")
+            self.assertEqual(result["replaced"], "민트초코 좋아함")
+            self.assertEqual(database.list_llm_keywords(100), ["야간 활동", "고양이 집사"])
+            database.remember_llm_keyword(200, "별도 기억")
+            self.assertEqual(database.list_llm_keywords(200), ["별도 기억"])
+            self.assertTrue(database.forget_llm_keyword(100, "고양이 집사"))
+            self.assertEqual(database.list_llm_keywords(100), ["야간 활동"])
 
     def test_static_word_asset_seeds_a_new_database(self) -> None:
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:

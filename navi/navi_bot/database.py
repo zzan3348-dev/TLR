@@ -8,7 +8,7 @@ import sqlite3
 from typing import Any, Iterator
 
 from .config import ensure_parent_dir
-from .utils_time import now_db_time
+from .utils_time import now_db_time, now_kst
 
 NAVI_OWNER_USER_ID = int(os.getenv("NAVI_OWNER_USER_ID", "0") or 0)
 AFFECTION_DAILY_GAIN_LIMIT = 30
@@ -170,6 +170,119 @@ class Database:
                 (int(message_id), now_db_time()),
             )
         return cursor.rowcount > 0
+
+    def get_llm_daily_usage(self, user_id: int, *, usage_date: str | None = None) -> int:
+        date_key = usage_date or now_kst().date().isoformat()
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT request_count FROM llm_daily_usage WHERE user_id=? AND usage_date=?",
+                (int(user_id), date_key),
+            ).fetchone()
+        return int(row["request_count"] or 0) if row else 0
+
+    def try_consume_llm_usage(
+        self,
+        user_id: int,
+        *,
+        limit: int = 5,
+        usage_date: str | None = None,
+    ) -> tuple[bool, int]:
+        date_key = usage_date or now_kst().date().isoformat()
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            row = conn.execute(
+                "SELECT request_count FROM llm_daily_usage WHERE user_id=? AND usage_date=?",
+                (int(user_id), date_key),
+            ).fetchone()
+            current = int(row["request_count"] or 0) if row else 0
+            if current >= int(limit):
+                return False, current
+            consumed = current + 1
+            conn.execute(
+                """INSERT INTO llm_daily_usage(user_id,usage_date,request_count,last_used_at)
+                VALUES(?,?,?,?) ON CONFLICT(user_id,usage_date) DO UPDATE SET
+                request_count=excluded.request_count,last_used_at=excluded.last_used_at""",
+                (int(user_id), date_key, consumed, now_db_time()),
+            )
+        return True, consumed
+
+    def refund_llm_usage(self, user_id: int, *, usage_date: str | None = None) -> int:
+        date_key = usage_date or now_kst().date().isoformat()
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute(
+                """UPDATE llm_daily_usage SET request_count=MAX(0,request_count-1),last_used_at=?
+                WHERE user_id=? AND usage_date=?""",
+                (now_db_time(), int(user_id), date_key),
+            )
+            row = conn.execute(
+                "SELECT request_count FROM llm_daily_usage WHERE user_id=? AND usage_date=?",
+                (int(user_id), date_key),
+            ).fetchone()
+        return int(row["request_count"] or 0) if row else 0
+
+    def list_llm_keywords(self, user_id: int) -> list[str]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT keyword FROM llm_user_keywords WHERE user_id=? ORDER BY slot",
+                (int(user_id),),
+            ).fetchall()
+        return [str(row["keyword"]) for row in rows]
+
+    def remember_llm_keyword(self, user_id: int, keyword: str, *, limit: int = 2) -> dict[str, Any]:
+        clean_keyword = " ".join(str(keyword or "").strip().split())[:100]
+        if not clean_keyword:
+            raise ValueError("기억할 키워드가 비어 있습니다.")
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            rows = conn.execute(
+                "SELECT slot,keyword,created_at FROM llm_user_keywords WHERE user_id=? ORDER BY slot",
+                (int(user_id),),
+            ).fetchall()
+            existing = next((row for row in rows if str(row["keyword"]).casefold() == clean_keyword.casefold()), None)
+            now = now_db_time()
+            if existing:
+                conn.execute(
+                    "UPDATE llm_user_keywords SET keyword=?,updated_at=? WHERE user_id=? AND slot=?",
+                    (clean_keyword, now, int(user_id), int(existing["slot"])),
+                )
+                return {"keyword": clean_keyword, "replaced": None, "count": len(rows)}
+            if len(rows) < int(limit):
+                used_slots = {int(row["slot"]) for row in rows}
+                slot = next(value for value in range(1, int(limit) + 1) if value not in used_slots)
+                replaced = None
+            else:
+                oldest = min(rows, key=lambda row: (str(row["created_at"]), int(row["slot"])))
+                slot = int(oldest["slot"])
+                replaced = str(oldest["keyword"])
+                conn.execute("DELETE FROM llm_user_keywords WHERE user_id=? AND slot=?", (int(user_id), slot))
+            conn.execute(
+                """INSERT INTO llm_user_keywords(user_id,slot,keyword,created_at,updated_at)
+                VALUES(?,?,?,?,?)""",
+                (int(user_id), slot, clean_keyword, now, now),
+            )
+        return {"keyword": clean_keyword, "replaced": replaced, "count": min(int(limit), len(rows) + 1)}
+
+    def forget_llm_keyword(self, user_id: int, keyword: str) -> bool:
+        target = " ".join(str(keyword or "").strip().split()).casefold()
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT slot,keyword FROM llm_user_keywords WHERE user_id=?",
+                (int(user_id),),
+            ).fetchall()
+            match = next((row for row in rows if str(row["keyword"]).casefold() == target), None)
+            if match is None:
+                return False
+            conn.execute(
+                "DELETE FROM llm_user_keywords WHERE user_id=? AND slot=?",
+                (int(user_id), int(match["slot"])),
+            )
+        return True
+
+    def clear_llm_keywords(self, user_id: int) -> int:
+        with self._connect() as conn:
+            cursor = conn.execute("DELETE FROM llm_user_keywords WHERE user_id=?", (int(user_id),))
+        return int(cursor.rowcount)
 
     def _grant_global_badge_conn(
         self,
@@ -394,6 +507,8 @@ class Database:
 _SCHEMA = r"""
 CREATE TABLE IF NOT EXISTS bot_settings(key TEXT PRIMARY KEY,value TEXT NOT NULL,updated_by INTEGER,updated_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS chat_message_claims(message_id INTEGER PRIMARY KEY,created_at TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS llm_daily_usage(user_id INTEGER NOT NULL,usage_date TEXT NOT NULL,request_count INTEGER NOT NULL DEFAULT 0,last_used_at TEXT,PRIMARY KEY(user_id,usage_date));
+CREATE TABLE IF NOT EXISTS llm_user_keywords(user_id INTEGER NOT NULL,slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 2),keyword TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,slot));
 CREATE TABLE IF NOT EXISTS global_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,badge_key TEXT UNIQUE NOT NULL,name TEXT NOT NULL,icon TEXT,description TEXT,rarity TEXT DEFAULT 'common',special_reaction TEXT,priority INTEGER DEFAULT 100,system_locked INTEGER DEFAULT 0,created_by INTEGER,created_at TEXT NOT NULL,updated_at TEXT);
 CREATE TABLE IF NOT EXISTS global_user_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,badge_key TEXT NOT NULL,granted_by INTEGER,granted_reason TEXT,granted_at TEXT NOT NULL,source TEXT DEFAULT 'manual',UNIQUE(user_id,badge_key));
 CREATE TABLE IF NOT EXISTS global_user_profile_settings(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER UNIQUE NOT NULL,active_badge_key TEXT,badge_reactions_enabled INTEGER DEFAULT 1,updated_at TEXT NOT NULL);

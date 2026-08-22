@@ -18,7 +18,15 @@ from .commands.tlr import TlrCommands
 from .commands_restaurant import RestaurantCommands, is_restaurant_owner_grant_command, handle_restaurant_owner_grant_command
 from .commands_word_chain import WordChainCommands
 from .config import Config, no_mentions
-from .database import Database
+from .database import Database, NAVI_OWNER_USER_ID
+from .llm_chat import (
+    EMPTY_MENTION_REPLY,
+    GeminiProvider,
+    LLMChatService,
+    is_direct_bot_mention,
+    parse_memory_command,
+    strip_bot_mentions,
+)
 from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
@@ -45,6 +53,16 @@ class NaviBot(commands.Bot):
             self.db,
             bot=self,
         )
+        self.llm_chat: LLMChatService | None = None
+        if config.gemini_api_key:
+            self.llm_chat = LLMChatService(
+                provider=GeminiProvider(
+                    api_key=config.gemini_api_key,
+                    model=config.gemini_model,
+                    timeout_seconds=config.llm_timeout_seconds,
+                ),
+                db=self.db,
+            )
 
     async def setup_hook(self) -> None:
         self.db.init_db()
@@ -68,6 +86,8 @@ class NaviBot(commands.Bot):
 
     async def close(self) -> None:
         self.poll_tlr_events.cancel()
+        if self.llm_chat is not None:
+            await self.llm_chat.close()
         await self.tlr.close()
         await super().close()
 
@@ -129,6 +149,34 @@ class NaviBot(commands.Bot):
             if self.db.claim_chat_message(message.id):
                 await handle_restaurant_owner_grant_command(self, self.db, message)
             return
+        if self.user is not None and is_direct_bot_mention(message, self.user.id):
+            if not self.db.claim_chat_message(message.id):
+                return
+            prompt = strip_bot_mentions(message.content, self.user.id)
+            if not prompt:
+                await message.reply(EMPTY_MENTION_REPLY, allowed_mentions=no_mentions(), mention_author=False)
+                return
+            memory_command = parse_memory_command(prompt)
+            if memory_command is not None:
+                await self._handle_llm_memory_command(message, memory_command.action, memory_command.keyword)
+                return
+            if self.llm_chat is None:
+                await message.reply(
+                    "으음... 아직 대화 기능을 준비하지 못했어요. 잠시 뒤에 다시 불러주세요.",
+                    allowed_mentions=no_mentions(),
+                    mention_author=False,
+                )
+                return
+            async with message.channel.typing():
+                reply = await self.llm_chat.generate_reply(
+                    user_id=message.author.id,
+                    username=str(getattr(message.author, "display_name", None) or message.author.name),
+                    guild_id=getattr(message.guild, "id", None),
+                    message=prompt,
+                    is_owner=bool(NAVI_OWNER_USER_ID and message.author.id == NAVI_OWNER_USER_ID),
+                )
+            await message.reply(reply.text, allowed_mentions=no_mentions(), mention_author=False)
+            return
         affection_level: int | None = None
         if "나비" in (message.content or ""):
             try:
@@ -150,6 +198,33 @@ class NaviBot(commands.Bot):
             if result.edit_delay_seconds > 0:
                 await asyncio.sleep(result.edit_delay_seconds)
             await sent.edit(content=result.edit_to, allowed_mentions=no_mentions())
+
+    async def _handle_llm_memory_command(self, message: discord.Message, action: str, keyword: str) -> None:
+        user_id = int(message.author.id)
+        if action == "list":
+            memories = self.db.list_llm_keywords(user_id)
+            response = (
+                "아직 기억해둔 키워드가 없어요. `@NAVI 기억해: 내용`으로 알려주세요."
+                if not memories
+                else "나비가 기억하는 키워드는 이 두 칸이에요.\n" + "\n".join(
+                    f"{index}. {value}" for index, value in enumerate(memories, start=1)
+                )
+            )
+        elif action == "clear":
+            count = self.db.clear_llm_keywords(user_id)
+            response = "기억해둔 키워드를 전부 지웠어요." if count else "지울 기억이 없네요."
+        elif action == "remember":
+            result = self.db.remember_llm_keyword(user_id, keyword, limit=2)
+            if result["replaced"]:
+                response = f"기억 두 칸이 꽉 차서 `{result['replaced']}` 대신 `{result['keyword']}`을 기억할게요."
+            else:
+                response = f"네에, `{result['keyword']}` 기억해둘게요. 한 사람당 두 개까지 기억할 수 있어요."
+        elif action == "forget":
+            removed = self.db.forget_llm_keyword(user_id, keyword)
+            response = f"`{keyword}`은 잊었어요." if removed else f"`{keyword}`은 기억에서 찾지 못했어요."
+        else:
+            response = "기억 명령을 이해하지 못했어요."
+        await message.reply(response, allowed_mentions=no_mentions(), mention_author=False)
 
     @tasks.loop(seconds=30)
     async def poll_tlr_events(self) -> None:
