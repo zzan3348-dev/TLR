@@ -52,10 +52,10 @@ const baseLayoutOptions = {
 describe("mapLabelRenderer", () => {
   it("국명 크기는 지도 카메라 배율에 정비례한다", () => {
     const label = createLabel(1, { fontSize: 80 });
-    expect(getCountryLabelMapMetrics(label, 0.5).fontSize).toBe(40);
-    expect(getCountryLabelMapMetrics(label, 1).fontSize).toBe(80);
-    expect(getCountryLabelMapMetrics(label, 2).fontSize).toBe(160);
-    expect(getCountryLabelMapMetrics(label, 4).fontSize).toBe(320);
+    expect(getCountryLabelMapMetrics(label, 0.5).fontSize).toBeCloseTo(35.2);
+    expect(getCountryLabelMapMetrics(label, 1).fontSize).toBeCloseTo(70.4);
+    expect(getCountryLabelMapMetrics(label, 2).fontSize).toBeCloseTo(140.8);
+    expect(getCountryLabelMapMetrics(label, 4).fontSize).toBeCloseTo(281.6);
   });
 
   it("회전된 라벨의 화면 경계와 겹침을 계산한다", () => {
@@ -95,7 +95,7 @@ describe("mapLabelRenderer", () => {
     });
 
     const sizes = placements.map(({ screenFontSize }) => screenFontSize);
-    expect(sizes).toEqual([120, 160, 320, 640]);
+    expect(sizes).toEqual([105.6, 140.8, 281.6, 563.2]);
     expect(placements.every(({ x }) => Math.abs(x - 500) < 0.001)).toBe(
       true,
     );
@@ -265,7 +265,7 @@ describe("mapLabelRenderer", () => {
     });
 
     expect(placements).toHaveLength(1);
-    expect(placements[0].screenFontSize).toBeCloseTo(160);
+    expect(placements[0].screenFontSize).toBeCloseTo(140.8);
   });
 
   it("국명은 최소 줌 직후부터 갑자기 켜지지 않고 서서히 나타난다", () => {

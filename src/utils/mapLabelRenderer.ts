@@ -55,6 +55,9 @@ type LayoutMapLabelsOptions = {
 
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
+// 곡선 경로와 자간 배치는 유지하되 글자 자체에만 여백을 준다.
+// 모든 줌 단계에 같은 값이 적용되므로 map-space 비례 동작은 변하지 않는다.
+const COUNTRY_LABEL_FONT_DENSITY = 0.88;
 
 export type CountryLabelMapMetrics = {
   fontSize: number;
@@ -72,7 +75,7 @@ export function getCountryLabelMapMetrics(
 ): CountryLabelMapMetrics {
   const layoutScale = cameraScale * countryScaleMultiplier;
   return {
-    fontSize: label.fontSize * layoutScale,
+    fontSize: label.fontSize * layoutScale * COUNTRY_LABEL_FONT_DENSITY,
     layoutScale,
   };
 }
