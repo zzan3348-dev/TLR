@@ -53,36 +53,27 @@ type LayoutMapLabelsOptions = {
   reservedBounds?: readonly LabelBounds[];
 };
 
-const MIN_SCREEN_FONT_SIZE = 7.5;
 const LABEL_COLLISION_PADDING = 2;
 const VIEWPORT_MARGIN = 12;
-// 원본 5632px 지도를 1920px 기준 화면에 표시하던 기존 시각 크기다.
-// 뷰포트와 카메라 배율 대신 이 기준값만 사용해 국명 크기를 고정한다.
-const REFERENCE_MAP_SCREEN_SCALE = 1920 / 5632;
 
-export type FixedCountryLabelScreenMetrics = {
+export type CountryLabelMapMetrics = {
   fontSize: number;
   layoutScale: number;
 };
 
 /**
- * 국명의 화면상 크기를 결정한다.
- *
- * 이 함수에는 의도적으로 camera.scale, fitScale, viewport를 전달하지 않는다.
- * 줌과 창 크기는 월드 앵커의 화면 위치만 바꿀 수 있고 글꼴 크기와 글자 간격은
- * 절대로 바꾸지 못하게 하기 위한 경계다.
+ * 지도 좌표계에서 정의된 국명 크기를 현재 카메라 배율로 투영한다.
+ * 글꼴, 자간과 곡선 폭이 지도 geometry와 정확히 같은 비율로 확대·축소된다.
  */
-export function getFixedCountryLabelScreenMetrics(
+export function getCountryLabelMapMetrics(
   label: Pick<MapCountryLabel, "fontSize">,
+  cameraScale: number,
   countryScaleMultiplier = 1,
-): FixedCountryLabelScreenMetrics {
-  const layoutScale = REFERENCE_MAP_SCREEN_SCALE * countryScaleMultiplier;
-  const minimumLayoutScale =
-    MIN_SCREEN_FONT_SIZE / Math.max(1, label.fontSize);
-
+): CountryLabelMapMetrics {
+  const layoutScale = cameraScale * countryScaleMultiplier;
   return {
-    fontSize: Math.max(MIN_SCREEN_FONT_SIZE, label.fontSize * layoutScale),
-    layoutScale: Math.max(minimumLayoutScale, layoutScale),
+    fontSize: label.fontSize * layoutScale,
+    layoutScale,
   };
 }
 
@@ -192,7 +183,7 @@ function createScreenGlyphs(
   viewport: ViewportSize,
   mapWidth: number,
   screenFontSize: number,
-  fixedLayoutScale: number,
+  mapLayoutScale: number,
 ): { glyphs: ScreenGlyph[]; screenFontSize: number } {
   const characters = [...label.text];
   const approximateGlyphWidth = label.fontSize * 0.9;
@@ -232,12 +223,11 @@ function createScreenGlyphs(
       x: worldPoint.x + pathAnchorOffset.x,
       y: worldPoint.y + pathAnchorOffset.y,
     };
-    // 국명 전체를 하나의 고정 screen-space 표식으로 취급한다. 지도 좌표에는
-    // 중심 앵커만 고정하고 글자별 곡선 오프셋은 고정 픽셀 배율로 계산해야
-    // 줌할 때 글자 크기와 자간, 전체 국명 폭이 함께 커지거나 작아지지 않는다.
+    // 앵커뿐 아니라 글자별 곡선 오프셋에도 현재 지도 배율을 그대로 적용한다.
+    // 따라서 국명은 지도에 인쇄된 요소처럼 geometry와 함께 확대·축소된다.
     const screenPoint = {
-      x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * fixedLayoutScale,
-      y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * fixedLayoutScale,
+      x: labelAnchor.x + (anchoredWorldPoint.x - label.x) * mapLayoutScale,
+      y: labelAnchor.y + (anchoredWorldPoint.y - label.y) * mapLayoutScale,
     };
     const angle = quadraticAngle(
       label.start,
@@ -277,11 +267,9 @@ function createScreenPlacement(
   selected: boolean,
   visibilityOpacity: number,
 ): ScreenMapLabel | null {
-  // 국명은 지도 위의 좌표를 따르지만, 글꼴과 곡선 간격은 화면 픽셀로
-  // 고정한다. fitScale/camera.scale을 섞으면 창 크기와 줌에 따라 글씨가
-  // 커졌다 작아지는 회귀가 생긴다.
-  const fixedMetrics = getFixedCountryLabelScreenMetrics(
+  const mapMetrics = getCountryLabelMapMetrics(
     label,
+    camera.scale,
     mapScaleMultiplier,
   );
   const { glyphs, screenFontSize } = createScreenGlyphs(
@@ -290,8 +278,8 @@ function createScreenPlacement(
     camera,
     viewport,
     mapWidth,
-    fixedMetrics.fontSize,
-    fixedMetrics.layoutScale,
+    mapMetrics.fontSize,
+    mapMetrics.layoutScale,
   );
   if (glyphs.length === 0) {
     return null;
@@ -367,12 +355,9 @@ export function layoutMapLabels({
         MAP_LOD_POLICY.countryLabelEnter - selectedAdvance,
         MAP_LOD_POLICY.countryLabelFadeDistance,
       );
-      // 수도가 표시되는 근거리에서도 국명을 유지한다. 줌은 국명을 다시
-      // 숨기거나 크기를 바꾸지 않고, 처음 나타나는 시점만 결정한다.
+      // 수도가 표시되는 근거리에서도 국명을 유지한다. LOD는 가시성만
+      // 결정하며, 표시된 국명의 크기는 지도 배율이 자연스럽게 결정한다.
       const closeOpacity = 1;
-      // 투영 폭/면적을 opacity에 다시 곱하면 축소 중 글자의 획이 옅어져
-      // 실제 글꼴 크기가 줄어드는 것처럼 보인다. 줌은 최초 LOD 진입 여부만
-      // 결정하며, 나타난 국명의 픽셀 크기와 농도는 이후 완전히 고정한다.
       const visibilityOpacity = enterOpacity * closeOpacity;
       if (visibilityOpacity <= 0.01) continue;
       const placement = createScreenPlacement(
@@ -428,6 +413,8 @@ export function drawMapLabels(
   for (const placement of placements) {
     const { selected } = placement;
     const fontSize = placement.screenFontSize;
+    const mapRenderScale =
+      fontSize / Math.max(1, placement.label.fontSize);
     for (const glyph of placement.glyphs) {
       context.save();
       context.setTransform(
@@ -448,9 +435,9 @@ export function drawMapLabels(
       context.textAlign = "center";
       context.textBaseline = "middle";
       context.lineJoin = "round";
-      context.lineWidth = selected
-        ? 1.45 + presentationProgress * 0.15
-        : 1.35;
+      context.lineWidth =
+        (selected ? 4.25 + presentationProgress * 0.45 : 4) *
+        mapRenderScale;
       context.strokeStyle = selected
         ? "rgba(22, 18, 15, 0.94)"
         : "rgba(5, 10, 16, 0.74)";
@@ -458,8 +445,8 @@ export function drawMapLabels(
         ? "rgba(232, 224, 205, 1)"
         : "rgba(229, 227, 215, 0.9)";
       context.shadowColor = "rgba(0, 0, 0, 0.42)";
-      context.shadowBlur = selected ? 1.7 : 1.5;
-      context.shadowOffsetY = 0.7;
+      context.shadowBlur = (selected ? 5 : 4.4) * mapRenderScale;
+      context.shadowOffsetY = 2 * mapRenderScale;
       context.strokeText(glyph.character, 0, 0);
       context.fillText(glyph.character, 0, 0);
       context.restore();
