@@ -19,6 +19,7 @@ import { mapCountries } from "./data/mapCountries";
 import { PlayHud } from "./features/play/components/PlayHud";
 import { PlayWindowManager } from "./features/play/components/PlayWindowManager";
 import { DiplomacyNotificationQueue } from "./features/diplomacy/components/DiplomacyNotificationQueue";
+import { EventTestPage } from "./features/events/components/EventTestPage";
 import { loadEconomy } from "./features/economy/economyClient";
 import type { EconomySnapshot } from "./features/economy/types";
 import { getPlaySimulationState } from "./features/play/data/playSimulationState";
@@ -311,6 +312,10 @@ export default function App() {
     playCountry,
     selection,
   ]);
+
+  if (window.location.pathname === "/event-test") {
+    return <EventTestPage />;
+  }
 
   if (new URLSearchParams(window.location.search).get("icons") === "1") {
     return <IconCatalog />;
