@@ -6052,12 +6052,12 @@ button:focus-visible,
 
 .event-paper-template__choices {
   position: absolute;
-  right: -1.8%;
+  right: -2.4%;
   bottom: 8.4%;
   display: flex;
   flex-direction: column;
   gap: clamp(4px, 0.72cqw, 6px);
-  width: 60%;
+  width: 66%;
 }
 
 .event-choice-button {
@@ -6066,7 +6066,7 @@ button:focus-visible,
   grid-template-columns: clamp(7px, 1.18cqw, 10px) 1fr;
   align-items: stretch;
   width: 100%;
-  min-height: clamp(24px, 4.25cqw, 34px);
+  min-height: clamp(26px, 4.55cqw, 36px);
   padding: 0;
   overflow: hidden;
   color: #2b2923;
@@ -6133,7 +6133,7 @@ button:focus-visible,
   place-items: center;
   padding: 4px 10px;
   font-family: "Courier New", Georgia, serif;
-  font-size: clamp(8px, 1.22cqw, 10px);
+  font-size: clamp(9px, 1.38cqw, 11px);
   font-weight: 700;
   letter-spacing: 0.025em;
 }
