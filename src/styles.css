@@ -6095,14 +6095,6 @@ button:focus-visible,
   margin: 0 0 0.9em;
 }
 
-.newspaperEventBody p:first-child::first-letter {
-  float: left;
-  margin: 0.04em 0.12em 0 0;
-  font-size: 2.4em;
-  font-weight: 800;
-  line-height: 0.78;
-}
-
 .newspaper-event-template__choices {
   position: absolute;
   right: 3.7%;
