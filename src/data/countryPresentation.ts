@@ -1,9 +1,11 @@
 import rawCountryPresentation from "./countryPresentation.json";
 import rawCountryParties from "./countryParties.json";
 import rawLeaderEffects from "./leaderEffects.json";
+import rawNationalSpirits from "./generated/countryNationalSpirits.json";
 import type { MapCountryIndex } from "../types/mapCountry";
 import type {
   CountryLeaderEffect,
+  CountryNationalSpirit,
   CountryPoliticsPresentation,
   CountryPresentationData,
   CountryPresentationOverrides,
@@ -22,6 +24,11 @@ const leaderEffectOverrides = rawLeaderEffects as Record<
 const partyOverrides = rawCountryParties as unknown as Record<
   string,
   Omit<CountryPoliticsPresentation, "faction">
+>;
+
+const nationalSpiritOverrides = rawNationalSpirits as Record<
+  string,
+  CountryNationalSpirit[]
 >;
 
 const DEFAULT_TEST_LEADER_PORTRAIT_PATH =
@@ -79,7 +86,8 @@ export function getCountryPresentation(
     },
     motto: overrides.motto?.trim() ?? "",
     description: overrides.description?.trim() ?? "",
-    nationalSpirits: overrides.nationalSpirits ?? [],
+    nationalSpirits:
+      nationalSpiritOverrides[country.key] ?? overrides.nationalSpirits ?? [],
     gallery: overrides.gallery ?? [],
     details: overrides.details ?? [],
   };

@@ -9,6 +9,7 @@ import type { PlaySimulationState } from "../../play/data/playSimulationState";
 import { announceEconomyUpdate, confirmBudget, createTradeProposal, EconomyApiError, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
 import { RESOURCE_LABELS, type EconomySnapshot, type TradeAgreement, type TradeAssetType, type TradeCountrySummary, type TradeLine, type TradeProposal, type TradeResourceId } from "../types";
 import { getStartingResources } from "../data/countryResourceStates";
+import { getStartingCapacity, getStartingEconomy } from "../data/countryEconomyStates";
 
 type EconomyTab = "overview" | "society" | "trade";
 type Props = { country: MapCountryIndex; state: PlaySimulationState; onClose: () => void };
@@ -18,12 +19,13 @@ const RESOURCES = Object.keys(RESOURCE_LABELS) as TradeResourceId[];
 const COUNTRY_MAP = new Map((mapCountries as unknown as MapCountryIndex[]).map((entry) => [entry.key, entry]));
 
 function emptyEconomySnapshot(countryKey: string): EconomySnapshot {
+  const economy = getStartingEconomy(countryKey);
   return {
     countryKey,
     worldDate: "1932-01-01",
-    readiness: "UNCONFIGURED",
-    economy: null,
-    productionCapacity: null,
+    readiness: economy ? "READY" : "UNCONFIGURED",
+    economy,
+    productionCapacity: getStartingCapacity(economy),
     resources: getStartingResources(countryKey),
     history: [],
     rules: {

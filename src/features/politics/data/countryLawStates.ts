@@ -1,3 +1,4 @@
 import type { CountryLawState } from "../types/laws";
+import generatedStates from "./generated/countryLawStates.json";
 
-export const countryLawStates: Readonly<Record<string, CountryLawState>> = {};
+export const countryLawStates = generatedStates as Readonly<Record<string, CountryLawState>>;

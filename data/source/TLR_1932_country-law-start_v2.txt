@@ -1,0 +1,2429 @@
+TLR 1932 전세계 법률 시작값 — 62개국 통합수정본 v2
+========================================================================
+
+변경사항
+- 기존 52개국 시작법은 수정하지 않음.
+- 누락됐던 10개국의 시작법 28개를 추가함.
+- 사용자 확정 국명 반영: 컬럼비아 개척연방 / 신도나우 연합제국 / 신강 공화국 / 사천 공화국 / 바이에른사회주의공화국 / 영국령 인도제국.
+- 국가 간 27/28 동일 프로필 등은 이번 수정 대상에서 제외함.
+
+추가 10개국
+- 남아프리카 연방 / 로디지아 인권동맹연방 / 만데 연방 / 벨기에-콩고 왕령
+- 소코토 연방 / 아샨티 제국 / 에티오피아 제국
+- 사우디아라비아 제2국가 / 오스만 제국 / 이란 입헌왕국
+
+=(대영제국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 언론의 자유 (press:free-press)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 전문 직업군 (officers:professional)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 산업별 기준 (minimum-wage:sectoral)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(노르드 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 예비군 훈련 (training:reserve)
+장교 제도: 전문 직업군 (officers:professional)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 자유무역 (trade:free)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 보편 지원 (unemployment:comprehensive)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 공동체 치안 (policing:community)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(발트 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 예비군 훈련 (training:reserve)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(프랑스 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 할당 이민 (immigration:quota)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(독일민주공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 전면 공교육 (education:universal)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(폴란드 사회민주공화국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(러시아 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 광범위 동원 (forced-labor:extensive)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 전면 징병 (service:mass)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 면제 없음 (exemptions:none)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 국유 농업 (land-system:national)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(우크라이나 농민연방공화국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 세속주의 (religion-policy:secularism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 개방 이민 (immigration:open)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 사회적 면제 (exemptions:social)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 탄력 노동시간 (working-hours:flexible)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 공동체 치안 (policing:community)
+산업 규제: 협의 규제 (industry-regulation:corporate)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(보헤미아 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(바이에른사회주의공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(헝가리 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(오스트리아 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 폐지 (penal-system:abolished)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(루마니아 사회주의 공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(스위스 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 할당 이민 (immigration:quota)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 언론의 자유 (press:free-press)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 예비군 훈련 (training:reserve)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 자유무역 (trade:free)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 산업별 기준 (minimum-wage:sectoral)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(이탈리아 인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(유고슬라비아 인민연방공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(이베리아 사회주의 공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(아라곤 자유지대)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 세속주의 (religion-policy:secularism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 개방 이민 (immigration:open)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 사회적 면제 (exemptions:social)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 산업별 기준 (minimum-wage:sectoral)
+법정 노동시간: 탄력 노동시간 (working-hours:flexible)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 공동체 치안 (policing:community)
+산업 규제: 협의 규제 (industry-regulation:corporate)
+여성 권리: 완전한 평등 (womens-rights:equal-access)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(캅카스 인민연방공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(그란콜롬비아 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(대브라질 제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(페루-볼리비아 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(칠레 공화국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(아르헨티나 공화국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(컬럼비아 개척연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 세속주의 (religion-policy:secularism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(오대호 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 전면 보장 (assembly:free)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 사회적 면제 (exemptions:social)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고율 누진세 (income-tax:high)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 단축 노동시간 (working-hours:short)
+실업급여: 보편 지원 (unemployment:comprehensive)
+연금: 보편 연금 (pensions:universal)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(노바 메히코 연방)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(카리브 연방)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 사회적 면제 (exemptions:social)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(캐나다 자치령)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(오스트레일리아 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 세속주의 (religion-policy:secularism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 생활임금 (minimum-wage:living)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(뉴질랜드 자치령)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 산별 교섭 (trade-unions:sectoral)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(알라시 공화국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(투르키스탄 민주인민공화국)=
+[정치법]
+정당 제도: 일당제 (party-system:single-party)
+종교 정책: 국가 무신론 (religion-policy:atheism)
+노동조합: 국가 노동조합 (trade-unions:state-union)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 정치 장교단 (officers:political)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 국가 고용보장 (unemployment:guaranteed)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 계획경제 (industry-ownership:planned)
+토지 제도: 협동농장 (land-system:cooperative)
+
+[사회법]
+의료보험: 국가 의료 (healthcare:state-service)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 계획 규제 (industry-regulation:planning)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(신강 공화국)=
+[정치법]
+정당 제도: 군정·임시행정 (party-system:military)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(신프랑스 연방왕국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 광범위 동원 (forced-labor:extensive)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(오라녜-누산타라 연합왕국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 조합주의 경제 (industry-ownership:corporate)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 협의 규제 (industry-regulation:corporate)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(필리핀 제도정부)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(대청제국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(작센-초 연합왕국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 조합주의 경제 (industry-ownership:corporate)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 협의 규제 (industry-regulation:corporate)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(신프로이센 왕국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 전문 직업군 (officers:professional)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 산업별 기준 (minimum-wage:sectoral)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(사천 공화국)=
+[정치법]
+정당 제도: 군정·임시행정 (party-system:military)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 전면 징병 (service:mass)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(광둥 해양공화국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 세속주의 (religion-policy:secularism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 개방 이민 (immigration:open)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 자유무역 (trade:free)
+소득세법: 단일세율 (income-tax:flat)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 탄력 노동시간 (working-hours:flexible)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(몽골국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 기초 훈련 (training:basic)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(러시아 제국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 전면 징병 (service:mass)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(영국령 인도제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(네팔 왕국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 기초 훈련 (training:basic)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(티베트 왕국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 기초 훈련 (training:basic)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(황러시아)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(대한제국)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(대일본제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 형벌 노동 (forced-labor:penal-only)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 교리 훈련 (training:doctrine)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 강제 동화 (ethnic-policy:assimilation)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(신도나우 연합제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 재산·계층 선거 (franchise:class)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(신사보이 왕국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 정착 장려 (immigration:settlement)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 전략적 관세 (trade:tariffs)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 정치 검열 (censorship:political)
+
+------------------------------------------------------------------------
+
+=(사우디아라비아 제2국가)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 국경 폐쇄 (immigration:closed)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 자급 우선 (trade:autarky)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 자유 기업 (industry-ownership:private)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(오스만 제국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 고용보험 (unemployment:insurance)
+연금: 기여 연금 (pensions:contributory)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 국민건강보험 (healthcare:insurance)
+교육 정책: 중등교육 보장 (education:secondary)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(이란 입헌왕국)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(남아프리카 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 지원병제 (service:volunteer)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 균형 과세 (income-tax:balanced)
+최저임금법: 지역 기준 (minimum-wage:regional)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 직역 연금 (pensions:occupational)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 여성 참정권 (womens-rights:suffrage)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(로디지아 인권동맹연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 모두 허용 (trade-unions:allowed)
+이민 정책: 개방 이민 (immigration:open)
+강제노동: 금지 (forced-labor:prohibited)
+집회·결사의 자유: 법적 보장 (assembly:protected)
+언론의 자유: 다원 언론 (press:plural)
+선거권: 보통 선거 (franchise:universal)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전문 교육 (training:professional)
+장교 제도: 능력 중심 (officers:merit)
+병역 면제: 엄격 심사 (exemptions:regulated)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 고소득층 중심 (income-tax:progressive)
+최저임금법: 전국 기준 (minimum-wage:national)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 제한 지원 (unemployment:limited)
+연금: 공적 연금 (pensions:public)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 보편 의료 (healthcare:universal)
+교육 정책: 공교육 보장 (education:public)
+형벌 제도: 교정 중심 (penal-system:rehabilitative)
+치안 정책: 민간 통제 (policing:civilian)
+산업 규제: 강한 규제 (industry-regulation:strict)
+여성 권리: 법적 평등 (womens-rights:equal)
+민족 정책: 다민족 인정 (ethnic-policy:recognition)
+검열: 언론 자유 (censorship:free)
+
+------------------------------------------------------------------------
+
+=(만데 연방)=
+[정치법]
+정당 제도: 다당제 (party-system:multiparty)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 등록제 (assembly:registered)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 사관학교제 (officers:academy)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 처벌과 교정 (penal-system:mixed)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(벨기에-콩고 왕령)=
+[정치법]
+정당 제도: 비당파 체제 (party-system:nonpartisan)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 금지 (trade-unions:banned)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 광범위 동원 (forced-labor:extensive)
+집회·결사의 자유: 엄격 제한 (assembly:restricted)
+언론의 자유: 국영 언론 (press:state-media)
+선거권: 선거 없음 (franchise:none)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 최소 면제 (exemptions:minimal)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 민간 중심 (healthcare:private)
+교육 정책: 선별 교육 (education:elite)
+형벌 제도: 엄벌 중심 (penal-system:punitive)
+치안 정책: 군사 치안 (policing:militarized)
+산업 규제: 최소 규제 (industry-regulation:minimal)
+여성 권리: 제한적 권리 (womens-rights:restricted)
+민족 정책: 차별적 공존 (ethnic-policy:coexistence)
+검열: 전면 검열 (censorship:total)
+
+------------------------------------------------------------------------
+
+=(소코토 연방)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 우대 종교 (religion-policy:favored)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 혼합 소유 (land-system:mixed)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 연방적 공존 (ethnic-policy:federal)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(아샨티 제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 종교 다원주의 (religion-policy:pluralism)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 허가 언론 (press:licensed)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 제한 징병 (service:limited)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 개방 무역 (trade:open-trade)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 표준 노동시간 (working-hours:standard)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 혼합경제 (industry-ownership:mixed-economy)
+토지 제도: 소농 자영 (land-system:smallholder)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 지방 치안 (policing:local)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 제한 검열 (censorship:limited)
+
+------------------------------------------------------------------------
+
+=(에티오피아 제국)=
+[정치법]
+정당 제도: 우세정당제 (party-system:dominant-party)
+종교 정책: 국교 우선 (religion-policy:state-faith)
+노동조합: 허가제 (trade-unions:controlled)
+이민 정책: 선별 이민 (immigration:selective)
+강제노동: 계약 노동 (forced-labor:contract)
+집회·결사의 자유: 허가제 (assembly:licensed)
+언론의 자유: 검열 언론 (press:censored)
+선거권: 제한 선거 (franchise:restricted)
+
+[군사 정책]
+군 복무 제도: 표준 징병 (service:standard)
+군사 훈련: 전투 교육 (training:combat)
+장교 제도: 신분 임명 (officers:appointed)
+병역 면제: 광범위 면제 (exemptions:broad)
+
+[경제법]
+무역법: 제한적 자유무역 (trade:limited)
+소득세법: 낮은 소득세 (income-tax:low)
+최저임금법: 미설정 (minimum-wage:none)
+법정 노동시간: 장시간 노동 (working-hours:long)
+실업급여: 지원 없음 (unemployment:none)
+연금: 가족 부양 (pensions:family)
+산업 소유 구조: 국가 감독 자본주의 (industry-ownership:supervised)
+토지 제도: 대지주 체제 (land-system:estate)
+
+[사회법]
+의료보험: 혼합 보장 (healthcare:mixed)
+교육 정책: 기초교육 지원 (education:primary)
+형벌 제도: 사형 유지 (penal-system:capital)
+치안 정책: 중앙 치안 (policing:centralized)
+산업 규제: 표준 규제 (industry-regulation:standard)
+여성 권리: 시민권 보장 (womens-rights:civil)
+민족 정책: 제한 자치 (ethnic-policy:autonomy)
+검열: 정치 검열 (censorship:political)

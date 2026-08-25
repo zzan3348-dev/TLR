@@ -43,8 +43,13 @@ describe("정치·법률 데이터 구조", () => {
     }
   });
 
-  it("실제 국가 상태와 개발용 예시 상태를 분리한다", () => {
-    expect(Object.keys(countryLawStates)).toHaveLength(0);
+  it("62개국 실제 시작 상태와 개발용 예시 상태를 분리한다", () => {
+    expect(Object.keys(countryLawStates)).toHaveLength(62);
+    expect(
+      Object.values(countryLawStates).every(
+        ({ laws }) => Object.keys(laws).length === 28,
+      ),
+    ).toBe(true);
     expect(Object.keys(countryDevelopmentStates)).toHaveLength(62);
     expect(DEV_LAW_SAMPLE.countryId).toBe("__development_fixture__");
     expect(DEV_DEVELOPMENT_SAMPLE.countryId).toBe(

@@ -6,6 +6,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCE_DIR = path.join(ROOT, "data", "source");
 const GENERATED_POLITICS = path.join(ROOT, "src", "features", "politics", "data", "generated");
 const GENERATED_ECONOMY = path.join(ROOT, "src", "features", "economy", "data");
+const GENERATED_PRESENTATION = path.join(ROOT, "src", "data", "generated");
 
 const readUtf8 = (file) => fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "");
 const writeJson = (file, value) => {
@@ -19,6 +20,7 @@ const aliases = new Map([
   ["신장 공화국", "신강 공화국"],
   ["쓰촨 공화국", "사천 공화국"],
   ["신도나우 통합제국", "신도나우 연합제국"],
+  ["영국령 인도제국", "영국령 인도"],
 ]);
 const countryByName = new Map(countries.map((country) => [country.name, country]));
 
@@ -35,6 +37,184 @@ function countrySections(text) {
     name: match[1].trim(),
     body: text.slice(match.index + match[0].length, headers[index + 1]?.index ?? text.length),
   }));
+}
+
+function plainCountrySections(text) {
+  const headers = [...text.matchAll(/^=([^=(][^=]+)=\s*$/gm)];
+  return headers.map((match, index) => ({
+    name: match[1].trim(),
+    body: text.slice(match.index + match[0].length, headers[index + 1]?.index ?? text.length),
+  }));
+}
+
+function requireCountryCount(states, label) {
+  if (Object.keys(states).length !== countries.length) {
+    throw new Error(`${label} 국가 수 불일치: ${Object.keys(states).length}/${countries.length}`);
+  }
+}
+
+function importNationalSpirits() {
+  const text = readUtf8(path.join(SOURCE_DIR, "TLR_national-spirits_v10.txt"));
+  const states = {};
+  const adverseEffects = new Set(["빈곤율", "실업률"]);
+  for (const section of countrySections(text)) {
+    const matches = [...section.body.matchAll(/^국민정신\s+\d+:\s*(.+)$/gm)];
+    const spirits = matches.map((match, index) => {
+      const body = section.body.slice(match.index + match[0].length, matches[index + 1]?.index ?? section.body.length);
+      const description = body.match(/^내용:\s*(.+)$/m)?.[1]?.trim();
+      const imagePath = body.match(/^아이콘 경로:\s*(.+)$/m)?.[1]?.trim();
+      const effectsBody = body.match(/^효과:\s*\r?\n([\s\S]*?)(?=^아이콘 경로:)/m)?.[1] ?? "";
+      const effects = effectsBody.split(/\r?\n/).map((line) => line.trim()).filter((line) => /^-\s+/.test(line)).map((line) => {
+        const text = line.replace(/^-\s+/, "");
+        const [label, value = ""] = text.split(/:\s*/, 2);
+        const number = value.match(/[+-]?\d+(?:\.\d+)?/)?.[0];
+        const direction = number?.startsWith("-") ? -1 : 1;
+        const harmful = adverseEffects.has(label.trim()) ? direction > 0 : direction < 0;
+        return { text, tone: harmful ? "negative" : "positive" };
+      });
+      if (!description || !imagePath || effects.length === 0) {
+        throw new Error(`${section.name}/${match[1].trim()}: 국민정신 필드가 누락되었습니다.`);
+      }
+      return {
+        id: path.basename(imagePath, path.extname(imagePath)),
+        name: match[1].trim(), description, imagePath, effects,
+      };
+    });
+    if (spirits.length === 0) throw new Error(`${section.name}: 국민정신이 없습니다.`);
+    states[countryKey(section.name)] = spirits;
+  }
+  requireCountryCount(states, "국민정신");
+  writeJson(path.join(GENERATED_PRESENTATION, "countryNationalSpirits.json"), states);
+  return states;
+}
+
+function field(body, label) {
+  return body.match(new RegExp(`^${label}:\\s*(.+)$`, "m"))?.[1]?.trim() ?? null;
+}
+
+function numeric(value) {
+  const match = value?.replaceAll(",", "").match(/[+-]?\d+(?:\.\d+)?/);
+  return match ? Number(match[0]) : null;
+}
+
+function moneyBillions(value) {
+  const amount = numeric(value);
+  if (amount === null) return null;
+  const signed = value.trim().startsWith("-") ? -Math.abs(amount) : amount;
+  return value.includes("M") ? signed / 1000 : signed;
+}
+
+function slashRecord(body, label, keys) {
+  const source = field(body, label);
+  if (!source) return null;
+  const result = {};
+  for (const part of source.split("/")) {
+    const match = part.trim().match(/^(.+?)\s+([+-]?\d+(?:\.\d+)?)%$/);
+    if (!match) continue;
+    const key = keys.get(match[1].trim());
+    if (key) result[key] = Number(match[2]);
+  }
+  return Object.keys(result).length === keys.size ? result : null;
+}
+
+function importEconomies() {
+  const text = readUtf8(path.join(SOURCE_DIR, "TLR_1932_economy-start_v3.txt"));
+  const budgetKeys = new Map([["행정", "administration"], ["국방", "defense"], ["산업", "industry"], ["복지", "welfare"], ["교육", "education"]]);
+  const industryKeys = new Map([["농림수산", "agriculture"], ["광업·자원", "mining"], ["제조업", "manufacturing"], ["건설·인프라", "construction"], ["상업·운송", "commerce_transport"], ["금융·행정·전문", "finance_services"]]);
+  const states = {};
+  for (const section of plainCountrySections(text)) {
+    const key = countryKey(section.name);
+    const currentBudget = slashRecord(section.body, "예산 배분", budgetKeys);
+    const industrialStructure = slashRecord(section.body, "산업구조", industryKeys);
+    const operatingLines = section.body.match(/정기 운영비:\s*\r?\n((?:\s+.+\r?\n?)+)/m)?.[1] ?? "";
+    const operatingCosts = {};
+    for (const match of operatingLines.matchAll(/([^/$\r\n]+?)\s+\$([0-9.]+)([MB])/g)) {
+      const label = match[1].trim();
+      operatingCosts[label] = Number(match[2]) * (match[3] === "M" ? 0.001 : 1);
+    }
+    if (!currentBudget || !industrialStructure) throw new Error(`${section.name}: 예산 또는 산업구조가 누락되었습니다.`);
+    const row = {
+      country_key: key,
+      gdp: moneyBillions(field(section.body, "GDP")),
+      per_capita_gdp: numeric(field(section.body, "1인당 GDP")),
+      nominal_growth_rate: numeric(field(section.body, "명목 성장률")),
+      real_growth_rate: numeric(field(section.body, "실질 성장률")),
+      inflation_rate: numeric(field(section.body, "물가상승률")),
+      unemployment_rate: numeric(field(section.body, "실업률")),
+      poverty_rate: numeric(field(section.body, "빈곤율")),
+      poverty_rate_change: numeric(field(section.body, "빈곤율 변화")),
+      total_population: numeric(field(section.body, "총인구")),
+      working_age_population: numeric(field(section.body, "생산가능인구")),
+      employed_population: numeric(field(section.body, "취업인구")),
+      unemployed_population: numeric(field(section.body, "실업인구")),
+      urban_population_rate: numeric(field(section.body, "도시인구 비율")),
+      rural_population_rate: numeric(field(section.body, "농촌인구 비율")),
+      literacy_rate: numeric(field(section.body, "문해율")),
+      life_expectancy: numeric(field(section.body, "기대수명")),
+      economic_system: field(section.body, "경제체제"),
+      economic_bloc: field(section.body, "경제권"),
+      credit_rating: field(section.body, "신용등급"),
+      bond_interest_rate: numeric(field(section.body, "국채금리")),
+      national_debt: moneyBillions(field(section.body, "정부부채")),
+      debt_to_gdp_rate: numeric(field(section.body, "GDP 대비 부채")),
+      foreign_reserves: moneyBillions(field(section.body, "유동준비금")),
+      national_income: moneyBillions(field(section.body, "세입")),
+      total_expenditure: moneyBillions(field(section.body, "총지출")),
+      fiscal_balance: moneyBillions(field(section.body, "재정수지")),
+      nominal_tax_rate: numeric(field(section.body, "명목세율")),
+      tax_collection_efficiency: numeric(field(section.body, "징세효율")),
+      budget_fulfillment_rate: numeric(field(section.body, "예산충족도")),
+      economic_crisis_signal: field(section.body, "경제위기 신호"),
+      research_capacity: numeric(field(section.body, "연구역량")),
+      base_production_capacity: numeric(field(section.body, "기본 생산능력")),
+      production_capacity_modifier: numeric(field(section.body, "생산능력 보정")),
+      domestic_capacity_used: numeric(field(section.body, "국내 사용 생산능력")),
+      trade_capacity_provided: numeric(field(section.body, "무역 제공 생산능력")),
+      trade_capacity_received: numeric(field(section.body, "무역 수령 생산능력")),
+      available_production_capacity: numeric(field(section.body, "가용 생산능력")),
+      current_budget: currentBudget,
+      industrial_structure: industrialStructure,
+      operating_costs: operatingCosts,
+    };
+    if (Object.values(row).some((value) => value === null)) throw new Error(`${section.name}: 경제 필드가 누락되었습니다.`);
+    states[key] = row;
+  }
+  requireCountryCount(states, "경제");
+  writeJson(path.join(GENERATED_ECONOMY, "countryEconomyStates.json"), states);
+  const json = (value) => `'${JSON.stringify(value).replaceAll("'", "''")}'::jsonb`;
+  const quote = (value) => `'${String(value).replaceAll("'", "''")}'`;
+  const columns = Object.keys(Object.values(states)[0]).filter((column) => column !== "country_key");
+  const sqlValue = (column, value) => ["current_budget", "industrial_structure", "operating_costs"].includes(column) ? json(value) : typeof value === "string" ? quote(value) : value;
+  const rows = Object.values(states).map((row) => `  (${quote(row.country_key)},${columns.map((column) => sqlValue(column, row[column])).join(",")},${json(row)})`);
+  const migration = `begin;\n\nalter table public.country_economies\n${[
+    ["per_capita_gdp", "numeric"], ["real_growth_rate", "numeric"], ["poverty_rate", "numeric"], ["poverty_rate_change", "numeric"],
+    ["total_population", "numeric"], ["working_age_population", "numeric"], ["employed_population", "numeric"], ["unemployed_population", "numeric"],
+    ["urban_population_rate", "numeric"], ["rural_population_rate", "numeric"], ["literacy_rate", "numeric"], ["life_expectancy", "numeric"],
+    ["economic_system", "text"], ["economic_bloc", "text"], ["credit_rating", "text"], ["bond_interest_rate", "numeric"],
+    ["debt_to_gdp_rate", "numeric"], ["fiscal_balance", "numeric"], ["economic_crisis_signal", "text"],
+    ["trade_capacity_provided", "numeric"], ["trade_capacity_received", "numeric"], ["available_production_capacity", "numeric"],
+    ["operating_costs", "jsonb"], ["starting_data", "jsonb"],
+  ].map(([name, type]) => `  add column if not exists ${name} ${type}`).join(",\n")};\n\ninsert into public.country_economies (country_key,${columns.join(",")},starting_data) values\n${rows.join(",\n")}\non conflict (country_key) do update set\n${columns.map((column) => `  ${column}=excluded.${column}`).join(",\n")},\n  starting_data=excluded.starting_data,\n  updated_at=now();\n\ncommit;\n`;
+  fs.writeFileSync(path.join(ROOT, "supabase", "migrations", "202608250001_country_economy_starting_values.sql"), migration, "utf8");
+  return states;
+}
+
+function importCountryLawStates() {
+  const text = readUtf8(path.join(SOURCE_DIR, "TLR_1932_country-law-start_v2.txt"));
+  const states = {};
+  for (const section of countrySections(text)) {
+    const laws = {};
+    for (const match of section.body.matchAll(/^.+\(([^:()]+):([^()]+)\)\s*$/gm)) {
+      const lawId = match[1].trim();
+      laws[lawId] = `${lawId}:${match[2].trim()}`;
+    }
+    if (Object.keys(laws).length !== lawMeta.size) throw new Error(`${section.name}: 시작 법률이 ${Object.keys(laws).length}/${lawMeta.size}개입니다.`);
+    const key = countryKey(section.name);
+    states[key] = { countryId: key, laws };
+  }
+  requireCountryCount(states, "시작 법률");
+  writeJson(path.join(GENERATED_POLITICS, "countryLawStates.json"), states);
+  return states;
 }
 
 const developmentIds = new Map([
@@ -217,4 +397,7 @@ function importLaws() {
 const development = importDevelopment();
 const resources = importResources();
 const laws = importLaws();
-console.log(`TLR 시작 데이터 생성 완료: 법률 ${laws.length}개/${laws.reduce((sum, law) => sum + law.options.length, 0)}개 선택지, 사회발전 ${Object.keys(development).length}개국, 자원 ${Object.keys(resources).length}개국`);
+const nationalSpirits = importNationalSpirits();
+const economies = importEconomies();
+const countryLaws = importCountryLawStates();
+console.log(`TLR 시작 데이터 생성 완료: 법률 ${laws.length}개/${laws.reduce((sum, law) => sum + law.options.length, 0)}개 선택지, 시작법 ${Object.keys(countryLaws).length}개국, 국민정신 ${Object.keys(nationalSpirits).length}개국, 경제 ${Object.keys(economies).length}개국, 사회발전 ${Object.keys(development).length}개국, 자원 ${Object.keys(resources).length}개국`);

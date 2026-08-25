@@ -2,6 +2,7 @@ import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { economyWorldDate, requireEconomyActor } from "../../economy.js";
 import { mergeStartingResources } from "../../startingResources.js";
+import { mergeStartingEconomy, startingCapacityForEconomy } from "../../startingEconomies.js";
 
 type EconomyRow = Record<string, unknown> & { country_key: string };
 type ResourceRow = Record<string, unknown> & { resource_type_id: string };
@@ -35,12 +36,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       const component = Array.isArray(result.data) ? result.data[0] : result.data;
       return { ...resource, available: component && typeof component === "object" && "available" in component ? Number(component.available) : null };
     }));
+    const mergedEconomy = mergeStartingEconomy(actor.countryKey, economy.data ?? null);
+    const databaseCapacity = Array.isArray(capacity.data) ? capacity.data[0] ?? null : capacity.data ?? null;
     response.status(200).json({
       countryKey: actor.countryKey,
       worldDate,
-      readiness: readiness.data ?? "UNCONFIGURED",
-      economy: economy.data ?? null,
-      productionCapacity: Array.isArray(capacity.data) ? capacity.data[0] ?? null : capacity.data ?? null,
+      readiness: mergedEconomy ? "READY" : readiness.data ?? "UNCONFIGURED",
+      economy: mergedEconomy,
+      productionCapacity: databaseCapacity ?? startingCapacityForEconomy(mergedEconomy),
       resources: resourceComponents,
       history: history.data ?? [],
       rules: rules.data,
