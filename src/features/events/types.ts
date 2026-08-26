@@ -1,4 +1,4 @@
-export type EventTemplateType = "document" | "newspaper";
+export type EventTemplateType = "document" | "newspaper" | "super";
 
 export type EventChoice = {
   id: string;
@@ -21,6 +21,45 @@ export type NewspaperEventData = {
   image?: string;
   imageCrop?: EventImageCrop;
   choices?: readonly EventChoice[];
+};
+
+export type SuperEventMusicSourceType = "upload" | "url" | "youtube";
+
+export type SuperEventMusic = {
+  sourceType: SuperEventMusicSourceType;
+  source: string;
+  startTime?: number;
+  endTime?: number;
+  volume?: number;
+  fadeIn?: number;
+  fadeOut?: number;
+};
+
+export type SuperEventProjectorAudio = {
+  start?: string;
+  loop?: string;
+  stop?: string;
+};
+
+export type SuperEventProjectionEffect = {
+  grain?: number;
+  flicker?: number;
+  jitter?: number;
+  vignette?: number;
+  dust?: number;
+};
+
+export type SuperEventData = {
+  id: string;
+  title: string;
+  image?: string;
+  imageCrop?: EventImageCrop;
+  quote?: string;
+  attribution?: string;
+  buttonText: string;
+  music?: SuperEventMusic;
+  projectorAudio?: SuperEventProjectorAudio;
+  projectionEffect?: SuperEventProjectionEffect;
 };
 
 export const DEFAULT_EVENT_IMAGE_CROP: Readonly<EventImageCrop> = {

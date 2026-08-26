@@ -1,10 +1,10 @@
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import { EventChoiceButton } from "./EventChoiceButton";
 import {
-  normalizeEventImageCrop,
   type EventImageCrop,
   type NewspaperEventData,
 } from "../types";
+import { CroppedEventImage } from "./CroppedEventImage";
 
 type NewspaperEventImageProps = {
   image?: string;
@@ -17,21 +17,13 @@ export function NewspaperEventImage({
   crop,
   alt = "",
 }: NewspaperEventImageProps) {
-  const normalizedCrop = normalizeEventImageCrop(crop);
-  const imageStyle = {
-    objectPosition: `${normalizedCrop.x}% ${normalizedCrop.y}%`,
-    transform: `scale(${normalizedCrop.scale})`,
-    transformOrigin: `${normalizedCrop.x}% ${normalizedCrop.y}%`,
-  } as CSSProperties;
-
   return (
-    <div className="newspaper-event-template__photo" data-has-image={Boolean(image)}>
-      {image ? (
-        <img src={image} alt={alt} draggable={false} style={imageStyle} />
-      ) : (
-        <span aria-label="이벤트 사진 없음" />
-      )}
-    </div>
+    <CroppedEventImage
+      className="newspaper-event-template__photo"
+      image={image}
+      crop={crop}
+      alt={alt}
+    />
   );
 }
 
