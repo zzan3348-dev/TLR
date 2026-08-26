@@ -29,7 +29,7 @@ export function SuperEventQueueProvider({ children }: { children: ReactNode }) {
       {children}
       {activeEvent ? (
         <SuperEventTemplate
-          key={activeEvent.id}
+          key={activeEvent.instanceId}
           event={activeEvent}
           onFinished={finishActiveEvent}
         />

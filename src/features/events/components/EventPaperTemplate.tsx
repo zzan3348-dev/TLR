@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { EventChoiceButton } from "./EventChoiceButton";
+import type { DocumentEventData } from "../types";
 
 type EventPaperTemplateProps = {
-  title: string;
-  body: string[];
-  choices: string[];
+  event: DocumentEventData;
+  onFinished?: () => void;
 };
 
 export function EventPaperTemplate({
-  title,
-  body,
-  choices,
+  event,
+  onFinished,
 }: EventPaperTemplateProps) {
-  const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
+  const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
 
   return (
     <article className="event-paper-template" aria-label="이벤트 미리보기">
@@ -24,24 +23,28 @@ export function EventPaperTemplate({
       />
       <div className="event-paper-template__content">
         <header className="event-paper-template__header">
-          <h1 className="eventTitle">{title}</h1>
+          <h1 className="eventTitle">{event.title}</h1>
         </header>
 
         <div className="eventBody">
-          {body.map((paragraph, index) => (
+          {event.body.map((paragraph, index) => (
             <p key={`${paragraph}-${index}`}>{paragraph}</p>
           ))}
         </div>
 
         <div className="event-paper-template__choices">
-          {choices.map((choice, index) => (
+          {event.choices.map((choice) => (
             <EventChoiceButton
-              key={choice}
-              selected={selectedChoice === index}
-              onClick={() => setSelectedChoice(index)}
-            >
-              {choice}
-            </EventChoiceButton>
+              key={choice.id}
+              eventId={event.id}
+              eventInstanceId={event.instanceId}
+              choice={choice}
+              selected={selectedChoiceId === choice.id}
+              onApplied={() => {
+                setSelectedChoiceId(choice.id);
+                onFinished?.();
+              }}
+            />
           ))}
         </div>
       </div>

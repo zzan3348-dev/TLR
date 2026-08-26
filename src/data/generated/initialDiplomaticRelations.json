@@ -1,0 +1,407 @@
+[
+  {
+    "countryAKey": "country-013",
+    "countryBKey": "country-003",
+    "countryAName": "프랑스 인민공화국",
+    "countryBName": "러시아 인민공화국",
+    "score": 45,
+    "type": "우호 + 경쟁",
+    "reason": "유럽인민연방의 양대 축이지만 혁명 주도권과 대외노선에서 경쟁."
+  },
+  {
+    "countryAKey": "country-013",
+    "countryBKey": "country-008",
+    "countryAName": "프랑스 인민공화국",
+    "countryBName": "독일민주공화국",
+    "score": 15,
+    "type": "약한 우호 / 경계",
+    "reason": "독일의 신사회주의 노선에 대한 불신."
+  },
+  {
+    "countryAKey": "country-003",
+    "countryBKey": "country-008",
+    "countryAName": "러시아 인민공화국",
+    "countryBName": "독일민주공화국",
+    "score": 10,
+    "type": "약한 우호 / 경계",
+    "reason": "독일의 개혁사회주의와 독자노선을 경계."
+  },
+  {
+    "countryAKey": "country-016",
+    "countryBKey": "country-019",
+    "countryAName": "보헤미아 인민공화국",
+    "countryBName": "헝가리 인민공화국",
+    "score": -75,
+    "type": "강한 적대",
+    "reason": "슬로바키아 상실과 동지적 개입의 후유증."
+  },
+  {
+    "countryAKey": "country-016",
+    "countryBKey": "country-008",
+    "countryAName": "보헤미아 인민공화국",
+    "countryBName": "독일민주공화국",
+    "score": 30,
+    "type": "우호 + 불신",
+    "reason": "독일의 지원은 긍정적이나 주데텐 문제는 불안요소."
+  },
+  {
+    "countryAKey": "country-022",
+    "countryBKey": "country-019",
+    "countryAName": "루마니아 사회주의 공화국",
+    "countryBName": "헝가리 인민공화국",
+    "score": -70,
+    "type": "강한 적대",
+    "reason": "카르파티아 산악지역 상실과 국경문제."
+  },
+  {
+    "countryAKey": "country-014",
+    "countryBKey": "country-003",
+    "countryAName": "우크라이나 농민연방공화국",
+    "countryBName": "러시아 인민공화국",
+    "score": -15,
+    "type": "불편함",
+    "reason": "모스크바의 후견적 태도와 '동생' 취급에 대한 반감."
+  },
+  {
+    "countryAKey": "country-026",
+    "countryBKey": "country-013",
+    "countryAName": "캅카스 인민연방공화국",
+    "countryBName": "프랑스 인민공화국",
+    "score": -20,
+    "type": "냉담",
+    "reason": "프랑스 중심 혁명질서와 변방 취급에 대한 불만."
+  },
+  {
+    "countryAKey": "country-026",
+    "countryBKey": "country-003",
+    "countryAName": "캅카스 인민연방공화국",
+    "countryBName": "러시아 인민공화국",
+    "score": -30,
+    "type": "냉담 ~ 적대",
+    "reason": "러시아 중심주의와 간섭 가능성 경계."
+  },
+  {
+    "countryAKey": "country-017",
+    "countryBKey": "country-008",
+    "countryAName": "바이에른사회주의공화국",
+    "countryBName": "독일민주공화국",
+    "score": -20,
+    "type": "경쟁",
+    "reason": "독일 통일 문제와 별도 국가정체성 충돌."
+  },
+  {
+    "countryAKey": "country-036",
+    "countryBKey": "country-008",
+    "countryAName": "신프로이센 왕국",
+    "countryBName": "독일민주공화국",
+    "score": -90,
+    "type": "극심한 적대",
+    "reason": "서로가 독일의 정통성을 주장."
+  },
+  {
+    "countryAKey": "country-039",
+    "countryBKey": "country-021",
+    "countryAName": "신도나우 연합제국",
+    "countryBName": "오스트리아 인민공화국",
+    "score": -85,
+    "type": "극심한 적대",
+    "reason": "합스부르크 복고와 오스트리아 본토 정통성 충돌."
+  },
+  {
+    "countryAKey": "country-039",
+    "countryBKey": "country-019",
+    "countryAName": "신도나우 연합제국",
+    "countryBName": "헝가리 인민공화국",
+    "score": -70,
+    "type": "강한 적대",
+    "reason": "옛 제국 영토와 합스부르크 질서 문제."
+  },
+  {
+    "countryAKey": "country-043",
+    "countryBKey": "country-024",
+    "countryAName": "신사보이 왕국",
+    "countryBName": "이탈리아 인민공화국",
+    "score": -90,
+    "type": "극심한 적대",
+    "reason": "이탈리아 본토 탈환 목표."
+  },
+  {
+    "countryAKey": "country-042",
+    "countryBKey": "country-013",
+    "countryAName": "신프랑스 연방왕국",
+    "countryBName": "프랑스 인민공화국",
+    "score": -90,
+    "type": "극심한 적대",
+    "reason": "두 프랑스의 정통성 경쟁."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-042",
+    "countryAName": "대영제국",
+    "countryBName": "신프랑스 연방왕국",
+    "score": -55,
+    "type": "적대",
+    "reason": "대륙 왕정 붕괴 당시 영국의 비개입을 배신으로 기억."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-043",
+    "countryAName": "대영제국",
+    "countryBName": "신사보이 왕국",
+    "score": -55,
+    "type": "적대",
+    "reason": "영국의 과거 비개입에 대한 망명왕정의 반감."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-036",
+    "countryAName": "대영제국",
+    "countryBName": "신프로이센 왕국",
+    "score": -60,
+    "type": "강한 적대",
+    "reason": "구왕정 질서에 대한 영국의 배신으로 인식."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-039",
+    "countryAName": "대영제국",
+    "countryBName": "신도나우 연합제국",
+    "score": -55,
+    "type": "적대",
+    "reason": "합스부르크 망명세력의 영국 배신론."
+  },
+  {
+    "countryAKey": "country-004",
+    "countryBKey": "country-003",
+    "countryAName": "러시아 제국",
+    "countryBName": "러시아 인민공화국",
+    "score": -100,
+    "type": "절대적 적대",
+    "reason": "러시아 정통정부와 모스크바 지배권을 둘러싼 대립."
+  },
+  {
+    "countryAKey": "country-010",
+    "countryBKey": "country-003",
+    "countryAName": "황러시아",
+    "countryBName": "러시아 인민공화국",
+    "score": -80,
+    "type": "강한 적대",
+    "reason": "백색협약과 혁명 러시아의 체제대립."
+  },
+  {
+    "countryAKey": "country-012",
+    "countryBKey": "country-045",
+    "countryAName": "대청제국",
+    "countryBName": "광둥 해양공화국",
+    "score": -55,
+    "type": "적대",
+    "reason": "광둥 독립을 중국 통일의 장애물로 인식."
+  },
+  {
+    "countryAKey": "country-012",
+    "countryBKey": "country-038",
+    "countryAName": "대청제국",
+    "countryBName": "사천 공화국",
+    "score": -50,
+    "type": "적대",
+    "reason": "중앙 황실과 지방공화정의 정통성 충돌."
+  },
+  {
+    "countryAKey": "country-012",
+    "countryBKey": "country-020",
+    "countryAName": "대청제국",
+    "countryBName": "신강 공화국",
+    "score": -45,
+    "type": "경쟁 ~ 적대",
+    "reason": "신강의 독립과 옛 제국권 문제."
+  },
+  {
+    "countryAKey": "country-012",
+    "countryBKey": "country-035",
+    "countryAName": "대청제국",
+    "countryBName": "티베트 왕국",
+    "score": -45,
+    "type": "경쟁 ~ 적대",
+    "reason": "옛 종주권과 독립 문제."
+  },
+  {
+    "countryAKey": "country-018",
+    "countryBKey": "country-012",
+    "countryAName": "대일본제국",
+    "countryBName": "대청제국",
+    "score": -45,
+    "type": "경쟁 ~ 적대",
+    "reason": "동아시아 패권과 중국 연안 영향력 경쟁."
+  },
+  {
+    "countryAKey": "country-028",
+    "countryBKey": "country-018",
+    "countryAName": "대한제국",
+    "countryBName": "대일본제국",
+    "score": -40,
+    "type": "강한 경쟁",
+    "reason": "동아시아의 두 산업·군사 제국."
+  },
+  {
+    "countryAKey": "country-028",
+    "countryBKey": "country-012",
+    "countryAName": "대한제국",
+    "countryBName": "대청제국",
+    "score": -20,
+    "type": "긴장",
+    "reason": "북간도와 만주권 이해관계 충돌."
+  },
+  {
+    "countryAKey": "country-045",
+    "countryBKey": "country-018",
+    "countryAName": "광둥 해양공화국",
+    "countryBName": "대일본제국",
+    "score": 25,
+    "type": "우호 + 경계",
+    "reason": "일본 자본의 영향력은 크지만 정치적 종속은 거부."
+  },
+  {
+    "countryAKey": "country-045",
+    "countryBKey": "country-002",
+    "countryAName": "광둥 해양공화국",
+    "countryBName": "대영제국",
+    "score": 30,
+    "type": "우호 + 경계",
+    "reason": "영국 금융·해운망 의존과 독립적 균형외교가 공존."
+  },
+  {
+    "countryAKey": "country-031",
+    "countryBKey": "country-040",
+    "countryAName": "오스만 제국",
+    "countryBName": "사우디아라비아 제2국가",
+    "score": -90,
+    "type": "극심한 적대",
+    "reason": "메카·메디나와 아라비아 정통성 문제."
+  },
+  {
+    "countryAKey": "country-031",
+    "countryBKey": "country-032",
+    "countryAName": "오스만 제국",
+    "countryBName": "이란 입헌왕국",
+    "score": -25,
+    "type": "경쟁",
+    "reason": "중동 패권과 국경·완충지역 문제."
+  },
+  {
+    "countryAKey": "country-042",
+    "countryBKey": "country-058",
+    "countryAName": "신프랑스 연방왕국",
+    "countryBName": "영국령 인도제국",
+    "score": -40,
+    "type": "경쟁 ~ 적대",
+    "reason": "미얀마와 인도차이나 주변 전략권 경쟁."
+  },
+  {
+    "countryAKey": "country-051",
+    "countryBKey": "country-055",
+    "countryAName": "벨기에-콩고 왕령",
+    "countryBName": "로디지아 인권동맹연방",
+    "score": -90,
+    "type": "극심한 적대",
+    "reason": "인권 비판과 콩고 난민문제가 왕령체제의 정당성을 직접 공격."
+  },
+  {
+    "countryAKey": "country-048",
+    "countryBKey": "country-043",
+    "countryAName": "에티오피아 제국",
+    "countryBName": "신사보이 왕국",
+    "score": -70,
+    "type": "강한 적대",
+    "reason": "이탈리아 망명세력과 과거 침략의 기억."
+  },
+  {
+    "countryAKey": "country-001",
+    "countryBKey": "country-007",
+    "countryAName": "컬럼비아 개척연방",
+    "countryBName": "오대호 연방",
+    "score": -100,
+    "type": "절대적 적대",
+    "reason": "상실한 오대호 산업지대를 국가적 상처로 인식."
+  },
+  {
+    "countryAKey": "country-001",
+    "countryBKey": "country-037",
+    "countryAName": "컬럼비아 개척연방",
+    "countryBName": "카리브 연방",
+    "score": 70,
+    "type": "강한 우호 / 후견",
+    "reason": "컬럼비아의 전략적·경제적 후견."
+  },
+  {
+    "countryAKey": "country-037",
+    "countryBKey": "country-002",
+    "countryAName": "카리브 연방",
+    "countryBName": "대영제국",
+    "score": -40,
+    "type": "적대",
+    "reason": "카리브 해역에서 영국 해군과 컬럼비아 영향권 충돌."
+  },
+  {
+    "countryAKey": "country-001",
+    "countryBKey": "country-059",
+    "countryAName": "컬럼비아 개척연방",
+    "countryBName": "필리핀 제도정부",
+    "score": 75,
+    "type": "강한 우호 / 종속적",
+    "reason": "컬럼비아의 강한 군사·전략적 영향력."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-057",
+    "countryAName": "대영제국",
+    "countryBName": "캐나다 자치령",
+    "score": 80,
+    "type": "강한 우호 / 제국관계",
+    "reason": "왕실과 제국체제를 공유하는 핵심 관계."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-060",
+    "countryAName": "대영제국",
+    "countryBName": "오스트레일리아 연방",
+    "score": 80,
+    "type": "강한 우호 / 제국관계",
+    "reason": "제국권 핵심 자치령 관계."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-062",
+    "countryAName": "대영제국",
+    "countryBName": "뉴질랜드 자치령",
+    "score": 80,
+    "type": "강한 우호 / 제국관계",
+    "reason": "매우 긴밀한 정치·경제·군사관계."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-058",
+    "countryAName": "대영제국",
+    "countryBName": "영국령 인도제국",
+    "score": 90,
+    "type": "강한 우호 / 종속적",
+    "reason": "영국 제국의 핵심 전략·경제 기반."
+  },
+  {
+    "countryAKey": "country-002",
+    "countryBKey": "country-061",
+    "countryAName": "대영제국",
+    "countryBName": "남아프리카 연방",
+    "score": 70,
+    "type": "강한 우호",
+    "reason": "아프리카에 남은 영국 제국권 핵심 거점."
+  },
+  {
+    "countryAKey": "country-060",
+    "countryBKey": "country-062",
+    "countryAName": "오스트레일리아 연방",
+    "countryBName": "뉴질랜드 자치령",
+    "score": 55,
+    "type": "우호",
+    "reason": "타스만권 국방·무역 협력."
+  }
+]

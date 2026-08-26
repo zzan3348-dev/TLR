@@ -4,7 +4,7 @@ export function appendSuperEvent(
   queue: readonly SuperEventData[],
   event: SuperEventData,
 ): SuperEventData[] {
-  return queue.some(({ id }) => id === event.id) ? [...queue] : [...queue, event];
+  return queue.some(({ instanceId }) => instanceId === event.instanceId) ? [...queue] : [...queue, event];
 }
 
 export function advanceSuperEventQueue(

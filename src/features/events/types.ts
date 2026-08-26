@@ -1,8 +1,20 @@
+import type { EventEffect } from "../effects/types";
+
 export type EventTemplateType = "document" | "newspaper" | "super";
 
 export type EventChoice = {
   id: string;
-  label: string;
+  text: string;
+  description?: string;
+  effects?: readonly EventEffect[];
+};
+
+export type DocumentEventData = {
+  id: string;
+  instanceId: string;
+  title: string;
+  body: readonly string[];
+  choices: readonly EventChoice[];
 };
 
 export type EventImageCrop = {
@@ -16,6 +28,7 @@ export type EventImageCrop = {
 
 export type NewspaperEventData = {
   id: string;
+  instanceId: string;
   title: string;
   body: string;
   image?: string;
@@ -51,12 +64,13 @@ export type SuperEventProjectionEffect = {
 
 export type SuperEventData = {
   id: string;
+  instanceId: string;
   title: string;
   image?: string;
   imageCrop?: EventImageCrop;
   quote?: string;
   attribution?: string;
-  buttonText: string;
+  choice: EventChoice;
   music?: SuperEventMusic;
   projectorAudio?: SuperEventProjectorAudio;
   projectionEffect?: SuperEventProjectionEffect;

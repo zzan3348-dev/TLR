@@ -2,6 +2,7 @@ node_modules/
 dist/
 .vercel/
 .codex-tmp/
+.codex-dev/
 artifacts/
 work/
 deploy-optimized/
@@ -23,3 +24,4 @@ public/maps/generated/generated/
 
 .vercel
 .env*
+supabase/.temp/

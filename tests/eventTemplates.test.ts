@@ -37,13 +37,15 @@ describe("이벤트 템플릿 유형", () => {
   it("슈퍼이벤트 큐를 중복 없이 FIFO 순서로 처리한다", () => {
     const first: SuperEventData = {
       id: "first",
+      instanceId: "first-instance",
       title: "첫 번째",
-      buttonText: "확인",
+      choice: { id: "confirm", text: "확인" },
     };
     const second: SuperEventData = {
       id: "second",
+      instanceId: "second-instance",
       title: "두 번째",
-      buttonText: "확인",
+      choice: { id: "confirm", text: "확인" },
     };
 
     const queue = appendSuperEvent(appendSuperEvent([], first), second);

@@ -27,7 +27,7 @@ export function NewspaperEventImage({
   );
 }
 
-export function NewspaperEventTemplate({ event }: { event: NewspaperEventData }) {
+export function NewspaperEventTemplate({ event, onFinished }: { event: NewspaperEventData; onFinished?: () => void }) {
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
   const paragraphs = event.body.split(/\n{2,}/u).map((paragraph) => paragraph.trim()).filter(Boolean);
 
@@ -62,11 +62,15 @@ export function NewspaperEventTemplate({ event }: { event: NewspaperEventData })
           {event.choices.map((choice) => (
             <EventChoiceButton
               key={choice.id}
+              eventId={event.id}
+              eventInstanceId={event.instanceId}
+              choice={choice}
               selected={selectedChoiceId === choice.id}
-              onClick={() => setSelectedChoiceId(choice.id)}
-            >
-              {choice.label}
-            </EventChoiceButton>
+              onApplied={() => {
+                setSelectedChoiceId(choice.id);
+                onFinished?.();
+              }}
+            />
           ))}
         </div>
       ) : null}

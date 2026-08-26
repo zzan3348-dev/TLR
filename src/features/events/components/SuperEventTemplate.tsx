@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SuperEventAudioController } from "../audio/SuperEventAudioController";
 import type { SuperEventData, SuperEventProjectionEffect } from "../types";
 import { CroppedEventImage } from "./CroppedEventImage";
+import { EventChoiceButton } from "./EventChoiceButton";
 
 const DEFAULT_PROJECTION_EFFECT: Required<SuperEventProjectionEffect> = {
   grain: 0.12,
@@ -89,9 +90,14 @@ export function SuperEventTemplate({
           ) : null}
         </section>
 
-        <button className="super-event-template__finish" type="button" disabled={closing} onClick={finish}>
-          {event.buttonText}
-        </button>
+        <EventChoiceButton
+          eventId={event.id}
+          eventInstanceId={event.instanceId}
+          choice={event.choice}
+          selected={closing}
+          onApplied={finish}
+          variant="super"
+        />
       </article>
     </div>
   );

@@ -14,6 +14,7 @@ import naviResearchInvestments from "../server/routes/navi/researchInvestments.j
 import mapCapitals from "../server/routes/mapCapitals.js";
 import decisionCurrent from "../server/routes/decisions/current.js";
 import decisionExecute from "../server/routes/decisions/execute.js";
+import eventChoices from "../server/routes/events/choices.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   budget,
@@ -41,6 +42,10 @@ const decisionHandlers: Record<string, (request: ApiRequest, response: ApiRespon
   execute: decisionExecute,
 };
 
+const eventHandlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
+  choices: eventChoices,
+};
+
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const rawRoute = request.query?.route;
   const route = Array.isArray(rawRoute) ? rawRoute[0] : rawRoute;
@@ -55,6 +60,8 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       ? naviHandlers[route]
       : domain === "decisions"
         ? decisionHandlers[route]
+      : domain === "events"
+        ? eventHandlers[route]
       : domain === "research"
         ? researchHandlers[route]
         : handlers[route]

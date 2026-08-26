@@ -27,6 +27,10 @@
       "destination": "/api/economy-dispatch?domain=decisions&route=:route"
     },
     {
+      "source": "/api/events/:route",
+      "destination": "/api/economy-dispatch?domain=events&route=:route"
+    },
+    {
       "source": "/api/admin/research",
       "destination": "/api/admin/actions?domain=research"
     },
