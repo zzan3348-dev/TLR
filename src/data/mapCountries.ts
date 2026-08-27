@@ -1,7 +1,7 @@
-import mapCountryData from "./mapCountries.json";
-import { countryFactionMemberships } from "./countryFactionMemberships";
-import { countryEnglishNames } from "./countryEnglishNames";
-import { countryNativeNames } from "./countryNativeNames";
+import mapCountryData from "./mapCountries.json" with { type: "json" };
+import { countryFactionMemberships } from "./countryFactionMemberships.js";
+import { countryEnglishNames } from "./countryEnglishNames.js";
+import { countryNativeNames } from "./countryNativeNames.js";
 import type {
   FlagFit,
   FlagBlendMode,
@@ -12,7 +12,7 @@ import type {
   MapCountryLabelSettings,
   MapLabelLayoutMode,
   MapLabelMode,
-} from "../types/mapCountry";
+} from "../types/mapCountry.js";
 
 const isFlagFit = (value: string): value is FlagFit =>
   value === "cover" || value === "contain" || value === "stretch";

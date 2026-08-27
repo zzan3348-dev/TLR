@@ -1,6 +1,6 @@
-import { mapCountries } from "../../data/mapCountries";
-import { resolveNationalSpiritDefinition } from "./nationalSpiritRegistry";
-import type { EventEffect } from "./types";
+import { mapCountries } from "../../data/mapCountries.js";
+import { resolveNationalSpiritDefinition } from "./nationalSpiritRegistry.js";
+import type { EventEffect } from "./types.js";
 
 const COUNTRY_IDS = new Set(mapCountries.map(({ key }) => key));
 

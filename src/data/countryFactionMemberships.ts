@@ -1,4 +1,4 @@
-import type { FactionMembership } from "../types/faction";
+import type { FactionMembership } from "../types/faction.js";
 
 const member = (factionId: string): FactionMembership => ({
   factionId,

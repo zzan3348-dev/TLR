@@ -1,5 +1,5 @@
-import rawNationalSpirits from "../../data/generated/countryNationalSpirits.json";
-import type { CountryNationalSpirit } from "../../types/countryPresentation";
+import rawNationalSpirits from "../../data/generated/countryNationalSpirits.json" with { type: "json" };
+import type { CountryNationalSpirit } from "../../types/countryPresentation.js";
 
 export type NationalSpiritRegistryEntry = CountryNationalSpirit & {
   registryId: string;
