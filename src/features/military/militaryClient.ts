@@ -1,4 +1,4 @@
-import type { MilitaryOverview, OfficerCorpsState, OfficerSpiritCategory } from "./types";
+import type { Conflict, MilitaryMapState, MilitaryNotification, MilitaryOverview, OfficerCorpsState, OfficerSpiritCategory } from "./types";
 
 export class MilitaryApiError extends Error {
   constructor(
@@ -25,6 +25,22 @@ async function militaryRequest<T>(route: string, init?: RequestInit): Promise<T>
 
 export function fetchMilitaryOverview(countryKey: string): Promise<MilitaryOverview> {
   return militaryRequest<MilitaryOverview>(`overview?country_key=${encodeURIComponent(countryKey)}`);
+}
+
+export function fetchMilitaryMapState(): Promise<MilitaryMapState> {
+  return militaryRequest<MilitaryMapState>("map-state");
+}
+
+export function fetchWarDeclarations(): Promise<MilitaryNotification[]> {
+  return militaryRequest<MilitaryNotification[]>("notifications");
+}
+
+export function acknowledgeMilitaryNotification(id: string): Promise<{ ok: true }> {
+  return militaryRequest<{ ok: true }>("notifications", { method: "PATCH", body: JSON.stringify({ id }) });
+}
+
+export function fetchMilitaryConflicts(): Promise<Conflict[]> {
+  return militaryRequest<Conflict[]>("conflicts");
 }
 
 export function fetchOfficerCorps(countryKey: string): Promise<OfficerCorpsState> {

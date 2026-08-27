@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { UiIcon } from "../../../components/UiIcon";
 import { fetchOfficerCorps, MilitaryApiError, selectGrandDoctrine, selectOfficerSpirit } from "../militaryClient";
 import type { GrandDoctrine, MilitarySelectionState, OfficerCorpsState, OfficerSpirit, OfficerSpiritCategory } from "../types";
 
@@ -120,7 +121,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
                   onClick={() => void applyOption(option)} disabled={pending !== null || option.selectionState !== "READY"}>
                   <img src={option.iconPath ?? fallback} alt="" />
                   <span><strong>{option.displayName}</strong><small>{STATE_LABEL[option.selectionState]}</small></span>
-                  {(option.selectionState === "LOCKED" || option.selectionState === "PARTIAL") && <i aria-hidden="true">▣</i>}
+                  {(option.selectionState === "LOCKED" || option.selectionState === "PARTIAL") ? <UiIcon name="lock" /> : null}
                 </button>
               );
             })}

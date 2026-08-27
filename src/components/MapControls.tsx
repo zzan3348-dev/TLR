@@ -5,7 +5,7 @@ import type { MapMode } from "../types/faction";
 type MapControlsProps = {
   mapHandle: React.RefObject<WorldMapHandle | null>;
   mapMode: MapMode;
-  onToggleFactionMode: () => void;
+  onChangeMapMode: (mode: MapMode) => void;
   showProvinceBorders: boolean;
   onToggleProvinceBorders: () => void;
   showLabels: boolean;
@@ -17,7 +17,7 @@ type MapControlsProps = {
 export function MapControls({
   mapHandle,
   mapMode,
-  onToggleFactionMode,
+  onChangeMapMode,
   showProvinceBorders,
   onToggleProvinceBorders,
   showLabels,
@@ -33,7 +33,7 @@ export function MapControls({
     >
       <button
         type="button"
-        onClick={onToggleFactionMode}
+        onClick={() => onChangeMapMode(mapMode === "faction" ? "political" : "faction")}
         aria-label={
           mapMode === "faction"
             ? "정치지도로 돌아가기"
@@ -46,6 +46,21 @@ export function MapControls({
           {mapMode === "faction" ? "정치지도" : "세력지도"}
         </small>
       </button>
+      {([[
+        "army", "armyMap", "육군 지도",
+      ], ["navy", "navyMap", "해군 지도"], ["air", "airMap", "공군 지도"]] as const).map(([mode, icon, label]) => (
+        <button
+          key={mode}
+          type="button"
+          className="map-controls__military"
+          onClick={() => onChangeMapMode(mapMode === mode ? "political" : mode)}
+          aria-label={`${label} 표시`}
+          aria-pressed={mapMode === mode}
+        >
+          <StrategyIcon name={icon} />
+          <small>{label}</small>
+        </button>
+      ))}
       <button
         type="button"
         onClick={onToggleProvinceBorders}

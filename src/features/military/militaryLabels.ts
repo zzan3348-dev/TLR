@@ -9,9 +9,15 @@ const LABELS: Record<string, string> = {
   SUBMITTED: "제출됨",
   UNDER_REVIEW: "심의 중",
   RESOLVED: "판정 완료",
+  ADJUDICATED: "판정 완료",
   REJECTED: "반려됨",
   SUCCESS: "성공",
   PARTIAL: "부분 성공",
+  DECISIVE_SUCCESS: "결정적 성공",
+  PARTIAL_SUCCESS: "부분 성공",
+  STALEMATE: "교착",
+  PARTIAL_FAILURE: "부분 실패",
+  DECISIVE_FAILURE: "결정적 실패",
   FAILURE: "실패",
   INVALID: "무효",
   WITHDRAWN: "철회",
@@ -43,4 +49,3 @@ export function militaryLabel(value: string | null | undefined): string {
   if (!value) return "미설정";
   return LABELS[value] ?? value;
 }
-

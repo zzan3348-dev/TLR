@@ -11,6 +11,9 @@ import {
 } from "react";
 import { capitalsToMarkers, initialMapCapitals } from "../data/mapCapitals";
 import { fetchHostileCountryKeys } from "../features/military/mapConflictUtils";
+import { fetchMilitaryMapState } from "../features/military/militaryClient";
+import { MilitaryMapOverlay } from "../features/military/components/MilitaryMapOverlay";
+import type { MilitaryMapState, WarReport } from "../features/military/types";
 import { mapCountries } from "../data/mapCountries";
 import { mapCountryComponents } from "../data/mapCountryComponents";
 import { mapCountryLabels } from "../data/mapCountryLabels";
@@ -85,6 +88,7 @@ type WorldMapProps = {
     country: MapCountryIndex,
     component: MapCountryComponent,
   ) => void;
+  onWarReportSelect?: (report: WarReport) => void;
 };
 
 type PointerPosition = {
@@ -124,6 +128,7 @@ type MapOverlayView = {
   camera: MapCamera;
   viewport: ViewportSize;
   mapWidth: number;
+  mapHeight: number;
   fitScale: number;
 };
 
@@ -162,6 +167,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       selectedCountry,
       selectedComponent,
       onCountrySelect,
+      onWarReportSelect,
     },
     forwardedRef,
   ) {
@@ -206,6 +212,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const [hostileCountryKeys, setHostileCountryKeys] =
       useState<ReadonlySet<string>>(() => new Set());
     const [overlayView, setOverlayView] = useState<MapOverlayView | null>(null);
+    const [militaryMapState, setMilitaryMapState] = useState<MilitaryMapState>({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
     const mapMarkers = useMemo(
       () => capitalsToMarkers(initialMapCapitals),
       [],
@@ -485,9 +492,21 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         camera: { ...cameraRef.current },
         viewport: { ...viewportRef.current },
         mapWidth: assets.width,
+        mapHeight: assets.height,
         fitScale: fitScaleRef.current,
       });
     }, []);
+
+    useEffect(() => {
+      if (!(["army", "navy", "air"] as MapMode[]).includes(mapMode)) return;
+      const controller = new AbortController();
+      fetchMilitaryMapState().then((state) => {
+        if (!controller.signal.aborted) setMilitaryMapState(state);
+      }).catch(() => {
+        if (!controller.signal.aborted) setMilitaryMapState({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
+      });
+      return () => controller.abort();
+    }, [mapMode]);
 
     const animateSelectionPresentation = useCallback(() => {
       if (presentationFrameRef.current !== null) {
@@ -1259,6 +1278,14 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             );
           })}
         </div>
+        {overlayView && (mapMode === "army" || mapMode === "navy" || mapMode === "air") ? (
+          <MilitaryMapOverlay
+            mode={mapMode}
+            state={militaryMapState}
+            {...overlayView}
+            onReportSelect={(report) => onWarReportSelect?.(report)}
+          />
+        ) : null}
         {mapMode === "faction" && hoveredMapCountry ? (
           <div
             className="map-hover-tooltip"

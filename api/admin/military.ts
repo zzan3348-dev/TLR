@@ -2,6 +2,7 @@ import type { ApiRequest, ApiResponse } from "../../server/types.js";
 import { getAdminClient, getServerEnv } from "../../server/auth.js";
 import { requireAdminSession } from "../../server/adminAuth.js";
 import { currentWorldDate } from "../../server/diplomacy.js";
+import { withKoreanParticle } from "../../server/koreanGrammar.js";
 
 const CONFIGURATION_STATES = new Set(["PARTIAL", "READY", "DISABLED"]);
 const SPIRIT_CATEGORIES = new Set(["ACADEMY", "ARMY", "DIVISION_COMMAND"]);
@@ -15,8 +16,13 @@ const REQUIREMENT_TYPES = new Set([
   "HAS_LAW", "DOES_NOT_HAVE_LAW", "COUNTRY_STAT_AT_LEAST", "COUNTRY_STAT_AT_MOST",
   "WORLD_DATE_AFTER", "WORLD_DATE_BEFORE", "CUSTOM_ADMIN_FLAG",
 ]);
-const OUTCOMES = new Set(["SUCCESS", "PARTIAL", "FAILURE", "INVALID", "WITHDRAWN"]);
+const OUTCOMES = new Set([
+  "DECISIVE_SUCCESS", "SUCCESS", "PARTIAL_SUCCESS", "STALEMATE",
+  "PARTIAL_FAILURE", "FAILURE", "DECISIVE_FAILURE",
+]);
 const VISIBILITIES = new Set(["PUBLIC", "PARTICIPANTS", "ADMIN_ONLY"]);
+const CONFLICT_TYPES = new Set(["INTERSTATE_WAR", "LIMITED_WAR", "BORDER_CONFLICT", "CIVIL_WAR", "INDEPENDENCE_WAR", "ARMED_UPRISING"]);
+const FRONT_KINDS = new Set(["LAND_LINE", "NAVAL_AREA"]);
 
 function bodyOf(request: ApiRequest): Record<string, unknown> {
   return request.body && typeof request.body === "object" && !Array.isArray(request.body)
@@ -43,6 +49,31 @@ function objectValue(value: unknown): Record<string, unknown> | null {
   return value && typeof value === "object" && !Array.isArray(value)
     ? value as Record<string, unknown>
     : null;
+}
+
+function stringArray(value: unknown, maxItems = 5000): string[] | null {
+  if (!Array.isArray(value) || value.length > maxItems) return null;
+  const rows = value.map((item) => stringValue(item, 100));
+  return rows.some((item) => item === null) ? null : [...new Set(rows as string[])];
+}
+
+function pointArray(value: unknown): Array<{ x: number; y: number }> | null {
+  if (!Array.isArray(value) || value.length < 2 || value.length > 200) return null;
+  const points = value.map((raw) => {
+    const point = objectValue(raw);
+    const x = point ? finiteNumber(point.x) : null;
+    const y = point ? finiteNumber(point.y) : null;
+    return x === null || y === null ? null : { x, y };
+  });
+  return points.some((point) => point === null) ? null : points as Array<{ x: number; y: number }>;
+}
+
+async function audit(admin: ReturnType<typeof getAdminClient>, session: { sub: string; kind: string }, worldDate: string, actionKind: string, targetKind: string, targetId: string | null, countryKey: string | null, afterState: Record<string, unknown>) {
+  await admin.from("military_audit_logs").insert({
+    actor_subject: session.sub, actor_kind: session.kind, action_kind: actionKind,
+    target_kind: targetKind, target_id: targetId, country_key: countryKey,
+    after_state: afterState, world_date: worldDate,
+  });
 }
 
 function catalogPatch(body: Record<string, unknown>, kind: "GRAND_DOCTRINE" | "OFFICER_SPIRIT") {
@@ -75,7 +106,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   try {
     const worldDate = await currentWorldDate(admin);
     if (request.method === "GET") {
-      const [spectrums, ideologies, doctrines, spirits, doctrineEffects, spiritEffects, groups, requirements, actions] = await Promise.all([
+      const [spectrums, ideologies, doctrines, spirits, doctrineEffects, spiritEffects, groups, requirements, actions, conflicts, fronts, occupations, reports] = await Promise.all([
         admin.from("civil_war_spectrums").select("id,key,display_name_ko,description_ko,enabled,sort_order").order("sort_order"),
         admin.from("ideology_categories").select("id,key,display_name_ko,description_ko,color,icon_path,civil_war_spectrum_id,enabled,sort_order").order("sort_order"),
         admin.from("grand_doctrines").select("id,key,display_name_ko,description_ko,icon_path,configuration_status,enabled,sort_order").order("sort_order"),
@@ -85,14 +116,24 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         admin.from("military_requirement_groups").select("*").order("sort_order"),
         admin.from("military_requirements").select("*").order("sort_order"),
         admin.from("military_actions").select("*").in("status", ["SUBMITTED", "UNDER_REVIEW"]).order("created_at"),
+        admin.from("military_conflicts").select("*").in("status", ["DRAFT", "DECLARED", "ACTIVE", "CEASEFIRE"]).order("created_at", { ascending: false }),
+        admin.from("military_fronts").select("*").in("status", ["DRAFT", "ACTIVE"]).order("display_name"),
+        admin.from("military_occupations").select("*").eq("status", "ACTIVE_OCCUPATION").order("started_world_date", { ascending: false }),
+        admin.from("military_war_reports").select("*").order("report_world_date", { ascending: false }).limit(100),
       ]);
-      const failed = [spectrums, ideologies, doctrines, spirits, doctrineEffects, spiritEffects, groups, requirements, actions].find((result) => result.error);
+      const failed = [spectrums, ideologies, doctrines, spirits, doctrineEffects, spiritEffects, groups, requirements, actions, conflicts, fronts, occupations, reports].find((result) => result.error);
       if (failed?.error) throw failed.error;
       const actionIds = (actions.data ?? []).map((row) => row.id);
       const assignments = actionIds.length
         ? await admin.from("military_action_assignments").select("*").in("action_id", actionIds)
         : { data: [], error: null };
       if (assignments.error) throw assignments.error;
+      const conflictIds = (conflicts.data ?? []).map((row) => row.id);
+      const [sides, participants] = conflictIds.length ? await Promise.all([
+        admin.from("military_conflict_sides").select("*").in("conflict_id", conflictIds).order("sort_order"),
+        admin.from("military_conflict_participants").select("*").in("conflict_id", conflictIds).is("left_world_date", null),
+      ]) : [{ data: [], error: null }, { data: [], error: null }];
+      if (sides.error || participants.error) throw sides.error ?? participants.error;
       response.status(200).json({
         worldDate,
         spectrums: spectrums.data ?? [], ideologies: ideologies.data ?? [],
@@ -103,6 +144,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
           ...action,
           assignments: (assignments.data ?? []).filter((assignment) => assignment.action_id === action.id),
         })),
+        conflicts: (conflicts.data ?? []).map((conflict) => ({
+          ...conflict,
+          sides: (sides.data ?? []).filter((side) => side.conflict_id === conflict.id).map((side) => ({
+            ...side,
+            participants: (participants.data ?? []).filter((participant) => participant.side_id === side.id),
+          })),
+        })),
+        fronts: fronts.data ?? [], occupations: occupations.data ?? [], reports: reports.data ?? [],
       });
       return;
     }
@@ -214,6 +263,110 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       response.status(200).json({ ok: true }); return;
     }
 
+    if (action === "CREATE_CONFLICT") {
+      const displayName = stringValue(body.displayName, 160);
+      const conflictType = typeof body.conflictType === "string" ? body.conflictType : "";
+      const sideAName = stringValue(body.sideAName, 120);
+      const sideBName = stringValue(body.sideBName, 120);
+      const sideACountries = stringArray(body.sideACountries, 100);
+      const sideBCountries = stringArray(body.sideBCountries, 100);
+      if (!displayName || !CONFLICT_TYPES.has(conflictType) || !sideAName || !sideBName || !sideACountries?.length || !sideBCountries?.length || sideACountries.some((key) => sideBCountries.includes(key))) {
+        response.status(400).json({ error: "INVALID_MILITARY_CONFLICT" }); return;
+      }
+      const conflict = await admin.from("military_conflicts").insert({
+        display_name: displayName, conflict_type: conflictType, status: "ACTIVE",
+        declared_world_date: worldDate, started_world_date: worldDate,
+      }).select("id").single();
+      if (conflict.error) throw conflict.error;
+      const sideInsert = await admin.from("military_conflict_sides").insert([
+        { conflict_id: conflict.data.id, display_name: sideAName, sort_order: 0 },
+        { conflict_id: conflict.data.id, display_name: sideBName, sort_order: 1 },
+      ]).select("id,sort_order");
+      if (sideInsert.error) throw sideInsert.error;
+      const sideA = sideInsert.data.find((row) => row.sort_order === 0);
+      const sideB = sideInsert.data.find((row) => row.sort_order === 1);
+      if (!sideA || !sideB) throw new Error("MILITARY_CONFLICT_SIDE_CREATION_FAILED");
+      const participantRows = [
+        ...sideACountries.map((countryKey) => ({ conflict_id: conflict.data.id, side_id: sideA.id, country_key: countryKey, role: "BELLIGERENT", joined_world_date: worldDate })),
+        ...sideBCountries.map((countryKey) => ({ conflict_id: conflict.data.id, side_id: sideB.id, country_key: countryKey, role: "BELLIGERENT", joined_world_date: worldDate })),
+      ];
+      const participantInsert = await admin.from("military_conflict_participants").insert(participantRows);
+      if (participantInsert.error) throw participantInsert.error;
+      const declarationTitle = stringValue(body.declarationTitle, 160) ?? "선전포고!";
+      const declarationBody = stringValue(body.declarationBody, 500) ?? `${withKoreanParticle(sideAName, "이/가")} ${sideBName}에게 선전포고했습니다.`;
+      const notifications = await admin.from("military_notifications").insert([...sideACountries, ...sideBCountries].map((countryKey) => ({
+        country_key: countryKey, notification_type: "WAR_DECLARATION", conflict_id: conflict.data.id,
+        title: declarationTitle, body: declarationBody, world_date: worldDate,
+      })));
+      if (notifications.error) throw notifications.error;
+      await audit(admin, session, worldDate, "CREATE_CONFLICT", "MILITARY_CONFLICT", conflict.data.id, null, { displayName, conflictType, sideACountries, sideBCountries });
+      response.status(200).json({ ok: true, id: conflict.data.id }); return;
+    }
+
+    if (action === "UPSERT_FRONT") {
+      const id = optionalString(body.id, 64);
+      const conflictId = stringValue(body.conflictId, 64);
+      const displayName = stringValue(body.displayName, 160);
+      const frontKind = typeof body.frontKind === "string" ? body.frontKind : "";
+      const ownerSideId = stringValue(body.ownerSideId, 64);
+      const opponentSideId = stringValue(body.opponentSideId, 64);
+      const geometry = pointArray(body.geometry);
+      if (!conflictId || !displayName || !FRONT_KINDS.has(frontKind) || !ownerSideId || !opponentSideId || ownerSideId === opponentSideId || !geometry) {
+        response.status(400).json({ error: "INVALID_MILITARY_FRONT" }); return;
+      }
+      const patch = { conflict_id: conflictId, display_name: displayName, front_kind: frontKind, owner_side_id: ownerSideId, opponent_side_id: opponentSideId, geometry, status: "ACTIVE" };
+      const result = id
+        ? await admin.from("military_fronts").update(patch).eq("id", id).select("id").maybeSingle()
+        : await admin.from("military_fronts").insert(patch).select("id").single();
+      if (result.error) throw result.error;
+      if (!result.data) { response.status(404).json({ error: "MILITARY_FRONT_NOT_FOUND" }); return; }
+      await audit(admin, session, worldDate, "UPSERT_FRONT", "MILITARY_FRONT", result.data.id, null, patch);
+      response.status(200).json({ ok: true, id: result.data.id }); return;
+    }
+
+    if (action === "SET_OCCUPATION") {
+      const conflictId = stringValue(body.conflictId, 64);
+      const legalOwner = stringValue(body.legalOwnerCountryKey, 80);
+      const occupier = stringValue(body.occupierCountryKey, 80);
+      let provinceIds = stringArray(body.provinceIds);
+      const regionId = optionalString(body.regionId, 64);
+      if (!provinceIds?.length && regionId) {
+        const region = await admin.from("province_regions").select("province_ids").eq("id", regionId).maybeSingle();
+        if (region.error) throw region.error;
+        provinceIds = stringArray(region.data?.province_ids);
+      }
+      if (!conflictId || !legalOwner || !occupier || legalOwner === occupier || !provinceIds?.length) {
+        response.status(400).json({ error: "INVALID_MILITARY_OCCUPATION" }); return;
+      }
+      const inserted = await admin.from("military_occupations").insert({
+        conflict_id: conflictId, legal_owner_country_key: legalOwner, occupier_country_key: occupier,
+        province_ids: provinceIds, status: "ACTIVE_OCCUPATION", started_world_date: worldDate,
+      }).select("id").single();
+      if (inserted.error) throw inserted.error;
+      await audit(admin, session, worldDate, "SET_OCCUPATION", "MILITARY_OCCUPATION", inserted.data.id, occupier, { conflictId, legalOwner, occupier, provinceIds });
+      response.status(200).json({ ok: true, id: inserted.data.id }); return;
+    }
+
+    if (action === "END_CONFLICT") {
+      const conflictId = stringValue(body.conflictId, 64);
+      const reportTitle = stringValue(body.reportTitle, 160);
+      const reportBody = stringValue(body.reportBody, 8000);
+      if (!conflictId || !reportTitle || !reportBody || body.confirm !== true) { response.status(400).json({ error: "INVALID_WAR_END_CONFIRMATION" }); return; }
+      const conflict = await admin.from("military_conflicts").select("*").eq("id", conflictId).in("status", ["DECLARED", "ACTIVE", "CEASEFIRE"]).maybeSingle();
+      if (conflict.error) throw conflict.error;
+      if (!conflict.data) { response.status(409).json({ error: "MILITARY_CONFLICT_NOT_ACTIVE" }); return; }
+      const [ended, frontsEnded, actionsCancelled] = await Promise.all([
+        admin.from("military_conflicts").update({ status: "ENDED", ended_world_date: worldDate, version: Number(conflict.data.version ?? 1) + 1 }).eq("id", conflictId),
+        admin.from("military_fronts").update({ status: "DISSOLVED" }).eq("conflict_id", conflictId).in("status", ["DRAFT", "ACTIVE"]),
+        admin.from("military_actions").update({ status: "CANCELLED" }).eq("conflict_id", conflictId).in("status", ["DRAFT", "SUBMITTED", "UNDER_REVIEW"]),
+      ]);
+      if (ended.error || frontsEnded.error || actionsCancelled.error) throw ended.error ?? frontsEnded.error ?? actionsCancelled.error;
+      const report = await admin.from("military_war_reports").insert({ conflict_id: conflictId, title: reportTitle, body: reportBody, report_world_date: worldDate, losses: {}, outcomes: { outcome: "WAR_ENDED", winnerSideId: optionalString(body.winnerSideId, 64) }, visibility: "PUBLIC", marker_tone: "NEUTRAL" });
+      if (report.error) throw report.error;
+      await audit(admin, session, worldDate, "END_CONFLICT", "MILITARY_CONFLICT", conflictId, null, { reportTitle, winnerSideId: optionalString(body.winnerSideId, 64) });
+      response.status(200).json({ ok: true }); return;
+    }
+
     if (action === "RESOLVE_ACTION") {
       const actionId = stringValue(body.actionId, 64);
       const outcome = typeof body.outcome === "string" ? body.outcome : "";
@@ -228,18 +381,60 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       const losses = objectValue(body.losses) ?? {};
       const stateChanges = objectValue(body.stateChanges) ?? {};
       const territoryChanges = objectValue(body.territoryChanges) ?? {};
+      const markerObject = objectValue(body.marker);
+      const markerX = markerObject ? finiteNumber(markerObject.x) : null;
+      const markerY = markerObject ? finiteNumber(markerObject.y) : null;
+      const marker = markerX === null || markerY === null ? null : { x: markerX, y: markerY };
+      let winnerSideId = optionalString(body.winnerSideId, 64);
+      let loserSideId = optionalString(body.loserSideId, 64);
       const resolution = await admin.from("military_action_resolutions").insert({
         action_id: actionId, outcome, summary, losses, state_changes: stateChanges,
         territory_changes: territoryChanges, resolved_world_date: worldDate, admin_user_id: session.sub,
       });
       if (resolution.error) throw resolution.error;
-      const updated = await admin.from("military_actions").update({ status: "RESOLVED", version: Number(actionRow.data.version ?? 1) + 1 }).eq("id", actionId).in("status", ["SUBMITTED", "UNDER_REVIEW"]);
+      const updated = await admin.from("military_actions").update({ status: "ADJUDICATED", version: Number(actionRow.data.version ?? 1) + 1 }).eq("id", actionId).in("status", ["SUBMITTED", "UNDER_REVIEW"]);
       if (updated.error) throw updated.error;
+      const forceUpdates = objectValue(stateChanges.forceUpdates);
+      const updateGroups: Array<{ key: string; table: string; allowed: string[] }> = [
+        { key: "landUnits", table: "military_land_units", allowed: ["status", "current_manpower", "equipment_readiness", "training_level", "assigned_front_id", "assigned_conflict_id"] },
+        { key: "fleets", table: "military_fleets", allowed: ["status", "assigned_front_id", "assigned_conflict_id"] },
+        { key: "vessels", table: "military_vessels", allowed: ["status", "fleet_id", "assigned_front_id", "assigned_conflict_id"] },
+        { key: "airWings", table: "military_air_wings", allowed: ["status", "current_personnel", "readiness", "training_level", "assigned_front_id", "assigned_conflict_id"] },
+      ];
+      if (forceUpdates) {
+        for (const group of updateGroups) {
+          const rows = forceUpdates[group.key];
+          if (!Array.isArray(rows)) continue;
+          for (const raw of rows.slice(0, 500)) {
+            const item = objectValue(raw);
+            const id = item ? stringValue(item.id, 64) : null;
+            if (!item || !id) continue;
+            const patch: Record<string, unknown> = {};
+            for (const key of group.allowed) if (key in item) patch[key] = item[key];
+            if (Object.keys(patch).length) {
+              const forceUpdate = await admin.from(group.table).update(patch).eq("id", id).eq("country_key", actionRow.data.country_key);
+              if (forceUpdate.error) throw forceUpdate.error;
+            }
+          }
+        }
+      }
+      const positive = new Set(["DECISIVE_SUCCESS", "SUCCESS", "PARTIAL_SUCCESS"]);
+      const negative = new Set(["PARTIAL_FAILURE", "FAILURE", "DECISIVE_FAILURE"]);
+      if (!winnerSideId && !loserSideId && (positive.has(outcome) || negative.has(outcome))) {
+        const participant = await admin.from("military_conflict_participants").select("side_id").eq("conflict_id", actionRow.data.conflict_id).eq("country_key", actionRow.data.country_key).is("left_world_date", null).maybeSingle();
+        const sides = await admin.from("military_conflict_sides").select("id").eq("conflict_id", actionRow.data.conflict_id).order("sort_order");
+        if (participant.error || sides.error) throw participant.error ?? sides.error;
+        const actionSideId = participant.data?.side_id ?? null;
+        const opposingSideId = (sides.data ?? []).find((side) => side.id !== actionSideId)?.id ?? null;
+        if (positive.has(outcome)) { winnerSideId = actionSideId; loserSideId = opposingSideId; }
+        else { winnerSideId = opposingSideId; loserSideId = actionSideId; }
+      }
       const report = await admin.from("military_war_reports").insert({
         conflict_id: actionRow.data.conflict_id, action_id: actionId, front_id: actionRow.data.front_id,
         title: reportTitle, body: reportBody, report_world_date: worldDate, losses,
-        outcomes: { outcome, stateChanges }, territory_summary: optionalString(body.territorySummary, 2000),
-        visibility, marker_tone: outcome === "SUCCESS" ? "WIN" : outcome === "FAILURE" ? "LOSS" : "NEUTRAL",
+        winner_side_id: winnerSideId, loser_side_id: loserSideId,
+        outcomes: { outcome, stateChanges }, territory_summary: optionalString(body.territorySummary, 2000), marker,
+        visibility, marker_tone: positive.has(outcome) ? "WIN" : negative.has(outcome) ? "LOSS" : "NEUTRAL",
       });
       if (report.error) throw report.error;
       await Promise.all([

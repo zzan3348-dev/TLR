@@ -21,16 +21,30 @@ type Requirement = {
 };
 type RequirementGroup = { id: string; target_kind: CatalogKind; target_id: string; match_mode: "ALL" | "ANY"; sort_order: number };
 type ReviewAction = {
-  id: string; conflict_id: string; country_key: string; title: string; body: string; status: string;
+  id: string; conflict_id: string; front_id: string | null; country_key: string; title: string; body: string; status: string;
   submitted_world_date: string | null; assignments: Array<{ object_kind: string; object_id: string }>;
 };
+type AdminConflict = {
+  id: string; display_name: string; conflict_type: string; status: string;
+  sides: Array<{ id: string; display_name: string; sort_order: number; participants: Array<{ country_key: string | null }> }>;
+};
+type AdminFront = { id: string; conflict_id: string; display_name: string; front_kind: "LAND_LINE" | "NAVAL_AREA"; owner_side_id: string; opponent_side_id: string; geometry: Array<{ x: number; y: number }>; status: string };
+type AdminOccupation = { id: string; conflict_id: string; legal_owner_country_key: string; occupier_country_key: string; province_ids?: string[] };
 type Spectrum = { id: string; display_name_ko: string };
 
 export type MilitaryAdminData = {
   worldDate: string; spectrums: Spectrum[]; ideologies: Ideology[]; doctrines: Catalog[]; spirits: Catalog[];
   doctrineEffects: Effect[]; spiritEffects: Effect[]; requirementGroups: RequirementGroup[];
   requirements: Requirement[]; actions: ReviewAction[];
+  conflicts: AdminConflict[]; fronts: AdminFront[]; occupations: AdminOccupation[]; reports: Array<{ id: string; conflict_id: string }>;
 };
+
+type ResolutionDraft = {
+  outcome: string; summary: string; reportTitle: string; reportBody: string;
+  attackerLosses: string; defenderLosses: string; stateChanges: string; territorySummary: string; markerX: string; markerY: string;
+};
+
+const BLANK_RESOLUTION: ResolutionDraft = { outcome: "STALEMATE", summary: "", reportTitle: "", reportBody: "", attackerLosses: "", defenderLosses: "", stateChanges: "", territorySummary: "", markerX: "", markerY: "" };
 
 type EditorTarget = { kind: CatalogKind; id: string } | { kind: "IDEOLOGY"; id: string };
 type EffectDraft = { key: string; value: string; unit: "flat" | "percent"; displayText: string; adminGuidance: string };
@@ -70,7 +84,11 @@ export function MilitaryAdminSection({ data, onReload, onError }: { data: Milita
   const [effects, setEffects] = useState<EffectDraft[]>([]);
   const [groups, setGroups] = useState<GroupDraft[]>([]);
   const [busy, setBusy] = useState(false);
-  const [resolution, setResolution] = useState<Record<string, { outcome: string; summary: string; reportTitle: string; reportBody: string }>>({});
+  const [resolution, setResolution] = useState<Record<string, ResolutionDraft>>({});
+  const [conflictDraft, setConflictDraft] = useState({ displayName: "", conflictType: "INTERSTATE_WAR", sideAName: "", sideACountries: "", sideBName: "", sideBCountries: "" });
+  const [frontDraft, setFrontDraft] = useState({ conflictId: "", displayName: "", frontKind: "LAND_LINE", ownerSideId: "", opponentSideId: "", geometry: "" });
+  const [occupationDraft, setOccupationDraft] = useState({ conflictId: "", legalOwnerCountryKey: "", occupierCountryKey: "", regionId: "" });
+  const [warEnd, setWarEnd] = useState({ conflictId: "", winnerSideId: "", reportTitle: "", reportBody: "", preview: false });
 
   const selected = useMemo(() => target.kind === "IDEOLOGY"
     ? data.ideologies.find((row) => row.id === target.id) ?? null
@@ -122,12 +140,26 @@ export function MilitaryAdminSection({ data, onReload, onError }: { data: Milita
   };
 
   const resolve = async (actionRow: ReviewAction) => {
-    const form = resolution[actionRow.id] ?? { outcome: "PARTIAL", summary: "", reportTitle: "", reportBody: "" };
+    const form = resolution[actionRow.id] ?? BLANK_RESOLUTION;
     setBusy(true); onError("");
     try {
-      await postMilitary({ action: "RESOLVE_ACTION", actionId: actionRow.id, ...form, visibility: "PUBLIC", losses: {}, stateChanges: {}, territoryChanges: {} });
+      const stateChanges = form.stateChanges.trim() ? JSON.parse(form.stateChanges) as Record<string, unknown> : {};
+      await postMilitary({
+        action: "RESOLVE_ACTION", actionId: actionRow.id, outcome: form.outcome, summary: form.summary,
+        reportTitle: form.reportTitle, reportBody: form.reportBody, visibility: "PUBLIC",
+        losses: { attacker: form.attackerLosses, defender: form.defenderLosses }, stateChanges, territoryChanges: {},
+        territorySummary: form.territorySummary,
+        marker: form.markerX !== "" && form.markerY !== "" ? { x: Number(form.markerX), y: Number(form.markerY) } : null,
+      });
       await onReload();
     } catch { onError("작전 판정을 저장하지 못했습니다. 판정 요약과 보고서 내용을 확인해 주세요."); }
+    finally { setBusy(false); }
+  };
+
+  const runCommand = async (payload: Record<string, unknown>, errorMessage: string) => {
+    setBusy(true); onError("");
+    try { await postMilitary(payload); await onReload(); }
+    catch { onError(errorMessage); }
     finally { setBusy(false); }
   };
 
@@ -176,9 +208,57 @@ export function MilitaryAdminSection({ data, onReload, onError }: { data: Milita
           <div className="directorate-military__save"><button type="button" disabled={busy} onClick={() => void save()}>{busy ? "전송 중" : "관제 데이터 저장"}</button></div>
         </div>
       </div>
+      <section className="directorate-military__command">
+        <header><span>WAR CONTROL</span><h3>전쟁·전선·점령 관제</h3></header>
+        <div className="directorate-military__metrics">
+          <strong><b>{data.actions.length}</b>처리 대기 작전</strong>
+          <strong><b>{data.conflicts.length}</b>진행 중 전쟁</strong>
+          <strong><b>{data.fronts.filter((row) => row.status === "ACTIVE").length}</b>활성 전선</strong>
+          <strong><b>{data.occupations.length}</b>점령 구역</strong>
+        </div>
+        <div className="directorate-military__command-grid">
+          <form onSubmit={(event) => { event.preventDefault(); void runCommand({ action: "CREATE_CONFLICT", ...conflictDraft, sideACountries: conflictDraft.sideACountries.split(",").map((key) => key.trim()).filter(Boolean), sideBCountries: conflictDraft.sideBCountries.split(",").map((key) => key.trim()).filter(Boolean) }, "전쟁 생성에 실패했습니다. 양측 국가 키를 확인해 주세요."); }}>
+            <h4>전쟁 생성</h4>
+            <input required placeholder="전쟁명" value={conflictDraft.displayName} onChange={(event) => setConflictDraft({ ...conflictDraft, displayName: event.target.value })} />
+            <select value={conflictDraft.conflictType} onChange={(event) => setConflictDraft({ ...conflictDraft, conflictType: event.target.value })}><option value="INTERSTATE_WAR">국가간 전쟁</option><option value="LIMITED_WAR">제한전</option><option value="BORDER_CONFLICT">국경분쟁</option><option value="CIVIL_WAR">내전</option><option value="INDEPENDENCE_WAR">독립전쟁</option><option value="ARMED_UPRISING">무장봉기</option></select>
+            <input required placeholder="A측 명칭" value={conflictDraft.sideAName} onChange={(event) => setConflictDraft({ ...conflictDraft, sideAName: event.target.value })} />
+            <input required placeholder="A측 국가 key, 쉼표 구분" value={conflictDraft.sideACountries} onChange={(event) => setConflictDraft({ ...conflictDraft, sideACountries: event.target.value })} />
+            <input required placeholder="B측 명칭" value={conflictDraft.sideBName} onChange={(event) => setConflictDraft({ ...conflictDraft, sideBName: event.target.value })} />
+            <input required placeholder="B측 국가 key, 쉼표 구분" value={conflictDraft.sideBCountries} onChange={(event) => setConflictDraft({ ...conflictDraft, sideBCountries: event.target.value })} />
+            <button disabled={busy} type="submit">선전포고 확정</button>
+          </form>
+          <form onSubmit={(event) => { event.preventDefault(); let geometry: unknown; try { geometry = JSON.parse(frontDraft.geometry); } catch { onError("전선 좌표는 [{\"x\":...,\"y\":...}] JSON 형식이어야 합니다."); return; } void runCommand({ action: "UPSERT_FRONT", ...frontDraft, geometry }, "전선 저장에 실패했습니다."); }}>
+            <h4>전선 생성·수정</h4>
+            <select required value={frontDraft.conflictId} onChange={(event) => { const conflict = data.conflicts.find((row) => row.id === event.target.value); setFrontDraft({ ...frontDraft, conflictId: event.target.value, ownerSideId: conflict?.sides[0]?.id ?? "", opponentSideId: conflict?.sides[1]?.id ?? "" }); }}><option value="">전쟁 선택</option>{data.conflicts.map((row) => <option key={row.id} value={row.id}>{row.display_name}</option>)}</select>
+            <input required placeholder="전선명" value={frontDraft.displayName} onChange={(event) => setFrontDraft({ ...frontDraft, displayName: event.target.value })} />
+            <select value={frontDraft.frontKind} onChange={(event) => setFrontDraft({ ...frontDraft, frontKind: event.target.value })}><option value="LAND_LINE">육상 전선</option><option value="NAVAL_AREA">해상 지원구역</option></select>
+            <input required placeholder='지도 좌표 JSON [{"x":1200,"y":600},...]' value={frontDraft.geometry} onChange={(event) => setFrontDraft({ ...frontDraft, geometry: event.target.value })} />
+            <button disabled={busy} type="submit">전선 저장</button>
+          </form>
+          <form onSubmit={(event) => { event.preventDefault(); void runCommand({ action: "SET_OCCUPATION", ...occupationDraft }, "점령지 반영에 실패했습니다. 지역 그룹 ID를 확인해 주세요."); }}>
+            <h4>프로빈스 점령 반영</h4>
+            <select required value={occupationDraft.conflictId} onChange={(event) => setOccupationDraft({ ...occupationDraft, conflictId: event.target.value })}><option value="">전쟁 선택</option>{data.conflicts.map((row) => <option key={row.id} value={row.id}>{row.display_name}</option>)}</select>
+            <input required placeholder="법적 소유국 key" value={occupationDraft.legalOwnerCountryKey} onChange={(event) => setOccupationDraft({ ...occupationDraft, legalOwnerCountryKey: event.target.value })} />
+            <input required placeholder="현재 점령국 key" value={occupationDraft.occupierCountryKey} onChange={(event) => setOccupationDraft({ ...occupationDraft, occupierCountryKey: event.target.value })} />
+            <input required placeholder="프로빈스 지역 그룹 ID" value={occupationDraft.regionId} onChange={(event) => setOccupationDraft({ ...occupationDraft, regionId: event.target.value })} />
+            <small>프로빈스 관리 지도에서 만든 지역 그룹을 그대로 참조합니다.</small>
+            <button disabled={busy} type="submit">점령 상태 적용</button>
+          </form>
+          <form onSubmit={(event) => { event.preventDefault(); if (!warEnd.preview) { setWarEnd({ ...warEnd, preview: true }); return; } void runCommand({ action: "END_CONFLICT", ...warEnd, confirm: true }, "전쟁 종료 처리에 실패했습니다."); }}>
+            <h4>전쟁 종료 마법사</h4>
+            <select required value={warEnd.conflictId} onChange={(event) => setWarEnd({ ...warEnd, conflictId: event.target.value, winnerSideId: "", preview: false })}><option value="">전쟁 선택</option>{data.conflicts.map((row) => <option key={row.id} value={row.id}>{row.display_name}</option>)}</select>
+            <select value={warEnd.winnerSideId} onChange={(event) => setWarEnd({ ...warEnd, winnerSideId: event.target.value, preview: false })}><option value="">승자 없음/미정</option>{data.conflicts.find((row) => row.id === warEnd.conflictId)?.sides.map((side) => <option key={side.id} value={side.id}>{side.display_name}</option>)}</select>
+            <input required placeholder="최종 보고서 제목" value={warEnd.reportTitle} onChange={(event) => setWarEnd({ ...warEnd, reportTitle: event.target.value, preview: false })} />
+            <textarea required placeholder="최종 전쟁 보고서" value={warEnd.reportBody} onChange={(event) => setWarEnd({ ...warEnd, reportBody: event.target.value, preview: false })} />
+            {warEnd.preview ? <p className="directorate-military__end-preview">확정 시 모든 전선이 종료되고 미완료 작전이 취소됩니다. 점령지는 법적 영토와 분리된 채 유지됩니다.</p> : null}
+            <button disabled={busy} type="submit">{warEnd.preview ? "최종 확정" : "종료 결과 미리보기"}</button>
+          </form>
+        </div>
+      </section>
       <section className="directorate-military__review"><header><span>OPERATIONS ROOM</span><h3>작전 판정 대기열</h3></header>{data.actions.length === 0 ? <p>판정을 기다리는 작전이 없습니다.</p> : data.actions.map((actionRow) => {
-        const form = resolution[actionRow.id] ?? { outcome: "PARTIAL", summary: "", reportTitle: "", reportBody: "" };
-        return <article key={actionRow.id}><div><small>{countryName(actionRow.country_key)} · {actionRow.submitted_world_date ?? data.worldDate}</small><h4>{actionRow.title}</h4><p>{actionRow.body}</p><span>배속 전력 {actionRow.assignments.length}개</span></div><div className="directorate-military__resolution"><select aria-label="작전 결과" value={form.outcome} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, outcome: event.target.value } })}><option value="SUCCESS">성공</option><option value="PARTIAL">부분 성공</option><option value="FAILURE">실패</option><option value="INVALID">무효</option><option value="WITHDRAWN">철회</option></select><input placeholder="전쟁 보고서 제목" value={form.reportTitle} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, reportTitle: event.target.value } })} /><textarea placeholder="판정 요약" value={form.summary} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, summary: event.target.value } })} /><textarea placeholder="공개 보고서 본문" value={form.reportBody} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, reportBody: event.target.value } })} /><button type="button" disabled={busy} onClick={() => void resolve(actionRow)}>판정 확정</button></div></article>;
+        const form = resolution[actionRow.id] ?? BLANK_RESOLUTION;
+        const opposing = data.actions.find((row) => row.id !== actionRow.id && row.conflict_id === actionRow.conflict_id && row.front_id === actionRow.front_id);
+        return <article key={actionRow.id} className="directorate-military__operation-review"><div className="directorate-military__comparison"><section><small>제출측 · {actionRow.submitted_world_date ?? data.worldDate}</small><h4>{countryName(actionRow.country_key)}</h4><b>{actionRow.title}</b><p>{actionRow.body}</p><span>투입 전력 {actionRow.assignments.length}개</span></section><section>{opposing ? <><small>상대측 제출 작전</small><h4>{countryName(opposing.country_key)}</h4><b>{opposing.title}</b><p>{opposing.body}</p><span>투입 전력 {opposing.assignments.length}개</span></> : <p>같은 전선에서 제출된 상대측 작전이 없습니다.</p>}</section></div><div className="directorate-military__resolution"><select aria-label="작전 결과" value={form.outcome} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, outcome: event.target.value } })}><option value="DECISIVE_SUCCESS">결정적 성공</option><option value="SUCCESS">성공</option><option value="PARTIAL_SUCCESS">부분 성공</option><option value="STALEMATE">교착</option><option value="PARTIAL_FAILURE">부분 실패</option><option value="FAILURE">실패</option><option value="DECISIVE_FAILURE">결정적 실패</option></select><input placeholder="전쟁 보고서 제목" value={form.reportTitle} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, reportTitle: event.target.value } })} /><textarea placeholder="관리자 판정문" value={form.summary} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, summary: event.target.value } })} /><textarea placeholder="공개 보고서 본문" value={form.reportBody} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, reportBody: event.target.value } })} /><div className="directorate-military__losses"><input placeholder="공격측 피해" value={form.attackerLosses} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, attackerLosses: event.target.value } })} /><input placeholder="방어측 피해" value={form.defenderLosses} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, defenderLosses: event.target.value } })} /></div><textarea placeholder='부대 상태 변경 JSON (선택)' value={form.stateChanges} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, stateChanges: event.target.value } })} /><input placeholder="전선·점령 변화 요약" value={form.territorySummary} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, territorySummary: event.target.value } })} /><div className="directorate-military__marker-fields"><input type="number" placeholder="결과 마커 X" value={form.markerX} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, markerX: event.target.value } })} /><input type="number" placeholder="결과 마커 Y" value={form.markerY} onChange={(event) => setResolution({ ...resolution, [actionRow.id]: { ...form, markerY: event.target.value } })} /></div><button type="button" disabled={busy} onClick={() => void resolve(actionRow)}>판정·보고서 확정</button></div></article>;
       })}</section>
     </section>
   );

@@ -3,7 +3,8 @@ import { UiIcon } from "./UiIcon";
 export type StrategyIconName =
   | "country" | "politics" | "economy" | "military" | "diplomacy"
   | "intelligence" | "layers" | "handshake" | "province" | "faction"
-  | "capital" | "fit" | "plus" | "minus";
+  | "capital" | "fit" | "plus" | "minus"
+  | "armyMap" | "navyMap" | "airMap";
 
 type StrategyIconProps = { name: StrategyIconName; className?: string };
 
@@ -22,6 +23,9 @@ const ICON_MAP: Record<StrategyIconName, string> = {
   fit: "menu/fit",
   plus: "ui/open",
   minus: "ui/collapse",
+  armyMap: "military/army-map",
+  navyMap: "military/navy-map",
+  airMap: "military/air-map",
 };
 
 export function StrategyIcon({ name, className }: StrategyIconProps) {

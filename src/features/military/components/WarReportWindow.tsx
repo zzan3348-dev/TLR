@@ -34,13 +34,14 @@ function renderRecord(record: Record<string, unknown>): Array<{ key: string; val
 
 interface WarReportWindowProps {
   onClose: () => void;
+  initialReportId?: string | null;
 }
 
-export function WarReportWindow({ onClose }: WarReportWindowProps) {
+export function WarReportWindow({ onClose, initialReportId = null }: WarReportWindowProps) {
   const [reports, setReports] = useState<WarReport[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(initialReportId);
 
   const load = useCallback(async () => {
     setLoading(true);

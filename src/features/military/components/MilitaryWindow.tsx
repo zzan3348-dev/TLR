@@ -73,6 +73,7 @@ interface MilitaryWindowProps {
 
 export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
   const [subWindow, setSubWindow] = useState<"conflicts" | "reports" | null>(null);
+  const [selectedReportId, setSelectedReportId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<MilitaryTab>("overview");
   const [overview, setOverview] = useState<MilitaryOverview | null>(null);
   const [loading, setLoading] = useState(true);
@@ -111,6 +112,16 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
     void loadOverview();
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [loadOverview]);
+
+  useEffect(() => {
+    const openReport = (event: Event) => {
+      const reportId = (event as CustomEvent<{ reportId?: string }>).detail?.reportId ?? null;
+      setSelectedReportId(reportId);
+      setSubWindow("reports");
+    };
+    window.addEventListener("tlr:open-war-report", openReport);
+    return () => window.removeEventListener("tlr:open-war-report", openReport);
+  }, []);
 
   useEffect(() => {
     if (activeTab !== "fronts" || !overview) return;
@@ -209,7 +220,7 @@ export function MilitaryWindow({ countryKey, onClose }: MilitaryWindowProps) {
   }
 
   if (subWindow === "reports") {
-    return <WarReportWindow onClose={() => setSubWindow(null)} />;
+    return <WarReportWindow initialReportId={selectedReportId} onClose={() => { setSelectedReportId(null); setSubWindow(null); }} />;
   }
 
   const actions = (

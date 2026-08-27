@@ -19,6 +19,7 @@ import { mapCountries } from "./data/mapCountries";
 import { PlayHud } from "./features/play/components/PlayHud";
 import { PlayWindowManager } from "./features/play/components/PlayWindowManager";
 import { DiplomacyNotificationQueue } from "./features/diplomacy/components/DiplomacyNotificationQueue";
+import { WarDeclarationAlert } from "./features/military/components/WarDeclarationAlert";
 import { EventTestPage } from "./features/events/components/EventTestPage";
 import { loadEconomy } from "./features/economy/economyClient";
 import type { EconomySnapshot } from "./features/economy/types";
@@ -426,6 +427,11 @@ export default function App() {
           selectedCountry={highlightedCountry}
           selectedComponent={highlightedComponent}
           onCountrySelect={selectCountry}
+          onWarReportSelect={(report) => {
+            if (!playCountry) return;
+            setActivePlayWindow("military");
+            window.setTimeout(() => window.dispatchEvent(new CustomEvent("tlr:open-war-report", { detail: { reportId: report.id } })), 0);
+          }}
         />
         {playCountry && playSimulationState ? (
           <PlayHud
@@ -439,11 +445,7 @@ export default function App() {
         <MapControls
           mapHandle={mapRef}
           mapMode={mapMode}
-          onToggleFactionMode={() =>
-            setMapMode((current) =>
-              current === "faction" ? "political" : "faction",
-            )
-          }
+          onChangeMapMode={setMapMode}
           showProvinceBorders={showProvinceBorders}
           onToggleProvinceBorders={() =>
             updateProvinceBorders(!showProvinceBorders)
@@ -481,6 +483,7 @@ export default function App() {
           />
         ) : null}
         {playCountry ? <DiplomacyNotificationQueue country={playCountry} /> : null}
+        {playCountry ? <WarDeclarationAlert /> : null}
       </section>
       <CountryPlayFlow
         country={selection?.country ?? null}

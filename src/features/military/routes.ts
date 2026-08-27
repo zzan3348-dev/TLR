@@ -6,4 +6,6 @@ export const MILITARY_ROUTES = {
   fronts: "fronts",
   actions: "actions",
   reports: "reports",
+  mapState: "map-state",
+  notifications: "notifications",
 } as const;

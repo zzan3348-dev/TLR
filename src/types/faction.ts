@@ -23,4 +23,4 @@ export type Faction = {
   mapLabelPaths?: readonly FactionMapLabelPath[];
 };
 
-export type MapMode = "political" | "faction";
+export type MapMode = "political" | "faction" | "army" | "navy" | "air";

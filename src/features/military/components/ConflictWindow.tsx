@@ -65,6 +65,8 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
   const [editingActionId, setEditingActionId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [assignmentChoice, setAssignmentChoice] = useState("");
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [frontDraft, setFrontDraft] = useState({ displayName: "", frontKind: "LAND_LINE", geometry: "" });
 
   const loadConflicts = useCallback(async () => {
     setLoading(true);
@@ -193,6 +195,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
           await militaryMutation(MILITARY_ROUTES.actions, payload, "POST");
         }
         resetDraft();
+        setPreviewOpen(false);
         await loadDetail(selectedConflict.id);
       } catch {
         setError("작전 저장에 실패했다.");
@@ -202,6 +205,31 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     },
     [selectedConflict, draft, editingActionId, countryKey, resetDraft, loadDetail, actions]
   );
+
+  const withdrawAction = useCallback(async (action: MilitaryAction) => {
+    try {
+      await militaryMutation(MILITARY_ROUTES.actions, { id: action.id, expected_version: action.version, status: "WITHDRAWN" }, "PATCH");
+      if (selectedConflict) await loadDetail(selectedConflict.id);
+    } catch {
+      setError("작전을 철회하지 못했다. 이미 판정이 시작되었는지 확인하라.");
+    }
+  }, [loadDetail, selectedConflict]);
+
+  const createFront = useCallback(async () => {
+    if (!selectedConflict || !frontDraft.displayName.trim()) return;
+    const ownSide = selectedConflict.sides?.find((side) => side.participants?.some((participant) => participant.country_key === countryKey));
+    const opponentSide = selectedConflict.sides?.find((side) => side.id !== ownSide?.id);
+    if (!opponentSide) { setError("상대측을 확인할 수 없어 전선을 만들 수 없다."); return; }
+    let geometry: unknown;
+    try { geometry = JSON.parse(frontDraft.geometry); } catch { setError("전선 좌표는 지도 좌표 JSON 배열이어야 한다."); return; }
+    setSubmitting(true);
+    try {
+      await militaryMutation(MILITARY_ROUTES.fronts, { conflict_id: selectedConflict.id, opponent_side_id: opponentSide.id, display_name: frontDraft.displayName.trim(), front_kind: frontDraft.frontKind, geometry }, "POST");
+      setFrontDraft({ displayName: "", frontKind: "LAND_LINE", geometry: "" });
+      await loadDetail(selectedConflict.id);
+    } catch { setError("전선 생성에 실패했다. 좌표와 참가 진영을 확인하라."); }
+    finally { setSubmitting(false); }
+  }, [countryKey, frontDraft, loadDetail, selectedConflict]);
 
   const actions_ = (
     <button type="button" className="strategic-window__action" onClick={onClose}>
@@ -316,6 +344,14 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                         </ul>
                       )}
 
+                      <details className="conflict-window__front-builder">
+                        <summary>새 전선 생성</summary>
+                        <label className="conflict-window__field"><span>전선명</span><input value={frontDraft.displayName} onChange={(event) => setFrontDraft((current) => ({ ...current, displayName: event.target.value }))} /></label>
+                        <label className="conflict-window__field"><span>유형</span><select value={frontDraft.frontKind} onChange={(event) => setFrontDraft((current) => ({ ...current, frontKind: event.target.value }))}><option value="LAND_LINE">육상 전선</option><option value="NAVAL_AREA">해상 지원구역</option></select></label>
+                        <label className="conflict-window__field"><span>지도 좌표</span><textarea rows={3} placeholder='[{"x": 2800, "y": 620}, {"x": 2860, "y": 650}]' value={frontDraft.geometry} onChange={(event) => setFrontDraft((current) => ({ ...current, geometry: event.target.value }))} /></label>
+                        <button type="button" disabled={submitting} onClick={() => void createFront()}>전선 생성</button>
+                      </details>
+
                       <h4 className="military-window__section-title">작전</h4>
                       {actions.length === 0 ? (
                         <p className="military-window__empty">접수된 작전이 없다.</p>
@@ -346,6 +382,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                                   <UiIcon name="lock" /> 제출 후 수정 불가
                                 </span>
                               )}
+                              {action.status === "SUBMITTED" ? <button type="button" className="military-action-item__withdraw" onClick={() => void withdrawAction(action)}>철회</button> : null}
                             </li>
                           ))}
                         </ul>
@@ -426,7 +463,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                             type="button"
                             className="conflict-window__draft-actions--submit"
                             disabled={submitting || !draft.title.trim() || !draft.body.trim()}
-                            onClick={() => void saveDraft(true)}
+                            onClick={() => setPreviewOpen(true)}
                           >
                             제출
                           </button>
@@ -437,6 +474,22 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                           )}
                         </div>
                       </div>
+                      {previewOpen ? (
+                        <div className="operation-submit-preview" role="dialog" aria-modal="true" aria-label="작전 제출 미리보기">
+                          <section>
+                            <header><span>OPERATION ORDER</span><h4>작전 제출 확인</h4></header>
+                            <dl>
+                              <div><dt>작전명</dt><dd>{draft.title}</dd></div>
+                              <div><dt>전선</dt><dd>{fronts.find((front) => front.id === draft.frontId)?.display_name ?? "미지정"}</dd></div>
+                              <div><dt>육군</dt><dd>{draft.assignments.filter((item) => item.object_kind === "LAND_UNIT").length}개 편성</dd></div>
+                              <div><dt>함대</dt><dd>{draft.assignments.filter((item) => item.object_kind === "FLEET" || item.object_kind === "VESSEL").length}개</dd></div>
+                              <div><dt>항공대</dt><dd>{draft.assignments.filter((item) => item.object_kind === "AIR_WING").length}개</dd></div>
+                            </dl>
+                            <p>제출 후에는 수정할 수 없으며 관리자 판정 전까지 철회만 가능합니다.</p>
+                            <footer><button type="button" onClick={() => setPreviewOpen(false)}>취소</button><button type="button" className="operation-submit-preview__confirm" disabled={submitting} onClick={() => void saveDraft(true)}>관리자에게 제출</button></footer>
+                          </section>
+                        </div>
+                      ) : null}
                     </>
                   )}
                 </>

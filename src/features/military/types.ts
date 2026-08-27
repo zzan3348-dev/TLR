@@ -208,7 +208,7 @@ export type MilitaryAction = {
   front_id: string | null;
   title: string;
   body: string;
-  status: "DRAFT" | "SUBMITTED" | "UNDER_REVIEW" | "RESOLVED" | "REJECTED" | "CANCELLED";
+  status: "DRAFT" | "SUBMITTED" | "UNDER_REVIEW" | "ADJUDICATED" | "WITHDRAWN" | "RESOLVED" | "REJECTED" | "CANCELLED";
   submitted_world_date: string | null;
   resolution?: MilitaryActionResolution | null;
   assignments?: Array<{ object_kind: ForceKind | "FLEET"; object_id: string }>;
@@ -218,7 +218,7 @@ export type MilitaryAction = {
 export type MilitaryActionResolution = {
   id: string;
   action_id: string;
-  outcome: "SUCCESS" | "PARTIAL" | "FAILURE" | "INVALID" | "WITHDRAWN";
+  outcome: "DECISIVE_SUCCESS" | "SUCCESS" | "PARTIAL_SUCCESS" | "STALEMATE" | "PARTIAL_FAILURE" | "FAILURE" | "DECISIVE_FAILURE" | "PARTIAL" | "INVALID" | "WITHDRAWN";
   summary: string;
   losses: Record<string, unknown>;
   state_changes: Record<string, unknown>;
@@ -232,6 +232,7 @@ export type Occupation = {
   legal_owner_country_key: string;
   occupier_country_key: string;
   geometry: NormalizedPoint[];
+  province_ids?: string[];
   status: "ACTIVE_OCCUPATION" | "RETURNED" | "ANNEXED" | "TRANSFERRED" | "REMOVED";
   started_world_date: string;
   ended_world_date: string | null;
@@ -295,4 +296,18 @@ export type MilitaryOverview = {
   airWings: AirWing[];
   queues: MilitaryCreationQueue[];
   conflicts: Conflict[];
+};
+
+export type FrontForceSummary = {
+  frontId: string;
+  landUnits: number;
+  fleets: number;
+  airWings: number;
+};
+
+export type MilitaryMapState = {
+  fronts: MilitaryFront[];
+  reports: WarReport[];
+  occupations: Array<Occupation & { province_ids?: string[] }>;
+  forceSummaries: FrontForceSummary[];
 };

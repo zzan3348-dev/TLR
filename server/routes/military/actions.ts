@@ -39,6 +39,15 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     return;
   }
   const body = (request.body ?? {}) as Body;
+  if (request.method === "PATCH" && body.status === "WITHDRAWN") {
+    const id = cleanUuid(body.id);
+    const expectedVersion = Number(body.expected_version);
+    if (!id || !Number.isInteger(expectedVersion)) { response.status(400).json({ error: "ACTION_VERSION_REQUIRED" }); return; }
+    const withdrawn = await admin.from("military_actions").update({ status: "WITHDRAWN", version: expectedVersion + 1 }).eq("id", id).eq("country_key", actor.countryKey).in("status", ["SUBMITTED", "UNDER_REVIEW"]).eq("version", expectedVersion).select("*").maybeSingle();
+    if (withdrawn.error) { response.status(503).json({ error: "ACTION_WITHDRAW_FAILED" }); return; }
+    if (!withdrawn.data) { response.status(409).json({ error: "ACTION_LOCKED" }); return; }
+    response.status(200).json(withdrawn.data); return;
+  }
   const conflictId = cleanUuid(body.conflict_id);
   const frontId = body.front_id === null || body.front_id === "" ? null : cleanUuid(body.front_id);
   const title = typeof body.title === "string" ? body.title.trim().slice(0, 120) : "";
@@ -64,6 +73,18 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         const owned = await admin.from(tableByKind[entry.object_kind]).select("id").eq("id", entry.object_id).eq("country_key", actor.countryKey).maybeSingle();
         if (owned.error) throw owned.error;
         if (!owned.data) { response.status(400).json({ error: "INVALID_FORCE_ASSIGNMENT" }); return; }
+      }
+      if (status === "SUBMITTED") {
+        const ids = selected.map((entry) => entry.object_id);
+        const existingAssignments = await admin.from("military_action_assignments").select("action_id,object_kind,object_id").in("object_id", ids);
+        if (existingAssignments.error) throw existingAssignments.error;
+        const actionIds = [...new Set((existingAssignments.data ?? []).map((row) => String(row.action_id)))];
+        if (actionIds.length) {
+          const activeActions = await admin.from("military_actions").select("id").in("id", actionIds).in("status", ["SUBMITTED", "UNDER_REVIEW"]);
+          if (activeActions.error) throw activeActions.error;
+          const currentId = cleanUuid(body.id);
+          if ((activeActions.data ?? []).some((row) => row.id !== currentId)) { response.status(409).json({ error: "FORCE_ALREADY_IN_OPERATION" }); return; }
+        }
       }
     }
     const submittedWorldDate = status === "SUBMITTED" ? await currentWorldDate(admin) : null;
