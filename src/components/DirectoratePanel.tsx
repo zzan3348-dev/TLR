@@ -4,6 +4,8 @@ import { PROPOSAL_LABELS, type DiplomaticProposal } from "../features/diplomacy/
 import type { TradeAgreement, TradeProposal } from "../features/economy/types";
 import { MilitaryAdminSection, type MilitaryAdminData } from "../features/military/components/MilitaryAdminSection";
 import { ResearchAdminSection, type ResearchAdminData } from "../features/research/components/ResearchAdminSection";
+import { IntelligenceAdminSection } from "../features/intelligence/components/IntelligenceAdminSection";
+import type { IntelligenceAdminData } from "../features/intelligence/types";
 import { MapCapitalAdminSection } from "./MapCapitalAdminSection";
 import { ProvinceRegionAdminSection } from "./ProvinceRegionAdminSection";
 
@@ -30,27 +32,31 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [worldDate, setWorldDate] = useState("");
   const [militaryData, setMilitaryData] = useState<MilitaryAdminData | null>(null);
   const [researchData, setResearchData] = useState<ResearchAdminData | null>(null);
+  const [intelligenceData, setIntelligenceData] = useState<IntelligenceAdminData | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const loadQueue = useCallback(async () => {
-    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse] = await Promise.all([
+    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse, intelligenceResponse] = await Promise.all([
       fetch("/api/admin/diplomacy", { credentials: "include" }),
       fetch("/api/admin/economy", { credentials: "include" }),
       fetch("/api/admin/military", { credentials: "include" }),
       fetch("/api/admin/research", { credentials: "include" }),
+      fetch("/api/admin/intelligence", { credentials: "include" }),
     ]);
     if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok || !researchResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
     const diplomacyPayload = await diplomacyResponse.json() as { worldDate: string; queue: DiplomaticProposal[] };
     const economyPayload = await economyResponse.json() as { worldDate: string; queue: TradeProposal[]; agreements: TradeAgreement[]; economies: Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }> };
     const militaryPayload = await militaryResponse.json() as MilitaryAdminData;
     const researchPayload = await researchResponse.json() as ResearchAdminData;
+    const intelligencePayload = intelligenceResponse.ok ? await intelligenceResponse.json() as IntelligenceAdminData : null;
     setQueue(diplomacyPayload.queue);
     setTradeQueue(economyPayload.queue);
     setTradeAgreements(economyPayload.agreements);
     setEconomies(economyPayload.economies);
     setMilitaryData(militaryPayload);
     setResearchData(researchPayload);
+    setIntelligenceData(intelligencePayload);
     setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate || militaryPayload.worldDate);
   }, []);
 
@@ -149,6 +155,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <MapCapitalAdminSection />
       <ProvinceRegionAdminSection />
       {researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
+      {intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : null}
       {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">
         <header>

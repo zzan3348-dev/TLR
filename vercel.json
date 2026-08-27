@@ -19,6 +19,10 @@
       "destination": "/api/military-dispatch?route=:route"
     },
     {
+      "source": "/api/intelligence/:route",
+      "destination": "/api/intelligence-dispatch?route=:route"
+    },
+    {
       "source": "/api/research/:route",
       "destination": "/api/economy-dispatch?domain=research&route=:route"
     },
@@ -45,6 +49,10 @@
     {
       "source": "/api/admin/province-regions",
       "destination": "/api/admin/actions?domain=province-regions"
+    },
+    {
+      "source": "/api/admin/intelligence",
+      "destination": "/api/admin/actions?domain=intelligence"
     },
     {
       "source": "/api/navi/:route",

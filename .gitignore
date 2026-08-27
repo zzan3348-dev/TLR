@@ -25,3 +25,8 @@ public/maps/generated/generated/
 .vercel
 .env*
 supabase/.temp/
+
+# 로컬 브라우저 검증 중간 캡처 (최종 검증 캡처만 버전 관리)
+outputs/country-selected.png
+outputs/intelligence-after-click.png
+outputs/intelligence-map.png

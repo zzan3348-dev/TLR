@@ -103,7 +103,10 @@ export async function currentWorldDate(admin: AdminClient): Promise<string> {
     .eq("singleton", true)
     .single<{ current_world_date: string }>();
   if (error || !data) throw new Error("WORLD_STATE_UNAVAILABLE");
-  await admin.rpc("tlr_expire_diplomacy", { p_world_date: data.current_world_date });
+  await Promise.all([
+    admin.rpc("tlr_expire_diplomacy", { p_world_date: data.current_world_date }),
+    admin.rpc("tlr_advance_intelligence", { p_world_date: data.current_world_date }),
+  ]);
   return data.current_world_date;
 }
 
