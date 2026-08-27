@@ -20,7 +20,7 @@
     },
     {
       "source": "/api/intelligence/:route",
-      "destination": "/api/intelligence-dispatch?route=:route"
+      "destination": "/api/economy-dispatch?domain=intelligence&route=:route"
     },
     {
       "source": "/api/research/:route",

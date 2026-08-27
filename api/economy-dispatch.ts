@@ -15,6 +15,8 @@ import mapCapitals from "../server/routes/mapCapitals.js";
 import decisionCurrent from "../server/routes/decisions/current.js";
 import decisionExecute from "../server/routes/decisions/execute.js";
 import eventChoices from "../server/routes/events/choices.js";
+import intelligenceActions from "../server/routes/intelligence/actions.js";
+import intelligenceOverview from "../server/routes/intelligence/overview.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   budget,
@@ -46,6 +48,11 @@ const eventHandlers: Record<string, (request: ApiRequest, response: ApiResponse)
   choices: eventChoices,
 };
 
+const intelligenceHandlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
+  actions: intelligenceActions,
+  overview: intelligenceOverview,
+};
+
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const rawRoute = request.query?.route;
   const route = Array.isArray(rawRoute) ? rawRoute[0] : rawRoute;
@@ -64,6 +71,8 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         ? eventHandlers[route]
       : domain === "research"
         ? researchHandlers[route]
+      : domain === "intelligence"
+        ? intelligenceHandlers[route]
         : handlers[route]
     : undefined;
   if (!routeHandler) {
