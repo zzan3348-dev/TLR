@@ -41,8 +41,8 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         return { ...report, marker_tone: markerTone };
       }), occupations: (occupations.data ?? []).map((occupation) => {
         const geometry = occupation.geometry && typeof occupation.geometry === "object" && !Array.isArray(occupation.geometry) ? occupation.geometry as { provinceIds?: unknown } : null;
-        const provinceIds = Array.isArray(occupation.province_ids) ? occupation.province_ids : Array.isArray(geometry?.provinceIds) ? geometry.provinceIds : [];
-        return { ...occupation, province_ids: provinceIds.filter((id): id is string => typeof id === "string") };
+        const provinceIds: unknown[] = Array.isArray(occupation.province_ids) ? occupation.province_ids : Array.isArray(geometry?.provinceIds) ? geometry.provinceIds : [];
+        return { ...occupation, province_ids: provinceIds.filter((id: unknown): id is string => typeof id === "string") };
       }),
       forceSummaries: frontRows.map((front) => ({
         frontId: front.id,
