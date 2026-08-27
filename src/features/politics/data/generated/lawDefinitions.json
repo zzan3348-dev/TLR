@@ -9,7 +9,7 @@
       {
         "id": "party-system:single-party",
         "name": "일당제",
-        "description": "국가의 정당 경쟁 구조 자체를 폐쇄하는 체제급 변경이다. 행정 발전도는 요구하지 않는다.",
+        "description": "하나의 정당만 합법적으로 활동합니다.",
         "order": 1,
         "icon": "party-system/1",
         "modifiers": [
@@ -65,7 +65,7 @@
       {
         "id": "party-system:dominant-party",
         "name": "우세정당제",
-        "description": "정당 제도의 우세정당제 단계입니다.",
+        "description": "복수 정당이 존재하지만 한 정당이 제도를 주도합니다.",
         "order": 2,
         "icon": "party-system/2",
         "modifiers": [
@@ -121,7 +121,7 @@
       {
         "id": "party-system:multiparty",
         "name": "다당제",
-        "description": "정당 제도의 다당제 단계입니다.",
+        "description": "복수 정당의 경쟁과 의회 진출을 허용합니다.",
         "order": 3,
         "icon": "party-system/3",
         "modifiers": [
@@ -181,7 +181,7 @@
       {
         "id": "party-system:nonpartisan",
         "name": "비당파 체제",
-        "description": "정당 제도의 비당파 체제 단계입니다.",
+        "description": "비당파 체제 방식으로 정당의 설립과 정치 참여를 구성합니다.",
         "order": 4,
         "icon": "party-system/4",
         "modifiers": [
@@ -233,7 +233,7 @@
       {
         "id": "party-system:military",
         "name": "군정·임시행정",
-        "description": "정당 제도의 군정·임시행정 단계입니다.",
+        "description": "군정·임시행정 방식으로 정당의 설립과 정치 참여를 구성합니다.",
         "order": 5,
         "icon": "party-system/5",
         "modifiers": [
@@ -319,7 +319,7 @@
       {
         "id": "religion-policy:state-faith",
         "name": "국교 우선",
-        "description": "종교 정책의 국교 우선 단계입니다.",
+        "description": "국가가 공인 종교에 제도적 우위를 부여합니다.",
         "order": 1,
         "icon": "religion-policy/1",
         "modifiers": [
@@ -375,7 +375,7 @@
       {
         "id": "religion-policy:pluralism",
         "name": "종교 다원주의",
-        "description": "종교 정책의 종교 다원주의 단계입니다.",
+        "description": "여러 종교의 공적 활동을 허용합니다.",
         "order": 2,
         "icon": "religion-policy/2",
         "modifiers": [
@@ -426,7 +426,7 @@
       {
         "id": "religion-policy:secularism",
         "name": "세속주의",
-        "description": "종교 정책의 세속주의 단계입니다.",
+        "description": "국가 제도와 종교 권위를 분리합니다.",
         "order": 3,
         "icon": "religion-policy/3",
         "modifiers": [
@@ -471,7 +471,7 @@
       {
         "id": "religion-policy:favored",
         "name": "우대 종교",
-        "description": "종교 정책의 우대 종교 단계입니다.",
+        "description": "우대 종교 원칙에 따라 국가와 종교기관의 관계를 정합니다.",
         "order": 4,
         "icon": "religion-policy/4",
         "modifiers": [
@@ -523,7 +523,7 @@
       {
         "id": "religion-policy:atheism",
         "name": "국가 무신론",
-        "description": "종교 정책의 국가 무신론 단계입니다.",
+        "description": "국가 무신론 원칙에 따라 국가와 종교기관의 관계를 정합니다.",
         "order": 5,
         "icon": "religion-policy/5",
         "modifiers": [
@@ -609,7 +609,7 @@
       {
         "id": "trade-unions:banned",
         "name": "금지",
-        "description": "노동조합의 금지 단계입니다.",
+        "description": "독립적인 노동조합 활동을 허용하지 않습니다.",
         "order": 1,
         "icon": "trade-unions/1",
         "modifiers": [
@@ -668,7 +668,7 @@
       {
         "id": "trade-unions:controlled",
         "name": "허가제",
-        "description": "노동조합의 허가제 단계입니다.",
+        "description": "국가가 승인한 노동조합만 활동합니다.",
         "order": 2,
         "icon": "trade-unions/2",
         "modifiers": [
@@ -720,7 +720,7 @@
       {
         "id": "trade-unions:allowed",
         "name": "모두 허용",
-        "description": "노동조합의 모두 허용 단계입니다.",
+        "description": "노동자의 자율적인 조직과 교섭을 허용합니다.",
         "order": 3,
         "icon": "trade-unions/3",
         "modifiers": [
@@ -779,7 +779,7 @@
       {
         "id": "trade-unions:sectoral",
         "name": "산별 교섭",
-        "description": "노동조합의 산별 교섭 단계입니다.",
+        "description": "산별 교섭 체계로 노동조합의 조직과 교섭 권한을 다룹니다.",
         "order": 4,
         "icon": "trade-unions/4",
         "modifiers": [
@@ -841,7 +841,7 @@
       {
         "id": "trade-unions:state-union",
         "name": "국가 노동조합",
-        "description": "노동조합의 국가 노동조합 단계입니다.",
+        "description": "국가 노동조합 체계로 노동조합의 조직과 교섭 권한을 다룹니다.",
         "order": 5,
         "icon": "trade-unions/5",
         "modifiers": [
@@ -927,7 +927,7 @@
       {
         "id": "immigration:closed",
         "name": "국경 폐쇄",
-        "description": "이민 정책의 국경 폐쇄 단계입니다.",
+        "description": "특별한 사유가 없는 이민을 제한합니다.",
         "order": 1,
         "icon": "immigration/1",
         "modifiers": [
@@ -978,7 +978,7 @@
       {
         "id": "immigration:selective",
         "name": "선별 이민",
-        "description": "이민 정책의 선별 이민 단계입니다.",
+        "description": "필요 인력과 지정 집단의 이민을 허용합니다.",
         "order": 2,
         "icon": "immigration/2",
         "modifiers": [
@@ -1036,7 +1036,7 @@
       {
         "id": "immigration:open",
         "name": "개방 이민",
-        "description": "이민 정책의 개방 이민 단계입니다.",
+        "description": "폭넓은 이민과 정착을 허용합니다.",
         "order": 3,
         "icon": "immigration/3",
         "modifiers": [
@@ -1088,7 +1088,7 @@
       {
         "id": "immigration:quota",
         "name": "할당 이민",
-        "description": "이민 정책의 할당 이민 단계입니다.",
+        "description": "할당 이민 기준에 따라 외국인의 입국과 정착을 관리합니다.",
         "order": 4,
         "icon": "immigration/4",
         "modifiers": [
@@ -1136,7 +1136,7 @@
       {
         "id": "immigration:settlement",
         "name": "정착 장려",
-        "description": "이민 정책의 정착 장려 단계입니다.",
+        "description": "정착 장려 기준에 따라 외국인의 입국과 정착을 관리합니다.",
         "order": 5,
         "icon": "immigration/5",
         "modifiers": [
@@ -1228,7 +1228,7 @@
       {
         "id": "forced-labor:extensive",
         "name": "광범위 동원",
-        "description": "강제노동의 광범위 동원 단계입니다.",
+        "description": "국가 사업에 강제노동을 폭넓게 동원합니다.",
         "order": 1,
         "icon": "forced-labor/1",
         "modifiers": [
@@ -1308,7 +1308,7 @@
       {
         "id": "forced-labor:penal-only",
         "name": "형벌 노동",
-        "description": "강제노동의 형벌 노동 단계입니다.",
+        "description": "형벌 체계 안에서만 노동을 부과합니다.",
         "order": 2,
         "icon": "forced-labor/2",
         "modifiers": [
@@ -1360,7 +1360,7 @@
       {
         "id": "forced-labor:prohibited",
         "name": "금지",
-        "description": "강제노동의 금지 단계입니다.",
+        "description": "비자발적 노동을 법률로 금지합니다.",
         "order": 3,
         "icon": "forced-labor/3",
         "modifiers": [
@@ -1418,7 +1418,7 @@
       {
         "id": "forced-labor:emergency",
         "name": "비상 노동",
-        "description": "별도 국가 비상상태 시스템이 구현되면 '전쟁 중 OR 국가 비상상태'로 확장 가능.",
+        "description": "비상 노동 제도에 따라 비자발적 노동의 허용 범위를 정합니다.",
         "order": 4,
         "icon": "forced-labor/4",
         "modifiers": [
@@ -1480,7 +1480,7 @@
       {
         "id": "forced-labor:contract",
         "name": "계약 노동",
-        "description": "강제노동의 계약 노동 단계입니다.",
+        "description": "계약 노동 제도에 따라 비자발적 노동의 허용 범위를 정합니다.",
         "order": 5,
         "icon": "forced-labor/5",
         "modifiers": [
@@ -1547,7 +1547,7 @@
       {
         "id": "assembly:restricted",
         "name": "엄격 제한",
-        "description": "집회·결사의 자유의 엄격 제한 단계입니다.",
+        "description": "허가받지 않은 집회와 단체를 제한합니다.",
         "order": 1,
         "icon": "assembly/1",
         "modifiers": [
@@ -1592,7 +1592,7 @@
       {
         "id": "assembly:licensed",
         "name": "허가제",
-        "description": "집회·결사의 자유의 허가제 단계입니다.",
+        "description": "행정 허가 아래 집회와 결사를 인정합니다.",
         "order": 2,
         "icon": "assembly/2",
         "modifiers": [
@@ -1644,7 +1644,7 @@
       {
         "id": "assembly:protected",
         "name": "법적 보장",
-        "description": "집회·결사의 자유의 법적 보장 단계입니다.",
+        "description": "평화적 집회와 결사의 자유를 보장합니다.",
         "order": 3,
         "icon": "assembly/3",
         "modifiers": [
@@ -1696,7 +1696,7 @@
       {
         "id": "assembly:registered",
         "name": "등록제",
-        "description": "집회·결사의 자유의 등록제 단계입니다.",
+        "description": "등록제 기준으로 집회와 사회단체 결성의 자유를 보장하거나 제한합니다.",
         "order": 4,
         "icon": "assembly/4",
         "modifiers": [
@@ -1747,7 +1747,7 @@
       {
         "id": "assembly:free",
         "name": "전면 보장",
-        "description": "집회·결사의 자유의 전면 보장 단계입니다.",
+        "description": "전면 보장 기준으로 집회와 사회단체 결성의 자유를 보장하거나 제한합니다.",
         "order": 5,
         "icon": "assembly/5",
         "modifiers": [
@@ -1819,7 +1819,7 @@
       {
         "id": "press:state-media",
         "name": "국영 언론",
-        "description": "언론의 자유의 국영 언론 단계입니다.",
+        "description": "국가가 주요 언론의 편집권을 통제합니다.",
         "order": 1,
         "icon": "press/1",
         "modifiers": [
@@ -1878,7 +1878,7 @@
       {
         "id": "press:censored",
         "name": "검열 언론",
-        "description": "언론의 자유의 검열 언론 단계입니다.",
+        "description": "민간 언론을 허용하되 사전·사후 검열을 적용합니다.",
         "order": 2,
         "icon": "press/2",
         "modifiers": [
@@ -1937,7 +1937,7 @@
       {
         "id": "press:free-press",
         "name": "언론의 자유",
-        "description": "언론의 자유의 언론의 자유 단계입니다.",
+        "description": "독립 언론과 비판적 보도를 보장합니다.",
         "order": 3,
         "icon": "press/3",
         "modifiers": [
@@ -1989,7 +1989,7 @@
       {
         "id": "press:licensed",
         "name": "허가 언론",
-        "description": "언론의 자유의 허가 언론 단계입니다.",
+        "description": "허가 언론 체계 아래 언론기관의 설립과 보도 활동이 이루어집니다.",
         "order": 4,
         "icon": "press/4",
         "modifiers": [
@@ -2041,7 +2041,7 @@
       {
         "id": "press:plural",
         "name": "다원 언론",
-        "description": "언론의 자유의 다원 언론 단계입니다.",
+        "description": "다원 언론 체계 아래 언론기관의 설립과 보도 활동이 이루어집니다.",
         "order": 5,
         "icon": "press/5",
         "modifiers": [
@@ -2116,7 +2116,7 @@
       {
         "id": "franchise:none",
         "name": "선거 없음",
-        "description": "선거권의 선거 없음 단계입니다.",
+        "description": "국가 지도부를 선거로 구성하지 않습니다.",
         "order": 1,
         "icon": "franchise/1",
         "modifiers": [
@@ -2168,7 +2168,7 @@
       {
         "id": "franchise:restricted",
         "name": "제한 선거",
-        "description": "선거권의 제한 선거 단계입니다.",
+        "description": "재산·신분·성별 등의 조건을 적용합니다.",
         "order": 2,
         "icon": "franchise/2",
         "modifiers": [
@@ -2220,7 +2220,7 @@
       {
         "id": "franchise:universal",
         "name": "보통 선거",
-        "description": "선거권의 보통 선거 단계입니다.",
+        "description": "성인 시민의 평등한 투표권을 인정합니다.",
         "order": 3,
         "icon": "franchise/3",
         "modifiers": [
@@ -2273,7 +2273,7 @@
       {
         "id": "franchise:class",
         "name": "재산·계층 선거",
-        "description": "선거권의 재산·계층 선거 단계입니다.",
+        "description": "재산·계층 선거 기준으로 대표자를 선출할 수 있는 시민의 범위를 정합니다.",
         "order": 4,
         "icon": "franchise/4",
         "modifiers": [
@@ -2329,7 +2329,7 @@
       {
         "id": "franchise:equal",
         "name": "불평등 보통선거",
-        "description": "선거권의 불평등 보통선거 단계입니다.",
+        "description": "불평등 보통선거 기준으로 대표자를 선출할 수 있는 시민의 범위를 정합니다.",
         "order": 5,
         "icon": "franchise/5",
         "modifiers": [
@@ -2433,7 +2433,7 @@
       {
         "id": "service:volunteer",
         "name": "지원병제",
-        "description": "군 복무 제도의 지원병제 단계입니다.",
+        "description": "자원입대한 인력으로 군을 구성합니다.",
         "order": 1,
         "icon": "service/1",
         "modifiers": [
@@ -2484,7 +2484,7 @@
       {
         "id": "service:limited",
         "name": "제한 징병",
-        "description": "군 복무 제도의 제한 징병 단계입니다.",
+        "description": "필요한 범위에서 징집을 시행합니다.",
         "order": 2,
         "icon": "service/2",
         "modifiers": [
@@ -2548,7 +2548,7 @@
       {
         "id": "service:standard",
         "name": "표준 징병",
-        "description": "군 복무 제도의 표준 징병 단계입니다.",
+        "description": "표준 징병 방식으로 군 복무 인력을 모집하고 동원합니다.",
         "order": 3,
         "icon": "service/3",
         "modifiers": [
@@ -2620,7 +2620,7 @@
       {
         "id": "service:mass",
         "name": "전면 징병",
-        "description": "군 복무 제도의 전면 징병 단계입니다.",
+        "description": "광범위한 국민에게 군 복무를 부과합니다.",
         "order": 4,
         "icon": "service/4",
         "modifiers": [
@@ -2710,7 +2710,7 @@
       {
         "id": "service:total",
         "name": "총동원",
-        "description": "- 행정 효율이나 군 전문성 조건은 요구하지 않는다.",
+        "description": "총동원 방식으로 군 복무 인력을 모집하고 동원합니다.",
         "order": 5,
         "icon": "service/5",
         "modifiers": [
@@ -2814,7 +2814,7 @@
       {
         "id": "training:basic",
         "name": "기초 훈련",
-        "description": "군사 훈련의 기초 훈련 단계입니다.",
+        "description": "짧은 기초교육을 중심으로 병력을 양성합니다.",
         "order": 1,
         "icon": "training/1",
         "modifiers": [
@@ -2871,7 +2871,7 @@
       {
         "id": "training:combat",
         "name": "전투 교육",
-        "description": "군사 훈련의 전투 교육 단계입니다.",
+        "description": "실전 중심의 표준 군사교육을 시행합니다.",
         "order": 2,
         "icon": "training/2",
         "modifiers": [
@@ -2914,7 +2914,7 @@
       {
         "id": "training:professional",
         "name": "전문 교육",
-        "description": "군사 훈련의 전문 교육 단계입니다.",
+        "description": "장기간의 전문화된 교육과정을 운영합니다.",
         "order": 3,
         "icon": "training/3",
         "modifiers": [
@@ -2975,7 +2975,7 @@
       {
         "id": "training:reserve",
         "name": "예비군 훈련",
-        "description": "군사 훈련의 예비군 훈련 단계입니다.",
+        "description": "예비군 훈련 체계에 맞춰 병력의 교육 기간과 전문화 수준을 정합니다.",
         "order": 4,
         "icon": "training/4",
         "modifiers": [
@@ -3043,7 +3043,7 @@
       {
         "id": "training:doctrine",
         "name": "교리 훈련",
-        "description": "군사 훈련의 교리 훈련 단계입니다.",
+        "description": "교리 훈련 체계에 맞춰 병력의 교육 기간과 전문화 수준을 정합니다.",
         "order": 5,
         "icon": "training/5",
         "modifiers": [
@@ -3127,7 +3127,7 @@
       {
         "id": "officers:appointed",
         "name": "신분 임명",
-        "description": "장교 제도의 신분 임명 단계입니다.",
+        "description": "전통적 신분과 인맥을 장교 선발에 반영합니다.",
         "order": 1,
         "icon": "officers/1",
         "modifiers": [
@@ -3186,7 +3186,7 @@
       {
         "id": "officers:academy",
         "name": "사관학교제",
-        "description": "장교 제도의 사관학교제 단계입니다.",
+        "description": "정규 군사교육기관을 통해 장교를 선발합니다.",
         "order": 2,
         "icon": "officers/2",
         "modifiers": [
@@ -3236,7 +3236,7 @@
       {
         "id": "officers:merit",
         "name": "능력 중심",
-        "description": "장교 제도의 능력 중심 단계입니다.",
+        "description": "시험과 복무 성과를 중심으로 진급합니다.",
         "order": 3,
         "icon": "officers/3",
         "modifiers": [
@@ -3291,7 +3291,7 @@
       {
         "id": "officers:political",
         "name": "정치 장교단",
-        "description": "장교 제도의 정치 장교단 단계입니다.",
+        "description": "정치 장교단 원칙에 따라 장교를 선발하고 진급시킵니다.",
         "order": 4,
         "icon": "officers/4",
         "modifiers": [
@@ -3350,7 +3350,7 @@
       {
         "id": "officers:professional",
         "name": "전문 직업군",
-        "description": "장교 제도의 전문 직업군 단계입니다.",
+        "description": "전문 직업군 원칙에 따라 장교를 선발하고 진급시킵니다.",
         "order": 5,
         "icon": "officers/5",
         "modifiers": [
@@ -3435,7 +3435,7 @@
       {
         "id": "exemptions:broad",
         "name": "광범위 면제",
-        "description": "병역 면제의 광범위 면제 단계입니다.",
+        "description": "다양한 사회·경제적 사유를 인정합니다.",
         "order": 1,
         "icon": "exemptions/1",
         "modifiers": [
@@ -3493,7 +3493,7 @@
       {
         "id": "exemptions:regulated",
         "name": "엄격 심사",
-        "description": "병역 면제의 엄격 심사 단계입니다.",
+        "description": "법률로 정한 사유만 제한적으로 인정합니다.",
         "order": 2,
         "icon": "exemptions/2",
         "modifiers": [
@@ -3547,7 +3547,7 @@
       {
         "id": "exemptions:minimal",
         "name": "최소 면제",
-        "description": "병역 면제의 최소 면제 단계입니다.",
+        "description": "건강상 사유 외의 면제를 거의 인정하지 않습니다.",
         "order": 3,
         "icon": "exemptions/3",
         "modifiers": [
@@ -3598,7 +3598,7 @@
       {
         "id": "exemptions:social",
         "name": "사회적 면제",
-        "description": "병역 면제의 사회적 면제 단계입니다.",
+        "description": "사회적 면제 기준으로 병역 의무의 면제 범위를 정합니다.",
         "order": 4,
         "icon": "exemptions/4",
         "modifiers": [
@@ -3653,7 +3653,7 @@
       {
         "id": "exemptions:none",
         "name": "면제 없음",
-        "description": "병역 면제의 면제 없음 단계입니다.",
+        "description": "면제 없음 기준으로 병역 의무의 면제 범위를 정합니다.",
         "order": 5,
         "icon": "exemptions/5",
         "modifiers": [
@@ -3768,7 +3768,7 @@
       {
         "id": "trade:autarky",
         "name": "자급 우선",
-        "description": "무역법의 자급 우선 단계입니다.",
+        "description": "국내 생산과 전략적 자립을 우선합니다.",
         "order": 1,
         "icon": "trade/1",
         "modifiers": [
@@ -3834,7 +3834,7 @@
       {
         "id": "trade:tariffs",
         "name": "전략적 관세",
-        "description": "무역법의 전략적 관세 단계입니다.",
+        "description": "핵심 산업을 관세로 보호하며 교역합니다.",
         "order": 2,
         "icon": "trade/2",
         "modifiers": [
@@ -3892,7 +3892,7 @@
       {
         "id": "trade:open-trade",
         "name": "개방 무역",
-        "description": "무역법의 개방 무역 단계입니다.",
+        "description": "낮은 장벽으로 국제 교역을 확대합니다.",
         "order": 3,
         "icon": "trade/3",
         "modifiers": [
@@ -3950,7 +3950,7 @@
       {
         "id": "trade:limited",
         "name": "제한적 자유무역",
-        "description": "무역법의 제한적 자유무역 단계입니다.",
+        "description": "제한적 자유무역 원칙에 따라 관세와 대외 교역의 개방 범위를 조정합니다.",
         "order": 4,
         "icon": "trade/4",
         "modifiers": [
@@ -4015,7 +4015,7 @@
       {
         "id": "trade:free",
         "name": "자유무역",
-        "description": "무역법의 자유무역 단계입니다.",
+        "description": "자유무역 원칙에 따라 관세와 대외 교역의 개방 범위를 조정합니다.",
         "order": 5,
         "icon": "trade/5",
         "modifiers": [
@@ -4104,7 +4104,7 @@
       {
         "id": "income-tax:low",
         "name": "낮은 소득세",
-        "description": "소득세법의 낮은 소득세 단계입니다.",
+        "description": "낮은 세율로 민간 소득을 보전합니다.",
         "order": 1,
         "icon": "income-tax/1",
         "modifiers": [
@@ -4169,7 +4169,7 @@
       {
         "id": "income-tax:balanced",
         "name": "균형 과세",
-        "description": "소득세법의 균형 과세 단계입니다.",
+        "description": "재정과 가계 부담 사이의 균형을 추구합니다.",
         "order": 2,
         "icon": "income-tax/2",
         "modifiers": [
@@ -4212,7 +4212,7 @@
       {
         "id": "income-tax:progressive",
         "name": "고소득층 중심",
-        "description": "소득세법의 고소득층 중심 단계입니다.",
+        "description": "고소득 구간에 더 높은 세율을 적용합니다.",
         "order": 3,
         "icon": "income-tax/3",
         "modifiers": [
@@ -4282,7 +4282,7 @@
       {
         "id": "income-tax:flat",
         "name": "단일세율",
-        "description": "소득세법의 단일세율 단계입니다.",
+        "description": "단일세율 체계로 소득에 대한 조세 부담을 배분합니다.",
         "order": 4,
         "icon": "income-tax/4",
         "modifiers": [
@@ -4341,7 +4341,7 @@
       {
         "id": "income-tax:high",
         "name": "고율 누진세",
-        "description": "소득세법의 고율 누진세 단계입니다.",
+        "description": "고율 누진세 체계로 소득에 대한 조세 부담을 배분합니다.",
         "order": 5,
         "icon": "income-tax/5",
         "modifiers": [
@@ -4441,7 +4441,7 @@
       {
         "id": "minimum-wage:none",
         "name": "미설정",
-        "description": "최저임금법의 미설정 단계입니다.",
+        "description": "국가 단위 최저임금 기준이 없습니다.",
         "order": 1,
         "icon": "minimum-wage/1",
         "modifiers": [
@@ -4499,7 +4499,7 @@
       {
         "id": "minimum-wage:regional",
         "name": "지역 기준",
-        "description": "최저임금법의 지역 기준 단계입니다.",
+        "description": "지역별 경제 여건에 맞춰 기준을 둡니다.",
         "order": 2,
         "icon": "minimum-wage/2",
         "modifiers": [
@@ -4550,7 +4550,7 @@
       {
         "id": "minimum-wage:national",
         "name": "전국 기준",
-        "description": "최저임금법의 전국 기준 단계입니다.",
+        "description": "전국적으로 통일된 최저임금을 보장합니다.",
         "order": 3,
         "icon": "minimum-wage/3",
         "modifiers": [
@@ -4601,7 +4601,7 @@
       {
         "id": "minimum-wage:sectoral",
         "name": "산업별 기준",
-        "description": "최저임금법의 산업별 기준 단계입니다.",
+        "description": "산업별 기준 기준에 따라 노동자가 보장받는 최저 보수를 정합니다.",
         "order": 4,
         "icon": "minimum-wage/4",
         "modifiers": [
@@ -4663,7 +4663,7 @@
       {
         "id": "minimum-wage:living",
         "name": "생활임금",
-        "description": "최저임금법의 생활임금 단계입니다.",
+        "description": "생활임금 기준에 따라 노동자가 보장받는 최저 보수를 정합니다.",
         "order": 5,
         "icon": "minimum-wage/5",
         "modifiers": [
@@ -4756,7 +4756,7 @@
       {
         "id": "working-hours:long",
         "name": "장시간 노동",
-        "description": "법정 노동시간의 장시간 노동 단계입니다.",
+        "description": "장시간의 법정 노동을 허용합니다.",
         "order": 1,
         "icon": "working-hours/1",
         "modifiers": [
@@ -4815,7 +4815,7 @@
       {
         "id": "working-hours:standard",
         "name": "표준 노동시간",
-        "description": "법정 노동시간의 표준 노동시간 단계입니다.",
+        "description": "표준 근무시간과 휴식을 규정합니다.",
         "order": 2,
         "icon": "working-hours/2",
         "modifiers": [
@@ -4858,7 +4858,7 @@
       {
         "id": "working-hours:short",
         "name": "단축 노동시간",
-        "description": "법정 노동시간의 단축 노동시간 단계입니다.",
+        "description": "근로시간을 줄이고 여가를 확대합니다.",
         "order": 3,
         "icon": "working-hours/3",
         "modifiers": [
@@ -4917,7 +4917,7 @@
       {
         "id": "working-hours:flexible",
         "name": "탄력 노동시간",
-        "description": "법정 노동시간의 탄력 노동시간 단계입니다.",
+        "description": "탄력 노동시간 기준으로 법이 허용하는 노동시간의 범위를 정합니다.",
         "order": 4,
         "icon": "working-hours/4",
         "modifiers": [
@@ -4973,7 +4973,7 @@
       {
         "id": "working-hours:six-hour",
         "name": "6시간 노동",
-        "description": "- 생산성이 낮은 국가도 정치적으로 6시간 노동을 선언할 수 있다.",
+        "description": "6시간 노동 기준으로 법이 허용하는 노동시간의 범위를 정합니다.",
         "order": 5,
         "icon": "working-hours/5",
         "modifiers": [
@@ -5048,7 +5048,7 @@
       {
         "id": "unemployment:none",
         "name": "지원 없음",
-        "description": "실업급여의 지원 없음 단계입니다.",
+        "description": "국가 차원의 실업 소득보장이 없습니다.",
         "order": 1,
         "icon": "unemployment/1",
         "modifiers": [
@@ -5100,7 +5100,7 @@
       {
         "id": "unemployment:limited",
         "name": "제한 지원",
-        "description": "실업급여의 제한 지원 단계입니다.",
+        "description": "기간과 대상이 제한된 지원을 제공합니다.",
         "order": 2,
         "icon": "unemployment/2",
         "modifiers": [
@@ -5151,7 +5151,7 @@
       {
         "id": "unemployment:comprehensive",
         "name": "보편 지원",
-        "description": "실업급여의 보편 지원 단계입니다.",
+        "description": "폭넓은 실업 소득보장을 제공합니다.",
         "order": 3,
         "icon": "unemployment/3",
         "modifiers": [
@@ -5214,7 +5214,7 @@
       {
         "id": "unemployment:insurance",
         "name": "고용보험",
-        "description": "실업급여의 고용보험 단계입니다.",
+        "description": "고용보험 방식으로 실직자의 생계와 재취업을 지원합니다.",
         "order": 4,
         "icon": "unemployment/4",
         "modifiers": [
@@ -5276,7 +5276,7 @@
       {
         "id": "unemployment:guaranteed",
         "name": "국가 고용보장",
-        "description": "- 재정 여건 자체를 선택조건으로 막지는 않는다.",
+        "description": "국가 고용보장 방식으로 실직자의 생계와 재취업을 지원합니다.",
         "order": 5,
         "icon": "unemployment/5",
         "modifiers": [
@@ -5355,7 +5355,7 @@
       {
         "id": "pensions:family",
         "name": "가족 부양",
-        "description": "연금의 가족 부양 단계입니다.",
+        "description": "노후 부양을 가족과 공동체에 맡깁니다.",
         "order": 1,
         "icon": "pensions/1",
         "modifiers": [
@@ -5407,7 +5407,7 @@
       {
         "id": "pensions:occupational",
         "name": "직역 연금",
-        "description": "연금의 직역 연금 단계입니다.",
+        "description": "직업·조합별 연금제도를 운영합니다.",
         "order": 2,
         "icon": "pensions/2",
         "modifiers": [
@@ -5462,7 +5462,7 @@
       {
         "id": "pensions:public",
         "name": "공적 연금",
-        "description": "연금의 공적 연금 단계입니다.",
+        "description": "국가가 폭넓은 노후 소득을 보장합니다.",
         "order": 3,
         "icon": "pensions/3",
         "modifiers": [
@@ -5517,7 +5517,7 @@
       {
         "id": "pensions:contributory",
         "name": "기여 연금",
-        "description": "연금의 기여 연금 단계입니다.",
+        "description": "기여 연금 체계로 노후 소득과 부양 책임을 마련합니다.",
         "order": 4,
         "icon": "pensions/4",
         "modifiers": [
@@ -5579,7 +5579,7 @@
       {
         "id": "pensions:universal",
         "name": "보편 연금",
-        "description": "연금의 보편 연금 단계입니다.",
+        "description": "보편 연금 체계로 노후 소득과 부양 책임을 마련합니다.",
         "order": 5,
         "icon": "pensions/5",
         "modifiers": [
@@ -5658,7 +5658,7 @@
       {
         "id": "industry-ownership:private",
         "name": "자유 기업",
-        "description": "산업 소유 구조의 자유 기업 단계입니다.",
+        "description": "민간 기업의 소유와 운영을 우선합니다.",
         "order": 1,
         "icon": "industry-ownership/1",
         "modifiers": [
@@ -5717,7 +5717,7 @@
       {
         "id": "industry-ownership:supervised",
         "name": "국가 감독 자본주의",
-        "description": "산업 소유 구조의 국가 감독 자본주의 단계입니다.",
+        "description": "국가가 핵심 산업을 감독합니다.",
         "order": 2,
         "icon": "industry-ownership/2",
         "modifiers": [
@@ -5775,7 +5775,7 @@
       {
         "id": "industry-ownership:corporate",
         "name": "조합주의 경제",
-        "description": "산업 소유 구조의 조합주의 경제 단계입니다.",
+        "description": "산업별 조합이 생산과 분배를 조정합니다.",
         "order": 3,
         "icon": "industry-ownership/3",
         "modifiers": [
@@ -5838,7 +5838,7 @@
       {
         "id": "industry-ownership:mixed-economy",
         "name": "혼합경제",
-        "description": "산업 소유 구조의 혼합경제 단계입니다.",
+        "description": "혼합경제 구조에 따라 산업 자산의 소유권과 경영권을 배분합니다.",
         "order": 4,
         "icon": "industry-ownership/4",
         "modifiers": [
@@ -5896,7 +5896,7 @@
       {
         "id": "industry-ownership:planned",
         "name": "계획경제",
-        "description": "- 산업 전문성·공업 장비 수준으로 해금하지 않는다.",
+        "description": "계획경제 구조에 따라 산업 자산의 소유권과 경영권을 배분합니다.",
         "order": 5,
         "icon": "industry-ownership/5",
         "modifiers": [
@@ -5982,7 +5982,7 @@
       {
         "id": "land-system:estate",
         "name": "대지주 체제",
-        "description": "토지 제도의 대지주 체제 단계입니다.",
+        "description": "대규모 토지 소유와 소작을 유지합니다.",
         "order": 1,
         "icon": "land-system/1",
         "modifiers": [
@@ -6034,7 +6034,7 @@
       {
         "id": "land-system:mixed",
         "name": "혼합 소유",
-        "description": "토지 제도의 혼합 소유 단계입니다.",
+        "description": "대지주·자영농·협동조합을 병존시킵니다.",
         "order": 2,
         "icon": "land-system/2",
         "modifiers": [
@@ -6078,7 +6078,7 @@
       {
         "id": "land-system:smallholder",
         "name": "소농 자영",
-        "description": "토지 제도의 소농 자영 단계입니다.",
+        "description": "농민의 직접 소유와 경작을 우선합니다.",
         "order": 3,
         "icon": "land-system/3",
         "modifiers": [
@@ -6129,7 +6129,7 @@
       {
         "id": "land-system:cooperative",
         "name": "협동농장",
-        "description": "토지 제도의 협동농장 단계입니다.",
+        "description": "협동농장 체계로 농지의 소유와 경작 권리를 정합니다.",
         "order": 4,
         "icon": "land-system/4",
         "modifiers": [
@@ -6181,7 +6181,7 @@
       {
         "id": "land-system:national",
         "name": "국유 농업",
-        "description": "- 농업 방식 발전도는 소유관계와 별개의 축이므로 요구하지 않는다.",
+        "description": "국유 농업 체계로 농지의 소유와 경작 권리를 정합니다.",
         "order": 5,
         "icon": "land-system/5",
         "modifiers": [
@@ -6253,7 +6253,7 @@
       {
         "id": "healthcare:private",
         "name": "민간 중심",
-        "description": "의료보험의 민간 중심 단계입니다.",
+        "description": "의료비를 개인과 민간보험이 주로 부담합니다.",
         "order": 1,
         "icon": "healthcare/1",
         "modifiers": [
@@ -6305,7 +6305,7 @@
       {
         "id": "healthcare:mixed",
         "name": "혼합 보장",
-        "description": "의료보험의 혼합 보장 단계입니다.",
+        "description": "공공의료와 민간의료를 함께 운영합니다.",
         "order": 2,
         "icon": "healthcare/2",
         "modifiers": [
@@ -6356,7 +6356,7 @@
       {
         "id": "healthcare:universal",
         "name": "보편 의료",
-        "description": "- 보편적 접근권을 실제로 제공하기 위한 최소한의 기초 보건망만 요구한다.",
+        "description": "국가가 기본 의료 접근을 보장합니다.",
         "order": 3,
         "icon": "healthcare/3",
         "modifiers": [
@@ -6419,7 +6419,7 @@
       {
         "id": "healthcare:insurance",
         "name": "국민건강보험",
-        "description": "- 보험료 납부·가입자 명부·급여 지급체계를 운영해야 하므로 최소한의 행정망과 보건망을 요구한다.",
+        "description": "국민건강보험 방식으로 의료비와 의료서비스의 책임을 분담합니다.",
         "order": 4,
         "icon": "healthcare/4",
         "modifiers": [
@@ -6485,7 +6485,7 @@
       {
         "id": "healthcare:state-service",
         "name": "국가 의료",
-        "description": "- 의료기관을 국가가 직접 운영하는 구조이므로 체제적 파급력이 크다.",
+        "description": "국가 의료 방식으로 의료비와 의료서비스의 책임을 분담합니다.",
         "order": 5,
         "icon": "healthcare/5",
         "modifiers": [
@@ -6561,7 +6561,7 @@
       {
         "id": "education:elite",
         "name": "선별 교육",
-        "description": "교육 정책의 선별 교육 단계입니다.",
+        "description": "제한된 계층에 집중된 교육체계를 유지합니다.",
         "order": 1,
         "icon": "education/1",
         "modifiers": [
@@ -6613,7 +6613,7 @@
       {
         "id": "education:primary",
         "name": "기초교육 지원",
-        "description": "교육 정책의 기초교육 지원 단계입니다.",
+        "description": "초등교육의 보급을 국가가 지원합니다.",
         "order": 2,
         "icon": "education/2",
         "modifiers": [
@@ -6663,7 +6663,7 @@
       {
         "id": "education:public",
         "name": "공교육 보장",
-        "description": "교육 정책의 공교육 보장 단계입니다.",
+        "description": "폭넓은 공교육 접근을 보장합니다.",
         "order": 3,
         "icon": "education/3",
         "modifiers": [
@@ -6725,7 +6725,7 @@
       {
         "id": "education:secondary",
         "name": "중등교육 보장",
-        "description": "- 초등교육 수준의 기초 교육기반이 최소한 존재해야 전국적 중등교육 확대가 가능하다고 본다.",
+        "description": "중등교육 보장 체계에 맞춰 시민이 보장받는 교육의 범위를 정합니다.",
         "order": 4,
         "icon": "education/4",
         "modifiers": [
@@ -6792,7 +6792,7 @@
       {
         "id": "education:universal",
         "name": "전면 공교육",
-        "description": "- 모든 단계의 교육 접근을 공적으로 보장하는 체계이므로 일정한 교육기반과 전국적 행정망이 필요하다.",
+        "description": "전면 공교육 체계에 맞춰 시민이 보장받는 교육의 범위를 정합니다.",
         "order": 5,
         "icon": "education/5",
         "modifiers": [
@@ -6875,7 +6875,7 @@
       {
         "id": "penal-system:punitive",
         "name": "엄벌 중심",
-        "description": "형벌 제도의 엄벌 중심 단계입니다.",
+        "description": "강한 형벌과 장기 구금을 중심으로 운용합니다.",
         "order": 1,
         "icon": "penal-system/1",
         "modifiers": [
@@ -6927,7 +6927,7 @@
       {
         "id": "penal-system:mixed",
         "name": "처벌과 교정",
-        "description": "형벌 제도의 처벌과 교정 단계입니다.",
+        "description": "처벌과 사회복귀 정책을 병행합니다.",
         "order": 2,
         "icon": "penal-system/2",
         "modifiers": [
@@ -6970,7 +6970,7 @@
       {
         "id": "penal-system:rehabilitative",
         "name": "교정 중심",
-        "description": "- 단순 구금보다 재활·사회복귀 프로그램을 지속 운영하는 데 필요한 최소 행정능력을 요구한다.",
+        "description": "재활과 사회복귀에 무게를 둡니다.",
         "order": 3,
         "icon": "penal-system/3",
         "modifiers": [
@@ -7026,7 +7026,7 @@
       {
         "id": "penal-system:capital",
         "name": "사형 유지",
-        "description": "형벌 제도의 사형 유지 단계입니다.",
+        "description": "사형 유지 원칙에 따라 범죄에 대한 처벌과 교정 방식을 정합니다.",
         "order": 4,
         "icon": "penal-system/4",
         "modifiers": [
@@ -7078,7 +7078,7 @@
       {
         "id": "penal-system:abolished",
         "name": "사형 폐지",
-        "description": "형벌 제도의 사형 폐지 단계입니다.",
+        "description": "사형 폐지 원칙에 따라 범죄에 대한 처벌과 교정 방식을 정합니다.",
         "order": 5,
         "icon": "penal-system/5",
         "modifiers": [
@@ -7153,7 +7153,7 @@
       {
         "id": "policing:militarized",
         "name": "군사 치안",
-        "description": "- 평시에도 군사화된 치안체제가 존재할 수 있으므로 전쟁조건을 걸지 않는다.",
+        "description": "무장 치안조직에 폭넓은 권한을 부여합니다.",
         "order": 1,
         "icon": "policing/1",
         "modifiers": [
@@ -7212,7 +7212,7 @@
       {
         "id": "policing:centralized",
         "name": "중앙 치안",
-        "description": "치안 정책의 중앙 치안 단계입니다.",
+        "description": "국가가 통일된 치안체계를 운용합니다.",
         "order": 2,
         "icon": "policing/2",
         "modifiers": [
@@ -7268,7 +7268,7 @@
       {
         "id": "policing:civilian",
         "name": "민간 통제",
-        "description": "치안 정책의 민간 통제 단계입니다.",
+        "description": "민간 행정과 사법 통제 아래 치안을 운용합니다.",
         "order": 3,
         "icon": "policing/3",
         "modifiers": [
@@ -7317,7 +7317,7 @@
       {
         "id": "policing:local",
         "name": "지방 치안",
-        "description": "치안 정책의 지방 치안 단계입니다.",
+        "description": "지방 치안 체계로 치안기관의 권한과 지역사회와의 관계를 구성합니다.",
         "order": 4,
         "icon": "policing/4",
         "modifiers": [
@@ -7369,7 +7369,7 @@
       {
         "id": "policing:community",
         "name": "공동체 치안",
-        "description": "치안 정책의 공동체 치안 단계입니다.",
+        "description": "공동체 치안 체계로 치안기관의 권한과 지역사회와의 관계를 구성합니다.",
         "order": 5,
         "icon": "policing/5",
         "modifiers": [
@@ -7444,7 +7444,7 @@
       {
         "id": "industry-regulation:minimal",
         "name": "최소 규제",
-        "description": "산업 규제의 최소 규제 단계입니다.",
+        "description": "기업의 자율과 생산 확대를 우선합니다.",
         "order": 1,
         "icon": "industry-regulation/1",
         "modifiers": [
@@ -7503,7 +7503,7 @@
       {
         "id": "industry-regulation:standard",
         "name": "표준 규제",
-        "description": "산업 규제의 표준 규제 단계입니다.",
+        "description": "기본적인 안전·노동 기준을 적용합니다.",
         "order": 2,
         "icon": "industry-regulation/2",
         "modifiers": [
@@ -7546,7 +7546,7 @@
       {
         "id": "industry-regulation:strict",
         "name": "강한 규제",
-        "description": "산업 규제의 강한 규제 단계입니다.",
+        "description": "산업 활동에 엄격한 사회적 기준을 적용합니다.",
         "order": 3,
         "icon": "industry-regulation/3",
         "modifiers": [
@@ -7609,7 +7609,7 @@
       {
         "id": "industry-regulation:corporate",
         "name": "협의 규제",
-        "description": "산업 규제의 협의 규제 단계입니다.",
+        "description": "협의 규제 방식으로 기업 활동과 생산 현장에 대한 국가 개입을 조정합니다.",
         "order": 4,
         "icon": "industry-regulation/4",
         "modifiers": [
@@ -7665,7 +7665,7 @@
       {
         "id": "industry-regulation:planning",
         "name": "계획 규제",
-        "description": "- 산업 소유구조의 '계획경제'와는 별개다.",
+        "description": "계획 규제 방식으로 기업 활동과 생산 현장에 대한 국가 개입을 조정합니다.",
         "order": 5,
         "icon": "industry-regulation/5",
         "modifiers": [
@@ -7741,7 +7741,7 @@
       {
         "id": "womens-rights:restricted",
         "name": "제한적 권리",
-        "description": "여성 권리의 제한적 권리 단계입니다.",
+        "description": "공적·경제적 활동에 법적 제한을 둡니다.",
         "order": 1,
         "icon": "womens-rights/1",
         "modifiers": [
@@ -7799,7 +7799,7 @@
       {
         "id": "womens-rights:civil",
         "name": "시민권 보장",
-        "description": "여성 권리의 시민권 보장 단계입니다.",
+        "description": "기본적인 재산권과 시민권을 인정합니다.",
         "order": 2,
         "icon": "womens-rights/2",
         "modifiers": [
@@ -7850,7 +7850,7 @@
       {
         "id": "womens-rights:equal",
         "name": "법적 평등",
-        "description": "여성 권리의 법적 평등 단계입니다.",
+        "description": "성별에 따른 법률상 차별을 금지합니다.",
         "order": 3,
         "icon": "womens-rights/3",
         "modifiers": [
@@ -7902,7 +7902,7 @@
       {
         "id": "womens-rights:suffrage",
         "name": "여성 참정권",
-        "description": "- 선거 자체가 존재하지 않는 국가에서는 여성 참정권을 별도로 도입할 수 없다.",
+        "description": "여성 참정권 기준에 따라 여성에게 보장되는 시민적·사회적 권리를 정합니다.",
         "order": 4,
         "icon": "womens-rights/4",
         "modifiers": [
@@ -7958,7 +7958,7 @@
       {
         "id": "womens-rights:equal-access",
         "name": "완전한 평등",
-        "description": "- 제한적 권리에서 완전한 평등으로 한 번에 직행하지 않는다.",
+        "description": "완전한 평등 기준에 따라 여성에게 보장되는 시민적·사회적 권리를 정합니다.",
         "order": 5,
         "icon": "womens-rights/5",
         "modifiers": [
@@ -8037,7 +8037,7 @@
       {
         "id": "ethnic-policy:assimilation",
         "name": "강제 동화",
-        "description": "민족 정책의 강제 동화 단계입니다.",
+        "description": "단일한 국가 정체성과 언어를 강제합니다.",
         "order": 1,
         "icon": "ethnic-policy/1",
         "modifiers": [
@@ -8089,7 +8089,7 @@
       {
         "id": "ethnic-policy:coexistence",
         "name": "차별적 공존",
-        "description": "민족 정책의 차별적 공존 단계입니다.",
+        "description": "공동체를 인정하되 권리를 차등 적용합니다.",
         "order": 2,
         "icon": "ethnic-policy/2",
         "modifiers": [
@@ -8134,7 +8134,7 @@
       {
         "id": "ethnic-policy:autonomy",
         "name": "제한 자치",
-        "description": "민족 정책의 제한 자치 단계입니다.",
+        "description": "민족 공동체에 제한적인 자치권을 부여합니다.",
         "order": 3,
         "icon": "ethnic-policy/3",
         "modifiers": [
@@ -8189,7 +8189,7 @@
       {
         "id": "ethnic-policy:recognition",
         "name": "다민족 인정",
-        "description": "민족 정책의 다민족 인정 단계입니다.",
+        "description": "다민족 인정 원칙으로 여러 민족의 법적 지위와 자치 범위를 다룹니다.",
         "order": 4,
         "icon": "ethnic-policy/4",
         "modifiers": [
@@ -8234,7 +8234,7 @@
       {
         "id": "ethnic-policy:federal",
         "name": "연방적 공존",
-        "description": "- 민족 단위의 광범위한 자치와 권한배분을 국가구조에 반영하는 체제급 변화로 취급한다.",
+        "description": "연방적 공존 원칙으로 여러 민족의 법적 지위와 자치 범위를 다룹니다.",
         "order": 5,
         "icon": "ethnic-policy/5",
         "modifiers": [
@@ -8299,7 +8299,7 @@
       {
         "id": "censorship:total",
         "name": "전면 검열",
-        "description": "검열의 전면 검열 단계입니다.",
+        "description": "모든 매체의 제작과 유통을 사전 심사합니다.",
         "order": 1,
         "icon": "censorship/1",
         "modifiers": [
@@ -8365,7 +8365,7 @@
       {
         "id": "censorship:political",
         "name": "정치 검열",
-        "description": "검열의 정치 검열 단계입니다.",
+        "description": "정권 비판과 국가기밀 보도를 제한합니다.",
         "order": 2,
         "icon": "censorship/2",
         "modifiers": [
@@ -8424,7 +8424,7 @@
       {
         "id": "censorship:wartime",
         "name": "전시 검열",
-        "description": "- 전쟁이 끝났다고 자동으로 다른 검열법으로 되돌리지 않는다.",
+        "description": "전쟁과 비상시에만 통제를 강화합니다.",
         "order": 3,
         "icon": "censorship/3",
         "modifiers": [
@@ -8478,7 +8478,7 @@
       {
         "id": "censorship:limited",
         "name": "제한 검열",
-        "description": "검열의 제한 검열 단계입니다.",
+        "description": "제한 검열 기준으로 출판·방송·통신에 대한 국가의 통제 범위를 정합니다.",
         "order": 4,
         "icon": "censorship/4",
         "modifiers": [
@@ -8522,7 +8522,7 @@
       {
         "id": "censorship:free",
         "name": "언론 자유",
-        "description": "검열의 언론 자유 단계입니다.",
+        "description": "언론 자유 기준으로 출판·방송·통신에 대한 국가의 통제 범위를 정합니다.",
         "order": 5,
         "icon": "censorship/5",
         "modifiers": [

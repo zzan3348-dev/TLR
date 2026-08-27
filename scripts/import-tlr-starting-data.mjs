@@ -14,6 +14,41 @@ const writeJson = (file, value) => {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 };
 
+const lawDescriptionOverridesPath = path.join(SOURCE_DIR, "law-option-descriptions.json");
+const lawDescriptionOverrides = fs.existsSync(lawDescriptionOverridesPath)
+  ? JSON.parse(readUtf8(lawDescriptionOverridesPath))
+  : {};
+const lawDescriptionTemplates = new Map([
+  ["party-system", (name) => `${name} 방식으로 정당의 설립과 정치 참여를 구성합니다.`],
+  ["religion-policy", (name) => `${name} 원칙에 따라 국가와 종교기관의 관계를 정합니다.`],
+  ["trade-unions", (name) => `${name} 체계로 노동조합의 조직과 교섭 권한을 다룹니다.`],
+  ["immigration", (name) => `${name} 기준에 따라 외국인의 입국과 정착을 관리합니다.`],
+  ["forced-labor", (name) => `${name} 제도에 따라 비자발적 노동의 허용 범위를 정합니다.`],
+  ["assembly", (name) => `${name} 기준으로 집회와 사회단체 결성의 자유를 보장하거나 제한합니다.`],
+  ["press", (name) => `${name} 체계 아래 언론기관의 설립과 보도 활동이 이루어집니다.`],
+  ["franchise", (name) => `${name} 기준으로 대표자를 선출할 수 있는 시민의 범위를 정합니다.`],
+  ["service", (name) => `${name} 방식으로 군 복무 인력을 모집하고 동원합니다.`],
+  ["training", (name) => `${name} 체계에 맞춰 병력의 교육 기간과 전문화 수준을 정합니다.`],
+  ["officers", (name) => `${name} 원칙에 따라 장교를 선발하고 진급시킵니다.`],
+  ["exemptions", (name) => `${name} 기준으로 병역 의무의 면제 범위를 정합니다.`],
+  ["trade", (name) => `${name} 원칙에 따라 관세와 대외 교역의 개방 범위를 조정합니다.`],
+  ["income-tax", (name) => `${name} 체계로 소득에 대한 조세 부담을 배분합니다.`],
+  ["minimum-wage", (name) => `${name} 기준에 따라 노동자가 보장받는 최저 보수를 정합니다.`],
+  ["working-hours", (name) => `${name} 기준으로 법이 허용하는 노동시간의 범위를 정합니다.`],
+  ["unemployment", (name) => `${name} 방식으로 실직자의 생계와 재취업을 지원합니다.`],
+  ["pensions", (name) => `${name} 체계로 노후 소득과 부양 책임을 마련합니다.`],
+  ["industry-ownership", (name) => `${name} 구조에 따라 산업 자산의 소유권과 경영권을 배분합니다.`],
+  ["land-system", (name) => `${name} 체계로 농지의 소유와 경작 권리를 정합니다.`],
+  ["healthcare", (name) => `${name} 방식으로 의료비와 의료서비스의 책임을 분담합니다.`],
+  ["education", (name) => `${name} 체계에 맞춰 시민이 보장받는 교육의 범위를 정합니다.`],
+  ["penal-system", (name) => `${name} 원칙에 따라 범죄에 대한 처벌과 교정 방식을 정합니다.`],
+  ["policing", (name) => `${name} 체계로 치안기관의 권한과 지역사회와의 관계를 구성합니다.`],
+  ["industry-regulation", (name) => `${name} 방식으로 기업 활동과 생산 현장에 대한 국가 개입을 조정합니다.`],
+  ["womens-rights", (name) => `${name} 기준에 따라 여성에게 보장되는 시민적·사회적 권리를 정합니다.`],
+  ["ethnic-policy", (name) => `${name} 원칙으로 여러 민족의 법적 지위와 자치 범위를 다룹니다.`],
+  ["censorship", (name) => `${name} 기준으로 출판·방송·통신에 대한 국가의 통제 범위를 정합니다.`],
+]);
+
 const countries = JSON.parse(readUtf8(path.join(ROOT, "src", "data", "mapCountries.json")));
 const aliases = new Map([
   ["바이에른 사회주의 공화국", "바이에른사회주의공화국"],
@@ -380,7 +415,10 @@ function importLaws() {
       const requiresAdminApproval = optionBody.match(/^상시 관리자 승인:\s*(.+)$/m)?.[1]?.trim() === "필요";
       return {
         id: optionMatch[2].trim(), name: optionMatch[1].trim(),
-        description: note ?? `${meta[1]}의 ${optionMatch[1].trim()} 단계입니다.`, order: optionIndex + 1,
+        description: lawDescriptionOverrides[optionMatch[2].trim()]
+          ?? lawDescriptionTemplates.get(id)?.(optionMatch[1].trim())
+          ?? `${optionMatch[1].trim()} 원칙을 적용합니다.`,
+        order: optionIndex + 1,
         icon: `${id}/${optionIndex + 1}`, modifiers: effectLines.map(modifierFromEffect), requirements,
         incompatibilities: compatibility(optionBody, "×"), conditionalIdeologyCategories: compatibility(optionBody, "△"),
         politicalPowerCost, requiresAdminApproval, effectLines, notes: note,

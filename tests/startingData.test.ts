@@ -5,6 +5,12 @@ import lawStates from "../src/features/politics/data/generated/countryLawStates.
 import lawDefinitions from "../src/features/politics/data/generated/lawDefinitions.json";
 
 describe("TLR 1932 최신 시작 데이터", () => {
+  it("법률 선택지에 임시 단계 설명을 노출하지 않는다", () => {
+    const descriptions = lawDefinitions.flatMap((law) => law.options.map((option) => option.description));
+    expect(descriptions.some((description) => description.endsWith("단계입니다."))).toBe(false);
+    expect(lawDefinitions[0]?.options[1]?.description).toBe("복수 정당이 존재하지만 한 정당이 제도를 주도합니다.");
+  });
+
   it("62개국 국민정신 233개와 수치 효과를 제공한다", () => {
     expect(Object.keys(nationalSpirits)).toHaveLength(62);
     expect(Object.values(nationalSpirits).flat()).toHaveLength(233);
