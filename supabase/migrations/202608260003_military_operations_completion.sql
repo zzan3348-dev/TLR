@@ -1,6 +1,12 @@
 alter table public.military_occupations
   add column if not exists province_ids jsonb not null default '[]'::jsonb;
 
+update public.military_occupations
+set province_ids = geometry -> 'provinceIds'
+where jsonb_typeof(geometry) = 'object'
+  and jsonb_typeof(geometry -> 'provinceIds') = 'array'
+  and province_ids = '[]'::jsonb;
+
 alter table public.military_occupations
   drop constraint if exists military_occupations_province_ids_array;
 

@@ -340,7 +340,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       }
       const inserted = await admin.from("military_occupations").insert({
         conflict_id: conflictId, legal_owner_country_key: legalOwner, occupier_country_key: occupier,
-        province_ids: provinceIds, status: "ACTIVE_OCCUPATION", started_world_date: worldDate,
+        geometry: { provinceIds }, status: "ACTIVE_OCCUPATION", started_world_date: worldDate,
       }).select("id").single();
       if (inserted.error) throw inserted.error;
       await audit(admin, session, worldDate, "SET_OCCUPATION", "MILITARY_OCCUPATION", inserted.data.id, occupier, { conflictId, legalOwner, occupier, provinceIds });

@@ -39,7 +39,11 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         const playerSideId = (participants.data ?? []).find((row) => row.conflict_id === report.conflict_id && row.country_key === actor.countryKey)?.side_id;
         const markerTone = playerSideId && report.winner_side_id === playerSideId ? "WIN" : playerSideId && report.loser_side_id === playerSideId ? "LOSS" : report.marker_tone;
         return { ...report, marker_tone: markerTone };
-      }), occupations: occupations.data ?? [],
+      }), occupations: (occupations.data ?? []).map((occupation) => {
+        const geometry = occupation.geometry && typeof occupation.geometry === "object" && !Array.isArray(occupation.geometry) ? occupation.geometry as { provinceIds?: unknown } : null;
+        const provinceIds = Array.isArray(occupation.province_ids) ? occupation.province_ids : Array.isArray(geometry?.provinceIds) ? geometry.provinceIds : [];
+        return { ...occupation, province_ids: provinceIds.filter((id): id is string => typeof id === "string") };
+      }),
       forceSummaries: frontRows.map((front) => ({
         frontId: front.id,
         landUnits: counts(landUnits.data ?? [], front.id),
