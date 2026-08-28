@@ -132,6 +132,11 @@ type MapOverlayView = {
   fitScale: number;
 };
 
+type MilitaryFrontDraftPoint = {
+  x: number;
+  y: number;
+};
+
 const CLICK_MOVEMENT_LIMIT = 8;
 const CLICK_DURATION_LIMIT = 700;
 const CAMERA_ANIMATION_DURATION = 460;
@@ -213,6 +218,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       useState<ReadonlySet<string>>(() => new Set());
     const [overlayView, setOverlayView] = useState<MapOverlayView | null>(null);
     const [militaryMapState, setMilitaryMapState] = useState<MilitaryMapState>({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
+    const [militaryFrontDraft, setMilitaryFrontDraft] = useState<MilitaryFrontDraftPoint[] | null>(null);
     const mapMarkers = useMemo(
       () => capitalsToMarkers(initialMapCapitals),
       [],
@@ -630,6 +636,84 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       },
       [cancelAllCameraMotion, setCamera],
     );
+
+    useEffect(() => {
+      const focusMilitaryFront = (event: Event) => {
+        const detail = (event as CustomEvent<{
+          geometry?: Array<{ x: number; y: number }>;
+        }>).detail;
+        const assets = assetsRef.current;
+        const geometry = detail?.geometry ?? [];
+        if (!assets || geometry.length === 0) return;
+        const worldPoints = geometry.map((point) => ({
+          x: point.x >= 0 && point.x <= 1 ? point.x * assets.width : point.x,
+          y: point.y >= 0 && point.y <= 1 ? point.y * assets.height : point.y,
+        }));
+        const left = Math.min(...worldPoints.map((point) => point.x));
+        const right = Math.max(...worldPoints.map((point) => point.x));
+        const top = Math.min(...worldPoints.map((point) => point.y));
+        const bottom = Math.max(...worldPoints.map((point) => point.y));
+        const viewport = viewportRef.current;
+        const width = Math.max(180, right - left);
+        const height = Math.max(120, bottom - top);
+        const targetScale = Math.min(
+          fitScaleRef.current * 16,
+          Math.max(fitScaleRef.current, Math.min(viewport.width * 0.58 / width, viewport.height * 0.62 / height)),
+        );
+        animateCamera({ x: (left + right) / 2, y: (top + bottom) / 2, scale: targetScale });
+      };
+      window.addEventListener("tlr:focus-military-front", focusMilitaryFront);
+      return () => window.removeEventListener("tlr:focus-military-front", focusMilitaryFront);
+    }, [animateCamera]);
+
+    useEffect(() => {
+      const startFrontDrawing = () => setMilitaryFrontDraft([]);
+      const cancelFrontDrawing = () => setMilitaryFrontDraft(null);
+      window.addEventListener("tlr:military-front-draw-start", startFrontDrawing);
+      window.addEventListener("tlr:military-front-draw-cancel", cancelFrontDrawing);
+      return () => {
+        window.removeEventListener("tlr:military-front-draw-start", startFrontDrawing);
+        window.removeEventListener("tlr:military-front-draw-cancel", cancelFrontDrawing);
+      };
+    }, []);
+
+    const addMilitaryFrontPoint = useCallback((clientX: number, clientY: number) => {
+      const canvas = canvasRef.current;
+      const assets = assetsRef.current;
+      if (!canvas || !assets) return;
+      const bounds = canvas.getBoundingClientRect();
+      const worldPoint = screenPointToWorldPoint(
+        { x: clientX - bounds.left, y: clientY - bounds.top },
+        cameraRef.current,
+        viewportRef.current,
+        { width: assets.width, height: assets.height },
+      );
+      if (!worldPoint) return;
+      setMilitaryFrontDraft((current) => current ? [...current, {
+        x: Number(worldPoint.x.toFixed(1)),
+        y: Number(worldPoint.y.toFixed(1)),
+      }] : null);
+    }, []);
+
+    const finishMilitaryFrontDrawing = useCallback(() => {
+      if (!militaryFrontDraft || militaryFrontDraft.length < 2) return;
+      window.dispatchEvent(new CustomEvent("tlr:military-front-draw-complete", {
+        detail: { geometry: militaryFrontDraft },
+      }));
+      setMilitaryFrontDraft(null);
+    }, [militaryFrontDraft]);
+
+    const militaryFrontScreenPoints = useMemo(() => {
+      if (!militaryFrontDraft || !overlayView) return [];
+      const { camera, viewport, mapWidth } = overlayView;
+      return militaryFrontDraft.map((point) => {
+        const wrappedDelta = shortestWrappedDelta(camera.x, point.x, mapWidth);
+        return {
+          x: viewport.width / 2 + wrappedDelta * camera.scale,
+          y: viewport.height / 2 + (point.y - camera.y) * camera.scale,
+        };
+      });
+    }, [militaryFrontDraft, overlayView]);
 
     const zoomBy = useCallback(
       (factor: number) => {
@@ -1285,6 +1369,32 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             {...overlayView}
             onReportSelect={(report) => onWarReportSelect?.(report)}
           />
+        ) : null}
+        {militaryFrontDraft ? (
+          <div
+            className="military-front-draw-layer"
+            onClick={(event) => addMilitaryFrontPoint(event.clientX, event.clientY)}
+            role="application"
+            aria-label="지도에서 전선 경로 지정"
+          >
+            <svg className="military-front-draw-layer__path" aria-hidden="true">
+              {militaryFrontScreenPoints.length > 1 ? (
+                <polyline points={militaryFrontScreenPoints.map((point) => `${point.x},${point.y}`).join(" ")} />
+              ) : null}
+              {militaryFrontScreenPoints.map((point, index) => (
+                <circle key={`${point.x}:${point.y}:${index}`} cx={point.x} cy={point.y} r="5" />
+              ))}
+            </svg>
+            <div className="military-front-draw-layer__controls" onClick={(event) => event.stopPropagation()}>
+              <strong>전선 경로 지정</strong>
+              <span>지도 위를 순서대로 클릭하십시오 · {militaryFrontDraft.length}개 통제점</span>
+              <div>
+                <button type="button" onClick={() => setMilitaryFrontDraft((current) => current?.slice(0, -1) ?? null)} disabled={militaryFrontDraft.length === 0}>되돌리기</button>
+                <button type="button" onClick={() => setMilitaryFrontDraft(null)}>취소</button>
+                <button type="button" onClick={finishMilitaryFrontDrawing} disabled={militaryFrontDraft.length < 2}>경로 확정</button>
+              </div>
+            </div>
+          </div>
         ) : null}
         {mapMode === "faction" && hoveredMapCountry ? (
           <div

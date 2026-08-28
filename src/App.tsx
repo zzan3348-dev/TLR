@@ -251,6 +251,15 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const focusMilitaryFront = (event: Event) => {
+      const kind = (event as CustomEvent<{ frontKind?: string }>).detail?.frontKind;
+      setMapMode(kind === "NAVAL_AREA" ? "navy" : "army");
+    };
+    window.addEventListener("tlr:focus-military-front", focusMilitaryFront);
+    return () => window.removeEventListener("tlr:focus-military-front", focusMilitaryFront);
+  }, []);
+
+  useEffect(() => {
     if (!playCountry) {
       return;
     }
@@ -483,6 +492,7 @@ export default function App() {
             simulationState={playSimulationState}
             onCloseWindow={closePlayWindow}
             onExitPlayMode={exitPlayMode}
+            onOpenWindow={setActivePlayWindow}
           />
         ) : null}
         {playCountry ? <DiplomacyNotificationQueue country={playCountry} /> : null}

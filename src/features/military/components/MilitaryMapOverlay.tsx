@@ -110,6 +110,12 @@ export function MilitaryMapOverlay(props: Props) {
   const recentThreshold = latestReportTime - 30 * 86_400_000;
   const reports = props.state.reports.filter((report) => report.marker !== null && reportFilter !== "HIDDEN" && (reportFilter === "ALL" || Date.parse(report.report_world_date) >= recentThreshold));
   const modeLabel = props.mode === "army" ? "육군 지도" : props.mode === "navy" ? "해군 지도" : "공군 지도";
+  const modeIcon = `/assets/ui/generated-icons/world-control/${props.mode}-map.png`;
+  const legendItems = props.mode === "army"
+    ? ["전선 통제선", "점령 구역", "최근 교전 결과"]
+    : props.mode === "navy"
+      ? ["해상 수송 지원", "봉쇄·차단 구역", "상륙 지원"]
+      : ["제공권 지원", "항공 정찰", "지상군 지원"];
   const copies = [-1, 0, 1] as const;
   return (
     <div className={`military-map-overlay military-map-overlay--${props.mode}`} aria-label={modeLabel}>
@@ -140,7 +146,10 @@ export function MilitaryMapOverlay(props: Props) {
         const tone = report.marker_tone === "WIN" ? "win" : report.marker_tone === "LOSS" ? "loss" : "neutral";
         return [<button key={`report:${report.id}:${copy}`} type="button" className={`military-result-marker military-result-marker--${tone}`} style={{ left: screen.x, top: screen.y }} onClick={() => props.onReportSelect(report)} title={report.title} aria-label={`${report.title} 전쟁 보고서 열기`}><img src="/assets/ui/icons/military/battle-result.svg" alt="" /></button>];
       }))}
-      {fronts.length === 0 && reports.length === 0 ? <div className="military-map-overlay__empty">표시할 활성 전선이나 전투 보고서가 없습니다.</div> : null}
+      <aside className="military-map-overlay__legend" aria-label={`${modeLabel} 범례`}>
+        <header><img src={modeIcon} alt="" /><strong>{modeLabel} 관제</strong></header>
+        {legendItems.map((item, index) => <span key={item}><i className={`military-map-overlay__legend-signal military-map-overlay__legend-signal--${index}`} />{item}<b>{index === 0 && fronts.length ? "활성" : "대기"}</b></span>)}
+      </aside>
     </div>
   );
 }

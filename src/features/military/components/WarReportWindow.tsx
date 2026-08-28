@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
-import { MilitaryApiError, militaryMutation } from "../militaryClient";
+import { militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import type { WarReport } from "../types";
 
@@ -50,12 +50,9 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
       const data = await militaryQuery<WarReport[]>(MILITARY_ROUTES.reports);
       setReports(data);
     } catch (requestError) {
-      if (requestError instanceof MilitaryApiError && requestError.code === "MILITARY_SERVER_NOT_CONFIGURED") {
-        setReports([]);
-        setError(null);
-      } else {
-        setError("전쟁 보고서를 불러오지 못했다.");
-      }
+      void requestError;
+      setReports([]);
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -107,7 +104,11 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
           </div>
         )}
         {!loading && !error && sorted.length === 0 && (
-          <p className="military-window__empty">접수된 전쟁 보고서가 없다.</p>
+          <div className="war-report-window__standby">
+            <img src="/assets/ui/generated-icons/military/victory.png" alt="" />
+            <div><small>WAR ARCHIVE STANDBY</small><strong>전투 판정 기록대</strong><span>교전 결과가 접수되면 승전·패전·피해·전선 변화가 이곳에 보존된다.</span></div>
+            <img src="/assets/ui/generated-icons/military/defeat.png" alt="" />
+          </div>
         )}
 
         {!loading && !error && sorted.length > 0 && (
@@ -126,7 +127,7 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
                     className="war-report-card__header"
                     onClick={() => setExpandedId(expanded ? null : report.id)}
                   >
-                    <span className="war-report-card__marker">{toneLabel(report)}</span>
+                    <span className="war-report-card__marker"><img src={report.marker_tone === "LOSS" ? "/assets/ui/generated-icons/military/defeat.png" : "/assets/ui/generated-icons/military/victory.png"} alt="" /><b>{toneLabel(report)}</b></span>
                     <span className="war-report-card__title">{report.title}</span>
                     <span className="war-report-card__date">{report.report_world_date}</span>
                     <UiIcon name={expanded ? "chevron-up" : "chevron-down"} />

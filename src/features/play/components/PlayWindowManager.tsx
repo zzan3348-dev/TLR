@@ -16,6 +16,7 @@ type PlayWindowManagerProps = {
   simulationState: PlaySimulationState;
   onCloseWindow: () => void;
   onExitPlayMode: () => void;
+  onOpenWindow: (window: PrimaryWindow) => void;
 };
 
 export function PlayWindowManager({
@@ -25,6 +26,7 @@ export function PlayWindowManager({
   simulationState,
   onCloseWindow,
   onExitPlayMode,
+  onOpenWindow,
 }: PlayWindowManagerProps) {
   if (activeWindow === "politics") {
     return (
@@ -68,7 +70,7 @@ export function PlayWindowManager({
   }
 
   if (activeWindow === "military") {
-    return <MilitaryWindow countryKey={playerCountry.key} onClose={onCloseWindow} />;
+    return <MilitaryWindow countryKey={playerCountry.key} onClose={onCloseWindow} onOpenDiplomacy={() => onOpenWindow("diplomacy")} />;
   }
 
   if (activeWindow === "research") {

@@ -50,6 +50,14 @@ interface ConflictWindowProps {
   countryKey: string;
 }
 
+type FrontDraft = {
+  displayName: string;
+  frontKind: string;
+  geometry: Array<{ x: number; y: number }>;
+};
+
+const EMPTY_FRONT_DRAFT: FrontDraft = { displayName: "", frontKind: "LAND_LINE", geometry: [] };
+
 export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
   const [conflicts, setConflicts] = useState<Conflict[]>([]);
   const [overview, setOverview] = useState<MilitaryOverview | null>(null);
@@ -66,7 +74,8 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
   const [submitting, setSubmitting] = useState(false);
   const [assignmentChoice, setAssignmentChoice] = useState("");
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [frontDraft, setFrontDraft] = useState({ displayName: "", frontKind: "LAND_LINE", geometry: "" });
+  const [frontDraft, setFrontDraft] = useState<FrontDraft>(EMPTY_FRONT_DRAFT);
+  const [drawingFront, setDrawingFront] = useState(false);
 
   const loadConflicts = useCallback(async () => {
     setLoading(true);
@@ -123,6 +132,27 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     if (selectedConflictId) void loadDetail(selectedConflictId);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [selectedConflictId, loadDetail]);
+
+  useEffect(() => {
+    const completeDrawing = (event: Event) => {
+      const geometry = (event as CustomEvent<{ geometry?: Array<{ x: number; y: number }> }>).detail?.geometry;
+      if (geometry && geometry.length >= 2) {
+        setFrontDraft((current) => ({ ...current, geometry }));
+      }
+      setDrawingFront(false);
+    };
+    const cancelDrawing = () => setDrawingFront(false);
+    window.addEventListener("tlr:military-front-draw-complete", completeDrawing);
+    window.addEventListener("tlr:military-front-draw-cancel", cancelDrawing);
+    return () => {
+      window.removeEventListener("tlr:military-front-draw-complete", completeDrawing);
+      window.removeEventListener("tlr:military-front-draw-cancel", cancelDrawing);
+    };
+  }, []);
+
+  useEffect(() => () => {
+    window.dispatchEvent(new Event("tlr:military-front-draw-cancel"));
+  }, []);
 
   const selectedConflict = useMemo(
     () => conflicts.find((conflict) => conflict.id === selectedConflictId) ?? null,
@@ -220,12 +250,11 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     const ownSide = selectedConflict.sides?.find((side) => side.participants?.some((participant) => participant.country_key === countryKey));
     const opponentSide = selectedConflict.sides?.find((side) => side.id !== ownSide?.id);
     if (!opponentSide) { setError("상대측을 확인할 수 없어 전선을 만들 수 없다."); return; }
-    let geometry: unknown;
-    try { geometry = JSON.parse(frontDraft.geometry); } catch { setError("전선 좌표는 지도 좌표 JSON 배열이어야 한다."); return; }
+    if (frontDraft.geometry.length < 2) { setError("지도에서 전선 경로를 먼저 지정해야 한다."); return; }
     setSubmitting(true);
     try {
-      await militaryMutation(MILITARY_ROUTES.fronts, { conflict_id: selectedConflict.id, opponent_side_id: opponentSide.id, display_name: frontDraft.displayName.trim(), front_kind: frontDraft.frontKind, geometry }, "POST");
-      setFrontDraft({ displayName: "", frontKind: "LAND_LINE", geometry: "" });
+      await militaryMutation(MILITARY_ROUTES.fronts, { conflict_id: selectedConflict.id, opponent_side_id: opponentSide.id, display_name: frontDraft.displayName.trim(), front_kind: frontDraft.frontKind, geometry: frontDraft.geometry }, "POST");
+      setFrontDraft(EMPTY_FRONT_DRAFT);
       await loadDetail(selectedConflict.id);
     } catch { setError("전선 생성에 실패했다. 좌표와 참가 진영을 확인하라."); }
     finally { setSubmitting(false); }
@@ -348,8 +377,22 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                         <summary>새 전선 생성</summary>
                         <label className="conflict-window__field"><span>전선명</span><input value={frontDraft.displayName} onChange={(event) => setFrontDraft((current) => ({ ...current, displayName: event.target.value }))} /></label>
                         <label className="conflict-window__field"><span>유형</span><select value={frontDraft.frontKind} onChange={(event) => setFrontDraft((current) => ({ ...current, frontKind: event.target.value }))}><option value="LAND_LINE">육상 전선</option><option value="NAVAL_AREA">해상 지원구역</option></select></label>
-                        <label className="conflict-window__field"><span>지도 좌표</span><textarea rows={3} placeholder='[{"x": 2800, "y": 620}, {"x": 2860, "y": 650}]' value={frontDraft.geometry} onChange={(event) => setFrontDraft((current) => ({ ...current, geometry: event.target.value }))} /></label>
-                        <button type="button" disabled={submitting} onClick={() => void createFront()}>전선 생성</button>
+                        <div className="conflict-window__map-picker">
+                          <span>전선 경로</span>
+                          <button
+                            type="button"
+                            className={drawingFront ? "is-active" : ""}
+                            onClick={() => {
+                              setDrawingFront(true);
+                              window.dispatchEvent(new Event("tlr:military-front-draw-start"));
+                            }}
+                          >
+                            <UiIcon name="map" />
+                            {drawingFront ? "지도에서 지정 중" : "지도에서 경로 지정"}
+                          </button>
+                          <small>{frontDraft.geometry.length >= 2 ? `${frontDraft.geometry.length}개 통제점이 지정되었습니다.` : "지도 위의 경로를 순서대로 클릭하십시오."}</small>
+                        </div>
+                        <button type="button" disabled={submitting || frontDraft.geometry.length < 2} onClick={() => void createFront()}>전선 생성</button>
                       </details>
 
                       <h4 className="military-window__section-title">작전</h4>

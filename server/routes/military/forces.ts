@@ -4,7 +4,7 @@ import { getAdminClient, getServerEnv } from "../../auth.js";
 import { cleanUuid, requireMilitaryActor } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
 
-type RequestBody = { template_id?: unknown; display_name?: unknown; idempotency_key?: unknown };
+type RequestBody = { template_id?: unknown; display_name?: unknown; idempotency_key?: unknown; object_kind?: unknown; object_id?: unknown; assigned_front_id?: unknown };
 
 function addDays(date: string, days: number): string {
   const value = new Date(`${date}T00:00:00Z`);
@@ -13,11 +13,53 @@ function addDays(date: string, days: number): string {
 }
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
-  if (request.method !== "POST") { response.status(405).json({ error: "METHOD_NOT_ALLOWED" }); return; }
+  if (request.method !== "POST" && request.method !== "PATCH") { response.status(405).json({ error: "METHOD_NOT_ALLOWED" }); return; }
   const env = getServerEnv(); if (!env) { response.status(503).json({ error: "MILITARY_SERVER_NOT_CONFIGURED" }); return; }
   const admin = getAdminClient(env);
   const actor = await requireMilitaryActor(request, response, admin); if (!actor) return;
   const body = (request.body ?? {}) as RequestBody;
+  if (request.method === "PATCH") {
+    const objectId = cleanUuid(body.object_id);
+    const objectKind = typeof body.object_kind === "string" ? body.object_kind : "";
+    const tableByKind: Record<string, string> = { LAND_UNIT: "military_land_units", FLEET: "military_fleets", AIR_WING: "military_air_wings" };
+    const table = tableByKind[objectKind];
+    if (!objectId || !table) { response.status(400).json({ error: "INVALID_FORCE_OBJECT" }); return; }
+    const update: Record<string, unknown> = {};
+    if (typeof body.display_name === "string") {
+      const nextName = body.display_name.trim().slice(0, 80);
+      if (!nextName) { response.status(400).json({ error: "INVALID_FORCE_NAME" }); return; }
+      update.display_name = nextName;
+    }
+    if (Object.prototype.hasOwnProperty.call(body, "assigned_front_id")) {
+      const frontId = body.assigned_front_id === null ? null : cleanUuid(body.assigned_front_id);
+      if (body.assigned_front_id !== null && !frontId) { response.status(400).json({ error: "INVALID_FRONT" }); return; }
+      if (frontId) {
+        try {
+          const front = await admin.from("military_fronts").select("id, conflict_id, status").eq("id", frontId).maybeSingle();
+          if (front.error) throw front.error;
+          if (!front.data || front.data.status === "DISSOLVED") { response.status(409).json({ error: "FRONT_NOT_ACTIVE" }); return; }
+          const participant = await admin.from("military_conflict_participants").select("id").eq("conflict_id", front.data.conflict_id).eq("country_key", actor.countryKey).is("left_world_date", null).maybeSingle();
+          if (participant.error) throw participant.error;
+          if (!participant.data) { response.status(403).json({ error: "NOT_CONFLICT_PARTICIPANT" }); return; }
+          update.assigned_conflict_id = front.data.conflict_id;
+        } catch (error) {
+          console.error("front assignment validation failed", error);
+          response.status(503).json({ error: "FRONT_VALIDATION_FAILED" });
+          return;
+        }
+      } else update.assigned_conflict_id = null;
+      update.assigned_front_id = frontId;
+      update.status = frontId ? (objectKind === "LAND_UNIT" ? "ASSIGNED_TO_FRONT" : objectKind === "AIR_WING" ? "ASSIGNED" : "ASSIGNED_TO_FRONT") : "ACTIVE";
+    }
+    if (Object.keys(update).length === 0) { response.status(400).json({ error: "EMPTY_FORCE_UPDATE" }); return; }
+    try {
+      const result = await admin.from(table).update(update).eq("id", objectId).eq("country_key", actor.countryKey).select("*").maybeSingle();
+      if (result.error) throw result.error;
+      if (!result.data) { response.status(404).json({ error: "FORCE_NOT_FOUND" }); return; }
+      response.status(200).json(result.data);
+    } catch (error) { console.error("force update failed", error); response.status(503).json({ error: "FORCE_UPDATE_FAILED" }); }
+    return;
+  }
   const templateId = cleanUuid(body.template_id);
   const displayName = typeof body.display_name === "string" ? body.display_name.trim().slice(0, 80) : "";
   const idempotencyKey = typeof body.idempotency_key === "string" && body.idempotency_key.trim()
