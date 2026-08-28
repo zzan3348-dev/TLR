@@ -1,11 +1,11 @@
 create table if not exists public.world_state (
   singleton boolean primary key default true check (singleton),
-  current_world_date date not null default date '1932-04-03',
+  current_world_date date not null default date '1932-01-01',
   updated_at timestamptz not null default now()
 );
 
 insert into public.world_state (singleton, current_world_date)
-values (true, date '1932-04-03')
+values (true, date '1932-01-01')
 on conflict (singleton) do nothing;
 
 create table if not exists public.country_ownerships (

@@ -5,6 +5,7 @@ import overview from "../server/routes/diplomacy/overview.js";
 import proposals from "../server/routes/diplomacy/proposals.js";
 import intelligenceActions from "../server/routes/intelligence/actions.js";
 import intelligenceOverview from "../server/routes/intelligence/overview.js";
+import worldControlOverview from "../server/routes/worldControl/overview.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   actions,
@@ -18,12 +19,22 @@ const intelligenceHandlers: Record<string, (request: ApiRequest, response: ApiRe
   overview: intelligenceOverview,
 };
 
+const worldControlHandlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
+  overview: worldControlOverview,
+};
+
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   const rawRoute = request.query?.route;
   const route = Array.isArray(rawRoute) ? rawRoute[0] : rawRoute;
   const rawDomain = request.query?.domain;
   const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
-  const routeHandler = route ? domain === "intelligence" ? intelligenceHandlers[route] : handlers[route] : undefined;
+  const routeHandler = route
+    ? domain === "intelligence"
+      ? intelligenceHandlers[route]
+      : domain === "world-control"
+        ? worldControlHandlers[route]
+        : handlers[route]
+    : undefined;
   if (!routeHandler) {
     response.status(404).json({ error: "NOT_FOUND" });
     return;

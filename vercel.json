@@ -23,6 +23,10 @@
       "destination": "/api/diplomacy-dispatch?domain=intelligence&route=:route"
     },
     {
+      "source": "/api/world-control/:route",
+      "destination": "/api/diplomacy-dispatch?domain=world-control&route=:route"
+    },
+    {
       "source": "/api/research/:route",
       "destination": "/api/economy-dispatch?domain=research&route=:route"
     },
@@ -53,6 +57,10 @@
     {
       "source": "/api/admin/intelligence",
       "destination": "/api/admin/actions?domain=intelligence"
+    },
+    {
+      "source": "/api/admin/world-control",
+      "destination": "/api/admin/actions?domain=world-control"
     },
     {
       "source": "/api/navi/:route",

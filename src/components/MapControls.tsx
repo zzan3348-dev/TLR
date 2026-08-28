@@ -12,6 +12,7 @@ type MapControlsProps = {
   onToggleLabels: () => void;
   showCapitalLabels: boolean;
   onToggleCapitalLabels: () => void;
+  showMilitaryModes?: boolean;
 };
 
 export function MapControls({
@@ -24,6 +25,7 @@ export function MapControls({
   onToggleLabels,
   showCapitalLabels,
   onToggleCapitalLabels,
+  showMilitaryModes = true,
 }: MapControlsProps) {
   return (
     <div
@@ -46,7 +48,7 @@ export function MapControls({
           {mapMode === "faction" ? "정치지도" : "세력지도"}
         </small>
       </button>
-      {([[
+      {showMilitaryModes ? ([[
         "army", "armyMap", "육군 지도",
       ], ["navy", "navyMap", "해군 지도"], ["air", "airMap", "공군 지도"]] as const).map(([mode, icon, label]) => (
         <button
@@ -60,7 +62,7 @@ export function MapControls({
           <StrategyIcon name={icon} />
           <small>{label}</small>
         </button>
-      ))}
+      )) : null}
       <button
         type="button"
         onClick={onToggleProvinceBorders}

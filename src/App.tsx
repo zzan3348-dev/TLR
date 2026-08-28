@@ -440,6 +440,8 @@ export default function App() {
             activeWindow={activePlayWindow}
             onOpenWindow={setActivePlayWindow}
             onExitPlayMode={exitPlayMode}
+            mapMode={mapMode}
+            onChangeMapMode={setMapMode}
           />
         ) : null}
         <MapControls
@@ -456,6 +458,7 @@ export default function App() {
           onToggleCapitalLabels={() =>
             setShowCapitalLabels((current) => !current)
           }
+          showMilitaryModes={!playCountry}
         />
         {mapMode === "faction" ? <FactionLegend /> : null}
         <ReadOnlyCountryPanel

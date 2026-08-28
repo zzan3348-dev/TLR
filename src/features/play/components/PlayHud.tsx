@@ -12,6 +12,8 @@ import {
 } from "../data/playSimulationState";
 import type { PrimaryWindow } from "../types";
 import { loadResearchOverview } from "../../research/researchClient";
+import type { MapMode } from "../../../types/faction";
+import { WorldControlHud } from "../../world-control/components/WorldControlHud";
 
 type PlayHudProps = {
   country: MapCountryIndex;
@@ -19,6 +21,8 @@ type PlayHudProps = {
   activeWindow: PrimaryWindow;
   onOpenWindow: (window: PrimaryWindow) => void;
   onExitPlayMode: () => void;
+  mapMode: MapMode;
+  onChangeMapMode: (mode: MapMode) => void;
 };
 
 type HudTone = "positive" | "negative" | "neutral" | "warning";
@@ -69,6 +73,8 @@ export function PlayHud({
   activeWindow,
   onOpenWindow,
   onExitPlayMode,
+  mapMode,
+  onChangeMapMode,
 }: PlayHudProps) {
   const presentation = getCountryPresentation(country);
   const [researchPower, setResearchPower] = useState(0);
@@ -298,6 +304,7 @@ export function PlayHud({
           <small>국가선택</small>
         </button>
       </nav>
+      <WorldControlHud countryKey={country.key} mapMode={mapMode} onChangeMapMode={onChangeMapMode} />
     </header>
   );
 }

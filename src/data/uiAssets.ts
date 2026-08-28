@@ -31,6 +31,20 @@ export const uiIconAssets = {
     request: "/assets/ui/generated-icons/research/request.png",
     investment: "/assets/ui/generated-icons/research/investment.png",
   },
+  intelligence: {
+    agency: "/assets/ui/generated-icons/intelligence/agency.png",
+    defense: "/assets/ui/generated-icons/intelligence/defense.png",
+    operation: "/assets/ui/generated-icons/intelligence/operation.png",
+    training: "/assets/ui/generated-icons/intelligence/training.png",
+    cipher: "/assets/ui/generated-icons/intelligence/cipher.png",
+  },
+  worldControl: {
+    holdTime: "/assets/ui/generated-icons/world-control/hold-time.png",
+    advanceTime: "/assets/ui/generated-icons/world-control/advance-time.png",
+    armyMap: "/assets/ui/generated-icons/world-control/army-map.png",
+    navyMap: "/assets/ui/generated-icons/world-control/navy-map.png",
+    airMap: "/assets/ui/generated-icons/world-control/air-map.png",
+  },
   ui: {
     close: "/assets/ui/icons/ui/close.svg",
     expand: "/assets/ui/icons/ui/expand.svg",

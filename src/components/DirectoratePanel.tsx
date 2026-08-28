@@ -8,6 +8,8 @@ import { IntelligenceAdminSection } from "../features/intelligence/components/In
 import type { IntelligenceAdminData } from "../features/intelligence/types";
 import { MapCapitalAdminSection } from "./MapCapitalAdminSection";
 import { ProvinceRegionAdminSection } from "./ProvinceRegionAdminSection";
+import { WorldControlAdminSection } from "../features/world-control/components/WorldControlAdminSection";
+import type { WorldControlAdminData } from "../features/world-control/types";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -33,16 +35,18 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [militaryData, setMilitaryData] = useState<MilitaryAdminData | null>(null);
   const [researchData, setResearchData] = useState<ResearchAdminData | null>(null);
   const [intelligenceData, setIntelligenceData] = useState<IntelligenceAdminData | null>(null);
+  const [worldControlData, setWorldControlData] = useState<WorldControlAdminData | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const loadQueue = useCallback(async () => {
-    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse, intelligenceResponse] = await Promise.all([
+    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse, intelligenceResponse, worldControlResponse] = await Promise.all([
       fetch("/api/admin/diplomacy", { credentials: "include" }),
       fetch("/api/admin/economy", { credentials: "include" }),
       fetch("/api/admin/military", { credentials: "include" }),
       fetch("/api/admin/research", { credentials: "include" }),
       fetch("/api/admin/intelligence", { credentials: "include" }),
+      fetch("/api/admin/world-control", { credentials: "include" }),
     ]);
     if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok || !researchResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
     const diplomacyPayload = await diplomacyResponse.json() as { worldDate: string; queue: DiplomaticProposal[] };
@@ -50,6 +54,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
     const militaryPayload = await militaryResponse.json() as MilitaryAdminData;
     const researchPayload = await researchResponse.json() as ResearchAdminData;
     const intelligencePayload = intelligenceResponse.ok ? await intelligenceResponse.json() as IntelligenceAdminData : null;
+    const worldControlPayload = worldControlResponse.ok ? await worldControlResponse.json() as WorldControlAdminData : null;
     setQueue(diplomacyPayload.queue);
     setTradeQueue(economyPayload.queue);
     setTradeAgreements(economyPayload.agreements);
@@ -57,6 +62,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
     setMilitaryData(militaryPayload);
     setResearchData(researchPayload);
     setIntelligenceData(intelligencePayload);
+    setWorldControlData(worldControlPayload);
     setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate || militaryPayload.worldDate);
   }, []);
 
@@ -154,6 +160,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       </section>
       <MapCapitalAdminSection />
       <ProvinceRegionAdminSection />
+      {worldControlData ? <WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /> : null}
       {researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
       {intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : null}
       {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
