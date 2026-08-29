@@ -218,13 +218,14 @@ export function PlayHud({
             {
               label: "사용 중",
               value: state.productionCapacity.used?.toString() ?? "미설정",
+              tone: "negative",
             },
             {
               label: "전체 생산능력",
               value: state.productionCapacity.total?.toString() ?? "미설정",
             },
-            { label: "미배치", value: unusedProduction?.toString() ?? "미설정" },
-            { label: "무역 제공", value: state.tradeCapacityProvided?.toString() ?? "미설정", tone: "neutral" },
+            { label: "사용 가능", value: unusedProduction?.toString() ?? "미설정", tone: "positive" },
+            { label: "무역 제공", value: state.tradeCapacityProvided?.toString() ?? "미설정", tone: "negative" },
           ]}
           footer="생산능력은 산업시설과 경제법, 무역 상태의 영향을 받습니다."
         />
