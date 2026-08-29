@@ -133,7 +133,7 @@ export async function loadDecisionRuntime(admin: AdminClient, countryKey: string
   const mergedEconomy = mergeStartingEconomy(
     countryKey,
     economyResult.data ? { country_key: countryKey, ...economyResult.data } : null,
-  ) as EconomyRow | null;
+  ) as unknown as EconomyRow | null;
   return {
     worldDate,
     turn,
