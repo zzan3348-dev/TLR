@@ -8,6 +8,7 @@ import intelligenceAdmin from "../../server/routes/admin/intelligence.js";
 import worldControlAdmin from "../../server/routes/admin/worldControl.js";
 import siteStatusAdmin from "../../server/routes/admin/siteStatus.js";
 import countryApplicationsAdmin from "../../server/routes/admin/countryApplications.js";
+import { expelCountryAssignment } from "../../server/countryApplications.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",
@@ -67,6 +68,40 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const targetUserId = typeof body.targetUserId === "string" ? body.targetUserId : null;
   const targetCountryKey = typeof body.targetCountryKey === "string" ? body.targetCountryKey : null;
   const reason = typeof body.reason === "string" ? body.reason.slice(0, 1000) : "";
+  if (action === "EXPEL_COUNTRY_USER") {
+    if (!targetUserId || !targetCountryKey || !reason.trim()) {
+      response.status(400).json({ error: "INVALID_EXPULSION" });
+      return;
+    }
+    const env = getServerEnv();
+    if (!env) {
+      response.status(503).json({ error: "SERVER_NOT_CONFIGURED" });
+      return;
+    }
+    const admin = getAdminClient(env);
+    try {
+      const result = await expelCountryAssignment(request, admin, {
+        countryKey: targetCountryKey,
+        userId: targetUserId,
+        reason,
+      });
+      const { error: logError } = await admin.from("admin_action_logs").insert({
+        admin_user_id: session.sub,
+        admin_kind: session.kind,
+        target_user_id: targetUserId,
+        target_country_key: targetCountryKey,
+        action_kind: "REVOKE_COUNTRY_OWNERSHIP",
+        reason: reason.trim(),
+        starts_at: new Date().toISOString(),
+        ends_at: null,
+      });
+      response.status(200).json({ ok: true, recorded: !logError, action, ...result });
+    } catch (error) {
+      const code = error instanceof Error ? error.message : "COUNTRY_EXPULSION_FAILED";
+      response.status(code === "ACTIVE_ASSIGNMENT_NOT_FOUND" ? 409 : 503).json({ error: code });
+    }
+    return;
+  }
   if (!actionKinds.has(action) || !reason || (!targetUserId && !targetCountryKey && action !== "SUSPEND_ALL_PLAY")) {
     response.status(400).json({ error: "INVALID_ACTION" });
     return;

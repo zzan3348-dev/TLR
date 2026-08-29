@@ -12591,6 +12591,17 @@ button:disabled { opacity: 0.48; }
 .directorate-site-status__modal div { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
 .directorate-diplomacy__error { margin: 8px; padding: 8px; border: 1px solid #734d49; color: #d67970; }
 .directorate-diplomacy__empty { padding: 24px; color: #78867f; text-align: center; }
+.directorate-expulsion__notice { margin: 8px; padding: 8px; border: 1px solid #4f7259; background: #102018; color: #85c993; }
+.directorate-expulsion__form { display: grid; width: min(420px, 42vw); align-items: end; gap: 5px; grid-template-columns: minmax(170px, 1fr) auto; }
+.directorate-expulsion__form label { grid-column: 1 / -1; color: #a89761; font-size: 10px; font-weight: 700; }
+.directorate-expulsion__form textarea { min-height: 54px; padding: 7px 9px; resize: vertical; border: 1px solid #4a5b56; background: #070c0d; color: #d5d1c5; font: inherit; }
+.directorate-expulsion__form textarea:focus { outline: 1px solid #9b794d; border-color: #9b794d; }
+.directorate-expulsion__form button { min-width: 78px; min-height: 54px; border: 1px solid #874d47; background: linear-gradient(#3b211f, #211313); color: #e49b91; font-weight: 800; }
+.directorate-expulsion__form button:disabled { cursor: not-allowed; opacity: .42; }
+@media (max-width: 760px) {
+  .directorate-expulsion .directorate-diplomacy__queue > article { grid-template-columns: 1fr; }
+  .directorate-expulsion__form { width: 100%; }
+}
 
 /* Research directorate: real image assets remain unboxed and fully visible. */
 .strategic-window--research { width: min(760px, calc(100vw - 28px)); }

@@ -41,6 +41,17 @@ export function countryApplicationMessage(
   return `<@${discordUserId}>님이 <:${emoji.name}:${emoji.id}> ${countryName}을 신청하셨습니다! 개장까지 잠시만 기다려주세요!`;
 }
 
+export function countryExpulsionMessage(
+  discordUsername: string,
+  emoji: Pick<DiscordEmoji, "id" | "name">,
+  countryName: string,
+  reason: string,
+): string {
+  const safeUsername = discordUsername.replace(/[\r\n]/gu, " ").trim();
+  const safeReason = reason.replace(/[\r\n]+/gu, " ").trim();
+  return `${safeUsername}님의 <:${emoji.name}:${emoji.id}>${countryName} 연재 자격을 관리자가 박탈하였습니다\n사유: ${safeReason}`;
+}
+
 function countryByKey(countryKey: string): CatalogCountry | null {
   return (countryCatalog as CatalogCountry[]).find((country) => country.key === countryKey) ?? null;
 }
@@ -277,6 +288,67 @@ async function notifyCountryApplication(
     }
     console.error("country application notification failed", { countryKey: input.countryKey, userId: input.userId, code: failure });
     throw error;
+  }
+}
+
+export async function expelCountryAssignment(
+  request: ApiRequest,
+  admin: AdminClient,
+  input: { countryKey: string; userId: string; reason: string },
+): Promise<{ countryKey: string; userId: string; discordMessageId: string }> {
+  const country = countryByKey(input.countryKey);
+  const reason = input.reason.replace(/[\r\n]+/gu, " ").trim().slice(0, 500);
+  if (!country) throw new Error("COUNTRY_NOT_FOUND");
+  if (!reason) throw new Error("EXPULSION_REASON_REQUIRED");
+
+  const [ownershipResult, profileResult] = await Promise.all([
+    admin.from("country_ownerships")
+      .select("country_key,user_id,status")
+      .eq("country_key", input.countryKey)
+      .eq("user_id", input.userId)
+      .eq("status", "active")
+      .maybeSingle<{ country_key: string; user_id: string; status: string }>(),
+    admin.from("profiles")
+      .select("id,discord_user_id,discord_username")
+      .eq("id", input.userId)
+      .maybeSingle<{ id: string; discord_user_id: string | null; discord_username: string | null }>(),
+  ]);
+  if (ownershipResult.error || profileResult.error) throw new Error("EXPULSION_STATE_UNAVAILABLE");
+  if (!ownershipResult.data) throw new Error("ACTIVE_ASSIGNMENT_NOT_FOUND");
+  if (!profileResult.data?.discord_user_id) throw new Error("DISCORD_PROFILE_NOT_FOUND");
+
+  const now = new Date().toISOString();
+  const revoked = await admin.from("country_ownerships")
+    .update({ status: "revoked", revoked_at: now, updated_at: now })
+    .eq("country_key", input.countryKey)
+    .eq("user_id", input.userId)
+    .eq("status", "active")
+    .select("country_key")
+    .maybeSingle<{ country_key: string }>();
+  if (revoked.error || !revoked.data) throw new Error("COUNTRY_EXPULSION_FAILED");
+
+  try {
+    const token = process.env.DISCORD_BOT_TOKEN;
+    if (!token) throw new Error("DISCORD_BOT_TOKEN_MISSING");
+    const emoji = await ensureCountryEmoji(request, admin, token, country);
+    const username = profileResult.data.discord_username?.trim() || profileResult.data.discord_user_id;
+    const message = await discordJson<{ id: string }>(`${DISCORD_API}/channels/${TLR_APPLICATION_CHANNEL_ID}/messages`, token, {
+      method: "POST",
+      body: JSON.stringify({
+        content: countryExpulsionMessage(username, emoji, country.name, reason),
+        allowed_mentions: { parse: [] },
+        nonce: applicationNonce(`expel-${input.countryKey}-${input.userId}-${now}`),
+        enforce_nonce: true,
+      }),
+    });
+    return { countryKey: input.countryKey, userId: input.userId, discordMessageId: message.id };
+  } catch (error) {
+    console.error("country expulsion notification failed", {
+      countryKey: input.countryKey,
+      userId: input.userId,
+      code: error instanceof Error ? error.message.slice(0, 220) : "UNKNOWN",
+    });
+    throw new Error("COUNTRY_EXPELLED_NOTIFICATION_FAILED", { cause: error });
   }
 }
 
