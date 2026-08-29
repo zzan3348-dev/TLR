@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { createHash } from "node:crypto";
 import { PNG } from "pngjs";
 import countryCatalog from "../src/data/mapCountries.json" with { type: "json" };
 import type { AdminClient } from "./auth.js";
@@ -7,6 +8,10 @@ import type { ApiRequest } from "./types.js";
 export const TLR_DISCORD_GUILD_ID = "1535589795617833021";
 export const TLR_APPLICATION_CHANNEL_ID = "1543182755813138452";
 const DISCORD_API = "https://discord.com/api/v10";
+
+function applicationNonce(value: string): string {
+  return BigInt(`0x${createHash("sha256").update(value).digest("hex").slice(0, 15)}`).toString(10);
+}
 
 type CatalogCountry = { key: string; name: string; flagPath?: string };
 type ApplicationResult = {
@@ -139,7 +144,16 @@ async function ensureCountryEmoji(
     p_guild_id: TLR_DISCORD_GUILD_ID,
     p_emoji_name: emojiName,
   });
-  if (error || !Array.isArray(data) || !data[0]) throw new Error("EMOJI_RESERVATION_FAILED");
+  if (error || !Array.isArray(data) || !data[0]) {
+    const emojis = await discordJson<DiscordEmoji[]>(`${DISCORD_API}/guilds/${TLR_DISCORD_GUILD_ID}/emojis`, token);
+    const existing = emojis.find((emoji) => emoji.name === emojiName);
+    if (existing) return existing;
+    if (!country.flagPath) throw new Error("FLAG_PATH_MISSING");
+    return discordJson<DiscordEmoji>(`${DISCORD_API}/guilds/${TLR_DISCORD_GUILD_ID}/emojis`, token, {
+      method: "POST",
+      body: JSON.stringify({ name: emojiName, image: await loadFlagData(request, country.flagPath) }),
+    });
+  }
   const reservation = data[0] as { emoji_id: string | null; emoji_name: string; emoji_status: string; should_create: boolean };
   if (reservation.emoji_status === "ready" && reservation.emoji_id) {
     return { id: reservation.emoji_id, name: reservation.emoji_name };
@@ -177,12 +191,21 @@ export async function submitCountryApplication(
 ): Promise<ApplicationResult> {
   const country = countryByKey(input.countryKey);
   if (!country) throw new Error("COUNTRY_NOT_FOUND");
+  await ensureDiscordCountryAssignment(admin, input.countryKey, input.userId);
   const { data, error } = await admin.rpc("tlr_begin_country_application", {
     p_country_key: input.countryKey,
     p_user_id: input.userId,
     p_discord_user_id: input.discordUserId,
   });
-  if (error || !Array.isArray(data) || !data[0]) throw new Error(`APPLICATION_BEGIN_FAILED:${error?.message ?? "NO_ROW"}`);
+  if (error || !Array.isArray(data) || !data[0]) {
+    return notifyCountryApplication(request, admin, {
+      applicationId: `legacy-${input.countryKey}-${input.userId}`,
+      countryKey: input.countryKey,
+      userId: input.userId,
+      discordUserId: input.discordUserId,
+      persist: false,
+    });
+  }
   const begun = data[0] as { application_id: string; application_status: string; should_notify: boolean };
   if (!begun.should_notify) {
     return { applicationId: begun.application_id, status: begun.application_status, duplicate: true };
@@ -195,10 +218,31 @@ export async function submitCountryApplication(
   });
 }
 
+async function ensureDiscordCountryAssignment(admin: AdminClient, countryKey: string, userId: string): Promise<void> {
+  const [catalogResult, userOwnershipResult, countryOwnershipResult] = await Promise.all([
+    admin.from("countries").select("country_key").eq("country_key", countryKey).eq("active", true).maybeSingle<{ country_key: string }>(),
+    admin.from("country_ownerships").select("country_key,user_id,status").eq("user_id", userId).eq("status", "active").maybeSingle<{ country_key: string; user_id: string; status: string }>(),
+    admin.from("country_ownerships").select("country_key,user_id,status").eq("country_key", countryKey).maybeSingle<{ country_key: string; user_id: string; status: string }>(),
+  ]);
+  if (catalogResult.error || !catalogResult.data) throw new Error("COUNTRY_NOT_FOUND");
+  if (userOwnershipResult.error || countryOwnershipResult.error) throw new Error("OWNERSHIP_STATE_UNAVAILABLE");
+  if (userOwnershipResult.data && userOwnershipResult.data.country_key !== countryKey) throw new Error("COUNTRY_ALREADY_ASSIGNED");
+  if (countryOwnershipResult.data?.status === "active" && countryOwnershipResult.data.user_id !== userId) throw new Error("COUNTRY_ALREADY_CLAIMED");
+  if (countryOwnershipResult.data?.status === "active") return;
+  const now = new Date().toISOString();
+  const mutation = countryOwnershipResult.data
+    ? await admin.from("country_ownerships").update({ user_id: userId, status: "active", assigned_at: now, revoked_at: null, updated_at: now }).eq("country_key", countryKey).eq("status", "revoked")
+    : await admin.from("country_ownerships").insert({ country_key: countryKey, user_id: userId, status: "active", assigned_at: now, updated_at: now });
+  if (mutation.error) {
+    const code = mutation.error.code === "23505" ? "COUNTRY_ALREADY_CLAIMED" : "COUNTRY_ASSIGNMENT_FAILED";
+    throw new Error(code);
+  }
+}
+
 async function notifyCountryApplication(
   request: ApiRequest,
   admin: AdminClient,
-  input: { applicationId: string; countryKey: string; userId: string; discordUserId: string },
+  input: { applicationId: string; countryKey: string; userId: string; discordUserId: string; persist?: boolean },
 ): Promise<ApplicationResult> {
   const country = countryByKey(input.countryKey);
   if (!country) throw new Error("COUNTRY_NOT_FOUND");
@@ -211,22 +255,26 @@ async function notifyCountryApplication(
       body: JSON.stringify({
         content: countryApplicationMessage(input.discordUserId, emoji, country.name),
         allowed_mentions: { parse: ["users"] },
-        nonce: input.applicationId,
+        nonce: applicationNonce(input.applicationId),
         enforce_nonce: true,
       }),
     });
-    const { error: updateError } = await admin.from("country_applications").update({
-      status: "notified",
-      discord_message_id: message.id,
-      notified_at: new Date().toISOString(),
-      failure_code: null,
-      updated_at: new Date().toISOString(),
-    }).eq("id", input.applicationId);
-    if (updateError) throw new Error("APPLICATION_FINALIZE_FAILED");
+    if (input.persist !== false) {
+      const { error: updateError } = await admin.from("country_applications").update({
+        status: "notified",
+        discord_message_id: message.id,
+        notified_at: new Date().toISOString(),
+        failure_code: null,
+        updated_at: new Date().toISOString(),
+      }).eq("id", input.applicationId);
+      if (updateError) throw new Error("APPLICATION_FINALIZE_FAILED");
+    }
     return { applicationId: input.applicationId, status: "notified", duplicate: false };
   } catch (error) {
     const failure = error instanceof Error ? error.message.slice(0, 220) : "UNKNOWN";
-    await admin.from("country_applications").update({ status: "failed", failure_code: failure, updated_at: new Date().toISOString() }).eq("id", input.applicationId);
+    if (input.persist !== false) {
+      await admin.from("country_applications").update({ status: "failed", failure_code: failure, updated_at: new Date().toISOString() }).eq("id", input.applicationId);
+    }
     console.error("country application notification failed", { countryKey: input.countryKey, userId: input.userId, code: failure });
     throw error;
   }
@@ -242,7 +290,7 @@ export async function dispatchPendingCountryApplications(
     .order("created_at", { ascending: true })
     .limit(62)
     .returns<Array<{ id: string; country_key: string; user_id: string; discord_user_id: string; status: string }>>();
-  if (error) throw new Error("APPLICATION_QUEUE_UNAVAILABLE");
+  if (error) return dispatchLegacyCountryApplications(request, admin);
   let sent = 0;
   let failed = 0;
   for (const row of data ?? []) {
@@ -263,4 +311,42 @@ export async function dispatchPendingCountryApplications(
   }
   const { count } = await admin.from("country_applications").select("id", { count: "exact", head: true }).eq("status", "pending");
   return { sent, failed, remaining: count ?? 0 };
+}
+
+async function dispatchLegacyCountryApplications(
+  request: ApiRequest,
+  admin: AdminClient,
+): Promise<{ sent: number; failed: number; remaining: number }> {
+  const [ownershipResult, adminResult] = await Promise.all([
+    admin.from("country_ownerships").select("country_key,user_id").eq("status", "active").returns<Array<{ country_key: string; user_id: string }>>(),
+    admin.from("navi_admin_members").select("profile_id").eq("active", true).returns<Array<{ profile_id: string }>>(),
+  ]);
+  if (ownershipResult.error) throw new Error("LEGACY_APPLICATION_QUEUE_UNAVAILABLE");
+  const adminIds = new Set((adminResult.data ?? []).map((row) => row.profile_id));
+  const ownerships = (ownershipResult.data ?? []).filter((row) => !adminIds.has(row.user_id));
+  const userIds = [...new Set(ownerships.map((row) => row.user_id))];
+  const profilesResult = userIds.length
+    ? await admin.from("profiles").select("id,discord_user_id").in("id", userIds).returns<Array<{ id: string; discord_user_id: string }>>()
+    : { data: [], error: null };
+  if (profilesResult.error) throw new Error("LEGACY_PROFILE_QUEUE_UNAVAILABLE");
+  const discordIds = new Map((profilesResult.data ?? []).map((row) => [row.id, row.discord_user_id]));
+  let sent = 0;
+  let failed = 0;
+  for (const row of ownerships) {
+    const discordUserId = discordIds.get(row.user_id);
+    if (!discordUserId) { failed += 1; continue; }
+    try {
+      await notifyCountryApplication(request, admin, {
+        applicationId: `legacy-${row.country_key}-${row.user_id}`,
+        countryKey: row.country_key,
+        userId: row.user_id,
+        discordUserId,
+        persist: false,
+      });
+      sent += 1;
+    } catch {
+      failed += 1;
+    }
+  }
+  return { sent, failed, remaining: 0 };
 }

@@ -186,11 +186,16 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         discordUserId: profile.discord_user_id,
       });
     } catch (applicationError) {
+      const applicationCode = applicationError instanceof Error ? applicationError.message : "UNKNOWN";
       console.error("country application failed", {
         countryKey,
         userId: user.id,
         code: applicationError instanceof Error ? applicationError.message.slice(0, 220) : "UNKNOWN",
       });
+      if (applicationCode === "COUNTRY_ALREADY_ASSIGNED" || applicationCode === "COUNTRY_ALREADY_CLAIMED") {
+        response.status(409).json({ error: applicationCode, countryKey: ownershipCountryKey });
+        return;
+      }
       response.status(503).json({ error: "COUNTRY_APPLICATION_FAILED" });
       return;
     }

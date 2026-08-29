@@ -1,11 +1,12 @@
-import { requireAdminSession } from "../../adminAuth.js";
+import { getAdminSession } from "../../adminAuth.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { dispatchPendingCountryApplications } from "../../countryApplications.js";
+import { requireNaviService } from "../../naviAuth.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
 
 export default async function countryApplicationsAdmin(request: ApiRequest, response: ApiResponse): Promise<void> {
   if (request.method !== "GET" && request.method !== "POST") return void response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
-  if (!requireAdminSession(request, response)) return;
+  if (!getAdminSession(request) && !requireNaviService(request, response)) return;
   const env = getServerEnv();
   if (!env) return void response.status(503).json({ error: "SERVER_NOT_CONFIGURED" });
   const admin = getAdminClient(env);

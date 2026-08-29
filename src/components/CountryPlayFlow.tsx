@@ -129,7 +129,7 @@ function ConfirmationDialog({
           </h2>
           <p>{presentation.title}</p>
           <strong id="country-play-confirmation-warning">
-            신청은 국가 운영권 배정이 아니며, 개장 전에는 플레이할 수 없습니다.
+            Discord 계정에 국가가 배정되며, 개장 전에는 플레이할 수 없습니다.
           </strong>
           {error ? <p className="country-play-confirmation__error" role="alert">{error}</p> : null}
         </div>

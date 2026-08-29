@@ -161,7 +161,11 @@ export default function App() {
     try {
       const result = await submitCountryApplication(country.key);
       if (!result.ok) {
-        setCountryApplicationError("국가 신청 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        const messages: Record<string, string> = {
+          COUNTRY_ALREADY_ASSIGNED: "이미 다른 국가가 Discord 계정에 배정되어 있습니다.",
+          COUNTRY_ALREADY_CLAIMED: "이미 다른 Discord 계정에 배정된 국가입니다.",
+        };
+        setCountryApplicationError(messages[result.error ?? ""] ?? "국가 신청 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
         return false;
       }
       await refreshAuth();
