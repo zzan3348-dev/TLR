@@ -20,7 +20,6 @@ type PlayHudProps = {
   state: PlaySimulationState;
   activeWindow: PrimaryWindow;
   onOpenWindow: (window: PrimaryWindow) => void;
-  onExitPlayMode: () => void;
   mapMode: MapMode;
   onChangeMapMode: (mode: MapMode) => void;
 };
@@ -72,7 +71,6 @@ export function PlayHud({
   state,
   activeWindow,
   onOpenWindow,
-  onExitPlayMode,
   mapMode,
   onChangeMapMode,
 }: PlayHudProps) {
@@ -318,15 +316,6 @@ export function PlayHud({
             <small>{button.label}</small>
           </button>
         ))}
-        <span className="play-hud__divider" aria-hidden="true" />
-        <button
-          type="button"
-          className="play-hud__exit"
-          onClick={onExitPlayMode}
-        >
-          <UiIcon name="menu/exit" />
-          <small>국가선택</small>
-        </button>
       </nav>
       <WorldControlHud countryKey={country.key} mapMode={mapMode} onChangeMapMode={onChangeMapMode} />
     </header>

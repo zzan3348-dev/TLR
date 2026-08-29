@@ -5,7 +5,8 @@ import { TexturedActionButton } from "./TexturedActionButton";
 export type CountryPlayStep =
   | "closed"
   | "description"
-  | "confirmation";
+  | "confirmation"
+  | "complete";
 
 type CountryPlayFlowProps = {
   country: MapCountryIndex | null;
@@ -67,7 +68,7 @@ function DescriptionDialog({
           disabled={obscured}
           autoFocus={!obscured}
         >
-          플레이하기
+          국가 신청
         </TexturedActionButton>
         <TexturedActionButton
           tone="gray"
@@ -120,15 +121,15 @@ function ConfirmationDialog({
           aria-hidden="true"
         />
         <header className="country-play-confirmation__title">
-          국가 선택 확인
+          국가 신청 확인
         </header>
         <div className="country-play-confirmation__message">
           <h2 id="country-play-confirmation-title">
-            정말 플레이하시겠습니까?
+            정말 신청하시겠습니까?
           </h2>
           <p>{presentation.title}</p>
           <strong id="country-play-confirmation-warning">
-            해당 선택은 관리자의 승인 없이 바꿀 수 없습니다!
+            신청은 국가 운영권 배정이 아니며, 개장 전에는 플레이할 수 없습니다.
           </strong>
           {error ? <p className="country-play-confirmation__error" role="alert">{error}</p> : null}
         </div>
@@ -141,11 +142,31 @@ function ConfirmationDialog({
       </div>
       <div className="country-play-confirmation__actions">
         <TexturedActionButton tone="green" onClick={onConfirm} disabled={busy} autoFocus>
-          {busy ? "서버 등록 중…" : "확인"}
+          {busy ? "신청 중…" : "신청하기"}
         </TexturedActionButton>
         <TexturedActionButton tone="gray" onClick={onBack}>
           돌아가기
         </TexturedActionButton>
+      </div>
+    </section>
+  );
+}
+
+function CompletionDialog({ onClose }: { onClose: () => void }) {
+  return (
+    <section className="country-play-confirmation" role="dialog" aria-modal="true" aria-labelledby="country-application-complete-title">
+      <div className="country-play-confirmation__frame-wrap">
+        <img className="country-play-confirmation__frame" src="/assets/ui/play-confirmation-frame.png" alt="" draggable={false} aria-hidden="true" />
+        <header className="country-play-confirmation__title">국가 신청</header>
+        <div className="country-play-confirmation__message">
+          <h2 id="country-application-complete-title">완료되었습니다</h2>
+          <p>국가 신청이 접수되었습니다.</p>
+          <strong>개장까지 잠시만 기다려주세요.</strong>
+        </div>
+        <button type="button" className="country-play-confirmation__close" onClick={onClose} aria-label="신청 완료창 닫기" />
+      </div>
+      <div className="country-play-confirmation__actions">
+        <TexturedActionButton tone="green" onClick={onClose} autoFocus>확인</TexturedActionButton>
       </div>
     </section>
   );
@@ -166,14 +187,16 @@ export function CountryPlayFlow({
   }
 
   const isConfirmationOpen = step === "confirmation";
+  const isCompleteOpen = step === "complete";
+  const isModalOpen = isConfirmationOpen || isCompleteOpen;
 
   return (
     <div
       className="country-play-layer"
-      role={isConfirmationOpen ? undefined : "dialog"}
-      aria-modal={isConfirmationOpen ? undefined : true}
+      role={isModalOpen ? undefined : "dialog"}
+      aria-modal={isModalOpen ? undefined : true}
       aria-label={
-        isConfirmationOpen ? undefined : `${country.name} 국가 설명`
+        isModalOpen ? undefined : `${country.name} 국가 설명`
       }
       data-step={step}
     >
@@ -184,7 +207,7 @@ export function CountryPlayFlow({
       <DescriptionDialog
         key={step}
         country={country}
-        obscured={isConfirmationOpen}
+        obscured={isModalOpen}
         onClose={onClose}
         onRequestConfirmation={onRequestConfirmation}
       />
@@ -197,6 +220,7 @@ export function CountryPlayFlow({
           error={error}
         />
       ) : null}
+      {isCompleteOpen ? <CompletionDialog onClose={onClose} /> : null}
     </div>
   );
 }

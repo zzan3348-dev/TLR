@@ -18,11 +18,19 @@ export type AuthProfile = {
   blockedReason: string | null;
   blockedAt: string | null;
   countryKey: string | null;
+  siteStatus: "pre_open" | "open";
+  application: {
+    id: string;
+    countryKey: string;
+    status: string;
+    createdAt: string;
+    notifiedAt: string | null;
+  } | null;
 };
 
-export type CountryClaimResult = {
+export type CountryApplicationResult = {
   ok: boolean;
-  countryKey?: string;
+  application?: AuthProfile["application"];
   error?: string;
 };
 
@@ -156,6 +164,8 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
   }
   const row = profile as Record<string, unknown>;
   const ownershipCountryKey = (payload as { ownershipCountryKey?: unknown }).ownershipCountryKey;
+  const siteStatusPayload = (payload as { siteStatus?: unknown }).siteStatus;
+  const applicationPayload = (payload as { application?: unknown }).application;
   if (
     typeof row.id !== "string" ||
     typeof row.discord_user_id !== "string" ||
@@ -165,6 +175,12 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
   ) {
     return null;
   }
+  const siteStatusRecord = siteStatusPayload && typeof siteStatusPayload === "object"
+    ? siteStatusPayload as Record<string, unknown>
+    : null;
+  const applicationRecord = applicationPayload && typeof applicationPayload === "object"
+    ? applicationPayload as Record<string, unknown>
+    : null;
   return {
     id: row.id,
     discordUserId: row.discord_user_id,
@@ -179,10 +195,20 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
       typeof row.blocked_reason === "string" ? row.blocked_reason : null,
     blockedAt: typeof row.blocked_at === "string" ? row.blocked_at : null,
     countryKey: typeof ownershipCountryKey === "string" ? ownershipCountryKey : null,
+    siteStatus: siteStatusRecord?.status === "open" ? "open" : "pre_open",
+    application: applicationRecord && typeof applicationRecord.id === "string" && typeof applicationRecord.country_key === "string"
+      ? {
+          id: applicationRecord.id,
+          countryKey: applicationRecord.country_key,
+          status: typeof applicationRecord.status === "string" ? applicationRecord.status : "pending",
+          createdAt: typeof applicationRecord.created_at === "string" ? applicationRecord.created_at : "",
+          notifiedAt: typeof applicationRecord.notified_at === "string" ? applicationRecord.notified_at : null,
+        }
+      : null,
   };
 }
 
-export async function claimCountryOwnership(countryKey: string): Promise<CountryClaimResult> {
+export async function submitCountryApplication(countryKey: string): Promise<CountryApplicationResult> {
   const session = await getSession();
   if (!session) return { ok: false, error: "UNAUTHORIZED" };
   const response = await fetch("/api/auth/session", {
@@ -192,19 +218,28 @@ export async function claimCountryOwnership(countryKey: string): Promise<Country
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify({ action: "CLAIM_COUNTRY", countryKey }),
+    body: JSON.stringify({ action: "APPLY_COUNTRY", countryKey }),
   });
   const payload: unknown = await response.json().catch(() => ({}));
   const record = payload && typeof payload === "object" ? payload as Record<string, unknown> : {};
   if (!response.ok) {
     return {
       ok: false,
-      error: typeof record.error === "string" ? record.error : "COUNTRY_CLAIM_FAILED",
-      countryKey: typeof record.countryKey === "string" ? record.countryKey : undefined,
+      error: typeof record.error === "string" ? record.error : "COUNTRY_APPLICATION_FAILED",
     };
   }
   return {
     ok: true,
-    countryKey: typeof record.ownershipCountryKey === "string" ? record.ownershipCountryKey : countryKey,
+    application: record.application && typeof record.application === "object"
+      ? {
+          id: String((record.application as Record<string, unknown>).id ?? ""),
+          countryKey: String((record.application as Record<string, unknown>).country_key ?? countryKey),
+          status: String((record.application as Record<string, unknown>).status ?? "pending"),
+          createdAt: String((record.application as Record<string, unknown>).created_at ?? ""),
+          notifiedAt: typeof (record.application as Record<string, unknown>).notified_at === "string"
+            ? (record.application as Record<string, unknown>).notified_at as string
+            : null,
+        }
+      : undefined,
   };
 }

@@ -2,6 +2,7 @@
 import { timingSafeEqual } from "node:crypto";
 import type { ApiRequest, ApiResponse } from "./types.js";
 import { getAdminClient, getServerEnv, type AdminClient } from "./auth.js";
+import { requireSiteOpen } from "./siteStatus.js";
 
 export type NaviActor = {
   profileId: string;
@@ -92,6 +93,7 @@ export async function requireNaviActor(
     response.status(403).json({ error: "PLAY_ACCESS_BLOCKED", accessStatus: profile.access_status });
     return null;
   }
+  if (!await requireSiteOpen(admin, response)) return null;
   const { data: ownership, error: ownershipError } = await admin
     .from("country_ownerships")
     .select("country_key,status")

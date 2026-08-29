@@ -10,6 +10,7 @@ import { MapCapitalAdminSection } from "./MapCapitalAdminSection";
 import { ProvinceRegionAdminSection } from "./ProvinceRegionAdminSection";
 import { WorldControlAdminSection } from "../features/world-control/components/WorldControlAdminSection";
 import type { WorldControlAdminData } from "../features/world-control/types";
+import { SiteStatusAdminSection } from "./SiteStatusAdminSection";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -158,6 +159,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <section className="directorate-page__status">
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
+      <SiteStatusAdminSection />
       <MapCapitalAdminSection />
       <ProvinceRegionAdminSection />
       {worldControlData ? <WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /> : null}

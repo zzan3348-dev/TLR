@@ -31,7 +31,6 @@ import { createUnsetDevelopmentState } from "../utils/developmentState";
 type PoliticsPanelProps = {
   country: MapCountryIndex;
   onClose: () => void;
-  onExitPlayMode: () => void;
 };
 
 const SECTION_META: readonly {
@@ -138,7 +137,6 @@ export function PoliticsLeaderInfo({
 export function PoliticsPanel({
   country,
   onClose,
-  onExitPlayMode,
 }: PoliticsPanelProps) {
   const presentation = getCountryPresentation(country);
   const actualLawState = countryLawStates[country.key];
@@ -297,9 +295,6 @@ export function PoliticsPanel({
                   <strong>국가 법률</strong>
                   <span>정치·군사·경제·사회 제도</span>
                 </div>
-                <button type="button" onClick={onExitPlayMode}>
-                  국가선택
-                </button>
               </header>
               <div className="politics-template__law-scroll">
                 {SECTION_META.map(({ category, title, icon }) => (

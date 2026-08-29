@@ -6,6 +6,8 @@ import {
   getAuthenticatedUser,
   getServerEnv,
 } from "../../server/auth.js";
+import { submitCountryApplication } from "../../server/countryApplications.js";
+import { loadSiteStatus } from "../../server/siteStatus.js";
 
 type ProfileRow = {
   id: string;
@@ -33,7 +35,7 @@ type OwnershipRow = {
 function requestedCountryKey(request: ApiRequest): string | null {
   if (request.method !== "POST" || !request.body || typeof request.body !== "object") return null;
   const body = request.body as { action?: unknown; countryKey?: unknown };
-  return body.action === "CLAIM_COUNTRY"
+  return body.action === "APPLY_COUNTRY"
     && typeof body.countryKey === "string"
     && /^country-\d{3}$/u.test(body.countryKey)
     ? body.countryKey
@@ -166,58 +168,57 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     return;
   }
 
-  let ownershipCountryKey = activeOwnership?.country_key ?? null;
+  const ownershipCountryKey = activeOwnership?.country_key ?? null;
   if (request.method === "POST") {
     const countryKey = requestedCountryKey(request);
     if (!countryKey) {
-      response.status(400).json({ error: "INVALID_COUNTRY_CLAIM" });
+      response.status(400).json({ error: "INVALID_COUNTRY_APPLICATION" });
       return;
     }
     if (profile.access_status !== "active") {
       response.status(403).json({ error: "PLAY_ACCESS_BLOCKED", accessStatus: profile.access_status });
       return;
     }
-    if (ownershipCountryKey && ownershipCountryKey !== countryKey) {
-      response.status(409).json({ error: "COUNTRY_ALREADY_ASSIGNED", countryKey: ownershipCountryKey });
+    try {
+      await submitCountryApplication(request, admin, {
+        countryKey,
+        userId: user.id,
+        discordUserId: profile.discord_user_id,
+      });
+    } catch (applicationError) {
+      console.error("country application failed", {
+        countryKey,
+        userId: user.id,
+        code: applicationError instanceof Error ? applicationError.message.slice(0, 220) : "UNKNOWN",
+      });
+      response.status(503).json({ error: "COUNTRY_APPLICATION_FAILED" });
       return;
     }
-    if (!ownershipCountryKey) {
-      const { data: country, error: countryError } = await admin
-        .from("countries")
-        .select("country_key")
-        .eq("country_key", countryKey)
-        .eq("active", true)
-        .maybeSingle<{ country_key: string }>();
-      if (countryError || !country) {
-        response.status(countryError ? 503 : 404).json({ error: countryError ? "COUNTRY_CATALOG_UNAVAILABLE" : "COUNTRY_NOT_FOUND" });
-        return;
-      }
-      const { data: occupied, error: occupiedError } = await admin
-        .from("country_ownerships")
-        .select("country_key, user_id, status")
-        .eq("country_key", countryKey)
-        .maybeSingle<OwnershipRow>();
-      if (occupiedError) {
-        response.status(503).json({ error: "OWNERSHIP_STATE_UNAVAILABLE" });
-        return;
-      }
-      if (occupied) {
-        response.status(409).json({ error: occupied.status === "active" ? "COUNTRY_ALREADY_CLAIMED" : "COUNTRY_UNAVAILABLE" });
-        return;
-      }
-      const { error: claimError } = await admin.from("country_ownerships").insert({
-        country_key: countryKey,
-        user_id: user.id,
-        status: "active",
-      });
-      if (claimError) {
-        const code = typeof claimError === "object" && claimError && "code" in claimError ? String(claimError.code) : "";
-        response.status(code === "23505" ? 409 : 503).json({ error: code === "23505" ? "COUNTRY_ALREADY_CLAIMED" : "COUNTRY_CLAIM_FAILED" });
-        return;
-      }
-      ownershipCountryKey = countryKey;
-    }
   }
+
+  let siteStatus;
+  try {
+    siteStatus = await loadSiteStatus(admin);
+  } catch {
+    response.status(503).json({ error: "SITE_STATUS_UNAVAILABLE" });
+    return;
+  }
+  const { data: storedApplication, error: applicationLookupError } = await admin
+    .from("country_applications")
+    .select("id,country_key,status,created_at,notified_at")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle<{ id: string; country_key: string; status: string; created_at: string; notified_at: string | null }>();
+  const application = applicationLookupError && ownershipCountryKey
+    ? {
+        id: `legacy-${user.id}`,
+        country_key: ownershipCountryKey,
+        status: "pending",
+        created_at: "",
+        notified_at: null,
+      }
+    : storedApplication;
 
   await admin.from("auth_devices").upsert({
     user_id: user.id,
@@ -248,5 +249,5 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     asn: signals.asn,
   });
 
-  response.status(200).json({ profile, ownershipCountryKey });
+  response.status(200).json({ profile, ownershipCountryKey, siteStatus, application });
 }

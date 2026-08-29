@@ -15,7 +15,6 @@ type PlayWindowManagerProps = {
   activeWindow: PrimaryWindow;
   simulationState: PlaySimulationState;
   onCloseWindow: () => void;
-  onExitPlayMode: () => void;
   onOpenWindow: (window: PrimaryWindow) => void;
 };
 
@@ -25,7 +24,6 @@ export function PlayWindowManager({
   activeWindow,
   simulationState,
   onCloseWindow,
-  onExitPlayMode,
   onOpenWindow,
 }: PlayWindowManagerProps) {
   if (activeWindow === "politics") {
@@ -34,7 +32,6 @@ export function PlayWindowManager({
         key={playerCountry.key}
         country={playerCountry}
         onClose={onCloseWindow}
-        onExitPlayMode={onExitPlayMode}
       />
     );
   }

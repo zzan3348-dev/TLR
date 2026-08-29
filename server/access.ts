@@ -1,5 +1,6 @@
 import type { ApiRequest, ApiResponse } from "./types.js";
 import { getAuthenticatedUser, type AdminClient } from "./auth.js";
+import { requireSiteOpen } from "./siteStatus.js";
 
 export type ActiveProfile = {
   id: string;
@@ -30,5 +31,6 @@ export async function requireActiveUser(
     response.status(403).json({ error: "PLAY_ACCESS_BLOCKED", accessStatus: profile.access_status });
     return null;
   }
+  if (!await requireSiteOpen(admin, response)) return null;
   return { userId: user.id, profile };
 }

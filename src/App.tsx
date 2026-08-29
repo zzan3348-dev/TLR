@@ -26,7 +26,6 @@ import type { EconomySnapshot } from "./features/economy/types";
 import { getPlaySimulationState } from "./features/play/data/playSimulationState";
 import {
   clearPlayCountryKey,
-  readPlayCountryKey,
   storePlayCountryKey,
 } from "./features/play/playSession";
 import type { PrimaryWindow } from "./features/play/types";
@@ -36,7 +35,7 @@ import type {
 } from "./types/mapCountry";
 import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
-import { claimCountryOwnership, signOut } from "./services/authService";
+import { signOut, submitCountryApplication } from "./services/authService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -53,13 +52,6 @@ function readStoredProvinceSetting(): boolean {
   }
 }
 
-function readStoredPlayCountry(): MapCountryIndex | null {
-  const storedKey = readPlayCountryKey();
-  return (
-    mapCountries.find((country) => country.key === storedKey) ?? null
-  );
-}
-
 export default function App() {
   const { profile, loading: authLoading, refresh: refreshAuth } = useAuth();
   const mapRef = useRef<WorldMapHandle>(null);
@@ -74,9 +66,8 @@ export default function App() {
   const [selection, setSelection] = useState<SelectedMapTerritory | null>(null);
   const [countryPlayStep, setCountryPlayStep] =
     useState<CountryPlayStep>("closed");
-  const [playCountry, setPlayCountry] = useState<MapCountryIndex | null>(
-    readStoredPlayCountry,
-  );
+  const [playCountry, setPlayCountry] = useState<MapCountryIndex | null>(null);
+  const [applicationCountry, setApplicationCountry] = useState<MapCountryIndex | null>(null);
   const [activePlayWindow, setActivePlayWindow] =
     useState<PrimaryWindow>("politics");
   const [inspectedCountry, setInspectedCountry] =
@@ -95,8 +86,8 @@ export default function App() {
   const [directorateAccessOpen, setDirectorateAccessOpen] = useState(false);
   const [economySnapshot, setEconomySnapshot] =
     useState<EconomySnapshot | null>(null);
-  const [countryClaimBusy, setCountryClaimBusy] = useState(false);
-  const [countryClaimError, setCountryClaimError] = useState<string | null>(null);
+  const [countryApplicationBusy, setCountryApplicationBusy] = useState(false);
+  const [countryApplicationError, setCountryApplicationError] = useState<string | null>(null);
 
   useEffect(() => {
     const audio = new Audio("/audio/tlr-bgm.mp3");
@@ -159,17 +150,35 @@ export default function App() {
     storePlayCountryKey(country.key);
     setCountryPlayStep("closed");
     setSelection(null);
-    setCountryClaimError(null);
+    setCountryApplicationError(null);
     window.history.replaceState({}, "", `/play/${country.key}`);
   }, []);
+
+  const applyForCountry = useCallback(async (country: MapCountryIndex) => {
+    setCountryApplicationBusy(true);
+    setCountryApplicationError(null);
+    setApplicationCountry(country);
+    try {
+      const result = await submitCountryApplication(country.key);
+      if (!result.ok) {
+        setCountryApplicationError("국가 신청 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        return false;
+      }
+      await refreshAuth();
+      setCountryPlayStep("complete");
+      return true;
+    } finally {
+      setCountryApplicationBusy(false);
+    }
+  }, [refreshAuth]);
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (authLoading) return;
-    const match = window.location.pathname.match(/^\/(?:play|claim-country)\/([^/]+)$/u);
+    const match = window.location.pathname.match(/^\/(play|claim-country)\/([^/]+)$/u);
     if (!match) return;
     const country = mapCountries.find(
-      (candidate) => candidate.key === decodeURIComponent(match[1]),
+      (candidate) => candidate.key === decodeURIComponent(match[2]),
     );
     if (!country) {
       window.history.replaceState({}, "", "/");
@@ -189,22 +198,43 @@ export default function App() {
       setScreen("title");
       return;
     }
-    const requestedCountry = profile.countryKey
-      ? mapCountries.find((candidate) => candidate.key === profile.countryKey) ?? country
-      : country;
-    if (verifiedPlayCountryRef.current === requestedCountry.key) return;
-    setCountryClaimBusy(true);
-    void claimCountryOwnership(requestedCountry.key).then(async (result) => {
-      if (!result.ok) {
-        setCountryClaimError(result.error ?? "COUNTRY_CLAIM_FAILED");
-        setScreen("map");
-        return;
-      }
-      enterCountryPlay(requestedCountry);
-      setScreen("map");
-      await refreshAuth();
-    }).finally(() => setCountryClaimBusy(false));
-  }, [authLoading, enterCountryPlay, profile, refreshAuth]);
+    setScreen("map");
+    if (match[1] === "claim-country") {
+      window.history.replaceState({}, "", "/");
+      void applyForCountry(country);
+      return;
+    }
+    if (profile.siteStatus !== "open" || !profile.countryKey) {
+      verifiedPlayCountryRef.current = null;
+      setPlayCountry(null);
+      clearPlayCountryKey();
+      const waitingCountry = profile.application
+        ? mapCountries.find((candidate) => candidate.key === profile.application?.countryKey) ?? country
+        : country;
+      setApplicationCountry(waitingCountry);
+      if (profile.application) setCountryPlayStep("complete");
+      window.history.replaceState({}, "", "/");
+      return;
+    }
+    const assignedCountry = mapCountries.find((candidate) => candidate.key === profile.countryKey);
+    if (!assignedCountry || verifiedPlayCountryRef.current === assignedCountry.key) return;
+    enterCountryPlay(assignedCountry);
+  }, [applyForCountry, authLoading, enterCountryPlay, profile]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  /* 개장 전에는 기존 세션이나 조작된 클라이언트 상태로도 플레이 HUD를 유지하지 않는다. */
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (authLoading || !playCountry) return;
+    if (!profile || profile.siteStatus !== "open" || profile.countryKey !== playCountry.key) {
+      verifiedPlayCountryRef.current = null;
+      setPlayCountry(null);
+      setInspectedCountry(null);
+      setActivePlayWindow(null);
+      clearPlayCountryKey();
+      window.history.replaceState({}, "", "/");
+    }
+  }, [authLoading, playCountry, profile]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
@@ -269,42 +299,8 @@ export default function App() {
       setAuthModalOpen(true);
       return;
     }
-    setCountryClaimBusy(true);
-    setCountryClaimError(null);
-    void claimCountryOwnership(selection.country.key).then(async (result) => {
-      if (!result.ok) {
-        if (result.error === "COUNTRY_ALREADY_ASSIGNED" && result.countryKey) {
-          const assigned = mapCountries.find((country) => country.key === result.countryKey);
-          if (assigned) {
-            enterCountryPlay(assigned);
-            await refreshAuth();
-            return;
-          }
-        }
-        const messages: Record<string, string> = {
-          COUNTRY_ALREADY_CLAIMED: "이미 다른 플레이어가 운영 중인 국가입니다.",
-          COUNTRY_UNAVAILABLE: "관리자에 의해 현재 선택할 수 없는 국가입니다.",
-          PLAY_ACCESS_BLOCKED: "현재 계정은 국가 플레이가 제한되어 있습니다.",
-          COUNTRY_CLAIM_FAILED: "국가 등록 서버가 응답하지 않았습니다. 잠시 뒤 다시 시도하십시오.",
-        };
-        setCountryClaimError(messages[result.error ?? ""] ?? "국가 운영권을 등록하지 못했습니다.");
-        return;
-      }
-      enterCountryPlay(selection.country);
-      await refreshAuth();
-    }).finally(() => setCountryClaimBusy(false));
-  }, [enterCountryPlay, profile, refreshAuth, selection]);
-
-  const exitPlayMode = useCallback(() => {
-    verifiedPlayCountryRef.current = null;
-    setPlayCountry(null);
-    setInspectedCountry(null);
-    setActivePlayWindow(null);
-    setSelection(null);
-    clearPlayCountryKey();
-    setCountryPlayStep("closed");
-    window.history.replaceState({}, "", "/");
-  }, []);
+    void applyForCountry(selection.country);
+  }, [applyForCountry, profile, selection]);
 
   const closePlayWindow = useCallback(() => {
     setActivePlayWindow(null);
@@ -518,7 +514,6 @@ export default function App() {
             state={playSimulationState}
             activeWindow={activePlayWindow}
             onOpenWindow={setActivePlayWindow}
-            onExitPlayMode={exitPlayMode}
             mapMode={mapMode}
             onChangeMapMode={setMapMode}
           />
@@ -561,7 +556,6 @@ export default function App() {
             activeWindow={activePlayWindow}
             simulationState={playSimulationState}
             onCloseWindow={closePlayWindow}
-            onExitPlayMode={exitPlayMode}
             onOpenWindow={setActivePlayWindow}
           />
         ) : null}
@@ -569,16 +563,16 @@ export default function App() {
         {playCountry ? <WarDeclarationAlert /> : null}
       </section>
       <CountryPlayFlow
-        country={selection?.country ?? null}
+        country={selection?.country ?? applicationCountry}
         step={countryPlayStep}
-        onClose={() => setCountryPlayStep("closed")}
+        onClose={() => { setCountryPlayStep("closed"); setApplicationCountry(null); }}
         onRequestConfirmation={() =>
           setCountryPlayStep("confirmation")
         }
         onBack={() => setCountryPlayStep("description")}
         onConfirm={confirmCountryPlay}
-        busy={countryClaimBusy}
-        error={countryClaimError}
+        busy={countryApplicationBusy}
+        error={countryApplicationError}
       />
       <AuthModal
         open={authModalOpen}
