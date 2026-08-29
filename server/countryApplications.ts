@@ -348,7 +348,7 @@ export async function expelCountryAssignment(
       userId: input.userId,
       code: error instanceof Error ? error.message.slice(0, 220) : "UNKNOWN",
     });
-    throw new Error("COUNTRY_EXPELLED_NOTIFICATION_FAILED", { cause: error });
+    throw Object.assign(new Error("COUNTRY_EXPELLED_NOTIFICATION_FAILED"), { cause: error });
   }
 }
 
