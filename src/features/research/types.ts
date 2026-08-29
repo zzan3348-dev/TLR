@@ -32,6 +32,7 @@ export type ResearchOverview = {
   worldDate: string;
   balance: number;
   incomePerPeriod: number;
+  researchCapacity: number;
   categories: ResearchCategory[];
   projects: ResearchProject[];
 };

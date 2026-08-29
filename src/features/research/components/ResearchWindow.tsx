@@ -15,7 +15,7 @@ const STATUS: Record<ResearchProject["status"], string> = {
 
 function emptyOverview(countryKey: string): ResearchOverview {
   return {
-    countryKey, worldDate: "1932-01-01", balance: 0, incomePerPeriod: 0,
+    countryKey, worldDate: "1932-01-01", balance: 0, incomePerPeriod: 0, researchCapacity: 0,
     categories: [
       { id: "general", name: "일반 연구", description: "국가 연구 계획" },
       { id: "industry", name: "산업", description: "생산·기반시설 연구" },

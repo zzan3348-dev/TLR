@@ -22,6 +22,8 @@
     "generate-status-icons": "node scripts/extract-status-icons.mjs",
     "import-party-data": "node scripts/import-party-data.mjs",
     "import-starting-data": "node scripts/import-tlr-starting-data.mjs",
+    "import-country-base-stats": "node scripts/import-country-base-stats.mjs",
+    "audit-country-hud-data": "node scripts/audit-country-hud-data.mjs",
     "merge-western-papua": "node scripts/merge-western-papua.mjs",
     "split-selected-colonies": "node scripts/split-selected-colonies.mjs",
     "update-map-source": "node scripts/update-map-source.mjs"

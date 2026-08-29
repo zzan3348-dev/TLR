@@ -1,5 +1,7 @@
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import type { EconomySnapshot } from "../../economy/types";
+import { getStartingCapacity, getStartingEconomy } from "../../economy/data/countryEconomyStates";
+import { getCountryBaseStats } from "./countryBaseStats";
 
 export type ProductionCapacity = {
   total: number | null;
@@ -13,9 +15,14 @@ export type PlaySimulationState = {
   countryKey: string;
   politicalPower: number;
   politicalPowerChange: number;
+  basePoliticalPower: number;
+  baseStability: number;
   stability: number;
+  baseWarSupport: number;
   warSupport: number;
+  baseManpower: number;
   manpower: number;
+  reservedManpower: number;
   productionCapacity: ProductionCapacity;
   gdp: number | null;
   nominalGrowth: number | null;
@@ -25,6 +32,10 @@ export type PlaySimulationState = {
   debtToGdp: number | null;
   povertyRate: number | null;
   unemploymentRate: number | null;
+  researchCapacity: number | null;
+  tradeCapacityProvided: number | null;
+  bondInterestRate: number | null;
+  creditRating: string | null;
   graphs: {
     gdp: readonly number[];
     inflation: readonly number[];
@@ -39,9 +50,14 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
   countryKey: "__placeholder__",
   politicalPower: 0,
   politicalPowerChange: 0,
+  basePoliticalPower: 0,
+  baseStability: 0,
   stability: 0,
+  baseWarSupport: 0,
   warSupport: 0,
+  baseManpower: 0,
   manpower: 0,
+  reservedManpower: 0,
   productionCapacity: {
     total: null,
     used: null,
@@ -57,6 +73,10 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
   debtToGdp: null,
   povertyRate: null,
   unemploymentRate: null,
+  researchCapacity: null,
+  tradeCapacityProvided: null,
+  bondInterestRate: null,
+  creditRating: null,
   graphs: {
     gdp: [0, 0, 0, 0, 0, 0],
     inflation: [0, 0, 0, 0, 0, 0],
@@ -71,13 +91,25 @@ export function getPlaySimulationState(
   country: MapCountryIndex,
   snapshot: EconomySnapshot | null = null,
 ): PlaySimulationState {
-  const economy = snapshot?.economy ?? null;
-  const capacity = snapshot?.productionCapacity ?? null;
+  const economy = snapshot?.economy ?? getStartingEconomy(country.key);
+  const capacity = snapshot?.productionCapacity ?? getStartingCapacity(economy);
   const gdp = economy?.gdp ?? null;
   const debt = economy?.national_debt ?? null;
+  const nationalStats = snapshot?.nationalStats ?? null;
+  const baseStats = getCountryBaseStats(country.key);
   return {
     ...ZERO_PLAY_SIMULATION_STATE,
     countryKey: country.key,
+    politicalPower: nationalStats?.politicalPower ?? baseStats?.base_political_power ?? 0,
+    politicalPowerChange: nationalStats?.politicalPowerPerTurn ?? baseStats?.political_power_per_turn ?? 0,
+    basePoliticalPower: nationalStats?.basePoliticalPower ?? baseStats?.base_political_power ?? 0,
+    baseStability: nationalStats?.baseStability ?? baseStats?.base_stability ?? 0,
+    stability: nationalStats?.stability ?? baseStats?.base_stability ?? 0,
+    baseWarSupport: nationalStats?.baseWarSupport ?? baseStats?.base_war_support ?? 0,
+    warSupport: nationalStats?.warSupport ?? baseStats?.base_war_support ?? 0,
+    baseManpower: nationalStats?.baseAvailableManpower ?? baseStats?.base_available_manpower ?? 0,
+    manpower: nationalStats?.availableManpower ?? baseStats?.base_available_manpower ?? 0,
+    reservedManpower: nationalStats?.reservedManpower ?? 0,
     productionCapacity: capacity
       ? {
           total: capacity.effective_capacity,
@@ -97,9 +129,18 @@ export function getPlaySimulationState(
     debt,
     debtToGdp: debt != null && gdp != null && gdp !== 0 ? (debt / gdp) * 100 : null,
     unemploymentRate: economy?.unemployment_rate ?? null,
+    povertyRate: economy?.poverty_rate ?? null,
+    researchCapacity: economy?.research_capacity ?? null,
+    tradeCapacityProvided: economy?.trade_capacity_provided ?? null,
+    bondInterestRate: economy?.bond_interest_rate ?? null,
+    creditRating: economy?.credit_rating ?? null,
     graphs: { ...ZERO_PLAY_SIMULATION_STATE.graphs },
-    isPlaceholder: !snapshot?.economy,
-    dataStatus: snapshot ? snapshot.readiness.toLowerCase() as PlaySimulationState["dataStatus"] : "unconfigured",
+    isPlaceholder: !economy || !baseStats,
+    dataStatus: economy && baseStats
+      ? snapshot
+        ? snapshot.readiness.toLowerCase() as PlaySimulationState["dataStatus"]
+        : "ready"
+      : "unconfigured",
   };
 }
 

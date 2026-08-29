@@ -8,6 +8,8 @@ import {
 } from "../src/features/decisions/data/commonDecisions.js";
 import type { AdminClient } from "./auth.js";
 import { currentWorldDate } from "./diplomacy.js";
+import { mergeStartingEconomy } from "./startingEconomies.js";
+import { currentNumber, startingCountryStatsForCountry } from "./startingCountryStats.js";
 
 type DecisionStateRow = {
   country_key: string;
@@ -112,12 +114,32 @@ export async function loadDecisionRuntime(admin: AdminClient, countryKey: string
   ]);
   const failed = [metricsResult, economyResult, manpowerResult, partyResult, modifierResult, executionResult, warResult].find((result) => result.error);
   if (failed?.error) throw failed.error;
+  const startingStats = startingCountryStatsForCountry(countryKey);
+  const rawMetrics = metricsResult.data;
+  const metrics = startingStats
+    ? {
+        country_key: countryKey,
+        political_power: currentNumber(rawMetrics?.political_power, startingStats.base_political_power),
+        political_power_gain_modifier: currentNumber(rawMetrics?.political_power_gain_modifier, 0),
+        stability: currentNumber(rawMetrics?.stability, startingStats.base_stability),
+        war_support: currentNumber(rawMetrics?.war_support, startingStats.base_war_support),
+        poverty_rate: numeric(rawMetrics?.poverty_rate),
+        living_standard_stage: numeric(rawMetrics?.living_standard_stage),
+        living_standard_max_stage: numeric(rawMetrics?.living_standard_max_stage),
+      }
+    : rawMetrics ?? null;
+  const mergedEconomy = mergeStartingEconomy(
+    countryKey,
+    economyResult.data ? { country_key: countryKey, ...economyResult.data } : null,
+  ) as EconomyRow | null;
   return {
     worldDate,
     turn,
-    metrics: metricsResult.data ?? null,
-    economy: economyResult.data ?? null,
-    manpower: numeric(manpowerResult.data?.available_manpower),
+    metrics,
+    economy: mergedEconomy,
+    manpower: startingStats
+      ? currentNumber(manpowerResult.data?.available_manpower, startingStats.base_available_manpower)
+      : numeric(manpowerResult.data?.available_manpower),
     atWar: (warResult.data?.length ?? 0) > 0,
     parties: partyOptions(countryKey, partyResult.data ?? []),
     modifiers: modifierResult.data ?? [],

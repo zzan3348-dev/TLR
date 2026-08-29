@@ -1,0 +1,560 @@
+{
+  "country-001": {
+    "country_key": "country-001",
+    "country_name": "컬럼비아 개척연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 3200000
+  },
+  "country-002": {
+    "country_key": "country-002",
+    "country_name": "대영제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1450000
+  },
+  "country-003": {
+    "country_key": "country-003",
+    "country_name": "러시아 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 3600000
+  },
+  "country-004": {
+    "country_key": "country-004",
+    "country_name": "러시아 제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1650000
+  },
+  "country-005": {
+    "country_key": "country-005",
+    "country_name": "노르드 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 520000
+  },
+  "country-006": {
+    "country_key": "country-006",
+    "country_name": "발트 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 210000
+  },
+  "country-007": {
+    "country_key": "country-007",
+    "country_name": "오대호 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 850000
+  },
+  "country-008": {
+    "country_key": "country-008",
+    "country_name": "독일민주공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1650000
+  },
+  "country-009": {
+    "country_key": "country-009",
+    "country_name": "알라시 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 230000
+  },
+  "country-010": {
+    "country_key": "country-010",
+    "country_name": "황러시아",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 320000
+  },
+  "country-011": {
+    "country_key": "country-011",
+    "country_name": "폴란드 사회민주공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 360000
+  },
+  "country-012": {
+    "country_key": "country-012",
+    "country_name": "대청제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 5200000
+  },
+  "country-013": {
+    "country_key": "country-013",
+    "country_name": "프랑스 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1350000
+  },
+  "country-014": {
+    "country_key": "country-014",
+    "country_name": "우크라이나 농민연방공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1100000
+  },
+  "country-015": {
+    "country_key": "country-015",
+    "country_name": "몽골국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 65000
+  },
+  "country-016": {
+    "country_key": "country-016",
+    "country_name": "보헤미아 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 240000
+  },
+  "country-017": {
+    "country_key": "country-017",
+    "country_name": "바이에른사회주의공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 270000
+  },
+  "country-018": {
+    "country_key": "country-018",
+    "country_name": "대일본제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1850000
+  },
+  "country-019": {
+    "country_key": "country-019",
+    "country_name": "헝가리 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 310000
+  },
+  "country-020": {
+    "country_key": "country-020",
+    "country_name": "신강 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 160000
+  },
+  "country-021": {
+    "country_key": "country-021",
+    "country_name": "오스트리아 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 220000
+  },
+  "country-022": {
+    "country_key": "country-022",
+    "country_name": "루마니아 사회주의 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 500000
+  },
+  "country-023": {
+    "country_key": "country-023",
+    "country_name": "스위스 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 145000
+  },
+  "country-024": {
+    "country_key": "country-024",
+    "country_name": "이탈리아 인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1250000
+  },
+  "country-025": {
+    "country_key": "country-025",
+    "country_name": "유고슬라비아 인민연방공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 760000
+  },
+  "country-026": {
+    "country_key": "country-026",
+    "country_name": "캅카스 인민연방공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 330000
+  },
+  "country-027": {
+    "country_key": "country-027",
+    "country_name": "투르키스탄 민주인민공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 430000
+  },
+  "country-028": {
+    "country_key": "country-028",
+    "country_name": "대한제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 900000
+  },
+  "country-029": {
+    "country_key": "country-029",
+    "country_name": "이베리아 사회주의 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1000000
+  },
+  "country-030": {
+    "country_key": "country-030",
+    "country_name": "아라곤 자유지대",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 180000
+  },
+  "country-031": {
+    "country_key": "country-031",
+    "country_name": "오스만 제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1300000
+  },
+  "country-032": {
+    "country_key": "country-032",
+    "country_name": "이란 입헌왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 620000
+  },
+  "country-033": {
+    "country_key": "country-033",
+    "country_name": "노바 메히코 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 780000
+  },
+  "country-034": {
+    "country_key": "country-034",
+    "country_name": "작센-초 연합왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1350000
+  },
+  "country-035": {
+    "country_key": "country-035",
+    "country_name": "티베트 왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 90000
+  },
+  "country-036": {
+    "country_key": "country-036",
+    "country_name": "신프로이센 왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 520000
+  },
+  "country-037": {
+    "country_key": "country-037",
+    "country_name": "카리브 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 260000
+  },
+  "country-038": {
+    "country_key": "country-038",
+    "country_name": "사천 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1700000
+  },
+  "country-039": {
+    "country_key": "country-039",
+    "country_name": "신도나우 연합제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 900000
+  },
+  "country-040": {
+    "country_key": "country-040",
+    "country_name": "사우디아라비아 제2국가",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 150000
+  },
+  "country-041": {
+    "country_key": "country-041",
+    "country_name": "네팔 왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 185000
+  },
+  "country-042": {
+    "country_key": "country-042",
+    "country_name": "신프랑스 연방왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 2650000
+  },
+  "country-043": {
+    "country_key": "country-043",
+    "country_name": "신사보이 왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 520000
+  },
+  "country-044": {
+    "country_key": "country-044",
+    "country_name": "만데 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 240000
+  },
+  "country-045": {
+    "country_key": "country-045",
+    "country_name": "광둥 해양공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 850000
+  },
+  "country-046": {
+    "country_key": "country-046",
+    "country_name": "그란콜롬비아 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 520000
+  },
+  "country-047": {
+    "country_key": "country-047",
+    "country_name": "소코토 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 390000
+  },
+  "country-048": {
+    "country_key": "country-048",
+    "country_name": "에티오피아 제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 520000
+  },
+  "country-049": {
+    "country_key": "country-049",
+    "country_name": "대브라질 제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1450000
+  },
+  "country-050": {
+    "country_key": "country-050",
+    "country_name": "아샨티 제국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 150000
+  },
+  "country-051": {
+    "country_key": "country-051",
+    "country_name": "벨기에-콩고 왕령",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 380000
+  },
+  "country-052": {
+    "country_key": "country-052",
+    "country_name": "페루-볼리비아 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 360000
+  },
+  "country-053": {
+    "country_key": "country-053",
+    "country_name": "오라녜-누산타라 연합왕국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 1750000
+  },
+  "country-054": {
+    "country_key": "country-054",
+    "country_name": "칠레 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 150000
+  },
+  "country-055": {
+    "country_key": "country-055",
+    "country_name": "로디지아 인권동맹연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 360000
+  },
+  "country-056": {
+    "country_key": "country-056",
+    "country_name": "아르헨티나 공화국",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 460000
+  },
+  "country-057": {
+    "country_key": "country-057",
+    "country_name": "캐나다 자치령",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 330000
+  },
+  "country-058": {
+    "country_key": "country-058",
+    "country_name": "영국령 인도",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 5500000
+  },
+  "country-059": {
+    "country_key": "country-059",
+    "country_name": "필리핀 제도정부",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 420000
+  },
+  "country-060": {
+    "country_key": "country-060",
+    "country_name": "오스트레일리아 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 240000
+  },
+  "country-061": {
+    "country_key": "country-061",
+    "country_name": "남아프리카 연방",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 310000
+  },
+  "country-062": {
+    "country_key": "country-062",
+    "country_name": "뉴질랜드 자치령",
+    "base_political_power": 300,
+    "political_power_per_turn": 200,
+    "base_stability": 100,
+    "base_war_support": 60,
+    "base_available_manpower": 60000
+  }
+}

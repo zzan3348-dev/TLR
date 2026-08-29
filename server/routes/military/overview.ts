@@ -2,6 +2,7 @@ import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { countryFromQuery } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
+import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
 
 type CapacityRow = { available?: unknown };
 
@@ -38,9 +39,12 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const capacity = capacityData && typeof capacityData === "object" && "available" in capacityData
       ? Number((capacityData as CapacityRow).available)
       : null;
-    const manpower = resources.data?.available_manpower === null || resources.data?.available_manpower === undefined
-      ? null
-      : Number(resources.data.available_manpower);
+    const startingStats = startingCountryStatsForCountry(countryKey);
+    const manpower = startingStats
+      ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
+      : resources.data?.available_manpower === null || resources.data?.available_manpower === undefined
+        ? null
+        : Number(resources.data.available_manpower);
     const reasons: string[] = [];
     if (manpower === null) reasons.push("가용 인력 수치가 아직 설정되지 않았습니다.");
     if (!Number.isFinite(capacity)) reasons.push("생산 능력 수치가 아직 설정되지 않았습니다.");

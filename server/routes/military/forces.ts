@@ -3,6 +3,7 @@ import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { cleanUuid, requireMilitaryActor } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
+import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
 
 type RequestBody = { template_id?: unknown; display_name?: unknown; idempotency_key?: unknown; object_kind?: unknown; object_id?: unknown; assigned_front_id?: unknown };
 
@@ -81,7 +82,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const capacityNeeded = Number(template.data.production_capacity_required);
     const formationDays = Number(template.data.formation_days);
     if (![manpowerNeeded, capacityNeeded, formationDays].every(Number.isFinite)) { response.status(409).json({ error: "TEMPLATE_COSTS_UNCONFIGURED" }); return; }
-    const availableManpower = resources.data?.available_manpower;
+    const startingStats = startingCountryStatsForCountry(actor.countryKey);
+    const availableManpower = startingStats
+      ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
+      : resources.data?.available_manpower;
     if (availableManpower === null || availableManpower === undefined) { response.status(409).json({ error: "MANPOWER_UNCONFIGURED" }); return; }
     const capacityData = Array.isArray(capacityResult.data) ? capacityResult.data[0] : capacityResult.data;
     const availableCapacity = capacityData && typeof capacityData === "object" && "available" in capacityData ? Number(capacityData.available) : Number.NaN;

@@ -19,7 +19,11 @@ export function mergeStartingEconomy(
 ): StartingEconomyRow | null {
   const startingRow = startingEconomyForCountry(countryKey);
   if (!startingRow) return databaseRow;
-  return databaseRow ? { ...startingRow, ...databaseRow } : startingRow;
+  if (!databaseRow) return startingRow;
+  const configuredDatabaseValues = Object.fromEntries(
+    Object.entries(databaseRow).filter(([, value]) => value !== null && value !== undefined),
+  );
+  return { ...startingRow, ...configuredDatabaseValues };
 }
 
 export function startingCapacityForEconomy(

@@ -79,6 +79,7 @@ export function PlayHud({
   const presentation = getCountryPresentation(country);
   const [researchPower, setResearchPower] = useState(0);
   const [researchIncome, setResearchIncome] = useState(0);
+  const researchCapacity = state.researchCapacity;
   const politicalPower = Number.isFinite(state.politicalPower)
     ? state.politicalPower
     : 0;
@@ -146,8 +147,8 @@ export function PlayHud({
               value: formatSigned(state.politicalPowerChange),
               tone: signedTone(state.politicalPowerChange),
             },
-            { label: "법률 효과", value: "+0.00", tone: "neutral" },
-            { label: "국가과제 효과", value: "+0.00", tone: "neutral" },
+            { label: "시작 정치력", value: state.basePoliticalPower.toFixed(2), tone: "neutral" },
+            { label: "증가 주기", value: "턴당", tone: "neutral" },
           ]}
           footer="정치력은 법률 변경, 디시전, 외교 행동의 비용으로 사용됩니다."
         />
@@ -159,9 +160,12 @@ export function PlayHud({
           intro="현 정부와 국가 질서에 대한 사회의 지지 수준입니다."
           lines={[
             { label: "현재 안정도", value: formatPercent(state.stability) },
-            { label: "기본 수치", value: "0.00%", tone: "neutral" },
-            { label: "정당·법률 효과", value: "+0.00%", tone: "neutral" },
-            { label: "최근 사회 변화", value: "+0.00%", tone: "neutral" },
+            { label: "기본 수치", value: formatPercent(state.baseStability), tone: "neutral" },
+            {
+              label: "적용 효과 합계",
+              value: `${formatSigned(state.stability - state.baseStability)}%`,
+              tone: signedTone(state.stability - state.baseStability),
+            },
           ]}
           footer="안정도는 정치력 획득과 행정·생산 효율에 영향을 줍니다."
         />
@@ -177,9 +181,12 @@ export function PlayHud({
               label: "현재 전쟁 지지도",
               value: formatPercent(state.warSupport),
             },
-            { label: "기본 수치", value: "0.00%", tone: "neutral" },
-            { label: "법률 효과", value: "+0.00%", tone: "neutral" },
-            { label: "전쟁 상태 효과", value: "+0.00%", tone: "neutral" },
+            { label: "기본 수치", value: formatPercent(state.baseWarSupport), tone: "neutral" },
+            {
+              label: "적용 효과 합계",
+              value: `${formatSigned(state.warSupport - state.baseWarSupport)}%`,
+              tone: signedTone(state.warSupport - state.baseWarSupport),
+            },
           ]}
           footer="전쟁 지지도는 동원, 전시법과 장기전 대응에 영향을 줍니다."
         />
@@ -191,9 +198,13 @@ export function PlayHud({
           intro="현재 추가로 동원하거나 국가사업에 투입할 수 있는 인력입니다."
           lines={[
             { label: "가용 인력", value: formatInteger(state.manpower) },
-            { label: "사용 중인 인력", value: "0", tone: "neutral" },
-            { label: "육군·해군·공군", value: "0 / 0 / 0" },
-            { label: "월간 증가", value: "+0", tone: "neutral" },
+            { label: "기본 가용 인력", value: formatInteger(state.baseManpower), tone: "neutral" },
+            { label: "편성 예약 인력", value: formatInteger(state.reservedManpower), tone: "neutral" },
+            {
+              label: "적용 후 차이",
+              value: formatSigned(state.manpower - state.baseManpower),
+              tone: signedTone(state.manpower - state.baseManpower),
+            },
           ]}
           footer="징병제와 인구 구조가 동원 가능한 전체 인력을 결정합니다."
         />
@@ -213,17 +224,18 @@ export function PlayHud({
               value: state.productionCapacity.total?.toString() ?? "미설정",
             },
             { label: "미배치", value: unusedProduction?.toString() ?? "미설정" },
-            { label: "무역 제공", value: "0", tone: "neutral" },
+            { label: "무역 제공", value: state.tradeCapacityProvided?.toString() ?? "미설정", tone: "neutral" },
           ]}
           footer="생산능력은 산업시설과 경제법, 무역 상태의 영향을 받습니다."
         />
         <HudMetric
           id="research-power"
           icon="hud/research-power"
-          label="연구력"
-          value={researchPower.toFixed(2)}
-          intro="국가 연구 계획을 제안하고 승인된 연구에 투자하는 데 사용하는 자원입니다."
+          label="연구역량"
+          value={researchCapacity?.toFixed(2) ?? "미설정"}
+          intro="경제·교육·산업 기반을 종합한 국가의 기본 연구 수행 역량입니다."
           lines={[
+            { label: "국가 연구역량", value: researchCapacity?.toFixed(2) ?? "미설정" },
             { label: "현재 연구력", value: researchPower.toFixed(2) },
             {
               label: "정산당 획득",
@@ -274,8 +286,8 @@ export function PlayHud({
               label: "GDP 대비 부채",
               value: formatPercent(state.debtToGdp),
             },
-            { label: "국채금리", value: "0.00%", tone: "neutral" },
-            { label: "신용등급", value: "N/A" },
+            { label: "국채금리", value: formatPercent(state.bondInterestRate), tone: "neutral" },
+            { label: "신용등급", value: state.creditRating ?? "미설정" },
           ]}
           footer="부채가 증가하면 국채 이자와 재정정책의 부담이 커집니다."
         />

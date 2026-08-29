@@ -66,12 +66,28 @@ export type CapacityRecord = {
   available: number;
 };
 
+export type NationalStatsRecord = {
+  basePoliticalPower: number;
+  politicalPower: number;
+  basePoliticalPowerPerTurn: number;
+  politicalPowerPerTurn: number;
+  politicalPowerGainModifier: number;
+  baseStability: number;
+  stability: number;
+  baseWarSupport: number;
+  warSupport: number;
+  baseAvailableManpower: number;
+  availableManpower: number;
+  reservedManpower: number;
+};
+
 export type EconomySnapshot = {
   countryKey: string;
   worldDate: string;
   readiness: EconomyReadiness;
   economy: EconomyRecord | null;
   productionCapacity: CapacityRecord | null;
+  nationalStats: NationalStatsRecord | null;
   resources: ResourceRecord[];
   history: Array<Record<string, unknown>>;
   rules: { settlement_interval_days: number; budget_min: number; budget_max: number; budget_step: number };
