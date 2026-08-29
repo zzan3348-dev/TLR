@@ -199,9 +199,20 @@ export function PlayHud({
           lines={[
             { label: "가용 인력", value: formatInteger(state.manpower) },
             { label: "기본 가용 인력", value: formatInteger(state.baseManpower), tone: "neutral" },
-            { label: "편성 예약 인력", value: formatInteger(state.reservedManpower), tone: "neutral" },
             {
-              label: "적용 후 차이",
+              label: "수정치 적용 동원풀",
+              value: formatInteger(state.mobilizableManpower),
+              tone: signedTone(state.manpowerModifierPercent),
+            },
+            {
+              label: "가용 인력 수정치",
+              value: `${formatSigned(state.manpowerModifierPercent)}%`,
+              tone: signedTone(state.manpowerModifierPercent),
+            },
+            { label: "현역 병력", value: formatInteger(state.activeMilitaryManpower), tone: "negative" },
+            { label: "편성 예약 인력", value: formatInteger(state.reservedManpower), tone: "negative" },
+            {
+              label: "기본값 대비 현재 차이",
               value: formatSigned(state.manpower - state.baseManpower),
               tone: signedTone(state.manpower - state.baseManpower),
             },

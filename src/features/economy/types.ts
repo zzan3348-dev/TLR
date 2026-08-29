@@ -74,11 +74,24 @@ export type NationalStatsRecord = {
   politicalPowerGainModifier: number;
   baseStability: number;
   stability: number;
+  stabilityModifierPoints: number;
   baseWarSupport: number;
   warSupport: number;
+  warSupportModifierPoints: number;
   baseAvailableManpower: number;
+  manpowerModifierPercent: number;
+  mobilizableManpower: number;
+  activeMilitaryManpower: number;
   availableManpower: number;
   reservedManpower: number;
+  modifierBreakdown: Array<{
+    key: "available_manpower" | "stability" | "war_support" | "political_power_gain";
+    value: number;
+    unit: "relative_percent" | "percentage_point";
+    sourceType: "law" | "national_spirit" | "decision";
+    sourceId: string;
+    label: string;
+  }>;
 };
 
 export type EconomySnapshot = {

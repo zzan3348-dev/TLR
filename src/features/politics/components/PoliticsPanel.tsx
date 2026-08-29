@@ -175,6 +175,7 @@ export function PoliticsPanel({
       setChoices((current) => {
         const next = { ...current, [lawId]: optionId };
         storeSessionLawChoices(country.key, next);
+        window.dispatchEvent(new CustomEvent("tlr:economy-updated"));
         return next;
       });
     },

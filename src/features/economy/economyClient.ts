@@ -1,4 +1,5 @@
 import { supabase } from "../../lib/supabaseClient";
+import { readSessionLawChoices } from "../play/playSession";
 import type { EconomySnapshot, TradeAgreement, TradeCountrySummary, TradeLine, TradeNotification, TradeProposal } from "./types";
 
 export class EconomyApiError extends Error {
@@ -6,7 +7,10 @@ export class EconomyApiError extends Error {
 }
 
 async function headers(countryKey: string): Promise<HeadersInit> {
-  const result: Record<string, string> = { "Content-Type": "application/json" };
+  const result: Record<string, string> = {
+    "Content-Type": "application/json",
+    "x-tlr-law-choices": encodeURIComponent(JSON.stringify(readSessionLawChoices(countryKey))),
+  };
   const session = await supabase?.auth.getSession();
   const token = session?.data.session?.access_token;
   if (token) result.Authorization = `Bearer ${token}`;

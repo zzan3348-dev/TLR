@@ -2,6 +2,8 @@ import { randomUUID } from "node:crypto";
 import { getAdminClient, getServerEnv, type AdminClient } from "../../auth.js";
 import { currentWorldDate, requireDiplomacyActor } from "../../diplomacy.js";
 import { confidenceForInfiltration, estimateRange, operationScores } from "../../intelligenceEngine.js";
+import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
+import { worldTurn } from "../../decisions.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
 
 const DOMAINS = new Set(["ECONOMY", "ADMINISTRATION_POLITICS", "RESEARCH", "MILITARY", "UNDERGROUND"]);
@@ -14,22 +16,27 @@ async function chargePoliticalPower(admin: AdminClient, countryKey: string, amou
   const result = await admin.rpc("tlr_charge_intelligence_political_power", { p_country: countryKey, p_amount: amount });
   if (result.error) throw new Error(result.error.message.includes("INSUFFICIENT") ? "INSUFFICIENT_POLITICAL_POWER" : result.error.message.includes("UNSET") ? "POLITICAL_POWER_UNSET" : "POLITICAL_POWER_CHARGE_FAILED");
 }
-async function snapshotPayload(admin: AdminClient, target: string, domain: string, confidence: ReturnType<typeof confidenceForInfiltration>): Promise<Record<string, unknown>> {
+async function snapshotPayload(admin: AdminClient, target: string, domain: string, confidence: ReturnType<typeof confidenceForInfiltration>, worldDate: string): Promise<Record<string, unknown>> {
   if (domain === "ECONOMY") {
     const { data } = await admin.from("country_economies").select("gdp,base_production_capacity,national_income,unemployment_rate").eq("country_key", target).maybeSingle<Record<string, unknown>>();
     return Object.fromEntries(Object.entries(data ?? {}).map(([name, value]) => [name, typeof value === "number" ? estimateRange(value, confidence) : "미설정"]));
   }
   if (domain === "MILITARY") {
-    const { data } = await admin.from("country_military_resources").select("available_manpower").eq("country_key", target).maybeSingle<{ available_manpower: number | null }>();
-    return { available_manpower: typeof data?.available_manpower === "number" ? estimateRange(data.available_manpower, confidence) : "미설정", classification: "군사 동원력 추정" };
+    const stats = await loadCalculatedNationalStats(admin, target, worldTurn(worldDate), {}, worldDate);
+    return { available_manpower: stats ? estimateRange(stats.availableManpower, confidence) : "미설정", classification: "군사 동원력 추정" };
   }
   if (domain === "RESEARCH") {
     const { data } = await admin.from("country_economies").select("research_capacity,research_points").eq("country_key", target).maybeSingle<Record<string, unknown>>();
     return Object.fromEntries(Object.entries(data ?? {}).map(([name, value]) => [name, typeof value === "number" ? estimateRange(value, confidence) : "미설정"]));
   }
   if (domain === "ADMINISTRATION_POLITICS") {
-    const { data } = await admin.from("country_decision_states").select("stability,war_support,political_power").eq("country_key", target).maybeSingle<Record<string, unknown>>();
-    return Object.fromEntries(Object.entries(data ?? {}).map(([name, value]) => [name, typeof value === "number" ? estimateRange(value, confidence) : "미설정"]));
+    const stats = await loadCalculatedNationalStats(admin, target, worldTurn(worldDate), {}, worldDate);
+    if (!stats) return { stability: "미설정", war_support: "미설정", political_power: "미설정" };
+    return {
+      stability: estimateRange(stats.stability, confidence),
+      war_support: estimateRange(stats.warSupport, confidence),
+      political_power: estimateRange(stats.politicalPower, confidence),
+    };
   }
   return { classification: "지하조직 활동 추정", activity: confidence === "VERY_LOW" ? "판단 불가" : confidence === "LOW" ? "미약" : "접촉망 존재" };
 }
@@ -61,7 +68,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       const domain = typeof body.domain === "string" && DOMAINS.has(body.domain) ? body.domain : null; if (!target || !domain) throw new Error("INVALID_COLLECTION");
       const networkResult = await admin.from("spy_networks").select("*").eq("observer_country_id", actor.countryKey).eq("target_country_id", target).maybeSingle<Record<string, unknown>>();
       if (!networkResult.data) throw new Error("NETWORK_REQUIRED"); const infiltration = Number(networkResult.data[INFILTRATION_COLUMNS[domain]] ?? 0); if (infiltration < 5) throw new Error("INFILTRATION_TOO_LOW");
-      await chargePoliticalPower(admin, actor.countryKey, 10); const confidence = confidenceForInfiltration(infiltration); const payload = await snapshotPayload(admin, target, domain, confidence);
+      await chargePoliticalPower(admin, actor.countryKey, 10); const confidence = confidenceForInfiltration(infiltration); const payload = await snapshotPayload(admin, target, domain, confidence, worldDate);
       const inserted = await admin.from("intelligence_snapshots").insert({ observer_country_id: actor.countryKey, target_country_id: target, domain, acquired_world_date: worldDate, confidence, expires_world_date: datePlus(worldDate, 30), payload }).select("id").single();
       if (inserted.error) throw inserted.error; response.status(200).json({ ok: true, id: inserted.data.id }); return;
     }

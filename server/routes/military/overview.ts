@@ -3,6 +3,8 @@ import { getAdminClient, getServerEnv } from "../../auth.js";
 import { countryFromQuery } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
 import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
+import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
+import { worldTurn } from "../../decisions.js";
 
 type CapacityRow = { available?: unknown };
 
@@ -40,11 +42,12 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       ? Number((capacityData as CapacityRow).available)
       : null;
     const startingStats = startingCountryStatsForCountry(countryKey);
-    const manpower = startingStats
+    const calculatedStats = await loadCalculatedNationalStats(admin, countryKey, worldTurn(worldDate), {}, worldDate);
+    const manpower = calculatedStats?.availableManpower ?? (startingStats
       ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
       : resources.data?.available_manpower === null || resources.data?.available_manpower === undefined
         ? null
-        : Number(resources.data.available_manpower);
+        : Number(resources.data.available_manpower));
     const reasons: string[] = [];
     if (manpower === null) reasons.push("가용 인력 수치가 아직 설정되지 않았습니다.");
     if (!Number.isFinite(capacity)) reasons.push("생산 능력 수치가 아직 설정되지 않았습니다.");
@@ -56,7 +59,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       worldDate,
       readiness: reasons.length === 0 ? "READY" : reasons.length >= 3 ? "UNCONFIGURED" : "PARTIAL",
       reasons,
-      manpower: { available: manpower, reserved: Number(resources.data?.reserved_manpower ?? 0) },
+      manpower: {
+        available: manpower,
+        base: calculatedStats?.baseAvailableManpower ?? startingStats?.base_available_manpower ?? null,
+        mobilizable: calculatedStats?.mobilizableManpower ?? manpower,
+        modifierPercent: calculatedStats?.manpowerModifierPercent ?? 0,
+        active: calculatedStats?.activeMilitaryManpower ?? 0,
+        reserved: calculatedStats?.reservedManpower ?? Number(resources.data?.reserved_manpower ?? 0),
+      },
       productionCapacity: { available: Number.isFinite(capacity) ? capacity : null, reserved: Number(resources.data?.reserved_production_capacity ?? 0) },
       templates: templates.data ?? [], units: units.data ?? [], vessels: vessels.data ?? [], fleets: fleets.data ?? [],
       airWings: airWings.data ?? [], queues: queues.data ?? [], conflicts: conflicts.data ?? [],

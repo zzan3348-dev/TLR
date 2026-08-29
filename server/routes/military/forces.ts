@@ -4,6 +4,8 @@ import { getAdminClient, getServerEnv } from "../../auth.js";
 import { cleanUuid, requireMilitaryActor } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
 import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
+import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
+import { worldTurn } from "../../decisions.js";
 
 type RequestBody = { template_id?: unknown; display_name?: unknown; idempotency_key?: unknown; object_kind?: unknown; object_id?: unknown; assigned_front_id?: unknown };
 
@@ -83,23 +85,24 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const formationDays = Number(template.data.formation_days);
     if (![manpowerNeeded, capacityNeeded, formationDays].every(Number.isFinite)) { response.status(409).json({ error: "TEMPLATE_COSTS_UNCONFIGURED" }); return; }
     const startingStats = startingCountryStatsForCountry(actor.countryKey);
-    const availableManpower = startingStats
+    const worldDate = await currentWorldDate(admin);
+    const calculatedStats = await loadCalculatedNationalStats(admin, actor.countryKey, worldTurn(worldDate), {}, worldDate);
+    const availableManpower = calculatedStats?.availableManpower ?? (startingStats
       ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
-      : resources.data?.available_manpower;
+      : resources.data?.available_manpower);
     if (availableManpower === null || availableManpower === undefined) { response.status(409).json({ error: "MANPOWER_UNCONFIGURED" }); return; }
     const capacityData = Array.isArray(capacityResult.data) ? capacityResult.data[0] : capacityResult.data;
     const availableCapacity = capacityData && typeof capacityData === "object" && "available" in capacityData ? Number(capacityData.available) : Number.NaN;
     if (!Number.isFinite(availableCapacity)) { response.status(409).json({ error: "PRODUCTION_CAPACITY_UNCONFIGURED" }); return; }
     const reservedManpower = Number(resources.data?.reserved_manpower ?? 0);
     const reservedCapacity = Number(resources.data?.reserved_production_capacity ?? 0);
-    if (Number(availableManpower) - reservedManpower < manpowerNeeded) { response.status(409).json({ error: "INSUFFICIENT_MANPOWER" }); return; }
+    if (Number(availableManpower) < manpowerNeeded) { response.status(409).json({ error: "INSUFFICIENT_MANPOWER" }); return; }
     if (availableCapacity - reservedCapacity < capacityNeeded) { response.status(409).json({ error: "INSUFFICIENT_PRODUCTION_CAPACITY" }); return; }
     const nextVersion = Number(resources.data?.version ?? 0) + 1;
     const resourceMutation = resources.data
       ? await admin.from("country_military_resources").update({ reserved_manpower: reservedManpower + manpowerNeeded, reserved_production_capacity: reservedCapacity + capacityNeeded, version: nextVersion, updated_at: new Date().toISOString() }).eq("country_key", actor.countryKey).eq("version", resources.data.version).select("version").maybeSingle()
       : await admin.from("country_military_resources").insert({ country_key: actor.countryKey, available_manpower: availableManpower, reserved_manpower: manpowerNeeded, reserved_production_capacity: capacityNeeded, version: 1 }).select("version").maybeSingle();
     if (resourceMutation.error || !resourceMutation.data) { response.status(409).json({ error: "MILITARY_RESOURCE_CONFLICT" }); return; }
-    const worldDate = await currentWorldDate(admin);
     const queue = await admin.from("military_creation_queues").insert({
       country_key: actor.countryKey, template_id: templateId, force_kind: template.data.force_kind,
       requested_name: displayName, manpower_reserved: manpowerNeeded, production_capacity_reserved: capacityNeeded,

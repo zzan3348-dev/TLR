@@ -21,6 +21,9 @@ export type PlaySimulationState = {
   baseWarSupport: number;
   warSupport: number;
   baseManpower: number;
+  manpowerModifierPercent: number;
+  mobilizableManpower: number;
+  activeMilitaryManpower: number;
   manpower: number;
   reservedManpower: number;
   productionCapacity: ProductionCapacity;
@@ -56,6 +59,9 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
   baseWarSupport: 0,
   warSupport: 0,
   baseManpower: 0,
+  manpowerModifierPercent: 0,
+  mobilizableManpower: 0,
+  activeMilitaryManpower: 0,
   manpower: 0,
   reservedManpower: 0,
   productionCapacity: {
@@ -108,6 +114,9 @@ export function getPlaySimulationState(
     baseWarSupport: nationalStats?.baseWarSupport ?? baseStats?.base_war_support ?? 0,
     warSupport: nationalStats?.warSupport ?? baseStats?.base_war_support ?? 0,
     baseManpower: nationalStats?.baseAvailableManpower ?? baseStats?.base_available_manpower ?? 0,
+    manpowerModifierPercent: nationalStats?.manpowerModifierPercent ?? 0,
+    mobilizableManpower: nationalStats?.mobilizableManpower ?? baseStats?.base_available_manpower ?? 0,
+    activeMilitaryManpower: nationalStats?.activeMilitaryManpower ?? 0,
     manpower: nationalStats?.availableManpower ?? baseStats?.base_available_manpower ?? 0,
     reservedManpower: nationalStats?.reservedManpower ?? 0,
     productionCapacity: capacity

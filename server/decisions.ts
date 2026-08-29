@@ -10,6 +10,7 @@ import type { AdminClient } from "./auth.js";
 import { currentWorldDate } from "./diplomacy.js";
 import { mergeStartingEconomy } from "./startingEconomies.js";
 import { currentNumber, startingCountryStatsForCountry } from "./startingCountryStats.js";
+import { loadCalculatedNationalStats } from "./countryNationalStats.js";
 
 type DecisionStateRow = {
   country_key: string;
@@ -114,15 +115,16 @@ export async function loadDecisionRuntime(admin: AdminClient, countryKey: string
   ]);
   const failed = [metricsResult, economyResult, manpowerResult, partyResult, modifierResult, executionResult, warResult].find((result) => result.error);
   if (failed?.error) throw failed.error;
+  const calculatedStats = await loadCalculatedNationalStats(admin, countryKey, turn, {}, worldDate);
   const startingStats = startingCountryStatsForCountry(countryKey);
   const rawMetrics = metricsResult.data;
   const metrics = startingStats
     ? {
         country_key: countryKey,
         political_power: currentNumber(rawMetrics?.political_power, startingStats.base_political_power),
-        political_power_gain_modifier: currentNumber(rawMetrics?.political_power_gain_modifier, 0),
-        stability: currentNumber(rawMetrics?.stability, startingStats.base_stability),
-        war_support: currentNumber(rawMetrics?.war_support, startingStats.base_war_support),
+        political_power_gain_modifier: calculatedStats?.politicalPowerGainModifier ?? currentNumber(rawMetrics?.political_power_gain_modifier, 0),
+        stability: calculatedStats?.stability ?? currentNumber(rawMetrics?.stability, startingStats.base_stability),
+        war_support: calculatedStats?.warSupport ?? currentNumber(rawMetrics?.war_support, startingStats.base_war_support),
         poverty_rate: numeric(rawMetrics?.poverty_rate),
         living_standard_stage: numeric(rawMetrics?.living_standard_stage),
         living_standard_max_stage: numeric(rawMetrics?.living_standard_max_stage),
@@ -137,9 +139,9 @@ export async function loadDecisionRuntime(admin: AdminClient, countryKey: string
     turn,
     metrics,
     economy: mergedEconomy,
-    manpower: startingStats
+    manpower: calculatedStats?.availableManpower ?? (startingStats
       ? currentNumber(manpowerResult.data?.available_manpower, startingStats.base_available_manpower)
-      : numeric(manpowerResult.data?.available_manpower),
+      : numeric(manpowerResult.data?.available_manpower)),
     atWar: (warResult.data?.length ?? 0) > 0,
     parties: partyOptions(countryKey, partyResult.data ?? []),
     modifiers: modifierResult.data ?? [],
