@@ -53,7 +53,7 @@
 .directorate-modal__actions button { padding: .52rem .9rem; color: #ded8ca; background: #151b1b; border: 1px solid #59605b; font: .78rem Georgia,serif; cursor: pointer; }
 .directorate-modal__actions button:first-child { color: #f1c9a2; border-color: #9d4a46; }
 .directorate-modal__actions button:disabled { opacity: .45; cursor: not-allowed; }
-.directorate-page { min-height: 100vh; box-sizing: border-box; padding: 2rem clamp(1rem,4vw,4.5rem); color: #ded8cb; background: radial-gradient(circle at 70% 0%,rgba(86,32,35,.2),transparent 38%),#070b0c; font-family: ui-monospace,SFMono-Regular,Consolas,monospace; }
+.directorate-page { width: 100%; height: 100%; min-height: 0; box-sizing: border-box; padding: 2rem clamp(1rem,4vw,4.5rem); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; color: #ded8cb; background: radial-gradient(circle at 70% 0%,rgba(86,32,35,.2),transparent 38%),#070b0c; font-family: ui-monospace,SFMono-Regular,Consolas,monospace; -webkit-overflow-scrolling: touch; }
 .directorate-page--checking { display: grid; place-items: center; }
 .directorate-page--not-found { display: grid; place-items: center; color: #65706d; font-size: 1.2rem; }
 .directorate-page--not-found span { padding: 1rem; border: 1px solid #303837; }
