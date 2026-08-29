@@ -63,6 +63,14 @@
       "destination": "/api/admin/actions?domain=world-control"
     },
     {
+      "source": "/api/admin/site-status",
+      "destination": "/api/admin/actions?domain=site-status"
+    },
+    {
+      "source": "/api/admin/country-applications",
+      "destination": "/api/admin/actions?domain=country-applications"
+    },
+    {
       "source": "/api/navi/:route",
       "destination": "/api/economy-dispatch?domain=navi&route=:route"
     },

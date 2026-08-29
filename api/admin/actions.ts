@@ -6,6 +6,8 @@ import mapCapitalsAdmin from "../../server/routes/admin/mapCapitals.js";
 import provinceRegionsAdmin from "../../server/routes/admin/provinceRegions.js";
 import intelligenceAdmin from "../../server/routes/admin/intelligence.js";
 import worldControlAdmin from "../../server/routes/admin/worldControl.js";
+import siteStatusAdmin from "../../server/routes/admin/siteStatus.js";
+import countryApplicationsAdmin from "../../server/routes/admin/countryApplications.js";
 
 const actionKinds = new Set([
   "REVOKE_COUNTRY_OWNERSHIP",
@@ -44,6 +46,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
   if (domain === "world-control") {
     await worldControlAdmin(request, response);
+    return;
+  }
+  if (domain === "site-status") {
+    await siteStatusAdmin(request, response);
+    return;
+  }
+  if (domain === "country-applications") {
+    await countryApplicationsAdmin(request, response);
     return;
   }
   if (request.method !== "POST") {
