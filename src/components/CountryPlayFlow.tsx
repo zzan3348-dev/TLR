@@ -14,6 +14,8 @@ type CountryPlayFlowProps = {
   onRequestConfirmation: () => void;
   onBack: () => void;
   onConfirm: () => void;
+  busy?: boolean;
+  error?: string | null;
 };
 
 function DescriptionDialog({
@@ -90,10 +92,14 @@ function ConfirmationDialog({
   country,
   onBack,
   onConfirm,
+  busy = false,
+  error = null,
 }: {
   country: MapCountryIndex;
   onBack: () => void;
   onConfirm: () => void;
+  busy?: boolean;
+  error?: string | null;
 }) {
   const presentation = getCountryPresentation(country);
 
@@ -124,6 +130,7 @@ function ConfirmationDialog({
           <strong id="country-play-confirmation-warning">
             해당 선택은 관리자의 승인 없이 바꿀 수 없습니다!
           </strong>
+          {error ? <p className="country-play-confirmation__error" role="alert">{error}</p> : null}
         </div>
         <button
           type="button"
@@ -133,8 +140,8 @@ function ConfirmationDialog({
         />
       </div>
       <div className="country-play-confirmation__actions">
-        <TexturedActionButton tone="green" onClick={onConfirm} autoFocus>
-          확인
+        <TexturedActionButton tone="green" onClick={onConfirm} disabled={busy} autoFocus>
+          {busy ? "서버 등록 중…" : "확인"}
         </TexturedActionButton>
         <TexturedActionButton tone="gray" onClick={onBack}>
           돌아가기
@@ -151,6 +158,8 @@ export function CountryPlayFlow({
   onRequestConfirmation,
   onBack,
   onConfirm,
+  busy,
+  error,
 }: CountryPlayFlowProps) {
   if (!country || step === "closed") {
     return null;
@@ -184,6 +193,8 @@ export function CountryPlayFlow({
           country={country}
           onBack={onBack}
           onConfirm={onConfirm}
+          busy={busy}
+          error={error}
         />
       ) : null}
     </div>

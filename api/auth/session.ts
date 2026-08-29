@@ -24,7 +24,27 @@ type DeviceMatchRow = {
   asn: string | null;
 };
 
+type OwnershipRow = {
+  country_key: string;
+  user_id: string;
+  status: "active" | "revoked";
+};
+
+function requestedCountryKey(request: ApiRequest): string | null {
+  if (request.method !== "POST" || !request.body || typeof request.body !== "object") return null;
+  const body = request.body as { action?: unknown; countryKey?: unknown };
+  return body.action === "CLAIM_COUNTRY"
+    && typeof body.countryKey === "string"
+    && /^country-\d{3}$/u.test(body.countryKey)
+    ? body.countryKey
+    : null;
+}
+
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
+  if (request.method !== "GET" && request.method !== "POST") {
+    response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
+    return;
+  }
   const env = getServerEnv();
   if (!env) {
     response.status(503).json({ error: "AUTH_SERVER_NOT_CONFIGURED" });
@@ -135,6 +155,70 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     }).eq("id", user.id);
   }
 
+  const { data: activeOwnership, error: ownershipLookupError } = await admin
+    .from("country_ownerships")
+    .select("country_key, user_id, status")
+    .eq("user_id", user.id)
+    .eq("status", "active")
+    .maybeSingle<OwnershipRow>();
+  if (ownershipLookupError) {
+    response.status(503).json({ error: "OWNERSHIP_STATE_UNAVAILABLE" });
+    return;
+  }
+
+  let ownershipCountryKey = activeOwnership?.country_key ?? null;
+  if (request.method === "POST") {
+    const countryKey = requestedCountryKey(request);
+    if (!countryKey) {
+      response.status(400).json({ error: "INVALID_COUNTRY_CLAIM" });
+      return;
+    }
+    if (profile.access_status !== "active") {
+      response.status(403).json({ error: "PLAY_ACCESS_BLOCKED", accessStatus: profile.access_status });
+      return;
+    }
+    if (ownershipCountryKey && ownershipCountryKey !== countryKey) {
+      response.status(409).json({ error: "COUNTRY_ALREADY_ASSIGNED", countryKey: ownershipCountryKey });
+      return;
+    }
+    if (!ownershipCountryKey) {
+      const { data: country, error: countryError } = await admin
+        .from("countries")
+        .select("country_key")
+        .eq("country_key", countryKey)
+        .eq("active", true)
+        .maybeSingle<{ country_key: string }>();
+      if (countryError || !country) {
+        response.status(countryError ? 503 : 404).json({ error: countryError ? "COUNTRY_CATALOG_UNAVAILABLE" : "COUNTRY_NOT_FOUND" });
+        return;
+      }
+      const { data: occupied, error: occupiedError } = await admin
+        .from("country_ownerships")
+        .select("country_key, user_id, status")
+        .eq("country_key", countryKey)
+        .maybeSingle<OwnershipRow>();
+      if (occupiedError) {
+        response.status(503).json({ error: "OWNERSHIP_STATE_UNAVAILABLE" });
+        return;
+      }
+      if (occupied) {
+        response.status(409).json({ error: occupied.status === "active" ? "COUNTRY_ALREADY_CLAIMED" : "COUNTRY_UNAVAILABLE" });
+        return;
+      }
+      const { error: claimError } = await admin.from("country_ownerships").insert({
+        country_key: countryKey,
+        user_id: user.id,
+        status: "active",
+      });
+      if (claimError) {
+        const code = typeof claimError === "object" && claimError && "code" in claimError ? String(claimError.code) : "";
+        response.status(code === "23505" ? 409 : 503).json({ error: code === "23505" ? "COUNTRY_ALREADY_CLAIMED" : "COUNTRY_CLAIM_FAILED" });
+        return;
+      }
+      ownershipCountryKey = countryKey;
+    }
+  }
+
   await admin.from("auth_devices").upsert({
     user_id: user.id,
     device_install_hash: signals.deviceHash,
@@ -164,5 +248,5 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     asn: signals.asn,
   });
 
-  response.status(200).json({ profile });
+  response.status(200).json({ profile, ownershipCountryKey });
 }

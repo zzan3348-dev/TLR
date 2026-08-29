@@ -17,6 +17,13 @@ export type AuthProfile = {
   accessStatus: AccessStatus;
   blockedReason: string | null;
   blockedAt: string | null;
+  countryKey: string | null;
+};
+
+export type CountryClaimResult = {
+  ok: boolean;
+  countryKey?: string;
+  error?: string;
 };
 
 export function safeNextPath(value: string | null | undefined): string {
@@ -148,6 +155,7 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
     return null;
   }
   const row = profile as Record<string, unknown>;
+  const ownershipCountryKey = (payload as { ownershipCountryKey?: unknown }).ownershipCountryKey;
   if (
     typeof row.id !== "string" ||
     typeof row.discord_user_id !== "string" ||
@@ -170,5 +178,33 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
     blockedReason:
       typeof row.blocked_reason === "string" ? row.blocked_reason : null,
     blockedAt: typeof row.blocked_at === "string" ? row.blocked_at : null,
+    countryKey: typeof ownershipCountryKey === "string" ? ownershipCountryKey : null,
+  };
+}
+
+export async function claimCountryOwnership(countryKey: string): Promise<CountryClaimResult> {
+  const session = await getSession();
+  if (!session) return { ok: false, error: "UNAUTHORIZED" };
+  const response = await fetch("/api/auth/session", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ action: "CLAIM_COUNTRY", countryKey }),
+  });
+  const payload: unknown = await response.json().catch(() => ({}));
+  const record = payload && typeof payload === "object" ? payload as Record<string, unknown> : {};
+  if (!response.ok) {
+    return {
+      ok: false,
+      error: typeof record.error === "string" ? record.error : "COUNTRY_CLAIM_FAILED",
+      countryKey: typeof record.countryKey === "string" ? record.countryKey : undefined,
+    };
+  }
+  return {
+    ok: true,
+    countryKey: typeof record.ownershipCountryKey === "string" ? record.ownershipCountryKey : countryKey,
   };
 }

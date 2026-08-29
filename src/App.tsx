@@ -36,7 +36,7 @@ import type {
 } from "./types/mapCountry";
 import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
-import { signOut } from "./services/authService";
+import { claimCountryOwnership, signOut } from "./services/authService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -65,6 +65,7 @@ export default function App() {
   const mapRef = useRef<WorldMapHandle>(null);
   const bgmRef = useRef<HTMLAudioElement | null>(null);
   const bgmEnabledRef = useRef(true);
+  const verifiedPlayCountryRef = useRef<string | null>(null);
   const [screen, setScreen] = useState<"title" | "map" | "admin">(
     window.location.pathname.startsWith("/play/") ? "map" : window.location.pathname === "/admin" || window.location.pathname === "/directorate" ? "admin" : "title",
   );
@@ -89,10 +90,13 @@ export default function App() {
   const [showCapitalLabels, setShowCapitalLabels] = useState(true);
   const [isBgmEnabled, setIsBgmEnabled] = useState(true);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authNextPath, setAuthNextPath] = useState("/");
   const [accessBlockedOpen, setAccessBlockedOpen] = useState(false);
   const [directorateAccessOpen, setDirectorateAccessOpen] = useState(false);
   const [economySnapshot, setEconomySnapshot] =
     useState<EconomySnapshot | null>(null);
+  const [countryClaimBusy, setCountryClaimBusy] = useState(false);
+  const [countryClaimError, setCountryClaimError] = useState<string | null>(null);
 
   useEffect(() => {
     const audio = new Audio("/audio/tlr-bgm.mp3");
@@ -147,10 +151,22 @@ export default function App() {
     });
   }, []);
 
+  const enterCountryPlay = useCallback((country: MapCountryIndex) => {
+    verifiedPlayCountryRef.current = country.key;
+    setPlayCountry(country);
+    setInspectedCountry(null);
+    setActivePlayWindow("politics");
+    storePlayCountryKey(country.key);
+    setCountryPlayStep("closed");
+    setSelection(null);
+    setCountryClaimError(null);
+    window.history.replaceState({}, "", `/play/${country.key}`);
+  }, []);
+
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (authLoading) return;
-    const match = window.location.pathname.match(/^\/play\/([^/]+)$/u);
+    const match = window.location.pathname.match(/^\/(?:play|claim-country)\/([^/]+)$/u);
     if (!match) return;
     const country = mapCountries.find(
       (candidate) => candidate.key === decodeURIComponent(match[1]),
@@ -164,10 +180,31 @@ export default function App() {
       setAccessBlockedOpen(true);
       return;
     }
-    setPlayCountry(country);
-    storePlayCountryKey(country.key);
-    setScreen("map");
-  }, [authLoading, profile]);
+    if (!profile) {
+      verifiedPlayCountryRef.current = null;
+      setPlayCountry(null);
+      clearPlayCountryKey();
+      setAuthNextPath(`/claim-country/${country.key}`);
+      setAuthModalOpen(true);
+      setScreen("title");
+      return;
+    }
+    const requestedCountry = profile.countryKey
+      ? mapCountries.find((candidate) => candidate.key === profile.countryKey) ?? country
+      : country;
+    if (verifiedPlayCountryRef.current === requestedCountry.key) return;
+    setCountryClaimBusy(true);
+    void claimCountryOwnership(requestedCountry.key).then(async (result) => {
+      if (!result.ok) {
+        setCountryClaimError(result.error ?? "COUNTRY_CLAIM_FAILED");
+        setScreen("map");
+        return;
+      }
+      enterCountryPlay(requestedCountry);
+      setScreen("map");
+      await refreshAuth();
+    }).finally(() => setCountryClaimBusy(false));
+  }, [authLoading, enterCountryPlay, profile, refreshAuth]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
@@ -227,16 +264,39 @@ export default function App() {
       setAccessBlockedOpen(true);
       return;
     }
-    setPlayCountry(selection.country);
-    setInspectedCountry(null);
-    setActivePlayWindow("politics");
-    storePlayCountryKey(selection.country.key);
-    setCountryPlayStep("closed");
-    setSelection(null);
-    window.history.replaceState({}, "", `/play/${selection.country.key}`);
-  }, [profile, selection]);
+    if (!profile) {
+      setAuthNextPath(`/claim-country/${selection.country.key}`);
+      setAuthModalOpen(true);
+      return;
+    }
+    setCountryClaimBusy(true);
+    setCountryClaimError(null);
+    void claimCountryOwnership(selection.country.key).then(async (result) => {
+      if (!result.ok) {
+        if (result.error === "COUNTRY_ALREADY_ASSIGNED" && result.countryKey) {
+          const assigned = mapCountries.find((country) => country.key === result.countryKey);
+          if (assigned) {
+            enterCountryPlay(assigned);
+            await refreshAuth();
+            return;
+          }
+        }
+        const messages: Record<string, string> = {
+          COUNTRY_ALREADY_CLAIMED: "이미 다른 플레이어가 운영 중인 국가입니다.",
+          COUNTRY_UNAVAILABLE: "관리자에 의해 현재 선택할 수 없는 국가입니다.",
+          PLAY_ACCESS_BLOCKED: "현재 계정은 국가 플레이가 제한되어 있습니다.",
+          COUNTRY_CLAIM_FAILED: "국가 등록 서버가 응답하지 않았습니다. 잠시 뒤 다시 시도하십시오.",
+        };
+        setCountryClaimError(messages[result.error ?? ""] ?? "국가 운영권을 등록하지 못했습니다.");
+        return;
+      }
+      enterCountryPlay(selection.country);
+      await refreshAuth();
+    }).finally(() => setCountryClaimBusy(false));
+  }, [enterCountryPlay, profile, refreshAuth, selection]);
 
   const exitPlayMode = useCallback(() => {
+    verifiedPlayCountryRef.current = null;
     setPlayCountry(null);
     setInspectedCountry(null);
     setActivePlayWindow(null);
@@ -258,6 +318,15 @@ export default function App() {
     window.addEventListener("tlr:focus-military-front", focusMilitaryFront);
     return () => window.removeEventListener("tlr:focus-military-front", focusMilitaryFront);
   }, []);
+
+  useEffect(() => {
+    const requestAuthentication = () => {
+      setAuthNextPath(playCountry ? `/play/${playCountry.key}` : "/");
+      void refreshAuth().finally(() => setAuthModalOpen(true));
+    };
+    window.addEventListener("tlr:auth-required", requestAuthentication);
+    return () => window.removeEventListener("tlr:auth-required", requestAuthentication);
+  }, [playCountry, refreshAuth]);
 
   useEffect(() => {
     if (!playCountry) {
@@ -366,6 +435,7 @@ export default function App() {
           onCloseWindow={() => setTitleWindow(null)}
           onLogin={() => {
             setTitleWindow(null);
+            setAuthNextPath("/");
             setAuthModalOpen(true);
           }}
           onLogout={async () => {
@@ -388,7 +458,7 @@ export default function App() {
           open={authModalOpen}
           profile={profile}
           loading={authLoading}
-          nextPath="/"
+          nextPath={authNextPath}
           onClose={() => setAuthModalOpen(false)}
           onSignOut={async () => {
             await signOut();
@@ -507,12 +577,14 @@ export default function App() {
         }
         onBack={() => setCountryPlayStep("description")}
         onConfirm={confirmCountryPlay}
+        busy={countryClaimBusy}
+        error={countryClaimError}
       />
       <AuthModal
         open={authModalOpen}
         profile={profile}
         loading={authLoading}
-        nextPath={selection ? `/play/${selection.country.key}` : "/"}
+        nextPath={authNextPath}
         onClose={() => setAuthModalOpen(false)}
         onSignOut={async () => {
           await signOut();

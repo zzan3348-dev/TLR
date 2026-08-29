@@ -21,6 +21,7 @@ async function requestJson<T>(path: string, countryKey: string, init?: RequestIn
   const response = await fetch(path, { ...init, headers: { ...(await headers(countryKey)), ...init?.headers } });
   const payload: unknown = await response.json().catch(() => ({}));
   if (!response.ok) {
+    if (response.status === 401) window.dispatchEvent(new Event("tlr:auth-required"));
     const code = payload && typeof payload === "object" && "error" in payload && typeof payload.error === "string" ? payload.error : "ECONOMY_REQUEST_FAILED";
     throw new EconomyApiError(code, response.status);
   }
