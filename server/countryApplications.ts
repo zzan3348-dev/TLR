@@ -327,6 +327,20 @@ export async function expelCountryAssignment(
     .maybeSingle<{ country_key: string }>();
   if (revoked.error || !revoked.data) throw new Error("COUNTRY_EXPULSION_FAILED");
 
+  // 신청 기록은 현재 배정이 아니다. 추방 뒤 이 기록이 남아 있으면 클라이언트가
+  // 과거 신청을 현재 픽으로 오인하므로 해당 사용자·국가의 신청 흔적도 함께 정리한다.
+  const applicationCleanup = await admin.from("country_applications")
+    .delete()
+    .eq("country_key", input.countryKey)
+    .eq("user_id", input.userId);
+  if (applicationCleanup.error && applicationCleanup.error.code !== "42P01") {
+    console.error("country application cleanup after expulsion failed", {
+      countryKey: input.countryKey,
+      userId: input.userId,
+      code: applicationCleanup.error.code ?? "UNKNOWN",
+    });
+  }
+
   try {
     const token = process.env.DISCORD_BOT_TOKEN;
     if (!token) throw new Error("DISCORD_BOT_TOKEN_MISSING");

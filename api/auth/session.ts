@@ -208,22 +208,27 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     response.status(503).json({ error: "SITE_STATUS_UNAVAILABLE" });
     return;
   }
-  const { data: storedApplication, error: applicationLookupError } = await admin
-    .from("country_applications")
-    .select("id,country_key,status,created_at,notified_at")
-    .eq("user_id", user.id)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle<{ id: string; country_key: string; status: string; created_at: string; notified_at: string | null }>();
-  const application = applicationLookupError && ownershipCountryKey
-    ? {
-        id: `legacy-${user.id}`,
-        country_key: ownershipCountryKey,
-        status: "pending",
-        created_at: "",
-        notified_at: null,
-      }
-    : storedApplication;
+  type StoredApplication = { id: string; country_key: string; status: string; created_at: string; notified_at: string | null };
+  let application: StoredApplication | null = null;
+  if (ownershipCountryKey) {
+    const { data: storedApplication, error: applicationLookupError } = await admin
+      .from("country_applications")
+      .select("id,country_key,status,created_at,notified_at")
+      .eq("user_id", user.id)
+      .eq("country_key", ownershipCountryKey)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle<StoredApplication>();
+    application = applicationLookupError
+      ? {
+          id: `legacy-${user.id}`,
+          country_key: ownershipCountryKey,
+          status: "pending",
+          created_at: "",
+          notified_at: null,
+        }
+      : storedApplication;
+  }
 
   await admin.from("auth_devices").upsert({
     user_id: user.id,
