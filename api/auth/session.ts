@@ -8,6 +8,7 @@ import {
 } from "../../server/auth.js";
 import { submitCountryApplication } from "../../server/countryApplications.js";
 import { loadSiteStatus } from "../../server/siteStatus.js";
+import { ensurePersistentSession } from "../../server/persistentSession.js";
 
 type ProfileRow = {
   id: string;
@@ -65,7 +66,9 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
 
   const signals = await collectRequestSignals(request, env);
-  if (signals.setCookie) response.setHeader("Set-Cookie", signals.setCookie);
+  const persistentCookie = ensurePersistentSession(request, user.id);
+  const cookies = [signals.setCookie, persistentCookie].filter((cookie): cookie is string => Boolean(cookie));
+  if (cookies.length) response.setHeader("Set-Cookie", cookies);
 
   const username = typeof user.user_metadata?.full_name === "string"
     ? user.user_metadata.full_name

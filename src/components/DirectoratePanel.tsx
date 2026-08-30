@@ -12,6 +12,8 @@ import { WorldControlAdminSection } from "../features/world-control/components/W
 import type { WorldControlAdminData } from "../features/world-control/types";
 import { SiteStatusAdminSection } from "./SiteStatusAdminSection";
 import { CountryExpulsionAdminSection } from "./CountryExpulsionAdminSection";
+import { AdminPlayPreviewSection } from "./AdminPlayPreviewSection";
+import { AdminMembershipSection } from "./AdminMembershipSection";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
@@ -74,8 +76,8 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       .then(async (response) => {
         if (!active) return;
         if (!response.ok) {
-          setState("not-found");
-          return;
+          const discordLogin = await fetch("/api/admin/discord-login", { method: "POST", credentials: "include" });
+          if (!discordLogin.ok) { setState("not-found"); return; }
         }
         setState("authorized");
         try {
@@ -161,6 +163,8 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
       <SiteStatusAdminSection />
+      <AdminPlayPreviewSection />
+      <AdminMembershipSection />
       <CountryExpulsionAdminSection />
       <MapCapitalAdminSection />
       <ProvinceRegionAdminSection />

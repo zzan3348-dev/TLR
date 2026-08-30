@@ -88,6 +88,7 @@ export async function signInWithDiscord(nextPath = "/"): Promise<{
 }
 
 export async function signOut(): Promise<{ ok: boolean; error?: string }> {
+  await fetch("/api/auth/logout", { method: "POST", credentials: "include" }).catch(() => undefined);
   if (!supabase) {
     return { ok: true };
   }
@@ -144,11 +145,8 @@ export async function completeAuthCallback(): Promise<{
 
 export async function refreshServerProfile(): Promise<AuthProfile | null> {
   const session = await getSession();
-  if (!session) {
-    return null;
-  }
   const response = await fetch("/api/auth/session", {
-    headers: { Authorization: `Bearer ${session.access_token}` },
+    headers: session ? { Authorization: `Bearer ${session.access_token}` } : undefined,
     credentials: "include",
   });
   if (!response.ok) {
@@ -210,13 +208,9 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
 
 export async function submitCountryApplication(countryKey: string): Promise<CountryApplicationResult> {
   const session = await getSession();
-  if (!session) return { ok: false, error: "UNAUTHORIZED" };
   const response = await fetch("/api/auth/session", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${session.access_token}`,
-      "Content-Type": "application/json",
-    },
+    headers: { ...(session ? { Authorization: `Bearer ${session.access_token}` } : {}), "Content-Type": "application/json" },
     credentials: "include",
     body: JSON.stringify({ action: "APPLY_COUNTRY", countryKey }),
   });

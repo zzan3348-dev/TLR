@@ -35,10 +35,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const refresh = useCallback(async () => {
     const nextSession = await getSession();
     setSession(nextSession);
-    if (!nextSession) {
-      setProfile(null);
-      return;
-    }
     const nextProfile = await refreshServerProfile();
     setProfile(nextProfile);
   }, []);

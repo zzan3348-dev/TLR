@@ -24,6 +24,7 @@ type ActionBody = {
   reason?: unknown;
   startsAt?: unknown;
   endsAt?: unknown;
+  targetDiscordUsername?: unknown;
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
@@ -68,6 +69,22 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const targetUserId = typeof body.targetUserId === "string" ? body.targetUserId : null;
   const targetCountryKey = typeof body.targetCountryKey === "string" ? body.targetCountryKey : null;
   const reason = typeof body.reason === "string" ? body.reason.slice(0, 1000) : "";
+  if (action === "REGISTER_DISCORD_ADMIN") {
+    const username = typeof body.targetDiscordUsername === "string" ? body.targetDiscordUsername.trim().slice(0, 80) : "";
+    if (!username || !reason.trim()) return void response.status(400).json({ error: "INVALID_ADMIN_REGISTRATION" });
+    const env = getServerEnv();
+    if (!env) return void response.status(503).json({ error: "SERVER_NOT_CONFIGURED" });
+    const admin = getAdminClient(env);
+    const profiles = await admin.from("profiles").select("id,discord_username").ilike("discord_username", username).limit(2).returns<Array<{ id: string; discord_username: string | null }>>();
+    if (profiles.error) return void response.status(503).json({ error: "PROFILE_LOOKUP_FAILED" });
+    if (!profiles.data?.length) return void response.status(404).json({ error: "PROFILE_NOT_FOUND" });
+    if (profiles.data.length !== 1) return void response.status(409).json({ error: "PROFILE_AMBIGUOUS" });
+    const profile = profiles.data[0];
+    const registered = await admin.from("navi_admin_members").upsert({ profile_id: profile.id, role: "admin", active: true, granted_by: session.sub, updated_at: new Date().toISOString() }, { onConflict: "profile_id" });
+    if (registered.error) return void response.status(503).json({ error: "ADMIN_REGISTRATION_FAILED" });
+    response.status(200).json({ ok: true, action, profileId: profile.id, discordUsername: profile.discord_username });
+    return;
+  }
   if (action === "EXPEL_COUNTRY_USER") {
     if (!targetUserId || !targetCountryKey || !reason.trim()) {
       response.status(400).json({ error: "INVALID_EXPULSION" });

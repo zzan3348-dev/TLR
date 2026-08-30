@@ -36,6 +36,7 @@ import type {
 import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
 import { signOut, submitCountryApplication } from "./services/authService";
+import { endAdminPreview, loadAdminPreview } from "./services/adminPreviewService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -88,6 +89,9 @@ export default function App() {
     useState<EconomySnapshot | null>(null);
   const [countryApplicationBusy, setCountryApplicationBusy] = useState(false);
   const [countryApplicationError, setCountryApplicationError] = useState<string | null>(null);
+  const previewRequested = new URLSearchParams(window.location.search).get("mode") === "admin-preview";
+  const [adminPreviewLoading, setAdminPreviewLoading] = useState(previewRequested);
+  const [adminPreviewCountryKey, setAdminPreviewCountryKey] = useState<string | null>(null);
 
   useEffect(() => {
     const audio = new Audio("/audio/tlr-bgm.mp3");
@@ -154,6 +158,17 @@ export default function App() {
     window.history.replaceState({}, "", `/play/${country.key}`);
   }, []);
 
+  useEffect(() => {
+    if (!previewRequested) return;
+    let active = true;
+    void loadAdminPreview().then((preview) => {
+      if (!active) return;
+      setAdminPreviewCountryKey(preview.active ? preview.countryKey : null);
+      setAdminPreviewLoading(false);
+    }).catch(() => { if (active) setAdminPreviewLoading(false); });
+    return () => { active = false; };
+  }, [previewRequested]);
+
   const applyForCountry = useCallback(async (country: MapCountryIndex) => {
     setCountryApplicationBusy(true);
     setCountryApplicationError(null);
@@ -178,7 +193,7 @@ export default function App() {
 
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    if (authLoading) return;
+    if (authLoading || adminPreviewLoading) return;
     const match = window.location.pathname.match(/^\/(play|claim-country)\/([^/]+)$/u);
     if (!match) return;
     const country = mapCountries.find(
@@ -191,6 +206,21 @@ export default function App() {
     }
     if (profile?.accessStatus === "blocked") {
       setAccessBlockedOpen(true);
+      return;
+    }
+    if (adminPreviewCountryKey) {
+      if (adminPreviewCountryKey !== country.key) {
+        window.history.replaceState({}, "", `/play/${adminPreviewCountryKey}?mode=admin-preview`);
+        const previewCountry = mapCountries.find((candidate) => candidate.key === adminPreviewCountryKey);
+        if (previewCountry) enterCountryPlay(previewCountry);
+        return;
+      }
+      if (verifiedPlayCountryRef.current !== country.key) enterCountryPlay(country);
+      return;
+    }
+    if (previewRequested) {
+      setScreen("admin");
+      window.history.replaceState({}, "", "/directorate");
       return;
     }
     if (!profile) {
@@ -223,14 +253,14 @@ export default function App() {
     const assignedCountry = mapCountries.find((candidate) => candidate.key === profile.countryKey);
     if (!assignedCountry || verifiedPlayCountryRef.current === assignedCountry.key) return;
     enterCountryPlay(assignedCountry);
-  }, [applyForCountry, authLoading, enterCountryPlay, profile]);
+  }, [adminPreviewCountryKey, adminPreviewLoading, applyForCountry, authLoading, enterCountryPlay, previewRequested, profile]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   /* 개장 전에는 기존 세션이나 조작된 클라이언트 상태로도 플레이 HUD를 유지하지 않는다. */
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (authLoading || !playCountry) return;
-    if (!profile || profile.siteStatus !== "open" || profile.countryKey !== playCountry.key) {
+    if (!adminPreviewCountryKey && (!profile || profile.siteStatus !== "open" || profile.countryKey !== playCountry.key)) {
       verifiedPlayCountryRef.current = null;
       setPlayCountry(null);
       setInspectedCountry(null);
@@ -238,7 +268,7 @@ export default function App() {
       clearPlayCountryKey();
       window.history.replaceState({}, "", "/");
     }
-  }, [authLoading, playCountry, profile]);
+  }, [adminPreviewCountryKey, authLoading, playCountry, profile]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
@@ -474,7 +504,20 @@ export default function App() {
     <main
       className={`app-shell${isMapEntering ? " app-shell--map-entering" : ""}`}
       data-play-mode={playCountry !== null}
+      data-admin-preview={adminPreviewCountryKey !== null}
     >
+      {adminPreviewCountryKey && playCountry ? (
+        <aside className="admin-preview-banner" role="status">
+          <span>관리자 테스트 모드 · 현재 테스트 국가: {playCountry.name} · 읽기 전용</span>
+          <button type="button" onClick={() => void endAdminPreview().finally(() => {
+            setAdminPreviewCountryKey(null);
+            setPlayCountry(null);
+            clearPlayCountryKey();
+            setScreen("admin");
+            window.history.replaceState({}, "", "/directorate");
+          })}>테스트 종료</button>
+        </aside>
+      ) : null}
       {isMapEntering ? (
         <div className="map-entry-transition" aria-hidden="true" />
       ) : null}
@@ -485,6 +528,16 @@ export default function App() {
         onCloseSettings={() => setIsSettingsOpen(false)}
         onToggleBgm={toggleBgm}
         onBackToTitle={() => {
+          if (adminPreviewCountryKey) {
+            void endAdminPreview().finally(() => {
+              setAdminPreviewCountryKey(null);
+              setPlayCountry(null);
+              clearPlayCountryKey();
+              setScreen("admin");
+              window.history.replaceState({}, "", "/directorate");
+            });
+            return;
+          }
           setIsSettingsOpen(false);
           setTitleWindow(null);
           setIsMapEntering(false);

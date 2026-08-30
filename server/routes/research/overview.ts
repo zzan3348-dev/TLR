@@ -2,6 +2,7 @@ import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { requireResearchActor, researchWorldDate } from "../../research.js";
 import { mergeStartingEconomy } from "../../startingEconomies.js";
+import { currentWorldDate } from "../../diplomacy.js";
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
   if (request.method !== "GET") { response.status(405).json({ error: "METHOD_NOT_ALLOWED" }); return; }
@@ -11,8 +12,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const actor = await requireResearchActor(request, response, admin);
   if (!actor) return;
   try {
-    const worldDate = await researchWorldDate(admin);
-    const settled = await admin.rpc("tlr_settle_research_points", { p_country: actor.countryKey, p_world_date: worldDate });
+    const worldDate = actor.mode === "preview" ? await currentWorldDate(admin) : await researchWorldDate(admin);
+    const settled = actor.mode === "preview"
+      ? { data: null, error: null }
+      : await admin.rpc("tlr_settle_research_points", { p_country: actor.countryKey, p_world_date: worldDate });
     if (settled.error) throw settled.error;
     const [economy, categories, projects] = await Promise.all([
       admin.from("country_economies").select("country_key,research_points,research_income_per_period,research_budget_share,research_capacity").eq("country_key", actor.countryKey).maybeSingle(),

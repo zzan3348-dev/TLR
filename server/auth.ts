@@ -2,6 +2,7 @@
 import { createHmac, randomBytes } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { ApiRequest } from "./types.js";
+import { persistentSessionUserId } from "./persistentSession.js";
 
 export type AdminClient = SupabaseClient;
 export type AuthenticatedUser = {
@@ -58,7 +59,13 @@ export function getBearerToken(request: ApiRequest): string | null {
 
 export async function getAuthenticatedUser(request: ApiRequest, admin: AdminClient): Promise<AuthenticatedUser | null> {
   const token = getBearerToken(request);
-  if (!token) return null;
+  if (!token) {
+    const userId = persistentSessionUserId(request);
+    if (!userId) return null;
+    const authAdmin = admin.auth.admin as unknown as { getUserById(id: string): Promise<{ data: { user: AuthenticatedUser | null }; error: unknown }> };
+    const restored = await authAdmin.getUserById(userId);
+    return restored.error ? null : restored.data.user;
+  }
   // Vercel type-checks every serverless entrypoint in isolation. Keep this
   // boundary structural so different @supabase/auth-js patch types do not
   // erase getUser from the generated function type.

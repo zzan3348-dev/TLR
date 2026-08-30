@@ -12592,6 +12592,14 @@ button:disabled { opacity: 0.48; }
 .directorate-diplomacy__error { margin: 8px; padding: 8px; border: 1px solid #734d49; color: #d67970; }
 .directorate-diplomacy__empty { padding: 24px; color: #78867f; text-align: center; }
 .directorate-expulsion__notice { margin: 8px; padding: 8px; border: 1px solid #4f7259; background: #102018; color: #85c993; }
+.directorate-preview__body { display: grid; padding: 14px 16px; align-items: end; gap: 8px 10px; grid-template-columns: minmax(220px, 1fr) auto; color: #a7b2ad; }
+.directorate-preview__body label { display: grid; gap: 5px; color: #c7bd91; font-size: 11px; }
+.directorate-preview__body select { min-height: 36px; padding: 6px 9px; border: 1px solid #4d625b; background: #070d0e; color: #ddd8ca; }
+.directorate-preview__body input { min-height: 36px; padding: 6px 9px; border: 1px solid #4d625b; background: #070d0e; color: #ddd8ca; }
+.directorate-preview__body button { min-height: 36px; padding: 6px 14px; border: 1px solid #71825d; background: linear-gradient(#273224, #151b16); color: #dfd077; font-weight: 800; }
+.directorate-preview__body > p { margin: 0; grid-column: 1 / -1; font-size: 11px; }
+.admin-preview-banner { position: fixed; top: 46px; left: 50%; z-index: 4500; display: flex; padding: 7px 10px; align-items: center; gap: 10px; border: 1px solid #b8973e; background: rgb(20 24 20 / 94%); box-shadow: 0 4px 18px #000b; color: #ead77d; font: 700 11px/1.2 ui-monospace, monospace; transform: translateX(-50%); }
+.admin-preview-banner button { min-height: 26px; border: 1px solid #86604d; background: #281817; color: #e5a29b; font-weight: 800; }
 .directorate-expulsion__form { display: grid; width: min(420px, 42vw); align-items: end; gap: 5px; grid-template-columns: minmax(170px, 1fr) auto; }
 .directorate-expulsion__form label { grid-column: 1 / -1; color: #a89761; font-size: 10px; font-weight: 700; }
 .directorate-expulsion__form textarea { min-height: 54px; padding: 7px 9px; resize: vertical; border: 1px solid #4a5b56; background: #070c0d; color: #d5d1c5; font: inherit; }

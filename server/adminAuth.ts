@@ -8,7 +8,7 @@ import {
 import type { ApiRequest, ApiResponse } from "./types.js";
 
 export const ADMIN_SESSION_COOKIE = "tlr_directorate_session";
-export const ADMIN_SESSION_MAX_AGE_SECONDS = 4 * 60 * 60;
+export const ADMIN_SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
 
 export type AdminSession = {
   sub: string;

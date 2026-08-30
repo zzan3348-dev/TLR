@@ -2,6 +2,7 @@
 import type { ApiRequest, ApiResponse } from "./types.js";
 import { requireActiveUser } from "./access.js";
 import type { AdminClient } from "./auth.js";
+import { getAdminPreview } from "./adminPreview.js";
 
 export const PROPOSAL_TYPES = [
   "NON_AGGRESSION",
@@ -24,7 +25,7 @@ export type ReviewRoute = "PLAYER" | "ADMIN";
 export type DiplomacyActor = {
   userId: string | null;
   countryKey: string;
-  mode: "authenticated" | "development";
+  mode: "authenticated" | "development" | "preview";
 };
 
 type OwnershipRow = {
@@ -135,6 +136,15 @@ export async function requireDiplomacyActor(
 ): Promise<DiplomacyActor | null> {
   const devCountry = isDevelopmentRequest(request);
   if (devCountry) return { userId: null, countryKey: devCountry, mode: "development" };
+
+  const preview = getAdminPreview(request);
+  if (preview) {
+    if (request.method !== "GET") {
+      response.status(403).json({ error: "ADMIN_PREVIEW_READ_ONLY" });
+      return null;
+    }
+    return { userId: null, countryKey: preview.countryKey, mode: "preview" };
+  }
 
   const auth = await requireActiveUser(request, response, admin);
   if (!auth) return null;
