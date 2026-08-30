@@ -22,6 +22,7 @@ from .database import Database, NAVI_OWNER_USER_ID
 from .llm_chat import (
     EMPTY_MENTION_REPLY,
     GeminiProvider,
+    LLM_COOLDOWN_SECONDS,
     LLMChatService,
     is_direct_bot_mention,
     parse_memory_command,
@@ -70,6 +71,7 @@ class NaviBot(commands.Bot):
                 ),
                 db=self.db,
                 safety=self.navi_safety,
+                cooldown_seconds=LLM_COOLDOWN_SECONDS,
             )
         elif config.llm_provider == "gemini" and config.gemini_api_key:
             self.llm_chat = LLMChatService(

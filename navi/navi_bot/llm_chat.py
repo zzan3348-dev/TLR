@@ -17,6 +17,7 @@ from .utils_time import now_kst
 log = logging.getLogger(__name__)
 LLM_DAILY_LIMIT = 5
 LLM_KEYWORD_LIMIT = 2
+LLM_COOLDOWN_SECONDS = 3.0
 MAX_INPUT_LENGTH = 1200
 MAX_OUTPUT_LENGTH = 1800
 TARGET_OUTPUT_LENGTH = 700
@@ -26,6 +27,7 @@ COMPACT_GENERATION_TOKENS = 600
 EMPTY_MENTION_REPLY = "네에, 불렀어요?"
 LIMIT_REPLY = "오늘 나비와 대화할 수 있는 횟수 5회를 전부 사용했어요! 내일 다시 말 걸어주세요."
 ERROR_REPLY = "으음... 지금은 대답을 가져오지 못했어요. 잠시 뒤에 다시 불러주세요."
+COOLDOWN_REPLY = "조금만 천천히 불러주세요! 나비가 앞선 말을 정리하고 있어요."
 
 NAVI_TONE_EXAMPLES = (
     "네에! 나비 여기 있어요!",
@@ -141,10 +143,19 @@ class LLMReply:
 
 
 class LLMChatService:
-    def __init__(self, *, provider: LLMProvider, db: Database, safety: NaviSafety | None = None) -> None:
+    def __init__(
+        self,
+        *,
+        provider: LLMProvider,
+        db: Database,
+        safety: NaviSafety | None = None,
+        cooldown_seconds: float = 0.0,
+    ) -> None:
         self.provider = provider
         self.db = db
         self.safety = safety
+        self.cooldown_seconds = max(0.0, float(cooldown_seconds))
+        self._last_request_at: dict[int, float] = {}
 
     async def generate_reply(
         self,
@@ -167,6 +178,11 @@ class LLMChatService:
                     safety_decision.recent_count,
                 )
                 return LLMReply("blocked", safety_decision.response, usage_count=usage_count)
+        current_time = time.monotonic()
+        last_request_at = self._last_request_at.get(int(user_id), 0.0)
+        if self.cooldown_seconds and current_time - last_request_at < self.cooldown_seconds:
+            usage_count = self.db.get_llm_daily_usage(user_id)
+            return LLMReply("cooldown", COOLDOWN_REPLY, usage_count=usage_count)
         usage_date = now_kst().date().isoformat()
         consumed, usage_count = self.db.try_consume_llm_usage(
             user_id,
@@ -176,6 +192,7 @@ class LLMChatService:
         if not consumed:
             log.info("NAVI LLM limit user_id=%s guild_id=%s usage=%s", user_id, guild_id, usage_count)
             return LLMReply("limit", LIMIT_REPLY, usage_count=usage_count)
+        self._last_request_at[int(user_id)] = current_time
         started = time.monotonic()
         try:
             memories = self.db.list_llm_keywords(user_id)
@@ -207,25 +224,27 @@ class LLMChatService:
         except Exception as exc:
             self.db.refund_llm_usage(user_id, usage_date=usage_date)
             latency_ms = int((time.monotonic() - started) * 1000)
-            log.exception(
-                "NAVI LLM failed user_id=%s guild_id=%s model=%s usage=%s latency_ms=%s error_type=%s",
+            if not getattr(exc, "diagnostic_logged", False):
+                log.exception(
+                    "NAVI LLM failed user_id=%s guild_id=%s model=%s usage=%s latency_ms=%s error_type=%s",
+                    user_id,
+                    guild_id,
+                    getattr(self.provider, "model", type(self.provider).__name__),
+                    usage_count,
+                    latency_ms,
+                    type(exc).__name__,
+                )
+            return LLMReply("error", ERROR_REPLY, usage_count=max(0, usage_count - 1), latency_ms=latency_ms)
+        latency_ms = int((time.monotonic() - started) * 1000)
+        if not getattr(self.provider, "structured_logging", False):
+            log.info(
+                "NAVI LLM success user_id=%s guild_id=%s model=%s usage=%s latency_ms=%s",
                 user_id,
                 guild_id,
                 getattr(self.provider, "model", type(self.provider).__name__),
                 usage_count,
                 latency_ms,
-                type(exc).__name__,
             )
-            return LLMReply("error", ERROR_REPLY, usage_count=max(0, usage_count - 1), latency_ms=latency_ms)
-        latency_ms = int((time.monotonic() - started) * 1000)
-        log.info(
-            "NAVI LLM success user_id=%s guild_id=%s model=%s usage=%s latency_ms=%s",
-            user_id,
-            guild_id,
-            getattr(self.provider, "model", type(self.provider).__name__),
-            usage_count,
-            latency_ms,
-        )
         return LLMReply(status, safe_text, usage_count=usage_count, latency_ms=latency_ms)
 
     async def close(self) -> None:

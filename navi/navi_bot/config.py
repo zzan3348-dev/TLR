@@ -25,7 +25,7 @@ class Config:
     llm_model: str = "google/gemma-4-31b-it:free"
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.7-flash"
-    llm_timeout_seconds: float = 20.0
+    llm_timeout_seconds: float = 30.0
 
     @classmethod
     def from_env(cls) -> "Config":
@@ -52,7 +52,7 @@ class Config:
             or "google/gemma-4-31b-it:free",
             gemini_api_key=os.getenv("GEMINI_API_KEY", "").strip(),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.7-flash").strip() or "gemini-3.7-flash",
-            llm_timeout_seconds=max(5.0, float(os.getenv("NAVI_LLM_TIMEOUT_SECONDS", "20"))),
+            llm_timeout_seconds=max(10.0, float(os.getenv("NAVI_LLM_TIMEOUT_SECONDS", "30"))),
         )
 
 
