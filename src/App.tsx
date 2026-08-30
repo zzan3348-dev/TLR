@@ -1,26 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { TopBar } from "./components/MapChrome";
-import { FactionLegend } from "./components/FactionLegend";
-import { MapControls } from "./components/MapControls";
-import {
-  CountryPlayFlow,
-  type CountryPlayStep,
-} from "./components/CountryPlayFlow";
-import { ReadOnlyCountryPanel } from "./components/ReadOnlyCountryPanel";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import type { CountryPlayStep } from "./components/CountryPlayFlow";
 import { TexturedActionButton } from "./components/TexturedActionButton";
-import { IconCatalog } from "./components/IconCatalog";
 import { TitleScreen, type TitleWindow } from "./components/TitleScreen";
 import { DirectorateAccessModal } from "./components/DirectorateAccessModal";
-import { DirectoratePanel } from "./components/DirectoratePanel";
 import { AuthModal } from "./components/AuthModal";
 import { AccessBlockedScreen } from "./components/AccessBlockedScreen";
-import { WorldMap, type WorldMapHandle } from "./components/WorldMap";
+import type { WorldMapHandle } from "./components/WorldMap";
 import { mapCountries } from "./data/mapCountries";
-import { PlayHud } from "./features/play/components/PlayHud";
-import { PlayWindowManager } from "./features/play/components/PlayWindowManager";
-import { DiplomacyNotificationQueue } from "./features/diplomacy/components/DiplomacyNotificationQueue";
-import { WarDeclarationAlert } from "./features/military/components/WarDeclarationAlert";
-import { EventTestPage } from "./features/events/components/EventTestPage";
 import { loadEconomy } from "./features/economy/economyClient";
 import type { EconomySnapshot } from "./features/economy/types";
 import { getPlaySimulationState } from "./features/play/data/playSimulationState";
@@ -39,6 +25,20 @@ import { signOut, submitCountryApplication } from "./services/authService";
 import { endAdminPreview, loadAdminPreview } from "./services/adminPreviewService";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
+
+const DirectoratePanel = lazy(() => import("./components/DirectoratePanel").then((module) => ({ default: module.DirectoratePanel })));
+const WorldMap = lazy(() => import("./components/WorldMap").then((module) => ({ default: module.WorldMap })));
+const TopBar = lazy(() => import("./components/MapChrome").then((module) => ({ default: module.TopBar })));
+const FactionLegend = lazy(() => import("./components/FactionLegend").then((module) => ({ default: module.FactionLegend })));
+const MapControls = lazy(() => import("./components/MapControls").then((module) => ({ default: module.MapControls })));
+const CountryPlayFlow = lazy(() => import("./components/CountryPlayFlow").then((module) => ({ default: module.CountryPlayFlow })));
+const ReadOnlyCountryPanel = lazy(() => import("./components/ReadOnlyCountryPanel").then((module) => ({ default: module.ReadOnlyCountryPanel })));
+const IconCatalog = lazy(() => import("./components/IconCatalog").then((module) => ({ default: module.IconCatalog })));
+const PlayHud = lazy(() => import("./features/play/components/PlayHud").then((module) => ({ default: module.PlayHud })));
+const PlayWindowManager = lazy(() => import("./features/play/components/PlayWindowManager").then((module) => ({ default: module.PlayWindowManager })));
+const DiplomacyNotificationQueue = lazy(() => import("./features/diplomacy/components/DiplomacyNotificationQueue").then((module) => ({ default: module.DiplomacyNotificationQueue })));
+const WarDeclarationAlert = lazy(() => import("./features/military/components/WarDeclarationAlert").then((module) => ({ default: module.WarDeclarationAlert })));
+const EventTestPage = lazy(() => import("./features/events/components/EventTestPage").then((module) => ({ default: module.EventTestPage })));
 
 type SelectedMapTerritory = {
   country: MapCountryIndex;
@@ -423,11 +423,11 @@ export default function App() {
   ]);
 
   if (window.location.pathname === "/event-test") {
-    return <EventTestPage />;
+    return <Suspense fallback={null}><EventTestPage /></Suspense>;
   }
 
   if (new URLSearchParams(window.location.search).get("icons") === "1") {
-    return <IconCatalog />;
+    return <Suspense fallback={null}><IconCatalog /></Suspense>;
   }
 
   if (accessBlockedOpen && profile?.accessStatus === "blocked") {
@@ -446,7 +446,7 @@ export default function App() {
   }
 
   if (screen === "admin") {
-    return <DirectoratePanel onBackToTitle={() => { setScreen("title"); window.history.replaceState({}, "", "/"); }} />;
+    return <Suspense fallback={<main className="directorate-page directorate-page--checking" aria-label="관제망 확인 중" />}><DirectoratePanel onBackToTitle={() => { setScreen("title"); window.history.replaceState({}, "", "/"); }} /></Suspense>;
   }
 
   if (screen === "title") {
@@ -521,7 +521,7 @@ export default function App() {
       {isMapEntering ? (
         <div className="map-entry-transition" aria-hidden="true" />
       ) : null}
-      <TopBar
+      <Suspense fallback={null}><TopBar
         isSettingsOpen={isSettingsOpen}
         isBgmEnabled={isBgmEnabled}
         onToggleSettings={() => setIsSettingsOpen((current) => !current)}
@@ -543,39 +543,43 @@ export default function App() {
           setIsMapEntering(false);
           setScreen("title");
         }}
-      />
+      /></Suspense>
       <section
         className="map-stage"
         aria-label="세계지도"
         data-panel-open={selection !== null}
         data-play-mode={playCountry !== null}
       >
-        <WorldMap
-          ref={mapRef}
-          mapMode={mapMode}
-          showProvinceBorders={showProvinceBorders}
-          showLabels={showLabels}
-          showCapitalLabels={showCapitalLabels}
-          selectedCountry={highlightedCountry}
-          selectedComponent={highlightedComponent}
-          onCountrySelect={selectCountry}
-          onWarReportSelect={(report) => {
-            if (!playCountry) return;
-            setActivePlayWindow("military");
-            window.setTimeout(() => window.dispatchEvent(new CustomEvent("tlr:open-war-report", { detail: { reportId: report.id } })), 0);
-          }}
-        />
-        {playCountry && playSimulationState ? (
-          <PlayHud
-            country={playCountry}
-            state={playSimulationState}
-            activeWindow={activePlayWindow}
-            onOpenWindow={setActivePlayWindow}
+        <Suspense fallback={null}>
+          <WorldMap
+            ref={mapRef}
             mapMode={mapMode}
-            onChangeMapMode={setMapMode}
+            showProvinceBorders={showProvinceBorders}
+            showLabels={showLabels}
+            showCapitalLabels={showCapitalLabels}
+            selectedCountry={highlightedCountry}
+            selectedComponent={highlightedComponent}
+            onCountrySelect={selectCountry}
+            onWarReportSelect={(report) => {
+              if (!playCountry) return;
+              setActivePlayWindow("military");
+              window.setTimeout(() => window.dispatchEvent(new CustomEvent("tlr:open-war-report", { detail: { reportId: report.id } })), 0);
+            }}
           />
+        </Suspense>
+        {playCountry && playSimulationState ? (
+          <Suspense fallback={null}>
+            <PlayHud
+              country={playCountry}
+              state={playSimulationState}
+              activeWindow={activePlayWindow}
+              onOpenWindow={setActivePlayWindow}
+              mapMode={mapMode}
+              onChangeMapMode={setMapMode}
+            />
+          </Suspense>
         ) : null}
-        <MapControls
+        <Suspense fallback={null}><MapControls
           mapHandle={mapRef}
           mapMode={mapMode}
           onChangeMapMode={setMapMode}
@@ -590,12 +594,12 @@ export default function App() {
             setShowCapitalLabels((current) => !current)
           }
           showMilitaryModes={!playCountry}
-        />
-        {mapMode === "faction" ? <FactionLegend /> : null}
-        <ReadOnlyCountryPanel
+        /></Suspense>
+        {mapMode === "faction" ? <Suspense fallback={null}><FactionLegend /></Suspense> : null}
+        <Suspense fallback={null}><ReadOnlyCountryPanel
           country={playCountry ? null : selection?.country ?? null}
           onClose={closePanel}
-        />
+        /></Suspense>
         {selection && !playCountry && countryPlayStep === "closed" ? (
           <div className="map-selection-action">
             <TexturedActionButton
@@ -607,19 +611,21 @@ export default function App() {
           </div>
         ) : null}
         {playCountry && playSimulationState ? (
-          <PlayWindowManager
-            playerCountry={playCountry}
-            inspectedCountry={inspectedCountry}
-            activeWindow={activePlayWindow}
-            simulationState={playSimulationState}
-            onCloseWindow={closePlayWindow}
-            onOpenWindow={setActivePlayWindow}
-          />
+          <Suspense fallback={null}>
+            <PlayWindowManager
+              playerCountry={playCountry}
+              inspectedCountry={inspectedCountry}
+              activeWindow={activePlayWindow}
+              simulationState={playSimulationState}
+              onCloseWindow={closePlayWindow}
+              onOpenWindow={setActivePlayWindow}
+            />
+          </Suspense>
         ) : null}
-        {playCountry ? <DiplomacyNotificationQueue country={playCountry} /> : null}
-        {playCountry ? <WarDeclarationAlert /> : null}
+        {playCountry ? <Suspense fallback={null}><DiplomacyNotificationQueue country={playCountry} /></Suspense> : null}
+        {playCountry ? <Suspense fallback={null}><WarDeclarationAlert /></Suspense> : null}
       </section>
-      <CountryPlayFlow
+      <Suspense fallback={null}><CountryPlayFlow
         country={selection?.country ?? applicationCountry}
         step={countryPlayStep}
         onClose={() => { setCountryPlayStep("closed"); setApplicationCountry(null); }}
@@ -630,7 +636,7 @@ export default function App() {
         onConfirm={confirmCountryPlay}
         busy={countryApplicationBusy}
         error={countryApplicationError}
-      />
+      /></Suspense>
       <AuthModal
         open={authModalOpen}
         profile={profile}
