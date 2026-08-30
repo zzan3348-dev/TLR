@@ -37,7 +37,9 @@ NEW NAVI worker는 옛 NAVI 서비스·volume을 재사용하지 않고 Railway�
 - 신규 volume mount: `/data`
 - `NAVI_DATABASE_PATH`: `/data/new_navi.sqlite3`
 - 필수 환경변수: `DISCORD_BOT_TOKEN`, `DISCORD_APPLICATION_ID`,
-  `TLR_API_BASE_URL`, `TLR_NAVI_SERVICE_TOKEN`
+  `TLR_API_BASE_URL`, `TLR_NAVI_SERVICE_TOKEN`, `OPENROUTER_API_KEY`
+- LLM 공급자/모델: `NAVI_LLM_PROVIDER=openrouter`,
+  `NAVI_LLM_MODEL=google/gemma-4-31b-it:free`
 
 Railway 변수에는 실제 secret을 직접 등록하고 `.env`나 기존 SQLite를 업로드하지
 않습니다. 새 volume의 빈 DB에서 NAVI 미니게임·캐릭터 schema만 생성됩니다.

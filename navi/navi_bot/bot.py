@@ -28,6 +28,7 @@ from .llm_chat import (
     strip_bot_mentions,
 )
 from .navi_safety import NaviSafety
+from .navi_llm import NaviLLMClient
 from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
@@ -59,7 +60,18 @@ class NaviBot(commands.Bot):
             Path(__file__).with_name("assets") / "navi_safety_reactions.json",
         )
         self.llm_chat: LLMChatService | None = None
-        if config.gemini_api_key:
+        if config.llm_provider == "openrouter" and config.openrouter_api_key:
+            self.llm_chat = LLMChatService(
+                provider=NaviLLMClient(
+                    api_key=config.openrouter_api_key,
+                    model=config.llm_model,
+                    timeout_seconds=config.llm_timeout_seconds,
+                    max_tokens=400,
+                ),
+                db=self.db,
+                safety=self.navi_safety,
+            )
+        elif config.llm_provider == "gemini" and config.gemini_api_key:
             self.llm_chat = LLMChatService(
                 provider=GeminiProvider(
                     api_key=config.gemini_api_key,
@@ -69,6 +81,10 @@ class NaviBot(commands.Bot):
                 db=self.db,
                 safety=self.navi_safety,
             )
+        elif config.llm_provider not in {"openrouter", "gemini"}:
+            log.error("지원하지 않는 NAVI LLM provider입니다: %s", config.llm_provider)
+        else:
+            log.warning("NAVI LLM 비활성화: %s API 키가 설정되지 않았습니다.", config.llm_provider)
 
     async def setup_hook(self) -> None:
         self.db.init_db()
