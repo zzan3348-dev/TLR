@@ -143,6 +143,72 @@ class Database:
                     source="bootstrap",
                 )
 
+    def run_maintenance(
+        self,
+        *,
+        claim_retention_days: int = 2,
+        llm_usage_retention_days: int = 30,
+        safety_retention_days: int = 30,
+    ) -> dict[str, Any]:
+        """임시성 데이터만 정리하고 SQLite WAL을 안전하게 회수한다.
+
+        호감도, 배지, 대화 기억, 식당 및 끝말잇기 기록처럼 사용자가 만든
+        영구 상태는 이 작업의 대상에 포함하지 않는다.
+        """
+        now = now_kst()
+        claim_cutoff = to_db_time(now - timedelta(days=max(1, int(claim_retention_days))))
+        usage_cutoff = (now.date() - timedelta(days=max(1, int(llm_usage_retention_days)))).isoformat()
+        safety_cutoff = to_db_time(now - timedelta(days=max(1, int(safety_retention_days))))
+        database_path = Path(self.path)
+
+        def storage_bytes() -> int:
+            return sum(
+                candidate.stat().st_size
+                for candidate in (
+                    database_path,
+                    Path(f"{database_path}-wal"),
+                    Path(f"{database_path}-shm"),
+                )
+                if candidate.is_file()
+            )
+
+        before_bytes = storage_bytes()
+        with self._connect() as conn:
+            deleted_claims = conn.execute(
+                "DELETE FROM chat_message_claims WHERE created_at < ?",
+                (claim_cutoff,),
+            ).rowcount
+            deleted_usage = conn.execute(
+                "DELETE FROM llm_daily_usage WHERE usage_date < ?",
+                (usage_cutoff,),
+            ).rowcount
+            deleted_safety = conn.execute(
+                "DELETE FROM navi_safety_violations WHERE created_at < ?",
+                (safety_cutoff,),
+            ).rowcount
+            deleted_restrictions = conn.execute(
+                "DELETE FROM navi_llm_restrictions WHERE restricted_until <= ?",
+                (to_db_time(now),),
+            ).rowcount
+            conn.execute("PRAGMA optimize")
+
+        # 삭제 트랜잭션의 연결을 닫은 뒤 별도 연결에서 checkpoint해야
+        # 같은 연결의 트랜잭션 잠금 때문에 WAL 회수가 방해받지 않는다.
+        with sqlite3.connect(self.path, timeout=10.0) as conn:
+            checkpoint = conn.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
+
+        return {
+            "deleted_claims": max(0, int(deleted_claims)),
+            "deleted_usage": max(0, int(deleted_usage)),
+            "deleted_safety": max(0, int(deleted_safety)),
+            "deleted_restrictions": max(0, int(deleted_restrictions)),
+            "checkpoint_busy": int(checkpoint[0]),
+            "checkpoint_log_frames": int(checkpoint[1]),
+            "checkpointed_frames": int(checkpoint[2]),
+            "before_bytes": before_bytes,
+            "after_bytes": storage_bytes(),
+        }
+
     def set_setting(self, *, key: str, value: str, updated_by: int | None) -> dict[str, Any]:
         with self._connect() as conn:
             conn.execute(
@@ -558,11 +624,15 @@ class Database:
 _SCHEMA = r"""
 CREATE TABLE IF NOT EXISTS bot_settings(key TEXT PRIMARY KEY,value TEXT NOT NULL,updated_by INTEGER,updated_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS chat_message_claims(message_id INTEGER PRIMARY KEY,created_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_chat_message_claims_created ON chat_message_claims(created_at);
 CREATE TABLE IF NOT EXISTS llm_daily_usage(user_id INTEGER NOT NULL,usage_date TEXT NOT NULL,request_count INTEGER NOT NULL DEFAULT 0,last_used_at TEXT,PRIMARY KEY(user_id,usage_date));
+CREATE INDEX IF NOT EXISTS idx_llm_daily_usage_date ON llm_daily_usage(usage_date);
 CREATE TABLE IF NOT EXISTS llm_user_keywords(user_id INTEGER NOT NULL,slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 2),keyword TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,slot));
 CREATE TABLE IF NOT EXISTS navi_safety_violations(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,guild_id INTEGER,violation_type TEXT NOT NULL,created_at TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS idx_navi_safety_violations_user_created ON navi_safety_violations(user_id,created_at);
+CREATE INDEX IF NOT EXISTS idx_navi_safety_violations_created ON navi_safety_violations(created_at);
 CREATE TABLE IF NOT EXISTS navi_llm_restrictions(user_id INTEGER PRIMARY KEY,restricted_until TEXT NOT NULL,reason TEXT,updated_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS idx_navi_llm_restrictions_until ON navi_llm_restrictions(restricted_until);
 CREATE TABLE IF NOT EXISTS global_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,badge_key TEXT UNIQUE NOT NULL,name TEXT NOT NULL,icon TEXT,description TEXT,rarity TEXT DEFAULT 'common',special_reaction TEXT,priority INTEGER DEFAULT 100,system_locked INTEGER DEFAULT 0,created_by INTEGER,created_at TEXT NOT NULL,updated_at TEXT);
 CREATE TABLE IF NOT EXISTS global_user_badges(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,badge_key TEXT NOT NULL,granted_by INTEGER,granted_reason TEXT,granted_at TEXT NOT NULL,source TEXT DEFAULT 'manual',UNIQUE(user_id,badge_key));
 CREATE TABLE IF NOT EXISTS global_user_profile_settings(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER UNIQUE NOT NULL,active_badge_key TEXT,badge_reactions_enabled INTEGER DEFAULT 1,updated_at TEXT NOT NULL);

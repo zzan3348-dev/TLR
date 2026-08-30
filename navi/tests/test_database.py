@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import closing
 from concurrent.futures import ThreadPoolExecutor
+from datetime import timedelta
 import sqlite3
 import tempfile
 from pathlib import Path
@@ -16,6 +17,7 @@ from navi_bot.navi_dialogues import (
     NAVI_PROFILE_LINES,
 )
 from navi_bot.restaurant_render import render_restaurant_scene
+from navi_bot.utils_time import now_kst, to_db_time
 
 
 class NewDatabaseTests(unittest.TestCase):
@@ -81,6 +83,67 @@ class NewDatabaseTests(unittest.TestCase):
             self.assertEqual(database.list_llm_keywords(200), ["별도 기억"])
             self.assertTrue(database.forget_llm_keyword(100, "고양이 집사"))
             self.assertEqual(database.list_llm_keywords(100), ["야간 활동"])
+
+    def test_maintenance_prunes_only_expired_temporary_data(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            path = Path(directory) / "new_navi.sqlite3"
+            database = Database(str(path))
+            database.init_db()
+            now = now_kst()
+            old_time = to_db_time(now - timedelta(days=45))
+            current_time = to_db_time(now)
+            old_date = (now.date() - timedelta(days=45)).isoformat()
+            current_date = now.date().isoformat()
+            with closing(sqlite3.connect(path)) as connection:
+                connection.execute(
+                    "INSERT INTO chat_message_claims(message_id,created_at) VALUES(?,?)",
+                    (1, old_time),
+                )
+                connection.execute(
+                    "INSERT INTO chat_message_claims(message_id,created_at) VALUES(?,?)",
+                    (2, current_time),
+                )
+                connection.execute(
+                    "INSERT INTO llm_daily_usage(user_id,usage_date,request_count,last_used_at) VALUES(?,?,?,?)",
+                    (1, old_date, 3, old_time),
+                )
+                connection.execute(
+                    "INSERT INTO llm_daily_usage(user_id,usage_date,request_count,last_used_at) VALUES(?,?,?,?)",
+                    (2, current_date, 1, current_time),
+                )
+                connection.execute(
+                    "INSERT INTO navi_safety_violations(user_id,guild_id,violation_type,created_at) VALUES(?,?,?,?)",
+                    (1, None, "prompt_injection", old_time),
+                )
+                connection.execute(
+                    "INSERT INTO navi_safety_violations(user_id,guild_id,violation_type,created_at) VALUES(?,?,?,?)",
+                    (2, None, "prompt_injection", current_time),
+                )
+                connection.execute(
+                    "INSERT INTO navi_llm_restrictions(user_id,restricted_until,reason,updated_at) VALUES(?,?,?,?)",
+                    (1, old_time, "expired", old_time),
+                )
+                connection.execute(
+                    "INSERT INTO global_user_affection(user_id,affection,created_at,updated_at) VALUES(?,?,?,?)",
+                    (99, 777, old_time, old_time),
+                )
+                connection.commit()
+
+            result = database.run_maintenance()
+
+            self.assertEqual(result["deleted_claims"], 1)
+            self.assertEqual(result["deleted_usage"], 1)
+            self.assertEqual(result["deleted_safety"], 1)
+            self.assertEqual(result["deleted_restrictions"], 1)
+            with closing(sqlite3.connect(path)) as connection:
+                self.assertEqual(connection.execute("SELECT COUNT(*) FROM chat_message_claims").fetchone()[0], 1)
+                self.assertEqual(connection.execute("SELECT COUNT(*) FROM llm_daily_usage").fetchone()[0], 1)
+                self.assertEqual(connection.execute("SELECT COUNT(*) FROM navi_safety_violations").fetchone()[0], 1)
+                self.assertEqual(connection.execute("SELECT COUNT(*) FROM navi_llm_restrictions").fetchone()[0], 0)
+                affection = connection.execute(
+                    "SELECT affection FROM global_user_affection WHERE user_id=99",
+                ).fetchone()[0]
+            self.assertEqual(affection, 777)
 
     def test_static_word_asset_seeds_a_new_database(self) -> None:
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:

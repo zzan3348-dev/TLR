@@ -107,9 +107,11 @@ class NaviBot(commands.Bot):
             await self.tree.sync()
             log.info("전역 Slash Command 동기화 완료")
         self.poll_tlr_events.start()
+        self.maintain_database.start()
 
     async def close(self) -> None:
         self.poll_tlr_events.cancel()
+        self.maintain_database.cancel()
         if self.llm_chat is not None:
             await self.llm_chat.close()
         await self.tlr.close()
@@ -295,6 +297,29 @@ class NaviBot(commands.Bot):
 
     @poll_tlr_events.before_loop
     async def before_poll_tlr_events(self) -> None:
+        await self.wait_until_ready()
+
+    @tasks.loop(hours=6)
+    async def maintain_database(self) -> None:
+        try:
+            result = await asyncio.to_thread(self.db.run_maintenance)
+        except Exception:
+            log.exception("NAVI SQLite 정기 최적화 실패")
+            return
+        log.info(
+            "NAVI SQLite 정기 최적화 완료: claims=%s usage=%s safety=%s restrictions=%s "
+            "storage_mb=%.2f->%.2f checkpoint_busy=%s",
+            result["deleted_claims"],
+            result["deleted_usage"],
+            result["deleted_safety"],
+            result["deleted_restrictions"],
+            result["before_bytes"] / (1024 * 1024),
+            result["after_bytes"] / (1024 * 1024),
+            result["checkpoint_busy"],
+        )
+
+    @maintain_database.before_loop
+    async def before_maintain_database(self) -> None:
         await self.wait_until_ready()
 
     async def _deliver_event(self, event: dict[str, Any]) -> None:
