@@ -1,8 +1,8 @@
-import { adminSessionCookie, createAdminSession, getAdminConfig } from "../../server/adminAuth.js";
-import { getAdminClient, getAuthenticatedUser, getServerEnv } from "../../server/auth.js";
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { adminSessionCookie, createAdminSession, getAdminConfig } from "../../adminAuth.js";
+import { getAdminClient, getAuthenticatedUser, getServerEnv } from "../../auth.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
 
-export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
+export default async function discordAdminLogin(request: ApiRequest, response: ApiResponse): Promise<void> {
   if (request.method !== "POST") return void response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
   const env = getServerEnv(); const secret = getAdminConfig().sessionSecret;
   if (!env || !secret) return void response.status(404).json({ error: "NOT_FOUND" });

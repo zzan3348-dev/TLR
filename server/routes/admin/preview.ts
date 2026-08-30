@@ -1,9 +1,9 @@
-import { requireAdminSession, getAdminConfig } from "../../server/adminAuth.js";
-import { adminPreviewCookie, clearAdminPreviewCookie, createAdminPreviewSession, getAdminPreview } from "../../server/adminPreview.js";
-import { getAdminClient, getServerEnv } from "../../server/auth.js";
-import type { ApiRequest, ApiResponse } from "../../server/types.js";
+import { requireAdminSession, getAdminConfig } from "../../adminAuth.js";
+import { adminPreviewCookie, clearAdminPreviewCookie, createAdminPreviewSession, getAdminPreview } from "../../adminPreview.js";
+import { getAdminClient, getServerEnv } from "../../auth.js";
+import type { ApiRequest, ApiResponse } from "../../types.js";
 
-export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
+export default async function previewAdmin(request: ApiRequest, response: ApiResponse): Promise<void> {
   const session = requireAdminSession(request, response);
   if (!session) return;
   if (request.method === "DELETE") {

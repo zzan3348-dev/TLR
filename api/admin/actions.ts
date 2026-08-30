@@ -8,6 +8,8 @@ import intelligenceAdmin from "../../server/routes/admin/intelligence.js";
 import worldControlAdmin from "../../server/routes/admin/worldControl.js";
 import siteStatusAdmin from "../../server/routes/admin/siteStatus.js";
 import countryApplicationsAdmin from "../../server/routes/admin/countryApplications.js";
+import previewAdmin from "../../server/routes/admin/preview.js";
+import discordAdminLogin from "../../server/routes/admin/discordLogin.js";
 import { expelCountryAssignment } from "../../server/countryApplications.js";
 
 const actionKinds = new Set([
@@ -56,6 +58,14 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
   if (domain === "country-applications") {
     await countryApplicationsAdmin(request, response);
+    return;
+  }
+  if (domain === "preview") {
+    await previewAdmin(request, response);
+    return;
+  }
+  if (domain === "discord-login") {
+    await discordAdminLogin(request, response);
     return;
   }
   if (request.method !== "POST") {

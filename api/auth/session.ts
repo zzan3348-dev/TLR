@@ -8,7 +8,7 @@ import {
 } from "../../server/auth.js";
 import { submitCountryApplication } from "../../server/countryApplications.js";
 import { loadSiteStatus } from "../../server/siteStatus.js";
-import { ensurePersistentSession } from "../../server/persistentSession.js";
+import { clearAuthSessionCookie, ensurePersistentSession } from "../../server/persistentSession.js";
 
 type ProfileRow = {
   id: string;
@@ -44,6 +44,14 @@ function requestedCountryKey(request: ApiRequest): string | null {
 }
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
+  const rawDomain = request.query?.domain;
+  const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
+  if (domain === "logout") {
+    if (request.method !== "POST") return void response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
+    response.setHeader("Set-Cookie", clearAuthSessionCookie());
+    response.status(200).json({ ok: true });
+    return;
+  }
   if (request.method !== "GET" && request.method !== "POST") {
     response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     return;

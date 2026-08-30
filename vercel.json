@@ -71,6 +71,18 @@
       "destination": "/api/admin/actions?domain=country-applications"
     },
     {
+      "source": "/api/admin/preview",
+      "destination": "/api/admin/actions?domain=preview"
+    },
+    {
+      "source": "/api/admin/discord-login",
+      "destination": "/api/admin/actions?domain=discord-login"
+    },
+    {
+      "source": "/api/auth/logout",
+      "destination": "/api/auth/session?domain=logout"
+    },
+    {
       "source": "/api/navi/:route",
       "destination": "/api/economy-dispatch?domain=navi&route=:route"
     },
