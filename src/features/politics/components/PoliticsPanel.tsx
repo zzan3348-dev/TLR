@@ -22,6 +22,7 @@ import { DEV_DEVELOPMENT_SAMPLE } from "../data/devDevelopmentSample";
 import { DEV_LAW_SAMPLE } from "../data/devLawSample";
 import { lawDefinitions } from "../data/lawDefinitions";
 import type { LawCategory, LawDefinition } from "../types/laws";
+import type { PlaySimulationState } from "../../play/data/playSimulationState";
 import { DevelopmentSection } from "./DevelopmentSection";
 import { LawDetailModal } from "./LawDetailModal";
 import { LawSection } from "./LawSection";
@@ -30,6 +31,8 @@ import { createUnsetDevelopmentState } from "../utils/developmentState";
 
 type PoliticsPanelProps = {
   country: MapCountryIndex;
+  simulationState: PlaySimulationState;
+  readOnly?: boolean;
   onClose: () => void;
 };
 
@@ -136,6 +139,8 @@ export function PoliticsLeaderInfo({
 
 export function PoliticsPanel({
   country,
+  simulationState,
+  readOnly = false,
   onClose,
 }: PoliticsPanelProps) {
   const presentation = getCountryPresentation(country);
@@ -319,10 +324,25 @@ export function PoliticsPanel({
       />
 
       <LawDetailModal
+        key={selectedLaw?.id ?? "closed"}
         definition={selectedLaw}
         selectedOptionId={
           selectedLaw ? choices[selectedLaw.id] ?? null : null
         }
+        availabilityContext={{
+          rulingIdeologyCategory: primaryParty?.ideologyCategory ?? presentation.politics.ideologyCategory,
+          rulingPartyName: primaryParty?.name ?? presentation.politics.rulingParty ?? "정당 미설정",
+          rulingPartySupport: primaryParty?.support ?? 0,
+          politicalPower: simulationState.politicalPower,
+          stability: simulationState.stability,
+          warSupport: simulationState.warSupport,
+          gdp: simulationState.gdp,
+          atWar: simulationState.atWar,
+          selectedLawOptions: choices,
+          developmentState,
+          readOnly,
+        }}
+        definitions={lawDefinitions}
         onSelect={selectLawOption}
         onClose={() => setSelectedLaw(null)}
       />

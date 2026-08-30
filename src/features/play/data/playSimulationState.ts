@@ -20,6 +20,7 @@ export type PlaySimulationState = {
   stability: number;
   baseWarSupport: number;
   warSupport: number;
+  atWar: boolean;
   baseManpower: number;
   manpowerModifierPercent: number;
   mobilizableManpower: number;
@@ -58,6 +59,7 @@ export const ZERO_PLAY_SIMULATION_STATE: PlaySimulationState = {
   stability: 0,
   baseWarSupport: 0,
   warSupport: 0,
+  atWar: false,
   baseManpower: 0,
   manpowerModifierPercent: 0,
   mobilizableManpower: 0,
@@ -113,6 +115,7 @@ export function getPlaySimulationState(
     stability: nationalStats?.stability ?? baseStats?.base_stability ?? 0,
     baseWarSupport: nationalStats?.baseWarSupport ?? baseStats?.base_war_support ?? 0,
     warSupport: nationalStats?.warSupport ?? baseStats?.base_war_support ?? 0,
+    atWar: snapshot?.atWar ?? false,
     baseManpower: nationalStats?.baseAvailableManpower ?? baseStats?.base_available_manpower ?? 0,
     manpowerModifierPercent: nationalStats?.manpowerModifierPercent ?? 0,
     mobilizableManpower: nationalStats?.mobilizableManpower ?? baseStats?.base_available_manpower ?? 0,

@@ -101,6 +101,7 @@ export type EconomySnapshot = {
   economy: EconomyRecord | null;
   productionCapacity: CapacityRecord | null;
   nationalStats: NationalStatsRecord | null;
+  atWar: boolean;
   resources: ResourceRecord[];
   history: Array<Record<string, unknown>>;
   rules: { settlement_interval_days: number; budget_min: number; budget_max: number; budget_step: number };

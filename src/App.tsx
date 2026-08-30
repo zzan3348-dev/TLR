@@ -617,6 +617,7 @@ export default function App() {
               inspectedCountry={inspectedCountry}
               activeWindow={activePlayWindow}
               simulationState={playSimulationState}
+              readOnly={adminPreviewCountryKey !== null}
               onCloseWindow={closePlayWindow}
               onOpenWindow={setActivePlayWindow}
             />

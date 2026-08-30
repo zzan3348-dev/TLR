@@ -393,8 +393,51 @@ function modifierFromEffect(line) {
   };
 }
 
+function readLawImplementationMeta() {
+  const sourcePath = path.join(SOURCE_DIR, "TLR_1932_law-change-costs_v2.txt");
+  if (!fs.existsSync(sourcePath)) {
+    throw new Error(`법률 변경 확장표가 없습니다: ${sourcePath}`);
+  }
+  const text = readUtf8(sourcePath);
+  const optionMatches = [...text.matchAll(/^option id:\s*([^\s]+)\s*$/gm)];
+  const result = new Map();
+  for (let index = 0; index < optionMatches.length; index += 1) {
+    const match = optionMatches[index];
+    const optionId = match[1].trim();
+    const body = text.slice(
+      match.index + match[0].length,
+      optionMatches[index + 1]?.index ?? text.length,
+    );
+    const implementationTurns = Number(body.match(/^v2 시행기간:\s*(\d+)턴\s*$/m)?.[1]);
+    const implementationCostGdpPct = Number(
+      body.match(/^v2 일회성 시행비:\s*GDP 대비\s*([\d.]+)%\s*$/m)?.[1],
+    );
+    const changeCooldownTurns = Number(
+      body.match(/^v2 재변경 쿨다운:\s*(\d+)턴\s*$/m)?.[1],
+    );
+    if (
+      !Number.isFinite(implementationTurns) ||
+      !Number.isFinite(implementationCostGdpPct) ||
+      !Number.isFinite(changeCooldownTurns)
+    ) {
+      throw new Error(`${optionId}: v2 시행 데이터가 누락되었습니다.`);
+    }
+    if (result.has(optionId)) throw new Error(`${optionId}: v2 선택지 ID가 중복됩니다.`);
+    result.set(optionId, {
+      implementationTurns,
+      implementationCostGdpPct,
+      changeCooldownTurns,
+    });
+  }
+  if (result.size !== 140) {
+    throw new Error(`법률 v2 선택지 수 불일치: ${result.size}/140`);
+  }
+  return result;
+}
+
 function importLaws() {
   const text = readUtf8(path.join(SOURCE_DIR, "TLR_1932_law-system_v1.txt"));
+  const implementationMeta = readLawImplementationMeta();
   const lawMatches = [...text.matchAll(/^law id:\s*([^\s]+)\s*$/gm)];
   const laws = lawMatches.map((lawMatch, lawIndex) => {
     const id = lawMatch[1].trim();
@@ -413,21 +456,30 @@ function importLaws() {
       const note = optionBody.match(/^비고:\s*(.+)$/m)?.[1]?.trim() ?? null;
       const politicalPowerCost = Number(optionBody.match(/^정치력 비용:\s*(\d+)/m)?.[1] ?? 0);
       const requiresAdminApproval = optionBody.match(/^상시 관리자 승인:\s*(.+)$/m)?.[1]?.trim() === "필요";
+      const optionId = optionMatch[2].trim();
+      const v2 = implementationMeta.get(optionId);
+      if (!v2) throw new Error(`${optionId}: v2 시행 데이터가 없습니다.`);
       return {
-        id: optionMatch[2].trim(), name: optionMatch[1].trim(),
-        description: lawDescriptionOverrides[optionMatch[2].trim()]
+        id: optionId, name: optionMatch[1].trim(),
+        description: lawDescriptionOverrides[optionId]
           ?? lawDescriptionTemplates.get(id)?.(optionMatch[1].trim())
           ?? `${optionMatch[1].trim()} 원칙을 적용합니다.`,
         order: optionIndex + 1,
         icon: `${id}/${optionIndex + 1}`, modifiers: effectLines.map(modifierFromEffect), requirements,
         incompatibilities: compatibility(optionBody, "×"), conditionalIdeologyCategories: compatibility(optionBody, "△"),
         politicalPowerCost, requiresAdminApproval, effectLines, notes: note,
+        ...v2,
       };
     });
     if (options.length !== 5) throw new Error(`${id}: 선택지가 ${options.length}개입니다.`);
     return { id, category: meta[0], name: meta[1], icon: id, description: `${meta[1]}의 운영 기준을 규정합니다.`, options };
   });
   if (laws.length !== lawMeta.size) throw new Error(`법률 수 불일치: ${laws.length}/${lawMeta.size}`);
+  const importedOptionIds = new Set(laws.flatMap((law) => law.options.map((option) => option.id)));
+  const unusedV2Ids = [...implementationMeta.keys()].filter((id) => !importedOptionIds.has(id));
+  if (unusedV2Ids.length > 0) {
+    throw new Error(`v1과 일치하지 않는 v2 선택지: ${unusedV2Ids.join(", ")}`);
+  }
   writeJson(path.join(GENERATED_POLITICS, "lawDefinitions.json"), laws);
   return laws;
 }

@@ -14,6 +14,7 @@ type PlayWindowManagerProps = {
   inspectedCountry: MapCountryIndex | null;
   activeWindow: PrimaryWindow;
   simulationState: PlaySimulationState;
+  readOnly?: boolean;
   onCloseWindow: () => void;
   onOpenWindow: (window: PrimaryWindow) => void;
 };
@@ -23,6 +24,7 @@ export function PlayWindowManager({
   inspectedCountry,
   activeWindow,
   simulationState,
+  readOnly = false,
   onCloseWindow,
   onOpenWindow,
 }: PlayWindowManagerProps) {
@@ -31,6 +33,8 @@ export function PlayWindowManager({
       <PoliticsPanel
         key={playerCountry.key}
         country={playerCountry}
+        simulationState={simulationState}
+        readOnly={readOnly}
         onClose={onCloseWindow}
       />
     );

@@ -19,15 +19,21 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   if (!actor) return;
   try {
     const worldDate = await economyWorldDate(admin);
-    const [economy, readiness, resources, capacity, history, rules] = await Promise.all([
+    const [economy, readiness, resources, capacity, history, rules, activeWars] = await Promise.all([
       admin.from("country_economies").select("*").eq("country_key", actor.countryKey).maybeSingle<EconomyRow>(),
       admin.rpc("tlr_economy_readiness", { p_country: actor.countryKey }),
       admin.from("country_resources").select("*").eq("country_key", actor.countryKey).order("resource_type_id").returns<ResourceRow[]>(),
       admin.rpc("tlr_trade_capacity_components", { p_country: actor.countryKey }),
       admin.from("economy_history").select("*").eq("country_key", actor.countryKey).order("period_end", { ascending: false }).limit(24).returns<HistoryRow[]>(),
       admin.from("economy_rules").select("settlement_interval_days,budget_min,budget_max,budget_step,calculation_parameters").eq("singleton", true).single(),
+      admin.from("military_conflict_participants")
+        .select("conflict_id,military_conflicts!inner(status)")
+        .eq("country_key", actor.countryKey)
+        .is("left_world_date", null)
+        .not("military_conflicts.status", "in", "(ENDED,CANCELLED)")
+        .limit(1),
     ]);
-    const failed = [economy, readiness, resources, capacity, history, rules].find((result) => result.error);
+    const failed = [economy, readiness, resources, capacity, history, rules, activeWars].find((result) => result.error);
     if (failed?.error) throw failed.error;
     const databaseResources = (resources.data ?? []) as Array<ResourceRow & { country_key: string; export_limit?: number; production_per_period?: number; domestic_use?: number }>;
     const mergedResources = mergeStartingResources(actor.countryKey, databaseResources);
@@ -57,6 +63,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       readiness: mergedEconomy ? "READY" : readiness.data ?? "UNCONFIGURED",
       economy: mergedEconomy,
       nationalStats,
+      atWar: (activeWars.data?.length ?? 0) > 0,
       productionCapacity: configuredDatabaseCapacity ?? startingCapacityForEconomy(mergedEconomy),
       resources: resourceComponents,
       history: history.data ?? [],

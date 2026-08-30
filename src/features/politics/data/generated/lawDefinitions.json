@@ -60,7 +60,10 @@
           "턴당 정치력 변화: +10%",
           "안정도: -2.5%p"
         ],
-        "notes": "국가의 정당 경쟁 구조 자체를 폐쇄하는 체제급 변경이다. 행정 발전도는 요구하지 않는다."
+        "notes": "국가의 정당 경쟁 구조 자체를 폐쇄하는 체제급 변경이다. 행정 발전도는 요구하지 않는다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 4
       },
       {
         "id": "party-system:dominant-party",
@@ -116,7 +119,10 @@
           "턴당 정치력 변화: +5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "party-system:multiparty",
@@ -176,7 +182,10 @@
           "안정도: +5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 4
       },
       {
         "id": "party-system:nonpartisan",
@@ -228,7 +237,10 @@
           "턴당 정치력 변화: +12.5%",
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "party-system:military",
@@ -305,7 +317,10 @@
           "================================================================",
           "2. 종교 정책"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 4
       }
     ]
   },
@@ -370,7 +385,10 @@
           "안정도: +5%p",
           "전쟁 지지도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "religion-policy:pluralism",
@@ -421,7 +439,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "religion-policy:secularism",
@@ -466,7 +487,10 @@
         "effectLines": [
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "religion-policy:favored",
@@ -518,7 +542,10 @@
           "안정도: +2.5%p",
           "전쟁 지지도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "religion-policy:atheism",
@@ -595,7 +622,10 @@
           "================================================================",
           "3. 노동조합"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -663,7 +693,10 @@
           "안정도: -5%p",
           "명목 성장률: -1%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade-unions:controlled",
@@ -715,7 +748,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade-unions:allowed",
@@ -774,7 +810,10 @@
           "안정도: +2.5%p",
           "명목 성장률: +1%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade-unions:sectoral",
@@ -836,7 +875,10 @@
           "안정도: +5%p",
           "명목 성장률: +1.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade-unions:state-union",
@@ -913,7 +955,10 @@
           "================================================================",
           "4. 이민 정책"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -973,7 +1018,10 @@
           "안정도: +5%p",
           "인구 증가율: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "immigration:selective",
@@ -1031,7 +1079,10 @@
           "인구 증가율: +2.5%",
           "연구력: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.15,
+        "changeCooldownTurns": 2
       },
       {
         "id": "immigration:open",
@@ -1083,7 +1134,10 @@
           "안정도: -5%p",
           "인구 증가율: +7.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "immigration:quota",
@@ -1131,7 +1185,10 @@
         "effectLines": [
           "인구 증가율: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "immigration:settlement",
@@ -1214,7 +1271,10 @@
           "================================================================",
           "5. 강제노동"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -1303,7 +1363,10 @@
           "인구 증가율: -10%",
           "징세효율: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 3
       },
       {
         "id": "forced-labor:penal-only",
@@ -1355,7 +1418,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "forced-labor:prohibited",
@@ -1413,7 +1479,10 @@
           "전쟁 지지도: +2.5%p",
           "연구력: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 3
       },
       {
         "id": "forced-labor:emergency",
@@ -1475,7 +1544,10 @@
           "안정도: -2.5%p",
           "전쟁 지지도: -2.5%p"
         ],
-        "notes": "별도 국가 비상상태 시스템이 구현되면 '전쟁 중 OR 국가 비상상태'로 확장 가능."
+        "notes": "별도 국가 비상상태 시스템이 구현되면 '전쟁 중 OR 국가 비상상태'로 확장 가능.",
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "forced-labor:contract",
@@ -1533,7 +1605,10 @@
           "================================================================",
           "6. 집회·결사의 자유"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -1587,7 +1662,10 @@
         "effectLines": [
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "assembly:licensed",
@@ -1639,7 +1717,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 2
       },
       {
         "id": "assembly:protected",
@@ -1691,7 +1772,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.15,
+        "changeCooldownTurns": 2
       },
       {
         "id": "assembly:registered",
@@ -1742,7 +1826,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "assembly:free",
@@ -1805,7 +1892,10 @@
           "================================================================",
           "7. 언론의 자유"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -1873,7 +1963,10 @@
           "전쟁 지지도: +7.5%p",
           "턴당 정치력 변화: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "press:censored",
@@ -1932,7 +2025,10 @@
           "전쟁 지지도: +2.5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "press:free-press",
@@ -1984,7 +2080,10 @@
           "안정도: +5%p",
           "턴당 정치력 변화: -10%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "press:licensed",
@@ -2036,7 +2135,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "press:plural",
@@ -2102,7 +2204,10 @@
           "================================================================",
           "8. 선거권"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -2163,7 +2268,10 @@
           "턴당 정치력 변화: +10%",
           "안정도: -7.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "franchise:restricted",
@@ -2215,7 +2323,10 @@
           "턴당 정치력 변화: +7.5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "franchise:universal",
@@ -2268,7 +2379,10 @@
         "effectLines": [
           "안정도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 4
       },
       {
         "id": "franchise:class",
@@ -2324,7 +2438,10 @@
           "턴당 정치력 변화: +7.5%",
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 4
       },
       {
         "id": "franchise:equal",
@@ -2419,7 +2536,10 @@
           "================================================================",
           "9. 군 복무 제도"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 4
       }
     ]
   },
@@ -2479,7 +2599,10 @@
           "가용 인력: -15%",
           "준비도: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "service:limited",
@@ -2543,7 +2666,10 @@
           "전쟁 지지도: -5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "service:standard",
@@ -2615,7 +2741,10 @@
           "턴당 정치력 변화: -5%",
           "생산능력 수정치: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 3
       },
       {
         "id": "service:mass",
@@ -2705,7 +2834,10 @@
           "연구력: -2.5%",
           "준비도: -10%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 3
       },
       {
         "id": "service:total",
@@ -2800,7 +2932,10 @@
           "연구력: -7.5%",
           "준비도: -25%"
         ],
-        "notes": "- 행정 효율이나 군 전문성 조건은 요구하지 않는다."
+        "notes": "- 행정 효율이나 군 전문성 조건은 요구하지 않는다.",
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 1.5,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -2866,7 +3001,10 @@
           "훈련도: -10%",
           "준비도: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "training:combat",
@@ -2909,7 +3047,10 @@
         "effectLines": [
           "훈련도: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "training:professional",
@@ -2970,7 +3111,10 @@
           "훈련도: +15%",
           "준비도: +10%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       },
       {
         "id": "training:reserve",
@@ -3038,7 +3182,10 @@
           "준비도: +10%",
           "가용 인력: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "training:doctrine",
@@ -3113,7 +3260,10 @@
           "================================================================",
           "11. 장교 제도"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -3181,7 +3331,10 @@
           "훈련도: -10%",
           "준비도: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "officers:academy",
@@ -3231,7 +3384,10 @@
           "훈련도: +10%",
           "준비도: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "officers:merit",
@@ -3286,7 +3442,10 @@
           "훈련도: +15%",
           "준비도: +10%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "officers:political",
@@ -3345,7 +3504,10 @@
           "전쟁 지지도: +2.5%p",
           "준비도: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "officers:professional",
@@ -3421,7 +3583,10 @@
           "================================================================",
           "12. 병역 면제"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -3488,7 +3653,10 @@
           "생산능력 수정치: +5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 1
       },
       {
         "id": "exemptions:regulated",
@@ -3542,7 +3710,10 @@
           "가용 인력: -10%",
           "생산능력 수정치: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 1
       },
       {
         "id": "exemptions:minimal",
@@ -3593,7 +3764,10 @@
           "가용 인력: +10%",
           "생산능력 수정치: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 1
       },
       {
         "id": "exemptions:social",
@@ -3648,7 +3822,10 @@
           "가용 인력: -10%",
           "생산능력 수정치: +7.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.25,
+        "changeCooldownTurns": 1
       },
       {
         "id": "exemptions:none",
@@ -3754,7 +3931,10 @@
           "================================================================",
           "13. 무역법"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 1
       }
     ]
   },
@@ -3829,7 +4009,10 @@
           "연구력: -5%",
           "명목 성장률: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade:tariffs",
@@ -3887,7 +4070,10 @@
           "생산능력 수정치: +2.5%",
           "국가수익: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade:open-trade",
@@ -3945,7 +4131,10 @@
           "생산능력 수정치: +2.5%",
           "연구력: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade:limited",
@@ -4010,7 +4199,10 @@
           "연구력: +5%",
           "명목 성장률: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "trade:free",
@@ -4090,7 +4282,10 @@
           "================================================================",
           "14. 소득세법"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -4164,7 +4359,10 @@
           "명목 성장률: +2%p",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "income-tax:balanced",
@@ -4207,7 +4405,10 @@
         "effectLines": [
           "명목세율: 기준값 유지"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "income-tax:progressive",
@@ -4277,7 +4478,10 @@
           "안정도: -2.5%p",
           "명목 성장률: -1%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "income-tax:flat",
@@ -4336,7 +4540,10 @@
           "국가수익: +5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "income-tax:high",
@@ -4427,7 +4634,10 @@
           "================================================================",
           "15. 최저임금법"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -4494,7 +4704,10 @@
           "안정도: -5%p",
           "실업률: -0.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 2
       },
       {
         "id": "minimum-wage:regional",
@@ -4545,7 +4758,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "minimum-wage:national",
@@ -4596,7 +4812,10 @@
           "안정도: +2.5%p",
           "실업률: +0.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "minimum-wage:sectoral",
@@ -4658,7 +4877,10 @@
           "안정도: +5%p",
           "실업률: +0.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "minimum-wage:living",
@@ -4742,7 +4964,10 @@
           "================================================================",
           "16. 법정 노동시간"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -4810,7 +5035,10 @@
           "안정도: -5%p",
           "연구력: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 2
       },
       {
         "id": "working-hours:standard",
@@ -4853,7 +5081,10 @@
         "effectLines": [
           "없음"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.05,
+        "changeCooldownTurns": 2
       },
       {
         "id": "working-hours:short",
@@ -4912,7 +5143,10 @@
           "안정도: +5%p",
           "연구력: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "working-hours:flexible",
@@ -4968,7 +5202,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "working-hours:six-hour",
@@ -5034,7 +5271,10 @@
           "실업률: -1.5%p",
           "연구력: +2.5%"
         ],
-        "notes": "- 생산성이 낮은 국가도 정치적으로 6시간 노동을 선언할 수 있다."
+        "notes": "- 생산성이 낮은 국가도 정치적으로 6시간 노동을 선언할 수 있다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -5095,7 +5335,10 @@
           "총지출: 추가 없음",
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0,
+        "changeCooldownTurns": 3
       },
       {
         "id": "unemployment:limited",
@@ -5146,7 +5389,10 @@
           "총지출: GDP 대비 +1%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 3
       },
       {
         "id": "unemployment:comprehensive",
@@ -5209,7 +5455,10 @@
           "안정도: +5%p",
           "실업률: -0.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "unemployment:insurance",
@@ -5271,7 +5520,10 @@
           "안정도: +5%p",
           "징세효율: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 3
       },
       {
         "id": "unemployment:guaranteed",
@@ -5341,7 +5593,10 @@
           "실업률: -3%p",
           "생산능력 수정치: -2.5%"
         ],
-        "notes": "- 재정 여건 자체를 선택조건으로 막지는 않는다."
+        "notes": "- 재정 여건 자체를 선택조건으로 막지는 않는다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 2,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -5402,7 +5657,10 @@
           "총지출: 추가 없음",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0,
+        "changeCooldownTurns": 3
       },
       {
         "id": "pensions:occupational",
@@ -5457,7 +5715,10 @@
           "총지출: GDP 대비 +1.5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 3
       },
       {
         "id": "pensions:public",
@@ -5512,7 +5773,10 @@
           "총지출: GDP 대비 +3%",
           "안정도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 3
       },
       {
         "id": "pensions:contributory",
@@ -5574,7 +5838,10 @@
           "안정도: +5%p",
           "징세효율: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.7,
+        "changeCooldownTurns": 3
       },
       {
         "id": "pensions:universal",
@@ -5644,7 +5911,10 @@
           "================================================================",
           "19. 산업 소유 구조"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 1.5,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -5712,7 +5982,10 @@
           "명목 성장률: +5%p",
           "징세효율: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 4
       },
       {
         "id": "industry-ownership:supervised",
@@ -5770,7 +6043,10 @@
           "명목 성장률: +2.5%p",
           "징세효율: +5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 4
       },
       {
         "id": "industry-ownership:corporate",
@@ -5833,7 +6109,10 @@
           "안정도: +2.5%p",
           "명목 성장률: +1%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 4
       },
       {
         "id": "industry-ownership:mixed-economy",
@@ -5891,7 +6170,10 @@
           "안정도: +5%p",
           "징세효율: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 4
       },
       {
         "id": "industry-ownership:planned",
@@ -5968,7 +6250,10 @@
           "턴당 정치력 변화: -5%",
           "안정도: -2.5%p"
         ],
-        "notes": "- 산업 전문성·공업 장비 수준으로 해금하지 않는다."
+        "notes": "- 산업 전문성·공업 장비 수준으로 해금하지 않는다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 2,
+        "changeCooldownTurns": 4
       }
     ]
   },
@@ -6029,7 +6314,10 @@
           "식량 생산량: +5%",
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 4
       },
       {
         "id": "land-system:mixed",
@@ -6073,7 +6361,10 @@
         "effectLines": [
           "식량 생산량: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "land-system:smallholder",
@@ -6124,7 +6415,10 @@
           "식량 생산량: +5%",
           "안정도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 4
       },
       {
         "id": "land-system:cooperative",
@@ -6176,7 +6470,10 @@
           "식량 생산량: +7.5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 4
       },
       {
         "id": "land-system:national",
@@ -6239,7 +6536,10 @@
           "안정도: -2.5%p",
           "총지출: GDP 대비 +1%"
         ],
-        "notes": "- 농업 방식 발전도는 소유관계와 별개의 축이므로 요구하지 않는다."
+        "notes": "- 농업 방식 발전도는 소유관계와 별개의 축이므로 요구하지 않는다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 1.8,
+        "changeCooldownTurns": 4
       }
     ]
   },
@@ -6300,7 +6600,10 @@
           "총지출: 추가 없음",
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "healthcare:mixed",
@@ -6351,7 +6654,10 @@
           "총지출: GDP 대비 +1.5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 3
       },
       {
         "id": "healthcare:universal",
@@ -6414,7 +6720,10 @@
           "안정도: +5%p",
           "명목 성장률: +1%p"
         ],
-        "notes": "- 보편적 접근권을 실제로 제공하기 위한 최소한의 기초 보건망만 요구한다."
+        "notes": "- 보편적 접근권을 실제로 제공하기 위한 최소한의 기초 보건망만 요구한다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "healthcare:insurance",
@@ -6480,7 +6789,10 @@
           "안정도: +5%p",
           "징세효율: +2.5%"
         ],
-        "notes": "- 보험료 납부·가입자 명부·급여 지급체계를 운영해야 하므로 최소한의 행정망과 보건망을 요구한다."
+        "notes": "- 보험료 납부·가입자 명부·급여 지급체계를 운영해야 하므로 최소한의 행정망과 보건망을 요구한다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "healthcare:state-service",
@@ -6547,7 +6859,10 @@
           "안정도: +7.5%p",
           "연구력: +2.5%"
         ],
-        "notes": "- 의료기관을 국가가 직접 운영하는 구조이므로 체제적 파급력이 크다."
+        "notes": "- 의료기관을 국가가 직접 운영하는 구조이므로 체제적 파급력이 크다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 2,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -6608,7 +6923,10 @@
           "총지출: GDP 대비 +0.5%",
           "연구력: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "education:primary",
@@ -6658,7 +6976,10 @@
           "총지출: GDP 대비 +1.5%",
           "연구력: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 3
       },
       {
         "id": "education:public",
@@ -6720,7 +7041,10 @@
           "연구력: +5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "education:secondary",
@@ -6787,7 +7111,10 @@
           "연구력: +7.5%",
           "명목 성장률: +1%p"
         ],
-        "notes": "- 초등교육 수준의 기초 교육기반이 최소한 존재해야 전국적 중등교육 확대가 가능하다고 본다."
+        "notes": "- 초등교육 수준의 기초 교육기반이 최소한 존재해야 전국적 중등교육 확대가 가능하다고 본다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 1.4,
+        "changeCooldownTurns": 3
       },
       {
         "id": "education:universal",
@@ -6861,7 +7188,10 @@
           "안정도: +5%p",
           "명목 성장률: +2%p"
         ],
-        "notes": "- 모든 단계의 교육 접근을 공적으로 보장하는 체계이므로 일정한 교육기반과 전국적 행정망이 필요하다."
+        "notes": "- 모든 단계의 교육 접근을 공적으로 보장하는 체계이므로 일정한 교육기반과 전국적 행정망이 필요하다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 2,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -6922,7 +7252,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "penal-system:mixed",
@@ -6965,7 +7298,10 @@
         "effectLines": [
           "없음"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "penal-system:rehabilitative",
@@ -7021,7 +7357,10 @@
           "안정도: +5%p",
           "총지출: GDP 대비 +1%"
         ],
-        "notes": "- 단순 구금보다 재활·사회복귀 프로그램을 지속 운영하는 데 필요한 최소 행정능력을 요구한다."
+        "notes": "- 단순 구금보다 재활·사회복귀 프로그램을 지속 운영하는 데 필요한 최소 행정능력을 요구한다.",
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       },
       {
         "id": "penal-system:capital",
@@ -7073,7 +7412,10 @@
           "전쟁 지지도: +2.5%p",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "penal-system:abolished",
@@ -7139,7 +7481,10 @@
           "================================================================",
           "24. 치안 정책"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -7207,7 +7552,10 @@
           "전쟁 지지도: +5%p",
           "턴당 정치력 변화: -5%"
         ],
-        "notes": "- 평시에도 군사화된 치안체제가 존재할 수 있으므로 전쟁조건을 걸지 않는다."
+        "notes": "- 평시에도 군사화된 치안체제가 존재할 수 있으므로 전쟁조건을 걸지 않는다.",
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 2
       },
       {
         "id": "policing:centralized",
@@ -7263,7 +7611,10 @@
           "안정도: +5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "policing:civilian",
@@ -7312,7 +7663,10 @@
         "effectLines": [
           "안정도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "policing:local",
@@ -7364,7 +7718,10 @@
           "안정도: +2.5%p",
           "턴당 정치력 변화: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 2
       },
       {
         "id": "policing:community",
@@ -7430,7 +7787,10 @@
           "================================================================",
           "25. 산업 규제"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -7498,7 +7858,10 @@
           "명목 성장률: +2%p",
           "안정도: -5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "industry-regulation:standard",
@@ -7541,7 +7904,10 @@
         "effectLines": [
           "생산능력 수정치: +2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "industry-regulation:strict",
@@ -7604,7 +7970,10 @@
           "안정도: +5%p",
           "명목 성장률: -1%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 2
       },
       {
         "id": "industry-regulation:corporate",
@@ -7660,7 +8029,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.5,
+        "changeCooldownTurns": 2
       },
       {
         "id": "industry-regulation:planning",
@@ -7727,7 +8099,10 @@
           "안정도: +2.5%p",
           "명목 성장률: -1%p"
         ],
-        "notes": "- 산업 소유구조의 '계획경제'와는 별개다."
+        "notes": "- 산업 소유구조의 '계획경제'와는 별개다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 2
       }
     ]
   },
@@ -7794,7 +8169,10 @@
           "생산능력 수정치: -5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 3
       },
       {
         "id": "womens-rights:civil",
@@ -7845,7 +8223,10 @@
           "가용 인력: -5%",
           "생산능력 수정치: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 3
       },
       {
         "id": "womens-rights:equal",
@@ -7897,7 +8278,10 @@
           "생산능력 수정치: +2.5%",
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 3
       },
       {
         "id": "womens-rights:suffrage",
@@ -7953,7 +8337,10 @@
           "안정도: +5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": "- 선거 자체가 존재하지 않는 국가에서는 여성 참정권을 별도로 도입할 수 없다."
+        "notes": "- 선거 자체가 존재하지 않는 국가에서는 여성 참정권을 별도로 도입할 수 없다.",
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 3
       },
       {
         "id": "womens-rights:equal-access",
@@ -8023,7 +8410,10 @@
           "인구 증가율: -5%",
           "안정도: -2.5%p"
         ],
-        "notes": "- 제한적 권리에서 완전한 평등으로 한 번에 직행하지 않는다."
+        "notes": "- 제한적 권리에서 완전한 평등으로 한 번에 직행하지 않는다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 0.8,
+        "changeCooldownTurns": 3
       }
     ]
   },
@@ -8084,7 +8474,10 @@
           "턴당 정치력 변화: +5%",
           "안정도: -7.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.3,
+        "changeCooldownTurns": 4
       },
       {
         "id": "ethnic-policy:coexistence",
@@ -8129,7 +8522,10 @@
         "effectLines": [
           "안정도: -2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 4
       },
       {
         "id": "ethnic-policy:autonomy",
@@ -8184,7 +8580,10 @@
           "안정도: +5%p",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.6,
+        "changeCooldownTurns": 4
       },
       {
         "id": "ethnic-policy:recognition",
@@ -8229,7 +8628,10 @@
         "effectLines": [
           "안정도: +5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 3,
+        "implementationCostGdpPct": 0.4,
+        "changeCooldownTurns": 4
       },
       {
         "id": "ethnic-policy:federal",
@@ -8285,7 +8687,10 @@
           "안정도: +7.5%p",
           "턴당 정치력 변화: -5%"
         ],
-        "notes": "- 민족 단위의 광범위한 자치와 권한배분을 국가구조에 반영하는 체제급 변화로 취급한다."
+        "notes": "- 민족 단위의 광범위한 자치와 권한배분을 국가구조에 반영하는 체제급 변화로 취급한다.",
+        "implementationTurns": 4,
+        "implementationCostGdpPct": 1,
+        "changeCooldownTurns": 4
       }
     ]
   },
@@ -8360,7 +8765,10 @@
           "연구력: -5%",
           "턴당 정치력 변화: -5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       },
       {
         "id": "censorship:political",
@@ -8419,7 +8827,10 @@
           "연구력: -2.5%",
           "턴당 정치력 변화: -2.5%"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "censorship:wartime",
@@ -8473,7 +8884,10 @@
           "전쟁 지지도: +5%p",
           "안정도: +2.5%p"
         ],
-        "notes": "- 전쟁이 끝났다고 자동으로 다른 검열법으로 되돌리지 않는다."
+        "notes": "- 전쟁이 끝났다고 자동으로 다른 검열법으로 되돌리지 않는다.",
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "censorship:limited",
@@ -8517,7 +8931,10 @@
         "effectLines": [
           "안정도: +2.5%p"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 1,
+        "implementationCostGdpPct": 0.1,
+        "changeCooldownTurns": 2
       },
       {
         "id": "censorship:free",
@@ -8814,7 +9231,10 @@
           "3. 효과는 TLR_1932_법률효과_TNO변환_전체_v1.txt를 그대로 반영",
           "4. 이후 밸런스 수정 시 이 통합본을 단일 기준본으로 갱신"
         ],
-        "notes": null
+        "notes": null,
+        "implementationTurns": 2,
+        "implementationCostGdpPct": 0.2,
+        "changeCooldownTurns": 2
       }
     ]
   }

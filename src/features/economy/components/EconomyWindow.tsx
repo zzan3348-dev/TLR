@@ -27,6 +27,7 @@ function emptyEconomySnapshot(countryKey: string): EconomySnapshot {
     economy,
     productionCapacity: getStartingCapacity(economy),
     nationalStats: null,
+    atWar: false,
     resources: getStartingResources(countryKey),
     history: [],
     rules: {
