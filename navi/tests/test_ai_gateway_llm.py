@@ -8,20 +8,19 @@ import unittest
 from navi_bot.database import Database
 from navi_bot.llm_chat import LLMChatService
 from navi_bot.navi_llm import (
-    DEFAULT_FALLBACK_MODELS,
-    DEFAULT_OPENROUTER_MODEL,
-    OPENROUTER_CHAT_COMPLETIONS_URL,
+    AI_GATEWAY_CHAT_COMPLETIONS_URL,
+    DEFAULT_AI_GATEWAY_MODEL,
     NaviLLMAttemptError,
     NaviLLMClient,
     NaviLLMCompletion,
     NaviLLMError,
     _http_error_type,
-    build_openrouter_payload,
-    parse_openrouter_completion,
+    build_ai_gateway_payload,
+    parse_ai_gateway_completion,
 )
 
 
-def completion(text: str = "네에, 정상 작동 중이에요!", model: str = DEFAULT_OPENROUTER_MODEL) -> NaviLLMCompletion:
+def completion(text: str = "네에, 정상 작동 중이에요!", model: str = DEFAULT_AI_GATEWAY_MODEL) -> NaviLLMCompletion:
     return NaviLLMCompletion(text=text, finish_reason="stop", actual_model=model)
 
 
@@ -62,7 +61,7 @@ class SequenceClient(NaviLLMClient):
         return outcome
 
 
-class OpenRouterLLMTests(unittest.TestCase):
+class AIGatewayLLMTests(unittest.TestCase):
     def test_http_statuses_have_distinct_diagnostic_types(self) -> None:
         self.assertEqual(
             {status: _http_error_type(status) for status in (401, 402, 404, 408, 429, 500, 502, 503)},
@@ -78,36 +77,48 @@ class OpenRouterLLMTests(unittest.TestCase):
             },
         )
 
-    def test_payload_uses_verified_free_model_fallbacks_and_no_provider_lock(self) -> None:
-        models = (DEFAULT_OPENROUTER_MODEL, *DEFAULT_FALLBACK_MODELS)
-        payload = build_openrouter_payload(
-            models=models,
+    def test_payload_uses_one_vercel_gateway_model_without_fallback_array(self) -> None:
+        payload = build_ai_gateway_payload(
+            model=DEFAULT_AI_GATEWAY_MODEL,
             system_prompt="너는 NAVI다.",
             message="안녕",
         )
-        self.assertEqual(OPENROUTER_CHAT_COMPLETIONS_URL, "https://openrouter.ai/api/v1/chat/completions")
-        self.assertEqual(
-            payload["models"],
-            [
-                "google/gemma-4-31b-it:free",
-                "google/gemma-4-26b-a4b-it:free",
-                "z-ai/glm-5.2:free",
-            ],
-        )
+        self.assertEqual(AI_GATEWAY_CHAT_COMPLETIONS_URL, "https://ai-gateway.vercel.sh/v1/chat/completions")
+        self.assertEqual(payload["model"], "google/gemma-4-31b-it")
         self.assertEqual(payload["max_tokens"], 400)
-        self.assertNotIn("model", payload)
+        self.assertNotIn("models", payload)
         self.assertNotIn("provider", payload)
 
     def test_normal_primary_completion(self) -> None:
-        async def exercise() -> tuple[str, int, bool]:
+        async def exercise() -> tuple[str, int, str]:
             client = SequenceClient([completion()])
             result = await client._generate_with_retries(system_prompt="NAVI", message="안녕")
-            return result.text, result.attempts, result.fallback_used
+            return result.text, result.attempts, result.actual_model
 
-        text, attempts, fallback_used = asyncio.run(exercise())
+        text, attempts, actual_model = asyncio.run(exercise())
         self.assertEqual(text, "네에, 정상 작동 중이에요!")
         self.assertEqual(attempts, 1)
-        self.assertFalse(fallback_used)
+        self.assertEqual(actual_model, DEFAULT_AI_GATEWAY_MODEL)
+
+    def test_success_log_contains_only_actual_model_and_latency_details(self) -> None:
+        async def exercise() -> str:
+            client = SequenceClient([completion()])
+            with self.assertLogs("navi_bot.navi_llm", level="INFO") as captured:
+                await client.generate_reply(
+                    user_id=123,
+                    username="tester",
+                    guild_id=456,
+                    system_prompt="비공개 시스템 프롬프트",
+                    message="비공개 사용자 메시지",
+                )
+            return "\n".join(captured.output)
+
+        output = asyncio.run(exercise())
+        self.assertIn("actual_model=google/gemma-4-31b-it", output)
+        self.assertIn("latency_ms=", output)
+        self.assertNotIn("user_id", output)
+        self.assertNotIn("guild_id", output)
+        self.assertNotIn("비공개", output)
 
     def test_timeout_is_retried_with_backoff(self) -> None:
         async def exercise() -> tuple[int, list[float]]:
@@ -119,36 +130,35 @@ class OpenRouterLLMTests(unittest.TestCase):
         self.assertEqual(calls, 2)
         self.assertEqual(delays, [1.0])
 
-    def test_429_retries_then_records_fallback_model(self) -> None:
-        async def exercise() -> tuple[int, int, bool, str]:
+    def test_429_retries_same_gateway_model(self) -> None:
+        async def exercise() -> tuple[int, int, str]:
             client = SequenceClient(
                 [
                     failure(429, "rate_limit", retryable=True),
-                    completion(model="google/gemma-4-26b-a4b-it"),
+                    completion(),
                 ]
             )
             result = await client._generate_with_retries(system_prompt="NAVI", message="안녕")
-            return client.calls, result.retry_count, result.fallback_used, result.actual_model
+            return client.calls, result.retry_count, result.actual_model
 
-        calls, retries, fallback_used, actual_model = asyncio.run(exercise())
+        calls, retries, actual_model = asyncio.run(exercise())
         self.assertEqual((calls, retries), (2, 1))
-        self.assertTrue(fallback_used)
-        self.assertEqual(actual_model, "google/gemma-4-26b-a4b-it")
+        self.assertEqual(actual_model, DEFAULT_AI_GATEWAY_MODEL)
 
-    def test_502_and_503_are_retried_with_fallback(self) -> None:
+    def test_502_and_503_are_retried_through_gateway(self) -> None:
         for status, error_type in ((502, "bad_gateway"), (503, "provider_unavailable")):
             with self.subTest(status=status):
-                async def exercise() -> tuple[int, bool]:
+                async def exercise() -> tuple[int, str]:
                     client = SequenceClient(
                         [
                             failure(status, error_type, retryable=True),
-                            completion(model="z-ai/glm-5.2"),
+                            completion(),
                         ]
                     )
                     result = await client._generate_with_retries(system_prompt="NAVI", message="안녕")
-                    return client.calls, result.fallback_used
+                    return client.calls, result.actual_model
 
-                self.assertEqual(asyncio.run(exercise()), (2, True))
+                self.assertEqual(asyncio.run(exercise()), (2, DEFAULT_AI_GATEWAY_MODEL))
 
     def test_nonretryable_http_errors_stop_after_one_attempt(self) -> None:
         for status, error_type in (
@@ -168,25 +178,25 @@ class OpenRouterLLMTests(unittest.TestCase):
 
     def test_empty_choices_is_a_retryable_failure(self) -> None:
         with self.assertRaises(NaviLLMAttemptError) as raised:
-            parse_openrouter_completion({"choices": []}, primary_model=DEFAULT_OPENROUTER_MODEL)
+            parse_ai_gateway_completion({"choices": []}, primary_model=DEFAULT_AI_GATEWAY_MODEL)
         self.assertEqual(raised.exception.error_type, "empty_choices")
         self.assertTrue(raised.exception.retryable)
 
     def test_empty_content_is_a_retryable_failure(self) -> None:
         payload = {
-            "model": DEFAULT_OPENROUTER_MODEL,
+            "model": DEFAULT_AI_GATEWAY_MODEL,
             "choices": [{"message": {"content": "   "}, "finish_reason": "stop"}],
         }
         with self.assertRaises(NaviLLMAttemptError) as raised:
-            parse_openrouter_completion(payload, primary_model=DEFAULT_OPENROUTER_MODEL)
+            parse_ai_gateway_completion(payload, primary_model=DEFAULT_AI_GATEWAY_MODEL)
         self.assertEqual(raised.exception.error_type, "empty_content")
 
-    def test_primary_failure_and_fallback_success_returns_normal_discord_reply(self) -> None:
+    def test_gateway_success_returns_normal_discord_reply(self) -> None:
         async def exercise() -> tuple[str, int]:
             with tempfile.TemporaryDirectory() as directory:
                 database = Database(str(Path(directory) / "new-navi.sqlite3"))
                 database.init_db()
-                client = SequenceClient([completion(model="google/gemma-4-26b-a4b-it")])
+                client = SequenceClient([completion()])
                 service = LLMChatService(provider=client, db=database)
                 reply = await service.generate_reply(
                     user_id=55,
@@ -198,7 +208,7 @@ class OpenRouterLLMTests(unittest.TestCase):
 
         self.assertEqual(asyncio.run(exercise()), ("success", 1))
 
-    def test_all_models_fail_before_user_error_and_usage_is_refunded(self) -> None:
+    def test_all_attempts_fail_before_user_error_and_usage_is_refunded(self) -> None:
         async def exercise() -> tuple[str, int, int]:
             with tempfile.TemporaryDirectory() as directory:
                 database = Database(str(Path(directory) / "new-navi.sqlite3"))

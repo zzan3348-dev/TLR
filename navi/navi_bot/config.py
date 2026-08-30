@@ -20,9 +20,9 @@ class Config:
     guild_id: int | None = None
     notification_channel_id: int | None = None
     navi_coin_emoji: str = "🪙"
-    llm_provider: str = "openrouter"
-    openrouter_api_key: str = ""
-    llm_model: str = "google/gemma-4-31b-it:free"
+    llm_provider: str = "ai_gateway"
+    ai_gateway_api_key: str = ""
+    llm_model: str = "google/gemma-4-31b-it"
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.7-flash"
     llm_timeout_seconds: float = 30.0
@@ -46,10 +46,10 @@ class Config:
             guild_id=_optional_int("DISCORD_GUILD_ID"),
             notification_channel_id=_optional_int("NAVI_NOTIFICATION_CHANNEL_ID"),
             navi_coin_emoji=os.getenv("NAVI_COIN_EMOJI", "🪙").strip() or "🪙",
-            llm_provider=os.getenv("NAVI_LLM_PROVIDER", "openrouter").strip().casefold() or "openrouter",
-            openrouter_api_key=os.getenv("OPENROUTER_API_KEY", "").strip(),
-            llm_model=os.getenv("NAVI_LLM_MODEL", "google/gemma-4-31b-it:free").strip()
-            or "google/gemma-4-31b-it:free",
+            llm_provider=os.getenv("NAVI_LLM_PROVIDER", "ai_gateway").strip().casefold() or "ai_gateway",
+            ai_gateway_api_key=os.getenv("AI_GATEWAY_API_KEY", "").strip(),
+            llm_model=os.getenv("NAVI_LLM_MODEL", "google/gemma-4-31b-it").strip()
+            or "google/gemma-4-31b-it",
             gemini_api_key=os.getenv("GEMINI_API_KEY", "").strip(),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.7-flash").strip() or "gemini-3.7-flash",
             llm_timeout_seconds=max(10.0, float(os.getenv("NAVI_LLM_TIMEOUT_SECONDS", "30"))),

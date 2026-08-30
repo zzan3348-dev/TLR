@@ -61,10 +61,10 @@ class NaviBot(commands.Bot):
             Path(__file__).with_name("assets") / "navi_safety_reactions.json",
         )
         self.llm_chat: LLMChatService | None = None
-        if config.llm_provider == "openrouter" and config.openrouter_api_key:
+        if config.llm_provider == "ai_gateway" and config.ai_gateway_api_key:
             self.llm_chat = LLMChatService(
                 provider=NaviLLMClient(
-                    api_key=config.openrouter_api_key,
+                    api_key=config.ai_gateway_api_key,
                     model=config.llm_model,
                     timeout_seconds=config.llm_timeout_seconds,
                     max_tokens=400,
@@ -83,7 +83,7 @@ class NaviBot(commands.Bot):
                 db=self.db,
                 safety=self.navi_safety,
             )
-        elif config.llm_provider not in {"openrouter", "gemini"}:
+        elif config.llm_provider not in {"ai_gateway", "gemini"}:
             log.error("지원하지 않는 NAVI LLM provider입니다: %s", config.llm_provider)
         else:
             log.warning("NAVI LLM 비활성화: %s API 키가 설정되지 않았습니다.", config.llm_provider)

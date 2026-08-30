@@ -8,17 +8,14 @@ import re
 import time
 from typing import Awaitable, Callable
 
-import aiohttp
+from openai import APIConnectionError, APIStatusError, APITimeoutError, AsyncOpenAI
 
 
 log = logging.getLogger(__name__)
 
-OPENROUTER_CHAT_COMPLETIONS_URL = "https://openrouter.ai/api/v1/chat/completions"
-DEFAULT_OPENROUTER_MODEL = "google/gemma-4-31b-it:free"
-DEFAULT_FALLBACK_MODELS = (
-    "google/gemma-4-26b-a4b-it:free",
-    "z-ai/glm-5.2:free",
-)
+AI_GATEWAY_BASE_URL = "https://ai-gateway.vercel.sh/v1"
+AI_GATEWAY_CHAT_COMPLETIONS_URL = f"{AI_GATEWAY_BASE_URL}/chat/completions"
+DEFAULT_AI_GATEWAY_MODEL = "google/gemma-4-31b-it"
 DEFAULT_MAX_TOKENS = 400
 DEFAULT_TIMEOUT_SECONDS = 30.0
 MAX_ATTEMPTS = 3
@@ -38,8 +35,6 @@ class NaviLLMResult:
     actual_model: str
     attempts: int
     retry_count: int
-    fallback_used: bool
-    fallbacks_tried: int
     last_status: int | None = None
     last_error_code: str = "none"
     last_error_type: str = "none"
@@ -62,7 +57,7 @@ class NaviLLMAttemptError(RuntimeError):
 
 
 class NaviLLMError(RuntimeError):
-    """프롬프트나 secret을 포함하지 않는 최종 OpenRouter 오류."""
+    """프롬프트나 secret을 포함하지 않는 최종 AI Gateway 오류."""
 
     def __init__(
         self,
@@ -71,20 +66,18 @@ class NaviLLMError(RuntimeError):
         error_code: str,
         error_type: str,
         attempts: int,
-        fallback_count: int,
     ) -> None:
-        super().__init__("OpenRouter request failed")
+        super().__init__("Vercel AI Gateway request failed")
         self.status_code = status_code
         self.error_code = error_code
         self.error_type = error_type
         self.attempts = attempts
         self.retry_count = max(0, attempts - 1)
-        self.fallback_count = fallback_count
         self.diagnostic_logged = False
 
 
 class NaviLLMClient:
-    """OpenRouter chat/completions 어댑터와 제한 재시도 정책."""
+    """Vercel AI Gateway chat/completions 어댑터와 제한 재시도 정책."""
 
     structured_logging = True
 
@@ -92,32 +85,27 @@ class NaviLLMClient:
         self,
         *,
         api_key: str,
-        model: str = DEFAULT_OPENROUTER_MODEL,
-        fallback_models: tuple[str, ...] = DEFAULT_FALLBACK_MODELS,
+        model: str = DEFAULT_AI_GATEWAY_MODEL,
         timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
         max_tokens: int = DEFAULT_MAX_TOKENS,
     ) -> None:
         self.api_key = str(api_key or "").strip()
-        self.model = str(model or DEFAULT_OPENROUTER_MODEL).strip() or DEFAULT_OPENROUTER_MODEL
-        unique_models = [self.model]
-        for fallback in fallback_models[:2]:
-            clean = str(fallback or "").strip()
-            if clean and clean not in unique_models:
-                unique_models.append(clean)
-        if any(not model_id.endswith(":free") for model_id in unique_models[1:]):
-            raise ValueError("NAVI OpenRouter fallback models must all be free model IDs")
-        self.models = tuple(unique_models)
+        self.model = str(model or DEFAULT_AI_GATEWAY_MODEL).strip() or DEFAULT_AI_GATEWAY_MODEL
         self.timeout_seconds = max(10.0, float(timeout_seconds))
         self.max_tokens = max(1, int(max_tokens))
-        self._session: aiohttp.ClientSession | None = None
+        self._client: AsyncOpenAI | None = None
         self._sleep: Callable[[float], Awaitable[None]] = asyncio.sleep
         self._jitter: Callable[[float, float], float] = random.uniform
 
-    async def _get_session(self) -> aiohttp.ClientSession:
-        if self._session is None or self._session.closed:
-            timeout = aiohttp.ClientTimeout(total=self.timeout_seconds)
-            self._session = aiohttp.ClientSession(timeout=timeout)
-        return self._session
+    def _get_client(self) -> AsyncOpenAI:
+        if self._client is None:
+            self._client = AsyncOpenAI(
+                api_key=self.api_key,
+                base_url=AI_GATEWAY_BASE_URL,
+                timeout=self.timeout_seconds,
+                max_retries=0,
+            )
+        return self._client
 
     async def generate(self, *, system_prompt: str, message: str) -> str:
         result = await self._generate_with_retries(system_prompt=system_prompt, message=message)
@@ -145,16 +133,12 @@ class NaviLLMClient:
             latency_ms = int((time.monotonic() - started) * 1000)
             exc.diagnostic_logged = True
             log.error(
-                "[NAVI_LLM] result=failed user_id=%s guild_id=%s primary=%s status=%s "
-                "attempts=%s retries=%s fallbacks_tried=%s fallback_used=false actual_model=none "
+                "[NAVI_LLM] result=failed model=%s status=%s attempts=%s retries=%s "
                 "error_code=%s error_type=%s latency_ms=%s",
-                user_id,
-                guild_id,
                 self.model,
                 exc.status_code if exc.status_code is not None else "none",
                 exc.attempts,
                 exc.retry_count,
-                exc.fallback_count,
                 exc.error_code,
                 exc.error_type,
                 latency_ms,
@@ -163,20 +147,8 @@ class NaviLLMClient:
 
         latency_ms = int((time.monotonic() - started) * 1000)
         log.info(
-            "[NAVI_LLM] result=success user_id=%s guild_id=%s primary=%s status=200 "
-            "attempts=%s retries=%s fallbacks_tried=%s fallback_used=%s actual_model=%s "
-            "last_status=%s last_error_code=%s last_error_type=%s latency_ms=%s",
-            user_id,
-            guild_id,
-            self.model,
-            result.attempts,
-            result.retry_count,
-            result.fallbacks_tried,
-            str(result.fallback_used).lower(),
+            "[NAVI_LLM] result=success actual_model=%s latency_ms=%s",
             result.actual_model,
-            result.last_status if result.last_status is not None else "none",
-            result.last_error_code,
-            result.last_error_type,
             latency_ms,
         )
         return result.text
@@ -189,13 +161,13 @@ class NaviLLMClient:
         user_id: int | None = None,
         guild_id: int | None = None,
     ) -> NaviLLMResult:
+        _ = (user_id, guild_id)
         if not self.api_key:
             raise NaviLLMError(
                 status_code=None,
                 error_code="missing_api_key",
                 error_type="configuration_error",
                 attempts=0,
-                fallback_count=len(self.models) - 1,
             )
 
         deadline = time.monotonic() + self.timeout_seconds
@@ -232,17 +204,11 @@ class NaviLLMClient:
             except NaviLLMAttemptError as exc:
                 failure = exc
             else:
-                fallback_index = _model_index(self.models, completion.actual_model)
                 return NaviLLMResult(
                     text=completion.text,
                     actual_model=completion.actual_model,
                     attempts=attempt,
                     retry_count=attempt - 1,
-                    fallback_used=fallback_index > 0,
-                    fallbacks_tried=max(
-                        fallback_index,
-                        len(self.models) - 1 if last_failure is not None else 0,
-                    ),
                     last_status=last_failure.status_code if last_failure else None,
                     last_error_code=last_failure.error_code if last_failure else "none",
                     last_error_type=last_failure.error_type if last_failure else "none",
@@ -255,10 +221,8 @@ class NaviLLMClient:
             if time.monotonic() + delay >= deadline:
                 break
             log.warning(
-                "[NAVI_LLM] result=retry user_id=%s guild_id=%s primary=%s status=%s "
+                "[NAVI_LLM] result=retry model=%s status=%s "
                 "attempt=%s next_attempt=%s error_code=%s error_type=%s delay_ms=%s",
-                user_id if user_id is not None else "none",
-                guild_id if guild_id is not None else "none",
                 self.model,
                 failure.status_code if failure.status_code is not None else "none",
                 attempt,
@@ -280,7 +244,6 @@ class NaviLLMClient:
             error_code=failure.error_code,
             error_type=failure.error_type,
             attempts=attempts_made,
-            fallback_count=len(self.models) - 1,
         )
 
     async def _request_once(
@@ -290,72 +253,55 @@ class NaviLLMClient:
         message: str,
         max_tokens: int,
     ) -> NaviLLMCompletion:
-        session = await self._get_session()
-        payload = build_openrouter_payload(
-            models=self.models,
+        client = self._get_client()
+        payload = build_ai_gateway_payload(
+            model=self.model,
             system_prompt=system_prompt,
             message=message,
             max_tokens=max_tokens,
         )
         try:
-            async with session.post(
-                OPENROUTER_CHAT_COMPLETIONS_URL,
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                    "X-Title": "TLR NEW NAVI",
-                },
-                json=payload,
-            ) as response:
-                if response.status != 200:
-                    error_code, error_type = await _read_openrouter_error(response)
-                    raise NaviLLMAttemptError(
-                        status_code=response.status,
-                        error_code=error_code,
-                        error_type=error_type,
-                        retryable=response.status in RETRYABLE_HTTP_STATUSES,
-                    )
-                try:
-                    data = await response.json(content_type=None)
-                except (aiohttp.ClientError, ValueError, TypeError) as exc:
-                    raise NaviLLMAttemptError(
-                        status_code=200,
-                        error_code=type(exc).__name__,
-                        error_type="invalid_json",
-                        retryable=True,
-                    ) from exc
-        except NaviLLMAttemptError:
-            raise
-        except asyncio.TimeoutError as exc:
+            response = await client.chat.completions.create(**payload)
+        except APITimeoutError as exc:
             raise NaviLLMAttemptError(
                 status_code=None,
                 error_code="request_timeout",
                 error_type="timeout",
                 retryable=True,
             ) from exc
-        except aiohttp.ClientError as exc:
+        except APIStatusError as exc:
+            status_code = int(exc.status_code)
+            error_code, error_type = _read_ai_gateway_error(status_code, exc.body)
+            raise NaviLLMAttemptError(
+                status_code=status_code,
+                error_code=error_code,
+                error_type=error_type,
+                retryable=status_code in RETRYABLE_HTTP_STATUSES,
+            ) from exc
+        except APIConnectionError as exc:
             raise NaviLLMAttemptError(
                 status_code=None,
                 error_code=type(exc).__name__,
                 error_type="network_error",
                 retryable=True,
             ) from exc
-        return parse_openrouter_completion(data, primary_model=self.model)
+        data = response.model_dump(mode="json")
+        return parse_ai_gateway_completion(data, primary_model=self.model)
 
     async def close(self) -> None:
-        if self._session is not None and not self._session.closed:
-            await self._session.close()
+        if self._client is not None:
+            await self._client.close()
 
 
-def build_openrouter_payload(
+def build_ai_gateway_payload(
     *,
-    models: tuple[str, ...],
+    model: str,
     system_prompt: str,
     message: str,
     max_tokens: int = DEFAULT_MAX_TOKENS,
 ) -> dict[str, object]:
     return {
-        "models": list(models),
+        "model": str(model),
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": message},
@@ -365,7 +311,7 @@ def build_openrouter_payload(
     }
 
 
-def parse_openrouter_completion(data: object, *, primary_model: str) -> NaviLLMCompletion:
+def parse_ai_gateway_completion(data: object, *, primary_model: str) -> NaviLLMCompletion:
     if not isinstance(data, dict):
         raise _invalid_response("invalid_response")
     choices = data.get("choices")
@@ -392,19 +338,14 @@ def parse_openrouter_completion(data: object, *, primary_model: str) -> NaviLLMC
     return NaviLLMCompletion(text=text, finish_reason=finish_reason, actual_model=actual_model)
 
 
-async def _read_openrouter_error(response: aiohttp.ClientResponse) -> tuple[str, str]:
-    try:
-        data = await response.json(content_type=None)
-    except (aiohttp.ClientError, ValueError, TypeError):
-        await response.read()
-        data = None
-    error = data.get("error") if isinstance(data, dict) else None
+def _read_ai_gateway_error(status_code: int, body: object) -> tuple[str, str]:
+    error = body.get("error") if isinstance(body, dict) else None
     if isinstance(error, dict):
-        error_code = str(error.get("code") or response.status)
-        error_type = str(error.get("type") or _http_error_type(response.status))
+        error_code = str(error.get("code") or status_code)
+        error_type = str(error.get("type") or _http_error_type(status_code))
     else:
-        error_code = str(response.status)
-        error_type = _http_error_type(response.status)
+        error_code = str(status_code)
+        error_type = _http_error_type(status_code)
     return error_code[:80], error_type[:80]
 
 
@@ -430,18 +371,6 @@ def _invalid_response(error_type: str) -> NaviLLMAttemptError:
         error_type=error_type,
         retryable=True,
     )
-
-
-def _model_index(models: tuple[str, ...], actual_model: str) -> int:
-    normalized_actual = _normalize_model_id(actual_model)
-    for index, model_id in enumerate(models):
-        if _normalize_model_id(model_id) == normalized_actual:
-            return index
-    return 0
-
-
-def _normalize_model_id(model_id: str) -> str:
-    return str(model_id or "").removesuffix(":free")
 
 
 def _complete_sentence_prefix(text: str) -> str:
