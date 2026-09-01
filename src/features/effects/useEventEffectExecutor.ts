@@ -8,3 +8,7 @@ export function useEventEffectExecutor(): EventEffectExecutor {
   if (!executor) throw new Error("useEventEffectExecutor must be used inside EventEffectProvider");
   return executor;
 }
+
+export function useOptionalEventEffectExecutor(): EventEffectExecutor | null {
+  return useContext(EventEffectExecutorContext);
+}

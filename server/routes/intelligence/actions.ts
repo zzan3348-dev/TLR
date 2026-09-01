@@ -3,7 +3,7 @@ import { getAdminClient, getServerEnv, type AdminClient } from "../../auth.js";
 import { currentWorldDate, requireDiplomacyActor } from "../../diplomacy.js";
 import { confidenceForInfiltration, estimateRange, operationScores } from "../../intelligenceEngine.js";
 import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
-import { worldTurn } from "../../decisions.js";
+import { currentTurnNumber } from "../../worldProgression.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
 
 const DOMAINS = new Set(["ECONOMY", "ADMINISTRATION_POLITICS", "RESEARCH", "MILITARY", "UNDERGROUND"]);
@@ -22,7 +22,7 @@ async function snapshotPayload(admin: AdminClient, target: string, domain: strin
     return Object.fromEntries(Object.entries(data ?? {}).map(([name, value]) => [name, typeof value === "number" ? estimateRange(value, confidence) : "미설정"]));
   }
   if (domain === "MILITARY") {
-    const stats = await loadCalculatedNationalStats(admin, target, worldTurn(worldDate), {}, worldDate);
+    const stats = await loadCalculatedNationalStats(admin, target, await currentTurnNumber(admin), {}, worldDate);
     return { available_manpower: stats ? estimateRange(stats.availableManpower, confidence) : "미설정", classification: "군사 동원력 추정" };
   }
   if (domain === "RESEARCH") {
@@ -30,7 +30,7 @@ async function snapshotPayload(admin: AdminClient, target: string, domain: strin
     return Object.fromEntries(Object.entries(data ?? {}).map(([name, value]) => [name, typeof value === "number" ? estimateRange(value, confidence) : "미설정"]));
   }
   if (domain === "ADMINISTRATION_POLITICS") {
-    const stats = await loadCalculatedNationalStats(admin, target, worldTurn(worldDate), {}, worldDate);
+    const stats = await loadCalculatedNationalStats(admin, target, await currentTurnNumber(admin), {}, worldDate);
     if (!stats) return { stability: "미설정", war_support: "미설정", political_power: "미설정" };
     return {
       stability: estimateRange(stats.stability, confidence),

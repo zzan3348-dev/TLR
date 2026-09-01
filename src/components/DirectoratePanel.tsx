@@ -14,9 +14,18 @@ import { SiteStatusAdminSection } from "./SiteStatusAdminSection";
 import { CountryExpulsionAdminSection } from "./CountryExpulsionAdminSection";
 import { AdminPlayPreviewSection } from "./AdminPlayPreviewSection";
 import { AdminMembershipSection } from "./AdminMembershipSection";
+import { ContentStudio, DecisionCatalog } from "../features/management/components/ContentStudio";
 
 type DirectoratePanelProps = { onBackToTitle: () => void };
 type AdminSessionState = "checking" | "authorized" | "not-found";
+type ManagementView = "dashboard" | "event-studio" | "decision-studio" | "world-control" | "provinces" | "capitals" | "research" | "intelligence" | "military" | "economy" | "diplomacy" | "system";
+
+const MANAGEMENT_NAV: Array<{ group: string; items: Array<{ id: ManagementView; label: string; hint: string }> }> = [
+  { group: "운영", items: [{ id: "dashboard", label: "운영 대시보드", hint: "상태와 대기열" }, { id: "world-control", label: "세계상황·시간 요청", hint: "날짜 요청 관제" }, { id: "diplomacy", label: "외교 검토", hint: "제안 큐" }, { id: "economy", label: "경제·무역", hint: "계약과 데이터" }] },
+  { group: "콘텐츠 스튜디오", items: [{ id: "event-studio", label: "Event Studio", hint: "제작·미리보기·게시" }, { id: "decision-studio", label: "Decision Studio", hint: "실제 정의 점검" }] },
+  { group: "세계 편집", items: [{ id: "provinces", label: "프로빈스·Region", hint: "영토 그룹" }, { id: "capitals", label: "수도 데이터", hint: "지도 기준점" }, { id: "military", label: "군사 관제", hint: "전쟁·편성" }, { id: "intelligence", label: "첩보 관제", hint: "작전·자산" }, { id: "research", label: "연구 관제", hint: "프로젝트 심사" }] },
+  { group: "시스템", items: [{ id: "system", label: "접근·개장·테스트", hint: "권한과 운영" }] },
+];
 
 const actions = [
   ["REVOKE_COUNTRY_OWNERSHIP", "국가 운영권 회수", "현재 점유만 해제"],
@@ -30,7 +39,8 @@ function countryName(key: string): string {
 }
 
 export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
-  const [state, setState] = useState<AdminSessionState>("checking");
+  const visualPreview = import.meta.env.DEV && new URLSearchParams(window.location.search).get("management-ui-preview") === "1";
+  const [state, setState] = useState<AdminSessionState>(visualPreview ? "authorized" : "checking");
   const [queue, setQueue] = useState<DiplomaticProposal[]>([]);
   const [tradeQueue, setTradeQueue] = useState<TradeProposal[]>([]);
   const [tradeAgreements, setTradeAgreements] = useState<TradeAgreement[]>([]);
@@ -42,6 +52,8 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [worldControlData, setWorldControlData] = useState<WorldControlAdminData | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<ManagementView>("dashboard");
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
   const loadQueue = useCallback(async () => {
     const [diplomacyResponse, economyResponse, militaryResponse, researchResponse, intelligenceResponse, worldControlResponse] = await Promise.all([
@@ -71,6 +83,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   }, []);
 
   useEffect(() => {
+    if (visualPreview) return;
     let active = true;
     void fetch("/api/admin/session", { credentials: "include" })
       .then(async (response) => {
@@ -88,7 +101,19 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       })
       .catch(() => { if (active) setState("not-found"); });
     return () => { active = false; };
-  }, [loadQueue]);
+  }, [loadQueue, visualPreview]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLocaleLowerCase() === "k") {
+        event.preventDefault();
+        setPaletteOpen((open) => !open);
+      }
+      if (event.key === "Escape") setPaletteOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   const review = async (proposalId: string, action: "ACCEPT" | "REJECT" | "CANCEL") => {
     setBusyId(proposalId);
@@ -162,16 +187,23 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
       <section className="directorate-page__status">
         <span className="directorate-page__status-light" /> BOOTSTRAP DIRECTORATE / CONTROL CHANNEL OPEN
       </section>
-      <SiteStatusAdminSection />
-      <AdminPlayPreviewSection />
-      <AdminMembershipSection />
-      <CountryExpulsionAdminSection />
-      <MapCapitalAdminSection />
-      <ProvinceRegionAdminSection />
-      {worldControlData ? <WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /> : null}
-      {researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
-      {intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : null}
-      {militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
+      <div className="management-console">
+        <aside className="management-console__nav" aria-label="관리자 콘솔 메뉴">
+          <div><strong>MANAGEMENT</strong><button type="button" onClick={() => setPaletteOpen(true)}>검색 <kbd>Ctrl K</kbd></button></div>
+          {MANAGEMENT_NAV.map((group) => <section key={group.group}><h2>{group.group}</h2>{group.items.map((item) => <button type="button" data-active={activeView === item.id} onClick={() => setActiveView(item.id)} key={item.id}><strong>{item.label}</strong><small>{item.hint}</small></button>)}</section>)}
+        </aside>
+        <section className="management-console__main">
+          {activeView === "dashboard" ? <section className="management-dashboard"><header><div><span>OPERATOR OVERVIEW</span><h2>운영 대시보드</h2></div><strong>{worldDate || "세계날짜 확인 중"}</strong></header><div className="management-dashboard__metrics"><article><span>외교 검토</span><strong>{queue.length}</strong><button type="button" onClick={() => setActiveView("diplomacy")}>열기</button></article><article><span>무역 검토</span><strong>{tradeQueue.length}</strong><button type="button" onClick={() => setActiveView("economy")}>열기</button></article><article><span>연구 프로젝트</span><strong>{researchData?.projects.length ?? 0}</strong><button type="button" onClick={() => setActiveView("research")}>열기</button></article><article><span>세계시간 요청</span><strong>{worldControlData ? worldControlData.counts.advance + worldControlData.counts.hold : 0}</strong><button type="button" onClick={() => setActiveView("world-control")}>열기</button></article></div><div className="management-dashboard__quick"><h3>빠른 작업</h3><button type="button" onClick={() => setActiveView("event-studio")}>새 이벤트 제작</button><button type="button" onClick={() => setActiveView("provinces")}>Region 편집</button><button type="button" onClick={() => setActiveView("system")}>플레이 테스트</button><button type="button" onClick={() => setActiveView("world-control")}>세계시간 요청 검토</button></div><p>세계날짜는 달력이며 턴은 별도 운영·정산 주기입니다. 날짜 요청 화면에서 턴을 직접 증가시키지 않습니다.</p></section> : null}
+          {activeView === "event-studio" ? <ContentStudio /> : null}
+          {activeView === "decision-studio" ? <DecisionCatalog /> : null}
+          {activeView === "system" ? <><SiteStatusAdminSection /><AdminPlayPreviewSection /><AdminMembershipSection /><CountryExpulsionAdminSection /></> : null}
+          {activeView === "capitals" ? <MapCapitalAdminSection /> : null}
+          {activeView === "provinces" ? <ProvinceRegionAdminSection /> : null}
+          {activeView === "world-control" && worldControlData ? <><WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /><section className="management-turn-separation"><article><span>WORLD TIME</span><h3>세계날짜</h3><strong>{worldControlData.worldDate}</strong><p>이벤트·연구·첩보·건조의 달력 기준</p></article><article><span>TURN</span><h3>턴 관리</h3><strong>{worldControlData.turn.configured ? `${worldControlData.turn.number}턴 · ${worldControlData.turn.status}` : "턴 스케줄 미설정"}</strong><p>{worldControlData.turn.configured ? `${worldControlData.turn.startWorldDate} — ${worldControlData.turn.endWorldDate ?? "종료 경계 미설정"}` : "날짜에서 턴을 임의 추정하지 않습니다."}</p></article></section></> : null}
+          {activeView === "research" && researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
+          {activeView === "intelligence" && intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : null}
+          {activeView === "military" && militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
+          {activeView === "economy" ? <>
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">
         <header>
           <div><span>ECONOMIC OFFICE / DATA READINESS</span><h2 id="directorate-economy-title">경제 데이터·계약 관제</h2></div>
@@ -212,15 +244,16 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
           ))}
         </div>
       </section>
-      <section className="directorate-page__grid">
+      </> : null}
+      {activeView === "system" ? <section className="directorate-page__grid">
         {actions.map(([id, title, description]) => (
           <article key={id} className="directorate-action">
             <span className="directorate-action__id">{id}</span><h2>{title}</h2><p>{description}</p>
             <button type="button" disabled>관제 기록 준비됨</button>
           </article>
         ))}
-      </section>
-      <section className="directorate-diplomacy" aria-labelledby="directorate-diplomacy-title">
+      </section> : null}
+      {activeView === "diplomacy" ? <section className="directorate-diplomacy" aria-labelledby="directorate-diplomacy-title">
         <header>
           <div><span>FOREIGN OFFICE / ADMIN REVIEW</span><h2 id="directorate-diplomacy-title">AI 외교 검토 큐</h2></div>
           <strong>{worldDate || "—"} · {queue.length}건</strong>
@@ -243,8 +276,11 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
             </article>
           ))}
         </div>
-      </section>
-      <p className="directorate-page__note">모든 외교 조치는 서버에서 상태와 권한을 다시 검증하고 외교 사건 기록에 남습니다.</p>
+      </section> : null}
+      {queueError ? <p className="directorate-diplomacy__error" role="alert">{queueError}</p> : null}
+        </section>
+      </div>
+      {paletteOpen ? <div className="management-palette" role="dialog" aria-modal="true" aria-label="관리자 명령 검색"><div><header><strong>COMMAND PALETTE</strong><button type="button" onClick={() => setPaletteOpen(false)}>×</button></header>{MANAGEMENT_NAV.flatMap((group) => group.items).map((item) => <button type="button" key={item.id} onClick={() => { setActiveView(item.id); setPaletteOpen(false); }}><strong>{item.label}</strong><small>{item.hint}</small></button>)}</div></div> : null}
     </main>
   );
 }

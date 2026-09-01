@@ -107,7 +107,6 @@ export async function currentWorldDate(admin: AdminClient): Promise<string> {
   await Promise.all([
     admin.rpc("tlr_expire_diplomacy", { p_world_date: data.current_world_date }),
     admin.rpc("tlr_advance_intelligence", { p_world_date: data.current_world_date }),
-    admin.rpc("tlr_advance_country_stats", { p_world_date: data.current_world_date }),
   ]);
   return data.current_world_date;
 }

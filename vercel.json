@@ -79,6 +79,10 @@
       "destination": "/api/admin/actions?domain=discord-login"
     },
     {
+      "source": "/api/admin/content-studio",
+      "destination": "/api/admin/actions?domain=content-studio"
+    },
+    {
       "source": "/api/auth/logout",
       "destination": "/api/auth/session?domain=logout"
     },

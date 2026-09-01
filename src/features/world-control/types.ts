@@ -47,6 +47,25 @@ export type WorldControlAdminData = {
   counts: { advance: number; hold: number; none: number };
   requests: WorldControlAdminRequest[];
   noRequestCountryKeys: string[];
+  turn: {
+    configured: boolean;
+    id: string | null;
+    number: number | null;
+    startWorldDate: string | null;
+    endWorldDate: string | null;
+    status: "PLANNED" | "ACTIVE" | "SETTLED" | null;
+  };
+};
+
+export type WorldTimeAdvancePreview = {
+  preview: true;
+  currentWorldDate: string;
+  targetWorldDate: string;
+  currentTurnNumber: number | null;
+  resultingTurnNumber: number | null;
+  crossedTurnBoundaries: Array<{ id: string; turnNumber: number; endWorldDate: string }>;
+  dateBasedProcesses: readonly string[];
+  turnBasedProcesses: readonly string[];
 };
 
 export const WORLD_MAP_MODES: ReadonlyArray<{

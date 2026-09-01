@@ -5,11 +5,13 @@ import type { DocumentEventData } from "../types";
 type EventPaperTemplateProps = {
   event: DocumentEventData;
   onFinished?: () => void;
+  previewOnly?: boolean;
 };
 
 export function EventPaperTemplate({
   event,
   onFinished,
+  previewOnly = false,
 }: EventPaperTemplateProps) {
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
 
@@ -44,6 +46,7 @@ export function EventPaperTemplate({
                 setSelectedChoiceId(choice.id);
                 onFinished?.();
               }}
+              previewOnly={previewOnly}
             />
           ))}
         </div>

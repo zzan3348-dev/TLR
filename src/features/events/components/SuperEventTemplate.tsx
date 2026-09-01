@@ -18,9 +18,11 @@ const clampEffect = (value: number | undefined, fallback: number) =>
 export function SuperEventTemplate({
   event,
   onFinished,
+  previewOnly = false,
 }: {
   event: SuperEventData;
   onFinished: () => void;
+  previewOnly?: boolean;
 }) {
   const [closing, setClosing] = useState(false);
   const audioRef = useRef<SuperEventAudioController | null>(null);
@@ -42,6 +44,7 @@ export function SuperEventTemplate({
   } as CSSProperties;
 
   useEffect(() => {
+    if (previewOnly) return;
     const audio = new SuperEventAudioController();
     audioRef.current = audio;
     audio.startProjector(event.projectorAudio);
@@ -54,7 +57,7 @@ export function SuperEventTemplate({
       audio.dispose();
       audioRef.current = null;
     };
-  }, [event]);
+  }, [event, previewOnly]);
 
   const finish = () => {
     if (closing) return;
@@ -68,7 +71,7 @@ export function SuperEventTemplate({
   };
 
   return (
-    <div className="super-event-overlay" data-state={closing ? "closing" : "opening"} role="dialog" aria-modal="true" aria-label={`${event.title} 슈퍼이벤트`}>
+    <div className="super-event-overlay" data-state={closing ? "closing" : "opening"} data-preview={previewOnly} role="dialog" aria-modal={!previewOnly} aria-label={`${event.title} 슈퍼이벤트`}>
       <article className="super-event-template" style={style}>
         <img className="super-event-template__frame" src="/images/super-event-frame.png" alt="" draggable={false} />
         <h1 className="superEventTitle">{event.title}</h1>
@@ -97,6 +100,7 @@ export function SuperEventTemplate({
           selected={closing}
           onApplied={finish}
           variant="super"
+          previewOnly={previewOnly}
         />
       </article>
     </div>

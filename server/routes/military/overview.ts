@@ -4,7 +4,7 @@ import { countryFromQuery } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
 import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
 import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
-import { worldTurn } from "../../decisions.js";
+import { currentTurnNumber } from "../../worldProgression.js";
 
 type CapacityRow = { available?: unknown };
 
@@ -42,7 +42,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       ? Number((capacityData as CapacityRow).available)
       : null;
     const startingStats = startingCountryStatsForCountry(countryKey);
-    const calculatedStats = await loadCalculatedNationalStats(admin, countryKey, worldTurn(worldDate), {}, worldDate);
+    const calculatedStats = await loadCalculatedNationalStats(admin, countryKey, await currentTurnNumber(admin), {}, worldDate);
     const manpower = calculatedStats?.availableManpower ?? (startingStats
       ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
       : resources.data?.available_manpower === null || resources.data?.available_manpower === undefined

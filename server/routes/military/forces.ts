@@ -5,7 +5,7 @@ import { cleanUuid, requireMilitaryActor } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
 import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
 import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
-import { worldTurn } from "../../decisions.js";
+import { currentTurnNumber } from "../../worldProgression.js";
 
 type RequestBody = { template_id?: unknown; display_name?: unknown; idempotency_key?: unknown; object_kind?: unknown; object_id?: unknown; assigned_front_id?: unknown };
 
@@ -86,7 +86,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (![manpowerNeeded, capacityNeeded, formationDays].every(Number.isFinite)) { response.status(409).json({ error: "TEMPLATE_COSTS_UNCONFIGURED" }); return; }
     const startingStats = startingCountryStatsForCountry(actor.countryKey);
     const worldDate = await currentWorldDate(admin);
-    const calculatedStats = await loadCalculatedNationalStats(admin, actor.countryKey, worldTurn(worldDate), {}, worldDate);
+    const calculatedStats = await loadCalculatedNationalStats(admin, actor.countryKey, await currentTurnNumber(admin), {}, worldDate);
     const availableManpower = calculatedStats?.availableManpower ?? (startingStats
       ? currentNumber(resources.data?.available_manpower, startingStats.base_available_manpower)
       : resources.data?.available_manpower);

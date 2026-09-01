@@ -138,40 +138,8 @@ on conflict (country_key) do update set
   updated_at = now();
 
 update public.country_decision_states
-set last_political_power_turn = greatest(
-  0,
-  floor(
-    ((select current_world_date from public.world_state where singleton = true) - date '1932-01-01')::numeric / 30
-  )::integer
-)
+set last_political_power_turn = 1
 where last_political_power_turn is null;
-
-create or replace function public.tlr_advance_country_stats(p_world_date date)
-returns void
-language plpgsql
-security definer
-set search_path = public
-as $$
-declare
-  v_turn integer := greatest(0, floor((p_world_date - date '1932-01-01')::numeric / 30)::integer);
-begin
-  update public.country_decision_states
-  set
-    political_power = greatest(
-      0,
-      coalesce(political_power, base_political_power, 0)
-        + greatest(0, v_turn - coalesce(last_political_power_turn, v_turn))
-          * coalesce(political_power_per_turn, 0)
-          * greatest(0, 1 + coalesce(political_power_gain_modifier, 0) / 100)
-    ),
-    last_political_power_turn = v_turn,
-    updated_at = now()
-  where coalesce(last_political_power_turn, v_turn) < v_turn;
-end;
-$$;
-
-revoke execute on function public.tlr_advance_country_stats(date) from public, anon, authenticated;
-grant execute on function public.tlr_advance_country_stats(date) to service_role;
 
 commit;
 `;

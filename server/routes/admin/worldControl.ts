@@ -3,6 +3,7 @@ import { requireAdminSession } from "../../adminAuth.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
 import { safeDetail, validSituationLevel } from "../../worldControl.js";
+import { planWorldProgression, type TurnDefinition } from "../../worldProgression.js";
 
 async function readAdminData(admin: ReturnType<typeof getAdminClient>) {
   const [world, requests] = await Promise.all([
@@ -10,6 +11,10 @@ async function readAdminData(admin: ReturnType<typeof getAdminClient>) {
     admin.from("world_time_requests").select("country_key,request_state,hold_reason,details,requested_world_date,updated_at").order("updated_at", { ascending: false }),
   ]);
   if (world.error || requests.error || !world.data) throw world.error ?? requests.error ?? new Error("WORLD_STATE_UNAVAILABLE");
+  const turnState = await admin.from("world_state").select("current_turn_id").eq("singleton", true).single<{ current_turn_id: string | null }>();
+  const turnDefinition = !turnState.error && turnState.data?.current_turn_id
+    ? await admin.from("turn_definitions").select("id,turn_number,start_world_date,end_world_date,status").eq("id", turnState.data.current_turn_id).maybeSingle<{ id: string; turn_number: number; start_world_date: string; end_world_date: string | null; status: "PLANNED" | "ACTIVE" | "SETTLED" }>()
+    : null;
   const rows = requests.data ?? [];
   const requested = new Set(rows.map((row) => row.country_key));
   return {
@@ -24,6 +29,14 @@ async function readAdminData(admin: ReturnType<typeof getAdminClient>) {
     },
     requests: rows.map((row) => ({ countryKey: row.country_key, state: row.request_state, holdReason: row.hold_reason, details: row.details, requestedWorldDate: row.requested_world_date, updatedAt: row.updated_at })),
     noRequestCountryKeys: mapCountries.map((country) => country.key).filter((key) => !requested.has(key)),
+    turn: turnDefinition?.data ? {
+      configured: true,
+      id: turnDefinition.data.id,
+      number: turnDefinition.data.turn_number,
+      startWorldDate: turnDefinition.data.start_world_date,
+      endWorldDate: turnDefinition.data.end_world_date,
+      status: turnDefinition.data.status,
+    } : { configured: false, id: null, number: null, startWorldDate: null, endWorldDate: null, status: null },
   };
 }
 
@@ -40,6 +53,29 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const action = typeof body.action === "string" ? body.action : "";
     const reason = safeDetail(body.reason, 1000);
     const level = body.level;
+    if (action === "PREVIEW_WORLD_TIME" || action === "ADVANCE_WORLD_TIME") {
+      const targetWorldDate = safeDetail(body.targetWorldDate, 10);
+      if (!reason || !targetWorldDate || !/^\d{4}-\d{2}-\d{2}$/u.test(targetWorldDate)) return void response.status(400).json({ error: "INVALID_WORLD_TIME_ADVANCE" });
+      const before = await readAdminData(admin);
+      const turns = await admin.from("turn_definitions").select("id,turn_number,start_world_date,end_world_date,status").order("turn_number").returns<Array<{ id: string; turn_number: number; start_world_date: string; end_world_date: string | null; status: TurnDefinition["status"] }>>();
+      const schedule: TurnDefinition[] = turns.error ? [] : (turns.data ?? []).map((turn) => ({ id: turn.id, turnNumber: turn.turn_number, startWorldDate: turn.start_world_date, endWorldDate: turn.end_world_date, status: turn.status }));
+      const planned = planWorldProgression(before.worldDate, targetWorldDate, before.turn.id, schedule);
+      if (action === "PREVIEW_WORLD_TIME") return void response.status(200).json({
+        preview: true,
+        currentWorldDate: before.worldDate,
+        targetWorldDate,
+        currentTurnNumber: before.turn.number,
+        resultingTurnNumber: planned.crossedTurnBoundaries.length ? planned.crossedTurnBoundaries.at(-1)!.turnNumber + 1 : before.turn.number,
+        crossedTurnBoundaries: planned.crossedTurnBoundaries.map((turn) => ({ id: turn.id, turnNumber: turn.turnNumber, endWorldDate: turn.endWorldDate })),
+        dateBasedProcesses: ["외교 만료", "연구 완료", "첩보 단계", "무역 정산"],
+        turnBasedProcesses: planned.crossedTurnBoundaries.length ? ["턴 정치력 지급", "턴 종료 정산", "다음 턴 시작"] : [],
+      });
+      const idempotencyKey = safeDetail(body.idempotencyKey, 120);
+      if (!idempotencyKey) return void response.status(400).json({ error: "WORLD_TIME_IDEMPOTENCY_REQUIRED" });
+      const result = await admin.rpc("tlr_advance_world_time", { p_target_date: targetWorldDate, p_actor: session.sub, p_reason: reason, p_idempotency_key: idempotencyKey });
+      if (result.error || !(result.data as { ok?: boolean } | null)?.ok) return void response.status(409).json({ error: result.error?.message ?? (result.data as { error?: string } | null)?.error ?? "WORLD_TIME_ADVANCE_FAILED" });
+      return void response.status(200).json(await readAdminData(admin));
+    }
     if ((action !== "PREVIEW_SITUATION" && action !== "SET_SITUATION") || !validSituationLevel(level) || !reason) {
       response.status(400).json({ error: "INVALID_SITUATION_CHANGE" });
       return;

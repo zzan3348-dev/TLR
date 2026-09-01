@@ -27,7 +27,7 @@ export function NewspaperEventImage({
   );
 }
 
-export function NewspaperEventTemplate({ event, onFinished }: { event: NewspaperEventData; onFinished?: () => void }) {
+export function NewspaperEventTemplate({ event, onFinished, previewOnly = false }: { event: NewspaperEventData; onFinished?: () => void; previewOnly?: boolean }) {
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
   const paragraphs = event.body.split(/\n{2,}/u).map((paragraph) => paragraph.trim()).filter(Boolean);
 
@@ -70,6 +70,7 @@ export function NewspaperEventTemplate({ event, onFinished }: { event: Newspaper
                 setSelectedChoiceId(choice.id);
                 onFinished?.();
               }}
+              previewOnly={previewOnly}
             />
           ))}
         </div>

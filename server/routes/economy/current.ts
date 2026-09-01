@@ -5,6 +5,7 @@ import { mergeStartingResources } from "../../startingResources.js";
 import { mergeStartingEconomy, startingCapacityForEconomy } from "../../startingEconomies.js";
 import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
 import { readLawChoicesHeader } from "../../countryStatModifiers.js";
+import { currentTurnNumber } from "../../worldProgression.js";
 
 type EconomyRow = Record<string, unknown> & { country_key: string };
 type ResourceRow = Record<string, unknown> & { resource_type_id: string };
@@ -45,9 +46,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       return { ...resource, available: component && typeof component === "object" && "available" in component ? Number(component.available) : null };
     }));
     const mergedEconomy = mergeStartingEconomy(actor.countryKey, economy.data ?? null);
-    const start = Date.UTC(1932, 0, 1);
-    const parsedWorldDate = Date.parse(`${worldDate}T00:00:00Z`);
-    const turn = Number.isFinite(parsedWorldDate) ? Math.max(0, Math.floor((parsedWorldDate - start) / 86_400_000 / 30)) : 0;
+    const turn = await currentTurnNumber(admin);
     const lawChoices = readLawChoicesHeader(request.headers["x-tlr-law-choices"], actor.countryKey);
     const nationalStats = await loadCalculatedNationalStats(admin, actor.countryKey, turn, lawChoices, worldDate);
     const databaseCapacity = Array.isArray(capacity.data) ? capacity.data[0] ?? null : capacity.data ?? null;

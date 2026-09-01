@@ -11,6 +11,7 @@ import { currentWorldDate } from "./diplomacy.js";
 import { mergeStartingEconomy } from "./startingEconomies.js";
 import { currentNumber, startingCountryStatsForCountry } from "./startingCountryStats.js";
 import { loadCalculatedNationalStats } from "./countryNationalStats.js";
+import { currentTurnNumber } from "./worldProgression.js";
 
 type DecisionStateRow = {
   country_key: string;
@@ -73,15 +74,6 @@ export type DecisionRuntimeState = {
 };
 
 const partyCatalog = rawCountryParties as Record<string, PartySource>;
-const START_DATE = Date.UTC(1932, 0, 1);
-const TURN_DAYS = 30;
-
-export function worldTurn(worldDate: string): number {
-  const parsed = Date.parse(`${worldDate}T00:00:00Z`);
-  if (!Number.isFinite(parsed)) return 0;
-  return Math.max(0, Math.floor((parsed - START_DATE) / 86_400_000 / TURN_DAYS));
-}
-
 function numeric(value: unknown): number | null {
   if (value === null || value === undefined || value === "") return null;
   const parsed = Number(value);
@@ -103,7 +95,7 @@ function partyOptions(countryKey: string, overrides: PartyOverrideRow[]): Decisi
 
 export async function loadDecisionRuntime(admin: AdminClient, countryKey: string): Promise<DecisionRuntimeState> {
   const worldDate = await currentWorldDate(admin);
-  const turn = worldTurn(worldDate);
+  const turn = await currentTurnNumber(admin);
   const [metricsResult, economyResult, manpowerResult, partyResult, modifierResult, executionResult, warResult] = await Promise.all([
     admin.from("country_decision_states").select("*").eq("country_key", countryKey).maybeSingle<DecisionStateRow>(),
     admin.from("country_economies").select("unemployment_rate,budget_fulfillment_rate,nominal_growth_rate,national_income,tax_collection_efficiency,research_capacity,production_capacity_modifier").eq("country_key", countryKey).maybeSingle<EconomyRow>(),

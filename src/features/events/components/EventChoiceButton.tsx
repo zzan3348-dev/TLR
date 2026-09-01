@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from "react";
-import { useEventEffectExecutor } from "../../effects/useEventEffectExecutor";
+import { useOptionalEventEffectExecutor } from "../../effects/useEventEffectExecutor";
 import type { EventChoice } from "../types";
 import { EventChoiceTooltip } from "./EventChoiceTooltip";
 
@@ -10,6 +10,7 @@ type EventChoiceButtonProps = {
   selected: boolean;
   onApplied: () => void;
   variant?: "paper" | "super";
+  previewOnly?: boolean;
 };
 
 export function EventChoiceButton({
@@ -19,8 +20,9 @@ export function EventChoiceButton({
   selected,
   onApplied,
   variant = "paper",
+  previewOnly = false,
 }: EventChoiceButtonProps) {
-  const executor = useEventEffectExecutor();
+  const executor = useOptionalEventEffectExecutor();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipId = useId();
   const [anchor, setAnchor] = useState<DOMRect | null>(null);
@@ -31,6 +33,11 @@ export function EventChoiceButton({
   };
   const choose = async () => {
     if (pending || selected) return;
+    if (previewOnly) {
+      onApplied();
+      return;
+    }
+    if (!executor) throw new Error("EVENT_EFFECT_EXECUTOR_UNAVAILABLE");
     setPending(true);
     setError(null);
     try {

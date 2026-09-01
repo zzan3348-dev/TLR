@@ -149,7 +149,7 @@ export async function refreshServerProfile(): Promise<AuthProfile | null> {
     headers: session ? { Authorization: `Bearer ${session.access_token}` } : undefined,
     credentials: "include",
   });
-  if (!response.ok) {
+  if (!response.ok || !response.headers.get("content-type")?.includes("application/json")) {
     return null;
   }
   const payload: unknown = await response.json();
