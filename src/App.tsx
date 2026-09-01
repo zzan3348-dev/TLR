@@ -39,6 +39,7 @@ const PlayWindowManager = lazy(() => import("./features/play/components/PlayWind
 const DiplomacyNotificationQueue = lazy(() => import("./features/diplomacy/components/DiplomacyNotificationQueue").then((module) => ({ default: module.DiplomacyNotificationQueue })));
 const WarDeclarationAlert = lazy(() => import("./features/military/components/WarDeclarationAlert").then((module) => ({ default: module.WarDeclarationAlert })));
 const EventTestPage = lazy(() => import("./features/events/components/EventTestPage").then((module) => ({ default: module.EventTestPage })));
+const ActiveEventOverlay = lazy(() => import("./features/events/components/ActiveEventOverlay").then((module) => ({ default: module.ActiveEventOverlay })));
 
 type SelectedMapTerritory = {
   country: MapCountryIndex;
@@ -625,6 +626,7 @@ export default function App() {
         ) : null}
         {playCountry ? <Suspense fallback={null}><DiplomacyNotificationQueue country={playCountry} /></Suspense> : null}
         {playCountry ? <Suspense fallback={null}><WarDeclarationAlert /></Suspense> : null}
+        {playCountry && !adminPreviewCountryKey ? <Suspense fallback={null}><ActiveEventOverlay countryKey={playCountry.key} /></Suspense> : null}
       </section>
       <Suspense fallback={null}><CountryPlayFlow
         country={selection?.country ?? applicationCountry}

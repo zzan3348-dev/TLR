@@ -21,18 +21,12 @@ type AdminSessionState = "checking" | "authorized" | "not-found";
 type ManagementView = "dashboard" | "event-studio" | "decision-studio" | "world-control" | "provinces" | "capitals" | "research" | "intelligence" | "military" | "economy" | "diplomacy" | "system";
 
 const MANAGEMENT_NAV: Array<{ group: string; items: Array<{ id: ManagementView; label: string; hint: string }> }> = [
-  { group: "운영", items: [{ id: "dashboard", label: "운영 대시보드", hint: "상태와 대기열" }, { id: "world-control", label: "세계상황·시간 요청", hint: "날짜 요청 관제" }, { id: "diplomacy", label: "외교 검토", hint: "제안 큐" }, { id: "economy", label: "경제·무역", hint: "계약과 데이터" }] },
-  { group: "콘텐츠 스튜디오", items: [{ id: "event-studio", label: "Event Studio", hint: "제작·미리보기·게시" }, { id: "decision-studio", label: "Decision Studio", hint: "실제 정의 점검" }] },
-  { group: "세계 편집", items: [{ id: "provinces", label: "프로빈스·Region", hint: "영토 그룹" }, { id: "capitals", label: "수도 데이터", hint: "지도 기준점" }, { id: "military", label: "군사 관제", hint: "전쟁·편성" }, { id: "intelligence", label: "첩보 관제", hint: "작전·자산" }, { id: "research", label: "연구 관제", hint: "프로젝트 심사" }] },
+  { group: "운영", items: [{ id: "dashboard", label: "운영 대시보드", hint: "상태와 처리 대기" }, { id: "world-control", label: "세계시간", hint: "날짜 진행·턴 경계" }] },
+  { group: "콘텐츠 제작", items: [{ id: "event-studio", label: "이벤트", hint: "제작·예약·게시" }, { id: "decision-studio", label: "결정 카탈로그", hint: "실행 정의 감사" }] },
+  { group: "세계 편집", items: [{ id: "provinces", label: "프로빈스·Region", hint: "지역 그룹" }, { id: "capitals", label: "수도 데이터", hint: "지도 기준점" }, { id: "economy", label: "경제·무역", hint: "데이터와 계약" }, { id: "diplomacy", label: "외교", hint: "제안 검토" }] },
+  { group: "관제", items: [{ id: "military", label: "군사", hint: "전쟁·작전·점령" }, { id: "intelligence", label: "첩보", hint: "작전·자산·판정" }, { id: "research", label: "연구", hint: "프로젝트 심사" }] },
   { group: "시스템", items: [{ id: "system", label: "접근·개장·테스트", hint: "권한과 운영" }] },
 ];
-
-const actions = [
-  ["REVOKE_COUNTRY_OWNERSHIP", "국가 운영권 회수", "현재 점유만 해제"],
-  ["DENY_COUNTRY_ACCESS", "국가 접근 거부", "대상 국가 재접근 제한"],
-  ["SUSPEND_ALL_PLAY", "전체 플레이 중지", "공개 열람과 로그인은 허용"],
-  ["BLOCK_ACCOUNT", "계정 차단", "보호 기능 접근 차단"],
-] as const;
 
 function countryName(key: string): string {
   return mapCountries.find((country) => country.key === key)?.name ?? key;
@@ -54,32 +48,23 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
   const [busyId, setBusyId] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<ManagementView>("dashboard");
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [loadFailures, setLoadFailures] = useState<string[]>([]);
 
   const loadQueue = useCallback(async () => {
-    const [diplomacyResponse, economyResponse, militaryResponse, researchResponse, intelligenceResponse, worldControlResponse] = await Promise.all([
-      fetch("/api/admin/diplomacy", { credentials: "include" }),
-      fetch("/api/admin/economy", { credentials: "include" }),
-      fetch("/api/admin/military", { credentials: "include" }),
-      fetch("/api/admin/research", { credentials: "include" }),
-      fetch("/api/admin/intelligence", { credentials: "include" }),
-      fetch("/api/admin/world-control", { credentials: "include" }),
+    const read = async <T,>(url: string): Promise<T> => {
+      const response = await fetch(url, { credentials: "include" });
+      if (!response.ok) throw new Error(`${url}:${response.status}`);
+      return response.json() as Promise<T>;
+    };
+    const failures = await Promise.all([
+      read<{ worldDate: string; queue: DiplomaticProposal[] }>("/api/admin/diplomacy").then((payload) => { setQueue(payload.queue); setWorldDate(payload.worldDate); return null; }).catch(() => "외교"),
+      read<{ worldDate: string; queue: TradeProposal[]; agreements: TradeAgreement[]; economies: Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }> }>("/api/admin/economy").then((payload) => { setTradeQueue(payload.queue); setTradeAgreements(payload.agreements); setEconomies(payload.economies); setWorldDate((current) => current || payload.worldDate); return null; }).catch(() => "경제·무역"),
+      read<MilitaryAdminData>("/api/admin/military").then((payload) => { setMilitaryData(payload); setWorldDate((current) => current || payload.worldDate); return null; }).catch(() => "군사"),
+      read<ResearchAdminData>("/api/admin/research").then((payload) => { setResearchData(payload); return null; }).catch(() => "연구"),
+      read<IntelligenceAdminData>("/api/admin/intelligence").then((payload) => { setIntelligenceData(payload); return null; }).catch(() => "첩보"),
+      read<WorldControlAdminData>("/api/admin/world-control").then((payload) => { setWorldControlData(payload); setWorldDate(payload.worldDate); return null; }).catch(() => "세계시간"),
     ]);
-    if (!diplomacyResponse.ok || !economyResponse.ok || !militaryResponse.ok || !researchResponse.ok) throw new Error("ADMIN_REVIEW_QUEUE_FAILED");
-    const diplomacyPayload = await diplomacyResponse.json() as { worldDate: string; queue: DiplomaticProposal[] };
-    const economyPayload = await economyResponse.json() as { worldDate: string; queue: TradeProposal[]; agreements: TradeAgreement[]; economies: Array<{ country_key: string; gdp: number | null; base_production_capacity: number | null }> };
-    const militaryPayload = await militaryResponse.json() as MilitaryAdminData;
-    const researchPayload = await researchResponse.json() as ResearchAdminData;
-    const intelligencePayload = intelligenceResponse.ok ? await intelligenceResponse.json() as IntelligenceAdminData : null;
-    const worldControlPayload = worldControlResponse.ok ? await worldControlResponse.json() as WorldControlAdminData : null;
-    setQueue(diplomacyPayload.queue);
-    setTradeQueue(economyPayload.queue);
-    setTradeAgreements(economyPayload.agreements);
-    setEconomies(economyPayload.economies);
-    setMilitaryData(militaryPayload);
-    setResearchData(researchPayload);
-    setIntelligenceData(intelligencePayload);
-    setWorldControlData(worldControlPayload);
-    setWorldDate(diplomacyPayload.worldDate || economyPayload.worldDate || militaryPayload.worldDate);
+    setLoadFailures(failures.filter((failure): failure is string => Boolean(failure)));
   }, []);
 
   useEffect(() => {
@@ -95,9 +80,7 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
         setState("authorized");
         try {
           await loadQueue();
-        } catch {
-          if (active) setQueueError("외교 검토 큐를 불러오지 못했습니다.");
-        }
+        } catch { if (active) setQueueError("관리자 데이터를 불러오지 못했습니다."); }
       })
       .catch(() => { if (active) setState("not-found"); });
     return () => { active = false; };
@@ -193,16 +176,16 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
           {MANAGEMENT_NAV.map((group) => <section key={group.group}><h2>{group.group}</h2>{group.items.map((item) => <button type="button" data-active={activeView === item.id} onClick={() => setActiveView(item.id)} key={item.id}><strong>{item.label}</strong><small>{item.hint}</small></button>)}</section>)}
         </aside>
         <section className="management-console__main">
-          {activeView === "dashboard" ? <section className="management-dashboard"><header><div><span>OPERATOR OVERVIEW</span><h2>운영 대시보드</h2></div><strong>{worldDate || "세계날짜 확인 중"}</strong></header><div className="management-dashboard__metrics"><article><span>외교 검토</span><strong>{queue.length}</strong><button type="button" onClick={() => setActiveView("diplomacy")}>열기</button></article><article><span>무역 검토</span><strong>{tradeQueue.length}</strong><button type="button" onClick={() => setActiveView("economy")}>열기</button></article><article><span>연구 프로젝트</span><strong>{researchData?.projects.length ?? 0}</strong><button type="button" onClick={() => setActiveView("research")}>열기</button></article><article><span>세계시간 요청</span><strong>{worldControlData ? worldControlData.counts.advance + worldControlData.counts.hold : 0}</strong><button type="button" onClick={() => setActiveView("world-control")}>열기</button></article></div><div className="management-dashboard__quick"><h3>빠른 작업</h3><button type="button" onClick={() => setActiveView("event-studio")}>새 이벤트 제작</button><button type="button" onClick={() => setActiveView("provinces")}>Region 편집</button><button type="button" onClick={() => setActiveView("system")}>플레이 테스트</button><button type="button" onClick={() => setActiveView("world-control")}>세계시간 요청 검토</button></div><p>세계날짜는 달력이며 턴은 별도 운영·정산 주기입니다. 날짜 요청 화면에서 턴을 직접 증가시키지 않습니다.</p></section> : null}
+          {activeView === "dashboard" ? <section className="management-dashboard"><header><div><span>TLR WORLD CONTROL</span><h2>운영 대시보드</h2></div><div className="management-dashboard__clock"><span>세계시간</span><strong>{worldDate || "확인 중"}</strong><span>현재 턴</span><strong>{worldControlData?.turn.configured ? `Turn ${worldControlData.turn.number}` : "스케줄 미설정"}</strong></div></header>{loadFailures.length ? <div className="management-load-warning" role="alert"><strong>불러오지 못한 관제 영역 {loadFailures.length}개</strong><span>{loadFailures.join(" · ")}</span><button type="button" onClick={() => void loadQueue()}>다시 불러오기</button></div> : null}<h3>처리 필요</h3><div className="management-dashboard__metrics"><button type="button" onClick={() => setActiveView("military")}><span>군사작전 판정</span><strong>{militaryData?.actions.filter((action) => action.status === "SUBMITTED").length ?? 0}</strong></button><button type="button" onClick={() => setActiveView("intelligence")}><span>첩보 검토</span><strong>{intelligenceData?.operations.filter((operation) => operation.admin_review_status === "PENDING").length ?? 0}</strong></button><button type="button" onClick={() => setActiveView("research")}><span>연구 심사</span><strong>{researchData?.projects.filter((project) => ["SUBMITTED", "UNDER_REVIEW", "APPROVED"].includes(project.status)).length ?? 0}</strong></button><button type="button" onClick={() => setActiveView("diplomacy")}><span>외교 요청</span><strong>{queue.length}</strong></button><button type="button" onClick={() => setActiveView("economy")}><span>무역 검토</span><strong>{tradeQueue.length}</strong></button><button type="button" onClick={() => setActiveView("world-control")}><span>세계시간 요청</span><strong>{worldControlData ? worldControlData.counts.advance + worldControlData.counts.hold : 0}</strong></button></div><div className="management-dashboard__quick"><h3>빠른 작업</h3><button type="button" onClick={() => setActiveView("world-control")}>세계시간 진행</button><button type="button" onClick={() => setActiveView("event-studio")}>이벤트 제작·예약</button><button type="button" onClick={() => setActiveView("provinces")}>Region 편집</button><button type="button" onClick={() => setActiveView("system")}>플레이 테스트</button></div><p>WORLD TIME은 세계관 날짜, TURN은 운영 정산 주기입니다. 두 값은 별도 데이터로 판정됩니다.</p></section> : null}
           {activeView === "event-studio" ? <ContentStudio /> : null}
           {activeView === "decision-studio" ? <DecisionCatalog /> : null}
           {activeView === "system" ? <><SiteStatusAdminSection /><AdminPlayPreviewSection /><AdminMembershipSection /><CountryExpulsionAdminSection /></> : null}
           {activeView === "capitals" ? <MapCapitalAdminSection /> : null}
           {activeView === "provinces" ? <ProvinceRegionAdminSection /> : null}
-          {activeView === "world-control" && worldControlData ? <><WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /><section className="management-turn-separation"><article><span>WORLD TIME</span><h3>세계날짜</h3><strong>{worldControlData.worldDate}</strong><p>이벤트·연구·첩보·건조의 달력 기준</p></article><article><span>TURN</span><h3>턴 관리</h3><strong>{worldControlData.turn.configured ? `${worldControlData.turn.number}턴 · ${worldControlData.turn.status}` : "턴 스케줄 미설정"}</strong><p>{worldControlData.turn.configured ? `${worldControlData.turn.startWorldDate} — ${worldControlData.turn.endWorldDate ?? "종료 경계 미설정"}` : "날짜에서 턴을 임의 추정하지 않습니다."}</p></article></section></> : null}
-          {activeView === "research" && researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : null}
-          {activeView === "intelligence" && intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : null}
-          {activeView === "military" && militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : null}
+          {activeView === "world-control" ? worldControlData ? <><WorldControlAdminSection data={worldControlData} onReload={loadQueue} onError={setQueueError} /><section className="management-turn-separation"><article><span>WORLD TIME</span><h3>세계날짜</h3><strong>{worldControlData.worldDate}</strong><p>이벤트·연구·첩보·건조의 달력 기준</p></article><article><span>TURN</span><h3>턴 관리</h3><strong>{worldControlData.turn.configured ? `${worldControlData.turn.number}턴 · ${worldControlData.turn.status}` : "턴 스케줄 미설정"}</strong><p>{worldControlData.turn.configured ? `${worldControlData.turn.startWorldDate} — ${worldControlData.turn.endWorldDate ?? "종료 경계 미설정"}` : "날짜에서 턴을 임의 추정하지 않습니다."}</p></article></section></> : <section className="management-empty-state"><strong>세계시간 데이터를 불러오지 못했습니다.</strong><button type="button" onClick={() => void loadQueue()}>다시 불러오기</button></section> : null}
+          {activeView === "research" ? researchData ? <ResearchAdminSection data={researchData} busyId={busyId} onAction={reviewResearch} /> : <section className="management-empty-state"><strong>연구 관제 데이터를 불러오지 못했습니다.</strong><button type="button" onClick={() => void loadQueue()}>다시 불러오기</button></section> : null}
+          {activeView === "intelligence" ? intelligenceData ? <IntelligenceAdminSection data={intelligenceData} onReload={loadQueue} onError={setQueueError} /> : <section className="management-empty-state"><strong>첩보 관제 데이터를 불러오지 못했습니다.</strong><button type="button" onClick={() => void loadQueue()}>다시 불러오기</button></section> : null}
+          {activeView === "military" ? militaryData ? <MilitaryAdminSection data={militaryData} onReload={loadQueue} onError={setQueueError} /> : <section className="management-empty-state"><strong>군사 관제 데이터를 불러오지 못했습니다.</strong><button type="button" onClick={() => void loadQueue()}>다시 불러오기</button></section> : null}
           {activeView === "economy" ? <>
       <section className="directorate-diplomacy" aria-labelledby="directorate-economy-title">
         <header>
@@ -245,14 +228,6 @@ export function DirectoratePanel({ onBackToTitle }: DirectoratePanelProps) {
         </div>
       </section>
       </> : null}
-      {activeView === "system" ? <section className="directorate-page__grid">
-        {actions.map(([id, title, description]) => (
-          <article key={id} className="directorate-action">
-            <span className="directorate-action__id">{id}</span><h2>{title}</h2><p>{description}</p>
-            <button type="button" disabled>관제 기록 준비됨</button>
-          </article>
-        ))}
-      </section> : null}
       {activeView === "diplomacy" ? <section className="directorate-diplomacy" aria-labelledby="directorate-diplomacy-title">
         <header>
           <div><span>FOREIGN OFFICE / ADMIN REVIEW</span><h2 id="directorate-diplomacy-title">AI 외교 검토 큐</h2></div>

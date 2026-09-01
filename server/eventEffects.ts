@@ -3,6 +3,7 @@ import { currentWorldDate, type DiplomacyActor } from "./diplomacy.js";
 import { resolveNationalSpiritDefinition } from "../src/features/effects/nationalSpiritRegistry.js";
 import { validateEventEffects } from "../src/features/effects/effectValidation.js";
 import type { EventEffect } from "../src/features/effects/types.js";
+import { loadPendingEvents } from "./eventRuntime.js";
 
 type EventChoiceRow = {
   event_id: string;
@@ -33,6 +34,17 @@ export async function executeEventChoice(
   actor: DiplomacyActor,
   identifiers: { eventId: string; eventInstanceId: string; choiceId: string },
 ): Promise<{ applied: boolean; duplicate: boolean }> {
+  const { data: existingExecution, error: existingExecutionError } = await admin
+    .from("event_choice_executions")
+    .select("event_instance_id")
+    .eq("event_instance_id", identifiers.eventInstanceId)
+    .maybeSingle<{ event_instance_id: string }>();
+  if (existingExecutionError) throw new Error("EVENT_DATA_UNAVAILABLE");
+  if (existingExecution) return { applied: false, duplicate: true };
+  const pending = await loadPendingEvents(admin, actor.countryKey);
+  if (!pending.some((event) => event.id === identifiers.eventId && event.instanceId === identifiers.eventInstanceId && event.choices.some((choice) => choice.id === identifiers.choiceId))) {
+    throw new Error("EVENT_CHOICE_NOT_AVAILABLE");
+  }
   const [eventResult, choiceResult] = await Promise.all([
     admin.from("event_definitions").select("id,status").eq("id", identifiers.eventId).eq("status", "ACTIVE").maybeSingle<{ id: string; status: string }>(),
     admin.from("event_choices").select("event_id,choice_id,effects").eq("event_id", identifiers.eventId).eq("choice_id", identifiers.choiceId).maybeSingle<EventChoiceRow>(),

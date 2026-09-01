@@ -3,7 +3,7 @@ import { COMMON_DECISIONS } from "../../../src/features/decisions/data/commonDec
 import { validateEventEffects } from "../../../src/features/effects/effectValidation.js";
 import { listNationalSpiritDefinitions } from "../../../src/features/effects/nationalSpiritRegistry.js";
 import type { EventChoice, EventTemplateType } from "../../../src/features/events/types.js";
-import type { ManagementConditionGroup, ManagementEventDraft, ManagementEventTrigger, ManagementPublishState } from "../../../src/features/management/types.js";
+import type { ManagementConditionGroup, ManagementEventDelivery, ManagementEventDraft, ManagementEventTrigger, ManagementPublishState } from "../../../src/features/management/types.js";
 import { requireAdminSession } from "../../adminAuth.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import type { ApiRequest, ApiResponse } from "../../types.js";
@@ -14,7 +14,8 @@ type ChoiceRow = { event_id: string; choice_id: string; text: string; descriptio
 const EVENT_ID = /^[a-z0-9][a-z0-9_-]{2,79}$/u;
 const TEMPLATE_TYPES = new Set<EventTemplateType>(["document", "newspaper", "super"]);
 const PUBLISH_STATES = new Set<ManagementPublishState>(["DRAFT", "READY", "PUBLISHED", "ARCHIVED"]);
-const TRIGGER_MODES = new Set(["manual", "worldDateReached", "turnStarted", "turnEnded", "conditional", "reactive"]);
+const TRIGGER_MODES = new Set(["manual", "worldDateReached", "turnStarted", "turnEnded", "conditional"]);
+const WORLD_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 
 const ASSETS = [
   { id: "event-document", path: "/images/event-paper-template.png", label: "문서형 이벤트 프레임", kind: "event" as const },
@@ -48,6 +49,22 @@ function normalizeTrigger(value: unknown): ManagementEventTrigger {
   const source = value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
   const mode = TRIGGER_MODES.has(String(source.mode)) ? source.mode as ManagementEventTrigger["mode"] : "manual";
   return { mode, worldDate: safeText(source.worldDate, 10) || undefined, turnId: Number.isInteger(source.turnId) ? Number(source.turnId) : undefined, eventKey: safeText(source.eventKey, 100) || undefined };
+}
+
+function normalizeDeliveries(value: unknown): ManagementEventDelivery[] {
+  const countryIds = new Set(mapCountries.map((country) => country.key));
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 5000).flatMap((item) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) return [];
+    const source = item as Record<string, unknown>;
+    const id = safeText(source.id, 180);
+    const countryKey = safeText(source.countryKey, 40);
+    const availableWorldDate = safeText(source.availableWorldDate, 10);
+    const createdAt = safeText(source.createdAt, 40);
+    return id && countryIds.has(countryKey) && WORLD_DATE.test(availableWorldDate)
+      ? [{ id, countryKey, availableWorldDate, createdAt: createdAt || new Date(0).toISOString() }]
+      : [];
+  });
 }
 
 function normalizeDraft(value: unknown): ManagementEventDraft {
@@ -92,6 +109,7 @@ function normalizeDraft(value: unknown): ManagementEventDraft {
     trigger: normalizeTrigger(source.trigger),
     conditions: normalizeConditions(source.conditions),
     publishState,
+    deliveries: normalizeDeliveries(source.deliveries),
   };
 }
 
@@ -124,6 +142,7 @@ async function readContent(admin: ReturnType<typeof getAdminClient>) {
       trigger: normalizeTrigger(row.payload.trigger),
       conditions: normalizeConditions(row.payload.conditions),
       publishState: workflowState(row),
+      deliveries: normalizeDeliveries(row.payload.deliveries),
       updatedAt: row.updated_at,
     })),
     decisions: COMMON_DECISIONS,
@@ -138,6 +157,7 @@ async function persistEvent(admin: ReturnType<typeof getAdminClient>, draft: Man
   const payload = {
     body: draft.body, image: draft.image, imageCrop: draft.imageCrop, quote: draft.quote, attribution: draft.attribution,
     targetCountryIds: draft.targetCountryIds, trigger: draft.trigger, conditions: draft.conditions, workflowState: draft.publishState,
+    deliveries: draft.deliveries,
   };
   const definition = await admin.from("event_definitions").upsert({ id: draft.id, template_type: draft.templateType, title: draft.title, payload, status: databaseStatus, updated_at: new Date().toISOString() }, { onConflict: "id" });
   if (definition.error) throw definition.error;
@@ -168,8 +188,28 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       draft.id = `${draft.id}_copy_${Date.now().toString(36)}`.slice(0, 80);
       draft.title = `${draft.title} 복제본`.slice(0, 180);
       draft.publishState = "DRAFT";
+      draft.deliveries = [];
       await persistEvent(admin, draft);
-      return void response.status(200).json(await readContent(admin));
+      return void response.status(200).json({ ...await readContent(admin), focusedId: draft.id });
+    }
+    if (action === "SCHEDULE_EVENT") {
+      const eventId = safeText(body.eventId, 80).toLowerCase();
+      const availableWorldDate = safeText(body.availableWorldDate, 10);
+      const countryIds = new Set(mapCountries.map((country) => country.key));
+      const countryKeys = [...new Set((Array.isArray(body.countryKeys) ? body.countryKeys : []).map(String).filter((key) => countryIds.has(key)))];
+      if (!EVENT_ID.test(eventId) || !WORLD_DATE.test(availableWorldDate) || countryKeys.length === 0) throw new Error("INVALID_EVENT_SCHEDULE");
+      const selected = await admin.from("event_definitions").select("payload,status").eq("id", eventId).maybeSingle<{ payload: Record<string, unknown>; status: string }>();
+      if (selected.error) throw selected.error;
+      if (!selected.data || selected.data.status !== "ACTIVE") throw new Error("INVALID_EVENT_NOT_PUBLISHED");
+      const deliveries = normalizeDeliveries(selected.data.payload.deliveries);
+      const createdAt = new Date().toISOString();
+      const suffix = Date.now().toString(36);
+      for (const countryKey of countryKeys) {
+        deliveries.push({ id: `dispatch:${eventId}:${countryKey}:${suffix}`, countryKey, availableWorldDate, createdAt });
+      }
+      const update = await admin.from("event_definitions").update({ payload: { ...selected.data.payload, deliveries }, updated_at: createdAt }).eq("id", eventId);
+      if (update.error) throw update.error;
+      return void response.status(200).json({ ...await readContent(admin), focusedId: eventId });
     }
     return void response.status(400).json({ error: "INVALID_CONTENT_STUDIO_ACTION" });
   } catch (error) {

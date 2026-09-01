@@ -12,6 +12,12 @@ function countryName(key: string): string {
   return mapCountries.find((country) => country.key === key)?.name ?? key;
 }
 
+function addWorldDays(worldDate: string, days: number): string {
+  const date = new Date(`${worldDate}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
 export function WorldControlAdminSection({ data, onReload, onError }: Props) {
   const [level, setLevel] = useState(data.situationLevel);
   const [reason, setReason] = useState(data.situationReason ?? "");
@@ -71,6 +77,7 @@ export function WorldControlAdminSection({ data, onReload, onError }: Props) {
       </div>
       <div className="world-control-admin__time-advance">
         <header><div><small>WORLD DATE ADVANCE</small><h3>세계시간 진행</h3></div><strong>{data.worldDate}</strong></header>
+        <div className="world-control-admin__date-shortcuts"><button type="button" onClick={() => { setTargetWorldDate(addWorldDays(data.worldDate, 1)); setTimePreview(null); }}>+1일</button><button type="button" onClick={() => { setTargetWorldDate(addWorldDays(data.worldDate, 7)); setTimePreview(null); }}>+7일</button></div>
         <label>목표 세계날짜<input type="date" min={data.worldDate} value={targetWorldDate} onChange={(event) => { setTargetWorldDate(event.target.value); setTimePreview(null); }} /></label>
         <label>진행 사유<input value={timeReason} maxLength={1000} onChange={(event) => { setTimeReason(event.target.value); setTimePreview(null); }} /></label>
         <div className="directorate-diplomacy__buttons"><button type="button" disabled={busy || targetWorldDate <= data.worldDate} onClick={() => void runWorldTime("PREVIEW_WORLD_TIME")}>진행 미리보기</button><button type="button" disabled={busy || !timePreview} onClick={() => void runWorldTime("ADVANCE_WORLD_TIME")}>확정 실행</button></div>

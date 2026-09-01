@@ -20,6 +20,9 @@ const countryName = (key: string) => mapCountries.find((country) => country.key 
 export function ResearchAdminSection({ data, busyId, onAction }: Props) {
   const [duration, setDuration] = useState<Record<string, number>>({});
   const [completionDates, setCompletionDates] = useState<Record<string, string>>({});
+  const [adjustmentCountry, setAdjustmentCountry] = useState("");
+  const [adjustmentAmount, setAdjustmentAmount] = useState(0);
+  const [adjustmentReason, setAdjustmentReason] = useState("");
   const queue = data.projects.filter((project) => ["SUBMITTED", "UNDER_REVIEW", "APPROVED"].includes(project.status));
   const active = data.projects.filter((project) => project.status === "ACTIVE");
   const archive = data.projects.filter((project) => ["COMPLETED", "REJECTED", "CANCELLED"].includes(project.status));
@@ -34,7 +37,19 @@ export function ResearchAdminSection({ data, busyId, onAction }: Props) {
       <div className="directorate-research__ledger">
         {data.economies.map((economy) => <span key={economy.country_key}><b>{countryName(economy.country_key)}</b>{Number(economy.research_points).toLocaleString()} RP <small>+{Number(economy.research_income_per_period).toLocaleString()}</small></span>)}
       </div>
+      <form className="directorate-research__adjustment" onSubmit={(event) => {
+        event.preventDefault();
+        if (!adjustmentCountry || adjustmentAmount === 0 || !adjustmentReason.trim()) return;
+        void onAction({ action: "ADJUST_POINTS", countryKey: adjustmentCountry, amount: adjustmentAmount, note: adjustmentReason.trim() }, `points:${adjustmentCountry}`);
+      }}>
+        <strong>연구력 원장 조정</strong>
+        <label>국가<select value={adjustmentCountry} onChange={(event) => setAdjustmentCountry(event.target.value)} required><option value="">국가 선택</option>{data.economies.map((economy) => <option key={economy.country_key} value={economy.country_key}>{countryName(economy.country_key)}</option>)}</select></label>
+        <label>증감<input type="number" value={adjustmentAmount} onChange={(event) => setAdjustmentAmount(Number(event.target.value))} required /></label>
+        <label>감사 사유<input value={adjustmentReason} onChange={(event) => setAdjustmentReason(event.target.value)} maxLength={1000} required /></label>
+        <button type="submit" disabled={busyId === `points:${adjustmentCountry}` || !adjustmentCountry || adjustmentAmount === 0 || !adjustmentReason.trim()}>기록 후 반영</button>
+      </form>
       <div className="directorate-research__grid">
+        {queue.length === 0 && active.length === 0 && <p className="directorate-research__empty">심사 대기 또는 진행 중인 연구가 없습니다.</p>}
         {[...queue, ...active].map((project) => (
           <article key={project.id} data-status={project.status.toLowerCase()}>
             <UiIcon name="research/request" />

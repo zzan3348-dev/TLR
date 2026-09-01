@@ -16,10 +16,17 @@ export type ManagementConditionGroup = {
 };
 
 export type ManagementEventTrigger = {
-  mode: "manual" | "worldDateReached" | "turnStarted" | "turnEnded" | "conditional" | "reactive";
+  mode: "manual" | "worldDateReached" | "turnStarted" | "turnEnded" | "conditional";
   worldDate?: string;
   turnId?: number;
   eventKey?: string;
+};
+
+export type ManagementEventDelivery = {
+  id: string;
+  countryKey: string;
+  availableWorldDate: string;
+  createdAt: string;
 };
 
 export type ManagementEventDraft = {
@@ -36,6 +43,7 @@ export type ManagementEventDraft = {
   trigger: ManagementEventTrigger;
   conditions: ManagementConditionGroup;
   publishState: ManagementPublishState;
+  deliveries: ManagementEventDelivery[];
   updatedAt?: string;
 };
 
@@ -76,5 +84,6 @@ export function createEmptyEventDraft(): ManagementEventDraft {
     trigger: { mode: "manual" },
     conditions: EMPTY_CONDITION_GROUP,
     publishState: "DRAFT",
+    deliveries: [],
   };
 }

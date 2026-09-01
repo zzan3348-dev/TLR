@@ -15,6 +15,7 @@ import mapCapitals from "../server/routes/mapCapitals.js";
 import decisionCurrent from "../server/routes/decisions/current.js";
 import decisionExecute from "../server/routes/decisions/execute.js";
 import eventChoices from "../server/routes/events/choices.js";
+import eventPending from "../server/routes/events/pending.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   budget,
@@ -44,6 +45,7 @@ const decisionHandlers: Record<string, (request: ApiRequest, response: ApiRespon
 
 const eventHandlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
   choices: eventChoices,
+  pending: eventPending,
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
