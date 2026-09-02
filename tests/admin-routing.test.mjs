@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { URL } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const vercelConfig = JSON.parse(readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));

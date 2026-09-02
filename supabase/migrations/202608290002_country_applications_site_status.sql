@@ -148,7 +148,7 @@ $$;
 
 -- 기존 국가 신청이 즉시 운영권으로 잘못 저장된 일반 유저 기록을 신청 대기열로 이관한다.
 insert into public.country_applications(country_key,user_id,discord_user_id,status,created_at,updated_at)
-select ownership.country_key,ownership.user_id,profile.discord_user_id,'pending',ownership.created_at,now()
+select ownership.country_key,ownership.user_id,profile.discord_user_id,'pending',ownership.assigned_at,now()
 from public.country_ownerships ownership
 join public.profiles profile on profile.id=ownership.user_id
 where ownership.status='active'
