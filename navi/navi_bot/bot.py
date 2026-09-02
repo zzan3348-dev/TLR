@@ -28,6 +28,7 @@ from .llm_chat import (
     parse_memory_command,
     strip_bot_mentions,
 )
+from .llm_memory import MAX_LLM_KEYWORDS, is_safe_interest_keyword
 from .navi_safety import NaviSafety
 from .navi_llm import NaviLLMClient
 from .tlr_client import TlrApiError, TlrClient
@@ -215,6 +216,24 @@ class NaviBot(commands.Bot):
                 )
             await message.reply(reply.text, allowed_mentions=no_mentions(), mention_author=False)
             return
+        memory_command = parse_memory_command(message.content)
+        if message.content.strip().startswith("나비야") and memory_command is not None:
+            if not self.db.claim_chat_message(message.id):
+                return
+            safety_decision = self.navi_safety.screen_input(
+                user_id=message.author.id,
+                guild_id=getattr(message.guild, "id", None),
+                text=message.content,
+            )
+            if safety_decision.blocked:
+                await message.reply(
+                    safety_decision.response,
+                    allowed_mentions=no_mentions(),
+                    mention_author=False,
+                )
+                return
+            await self._handle_llm_memory_command(message, memory_command.action, memory_command.keyword)
+            return
         affection_level: int | None = None
         if "나비" in (message.content or ""):
             try:
@@ -244,7 +263,7 @@ class NaviBot(commands.Bot):
             response = (
                 "아직 기억해둔 키워드가 없어요. `@NAVI 기억해: 내용`으로 알려주세요."
                 if not memories
-                else "나비가 기억하는 키워드는 이 두 칸이에요.\n" + "\n".join(
+                else "나비가 기억하는 대표 관심사는 이 세 칸이에요.\n" + "\n".join(
                     f"{index}. {value}" for index, value in enumerate(memories, start=1)
                 )
             )
@@ -252,11 +271,14 @@ class NaviBot(commands.Bot):
             count = self.db.clear_llm_keywords(user_id)
             response = "기억해둔 키워드를 전부 지웠어요." if count else "지울 기억이 없네요."
         elif action == "remember":
-            result = self.db.remember_llm_keyword(user_id, keyword, limit=2)
-            if result["replaced"]:
-                response = f"기억 두 칸이 꽉 차서 `{result['replaced']}` 대신 `{result['keyword']}`을 기억할게요."
+            if not is_safe_interest_keyword(keyword):
+                response = "그건 취미나 관심사 키워드로 기억하기 어렵네요. 비밀번호나 연락처 같은 민감한 정보는 기억하지 않아요."
             else:
-                response = f"네에, `{result['keyword']}` 기억해둘게요. 한 사람당 두 개까지 기억할 수 있어요."
+                result = self.db.remember_llm_keyword(user_id, keyword, limit=MAX_LLM_KEYWORDS)
+                if result["replaced"]:
+                    response = f"기억 세 칸이 꽉 차서 `{result['replaced']}` 대신 `{result['keyword']}`을 기억할게요."
+                else:
+                    response = f"네에, `{result['keyword']}` 기억해둘게요. 대표 관심사는 세 개까지 기억할 수 있어요."
         elif action == "forget":
             removed = self.db.forget_llm_keyword(user_id, keyword)
             response = f"`{keyword}`은 잊었어요." if removed else f"`{keyword}`은 기억에서 찾지 못했어요."
@@ -307,12 +329,13 @@ class NaviBot(commands.Bot):
             log.exception("NAVI SQLite 정기 최적화 실패")
             return
         log.info(
-            "NAVI SQLite 정기 최적화 완료: claims=%s usage=%s safety=%s restrictions=%s "
+            "NAVI SQLite 정기 최적화 완료: claims=%s usage=%s safety=%s restrictions=%s candidates=%s "
             "storage_mb=%.2f->%.2f checkpoint_busy=%s",
             result["deleted_claims"],
             result["deleted_usage"],
             result["deleted_safety"],
             result["deleted_restrictions"],
+            result["deleted_keyword_candidates"],
             result["before_bytes"] / (1024 * 1024),
             result["after_bytes"] / (1024 * 1024),
             result["checkpoint_busy"],

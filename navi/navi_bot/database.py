@@ -9,6 +9,7 @@ import sqlite3
 from typing import Any, Iterator
 
 from .config import ensure_parent_dir
+from .llm_memory import MAX_LLM_KEYWORDS, normalize_interest_keyword
 from .utils_time import now_db_time, now_kst, parse_db_time, to_db_time
 
 NAVI_OWNER_USER_ID = int(os.getenv("NAVI_OWNER_USER_ID", "0") or 0)
@@ -110,6 +111,7 @@ class Database:
     def init_db(self) -> None:
         with self._connect() as conn:
             conn.executescript(_SCHEMA)
+            self._migrate_llm_keyword_slots(conn)
             for badge in DEFAULT_GLOBAL_BADGES:
                 conn.execute(
                     """
@@ -143,12 +145,38 @@ class Database:
                     source="bootstrap",
                 )
 
+    @staticmethod
+    def _migrate_llm_keyword_slots(conn: sqlite3.Connection) -> None:
+        row = conn.execute(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='llm_user_keywords'"
+        ).fetchone()
+        table_sql = " ".join(str(row["sql"] or "").upper().split()) if row else ""
+        if "BETWEEN 1 AND 2" not in table_sql:
+            return
+        conn.execute("ALTER TABLE llm_user_keywords RENAME TO llm_user_keywords_legacy")
+        conn.execute(
+            """CREATE TABLE llm_user_keywords(
+            user_id INTEGER NOT NULL,
+            slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 3),
+            keyword TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            PRIMARY KEY(user_id,slot))"""
+        )
+        conn.execute(
+            """INSERT INTO llm_user_keywords(user_id,slot,keyword,created_at,updated_at)
+            SELECT user_id,slot,keyword,created_at,updated_at
+            FROM llm_user_keywords_legacy WHERE slot BETWEEN 1 AND 3"""
+        )
+        conn.execute("DROP TABLE llm_user_keywords_legacy")
+
     def run_maintenance(
         self,
         *,
         claim_retention_days: int = 2,
         llm_usage_retention_days: int = 30,
         safety_retention_days: int = 30,
+        keyword_candidate_retention_days: int = 120,
     ) -> dict[str, Any]:
         """임시성 데이터만 정리하고 SQLite WAL을 안전하게 회수한다.
 
@@ -159,6 +187,7 @@ class Database:
         claim_cutoff = to_db_time(now - timedelta(days=max(1, int(claim_retention_days))))
         usage_cutoff = (now.date() - timedelta(days=max(1, int(llm_usage_retention_days)))).isoformat()
         safety_cutoff = to_db_time(now - timedelta(days=max(1, int(safety_retention_days))))
+        candidate_cutoff = to_db_time(now - timedelta(days=max(1, int(keyword_candidate_retention_days))))
         database_path = Path(self.path)
 
         def storage_bytes() -> int:
@@ -190,6 +219,16 @@ class Database:
                 "DELETE FROM navi_llm_restrictions WHERE restricted_until <= ?",
                 (to_db_time(now),),
             ).rowcount
+            deleted_keyword_candidates = conn.execute(
+                """DELETE FROM llm_keyword_candidates
+                WHERE manual=0 AND last_seen_at < ?
+                AND NOT EXISTS(
+                    SELECT 1 FROM llm_user_keywords AS k
+                    WHERE k.user_id=llm_keyword_candidates.user_id
+                    AND k.keyword=llm_keyword_candidates.keyword COLLATE NOCASE
+                )""",
+                (candidate_cutoff,),
+            ).rowcount
             conn.execute("PRAGMA optimize")
 
         # 삭제 트랜잭션의 연결을 닫은 뒤 별도 연결에서 checkpoint해야
@@ -202,6 +241,7 @@ class Database:
             "deleted_usage": max(0, int(deleted_usage)),
             "deleted_safety": max(0, int(deleted_safety)),
             "deleted_restrictions": max(0, int(deleted_restrictions)),
+            "deleted_keyword_candidates": max(0, int(deleted_keyword_candidates)),
             "checkpoint_busy": int(checkpoint[0]),
             "checkpoint_log_frames": int(checkpoint[1]),
             "checkpointed_frames": int(checkpoint[2]),
@@ -346,8 +386,14 @@ class Database:
             ).fetchall()
         return [str(row["keyword"]) for row in rows]
 
-    def remember_llm_keyword(self, user_id: int, keyword: str, *, limit: int = 2) -> dict[str, Any]:
-        clean_keyword = " ".join(str(keyword or "").strip().split())[:100]
+    def remember_llm_keyword(
+        self,
+        user_id: int,
+        keyword: str,
+        *,
+        limit: int = MAX_LLM_KEYWORDS,
+    ) -> dict[str, Any]:
+        clean_keyword = normalize_interest_keyword(keyword)
         if not clean_keyword:
             raise ValueError("기억할 키워드가 비어 있습니다.")
         with self._connect() as conn:
@@ -363,6 +409,7 @@ class Database:
                     "UPDATE llm_user_keywords SET keyword=?,updated_at=? WHERE user_id=? AND slot=?",
                     (clean_keyword, now, int(user_id), int(existing["slot"])),
                 )
+                self._mark_llm_keyword_manual_conn(conn, int(user_id), clean_keyword, now)
                 return {"keyword": clean_keyword, "replaced": None, "count": len(rows)}
             if len(rows) < int(limit):
                 used_slots = {int(row["slot"]) for row in rows}
@@ -373,12 +420,140 @@ class Database:
                 slot = int(oldest["slot"])
                 replaced = str(oldest["keyword"])
                 conn.execute("DELETE FROM llm_user_keywords WHERE user_id=? AND slot=?", (int(user_id), slot))
+                conn.execute(
+                    "DELETE FROM llm_keyword_candidates WHERE user_id=? AND keyword=? COLLATE NOCASE",
+                    (int(user_id), replaced),
+                )
             conn.execute(
                 """INSERT INTO llm_user_keywords(user_id,slot,keyword,created_at,updated_at)
                 VALUES(?,?,?,?,?)""",
                 (int(user_id), slot, clean_keyword, now, now),
             )
+            self._mark_llm_keyword_manual_conn(conn, int(user_id), clean_keyword, now)
         return {"keyword": clean_keyword, "replaced": replaced, "count": min(int(limit), len(rows) + 1)}
+
+    @staticmethod
+    def _mark_llm_keyword_manual_conn(
+        conn: sqlite3.Connection,
+        user_id: int,
+        keyword: str,
+        now: str,
+    ) -> None:
+        conn.execute(
+            """INSERT INTO llm_keyword_candidates(
+            user_id,keyword,mention_count,manual,first_seen_at,last_seen_at
+            ) VALUES(?,?,1,1,?,?)
+            ON CONFLICT(user_id,keyword) DO UPDATE SET
+            keyword=excluded.keyword,manual=1,last_seen_at=excluded.last_seen_at""",
+            (user_id, keyword, now, now),
+        )
+
+    def observe_llm_interest(
+        self,
+        user_id: int,
+        keyword: str,
+        *,
+        strong: bool = False,
+        limit: int = MAX_LLM_KEYWORDS,
+    ) -> dict[str, Any]:
+        """관심사 후보를 누적하고 안정적인 경우에만 세 칸 기억으로 승격한다."""
+
+        clean_keyword = normalize_interest_keyword(keyword)
+        if not clean_keyword:
+            raise ValueError("관찰할 키워드가 비어 있습니다.")
+        user_id = int(user_id)
+        now = now_db_time()
+        with self._connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute(
+                """INSERT INTO llm_keyword_candidates(
+                user_id,keyword,mention_count,manual,first_seen_at,last_seen_at
+                ) VALUES(?,?,1,0,?,?)
+                ON CONFLICT(user_id,keyword) DO UPDATE SET
+                keyword=excluded.keyword,
+                mention_count=llm_keyword_candidates.mention_count+1,
+                last_seen_at=excluded.last_seen_at""",
+                (user_id, clean_keyword, now, now),
+            )
+            conn.execute(
+                """DELETE FROM llm_keyword_candidates
+                WHERE rowid IN (
+                    SELECT c.rowid FROM llm_keyword_candidates AS c
+                    WHERE c.user_id=? AND c.manual=0 AND c.keyword<>? COLLATE NOCASE
+                    AND NOT EXISTS(
+                        SELECT 1 FROM llm_user_keywords AS k
+                        WHERE k.user_id=c.user_id AND k.keyword=c.keyword COLLATE NOCASE
+                    )
+                    ORDER BY c.last_seen_at DESC
+                    LIMIT -1 OFFSET 11
+                )""",
+                (user_id, clean_keyword),
+            )
+            candidate = conn.execute(
+                """SELECT mention_count,manual FROM llm_keyword_candidates
+                WHERE user_id=? AND keyword=? COLLATE NOCASE""",
+                (user_id, clean_keyword),
+            ).fetchone()
+            mention_count = int(candidate["mention_count"])
+
+            rows = conn.execute(
+                "SELECT slot,keyword,created_at FROM llm_user_keywords WHERE user_id=? ORDER BY slot",
+                (user_id,),
+            ).fetchall()
+            existing = next(
+                (row for row in rows if str(row["keyword"]).casefold() == clean_keyword.casefold()),
+                None,
+            )
+            if existing:
+                conn.execute(
+                    "UPDATE llm_user_keywords SET keyword=?,updated_at=? WHERE user_id=? AND slot=?",
+                    (clean_keyword, now, user_id, int(existing["slot"])),
+                )
+                return {"status": "existing", "keyword": clean_keyword, "mention_count": mention_count}
+
+            if not strong and mention_count < 2:
+                return {"status": "candidate", "keyword": clean_keyword, "mention_count": mention_count}
+
+            if len(rows) < int(limit):
+                used_slots = {int(row["slot"]) for row in rows}
+                slot = next(value for value in range(1, int(limit) + 1) if value not in used_slots)
+                conn.execute(
+                    """INSERT INTO llm_user_keywords(user_id,slot,keyword,created_at,updated_at)
+                    VALUES(?,?,?,?,?)""",
+                    (user_id, slot, clean_keyword, now, now),
+                )
+                return {"status": "stored", "keyword": clean_keyword, "mention_count": mention_count}
+
+            replaceable = conn.execute(
+                """SELECT k.slot,k.keyword,COALESCE(c.mention_count,0) AS mention_count
+                FROM llm_user_keywords AS k
+                LEFT JOIN llm_keyword_candidates AS c
+                  ON c.user_id=k.user_id AND c.keyword=k.keyword COLLATE NOCASE
+                WHERE k.user_id=? AND COALESCE(c.manual,1)=0
+                ORDER BY mention_count ASC,k.created_at ASC,k.slot ASC""",
+                (user_id,),
+            ).fetchall()
+            if not replaceable:
+                return {"status": "retained", "keyword": clean_keyword, "mention_count": mention_count}
+            weakest = replaceable[0]
+            weakest_count = int(weakest["mention_count"])
+            if mention_count < max(3, weakest_count + 1):
+                return {"status": "retained", "keyword": clean_keyword, "mention_count": mention_count}
+
+            slot = int(weakest["slot"])
+            replaced = str(weakest["keyword"])
+            conn.execute("DELETE FROM llm_user_keywords WHERE user_id=? AND slot=?", (user_id, slot))
+            conn.execute(
+                """INSERT INTO llm_user_keywords(user_id,slot,keyword,created_at,updated_at)
+                VALUES(?,?,?,?,?)""",
+                (user_id, slot, clean_keyword, now, now),
+            )
+            return {
+                "status": "replaced",
+                "keyword": clean_keyword,
+                "replaced": replaced,
+                "mention_count": mention_count,
+            }
 
     def forget_llm_keyword(self, user_id: int, keyword: str) -> bool:
         target = " ".join(str(keyword or "").strip().split()).casefold()
@@ -394,11 +569,16 @@ class Database:
                 "DELETE FROM llm_user_keywords WHERE user_id=? AND slot=?",
                 (int(user_id), int(match["slot"])),
             )
+            conn.execute(
+                "DELETE FROM llm_keyword_candidates WHERE user_id=? AND keyword=? COLLATE NOCASE",
+                (int(user_id), str(match["keyword"])),
+            )
         return True
 
     def clear_llm_keywords(self, user_id: int) -> int:
         with self._connect() as conn:
             cursor = conn.execute("DELETE FROM llm_user_keywords WHERE user_id=?", (int(user_id),))
+            conn.execute("DELETE FROM llm_keyword_candidates WHERE user_id=?", (int(user_id),))
         return int(cursor.rowcount)
 
     def _grant_global_badge_conn(
@@ -627,7 +807,9 @@ CREATE TABLE IF NOT EXISTS chat_message_claims(message_id INTEGER PRIMARY KEY,cr
 CREATE INDEX IF NOT EXISTS idx_chat_message_claims_created ON chat_message_claims(created_at);
 CREATE TABLE IF NOT EXISTS llm_daily_usage(user_id INTEGER NOT NULL,usage_date TEXT NOT NULL,request_count INTEGER NOT NULL DEFAULT 0,last_used_at TEXT,PRIMARY KEY(user_id,usage_date));
 CREATE INDEX IF NOT EXISTS idx_llm_daily_usage_date ON llm_daily_usage(usage_date);
-CREATE TABLE IF NOT EXISTS llm_user_keywords(user_id INTEGER NOT NULL,slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 2),keyword TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,slot));
+CREATE TABLE IF NOT EXISTS llm_user_keywords(user_id INTEGER NOT NULL,slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 3),keyword TEXT NOT NULL,created_at TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(user_id,slot));
+CREATE TABLE IF NOT EXISTS llm_keyword_candidates(user_id INTEGER NOT NULL,keyword TEXT NOT NULL COLLATE NOCASE,mention_count INTEGER NOT NULL DEFAULT 1,manual INTEGER NOT NULL DEFAULT 0,first_seen_at TEXT NOT NULL,last_seen_at TEXT NOT NULL,PRIMARY KEY(user_id,keyword));
+CREATE INDEX IF NOT EXISTS idx_llm_keyword_candidates_last_seen ON llm_keyword_candidates(last_seen_at);
 CREATE TABLE IF NOT EXISTS navi_safety_violations(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER NOT NULL,guild_id INTEGER,violation_type TEXT NOT NULL,created_at TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS idx_navi_safety_violations_user_created ON navi_safety_violations(user_id,created_at);
 CREATE INDEX IF NOT EXISTS idx_navi_safety_violations_created ON navi_safety_violations(created_at);

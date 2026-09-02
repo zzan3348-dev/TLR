@@ -25,6 +25,7 @@ from navi_bot.llm_chat import (
     sanitize_llm_output,
     strip_bot_mentions,
 )
+from navi_bot.llm_memory import extract_interest_observations, is_safe_interest_keyword
 
 
 class RuntimeTests(unittest.TestCase):
@@ -39,6 +40,10 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(strip_bot_mentions("<@1234>", 1234), "")
         self.assertEqual(parse_memory_command("기억해: 민트초코").action, "remember")
         self.assertEqual(parse_memory_command("기억 목록").action, "list")
+        self.assertEqual(parse_memory_command("나비야 나에 대해 뭐 기억해?").action, "list")
+        self.assertEqual(parse_memory_command("나비야 나 기타 좋아하는 거 기억해").keyword, "기타")
+        self.assertEqual(parse_memory_command("나비야 게임 좋아하는 건 잊어").keyword, "게임")
+        self.assertEqual(parse_memory_command("기타는 이제 안 좋아해").action, "forget")
         self.assertIsNone(parse_memory_command("이거 기억해줄래?"))
 
     def test_llm_prompt_uses_existing_navi_tone_and_mentions_are_safe(self) -> None:
@@ -46,9 +51,23 @@ class RuntimeTests(unittest.TestCase):
         self.assertIn("네에! 나비 여기 있어요!", prompt)
         self.assertIn("아빠", prompt)
         self.assertIn("고양이 집사", prompt)
+        self.assertIn("약한 하라구로", prompt)
+        self.assertIn("중요한 조언", prompt)
+        self.assertIn("무관한 질문마다 억지로 꺼내지 않는다", prompt)
         sanitized = sanitize_llm_output("@everyone <@1234> 안녕하세요")
         self.assertNotIn("@everyone", sanitized)
         self.assertNotIn("<@1234>", sanitized)
+
+    def test_interest_extraction_is_narrow_and_rejects_sensitive_data(self) -> None:
+        self.assertEqual(extract_interest_observations("난 기타 진짜 좋아함")[0].keyword, "기타")
+        self.assertTrue(extract_interest_observations("난 기타 진짜 좋아함")[0].strong)
+        self.assertEqual(extract_interest_observations("요즘 계속 히게단 노래 듣고 있음")[0].keyword, "히게단")
+        self.assertFalse(extract_interest_observations("요즘 계속 히게단 노래 듣고 있음")[0].strong)
+        self.assertEqual(extract_interest_observations("주말마다 그림 그림")[0].keyword, "그림")
+        self.assertEqual(extract_interest_observations("제일 좋아하는 밴드가 히게단임")[0].keyword, "히게단")
+        self.assertEqual(extract_interest_observations("오늘 게임 한 판 했어요"), ())
+        self.assertFalse(is_safe_interest_keyword("비밀번호 123456"))
+        self.assertFalse(is_safe_interest_keyword("010-1234-5678"))
 
     def test_llm_provider_failure_refunds_reserved_usage(self) -> None:
         class FailingProvider:
@@ -103,6 +122,39 @@ class RuntimeTests(unittest.TestCase):
                 return [reply.status for reply in replies]
 
         self.assertEqual(asyncio.run(exercise()), ["success"] * 5 + ["limit"])
+
+    def test_llm_service_promotes_a_clear_interest_before_building_the_prompt(self) -> None:
+        class CapturingProvider:
+            def __init__(self) -> None:
+                self.system_prompt = ""
+
+            async def generate(self, *, system_prompt: str, message: str) -> str:
+                self.system_prompt = system_prompt
+                return "오, 기타 좋아하시는군요. 제법 멋진 취미네요!"
+
+            async def close(self) -> None:
+                return None
+
+        async def exercise() -> tuple[list[str], str]:
+            with tempfile.TemporaryDirectory() as directory:
+                database = __import__("navi_bot.database", fromlist=["Database"]).Database(
+                    str(Path(directory) / "new-navi.sqlite3")
+                )
+                database.init_db()
+                provider = CapturingProvider()
+                service = LLMChatService(provider=provider, db=database)
+                result = await service.generate_reply(
+                    user_id=99,
+                    username="tester",
+                    guild_id=1,
+                    message="난 기타 진짜 좋아함",
+                )
+                self.assertEqual(result.status, "success")
+                return database.list_llm_keywords(99), provider.system_prompt
+
+        memories, prompt = asyncio.run(exercise())
+        self.assertEqual(memories, ["기타"])
+        self.assertIn("- 기타", prompt)
 
     def test_lcw_call_uses_the_new_text_without_an_invite_link(self) -> None:
         manager = ChatReactionManager(

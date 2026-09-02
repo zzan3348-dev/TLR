@@ -19,6 +19,6 @@ class HelpCommands(commands.Cog):
             "TLR: `/내국가`, `/경제`, `/연구요청`, `/내연구`, `/연구력추가투입`, `/내디시전`\n"
             "관리: `/관리자채널`, `/관리자역할`, `/대사채널`, `/블랙리스트`, `/나비상태`\n\n"
             "일반 채팅에서 `나비야`로 부르면 호감도·오너·특수 유저·배지·조건부 대사 기준에 맞춰 대답합니다.\n"
-            "봇을 직접 멘션하면 하루 5회 AI 대화를 사용할 수 있어요. `@NAVI 기억해: 내용`으로 개인별 키워드 두 개를 기억시킬 수 있습니다."
+            "봇을 직접 멘션하면 하루 5회 AI 대화를 사용할 수 있어요. `@NAVI 기억해: 내용`으로 대표 관심사 키워드 세 개를 기억시킬 수 있습니다."
         )
         await interaction.response.send_message(content, ephemeral=True, allowed_mentions=no_mentions())

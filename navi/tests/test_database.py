@@ -47,6 +47,7 @@ class NewDatabaseTests(unittest.TestCase):
             self.assertIn("global_user_affection", tables)
             self.assertIn("llm_daily_usage", tables)
             self.assertIn("llm_user_keywords", tables)
+            self.assertIn("llm_keyword_candidates", tables)
 
     def test_llm_usage_is_global_persistent_daily_and_atomic(self) -> None:
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
@@ -70,19 +71,73 @@ class NewDatabaseTests(unittest.TestCase):
             self.assertEqual(restarted.try_consume_llm_usage(100, usage_date="2026-08-24"), (True, 1))
             self.assertEqual(restarted.refund_llm_usage(100, usage_date="2026-08-24"), 0)
 
-    def test_llm_memory_keeps_two_keywords_per_user(self) -> None:
+    def test_llm_memory_keeps_three_keywords_per_user(self) -> None:
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
             database = Database(str(Path(directory) / "new-navi.sqlite3"))
             database.init_db()
             database.remember_llm_keyword(100, "민트초코 좋아함")
             database.remember_llm_keyword(100, "고양이 집사")
-            result = database.remember_llm_keyword(100, "야간 활동")
+            database.remember_llm_keyword(100, "야간 활동")
+            result = database.remember_llm_keyword(100, "기타")
             self.assertEqual(result["replaced"], "민트초코 좋아함")
-            self.assertEqual(database.list_llm_keywords(100), ["야간 활동", "고양이 집사"])
+            self.assertEqual(database.list_llm_keywords(100), ["기타", "고양이 집사", "야간 활동"])
             database.remember_llm_keyword(200, "별도 기억")
             self.assertEqual(database.list_llm_keywords(200), ["별도 기억"])
             self.assertTrue(database.forget_llm_keyword(100, "고양이 집사"))
-            self.assertEqual(database.list_llm_keywords(100), ["야간 활동"])
+            self.assertEqual(database.list_llm_keywords(100), ["기타", "야간 활동"])
+
+    def test_llm_interest_candidates_require_stability_and_protect_manual_memory(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            database = Database(str(Path(directory) / "new-navi.sqlite3"))
+            database.init_db()
+
+            first = database.observe_llm_interest(100, "히게단", strong=False)
+            self.assertEqual(first["status"], "candidate")
+            self.assertEqual(database.list_llm_keywords(100), [])
+            second = database.observe_llm_interest(100, "히게단", strong=False)
+            self.assertEqual(second["status"], "stored")
+            database.observe_llm_interest(100, "기타", strong=True)
+            database.observe_llm_interest(100, "그림", strong=True)
+            self.assertEqual(database.list_llm_keywords(100), ["히게단", "기타", "그림"])
+
+            database.observe_llm_interest(100, "독서", strong=False)
+            database.observe_llm_interest(100, "독서", strong=False)
+            self.assertNotIn("독서", database.list_llm_keywords(100))
+            replaced = database.observe_llm_interest(100, "독서", strong=False)
+            self.assertEqual(replaced["status"], "replaced")
+            self.assertIn("독서", database.list_llm_keywords(100))
+
+            for keyword in ("게임", "영화", "요리"):
+                database.remember_llm_keyword(200, keyword)
+            for _ in range(5):
+                result = database.observe_llm_interest(200, "등산", strong=True)
+            self.assertEqual(result["status"], "retained")
+            self.assertEqual(database.list_llm_keywords(200), ["게임", "영화", "요리"])
+
+    def test_old_two_slot_memory_schema_migrates_without_losing_keywords(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            path = Path(directory) / "new-navi.sqlite3"
+            with closing(sqlite3.connect(path)) as connection:
+                connection.execute(
+                    """CREATE TABLE llm_user_keywords(
+                    user_id INTEGER NOT NULL,
+                    slot INTEGER NOT NULL CHECK(slot BETWEEN 1 AND 2),
+                    keyword TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    PRIMARY KEY(user_id,slot))"""
+                )
+                connection.execute(
+                    "INSERT INTO llm_user_keywords VALUES(1,1,'기타','2026-01-01','2026-01-01')"
+                )
+                connection.commit()
+
+            database = Database(str(path))
+            database.init_db()
+            self.assertEqual(database.list_llm_keywords(1), ["기타"])
+            database.remember_llm_keyword(1, "그림")
+            database.remember_llm_keyword(1, "독서")
+            self.assertEqual(database.list_llm_keywords(1), ["기타", "그림", "독서"])
 
     def test_maintenance_prunes_only_expired_temporary_data(self) -> None:
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
