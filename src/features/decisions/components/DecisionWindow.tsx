@@ -4,7 +4,6 @@ import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { executeDecision, isColonialDecisionOverview, loadDecisions } from "../decisionsClient";
 import {
-  COMMON_DECISIONS,
   DECISION_CATEGORY_LABELS,
   type DecisionCategoryId,
   type DecisionOverview,
@@ -20,25 +19,6 @@ type HoveredDecision = { decision: DecisionView; unmet: string[]; x: number; y: 
 const CATEGORIES: DecisionCategoryId[] = ["political", "economy", "wartime"];
 const TOOLTIP_WIDTH = 382;
 const TOOLTIP_MARGIN = 14;
-
-function unavailableOverview(countryKey: string): DecisionOverview {
-  return {
-    countryKey,
-    worldDate: "",
-    turn: 0,
-    politicalPower: null,
-    parties: [],
-    decisions: COMMON_DECISIONS.map((decision) => ({
-      ...decision,
-      visible: true,
-      available: false,
-      unmetConditions: ["서버에서 현재 국가 상태를 확인해야 함"],
-      cooldownRemaining: 0,
-      status: "locked" as const,
-    })),
-    activeModifiers: [],
-  };
-}
 
 const STATUS_LABEL: Record<DecisionView["status"], string> = {
   ready: "실행 가능",
@@ -136,6 +116,7 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
   const [loading, setLoading] = useState(true);
   const [running, setRunning] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [refreshNonce, setRefreshNonce] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -149,8 +130,8 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
         setOverview(value);
       } catch {
         if (!controller.signal.aborted) {
-          setOverview(unavailableOverview(country.key));
-          setError("현재 국가 상태를 확인할 수 없어 결정 실행이 잠겨 있습니다.");
+          setOverview(null);
+          setError("결정 정보를 불러오지 못했습니다.");
         }
       } finally {
         if (!controller.signal.aborted) setLoading(false);
@@ -159,7 +140,7 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
 
     void refreshDecisions();
     return () => controller.abort();
-  }, [country.key]);
+  }, [country.key, refreshNonce]);
 
   const grouped = useMemo(
     () => CATEGORIES.map((category) => ({
@@ -196,7 +177,7 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
           <span>세계 날짜</span><strong>{overview?.worldDate ?? "—"}</strong>
         </div>
         {loading ? <p className="decision-ledger__message">결정 목록 수신 중…</p> : null}
-        {error ? <p className="decision-ledger__error">{error}</p> : null}
+        {error ? <p className="decision-ledger__error" role="alert"><span>{error}</span><button type="button" onClick={() => setRefreshNonce((value) => value + 1)}>다시 시도</button></p> : null}
         {!loading && overview ? grouped.map(({ category, decisions }) => decisions.length ? (
           <section className="generic-decision-category" key={category}>
             <button

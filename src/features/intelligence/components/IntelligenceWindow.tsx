@@ -7,37 +7,423 @@ import { DEFAULT_INTELLIGENCE_UPGRADES, DEFAULT_SPY_OPERATIONS, INTELLIGENCE_CAT
 import { intelligenceAction, loadIntelligence } from "../intelligenceClient";
 import type { IntelligenceCategory, IntelligenceDomain, IntelligenceOverview, SpyNetwork } from "../types";
 
-type IntelligenceWindowProps = { country: MapCountryIndex; onClose: () => void };
+type IntelligenceWindowProps = {
+  country: MapCountryIndex;
+  onClose: () => void;
+};
 type Tab = "AGENCY" | "NETWORKS" | "OPERATIONS" | "INTELLIGENCE" | "RECORDS";
-const TAB_LABELS: Record<Tab, string> = { AGENCY: "기관 개선", NETWORKS: "첩보망", OPERATIONS: "중대 작전", INTELLIGENCE: "보유 정보", RECORDS: "작전 기록" };
+const TAB_LABELS: Record<Tab, string> = {
+  AGENCY: "기관 개선",
+  NETWORKS: "첩보망",
+  OPERATIONS: "중대 작전",
+  INTELLIGENCE: "보유 정보",
+  RECORDS: "작전 기록",
+};
 const CATEGORIES = Object.keys(INTELLIGENCE_CATEGORY_LABELS) as IntelligenceCategory[];
 const DOMAINS = Object.keys(INTELLIGENCE_DOMAIN_LABELS) as IntelligenceDomain[];
-const CONFIDENCE = { VERY_LOW: "매우 낮음", LOW: "낮음", MEDIUM: "보통", HIGH: "높음", VERY_HIGH: "매우 높음" } as const;
-const PHASE = { PREPARATION: "준비", EXECUTION: "실행", EXTRACTION: "철수", RESULT: "결과" } as const;
-function countryName(key: string): string { return mapCountries.find((entry) => entry.key === key)?.name ?? key; }
-function daysBetween(from: string, to: string | null): number | null { if (!to) return null; return Math.max(0, Math.ceil((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000)); }
-function networkValue(network: SpyNetwork | undefined, domain: IntelligenceDomain): number { if (!network) return 0; return Number({ ECONOMY: network.economy_infiltration, ADMINISTRATION_POLITICS: network.administration_politics_infiltration, RESEARCH: network.research_infiltration, MILITARY: network.military_infiltration, UNDERGROUND: network.underground_infiltration }[domain] ?? 0); }
-function alertnessLabel(value: number): string { return value >= 80 ? "비상 방첩" : value >= 60 ? "고도 경계" : value >= 40 ? "경계" : value >= 20 ? "주의" : "평시"; }
-function capability(value: number | null | undefined): string { if (value == null) return "미설정"; return value >= 80 ? "최정예" : value >= 60 ? "우수" : value >= 40 ? "보통" : value >= 20 ? "미숙" : "초기"; }
+const CONFIDENCE = {
+  VERY_LOW: "매우 낮음",
+  LOW: "낮음",
+  MEDIUM: "보통",
+  HIGH: "높음",
+  VERY_HIGH: "매우 높음",
+} as const;
+const PHASE = {
+  PREPARATION: "준비",
+  EXECUTION: "실행",
+  EXTRACTION: "철수",
+  RESULT: "결과",
+} as const;
+function countryName(key: string): string {
+  return mapCountries.find((entry) => entry.key === key)?.name ?? key;
+}
+function daysBetween(from: string, to: string | null): number | null {
+  if (!to) return null;
+  return Math.max(0, Math.ceil((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000));
+}
+function networkValue(network: SpyNetwork | undefined, domain: IntelligenceDomain): number {
+  if (!network) return 0;
+  return Number(
+    {
+      ECONOMY: network.economy_infiltration,
+      ADMINISTRATION_POLITICS: network.administration_politics_infiltration,
+      RESEARCH: network.research_infiltration,
+      MILITARY: network.military_infiltration,
+      UNDERGROUND: network.underground_infiltration,
+    }[domain] ?? 0,
+  );
+}
+function alertnessLabel(value: number): string {
+  return value >= 80 ? "비상 방첩" : value >= 60 ? "고도 경계" : value >= 40 ? "경계" : value >= 20 ? "주의" : "평시";
+}
+function capability(value: number | null | undefined): string {
+  if (value == null) return "미설정";
+  return value >= 80 ? "최정예" : value >= 60 ? "우수" : value >= 40 ? "보통" : value >= 20 ? "미숙" : "초기";
+}
 
 export function IntelligenceWindow({ country, onClose }: IntelligenceWindowProps) {
-  const [data, setData] = useState<IntelligenceOverview | null>(null); const [tab, setTab] = useState<Tab>("AGENCY");
-  const [category, setCategory] = useState<IntelligenceCategory>("INFORMATION"); const [targetKey, setTargetKey] = useState(mapCountries.find((entry) => entry.key !== country.key)?.key ?? "");
-  const [busy, setBusy] = useState<string | null>(null); const [notice, setNotice] = useState("기관 자료 수신 중");
-  const reload = useCallback(async (signal?: AbortSignal) => { try { setData(await loadIntelligence(country.key, signal)); setNotice(""); } catch { setNotice("첩보 데이터 서버를 확인할 수 없습니다."); } }, [country.key]);
-  useEffect(() => { const controller = new AbortController(); void loadIntelligence(country.key, controller.signal).then((payload) => { setData(payload); setNotice(""); }).catch(() => { if (!controller.signal.aborted) setNotice("첩보 데이터 서버를 확인할 수 없습니다."); }); return () => controller.abort(); }, [country.key]);
-  const run = useCallback(async (id: string, body: Record<string, unknown>) => { setBusy(id); setNotice(""); try { await intelligenceAction(country.key, body); await reload(); setNotice("명령이 세계시간 기준으로 접수되었습니다."); } catch (error) { setNotice(error instanceof Error ? error.message : "명령을 처리하지 못했습니다."); } finally { setBusy(null); } }, [country.key, reload]);
-  const definitions = data?.upgradeDefinitions?.length ? data.upgradeDefinitions : DEFAULT_INTELLIGENCE_UPGRADES; const operationDefinitions = data?.operationDefinitions?.length ? data.operationDefinitions : DEFAULT_SPY_OPERATIONS;
-  const network = data?.networks?.find((entry) => entry.target_country_id === targetKey); const activeOperations = data?.operations?.filter((operation) => operation.state === "ACTIVE" || operation.state === "PENDING_ADMIN_REVIEW") ?? [];
-  const ownedUpgrades = useMemo(() => new Map((data?.upgrades ?? []).map((entry) => [entry.upgrade_key, entry])), [data?.upgrades]); const targetAssets = data?.assets?.filter((asset) => asset.target_country_id === targetKey) ?? []; const targetSnapshots = data?.snapshots?.filter((snapshot) => snapshot.target_country_id === targetKey) ?? []; const agencyReady = Boolean(data?.agency && data.agency.status === "ACTIVE");
-  return <StrategicWindow title="첩보" eyebrow={country.name} onClose={onClose}><div className="intelligence-command">
-    <header className="intelligence-agency-header"><div className="intelligence-agency-header__identity"><UiIcon name={data?.agency?.emblem_asset_key ?? "intelligence/agency"} /><div><small>INTELLIGENCE DIRECTORATE</small><h2>{data?.agency?.display_name ?? "정보기관 미설정"}</h2></div></div><dl><div><dt>기관 역량</dt><dd>{capability(data?.agency?.capability)}</dd></div><div><dt>방첩</dt><dd>{data?.agency?.counterintelligence ?? "미설정"}</dd></div><div><dt>작전 슬롯</dt><dd>{activeOperations.length} / {data?.agency?.operation_slot_cap ?? "미설정"}</dd></div><div><dt>활성 첩보망</dt><dd>{data?.networks?.length ?? 0}</dd></div><div><dt>진행 작전</dt><dd>{activeOperations.length}</dd></div></dl></header>
-    <nav className="intelligence-main-tabs" aria-label="첩보 메뉴">{(Object.keys(TAB_LABELS) as Tab[]).map((value) => <button key={value} type="button" data-active={tab === value} onClick={() => setTab(value)}>{TAB_LABELS[value]}</button>)}</nav>{notice ? <p className="intelligence-notice" role="status">{notice}</p> : null}
-    {tab === "AGENCY" ? <section className="intelligence-agency-workbench"><nav className="intelligence-category-tabs">{CATEGORIES.map((value) => <button key={value} type="button" data-active={category === value} onClick={() => setCategory(value)}><UiIcon name={INTELLIGENCE_CATEGORY_ICONS[value]} />{INTELLIGENCE_CATEGORY_LABELS[value]}</button>)}</nav><div className="intelligence-upgrade-list">{definitions.filter((entry) => entry.category === category).map((entry) => { const owned = ownedUpgrades.get(entry.key); const remaining = owned?.status === "BUILDING" ? daysBetween(data?.worldDate ?? "", owned.complete_world_date) : null; return <article key={entry.key} className="intelligence-upgrade-row" title={`${entry.display_name}\n\n비용  정치력 ${entry.political_power_cost}\n소요  ${entry.duration_world_days}일\n\n효과\n${entry.description}`}><UiIcon name={entry.icon_asset_key} /><div><strong>{entry.display_name}</strong><small>{entry.description}</small></div><span>{owned?.status === "ACTIVE" ? "구축 완료" : owned?.status === "BUILDING" ? `${remaining ?? 0}일 남음` : `정치력 ${entry.political_power_cost}`}</span><button type="button" disabled={!agencyReady || Boolean(owned) || busy === entry.key} onClick={() => void run(entry.key, { action: "START_UPGRADE", upgradeKey: entry.key })}>{owned ? "완료" : "구축"}</button></article>; })}</div></section> : null}
-    {tab !== "AGENCY" ? <div className="intelligence-target-strip"><label>대상국<select value={targetKey} onChange={(event) => setTargetKey(event.target.value)}>{mapCountries.filter((entry) => entry.key !== country.key).map((entry) => <option key={entry.key} value={entry.key}>{entry.name}</option>)}</select></label><strong>{countryName(targetKey)}</strong><span>세계일 {data?.worldDate ?? "미수신"}</span></div> : null}
-    {tab === "NETWORKS" ? <section className="intelligence-network-panel">{network ? <><div className="intelligence-network-bars">{DOMAINS.map((domain) => { const value = networkValue(network, domain); const assetCount = targetAssets.filter((asset) => asset.domain === domain && asset.status !== "LOST").length; return <div key={domain}><header><strong>{INTELLIGENCE_DOMAIN_LABELS[domain]}</strong><span>{value.toFixed(0)}</span><small>자산 {assetCount}</small></header><div className="intelligence-meter"><i style={{ width: `${value}%` }} /></div><span className="intelligence-network-actions"><button type="button" disabled={value >= 100 || busy === `develop-${domain}`} onClick={() => void run(`develop-${domain}`, { action: "DEVELOP_NETWORK", targetCountryKey: targetKey, domain })}>침투 확대</button><button type="button" disabled={value < 5 || busy === `collect-${domain}`} onClick={() => void run(`collect-${domain}`, { action: "COLLECT_INFORMATION", targetCountryKey: targetKey, domain })}>정보 수집</button></span></div>; })}</div><aside className="intelligence-alertness"><span>대상 경계도</span><strong>{alertnessLabel(Number(network.alertness))}</strong><meter min="0" max="100" value={Number(network.alertness)} /></aside></> : <div className="intelligence-network-empty"><UiIcon name="intelligence/agency" /><strong>해당 국가에 구축된 첩보망이 없습니다.</strong><button type="button" disabled={!agencyReady || busy === "network"} onClick={() => void run("network", { action: "ESTABLISH_NETWORK", targetCountryKey: targetKey })}>첩보망 개설</button></div>}</section> : null}
-    {tab === "OPERATIONS" ? <section className="intelligence-operation-list">{operationDefinitions.map((definition) => { const requirement = definition.requirements; const infiltration = requirement.domain ? networkValue(network, requirement.domain) : 0; const assetCount = targetAssets.filter((asset) => asset.domain === requirement.domain && asset.status === "ACTIVE").length; const current = activeOperations.find((operation) => operation.definition_key === definition.key && operation.target_country_id === targetKey); const remaining = current ? daysBetween(data?.worldDate ?? "", current.phase_end_world_date) : null; const locked = !network || infiltration < Number(requirement.infiltration ?? 0) || assetCount < Number(requirement.assets ?? 0); return <article key={definition.key} className="intelligence-operation-row" data-state={current?.state ?? (locked ? "LOCKED" : "READY")} title={`${definition.display_name}\n${definition.description}\n\n정치력 ${definition.political_power_cost}\n요구 침투 ${requirement.infiltration ?? 0}\n요구 자산 ${requirement.assets ?? 0}`}><UiIcon name={definition.icon_asset_key} /><div className="intelligence-operation-row__copy"><strong>{definition.display_name}</strong><small>{requirement.domain ? `${INTELLIGENCE_DOMAIN_LABELS[requirement.domain]} 침투 ${infiltration.toFixed(0)} / ${requirement.infiltration}` : "요구 분야 없음"} · 자산 {assetCount} / {requirement.assets ?? 0}</small>{current ? <div className="intelligence-operation-progress"><i data-phase={current.current_phase} /><span>{PHASE[current.current_phase]} · {remaining == null ? "판정 대기" : `${remaining}일`}</span></div> : null}</div><span>{current ? current.state === "PENDING_ADMIN_REVIEW" ? "판정 대기" : PHASE[current.current_phase] : locked ? "요건 부족" : `정치력 ${definition.political_power_cost}`}</span><button type="button" disabled={!agencyReady || locked || Boolean(current) || busy === definition.key} onClick={() => void run(definition.key, { action: "START_OPERATION", operationKey: definition.key, targetCountryKey: targetKey, idempotencyKey: `${country.key}:${targetKey}:${definition.key}:${Date.now()}` })}>{current ? "진행 중" : "준비"}</button></article>; })}</section> : null}
-    {tab === "INTELLIGENCE" ? <section className="intelligence-report-list">{targetSnapshots.length ? targetSnapshots.map((snapshot) => <article key={snapshot.id} data-status={snapshot.status}><header><UiIcon name={snapshot.domain === "MILITARY" ? "intelligence/operation" : "intelligence/agency"} /><div><strong>{INTELLIGENCE_DOMAIN_LABELS[snapshot.domain]} 정보 보고서</strong><small>취득 {snapshot.acquired_world_date} · 신뢰도 {CONFIDENCE[snapshot.confidence]} · {snapshot.status}</small></div></header><dl>{Object.entries(snapshot.payload).map(([name, value]) => <div key={name}><dt>{name}</dt><dd>{typeof value === "object" ? JSON.stringify(value) : String(value)}</dd></div>)}</dl></article>) : <p className="intelligence-empty">이 대상국에 대해 보존된 정보 스냅샷이 없습니다.</p>}</section> : null}
-    {tab === "RECORDS" ? <section className="intelligence-records"><table><thead><tr><th>작전</th><th>대상</th><th>단계/상태</th><th>결과</th><th>발각</th><th>귀속</th></tr></thead><tbody>{(data?.operations ?? []).map((operation) => <tr key={operation.id}><td>{operationDefinitions.find((entry) => entry.key === operation.definition_key)?.display_name ?? operation.definition_key}</td><td>{countryName(operation.target_country_id)}</td><td>{operation.state === "ACTIVE" ? PHASE[operation.current_phase] : operation.state}</td><td>{operation.success_result ?? "—"}</td><td>{operation.detection_result ?? "—"}</td><td>{operation.detection_result === "DETECTED" ? operation.attribution_result ?? "—" : "비공개"}</td></tr>)}{(data?.detectedIncidents ?? []).map((incident) => <tr key={`incident-${incident.id}`}><td>발각된 적대 공작</td><td>{incident.observer_country_id ? countryName(incident.observer_country_id) : "배후 불명"}</td><td>{incident.state}</td><td>방어 기록</td><td>발각</td><td>{incident.attribution_result ?? "배후 불명"}</td></tr>)}</tbody></table></section> : null}
-  </div></StrategicWindow>;
+  const [data, setData] = useState<IntelligenceOverview | null>(null);
+  const [tab, setTab] = useState<Tab>("AGENCY");
+  const [category, setCategory] = useState<IntelligenceCategory>("INFORMATION");
+  const [targetKey, setTargetKey] = useState(mapCountries.find((entry) => entry.key !== country.key)?.key ?? "");
+  const [busy, setBusy] = useState<string | null>(null);
+  const [notice, setNotice] = useState("기관 자료 수신 중");
+  const reload = useCallback(
+    async (signal?: AbortSignal) => {
+      try {
+        setData(await loadIntelligence(country.key, signal));
+        setNotice("");
+      } catch {
+        if (!signal?.aborted) {
+          setData(null);
+          setNotice("첩보 기록을 불러오지 못했습니다.");
+        }
+      }
+    },
+    [country.key],
+  );
+  useEffect(() => {
+    const controller = new AbortController();
+    void loadIntelligence(country.key, controller.signal)
+      .then((payload) => {
+        setData(payload);
+        setNotice("");
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) {
+          setData(null);
+          setNotice("첩보 기록을 불러오지 못했습니다.");
+        }
+      });
+    return () => controller.abort();
+  }, [country.key]);
+  const run = useCallback(
+    async (id: string, body: Record<string, unknown>) => {
+      setBusy(id);
+      setNotice("");
+      try {
+        await intelligenceAction(country.key, body);
+        await reload();
+        setNotice("명령이 세계시간 기준으로 접수되었습니다.");
+      } catch (error) {
+        setNotice(error instanceof Error ? error.message : "명령을 처리하지 못했습니다.");
+      } finally {
+        setBusy(null);
+      }
+    },
+    [country.key, reload],
+  );
+  const definitions = data ? (data.upgradeDefinitions?.length ? data.upgradeDefinitions : DEFAULT_INTELLIGENCE_UPGRADES) : [];
+  const operationDefinitions = data ? (data.operationDefinitions?.length ? data.operationDefinitions : DEFAULT_SPY_OPERATIONS) : [];
+  const network = data?.networks?.find((entry) => entry.target_country_id === targetKey);
+  const activeOperations = data?.operations?.filter((operation) => operation.state === "ACTIVE" || operation.state === "PENDING_ADMIN_REVIEW") ?? [];
+  const ownedUpgrades = useMemo(() => new Map((data?.upgrades ?? []).map((entry) => [entry.upgrade_key, entry])), [data?.upgrades]);
+  const targetAssets = data?.assets?.filter((asset) => asset.target_country_id === targetKey) ?? [];
+  const targetSnapshots = data?.snapshots?.filter((snapshot) => snapshot.target_country_id === targetKey) ?? [];
+  const agencyReady = Boolean(data?.agency && data.agency.status === "ACTIVE");
+  return (
+    <StrategicWindow title="첩보" eyebrow={country.name} onClose={onClose}>
+      <div className="intelligence-command">
+        <header className="intelligence-agency-header">
+          <div className="intelligence-agency-header__identity">
+            <UiIcon name={data?.agency?.emblem_asset_key ?? "intelligence/agency"} />
+            <div>
+              <small>INTELLIGENCE DIRECTORATE</small>
+              <h2>{data?.agency?.display_name ?? "정보기관 미설정"}</h2>
+            </div>
+          </div>
+          <dl>
+            <div>
+              <dt>기관 역량</dt>
+              <dd>{capability(data?.agency?.capability)}</dd>
+            </div>
+            <div>
+              <dt>방첩</dt>
+              <dd>{data?.agency?.counterintelligence ?? "미설정"}</dd>
+            </div>
+            <div>
+              <dt>작전 슬롯</dt>
+              <dd>
+                {activeOperations.length} / {data?.agency?.operation_slot_cap ?? "미설정"}
+              </dd>
+            </div>
+            <div>
+              <dt>활성 첩보망</dt>
+              <dd>{data?.networks?.length ?? 0}</dd>
+            </div>
+            <div>
+              <dt>진행 작전</dt>
+              <dd>{activeOperations.length}</dd>
+            </div>
+          </dl>
+        </header>
+        <nav className="intelligence-main-tabs" aria-label="첩보 메뉴">
+          {(Object.keys(TAB_LABELS) as Tab[]).map((value) => (
+            <button key={value} type="button" data-active={tab === value} onClick={() => setTab(value)}>
+              {TAB_LABELS[value]}
+            </button>
+          ))}
+        </nav>
+        {notice ? (
+          <p className="intelligence-notice" role="status">
+            <span>{notice}</span>
+            {!data && notice !== "기관 자료 수신 중" ? (
+              <button type="button" onClick={() => void reload()}>
+                다시 시도
+              </button>
+            ) : null}
+          </p>
+        ) : null}
+        {data && tab === "AGENCY" ? (
+          <section className="intelligence-agency-workbench">
+            <nav className="intelligence-category-tabs">
+              {CATEGORIES.map((value) => (
+                <button key={value} type="button" data-active={category === value} onClick={() => setCategory(value)}>
+                  <UiIcon name={INTELLIGENCE_CATEGORY_ICONS[value]} />
+                  {INTELLIGENCE_CATEGORY_LABELS[value]}
+                </button>
+              ))}
+            </nav>
+            <div className="intelligence-upgrade-list">
+              {definitions
+                .filter((entry) => entry.category === category)
+                .map((entry) => {
+                  const owned = ownedUpgrades.get(entry.key);
+                  const remaining = owned?.status === "BUILDING" ? daysBetween(data.worldDate, owned.complete_world_date) : null;
+                  return (
+                    <article key={entry.key} className="intelligence-upgrade-row" title={`${entry.display_name}\n\n비용  정치력 ${entry.political_power_cost}\n소요  ${entry.duration_world_days}일\n\n효과\n${entry.description}`}>
+                      <UiIcon name={entry.icon_asset_key} />
+                      <div>
+                        <strong>{entry.display_name}</strong>
+                        <small>{entry.description}</small>
+                      </div>
+                      <span>{owned?.status === "ACTIVE" ? "구축 완료" : owned?.status === "BUILDING" ? `${remaining ?? 0}일 남음` : `정치력 ${entry.political_power_cost}`}</span>
+                      <button
+                        type="button"
+                        disabled={!agencyReady || Boolean(owned) || busy === entry.key}
+                        onClick={() =>
+                          void run(entry.key, {
+                            action: "START_UPGRADE",
+                            upgradeKey: entry.key,
+                          })
+                        }
+                      >
+                        {owned ? "완료" : "구축"}
+                      </button>
+                    </article>
+                  );
+                })}
+            </div>
+          </section>
+        ) : null}
+        {data && tab !== "AGENCY" ? (
+          <div className="intelligence-target-strip">
+            <label>
+              대상국
+              <select value={targetKey} onChange={(event) => setTargetKey(event.target.value)}>
+                {mapCountries
+                  .filter((entry) => entry.key !== country.key)
+                  .map((entry) => (
+                    <option key={entry.key} value={entry.key}>
+                      {entry.name}
+                    </option>
+                  ))}
+              </select>
+            </label>
+            <strong>{countryName(targetKey)}</strong>
+            <span>세계일 {data?.worldDate ?? "미수신"}</span>
+          </div>
+        ) : null}
+        {data && tab === "NETWORKS" ? (
+          <section className="intelligence-network-panel">
+            {network ? (
+              <>
+                <div className="intelligence-network-bars">
+                  {DOMAINS.map((domain) => {
+                    const value = networkValue(network, domain);
+                    const assetCount = targetAssets.filter((asset) => asset.domain === domain && asset.status !== "LOST").length;
+                    return (
+                      <div key={domain}>
+                        <header>
+                          <strong>{INTELLIGENCE_DOMAIN_LABELS[domain]}</strong>
+                          <span>{value.toFixed(0)}</span>
+                          <small>자산 {assetCount}</small>
+                        </header>
+                        <div className="intelligence-meter">
+                          <i style={{ width: `${value}%` }} />
+                        </div>
+                        <span className="intelligence-network-actions">
+                          <button
+                            type="button"
+                            disabled={value >= 100 || busy === `develop-${domain}`}
+                            onClick={() =>
+                              void run(`develop-${domain}`, {
+                                action: "DEVELOP_NETWORK",
+                                targetCountryKey: targetKey,
+                                domain,
+                              })
+                            }
+                          >
+                            침투 확대
+                          </button>
+                          <button
+                            type="button"
+                            disabled={value < 5 || busy === `collect-${domain}`}
+                            onClick={() =>
+                              void run(`collect-${domain}`, {
+                                action: "COLLECT_INFORMATION",
+                                targetCountryKey: targetKey,
+                                domain,
+                              })
+                            }
+                          >
+                            정보 수집
+                          </button>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+                <aside className="intelligence-alertness">
+                  <span>대상 경계도</span>
+                  <strong>{alertnessLabel(Number(network.alertness))}</strong>
+                  <meter min="0" max="100" value={Number(network.alertness)} />
+                </aside>
+              </>
+            ) : (
+              <div className="intelligence-network-empty">
+                <UiIcon name="intelligence/agency" />
+                <strong>해당 국가에 구축된 첩보망이 없습니다.</strong>
+                <button
+                  type="button"
+                  disabled={!agencyReady || busy === "network"}
+                  onClick={() =>
+                    void run("network", {
+                      action: "ESTABLISH_NETWORK",
+                      targetCountryKey: targetKey,
+                    })
+                  }
+                >
+                  첩보망 개설
+                </button>
+              </div>
+            )}
+          </section>
+        ) : null}
+        {data && tab === "OPERATIONS" ? (
+          <section className="intelligence-operation-list">
+            {operationDefinitions.map((definition) => {
+              const requirement = definition.requirements;
+              const infiltration = requirement.domain ? networkValue(network, requirement.domain) : 0;
+              const assetCount = targetAssets.filter((asset) => asset.domain === requirement.domain && asset.status === "ACTIVE").length;
+              const current = activeOperations.find((operation) => operation.definition_key === definition.key && operation.target_country_id === targetKey);
+              const remaining = current ? daysBetween(data?.worldDate ?? "", current.phase_end_world_date) : null;
+              const locked = !network || infiltration < Number(requirement.infiltration ?? 0) || assetCount < Number(requirement.assets ?? 0);
+              return (
+                <article key={definition.key} className="intelligence-operation-row" data-state={current?.state ?? (locked ? "LOCKED" : "READY")} title={`${definition.display_name}\n${definition.description}\n\n정치력 ${definition.political_power_cost}\n요구 침투 ${requirement.infiltration ?? 0}\n요구 자산 ${requirement.assets ?? 0}`}>
+                  <UiIcon name={definition.icon_asset_key} />
+                  <div className="intelligence-operation-row__copy">
+                    <strong>{definition.display_name}</strong>
+                    <small>
+                      {requirement.domain ? `${INTELLIGENCE_DOMAIN_LABELS[requirement.domain]} 침투 ${infiltration.toFixed(0)} / ${requirement.infiltration}` : "요구 분야 없음"} · 자산 {assetCount} / {requirement.assets ?? 0}
+                    </small>
+                    {current ? (
+                      <div className="intelligence-operation-progress">
+                        <i data-phase={current.current_phase} />
+                        <span>
+                          {PHASE[current.current_phase]} · {remaining == null ? "판정 대기" : `${remaining}일`}
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                  <span>{current ? (current.state === "PENDING_ADMIN_REVIEW" ? "판정 대기" : PHASE[current.current_phase]) : locked ? "요건 부족" : `정치력 ${definition.political_power_cost}`}</span>
+                  <button
+                    type="button"
+                    disabled={!agencyReady || locked || Boolean(current) || busy === definition.key}
+                    onClick={() =>
+                      void run(definition.key, {
+                        action: "START_OPERATION",
+                        operationKey: definition.key,
+                        targetCountryKey: targetKey,
+                        idempotencyKey: `${country.key}:${targetKey}:${definition.key}:${Date.now()}`,
+                      })
+                    }
+                  >
+                    {current ? "진행 중" : "준비"}
+                  </button>
+                </article>
+              );
+            })}
+          </section>
+        ) : null}
+        {data && tab === "INTELLIGENCE" ? (
+          <section className="intelligence-report-list">
+            {targetSnapshots.length ? (
+              targetSnapshots.map((snapshot) => (
+                <article key={snapshot.id} data-status={snapshot.status}>
+                  <header>
+                    <UiIcon name={snapshot.domain === "MILITARY" ? "intelligence/operation" : "intelligence/agency"} />
+                    <div>
+                      <strong>{INTELLIGENCE_DOMAIN_LABELS[snapshot.domain]} 정보 보고서</strong>
+                      <small>
+                        취득 {snapshot.acquired_world_date} · 신뢰도 {CONFIDENCE[snapshot.confidence]} · {snapshot.status}
+                      </small>
+                    </div>
+                  </header>
+                  <dl>
+                    {Object.entries(snapshot.payload).map(([name, value]) => (
+                      <div key={name}>
+                        <dt>{name}</dt>
+                        <dd>{typeof value === "object" ? JSON.stringify(value) : String(value)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </article>
+              ))
+            ) : (
+              <p className="intelligence-empty">이 대상국에 대해 보존된 정보 스냅샷이 없습니다.</p>
+            )}
+          </section>
+        ) : null}
+        {data && tab === "RECORDS" ? (
+          <section className="intelligence-records">
+            <table>
+              <thead>
+                <tr>
+                  <th>작전</th>
+                  <th>대상</th>
+                  <th>단계/상태</th>
+                  <th>결과</th>
+                  <th>발각</th>
+                  <th>귀속</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(data?.operations ?? []).map((operation) => (
+                  <tr key={operation.id}>
+                    <td>{operationDefinitions.find((entry) => entry.key === operation.definition_key)?.display_name ?? operation.definition_key}</td>
+                    <td>{countryName(operation.target_country_id)}</td>
+                    <td>{operation.state === "ACTIVE" ? PHASE[operation.current_phase] : operation.state}</td>
+                    <td>{operation.success_result ?? "—"}</td>
+                    <td>{operation.detection_result ?? "—"}</td>
+                    <td>{operation.detection_result === "DETECTED" ? (operation.attribution_result ?? "—") : "비공개"}</td>
+                  </tr>
+                ))}
+                {(data?.detectedIncidents ?? []).map((incident) => (
+                  <tr key={`incident-${incident.id}`}>
+                    <td>발각된 적대 공작</td>
+                    <td>{incident.observer_country_id ? countryName(incident.observer_country_id) : "배후 불명"}</td>
+                    <td>{incident.state}</td>
+                    <td>방어 기록</td>
+                    <td>발각</td>
+                    <td>{incident.attribution_result ?? "배후 불명"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        ) : null}
+      </div>
+    </StrategicWindow>
+  );
 }

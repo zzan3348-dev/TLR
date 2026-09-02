@@ -66,7 +66,7 @@ export function CountryExpulsionAdminSection() {
       const code = caught instanceof Error ? caught.message : "COUNTRY_EXPULSION_FAILED";
       setError(code === "COUNTRY_EXPELLED_NOTIFICATION_FAILED"
         ? "국가 배정은 회수됐지만 Discord 공지 전송에 실패했습니다. 봇 토큰과 채널 권한을 확인해 주세요."
-        : "추방 처리에 실패했습니다. 배정 상태와 서버 연결을 확인해 주세요.");
+        : "추방 처리에 실패했습니다. 잠시 후 다시 시도해 주세요.");
       await fetchAssignments().then(setAssignments).catch(() => undefined);
     } finally {
       setBusyKey(null);

@@ -6,10 +6,8 @@ import { UiIcon } from "../../../components/UiIcon";
 import type { MapCountryIndex } from "../../../types/mapCountry";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import type { PlaySimulationState } from "../../play/data/playSimulationState";
-import { announceEconomyUpdate, confirmBudget, createTradeProposal, EconomyApiError, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
+import { announceEconomyUpdate, confirmBudget, createTradeProposal, loadEconomy, loadTradeAgreements, loadTradeCountries, loadTradeProposals, respondTradeProposal, saveBudget, terminateTradeAgreement } from "../economyClient";
 import { RESOURCE_LABELS, type EconomySnapshot, type TradeAgreement, type TradeAssetType, type TradeCountrySummary, type TradeLine, type TradeProposal, type TradeResourceId } from "../types";
-import { getStartingResources } from "../data/countryResourceStates";
-import { getStartingCapacity, getStartingEconomy } from "../data/countryEconomyStates";
 
 type EconomyTab = "overview" | "society" | "trade";
 type Props = { country: MapCountryIndex; state: PlaySimulationState; onClose: () => void };
@@ -17,27 +15,6 @@ const BUDGET_KEYS = ["administration", "defense", "industry", "welfare", "educat
 const BUDGET_LABELS: Record<(typeof BUDGET_KEYS)[number], string> = { administration: "행정", defense: "국방", industry: "산업", welfare: "복지", education: "교육" };
 const RESOURCES = Object.keys(RESOURCE_LABELS) as TradeResourceId[];
 const COUNTRY_MAP = new Map((mapCountries as unknown as MapCountryIndex[]).map((entry) => [entry.key, entry]));
-
-function emptyEconomySnapshot(countryKey: string): EconomySnapshot {
-  const economy = getStartingEconomy(countryKey);
-  return {
-    countryKey,
-    worldDate: "1932-01-01",
-    readiness: economy ? "READY" : "UNCONFIGURED",
-    economy,
-    productionCapacity: getStartingCapacity(economy),
-    nationalStats: null,
-    atWar: false,
-    resources: getStartingResources(countryKey),
-    history: [],
-    rules: {
-      settlement_interval_days: 30,
-      budget_min: 0,
-      budget_max: 100,
-      budget_step: 1,
-    },
-  };
-}
 
 function displayCountry(key: string): string {
   const country = COUNTRY_MAP.get(key);
@@ -70,18 +47,11 @@ export function EconomyWindow({ country, onClose }: Props) {
       setSnapshot(economy); setCountries(partners.countries); setProposals(proposalRows.proposals); setAgreements(agreementRows.agreements);
     } catch (reason) {
       if (reason instanceof DOMException && reason.name === "AbortError") return;
-      if (
-        reason instanceof EconomyApiError &&
-        reason.code === "ECONOMY_SERVER_NOT_CONFIGURED"
-      ) {
-        setSnapshot(emptyEconomySnapshot(country.key));
-        setCountries([]);
-        setProposals([]);
-        setAgreements([]);
-        setError(null);
-      } else {
-        setError(reason instanceof Error ? reason.message : "ECONOMY_DATA_UNAVAILABLE");
-      }
+      setSnapshot(null);
+      setCountries([]);
+      setProposals([]);
+      setAgreements([]);
+      setError("경제 기록을 불러오지 못했습니다.");
     } finally { setLoading(false); }
   }, [country.key]);
 
@@ -97,7 +67,7 @@ export function EconomyWindow({ country, onClose }: Props) {
         {([['overview', '경제 개요'], ['society', '사회'], ['trade', '무역']] as const).map(([id, label]) => <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => setTab(id)}>{label}</button>)}
       </div>
     }>
-      {loading ? <div className="economy-state-message">경제 기록을 조회하고 있습니다.</div> : error ? <div className="economy-state-message economy-state-message--error">경제 서버에 연결할 수 없습니다. ({error})</div> : snapshot ? (
+      {loading ? <div className="economy-state-message">경제 기록을 조회하고 있습니다.</div> : error ? <div className="economy-state-message economy-state-message--error" role="alert"><span>{error}</span><button type="button" onClick={() => void reload()}>다시 시도</button></div> : snapshot ? (
         tab === "overview" ? <EconomyOverview snapshot={snapshot} countryKey={country.key} onSaved={() => reload()} />
           : tab === "society" ? <SocietyOverview snapshot={snapshot} />
             : <TradeOverview snapshot={snapshot} countries={countries} proposals={proposals} agreements={agreements} onChanged={() => reload()} />

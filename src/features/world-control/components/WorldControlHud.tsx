@@ -16,15 +16,6 @@ type WorldControlHudProps = {
   onChangeMapMode: (mode: MapMode) => void;
 };
 
-const FALLBACK: WorldControlOverview = {
-  worldDate: "1932-01-01",
-  situationLevel: 5,
-  situationReason: null,
-  situationChangedWorldDate: null,
-  request: { state: "NONE", holdReason: null, details: null, requestedWorldDate: null, updatedAt: null },
-  schedules: [],
-};
-
 function formatWorldDate(value: string): string {
   const [year, month, day] = value.split("-").map(Number);
   if (!year || !month || !day) return value;
@@ -32,7 +23,7 @@ function formatWorldDate(value: string): string {
 }
 
 export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldControlHudProps) {
-  const [data, setData] = useState<WorldControlOverview>(FALLBACK);
+  const [data, setData] = useState<WorldControlOverview | null>(null);
   const [openPanel, setOpenPanel] = useState<"date" | "situation" | "hold" | null>(null);
   const [holdReason, setHoldReason] = useState<WorldTimeHoldReason>("MILITARY_OPERATION");
   const [details, setDetails] = useState("");
@@ -44,7 +35,7 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
       setData(await loadWorldControl(countryKey, signal));
       setMessage(null);
     } catch {
-      if (!signal?.aborted) setMessage("세계시간 서버를 확인할 수 없습니다.");
+      if (!signal?.aborted) setMessage("세계시간 기록을 불러오지 못했습니다.");
     }
   }, [countryKey]);
 
@@ -56,7 +47,7 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
         setMessage(null);
       })
       .catch(() => {
-        if (!controller.signal.aborted) setMessage("세계시간 서버를 확인할 수 없습니다.");
+        if (!controller.signal.aborted) setMessage("세계시간 기록을 불러오지 못했습니다.");
       });
     const listener = () => void reload();
     window.addEventListener("tlr:world-control-updated", listener);
@@ -82,23 +73,23 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
     }
   };
 
-  const requestLabel = data.request.state === "ADVANCE"
+  const requestLabel = data?.request.state === "ADVANCE"
     ? "진행 요청 중"
-    : data.request.state === "HOLD"
+    : data?.request.state === "HOLD"
       ? "보류 요청 중"
-      : "요청 없음";
+      : data ? "요청 없음" : "확인 중";
 
   return (
     <section className="world-control-hud" aria-label="세계시간과 지도 상황">
       <div className="world-control-hud__clock">
-        <button type="button" className="world-control-hud__request" disabled={busy} onClick={() => setOpenPanel("hold")} aria-label="세계시간 보류 요청">
+        <button type="button" className="world-control-hud__request" disabled={busy || !data} onClick={() => setOpenPanel("hold")} aria-label="세계시간 보류 요청">
           <UiIcon name="worldControl/hold-time" alt="" />
         </button>
         <button type="button" className="world-control-hud__date" aria-expanded={openPanel === "date"} onClick={() => setOpenPanel(openPanel === "date" ? null : "date")}>
-          <span>{formatWorldDate(data.worldDate)}</span>
+          <span>{data ? formatWorldDate(data.worldDate) : "—"}</span>
           <small>{requestLabel}</small>
         </button>
-        <button type="button" className="world-control-hud__request" disabled={busy} onClick={() => void submit("ADVANCE")} aria-label="세계시간 진행 요청">
+        <button type="button" className="world-control-hud__request" disabled={busy || !data} onClick={() => void submit("ADVANCE")} aria-label="세계시간 진행 요청">
           <UiIcon name="worldControl/advance-time" alt="" />
         </button>
       </div>
@@ -111,9 +102,9 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
         ))}
       </div>
 
-      <button type="button" className="world-control-hud__situation" data-level={data.situationLevel} aria-label={`세계상황 ${data.situationLevel}단계 ${SITUATION_LABELS[data.situationLevel] ?? ""}`} onClick={() => setOpenPanel(openPanel === "situation" ? null : "situation")}>
-        <img src={`/assets/ui/world-control/situation-level-${data.situationLevel}.png`} alt="" />
-        <strong>{data.situationLevel}</strong>
+      <button type="button" className="world-control-hud__situation" disabled={!data} data-level={data?.situationLevel} aria-label={data ? `세계상황 ${data.situationLevel}단계 ${SITUATION_LABELS[data.situationLevel] ?? ""}` : "세계상황 확인 중"} onClick={() => setOpenPanel(openPanel === "situation" ? null : "situation")}>
+        {data ? <img src={`/assets/ui/world-control/situation-level-${data.situationLevel}.png`} alt="" /> : null}
+        <strong>{data?.situationLevel ?? "—"}</strong>
       </button>
 
       {openPanel === "hold" ? (
@@ -126,7 +117,7 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
         </form>
       ) : null}
 
-      {openPanel === "date" ? (
+      {openPanel === "date" && data ? (
         <div className="world-control-popover world-control-popover--detail">
           <header><strong>세계시간 상세</strong><button type="button" onClick={() => setOpenPanel(null)}>닫기</button></header>
           <dl><div><dt>현재 날짜</dt><dd>{formatWorldDate(data.worldDate)}</dd></div><div><dt>우리 국가 요청</dt><dd>{requestLabel}</dd></div></dl>
@@ -137,7 +128,7 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
         </div>
       ) : null}
 
-      {openPanel === "situation" ? (
+      {openPanel === "situation" && data ? (
         <div className="world-control-popover world-control-popover--situation">
           <header><strong>세계상황 {data.situationLevel}단계 · {SITUATION_LABELS[data.situationLevel]}</strong><button type="button" onClick={() => setOpenPanel(null)}>닫기</button></header>
           <img src={`/assets/ui/world-control/situation-level-${data.situationLevel}.png`} alt={`${SITUATION_LABELS[data.situationLevel]} 상태 표정`} />
@@ -145,7 +136,7 @@ export function WorldControlHud({ countryKey, mapMode, onChangeMapMode }: WorldC
           <small>최근 변경: {data.situationChangedWorldDate ?? "초기 상태"}</small>
         </div>
       ) : null}
-      {message ? <p className="world-control-hud__message" role="status">{message}</p> : null}
+      {message ? <p className="world-control-hud__message" role="status"><span>{message}</span>{!data ? <button type="button" onClick={() => void reload()}>다시 시도</button> : null}</p> : null}
     </section>
   );
 }

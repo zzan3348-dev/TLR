@@ -180,7 +180,6 @@ export function MilitaryAdminSection({ data, onReload, onError }: { data: Milita
             <optgroup label="장교단 정신"><option value="OFFICER_SPIRIT:">＋ 새 장교단 정신</option>{data.spirits.map((row) => <option key={row.id} value={`OFFICER_SPIRIT:${row.id}`}>{row.display_name_ko}</option>)}</optgroup>
             <optgroup label="사상 계열"><option value="IDEOLOGY:">＋ 새 사상 계열</option>{data.ideologies.map((row) => <option key={row.id} value={`IDEOLOGY:${row.id}`}>{row.display_name_ko}</option>)}</optgroup>
           </select>
-          <p>사용자 화면에는 원본 출처명이 노출되지 않습니다. 준비되지 않은 항목은 PARTIAL로 유지됩니다.</p>
         </aside>
         <div className="directorate-military__editor">
           {target.kind === "IDEOLOGY" && ideology ? (

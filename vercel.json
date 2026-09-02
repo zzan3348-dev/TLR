@@ -40,7 +40,7 @@
     },
     {
       "source": "/api/admin/research",
-      "destination": "/api/admin/actions?domain=research"
+      "destination": "/api/admin/actions?adminRoute=research"
     },
     {
       "source": "/api/map-capitals",
@@ -48,39 +48,39 @@
     },
     {
       "source": "/api/admin/map-capitals",
-      "destination": "/api/admin/actions?domain=map-capitals"
+      "destination": "/api/admin/actions?adminRoute=map-capitals"
     },
     {
       "source": "/api/admin/province-regions",
-      "destination": "/api/admin/actions?domain=province-regions"
+      "destination": "/api/admin/actions?adminRoute=province-regions"
     },
     {
       "source": "/api/admin/intelligence",
-      "destination": "/api/admin/actions?domain=intelligence"
+      "destination": "/api/admin/actions?adminRoute=intelligence"
     },
     {
       "source": "/api/admin/world-control",
-      "destination": "/api/admin/actions?domain=world-control"
+      "destination": "/api/admin/actions?adminRoute=world-control"
     },
     {
       "source": "/api/admin/site-status",
-      "destination": "/api/admin/actions?domain=site-status"
+      "destination": "/api/admin/actions?adminRoute=site-status"
     },
     {
       "source": "/api/admin/country-applications",
-      "destination": "/api/admin/actions?domain=country-applications"
+      "destination": "/api/admin/actions?adminRoute=country-applications"
     },
     {
       "source": "/api/admin/preview",
-      "destination": "/api/admin/actions?domain=preview"
+      "destination": "/api/admin/actions?adminRoute=preview"
     },
     {
       "source": "/api/admin/discord-login",
-      "destination": "/api/admin/actions?domain=discord-login"
+      "destination": "/api/admin/actions?adminRoute=discord-login"
     },
     {
       "source": "/api/admin/content-studio",
-      "destination": "/api/admin/actions?domain=content-studio"
+      "destination": "/api/admin/actions?adminRoute=content-studio"
     },
     {
       "source": "/api/auth/logout",

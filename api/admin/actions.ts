@@ -31,7 +31,7 @@ type ActionBody = {
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
-  const rawDomain = request.query?.domain;
+  const rawDomain = request.query?.adminRoute;
   const domain = Array.isArray(rawDomain) ? rawDomain[0] : rawDomain;
   if (domain === "research") {
     await researchAdmin(request, response);

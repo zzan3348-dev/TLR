@@ -42,7 +42,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   PLAY_ACCESS_BLOCKED: "현재 계정은 국가 기능을 사용할 수 없습니다.",
   SELF_TARGET: "자국이 아닌 외교 대상을 지도에서 선택하십시오.",
   DIPLOMACY_DATA_UNAVAILABLE: "외교 기록을 불러올 수 없습니다. 잠시 뒤 다시 시도하십시오.",
-  DIPLOMACY_SERVER_NOT_CONFIGURED: "외교 데이터 서버가 설정되지 않았습니다.",
+  DIPLOMACY_SERVER_NOT_CONFIGURED: "외교 기록을 불러올 수 없습니다. 잠시 뒤 다시 시도하십시오.",
   DIPLOMACY_RESPONSE_INVALID: "외교 데이터 응답을 확인할 수 없습니다.",
   DUPLICATE_PENDING_PROPOSAL: "동일한 제안이 이미 응답을 기다리고 있습니다.",
   AGREEMENT_EXISTS: "동일한 협정이 이미 발효 중입니다.",
@@ -82,35 +82,8 @@ const AGREEMENT_ICONS: Record<DiplomaticAgreement["agreement_type"], string> = {
 
 function errorMessage(error: unknown): string {
   return error instanceof DiplomacyApiError
-    ? ERROR_MESSAGES[error.code] ?? `외교 요청이 거부되었습니다. (${error.code})`
+    ? ERROR_MESSAGES[error.code] ?? "외교 요청을 처리하지 못했습니다."
     : "외교 통신 중 예상하지 못한 오류가 발생했습니다.";
-}
-
-function emptyDiplomacyOverview(actorCountryKey: string, targetCountryKey: string): DiplomacyOverview {
-  const unavailable = { available: false, reason: "외교 데이터 입력 대기" };
-  return {
-    actorCountryKey,
-    targetCountryKey,
-    worldDate: "1932-01-01",
-    targetReviewRoute: "ADMIN",
-    relations: {
-      outgoing: { available: false, baseScore: null, score: null, modifiers: [] },
-      incoming: { available: false, baseScore: null, score: null, modifiers: [] },
-    },
-    actions: {
-      IMPROVE_RELATIONS: unavailable,
-      WORSEN_RELATIONS: unavailable,
-      NON_AGGRESSION: unavailable,
-      TRADE_AGREEMENT: unavailable,
-      FACTION_INVITATION: unavailable,
-      MILITARY_ACCESS: unavailable,
-      INDEPENDENCE_GUARANTEE: unavailable,
-      DECLARE_WAR: unavailable,
-      SEND_MESSAGE: unavailable,
-      INTELLIGENCE_NETWORK: unavailable,
-    },
-    proposals: [], agreements: [], history: [],
-  };
 }
 
 function addDays(date: string, days: number): string {
@@ -310,10 +283,8 @@ export function ForeignCountryWindow({ playerCountry, targetCountry, onClose }: 
       setOverview(data); setError(null);
     } catch (requestError) {
       if (requestError instanceof DOMException && requestError.name === "AbortError") return;
-      setOverview(emptyDiplomacyOverview(playerCountry.key, targetCountry.key));
-      setError(requestError instanceof DiplomacyApiError && requestError.code === "DIPLOMACY_SERVER_NOT_CONFIGURED"
-        ? null
-        : errorMessage(requestError));
+      setOverview(null);
+      setError(errorMessage(requestError));
     } finally { if (!signal?.aborted) setLoading(false); }
   }, [playerCountry.key, targetCountry.key]);
 

@@ -18,7 +18,7 @@ export function SiteStatusAdminSection() {
         if (!response.ok) throw new Error("SITE_STATUS_FAILED");
         setSite(await response.json() as SiteState);
       })
-      .catch(() => setError("서버 개장 상태를 불러오지 못했습니다."));
+      .catch(() => setError("개장 상태를 불러오지 못했습니다."));
   }, []);
 
   const openSite = async () => {
@@ -35,7 +35,7 @@ export function SiteStatusAdminSection() {
       setSite(await response.json() as SiteState);
       setConfirming(false);
     } catch {
-      setError("개장 상태를 변경하지 못했습니다. 서버 상태를 확인해 주세요.");
+      setError("개장 상태를 변경하지 못했습니다. 잠시 후 다시 시도해 주세요.");
     } finally {
       setBusy(false);
     }
@@ -44,7 +44,7 @@ export function SiteStatusAdminSection() {
   return (
     <section className="directorate-diplomacy directorate-site-status" aria-labelledby="directorate-site-status-title">
       <header>
-        <div><span>GLOBAL SERVER / OPENING CONTROL</span><h2 id="directorate-site-status-title">서버 상태</h2></div>
+        <div><span>SITE OPENING CONTROL</span><h2 id="directorate-site-status-title">개장 상태</h2></div>
         <strong>{site?.status === "open" ? "개장" : site ? "개장 전" : "확인 중"}</strong>
       </header>
       <div className="directorate-site-status__body">

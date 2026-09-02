@@ -13,21 +13,9 @@ const STATUS: Record<ResearchProject["status"], string> = {
   ACTIVE: "연구 진행 중", REJECTED: "반려", COMPLETED: "완료", CANCELLED: "취소",
 };
 
-function emptyOverview(countryKey: string): ResearchOverview {
-  return {
-    countryKey, worldDate: "1932-01-01", balance: 0, incomePerPeriod: 0, researchCapacity: 0,
-    categories: [
-      { id: "general", name: "일반 연구", description: "국가 연구 계획" },
-      { id: "industry", name: "산업", description: "생산·기반시설 연구" },
-      { id: "military", name: "군사", description: "군사 기술 연구" },
-      { id: "society", name: "사회", description: "행정·사회 연구" },
-    ], projects: [],
-  };
-}
-
 export function ResearchWindow({ country, onClose }: Props) {
   const [tab, setTab] = useState<Tab>("active");
-  const [data, setData] = useState<ResearchOverview>(() => emptyOverview(country.key));
+  const [data, setData] = useState<ResearchOverview | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [investment, setInvestment] = useState<{ project: ResearchProject; amount: number; preview: InvestmentPreview | null } | null>(null);
@@ -36,7 +24,8 @@ export function ResearchWindow({ country, onClose }: Props) {
     try { setData(await loadResearchOverview(signal)); setMessage(""); }
     catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
-      if (!(error instanceof ResearchApiError && error.code === "RESEARCH_SERVER_NOT_CONFIGURED")) setMessage("연구 기록을 불러오지 못했습니다.");
+      setData(null);
+      setMessage("연구 기록을 불러오지 못했습니다.");
     }
   };
   useEffect(() => {
@@ -46,13 +35,14 @@ export function ResearchWindow({ country, onClose }: Props) {
       setMessage("");
     }).catch((error: unknown) => {
       if (error instanceof DOMException && error.name === "AbortError") return;
-      if (!(error instanceof ResearchApiError && error.code === "RESEARCH_SERVER_NOT_CONFIGURED")) setMessage("연구 기록을 불러오지 못했습니다.");
+      setData(null);
+      setMessage("연구 기록을 불러오지 못했습니다.");
     });
     return () => controller.abort();
   }, [country.key]);
 
-  const active = useMemo(() => data.projects.filter((project) => ["SUBMITTED", "UNDER_REVIEW", "APPROVED", "ACTIVE"].includes(project.status)), [data.projects]);
-  const archive = useMemo(() => data.projects.filter((project) => ["REJECTED", "COMPLETED", "CANCELLED"].includes(project.status)), [data.projects]);
+  const active = useMemo(() => (data?.projects ?? []).filter((project) => ["SUBMITTED", "UNDER_REVIEW", "APPROVED", "ACTIVE"].includes(project.status)), [data?.projects]);
+  const archive = useMemo(() => (data?.projects ?? []).filter((project) => ["REJECTED", "COMPLETED", "CANCELLED"].includes(project.status)), [data?.projects]);
 
   const submit = async (form: HTMLFormElement) => {
     const values = new FormData(form);
@@ -87,7 +77,7 @@ export function ResearchWindow({ country, onClose }: Props) {
   const renderProjects = (projects: ResearchProject[]) => projects.length ? projects.map((project) => (
     <article className="research-project" key={project.id} data-status={project.status.toLowerCase()}>
       <UiIcon name={project.category_id === "military" ? "sections/military" : project.category_id === "industry" ? "sections/economy" : "research/laboratory"} />
-      <div><small>{STATUS[project.status]} · {data.categories.find((category) => category.id === project.category_id)?.name ?? project.category_id}</small><h3>{project.title}</h3><p>{project.objective || project.description}</p><footer><span>투자 {project.total_investment.toLocaleString()} RP</span><span>{project.scheduled_completion_world_date ?? "일정 미정"}</span></footer></div>
+      <div><small>{STATUS[project.status]} · {data?.categories.find((category) => category.id === project.category_id)?.name ?? project.category_id}</small><h3>{project.title}</h3><p>{project.objective || project.description}</p><footer><span>투자 {project.total_investment.toLocaleString()} RP</span><span>{project.scheduled_completion_world_date ?? "일정 미정"}</span></footer></div>
       {project.status === "ACTIVE" ? <button type="button" onClick={() => setInvestment({ project, amount: 10, preview: null })}>추가 투자</button> : null}
     </article>
   )) : <div className="research-empty"><UiIcon name="research/laboratory" /><strong>등록된 연구 없음</strong><p>연구 요청서를 작성하면 관제 심사를 거쳐 시작됩니다.</p></div>;
@@ -95,9 +85,9 @@ export function ResearchWindow({ country, onClose }: Props) {
   return (
     <StrategicWindow title="연구국" eyebrow={`${country.name} · 국가 연구 기록`} className="strategic-window--research" onClose={onClose}>
       <div className="research-window">
-        <header className="research-window__ledger"><UiIcon name="research/laboratory" /><div><small>RESEARCH DIRECTORATE</small><strong>{data.balance.toLocaleString()} RP</strong><span>정산 주기당 +{data.incomePerPeriod.toLocaleString()} · 세계일 {data.worldDate}</span></div></header>
+        <header className="research-window__ledger"><UiIcon name="research/laboratory" /><div><small>RESEARCH DIRECTORATE</small><strong>{data ? `${data.balance.toLocaleString()} RP` : "—"}</strong><span>{data ? `정산 주기당 +${data.incomePerPeriod.toLocaleString()} · 세계일 ${data.worldDate}` : "연구 기록 확인 중"}</span></div></header>
         <nav>{([['active','진행'],['request','연구 요청'],['archive','기록']] as const).map(([id,label]) => <button key={id} type="button" aria-pressed={tab === id} onClick={() => setTab(id)}>{label}</button>)}</nav>
-        {message ? <p className="research-window__message" role="alert">{message}</p> : null}
+        {message ? <p className="research-window__message" role="alert"><span>{message}</span>{!data ? <button type="button" onClick={() => void reload()}>다시 시도</button> : null}</p> : null}
         <main>
           {tab === "active" ? renderProjects(active) : null}
           {tab === "archive" ? renderProjects(archive) : null}
@@ -105,12 +95,12 @@ export function ResearchWindow({ country, onClose }: Props) {
             <form className="research-request" onSubmit={(event) => { event.preventDefault(); void submit(event.currentTarget); }}>
               <header><UiIcon name="research/request" /><div><small>FORM R-32</small><h2>신규 연구 요청서</h2></div></header>
               <label>연구명<input name="title" required maxLength={120} /></label>
-              <label>분류<select name="categoryId">{data.categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
+              <label>분류<select name="categoryId">{(data?.categories ?? []).map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></label>
               <label>연구 설명<textarea name="description" required rows={4} maxLength={4000} /></label>
               <label>연구 목표<textarea name="objective" required rows={3} maxLength={2000} /></label>
               <label>선행 조건<textarea name="prerequisites" rows={2} maxLength={1000} /></label>
               <label>최초 연구력 투자<input name="initialInvestment" type="number" min="1" step="1" defaultValue="10" required /></label>
-              <button type="submit" disabled={busy}>관제 심사 요청</button>
+              <button type="submit" disabled={busy || !data}>관제 심사 요청</button>
             </form>
           ) : null}
         </main>
