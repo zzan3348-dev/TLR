@@ -22,4 +22,22 @@ describe("Supabase migrations", () => {
     expect(migration).toContain("ownership.assigned_at");
     expect(migration).not.toContain("ownership.created_at");
   });
+
+  it("seeds every canonical capital without changing its saved coordinates", () => {
+    const capitals = JSON.parse(
+      readFileSync(new URL("../src/data/mapCapitals.json", import.meta.url), "utf8"),
+    );
+    const seed = readFileSync(
+      new URL("../supabase/migrations/202609020003_seed_map_capitals.sql", import.meta.url),
+      "utf8",
+    );
+
+    expect(capitals).toHaveLength(62);
+    for (const capital of capitals) {
+      const name = capital.name.replaceAll("'", "''");
+      expect(seed).toContain(
+        `('${capital.countryKey}','${name}',${capital.x},${capital.y},${capital.enabled})`,
+      );
+    }
+  });
 });
