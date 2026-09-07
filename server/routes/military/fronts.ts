@@ -2,6 +2,9 @@ import type { ApiRequest, ApiResponse } from "../../types.js";
 import { getAdminClient, getServerEnv } from "../../auth.js";
 import { cleanUuid, requireMilitaryActor } from "../../military.js";
 import { currentWorldDate } from "../../diplomacy.js";
+import borders from "../../../src/data/militaryBorderSegments.json" with { type: "json" };
+import { joinBorderSegments } from "../../../src/features/military/borderGeometry.js";
+const bordersById = new Map(borders.segments.map((segment) => [segment.id, segment]));
 
 function geometryOf(value: unknown): Array<{ x: number; y: number }> | null {
   if (!Array.isArray(value) || value.length < 2 || value.length > 200) return null;
@@ -24,11 +27,23 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     const opponentSideId = cleanUuid(body.opponent_side_id);
     const displayName = typeof body.display_name === "string" ? body.display_name.trim().slice(0, 160) : "";
     const frontKind = body.front_kind === "NAVAL_AREA" ? "NAVAL_AREA" : "LAND_LINE";
-    const geometry = geometryOf(body.geometry);
+    const segmentIds = Array.isArray(body.border_segment_ids) ? body.border_segment_ids : [];
+    const selectedSegments = segmentIds.map((id) => typeof id === "string" ? bordersById.get(id) : undefined);
+    const validSegments = selectedSegments.filter((segment) => segment !== undefined);
+    const geometry = frontKind === "LAND_LINE"
+      ? segmentIds.length > 0 && segmentIds.length <= 150 && new Set(segmentIds).size === segmentIds.length && validSegments.length === segmentIds.length ? joinBorderSegments(validSegments) : null
+      : geometryOf(body.geometry);
     if (!conflictId || !opponentSideId || !displayName || !geometry) { response.status(400).json({ error: "INVALID_FRONT" }); return; }
     const participant = await admin.from("military_conflict_participants").select("side_id").eq("conflict_id", conflictId).eq("country_key", actor.countryKey).is("left_world_date", null).maybeSingle();
     if (participant.error) { response.status(503).json({ error: "FRONT_CREATE_FAILED" }); return; }
     if (!participant.data || participant.data.side_id === opponentSideId) { response.status(403).json({ error: "INVALID_FRONT_SIDE" }); return; }
+    if (frontKind === "LAND_LINE") {
+      const members = await admin.from("military_conflict_participants").select("side_id,country_key").eq("conflict_id", conflictId).is("left_world_date", null);
+      if (members.error) { response.status(503).json({ error: "FRONT_CREATE_FAILED" }); return; }
+      const ids = (side: string) => new Set((members.data ?? []).filter((row) => row.side_id === side && row.country_key).map((row) => Number(String(row.country_key).replace("country-", ""))));
+      const friendly = ids(participant.data.side_id); const hostile = ids(opponentSideId);
+      if (!validSegments.every((segment) => segment.countryIds.some((id) => friendly.has(id)) && segment.countryIds.some((id) => hostile.has(id)))) { response.status(403).json({ error: "NOT_ENEMY_BORDER" }); return; }
+    }
     const opponent = await admin.from("military_conflict_sides").select("id").eq("id", opponentSideId).eq("conflict_id", conflictId).maybeSingle();
     if (opponent.error || !opponent.data) { response.status(400).json({ error: "INVALID_FRONT_SIDE" }); return; }
     const inserted = await admin.from("military_fronts").insert({ conflict_id: conflictId, front_kind: frontKind, display_name: displayName, owner_side_id: participant.data.side_id, opponent_side_id: opponentSideId, geometry, status: "ACTIVE" }).select("*").single();

@@ -5,7 +5,7 @@ import { currentWorldDate } from "../../diplomacy.js";
 
 const KINDS = new Set(["LAND_UNIT", "VESSEL", "FLEET", "AIR_WING"]);
 type Assignment = { object_kind?: unknown; object_id?: unknown };
-type Body = { id?: unknown; conflict_id?: unknown; front_id?: unknown; title?: unknown; body?: unknown; status?: unknown; assignments?: unknown; expected_version?: unknown };
+type Body = { id?: unknown; conflict_id?: unknown; front_id?: unknown; title?: unknown; body?: unknown; status?: unknown; assignments?: unknown; expected_version?: unknown; plan_kind?: unknown; plan_geometry?: unknown };
 
 function assignments(value: unknown): Array<{ object_kind: string; object_id: string }> | null {
   if (!Array.isArray(value)) return [];
@@ -54,6 +54,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const text = typeof body.body === "string" ? body.body.trim().slice(0, 8000) : "";
   const status = body.status === "SUBMITTED" ? "SUBMITTED" : "DRAFT";
   const selected = assignments(body.assignments);
+  const planKind = body.plan_kind == null ? null : String(body.plan_kind);
+  const geometry = body.plan_geometry ?? [];
+  if ((planKind !== null && !["OFFENSIVE", "DEFENSIVE", "OBJECTIVE", "WITHDRAWAL", "AMPHIBIOUS"].includes(planKind)) || !Array.isArray(geometry) || geometry.length > 200 || geometry.some((point) => !point || typeof point !== "object" || typeof point.x !== "number" || typeof point.y !== "number" || !Number.isFinite(point.x) || !Number.isFinite(point.y) || point.x < 0 || point.y < 0)) { response.status(400).json({ error: "INVALID_OPERATION_GEOMETRY" }); return; }
+  const plan = { plan_kind: planKind, plan_geometry: geometry.map((point) => ({ x: point.x, y: point.y })) };
   if (!conflictId || !title || !text || selected === null) { response.status(400).json({ error: "INVALID_ACTION" }); return; }
   try {
     const participant = await admin.from("military_conflict_participants").select("id").eq("conflict_id", conflictId).eq("country_key", actor.countryKey).is("left_world_date", null).maybeSingle();
@@ -93,13 +97,13 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       const id = cleanUuid(body.id);
       const expectedVersion = Number(body.expected_version);
       if (!id || !Number.isInteger(expectedVersion) || expectedVersion < 1) { response.status(400).json({ error: "ACTION_VERSION_REQUIRED" }); return; }
-      const update = await admin.from("military_actions").update({ conflict_id: conflictId, front_id: frontId, title, body: text, status, submitted_world_date: submittedWorldDate, version: expectedVersion + 1 }).eq("id", id).eq("country_key", actor.countryKey).eq("status", "DRAFT").eq("version", expectedVersion).select("id").maybeSingle();
+      const update = await admin.from("military_actions").update({ ...plan, conflict_id: conflictId, front_id: frontId, title, body: text, status, submitted_world_date: submittedWorldDate, version: expectedVersion + 1 }).eq("id", id).eq("country_key", actor.countryKey).eq("status", "DRAFT").eq("version", expectedVersion).select("id").maybeSingle();
       if (update.error) throw update.error;
       if (!update.data) { response.status(409).json({ error: "ACTION_LOCKED" }); return; }
       actionId = id;
       await admin.from("military_action_assignments").delete().eq("action_id", id);
     } else {
-      const inserted = await admin.from("military_actions").insert({ conflict_id: conflictId, country_key: actor.countryKey, front_id: frontId, title, body: text, status, submitted_world_date: submittedWorldDate }).select("id").single();
+      const inserted = await admin.from("military_actions").insert({ ...plan, conflict_id: conflictId, country_key: actor.countryKey, front_id: frontId, title, body: text, status, submitted_world_date: submittedWorldDate }).select("id").single();
       if (inserted.error) throw inserted.error;
       actionId = inserted.data.id;
     }

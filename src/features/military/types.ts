@@ -81,6 +81,10 @@ export type ConflictStatus =
 export type NormalizedPoint = { x: number; y: number };
 
 export type MilitaryTemplate = {
+  country_key?: string | null;
+  battalion_slots?: Array<string | null> | null;
+  support_slots?: Array<string | null> | null;
+  version?: number;
   id: string;
   force_kind: ForceKind;
   display_name: string;
@@ -91,6 +95,12 @@ export type MilitaryTemplate = {
   equipment_requirements: Record<string, number> | null;
   active: boolean;
   configuration_status: ConfigurationStatus;
+};
+
+export type BattalionDefinition = {
+  id: string; display_name: string; category: "LINE" | "SUPPORT"; icon_path: string | null;
+  manpower_required: number | null; production_capacity_required: number | null;
+  formation_days: number | null; upkeep: number | null; active: boolean;
 };
 
 export type LandUnitStatus =
@@ -202,6 +212,8 @@ export type MilitaryFront = {
 };
 
 export type MilitaryAction = {
+  plan_kind?: "OFFENSIVE" | "DEFENSIVE" | "OBJECTIVE" | "WITHDRAWAL" | "AMPHIBIOUS" | null;
+  plan_geometry?: NormalizedPoint[];
   id: string;
   conflict_id: string;
   country_key: string;
@@ -287,7 +299,8 @@ export type MilitaryOverview = {
   worldDate: string;
   readiness: ConfigurationStatus;
   reasons: string[];
-  manpower: { available: number | null; reserved: number };
+  manpower: { available: number | null; reserved: number; active?: number | null };
+  militaryExpenditure?: number | null;
   productionCapacity: { available: number | null; reserved: number };
   templates: MilitaryTemplate[];
   units: LandUnit[];
@@ -306,6 +319,9 @@ export type FrontForceSummary = {
 };
 
 export type MilitaryMapState = {
+  assignedUnits?: Array<{ id: string; display_name: string; assigned_front_id: string }>;
+  enemyFrontIds?: string[];
+  operations?: MilitaryAction[];
   fronts: MilitaryFront[];
   reports: WarReport[];
   occupations: Array<Occupation & { province_ids?: string[] }>;

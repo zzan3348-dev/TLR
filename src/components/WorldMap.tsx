@@ -10,6 +10,8 @@ import {
   type WheelEvent as ReactWheelEvent,
 } from "react";
 import { capitalsToMarkers, initialMapCapitals } from "../data/mapCapitals";
+import militaryBorders from "../data/militaryBorderSegments.json";
+import { joinBorderSegments, type BorderSegment } from "../features/military/borderGeometry";
 import { fetchHostileCountryKeys } from "../features/military/mapConflictUtils";
 import { fetchMilitaryMapState } from "../features/military/militaryClient";
 import { MilitaryMapOverlay } from "../features/military/components/MilitaryMapOverlay";
@@ -78,6 +80,7 @@ export type WorldMapHandle = {
 };
 
 type WorldMapProps = {
+  militaryInteractionScope?: "world" | "headquarters";
   mapMode: MapMode;
   showProvinceBorders: boolean;
   showLabels: boolean;
@@ -173,6 +176,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       selectedComponent,
       onCountrySelect,
       onWarReportSelect,
+      militaryInteractionScope = "world",
     },
     forwardedRef,
   ) {
@@ -219,6 +223,9 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     const [overlayView, setOverlayView] = useState<MapOverlayView | null>(null);
     const [militaryMapState, setMilitaryMapState] = useState<MilitaryMapState>({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
     const [militaryFrontDraft, setMilitaryFrontDraft] = useState<MilitaryFrontDraftPoint[] | null>(null);
+    const [eligibleBorders, setEligibleBorders] = useState<BorderSegment[] | null>(null);
+    const chosenBorders = useRef<BorderSegment[]>([]);
+    const [borderMessage, setBorderMessage] = useState("");
     const mapMarkers = useMemo(
       () => capitalsToMarkers(initialMapCapitals),
       [],
@@ -506,12 +513,14 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     useEffect(() => {
       if (!(["army", "navy", "air"] as MapMode[]).includes(mapMode)) return;
       const controller = new AbortController();
-      fetchMilitaryMapState().then((state) => {
+      const refresh = () => { void fetchMilitaryMapState().then((state) => {
         if (!controller.signal.aborted) setMilitaryMapState(state);
       }).catch(() => {
         if (!controller.signal.aborted) setMilitaryMapState({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
-      });
-      return () => controller.abort();
+      }); };
+      refresh();
+      window.addEventListener("tlr:military-updated", refresh);
+      return () => { controller.abort(); window.removeEventListener("tlr:military-updated", refresh); };
     }, [mapMode]);
 
     const animateSelectionPresentation = useCallback(() => {
@@ -640,8 +649,10 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
     useEffect(() => {
       const focusMilitaryFront = (event: Event) => {
         const detail = (event as CustomEvent<{
+          scope?: string;
           geometry?: Array<{ x: number; y: number }>;
         }>).detail;
+        if ((detail?.scope ?? "world") !== militaryInteractionScope) return;
         const assets = assetsRef.current;
         const geometry = detail?.geometry ?? [];
         if (!assets || geometry.length === 0) return;
@@ -664,18 +675,24 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       };
       window.addEventListener("tlr:focus-military-front", focusMilitaryFront);
       return () => window.removeEventListener("tlr:focus-military-front", focusMilitaryFront);
-    }, [animateCamera]);
+    }, [animateCamera, militaryInteractionScope]);
 
     useEffect(() => {
-      const startFrontDrawing = () => setMilitaryFrontDraft([]);
-      const cancelFrontDrawing = () => setMilitaryFrontDraft(null);
+      const startFrontDrawing = (event: Event) => {
+        const detail = (event as CustomEvent<{ scope?: string; borderCountries?: { friendly: number[]; hostile: number[] } }>).detail;
+        if ((detail?.scope ?? "world") !== militaryInteractionScope) return;
+        const countries = detail?.borderCountries;
+        setEligibleBorders(countries ? militaryBorders.segments.filter((segment) => segment.countryIds.some((id) => countries.friendly.includes(id)) && segment.countryIds.some((id) => countries.hostile.includes(id))) : null);
+        chosenBorders.current = []; setBorderMessage(""); setMilitaryFrontDraft([]);
+      };
+      const cancelFrontDrawing = () => { setMilitaryFrontDraft(null); setEligibleBorders(null); chosenBorders.current = []; };
       window.addEventListener("tlr:military-front-draw-start", startFrontDrawing);
       window.addEventListener("tlr:military-front-draw-cancel", cancelFrontDrawing);
       return () => {
         window.removeEventListener("tlr:military-front-draw-start", startFrontDrawing);
         window.removeEventListener("tlr:military-front-draw-cancel", cancelFrontDrawing);
       };
-    }, []);
+    }, [militaryInteractionScope]);
 
     const addMilitaryFrontPoint = useCallback((clientX: number, clientY: number) => {
       const canvas = canvasRef.current;
@@ -689,19 +706,30 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         { width: assets.width, height: assets.height },
       );
       if (!worldPoint) return;
+      if (eligibleBorders) {
+        let nearest: BorderSegment | null = null; let distance = 12 / cameraRef.current.scale;
+        for (const segment of eligibleBorders) for (const point of segment.points) {
+          const delta = Math.hypot(shortestWrappedDelta(worldPoint.x, point.x, assets.width), point.y - worldPoint.y);
+          if (delta < distance) { nearest = segment; distance = delta; }
+        }
+        if (!nearest || chosenBorders.current.some((segment) => segment.id === nearest.id)) return;
+        const selected = [...chosenBorders.current, nearest]; const geometry = joinBorderSegments(selected);
+        if (!geometry) { setBorderMessage("현재 전선 끝에 인접한 국경 구간을 선택해 주세요."); return; }
+        chosenBorders.current = selected; setMilitaryFrontDraft(geometry); setBorderMessage(""); return;
+      }
       setMilitaryFrontDraft((current) => current ? [...current, {
         x: Number(worldPoint.x.toFixed(1)),
         y: Number(worldPoint.y.toFixed(1)),
       }] : null);
-    }, []);
+    }, [eligibleBorders]);
 
     const finishMilitaryFrontDrawing = useCallback(() => {
       if (!militaryFrontDraft || militaryFrontDraft.length < 2) return;
       window.dispatchEvent(new CustomEvent("tlr:military-front-draw-complete", {
-        detail: { geometry: militaryFrontDraft },
+        detail: { geometry: militaryFrontDraft, segmentIds: eligibleBorders ? chosenBorders.current.map((segment) => segment.id) : undefined },
       }));
       setMilitaryFrontDraft(null);
-    }, [militaryFrontDraft]);
+    }, [militaryFrontDraft, eligibleBorders]);
 
     const militaryFrontScreenPoints = useMemo(() => {
       if (!militaryFrontDraft || !overlayView) return [];
@@ -1378,6 +1406,7 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
             aria-label="지도에서 전선 경로 지정"
           >
             <svg className="military-front-draw-layer__path" aria-hidden="true">
+              {eligibleBorders && overlayView && eligibleBorders.map((segment) => <polyline key={segment.id} style={{ stroke: "#d8b950", strokeWidth: 2, opacity: .7, fill: "none" }} points={segment.points.map((point) => `${overlayView.viewport.width / 2 + shortestWrappedDelta(overlayView.camera.x, point.x, overlayView.mapWidth) * overlayView.camera.scale},${overlayView.viewport.height / 2 + (point.y - overlayView.camera.y) * overlayView.camera.scale}`).join(" ")} />)}
               {militaryFrontScreenPoints.length > 1 ? (
                 <polyline points={militaryFrontScreenPoints.map((point) => `${point.x},${point.y}`).join(" ")} />
               ) : null}
@@ -1386,11 +1415,11 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
               ))}
             </svg>
             <div className="military-front-draw-layer__controls" onClick={(event) => event.stopPropagation()}>
-              <strong>전선 경로 지정</strong>
-              <span>지도 위를 순서대로 클릭하십시오 · {militaryFrontDraft.length}개 통제점</span>
+              <strong>{eligibleBorders ? "적국과 맞닿은 국경 선택" : "지도 경로 지정"}</strong>
+              <span>{borderMessage || (eligibleBorders ? eligibleBorders.length ? `${chosenBorders.current.length}개 국경 구간 선택` : "선택할 수 있는 적국 접경이 없습니다." : `${militaryFrontDraft.length}개 지점 지정`)}</span>
               <div>
-                <button type="button" onClick={() => setMilitaryFrontDraft((current) => current?.slice(0, -1) ?? null)} disabled={militaryFrontDraft.length === 0}>되돌리기</button>
-                <button type="button" onClick={() => setMilitaryFrontDraft(null)}>취소</button>
+                <button type="button" onClick={() => { if (eligibleBorders) { chosenBorders.current = chosenBorders.current.slice(0, -1); setMilitaryFrontDraft(joinBorderSegments(chosenBorders.current) ?? []); } else setMilitaryFrontDraft((current) => current?.slice(0, -1) ?? null); }} disabled={militaryFrontDraft.length === 0}>되돌리기</button>
+                <button type="button" onClick={() => window.dispatchEvent(new Event("tlr:military-front-draw-cancel"))}>취소</button>
                 <button type="button" onClick={finishMilitaryFrontDrawing} disabled={militaryFrontDraft.length < 2}>경로 확정</button>
               </div>
             </div>

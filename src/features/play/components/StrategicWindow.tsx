@@ -5,6 +5,7 @@ type StrategicWindowProps = PropsWithChildren<{
   title: string;
   eyebrow?: string;
   actions?: ReactNode;
+  headerControls?: ReactNode;
   className?: string;
   onClose: () => void;
 }>;
@@ -13,6 +14,7 @@ export function StrategicWindow({
   title,
   eyebrow,
   actions,
+  headerControls,
   className,
   onClose,
   children,
@@ -27,6 +29,7 @@ export function StrategicWindow({
           {eyebrow ? <small>{eyebrow}</small> : null}
           <h2>{title}</h2>
         </div>
+        {headerControls}
         <button type="button" onClick={onClose} aria-label={`${title} 닫기`}>
           <UiIcon name="ui/close" />
         </button>

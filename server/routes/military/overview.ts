@@ -5,6 +5,7 @@ import { currentWorldDate } from "../../diplomacy.js";
 import { currentNumber, startingCountryStatsForCountry } from "../../startingCountryStats.js";
 import { loadCalculatedNationalStats } from "../../countryNationalStats.js";
 import { currentTurnNumber } from "../../worldProgression.js";
+import { mergeStartingEconomy, startingCapacityForEconomy } from "../../startingEconomies.js";
 
 type CapacityRow = { available?: unknown };
 
@@ -17,18 +18,19 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   const admin = getAdminClient(env);
   try {
     const worldDate = await currentWorldDate(admin);
-    const [templates, units, vessels, fleets, airWings, queues, resources, capacityResult, participantRows] = await Promise.all([
-      admin.from("military_templates").select("*").eq("active", true).order("force_kind").order("display_name"),
+    const [templates, units, vessels, fleets, airWings, queues, resources, capacityResult, participantRows, economy] = await Promise.all([
+      admin.from("military_templates").select("*").eq("active", true).or(`country_key.is.null,country_key.eq.${countryKey}`).order("force_kind").order("display_name"),
       admin.from("military_land_units").select("*").eq("country_key", countryKey).neq("status", "DISBANDED").order("created_world_date"),
-      admin.from("military_vessels").select("*").eq("country_key", countryKey).not("status", "in", "(SUNK,RETIRED)").order("laid_down_world_date"),
+      admin.from("military_vessels").select("*").eq("country_key", countryKey).order("laid_down_world_date"),
       admin.from("military_fleets").select("*").eq("country_key", countryKey).neq("status", "DISSOLVED").order("created_world_date"),
       admin.from("military_air_wings").select("*").eq("country_key", countryKey).neq("status", "DISBANDED").order("created_world_date"),
       admin.from("military_creation_queues").select("*").eq("country_key", countryKey).in("status", ["QUEUED", "IN_PROGRESS"]).order("created_at"),
       admin.from("country_military_resources").select("available_manpower,reserved_manpower,reserved_production_capacity").eq("country_key", countryKey).maybeSingle(),
       admin.rpc("tlr_trade_capacity_components", { p_country: countryKey }),
       admin.from("military_conflict_participants").select("conflict_id").eq("country_key", countryKey).is("left_world_date", null),
+      admin.from("country_economies").select("*").eq("country_key", countryKey).maybeSingle(),
     ]);
-    const requiredResults = [templates, units, vessels, fleets, airWings, queues, resources, participantRows];
+    const requiredResults = [templates, units, vessels, fleets, airWings, queues, resources, participantRows, capacityResult, economy];
     const failed = requiredResults.find((result) => result.error);
     if (failed?.error) throw failed.error;
     const conflictIds = [...new Set((participantRows.data ?? []).map((row) => String(row.conflict_id)))];
@@ -38,9 +40,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (conflicts.error) throw conflicts.error;
 
     const capacityData = Array.isArray(capacityResult.data) ? capacityResult.data[0] : capacityResult.data;
+    const mergedEconomy = mergeStartingEconomy(countryKey, economy.data);
     const capacity = capacityData && typeof capacityData === "object" && "available" in capacityData
       ? Number((capacityData as CapacityRow).available)
-      : null;
+      : startingCapacityForEconomy(mergedEconomy)?.available ?? null;
     const startingStats = startingCountryStatsForCountry(countryKey);
     const calculatedStats = await loadCalculatedNationalStats(admin, countryKey, await currentTurnNumber(admin), {}, worldDate);
     const manpower = calculatedStats?.availableManpower ?? (startingStats
@@ -54,9 +57,11 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (!(templates.data ?? []).some((template) => template.configuration_status === "READY")) {
       reasons.push("가동 가능한 군사 편제가 없습니다.");
     }
+    const costs = mergedEconomy?.operating_costs as Record<string, unknown> | undefined;
     response.status(200).json({
       countryKey,
       worldDate,
+      militaryExpenditure: typeof costs?.["군 유지"] === "number" ? costs["군 유지"] : null,
       readiness: reasons.length === 0 ? "READY" : reasons.length >= 3 ? "UNCONFIGURED" : "PARTIAL",
       reasons,
       manpower: {
@@ -64,10 +69,10 @@ export default async function handler(request: ApiRequest, response: ApiResponse
         base: calculatedStats?.baseAvailableManpower ?? startingStats?.base_available_manpower ?? null,
         mobilizable: calculatedStats?.mobilizableManpower ?? manpower,
         modifierPercent: calculatedStats?.manpowerModifierPercent ?? 0,
-        active: calculatedStats?.activeMilitaryManpower ?? 0,
+        active: calculatedStats?.activeMilitaryManpower ?? null,
         reserved: calculatedStats?.reservedManpower ?? Number(resources.data?.reserved_manpower ?? 0),
       },
-      productionCapacity: { available: Number.isFinite(capacity) ? capacity : null, reserved: Number(resources.data?.reserved_production_capacity ?? 0) },
+      productionCapacity: { available: capacity !== null && Number.isFinite(capacity) ? Math.max(0, capacity - Number(resources.data?.reserved_production_capacity ?? 0)) : null, reserved: Number(resources.data?.reserved_production_capacity ?? 0) },
       templates: templates.data ?? [], units: units.data ?? [], vessels: vessels.data ?? [], fleets: fleets.data ?? [],
       airWings: airWings.data ?? [], queues: queues.data ?? [], conflicts: conflicts.data ?? [],
     });

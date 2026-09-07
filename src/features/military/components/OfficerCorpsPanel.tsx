@@ -15,32 +15,6 @@ const STATE_LABEL: Record<MilitarySelectionState, string> = {
 
 type FocusedOption = { kind: "doctrine"; row: GrandDoctrine } | { kind: "spirit"; row: OfficerSpirit };
 
-function placeholderOfficerCorps(countryKey: string): OfficerCorpsState {
-  const doctrineIcon = "/assets/ui/generated-icons/laws/training.png";
-  const spiritIcon = "/assets/ui/generated-icons/laws/officers.png";
-  const doctrineNames = ["공세 중시", "방어 중시", "기동전 중시", "소모전 중시", "인민전쟁", "정예군 체계"];
-  const doctrines: GrandDoctrine[] = doctrineNames.map((displayName, index) => ({
-    id: `doctrine-plan-${index}`,
-    key: `doctrine_plan_${index}`,
-    displayName,
-    description: index === 1 ? "국토 방위와 전선 유지, 예비대의 단계적 투입을 우선하는 대교리입니다." : "국가 군제와 장기 전쟁 수행 방향을 결정하는 대교리안입니다.",
-    iconPath: doctrineIcon,
-    configurationStatus: "READY",
-    enabled: true,
-    selectionState: index === 1 ? "SELECTED" : "READY",
-    effects: [{ key: `doctrine_effect_${index}`, value: 0, unit: "percent", displayText: index === 1 ? "방어 작전 판정 보정 +0.00%" : "교리 승인 후 효과 공개" }],
-    requirements: [{ id: `doctrine_requirement_${index}`, description: index === 1 ? "현재 전시계획에 반영" : "관리자 교리 수치 승인", met: index === 1 }],
-  }));
-  const spiritRows: Array<[OfficerSpiritCategory, string]> = [["ACADEMY", "참모교육 중시"], ["ACADEMY", "실전교육 중시"], ["ARMY", "통합군 지휘"], ["ARMY", "독립 병과 운용"], ["DIVISION_COMMAND", "현장 지휘권"], ["DIVISION_COMMAND", "참모본부 통제"]];
-  const spirits: OfficerSpirit[] = spiritRows.map(([category, displayName], index) => ({
-    id: `spirit-plan-${index}`, key: `spirit_plan_${index}`, category, displayName,
-    description: "장교단의 지휘 관행과 편성 운용 원칙을 규정합니다.", iconPath: spiritIcon,
-    configurationStatus: "READY", enabled: true, selectionState: index % 2 === 0 ? "SELECTED" : "READY",
-    effects: [{ key: `spirit_effect_${index}`, value: 0, unit: "percent", displayText: "지휘 체계 보정 +0.00%" }],
-    requirements: [{ id: `spirit_requirement_${index}`, description: "현행 장교단 계획", met: true }],
-  }));
-  return { countryKey, worldDate: "1932-01-01", version: 0, doctrine: doctrines[1], selectedSpirits: { ACADEMY: spirits[0], ARMY: spirits[2], DIVISION_COMMAND: spirits[4] }, doctrines, spirits };
-}
 
 export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
   const [state, setState] = useState<OfficerCorpsState | null>(null);
@@ -55,8 +29,8 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
     try { setState(await fetchOfficerCorps(countryKey)); }
     catch (requestError) {
       void requestError;
-      setState(placeholderOfficerCorps(countryKey));
-      setError(null);
+      setState(null);
+      setError("군사사상 정보를 불러오지 못했습니다.");
     }
     finally { setLoading(false); }
   }, [countryKey]);
@@ -79,14 +53,6 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
 
   const applyOption = useCallback(async (option: GrandDoctrine | OfficerSpirit) => {
     if (!state || option.selectionState !== "READY") return;
-    if (option.id.includes("-plan-")) {
-      if ("category" in option) {
-        setState({ ...state, selectedSpirits: { ...state.selectedSpirits, [option.category]: { ...option, selectionState: "SELECTED" } }, spirits: state.spirits.map((row) => row.category === option.category ? { ...row, selectionState: row.id === option.id ? "SELECTED" : "READY" } : row), version: state.version + 1 });
-      } else {
-        setState({ ...state, doctrine: { ...option, selectionState: "SELECTED" }, doctrines: state.doctrines.map((row) => ({ ...row, selectionState: row.id === option.id ? "SELECTED" : "READY" })), version: state.version + 1 });
-      }
-      setOpenCategory(null); setFocused(null); return;
-    }
     setPending(option.id); setError(null);
     try {
       const next = "category" in option
@@ -111,7 +77,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
 
       <div className="officer-corps__board">
         <button type="button" className="officer-corps__doctrine" onClick={() => setOpenCategory(openCategory === "DOCTRINE" ? null : "DOCTRINE")}>
-          <img src={doctrine?.iconPath ?? "/ui/military/doctrine-compass.svg"} alt="" />
+          {doctrine?.iconPath ? <img src={doctrine.iconPath} alt="" /> : <small>아이콘 미설정</small>}
           <span className="officer-corps__slot-copy"><small>대교리</small><strong>{doctrine?.displayName ?? "대교리 미채택"}</strong><em>{doctrine?.description || "교리 목록을 열어 국가의 군사적 방향을 확인하십시오."}</em></span>
           <span className="officer-corps__slot-command">교리 목록</span>
         </button>
@@ -122,7 +88,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
             const meta = CATEGORY_META[category];
             return (
               <button key={category} type="button" className="officer-corps__slot" onClick={() => setOpenCategory(openCategory === category ? null : category)}>
-                <img src={selected?.iconPath ?? meta.fallback} alt="" />
+                {selected?.iconPath ? <img src={selected.iconPath} alt="" /> : <small>아이콘 미설정</small>}
                 <span><small>{meta.label}</small><strong>{selected?.displayName ?? "미선택"}</strong></span>
                 <b>{openCategory === category ? "닫기" : "열기"}</b>
               </button>
@@ -136,15 +102,12 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
           <div className="officer-corps__catalog-grid">
             {visibleOptions.map((focusedOption) => {
               const option = focusedOption.row;
-              const fallback = focusedOption.kind === "spirit"
-                ? CATEGORY_META[focusedOption.row.category].fallback
-                : "/ui/military/doctrine-compass.svg";
               return (
                 <button key={option.id} type="button" className={`officer-option officer-option--${option.selectionState.toLowerCase()}`}
                   onMouseEnter={() => setFocused(focusedOption)}
                   onFocus={() => setFocused(focusedOption)}
                   onClick={() => void applyOption(option)} disabled={pending !== null || option.selectionState !== "READY"}>
-                  <img src={option.iconPath ?? fallback} alt="" />
+                  {option.iconPath ? <img src={option.iconPath} alt="" /> : <small>아이콘 미설정</small>}
                   <span><strong>{option.displayName}</strong><small>{STATE_LABEL[option.selectionState]}</small></span>
                   {(option.selectionState === "LOCKED" || option.selectionState === "PARTIAL") ? <UiIcon name="lock" /> : null}
                 </button>

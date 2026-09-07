@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { StrategicWindow } from "../../play/components/StrategicWindow";
 import { UiIcon } from "../../../components/UiIcon";
 import { militaryMutation } from "../militaryClient";
 import { MILITARY_ROUTES } from "../routes";
 import { fetchMilitaryOverview } from "../militaryClient";
 import { militaryLabel } from "../militaryLabels";
+import { CommandMap } from "./CommandMap";
 import type {
   Conflict,
   ForceKind,
@@ -37,20 +38,28 @@ const CONFLICT_STATUS_LABEL: Record<string, string> = {
 };
 
 interface DraftState {
+  planKind: NonNullable<MilitaryAction["plan_kind"]>;
+  geometry: Array<{ x: number; y: number }>;
   title: string;
   body: string;
   frontId: string;
   assignments: Array<{ object_kind: ForceKind | "FLEET"; object_id: string }>;
 }
 
-const EMPTY_DRAFT: DraftState = { title: "", body: "", frontId: "", assignments: [] };
+const EMPTY_DRAFT: DraftState = { title: "", body: "", frontId: "", assignments: [], planKind: "OFFENSIVE", geometry: [] };
 
 interface ConflictWindowProps {
   onClose: () => void;
   countryKey: string;
+  embedded?: boolean;
+}
+
+function ConflictFrame({ embedded, children, onClose }: { embedded?: boolean; children: ReactNode; onClose: () => void }) {
+  return embedded ? <section className="conflict-window conflict-window--embedded">{children}</section> : <StrategicWindow title="분쟁 사령부" className="conflict-window" onClose={onClose}>{children}</StrategicWindow>;
 }
 
 type FrontDraft = {
+  segmentIds?: string[];
   displayName: string;
   frontKind: string;
   geometry: Array<{ x: number; y: number }>;
@@ -58,7 +67,10 @@ type FrontDraft = {
 
 const EMPTY_FRONT_DRAFT: FrontDraft = { displayName: "", frontKind: "LAND_LINE", geometry: [] };
 
-export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
+export function ConflictWindow({ onClose, countryKey, embedded }: ConflictWindowProps) {
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [selection, setSelection] = useState<{ kind: string; id: string } | null>(null);
+  const drawingOperation = useRef(false);
   const [conflicts, setConflicts] = useState<Conflict[]>([]);
   const [overview, setOverview] = useState<MilitaryOverview | null>(null);
   const [loading, setLoading] = useState(true);
@@ -131,13 +143,16 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
 
   useEffect(() => {
     const completeDrawing = (event: Event) => {
-      const geometry = (event as CustomEvent<{ geometry?: Array<{ x: number; y: number }> }>).detail?.geometry;
+      const detail = (event as CustomEvent<{ geometry?: Array<{ x: number; y: number }>; segmentIds?: string[] }>).detail;
+      const geometry = detail?.geometry;
       if (geometry && geometry.length >= 2) {
-        setFrontDraft((current) => ({ ...current, geometry }));
+        if (drawingOperation.current) setDraft((current) => ({ ...current, geometry }));
+        else setFrontDraft((current) => ({ ...current, geometry, segmentIds: detail.segmentIds }));
       }
+      drawingOperation.current = false;
       setDrawingFront(false);
     };
-    const cancelDrawing = () => setDrawingFront(false);
+    const cancelDrawing = () => { drawingOperation.current = false; setDrawingFront(false); };
     window.addEventListener("tlr:military-front-draw-complete", completeDrawing);
     window.addEventListener("tlr:military-front-draw-cancel", cancelDrawing);
     return () => {
@@ -168,6 +183,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
       body: action.body,
       frontId: action.front_id ?? "",
       assignments: action.assignments ?? [],
+      planKind: action.plan_kind ?? "OFFENSIVE", geometry: action.plan_geometry ?? [],
     });
   }, []);
 
@@ -178,7 +194,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
       ...overview.fleets.map((item) => ({ kind: "FLEET" as const, id: item.id, name: item.display_name, status: item.status })),
       ...overview.vessels.map((item) => ({ kind: "VESSEL" as const, id: item.id, name: item.display_name, status: item.status })),
       ...overview.airWings.map((item) => ({ kind: "AIR_WING" as const, id: item.id, name: item.display_name, status: item.status })),
-    ];
+    ].filter((item) => !["SUNK", "RETIRED", "DISBANDED", "DISSOLVED"].includes(item.status));
   }, [overview]);
 
   const addAssignment = useCallback(() => {
@@ -213,6 +229,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
           front_id: draft.frontId || null,
           assignments: draft.assignments,
           status: submit ? "SUBMITTED" : "DRAFT",
+          plan_kind: draft.planKind, plan_geometry: draft.geometry,
         };
         if (editingActionId) {
           const action = actions.find((item) => item.id === editingActionId);
@@ -221,6 +238,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
           await militaryMutation(MILITARY_ROUTES.actions, payload, "POST");
         }
         resetDraft();
+        window.dispatchEvent(new Event("tlr:military-updated"));
         setPreviewOpen(false);
         await loadDetail(selectedConflict.id);
       } catch {
@@ -249,28 +267,42 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
     if (frontDraft.geometry.length < 2) { setError("지도에서 전선 경로를 먼저 지정해야 한다."); return; }
     setSubmitting(true);
     try {
-      await militaryMutation(MILITARY_ROUTES.fronts, { conflict_id: selectedConflict.id, opponent_side_id: opponentSide.id, display_name: frontDraft.displayName.trim(), front_kind: frontDraft.frontKind, geometry: frontDraft.geometry }, "POST");
+      await militaryMutation(MILITARY_ROUTES.fronts, { conflict_id: selectedConflict.id, opponent_side_id: opponentSide.id, display_name: frontDraft.displayName.trim(), front_kind: frontDraft.frontKind, geometry: frontDraft.geometry, border_segment_ids: frontDraft.segmentIds }, "POST");
       setFrontDraft(EMPTY_FRONT_DRAFT);
+      window.dispatchEvent(new Event("tlr:military-updated"));
       await loadDetail(selectedConflict.id);
     } catch { setError("전선 생성에 실패했다. 좌표와 참가 진영을 확인하라."); }
     finally { setSubmitting(false); }
   }, [countryKey, frontDraft, loadDetail, selectedConflict]);
 
-  const actions_ = (
-    <button type="button" className="strategic-window__action" onClick={onClose}>
-      <UiIcon name="close" />
-      <span>닫기</span>
-    </button>
-  );
+  const selectMapItem = useCallback((kind: string, id: string) => {
+    window.dispatchEvent(new CustomEvent("tlr:military-selection", { detail: { kind, id } }));
+    const geometry = kind === "front" ? fronts.find((front) => front.id === id)?.geometry : kind === "operation" ? actions.find((action) => action.id === id)?.plan_geometry : undefined;
+    if (geometry?.length) window.dispatchEvent(new CustomEvent("tlr:focus-military-front", { detail: { geometry, scope: "headquarters" } }));
+  }, [fronts, actions]);
+  useEffect(() => {
+    const select = (event: Event) => {
+      const next = (event as CustomEvent<{ kind: string; id: string }>).detail;
+      setSelection(next);
+      if (next.kind === "operation") {
+        const action = actions.find((item) => item.id === next.id);
+        if (action) { beginEditDraft(action); setDetailOpen(true); }
+      }
+      if (next.kind === "front") setDraft((current) => ({ ...current, frontId: next.id }));
+    };
+    window.addEventListener("tlr:military-selection", select);
+    return () => window.removeEventListener("tlr:military-selection", select);
+  }, [actions, beginEditDraft]);
+  const drawPlan = (kind: DraftState["planKind"]) => {
+    setDraft((current) => ({ ...current, planKind: kind }));
+    drawingOperation.current = true;
+    setDrawingFront(true);
+    setDetailOpen(false);
+    window.dispatchEvent(new CustomEvent("tlr:military-front-draw-start", { detail: { scope: "headquarters" } }));
+  };
 
   return (
-    <StrategicWindow
-      title="분쟁 사령부"
-      eyebrow="CONFLICT COMMAND"
-      actions={actions_}
-      className="conflict-window"
-      onClose={onClose}
-    >
+    <ConflictFrame embedded={embedded} onClose={onClose}>
       <div className="conflict-window__body">
         {loading && (
           <div className="military-window__state">
@@ -286,12 +318,13 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
           </div>
         )}
         {!loading && !error && conflicts.length === 0 && (
-          <p className="military-window__empty">등록된 분쟁이 없다.</p>
+          <div className="hq-peace-map"><p>현재 진행 중인 전쟁이 없습니다.</p><CommandMap countryKey={countryKey} /></div>
         )}
 
         {!loading && !error && conflicts.length > 0 && (
           <div className="conflict-window__layout">
             <aside className="conflict-window__list">
+              <h3>현재 전쟁 / 전선</h3>
               {conflicts.map((conflict) => (
                 <button
                   key={conflict.id}
@@ -300,7 +333,7 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                     "conflict-window__list-item" +
                     (conflict.id === selectedConflictId ? " conflict-window__list-item--active" : "")
                   }
-                  onClick={() => setSelectedConflictId(conflict.id)}
+                  onClick={() => { setSelectedConflictId(conflict.id); setDetailOpen(true); }}
                 >
                   <span className="conflict-window__list-name">{conflict.display_name}</span>
                   <span className="conflict-window__list-meta">
@@ -309,15 +342,26 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                   </span>
                 </button>
               ))}
+              <h4>전선</h4>
+              {fronts.map((front) => <button type="button" className="hq-row" key={front.id} aria-pressed={selection?.kind === "front" && selection.id === front.id} onClick={() => selectMapItem("front", front.id)}>{front.display_name}</button>)}
+              {!fronts.length && <p>등록된 전선 없음</p>}
+              <h4>배치 사단</h4>
+              {overview?.units.filter((unit) => !["DISBANDED", "DESTROYED"].includes(unit.status) && (!selection || selection.kind !== "front" || unit.assigned_front_id === selection.id)).map((unit) => <button type="button" key={unit.id} className="hq-row" aria-pressed={selection?.kind === "unit" && selection.id === unit.id} onClick={() => selectMapItem("unit", unit.id)}><img src="/assets/ui/icons/military/army-map.svg" alt="" /><span>{unit.display_name}<small>{militaryLabel(unit.status)}</small></span></button>)}
+              <h4>작전</h4>
+              {actions.map((action) => <button type="button" key={action.id} className="hq-row" aria-pressed={selection?.kind === "operation" && selection.id === action.id} onClick={() => selectMapItem("operation", action.id)}>{action.title}</button>)}
+              <button type="button" onClick={() => setDetailOpen(true)}>전선·작전 관리</button>
             </aside>
 
-            <section className="conflict-window__detail">
+            <CommandMap countryKey={countryKey} />
+            <section className="conflict-window__detail" hidden={!detailOpen || drawingFront}>
+              <button type="button" className="hq-detail-close" aria-label="상세 닫기" onClick={() => setDetailOpen(false)}>×</button>
               {selectedConflict && (
                 <>
                   <header className="conflict-window__detail-header">
                     <h3>{selectedConflict.display_name}</h3>
                     <span>{CONFLICT_STATUS_LABEL[selectedConflict.status] ?? selectedConflict.status}</span>
                   </header>
+                  {selection?.kind === "operation" && actions.filter((action) => action.id === selection.id).map((action) => <section className="hq-selected-operation" key={action.id}><h4>{action.title}</h4><p>{militaryLabel(action.status)}</p><p style={{whiteSpace:"pre-wrap"}}>{action.body}</p><p>배속 전력: {action.assignments?.length ?? 0}개</p></section>)}
 
                   <div className="conflict-window__sides">
                     {(selectedConflict.sides ?? []).map((side) => (
@@ -381,7 +425,13 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                             className={drawingFront ? "is-active" : ""}
                             onClick={() => {
                               setDrawingFront(true);
-                              window.dispatchEvent(new Event("tlr:military-front-draw-start"));
+                              drawingOperation.current = false;
+                              const ownSide = selectedConflict?.sides?.find((side) => side.participants?.some((p) => p.country_key === countryKey));
+                              const ids = (sideIds: string[]) => sideIds.map((key) => Number(key.replace("country-", "")));
+                              window.dispatchEvent(new CustomEvent("tlr:military-front-draw-start", { detail: frontDraft.frontKind === "LAND_LINE" ? { scope: "headquarters", borderCountries: {
+                                friendly: ids(ownSide?.participants?.flatMap((p) => p.country_key ? [p.country_key] : []) ?? []),
+                                hostile: ids(selectedConflict?.sides?.filter((side) => side.id !== ownSide?.id).flatMap((side) => side.participants?.flatMap((p) => p.country_key ? [p.country_key] : []) ?? []) ?? []),
+                              } } : { scope: "headquarters" } }));
                             }}
                           >
                             <UiIcon name="map" />
@@ -461,6 +511,8 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                           </select>
                         </label>
 
+                        <label className="conflict-window__field"><span>지도 작전 유형</span><select value={draft.planKind} onChange={(event) => setDraft((current) => ({ ...current, planKind: event.target.value as DraftState["planKind"] }))}><option value="OFFENSIVE">공세</option><option value="DEFENSIVE">방어선</option><option value="OBJECTIVE">목표선</option><option value="WITHDRAWAL">철수선</option><option value="AMPHIBIOUS">상륙 계획</option></select></label>
+                        <button type="button" onClick={() => drawPlan(draft.planKind)}>지도에서 작전선 그리기</button><span> {draft.geometry.length}개 지점</span><button type="button" onClick={() => setDraft((current) => ({ ...current, geometry: [] }))}>작전선 지우기</button>
                         <div className="conflict-window__assignments">
                           <span>배속 병력</span>
                           <ul>
@@ -535,9 +587,19 @@ export function ConflictWindow({ onClose, countryKey }: ConflictWindowProps) {
                 </>
               )}
             </section>
+            <div className="hq-plan-palette" aria-label="전투 계획">
+              <strong>전투 계획</strong><div>
+                <button type="button" title="전선 — 전선 관리에서 접경 지역을 지정합니다" onClick={() => setDetailOpen(true)}><img src="/assets/ui/icons/military/army-map.svg" alt="" /><span>전선</span></button>
+                <button type="button" title="방어선 — 시작점, 경유점, 목표점을 지정합니다" onClick={() => drawPlan("DEFENSIVE")}><img src="/assets/ui/icons/intelligence/defense.svg" alt="" /><span>방어</span></button>
+                <button type="button" title="공세 — 지도에서 공세 경로를 작성합니다" onClick={() => drawPlan("OFFENSIVE")}><img src="/assets/ui/icons/intelligence/operation.svg" alt="" /><span>공세</span></button>
+                <button type="button" title="목표선 — 작전의 목표 경로를 지정합니다" onClick={() => drawPlan("OBJECTIVE")}><img src="/assets/ui/icons/military/air-map.svg" alt="" /><span>목표</span></button>
+                <button type="button" title="현재 초안의 작전선 삭제 — 저장된 작전은 변경하지 않습니다" onClick={() => { setDraft((current) => ({ ...current, geometry: [] })); window.dispatchEvent(new Event("tlr:military-front-draw-cancel")); }}><span>×</span><span>삭제</span></button>
+                <button type="button" title="초안 확인 및 제출" onClick={() => setDetailOpen(true)}>초안<br />확인</button>
+              </div>
+            </div>
           </div>
         )}
       </div>
-    </StrategicWindow>
+    </ConflictFrame>
   );
 }

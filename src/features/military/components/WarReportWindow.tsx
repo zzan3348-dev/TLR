@@ -52,7 +52,7 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
     } catch (requestError) {
       void requestError;
       setReports([]);
-      setError(null);
+      setError("전쟁 보고서를 불러오지 못했습니다.");
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { StrategyIcon } from "../../../components/StrategyIcon";
 import type { MapCamera, ViewportSize } from "../../../types/mapCountry";
 import type { Province } from "../../../types/province";
@@ -104,6 +104,14 @@ function OccupationMapLayer(props: Pick<Props, "state" | "camera" | "viewport" |
 }
 
 export function MilitaryMapOverlay(props: Props) {
+  const arrowId = useId().replace(/:/g, "");
+  const [selection, setSelection] = useState<{ kind: string; id: string } | null>(null);
+  useEffect(() => {
+    const select = (event: Event) => setSelection((event as CustomEvent<{ kind: string; id: string }>).detail);
+    window.addEventListener("tlr:military-selection", select);
+    return () => window.removeEventListener("tlr:military-selection", select);
+  }, []);
+  const select = (kind: string, id: string) => window.dispatchEvent(new CustomEvent("tlr:military-selection", { detail: { kind, id } }));
   const [reportFilter, setReportFilter] = useState<"RECENT" | "ALL" | "HIDDEN">("RECENT");
   const fronts = props.state.fronts.filter((front) => visibleFront(front, props.mode, props.state) && front.geometry.length >= 2);
   const latestReportTime = Math.max(0, ...props.state.reports.map((report) => Date.parse(report.report_world_date)));
@@ -121,10 +129,22 @@ export function MilitaryMapOverlay(props: Props) {
     <div className={`military-map-overlay military-map-overlay--${props.mode}`} aria-label={modeLabel}>
       {props.mode === "army" ? <OccupationMapLayer {...props} /> : null}
       <div className="military-map-overlay__mode-plate"><StrategyIcon name={props.mode === "army" ? "armyMap" : props.mode === "navy" ? "navyMap" : "airMap"} /><span>{modeLabel}</span><select aria-label="전투 결과 표시 범위" value={reportFilter} onChange={(event) => setReportFilter(event.target.value as typeof reportFilter)}><option value="RECENT">최근 30일</option><option value="ALL">전체 결과</option><option value="HIDDEN">결과 숨김</option></select></div>
-      <svg className="military-map-overlay__fronts" viewBox={`0 0 ${props.viewport.width} ${props.viewport.height}`} aria-hidden="true">
+      <svg className="military-map-overlay__fronts" viewBox={`0 0 ${props.viewport.width} ${props.viewport.height}`} aria-label="전선과 작전 계획">
+        <defs><marker id={arrowId} markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 L4.5 2.5 L0 5 L1 2.5 Z" fill="#79cfc6" stroke="#092025" strokeWidth=".35" /></marker></defs>
+        {copies.flatMap((copy) => (props.state.operations ?? []).filter((operation) => (operation.plan_geometry?.length ?? 0) >= 2).map((operation) => {
+          const points = operation.plan_geometry!.map((point) => project(point, copy, props));
+          let d = `M ${points[0].x} ${points[0].y}`;
+          for (let i = 1; i < points.length - 1; i++) d += ` Q ${points[i].x} ${points[i].y} ${(points[i].x + points[i + 1].x) / 2} ${(points[i].y + points[i + 1].y) / 2}`;
+          d += ` L ${points.at(-1)!.x} ${points.at(-1)!.y}`;
+          return <g key={`operation:${operation.id}:${copy}`} className={`military-operation${selection?.kind === "operation" && selection.id === operation.id ? " is-selected" : ""}`} role="button" tabIndex={0} aria-label={operation.title} onClick={() => select("operation", operation.id)} onKeyDown={(event) => { if (event.key === "Enter") select("operation", operation.id); }}>
+            <title>{operation.title}</title><path d={d} className="military-operation__edge" />
+            <path d={d} className="military-operation__core" strokeDasharray={operation.plan_kind === "DEFENSIVE" ? "8 5" : undefined} markerEnd={operation.plan_kind === "DEFENSIVE" ? undefined : `url(#${arrowId})`} />
+            <path d={d} className="military-map-hit" />
+          </g>;
+        }))}
         {copies.flatMap((copy) => fronts.map((front) => {
           const d = pathFor(front, copy, props);
-          return <g key={`${front.id}:${copy}`} className="military-front-ribbon"><path className="military-front-ribbon__edge" d={d} /><path className="military-front-ribbon__core" d={d} /></g>;
+          return <g key={`${front.id}:${copy}`} className={`military-front-ribbon${props.state.enemyFrontIds?.includes(front.id) ? " is-enemy" : ""}${selection?.kind === "front" && selection.id === front.id ? " is-selected" : ""}`} role="button" tabIndex={0} aria-label={front.display_name} onClick={() => select("front", front.id)} onKeyDown={(event) => { if (event.key === "Enter") select("front", front.id); }}><path className="military-front-ribbon__edge" d={d} /><path className="military-front-ribbon__core" d={d} /><path className="military-map-hit" d={d} /></g>;
         }))}
       </svg>
       {copies.flatMap((copy) => fronts.flatMap((front) => {
@@ -133,18 +153,36 @@ export function MilitaryMapOverlay(props: Props) {
         const screen = project(midpoint, copy, props);
         if (screen.x < -180 || screen.x > props.viewport.width + 180 || screen.y < -100 || screen.y > props.viewport.height + 100) return [];
         const summary = props.state.forceSummaries.find((item) => item.frontId === front.id);
-        return [<div key={`label:${front.id}:${copy}`} className="military-front-counter" style={{ left: screen.x, top: screen.y }}>
+        return [<button type="button" key={`label:${front.id}:${copy}`} className={`military-front-counter${selection?.kind === "front" && selection.id === front.id ? " is-selected" : ""}`} style={{ left: screen.x, top: screen.y }} onClick={() => select("front", front.id)}>
           <strong>{front.display_name}</strong>
           <span><StrategyIcon name="armyMap" />{summary?.landUnits ?? 0}</span>
           <span><StrategyIcon name="navyMap" />{summary?.fleets ?? 0}</span>
           <span><StrategyIcon name="airMap" />{summary?.airWings ?? 0}</span>
-        </div>];
+        </button>];
       }))}
-      {copies.flatMap((copy) => reports.flatMap((report) => {
+      {copies.flatMap((copy) => reports.flatMap((report, index) => {
         const screen = project(report.marker as NormalizedPoint, copy, props);
+        const nearby = reports.slice(0, index).filter((other) => {
+          const p = project(other.marker as NormalizedPoint, copy, props);
+          return Math.hypot(p.x - screen.x, p.y - screen.y) < 32;
+        }).length;
+        screen.x += (nearby % 4) * 26;
+        screen.y += Math.floor(nearby / 4) * 26;
         if (screen.x < -40 || screen.x > props.viewport.width + 40 || screen.y < -40 || screen.y > props.viewport.height + 40) return [];
         const tone = report.marker_tone === "WIN" ? "win" : report.marker_tone === "LOSS" ? "loss" : "neutral";
         return [<button key={`report:${report.id}:${copy}`} type="button" className={`military-result-marker military-result-marker--${tone}`} style={{ left: screen.x, top: screen.y }} onClick={() => props.onReportSelect(report)} title={report.title} aria-label={`${report.title} 전쟁 보고서 열기`}><img src="/assets/ui/icons/military/battle-result.svg" alt="" /></button>];
+      }))}
+      {copies.flatMap((copy) => fronts.flatMap((front) => {
+        const midpoint = frontMidpoint(front);
+        if (!midpoint) return [];
+        const screen = project(midpoint, copy, props);
+        if (screen.x < 0 || screen.x > props.viewport.width || screen.y < 0 || screen.y > props.viewport.height) return [];
+        const units = props.state.assignedUnits?.filter((unit) => unit.assigned_front_id === front.id) ?? [];
+        if (!units.length) return [];
+        return [<details className="military-assigned-counter" key={`units:${front.id}:${copy}`} style={{left:screen.x,top:screen.y+30}}>
+          <summary>전선 배속 {units.length}개 사단</summary>
+          {units.map((unit) => <button type="button" key={unit.id} aria-pressed={selection?.kind === "unit" && selection.id === unit.id} onClick={() => select("unit",unit.id)}>{unit.display_name}</button>)}
+        </details>];
       }))}
       <aside className="military-map-overlay__legend" aria-label={`${modeLabel} 범례`}>
         <header><img src={modeIcon} alt="" /><strong>{modeLabel} 관제</strong></header>

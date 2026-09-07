@@ -1,5 +1,6 @@
 .git/
 .codex-tmp/
+.codex-dev/
 node_modules/
 dist/
 artifacts/

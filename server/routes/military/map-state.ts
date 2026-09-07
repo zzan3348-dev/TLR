@@ -22,22 +22,29 @@ export default async function handler(request: ApiRequest, response: ApiResponse
       response.status(200).json({ fronts: [], reports: [], occupations: [], forceSummaries: [] });
       return;
     }
-    const [fronts, reports, occupations, landUnits, fleets, airWings, participants] = await Promise.all([
+    const [fronts, reports, occupations, landUnits, fleets, airWings, participants, operations] = await Promise.all([
       admin.from("military_fronts").select("*").in("conflict_id", conflictIds).eq("status", "ACTIVE"),
       admin.from("military_war_reports").select("*").in("conflict_id", conflictIds).eq("visibility", "PUBLIC").order("report_world_date", { ascending: false }).limit(100),
       admin.from("military_occupations").select("*").in("conflict_id", conflictIds).eq("status", "ACTIVE_OCCUPATION"),
-      admin.from("military_land_units").select("assigned_front_id").in("assigned_conflict_id", conflictIds).neq("status", "DISBANDED"),
+      admin.from("military_land_units").select("id,display_name,country_key,assigned_front_id").in("assigned_conflict_id", conflictIds).neq("status", "DISBANDED"),
       admin.from("military_fleets").select("assigned_front_id").in("assigned_conflict_id", conflictIds).neq("status", "DISSOLVED"),
       admin.from("military_air_wings").select("assigned_front_id").in("assigned_conflict_id", conflictIds).neq("status", "DISBANDED"),
       admin.from("military_conflict_participants").select("conflict_id,side_id,country_key").in("conflict_id", conflictIds).is("left_world_date", null),
+      admin.from("military_actions").select("*").eq("country_key", actor.countryKey).in("conflict_id", conflictIds).in("status", ["DRAFT", "SUBMITTED", "UNDER_REVIEW"]),
     ]);
-    const failed = [fronts, reports, occupations, landUnits, fleets, airWings, participants].find((result) => result.error);
+    const failed = [fronts, reports, occupations, landUnits, fleets, airWings, participants, operations].find((result) => result.error);
     if (failed?.error) throw failed.error;
     const frontRows = (fronts.data ?? []) as FrontRow[];
     response.status(200).json({
+      assignedUnits: (landUnits.data ?? []).filter((unit) => unit.country_key === actor.countryKey && unit.assigned_front_id).map(({ id, display_name, assigned_front_id }) => ({ id, display_name, assigned_front_id })),
+      enemyFrontIds: (fronts.data ?? []).filter((front) => {
+        const ownSide = (participants.data ?? []).find((p) => p.conflict_id === front.conflict_id && p.country_key === actor.countryKey)?.side_id;
+        return ownSide && front.opponent_side_id === ownSide;
+      }).map((front) => front.id),
+      operations: operations.data ?? [],
       fronts: fronts.data ?? [], reports: (reports.data ?? []).map((report) => {
         const playerSideId = (participants.data ?? []).find((row) => row.conflict_id === report.conflict_id && row.country_key === actor.countryKey)?.side_id;
-        const markerTone = playerSideId && report.winner_side_id === playerSideId ? "WIN" : playerSideId && report.loser_side_id === playerSideId ? "LOSS" : report.marker_tone;
+        const markerTone = playerSideId && report.winner_side_id === playerSideId ? "WIN" : playerSideId && report.loser_side_id === playerSideId ? "LOSS" : "NEUTRAL";
         return { ...report, marker_tone: markerTone };
       }), occupations: (occupations.data ?? []).map((occupation) => {
         const geometry = occupation.geometry && typeof occupation.geometry === "object" && !Array.isArray(occupation.geometry) ? occupation.geometry as { provinceIds?: unknown } : null;

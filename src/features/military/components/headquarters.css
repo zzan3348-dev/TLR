@@ -1,0 +1,88 @@
+.strategic-window.military-hq{position:fixed;inset:3vh 3vw;width:94vw;max-width:none;height:94vh;max-height:none;display:flex;flex-direction:column;background:#071217;color:#d9dfda;border:2px solid #393f40;z-index:90}
+.military-hq .strategic-window__chrome{min-height:46px;padding:8px 12px}.military-hq .strategic-window__chrome h2{font-size:18px}.military-hq .strategic-window__body{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:0}
+.military-hq button,.military-hq input,.military-hq select{font:inherit;font-size:12px;color:inherit}.military-hq button{background:#1a211e;border:1px solid #4c5348;padding:7px 10px;cursor:pointer}.military-hq button:hover{background:#293128}.military-hq button:disabled{opacity:.5;cursor:not-allowed}.military-hq button:focus-visible{outline:2px solid #d7bc58;outline-offset:1px}
+.hq-tabs{display:flex;border-bottom:1px solid #5b604e;flex-shrink:0}.hq-tabs button{flex:1;border:0;border-bottom:2px solid transparent;background:transparent;padding:12px}.hq-tabs button[aria-current=page]{color:#e0c96b;border-bottom-color:#e0c96b}
+.hq-content{padding:10px;overflow:auto;min-height:0;flex:1;font-size:12px}.hq-content h3{font-size:14px;color:#e4d9a8;margin:0 0 10px;border-bottom:1px solid #454b40;padding-bottom:8px}.hq-content p{line-height:1.5}.hq-panel{padding:12px;min-width:0;background:#101816;border:1px solid #454d40;overflow:auto}
+.hq-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));border:1px solid #505544;margin-bottom:10px;background:#18211c}.hq-metrics>div{padding:10px;border-right:1px solid #414a3c;display:flex;flex-direction:column;gap:7px}.hq-metrics strong{font-size:18px;color:#e1d59c}.hq-metrics span{color:#aeb9a8}
+.hq-two-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.hq-service{display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid #323d33}.hq-service strong{margin-right:auto}
+.military-hq .hq-row{display:flex;align-items:center;gap:12px;width:100%;padding:10px;background:transparent;border:0;border-bottom:1px solid #354034;text-align:left;min-width:0}.hq-row strong{flex:1}.hq-row time,.hq-row small{color:#acb3a3}.hq-row.hq-tone-LOSS{color:#e58779}.hq-row.hq-tone-WIN{color:#94c493}
+.hq-subtabs{display:flex;gap:6px;margin-bottom:10px}.hq-subtabs button[aria-pressed=true],.hq-force-list button[aria-pressed=true]{border-color:#d3bd60;background:#2b3023;color:#eee0a2}
+.hq-force-layout{display:grid;grid-template-columns:minmax(220px,28%) minmax(0,1fr);gap:10px;min-height:400px}.hq-force-list .hq-row{display:flex;flex-direction:column;align-items:stretch;gap:5px}.hq-force-list label,.hq-edit label,.hq-template label{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.military-hq input,.military-hq select{background:#080f0d;border:1px solid #59604d;padding:7px;min-width:0;max-width:100%}
+.hq-facts{display:grid;grid-template-columns:minmax(100px,1fr) 2fr;gap:0;margin:10px 0}.hq-facts dt,.hq-facts dd{padding:9px 0;border-bottom:1px solid #2f392f;margin:0}.hq-facts dd{color:#e0ddc8}.hq-edit{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hq-edit button{justify-self:start}.hq-template{padding:10px 0;border-bottom:1px solid #434a3d}.hq-template>strong{color:#e5d999}.hq-template small{display:block;margin-top:8px}.hq-template progress{display:inline-block;width:75%;height:10px;margin-right:10px;accent-color:#b8a85c}.hq-error{padding:10px;color:#f0a092}
+.hq-designer{display:grid;grid-template-columns:22% minmax(0,1fr) 25%;gap:10px}.hq-battalion-grid,.hq-support-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:12px 0}.hq-battalion-grid button{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;overflow:hidden}.hq-battalion-grid img,.hq-support-grid img{width:28px;height:28px;object-fit:contain}.hq-slot-picker{display:flex;flex-wrap:wrap;gap:6px;border:1px solid #c5b364;background:#111710;padding:10px}.hq-support-grid button{min-height:60px;padding:4px;font-size:10px}
+.military-hq .conflict-window{position:relative;inset:auto;width:100%;max-width:none;height:100%;max-height:none;box-shadow:none}.military-hq .conflict-window .strategic-window__body{overflow:auto}
+.military-hq .conflict-window__layout{display:grid;grid-template-columns:minmax(0,20fr) minmax(0,60fr) minmax(0,20fr);gap:8px;min-height:440px;height:100%}.military-hq .conflict-window__list,.military-hq .conflict-window__detail{min-width:0;overflow:auto}.hq-map{position:relative;min-height:400px;height:100%;overflow:hidden;border:1px solid #626650}.hq-map .world-map-container{position:absolute;inset:0;width:100%;height:100%}.hq-map-tools{position:absolute;bottom:8px;left:8px;display:flex;gap:4px;z-index:10}.hq-peace-map{height:100%;display:flex;flex-direction:column}.hq-peace-map .hq-map{flex:1;min-height:420px}.military-hq .conflict-window__body{height:100%}.hq-map .military-front-draw-layer__controls{max-width:100%;flex-wrap:wrap}
+@media(max-width:760px){.hq-two-columns,.hq-force-layout{grid-template-columns:1fr}.hq-force-list{max-height:230px}.hq-tabs button{padding:9px 3px;font-size:11px}.hq-metrics{grid-template-columns:repeat(3,1fr)}.hq-edit{grid-template-columns:1fr}}
+
+/* One continuous command surface; map tools overlay the full map canvas. */
+.military-hq>.strategic-window__body{flex:1}
+.military-hq .strategic-window__chrome .hq-help-button{margin-left:auto;width:auto;height:26px}
+.military-hq .strategic-window__chrome>div{margin-right:auto}
+.hq-help{padding:10px;border-bottom:1px solid #426568;font-size:12px;line-height:1.6}
+.military-hq{--hq-line:#426568;--hq-accent:#72d0cc;border-radius:0;box-shadow:none}
+.military-hq .strategic-window__chrome{background:#282d2e;border-bottom:1px solid var(--hq-line)}
+.military-hq .strategic-window__chrome h2{font-family:Georgia,"Noto Serif KR",serif;font-size:24px;font-weight:800;color:#eeece1}
+.military-hq :is(button,input,select,textarea){border-radius:0;box-shadow:none;text-shadow:none;font-size:12px}
+.military-hq button{background:#09181d;border-color:var(--hq-line);padding:4px 8px}
+.military-hq button:hover{background:#14272c;border-color:#78b8ba;filter:none;transform:none;box-shadow:none}
+.military-hq button:focus-visible{outline-color:var(--hq-accent)}
+.military-hq :is(input,select,textarea){background:#050f14;border-color:var(--hq-line);padding:6px}
+.hq-tabs{border-color:var(--hq-line)}.hq-tabs button{padding:8px}
+.hq-tabs button[aria-current=page]{color:var(--hq-accent);border-bottom-color:var(--hq-accent);background:#10272c}
+.hq-content{padding:8px;font-size:13px}.hq-content h3{color:#e3e5d9;border-color:var(--hq-line)}
+.hq-panel{padding:8px;background:transparent;border:0;border-right:1px solid var(--hq-line);border-radius:0;box-shadow:none}
+.hq-metrics{background:transparent;border:0;border-bottom:1px solid var(--hq-line);margin-bottom:8px}
+.hq-metrics>div{padding:8px;border-color:var(--hq-line);gap:5px}.hq-metrics strong{color:#dbe4df}.hq-metrics span{font-size:11px;color:#9db0b2}
+.hq-two-columns{gap:0;border-bottom:1px solid var(--hq-line)}
+.hq-service{padding:8px 0;min-height:38px;border-color:var(--hq-line)}
+.military-hq .hq-row{padding:5px 7px;min-height:38px;gap:8px;border-left:2px solid transparent;border-bottom-color:var(--hq-line)}
+.hq-row small{font-size:11px;display:block}.hq-row img{width:26px;height:26px;object-fit:contain;flex-shrink:0}
+.military-hq .hq-row[aria-pressed=true]{border-left-color:var(--hq-accent);background:#153037;color:#bdeee8}
+.hq-subtabs button[aria-pressed=true]{border-color:var(--hq-accent);background:#123039;color:#bdeee8}
+.hq-force-layout,.hq-designer{gap:0}.hq-force-list .hq-row{gap:2px;min-height:40px}
+.hq-facts dt,.hq-facts dd,.hq-template{padding:7px 0;border-color:var(--hq-line)}
+.hq-template>strong{color:#dbe4df}.hq-template progress{accent-color:#74d3a8}
+.hq-slot-picker{border-color:var(--hq-line);background:#071217}
+.hq-content--war{padding:0;overflow:hidden;position:relative}
+.military-hq .conflict-window{border:0;background:transparent}
+.military-hq .conflict-window__body{padding:0;overflow:hidden}
+.military-hq .conflict-window__layout{display:block;position:relative;height:100%;min-height:400px;padding:0}
+.conflict-window__layout>.hq-map{position:absolute;inset:0;border:0}
+.military-hq .conflict-window__list{position:absolute;left:8px;top:8px;width:22%;max-height:calc(100% - 80px);z-index:15;overflow:auto;padding:6px;background:#071217f5;border:1px solid var(--hq-line)}
+.military-hq .conflict-window__list h4{margin:8px 0 2px;padding:5px;border-bottom:1px solid var(--hq-line)}
+.military-hq .conflict-window__list-item{width:100%;min-height:38px;margin:0;padding:5px 7px;border:0;border-bottom:1px solid var(--hq-line);border-left:2px solid transparent;background:transparent;box-shadow:none;text-align:left}
+.military-hq .conflict-window__list-item--active{border-left-color:var(--hq-accent);background:#143036}
+.military-hq .conflict-window__list-name{font-size:13px;color:#dde6e1}.military-hq .conflict-window__list-meta{font-size:11px}
+.military-hq .conflict-window__detail{position:absolute;right:8px;top:8px;width:30%;max-height:calc(100% - 92px);overflow:auto;z-index:16;padding:8px;background:#071217fa;border:1px solid var(--hq-line)}
+.military-hq .conflict-window__detail[hidden]{display:none}.hq-detail-close{float:right;position:sticky;top:0;z-index:1}
+.hq-plan-palette{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:17;background:#071217f5;border:1px solid var(--hq-line);padding:4px}
+.hq-plan-palette>strong{display:block;font-size:13px;padding:2px 4px 5px}.hq-plan-palette>div{display:flex;gap:3px}
+.hq-plan-palette button{width:46px;height:45px;padding:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px}
+.hq-plan-palette button img{width:24px;height:24px;object-fit:contain}
+.hq-map-tools{left:auto;right:8px}
+.hq-peace-map{height:100%;position:relative;display:block}.hq-peace-map>p{position:absolute;top:8px;left:8px;padding:10px;background:#071217ec;border:1px solid var(--hq-line);z-index:15;margin:0}
+.hq-map .military-map-overlay__legend{display:none}.hq-map .military-map-overlay__mode-plate{top:8px;right:8px;left:auto}
+.hq-map .military-map-overlay__mode-plate{transform:none;box-shadow:none;background:#071217ed;color:#c9e4e1}
+.hq-map .military-map-overlay__mode-plate::before{display:none}
+.hq-map .military-map-overlay__mode-plate>.strategy-icon{display:none}
+.military-map-overlay .military-front-ribbon{--front-color:#68c5c3;cursor:pointer}
+.military-map-overlay .military-front-ribbon.is-enemy{--front-color:#d56864}
+.military-map-overlay .military-front-ribbon.is-selected{--front-color:#bcf5ed}
+.military-map-overlay .military-front-ribbon__edge{stroke:#071012;stroke-width:4px;filter:none}
+.military-map-overlay .military-front-ribbon__core{stroke:var(--front-color);stroke-width:2px;stroke-dasharray:3 2;filter:none}
+.military-map-overlay .military-map-hit{stroke:transparent;stroke-width:14px;fill:none;pointer-events:stroke;cursor:pointer}
+.military-map-overlay .military-operation{color:#79cfc6;cursor:pointer}
+.military-map-overlay .military-operation.is-selected{color:#cbfff4}
+.military-map-overlay .military-operation__edge{fill:none;stroke:#092025;stroke-width:7px}
+.military-map-overlay .military-operation__core{fill:none;stroke:currentColor;stroke-width:4px}
+.military-map-overlay .military-front-counter{pointer-events:auto;cursor:pointer;border:1px solid #4d8285;border-radius:0;background:#071217e8;padding:3px 5px;box-shadow:none}
+.military-map-overlay .military-front-counter.is-selected{border-color:#b7f4ee}
+.military-assigned-counter{position:absolute;z-index:8;pointer-events:auto;background:#071217f5;border:1px solid #426568;max-width:200px;max-height:210px;overflow:auto;font-size:11px;padding:4px}
+.military-assigned-counter button{display:block;width:100%;text-align:left}
+.military-assigned-counter button[aria-pressed=true]{border-left:2px solid #72d0cc;background:#153037}
+.military-map-overlay .military-result-marker{width:24px;height:24px;background:#172528;border:1px solid currentColor;box-shadow:none;filter:none}
+.military-map-overlay .military-result-marker::before{display:none}
+.military-map-overlay .military-result-marker img{display:block;width:22px;height:22px;content:normal;filter:none}
+.military-map-overlay .military-result-marker--neutral{color:#a2abad}
+.military-map-overlay .military-result-marker:hover{filter:brightness(1.1);box-shadow:none}
+@media(max-width:760px){.hq-designer{grid-template-columns:1fr}.military-hq .conflict-window__list{width:24%;font-size:11px}.military-hq .conflict-window__detail{width:60%}.hq-map-tools{top:8px;bottom:auto}.hq-plan-palette button{width:36px}}

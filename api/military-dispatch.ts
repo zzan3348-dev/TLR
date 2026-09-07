@@ -8,9 +8,10 @@ import forces from "../server/routes/military/forces.js";
 import actions from "../server/routes/military/actions.js";
 import mapState from "../server/routes/military/map-state.js";
 import notifications from "../server/routes/military/notifications.js";
+import templates from "../server/routes/military/templates.js";
 
 const handlers: Record<string, (request: ApiRequest, response: ApiResponse) => Promise<void>> = {
-  overview, "officer-corps": officerCorps, conflicts, fronts, reports, forces, actions, "map-state": mapState, notifications,
+  overview, "officer-corps": officerCorps, conflicts, fronts, reports, forces, actions, "map-state": mapState, notifications, templates,
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
