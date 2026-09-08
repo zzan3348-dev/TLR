@@ -15,6 +15,12 @@
 @media(max-width:760px){.hq-two-columns,.hq-force-layout{grid-template-columns:1fr}.hq-force-list{max-height:230px}.hq-tabs button{padding:9px 3px;font-size:11px}.hq-metrics{grid-template-columns:repeat(3,1fr)}.hq-edit{grid-template-columns:1fr}}
 
 /* One continuous command surface; map tools overlay the full map canvas. */
+.hq-art-icon{display:inline-block;width:30px;height:30px;object-fit:contain;object-position:center;flex:0 0 auto;filter:none;content:normal}
+.military-hq .hq-tabs button,.military-hq .hq-subtabs button{display:flex;align-items:center;justify-content:center;gap:6px}
+.military-hq .hq-tabs .hq-art-icon{width:24px;height:24px}
+.military-hq .hq-force-list .hq-force-art-row{flex-direction:row;align-items:center}
+.military-hq .hq-force-art-row>span{min-width:0}
+.hq-plan-palette .hq-art-icon{width:26px;height:26px}
 .military-hq>.strategic-window__body{flex:1}
 .military-hq .strategic-window__chrome .hq-help-button{margin-left:auto;width:auto;height:26px}
 .military-hq .strategic-window__chrome>div{margin-right:auto}

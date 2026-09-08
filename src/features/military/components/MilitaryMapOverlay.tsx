@@ -1,5 +1,5 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { StrategyIcon } from "../../../components/StrategyIcon";
+import { MilitaryIcon } from "./MilitaryIcon";
 import type { MapCamera, ViewportSize } from "../../../types/mapCountry";
 import type { Province } from "../../../types/province";
 import type { MapMode } from "../../../types/faction";
@@ -118,7 +118,7 @@ export function MilitaryMapOverlay(props: Props) {
   const recentThreshold = latestReportTime - 30 * 86_400_000;
   const reports = props.state.reports.filter((report) => report.marker !== null && reportFilter !== "HIDDEN" && (reportFilter === "ALL" || Date.parse(report.report_world_date) >= recentThreshold));
   const modeLabel = props.mode === "army" ? "육군 지도" : props.mode === "navy" ? "해군 지도" : "공군 지도";
-  const modeIcon = `/assets/ui/generated-icons/world-control/${props.mode}-map.png`;
+  const modeIcon = `/assets/ui/military-art/${props.mode}.png`;
   const legendItems = props.mode === "army"
     ? ["전선 통제선", "점령 구역", "최근 교전 결과"]
     : props.mode === "navy"
@@ -128,7 +128,7 @@ export function MilitaryMapOverlay(props: Props) {
   return (
     <div className={`military-map-overlay military-map-overlay--${props.mode}`} aria-label={modeLabel}>
       {props.mode === "army" ? <OccupationMapLayer {...props} /> : null}
-      <div className="military-map-overlay__mode-plate"><StrategyIcon name={props.mode === "army" ? "armyMap" : props.mode === "navy" ? "navyMap" : "airMap"} /><span>{modeLabel}</span><select aria-label="전투 결과 표시 범위" value={reportFilter} onChange={(event) => setReportFilter(event.target.value as typeof reportFilter)}><option value="RECENT">최근 30일</option><option value="ALL">전체 결과</option><option value="HIDDEN">결과 숨김</option></select></div>
+      <div className="military-map-overlay__mode-plate"><MilitaryIcon name={props.mode} /><span>{modeLabel}</span><select aria-label="전투 결과 표시 범위" value={reportFilter} onChange={(event) => setReportFilter(event.target.value as typeof reportFilter)}><option value="RECENT">최근 30일</option><option value="ALL">전체 결과</option><option value="HIDDEN">결과 숨김</option></select></div>
       <svg className="military-map-overlay__fronts" viewBox={`0 0 ${props.viewport.width} ${props.viewport.height}`} aria-label="전선과 작전 계획">
         <defs><marker id={arrowId} markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 L4.5 2.5 L0 5 L1 2.5 Z" fill="#79cfc6" stroke="#092025" strokeWidth=".35" /></marker></defs>
         {copies.flatMap((copy) => (props.state.operations ?? []).filter((operation) => (operation.plan_geometry?.length ?? 0) >= 2).map((operation) => {
@@ -155,9 +155,9 @@ export function MilitaryMapOverlay(props: Props) {
         const summary = props.state.forceSummaries.find((item) => item.frontId === front.id);
         return [<button type="button" key={`label:${front.id}:${copy}`} className={`military-front-counter${selection?.kind === "front" && selection.id === front.id ? " is-selected" : ""}`} style={{ left: screen.x, top: screen.y }} onClick={() => select("front", front.id)}>
           <strong>{front.display_name}</strong>
-          <span><StrategyIcon name="armyMap" />{summary?.landUnits ?? 0}</span>
-          <span><StrategyIcon name="navyMap" />{summary?.fleets ?? 0}</span>
-          <span><StrategyIcon name="airMap" />{summary?.airWings ?? 0}</span>
+          <span><MilitaryIcon name="army" />{summary?.landUnits ?? 0}</span>
+          <span><MilitaryIcon name="navy" />{summary?.fleets ?? 0}</span>
+          <span><MilitaryIcon name="air" />{summary?.airWings ?? 0}</span>
         </button>];
       }))}
       {copies.flatMap((copy) => reports.flatMap((report, index) => {
@@ -170,7 +170,7 @@ export function MilitaryMapOverlay(props: Props) {
         screen.y += Math.floor(nearby / 4) * 26;
         if (screen.x < -40 || screen.x > props.viewport.width + 40 || screen.y < -40 || screen.y > props.viewport.height + 40) return [];
         const tone = report.marker_tone === "WIN" ? "win" : report.marker_tone === "LOSS" ? "loss" : "neutral";
-        return [<button key={`report:${report.id}:${copy}`} type="button" className={`military-result-marker military-result-marker--${tone}`} style={{ left: screen.x, top: screen.y }} onClick={() => props.onReportSelect(report)} title={report.title} aria-label={`${report.title} 전쟁 보고서 열기`}><img src="/assets/ui/icons/military/battle-result.svg" alt="" /></button>];
+        return [<button key={`report:${report.id}:${copy}`} type="button" className={`military-result-marker military-result-marker--${tone}`} style={{ left: screen.x, top: screen.y }} onClick={() => props.onReportSelect(report)} title={report.title} aria-label={`${report.title} 전쟁 보고서 열기`}><MilitaryIcon name={tone === "loss" ? "defensive" : "offensive"} /></button>];
       }))}
       {copies.flatMap((copy) => fronts.flatMap((front) => {
         const midpoint = frontMidpoint(front);

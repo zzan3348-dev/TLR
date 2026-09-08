@@ -6,6 +6,7 @@ import { MILITARY_ROUTES } from "../routes";
 import { fetchMilitaryOverview } from "../militaryClient";
 import { militaryLabel } from "../militaryLabels";
 import { CommandMap } from "./CommandMap";
+import { MilitaryIcon } from "./MilitaryIcon";
 import type {
   Conflict,
   ForceKind,
@@ -346,7 +347,7 @@ export function ConflictWindow({ onClose, countryKey, embedded }: ConflictWindow
               {fronts.map((front) => <button type="button" className="hq-row" key={front.id} aria-pressed={selection?.kind === "front" && selection.id === front.id} onClick={() => selectMapItem("front", front.id)}>{front.display_name}</button>)}
               {!fronts.length && <p>등록된 전선 없음</p>}
               <h4>배치 사단</h4>
-              {overview?.units.filter((unit) => !["DISBANDED", "DESTROYED"].includes(unit.status) && (!selection || selection.kind !== "front" || unit.assigned_front_id === selection.id)).map((unit) => <button type="button" key={unit.id} className="hq-row" aria-pressed={selection?.kind === "unit" && selection.id === unit.id} onClick={() => selectMapItem("unit", unit.id)}><img src="/assets/ui/icons/military/army-map.svg" alt="" /><span>{unit.display_name}<small>{militaryLabel(unit.status)}</small></span></button>)}
+              {overview?.units.filter((unit) => !["DISBANDED", "DESTROYED"].includes(unit.status) && (!selection || selection.kind !== "front" || unit.assigned_front_id === selection.id)).map((unit) => <button type="button" key={unit.id} className="hq-row" aria-pressed={selection?.kind === "unit" && selection.id === unit.id} onClick={() => selectMapItem("unit", unit.id)}><MilitaryIcon name="army" /><span>{unit.display_name}<small>{militaryLabel(unit.status)}</small></span></button>)}
               <h4>작전</h4>
               {actions.map((action) => <button type="button" key={action.id} className="hq-row" aria-pressed={selection?.kind === "operation" && selection.id === action.id} onClick={() => selectMapItem("operation", action.id)}>{action.title}</button>)}
               <button type="button" onClick={() => setDetailOpen(true)}>전선·작전 관리</button>
@@ -434,7 +435,7 @@ export function ConflictWindow({ onClose, countryKey, embedded }: ConflictWindow
                               } } : { scope: "headquarters" } }));
                             }}
                           >
-                            <UiIcon name="map" />
+                            <MilitaryIcon name="objective" />
                             {drawingFront ? "지도에서 지정 중" : "지도에서 경로 지정"}
                           </button>
                           <small>{frontDraft.geometry.length >= 2 ? `${frontDraft.geometry.length}개 통제점이 지정되었습니다.` : "지도 위의 경로를 순서대로 클릭하십시오."}</small>
@@ -589,11 +590,11 @@ export function ConflictWindow({ onClose, countryKey, embedded }: ConflictWindow
             </section>
             <div className="hq-plan-palette" aria-label="전투 계획">
               <strong>전투 계획</strong><div>
-                <button type="button" title="전선 — 전선 관리에서 접경 지역을 지정합니다" onClick={() => setDetailOpen(true)}><img src="/assets/ui/icons/military/army-map.svg" alt="" /><span>전선</span></button>
-                <button type="button" title="방어선 — 시작점, 경유점, 목표점을 지정합니다" onClick={() => drawPlan("DEFENSIVE")}><img src="/assets/ui/icons/intelligence/defense.svg" alt="" /><span>방어</span></button>
-                <button type="button" title="공세 — 지도에서 공세 경로를 작성합니다" onClick={() => drawPlan("OFFENSIVE")}><img src="/assets/ui/icons/intelligence/operation.svg" alt="" /><span>공세</span></button>
-                <button type="button" title="목표선 — 작전의 목표 경로를 지정합니다" onClick={() => drawPlan("OBJECTIVE")}><img src="/assets/ui/icons/military/air-map.svg" alt="" /><span>목표</span></button>
-                <button type="button" title="현재 초안의 작전선 삭제 — 저장된 작전은 변경하지 않습니다" onClick={() => { setDraft((current) => ({ ...current, geometry: [] })); window.dispatchEvent(new Event("tlr:military-front-draw-cancel")); }}><span>×</span><span>삭제</span></button>
+                <button type="button" title="전선 — 전선 관리에서 접경 지역을 지정합니다" onClick={() => setDetailOpen(true)}><MilitaryIcon name="army" /><span>전선</span></button>
+                <button type="button" title="방어선 — 시작점, 경유점, 목표점을 지정합니다" onClick={() => drawPlan("DEFENSIVE")}><MilitaryIcon name="defensive" /><span>방어</span></button>
+                <button type="button" title="공세 — 지도에서 공세 경로를 작성합니다" onClick={() => drawPlan("OFFENSIVE")}><MilitaryIcon name="offensive" /><span>공세</span></button>
+                <button type="button" title="목표선 — 작전의 목표 경로를 지정합니다" onClick={() => drawPlan("OBJECTIVE")}><MilitaryIcon name="objective" /><span>목표</span></button>
+                <button type="button" title="현재 초안의 작전선 삭제 — 저장된 작전은 변경하지 않습니다" onClick={() => { setDraft((current) => ({ ...current, geometry: [] })); window.dispatchEvent(new Event("tlr:military-front-draw-cancel")); }}><MilitaryIcon name="delete" /><span>삭제</span></button>
                 <button type="button" title="초안 확인 및 제출" onClick={() => setDetailOpen(true)}>초안<br />확인</button>
               </div>
             </div>

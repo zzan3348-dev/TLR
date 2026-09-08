@@ -12,10 +12,13 @@ import { militaryLabel } from "../militaryLabels";
 import { productionProgress, militaryNumber, serviceForces } from "../headquartersModel";
 import type { ForceKind, MilitaryFront, MilitaryOverview, MilitaryTemplate, WarReport } from "../types";
 import "./headquarters.css";
+import { MilitaryIcon, type MilitaryIconName } from "./MilitaryIcon";
 
 type Tab = "overview" | "forces" | "production" | "thought" | "war";
 const TABS: [Tab, string][] = [["overview", "개요"], ["forces", "전력"], ["production", "편성·생산"], ["thought", "군사사상"], ["war", "전쟁"]];
 const SERVICES: [ForceKind, string][] = [["LAND_UNIT", "육군"], ["VESSEL", "해군"], ["AIR_WING", "공군"]];
+const SERVICE_ICON: Record<ForceKind, MilitaryIconName> = { LAND_UNIT:"army", VESSEL:"navy", AIR_WING:"air" };
+const TAB_ICON: Record<Tab, MilitaryIconName> = { overview:"doctrine", forces:"army", production:"production", thought:"doctrine", war:"offensive" };
 const query = <T,>(url: string) => militaryMutation<T>(url, {}, "GET");
 const HeadquartersAdmin = lazy(() => import("./HeadquartersAdmin").then((module) => ({ default: module.HeadquartersAdmin })));
 
@@ -69,7 +72,7 @@ export function MilitaryWindow({ countryKey, onClose }: { countryKey: string; on
   return <StrategicWindow title="군사 사령부" eyebrow={`${name}${overview ? ` · ${overview.worldDate}` : ""}`} className="military-hq" onClose={onClose} headerControls={<button className="hq-help-button" type="button" aria-expanded={helpOpen} onClick={() => setHelpOpen(!helpOpen)}>도움말</button>}>
     {helpOpen && <div className="hq-help" role="note">전력에서 부대를 확인하고, 편성·생산에서 새 편성을 준비합니다. 전쟁에서는 전선을 선택한 뒤 지도에 작전 경로를 지정하고 초안을 제출하십시오. 전투 결과는 관리자 판정으로 반영되며 실시간 자동 이동은 없습니다.</div>}
     {isAdmin && <label className="hq-admin-switch"><input type="checkbox" checked={adminMode} onChange={(event) => setAdminMode(event.target.checked)} />관리자 모드</label>}
-    <nav className="hq-tabs" aria-label="군사 사령부">{TABS.map(([key, label]) => <button key={key} aria-current={tab === key ? "page" : undefined} onClick={() => setTab(key)}>{label}</button>)}</nav>
+    <nav className="hq-tabs" aria-label="군사 사령부">{TABS.map(([key, label]) => <button key={key} aria-current={tab === key ? "page" : undefined} onClick={() => setTab(key)}><MilitaryIcon name={TAB_ICON[key]} />{label}</button>)}</nav>
     {error && <div role="alert" className="hq-error">{error} <button onClick={() => void load()}>다시 불러오기</button></div>}
     {loading && !overview ? <p role="status">군사 정보 불러오는 중…</p> : overview && <div className={`hq-content${tab === "war" && !adminMode ? " hq-content--war" : ""}`} aria-busy={loading}>
       {tab === "overview" && <Overview data={overview} reports={reports} onReport={setReportId} onWar={() => setTab("war")} />}
@@ -88,7 +91,7 @@ function Overview({ data, reports, onReport, onWar }: { data: MilitaryOverview; 
     <div className="hq-two-columns">
       <section className="hq-panel"><h3>전군 현황</h3>{SERVICES.map(([kind, label]) => {
         const forces = serviceForces(data, kind);
-        return <div className="hq-service" key={kind}><strong>{label}</strong><span>{forces.length} {kind === "VESSEL" ? "척 (기록 포함)" : "편성"}</span><span>배속 {forces.filter((f) => f.frontId).length}</span></div>;
+        return <div className="hq-service" key={kind}><MilitaryIcon name={SERVICE_ICON[kind]} /><strong>{label}</strong><span>{forces.length} {kind === "VESSEL" ? "척 (기록 포함)" : "편성"}</span><span>배속 {forces.filter((f) => f.frontId).length}</span></div>;
       })}</section>
       <section className="hq-panel"><h3>현재 전쟁</h3>{data.conflicts.length ? data.conflicts.map((war) => <button className="hq-row" key={war.id} onClick={onWar}><strong>{war.display_name}</strong><span>{militaryLabel(war.status)}</span></button>) : <p>현재 진행 중인 전쟁이 없습니다.</p>}</section>
     </div>
@@ -116,11 +119,11 @@ function Forces({ data, fronts, reload }: { data: MilitaryOverview; fronts: Mili
     catch { setError("변경하지 못했습니다. 권한과 편성 상태를 확인해 주세요."); }
     finally { setPending(false); }
   };
-  return <><div className="hq-subtabs">{SERVICES.map(([key, label]) => <button key={key} aria-pressed={kind === key} onClick={() => { setKind(key); setSelectedId(""); setStatus(""); }}>{label}</button>)}</div>
+  return <><div className="hq-subtabs">{SERVICES.map(([key, label]) => <button key={key} aria-pressed={kind === key} onClick={() => { setKind(key); setSelectedId(""); setStatus(""); }}><MilitaryIcon name={SERVICE_ICON[key]} />{label}</button>)}</div>
     {kind === "VESSEL" && <FleetOrganizer data={data} reload={reload} />}
     {error && <p role="alert">{error}</p>}<div className="hq-force-layout">
       <aside className="hq-panel hq-force-list"><label>편성 검색<input value={search} onChange={(event) => setSearch(event.target.value)} /></label><label>상태<select value={status} onChange={(event) => setStatus(event.target.value)}><option value="">전체</option>{[...new Set(forces.map((f) => f.status))].map((value) => <option key={value} value={value}>{militaryLabel(value)}</option>)}</select></label>
-        {filtered.map((force) => <button key={force.id} className="hq-row" aria-pressed={selected?.id === force.id} onClick={() => setSelectedId(force.id)}><strong>{force.name}</strong><small>{force.templateName} · {militaryLabel(force.status)}</small></button>)}{!filtered.length && <p>해당 전력이 없습니다.</p>}
+        {filtered.map((force) => <button key={force.id} className="hq-row hq-force-art-row" aria-pressed={selected?.id === force.id} onClick={() => setSelectedId(force.id)}><MilitaryIcon name={SERVICE_ICON[kind]} /><span><strong>{force.name}</strong><small>{force.templateName} · {militaryLabel(force.status)}</small></span></button>)}{!filtered.length && <p>해당 전력이 없습니다.</p>}
       </aside>
       <section className="hq-panel">{selected ? <><h3>{selected.name}</h3><p>{selected.templateName}</p><dl className="hq-facts">
         <dt>상태</dt><dd>{militaryLabel(selected.status)}</dd><dt>현재 / 최대 인원</dt><dd>{militaryNumber(selected.personnel)} / {militaryNumber(selected.maximum)}</dd>
@@ -148,7 +151,7 @@ function Production({ data, reload }: { data: MilitaryOverview; reload: () => Pr
     finally { setPending(false); }
   };
   return <><div className="hq-metrics"><div><span>가용 인력</span><strong>{militaryNumber(data.manpower.available)}</strong></div><div><span>사용 가능 생산능력</span><strong>{militaryNumber(data.productionCapacity.available)}</strong></div><div><span>생산 중</span><strong>{data.queues.length}</strong></div></div>
-    <div className="hq-subtabs">{SERVICES.map(([key, label]) => <button key={key} aria-pressed={kind === key && !designer} onClick={() => { setKind(key); setDesigner(false); }}>{label}</button>)}<button aria-pressed={designer} onClick={() => setDesigner(true)}>사단 편제 설계</button></div>{error && <p role="alert">{error}</p>}
+    <div className="hq-subtabs">{SERVICES.map(([key, label]) => <button key={key} aria-pressed={kind === key && !designer} onClick={() => { setKind(key); setDesigner(false); }}><MilitaryIcon name={SERVICE_ICON[key]} />{label}</button>)}<button aria-pressed={designer} onClick={() => setDesigner(true)}><MilitaryIcon name="production" />사단 편제 설계</button></div>{error && <p role="alert">{error}</p>}
     {designer ? <DivisionDesigner data={data} reload={reload} /> :
     <div className="hq-two-columns"><section className="hq-panel"><h3>{kind === "VESSEL" ? "개별 함선 건조" : "신규 편성"}</h3>{templates.map((template) => <form className="hq-template" key={template.id} onSubmit={(event) => { event.preventDefault(); void form(template, String(new FormData(event.currentTarget).get("name"))); }}>
       <strong>{template.display_name}</strong><dl className="hq-facts"><dt>필요 인력</dt><dd>{militaryNumber(kind === "VESSEL" ? template.crew_required : template.manpower_required)}</dd><dt>생산능력 점유</dt><dd>{militaryNumber(template.production_capacity_required)}</dd><dt>기간</dt><dd>{militaryNumber(template.formation_days)}일</dd></dl><label>편성 명칭<input name="name" aria-label={`${template.display_name} 명칭`} defaultValue={template.display_name} required maxLength={80} /></label><button disabled={pending || template.configuration_status !== "READY"}>생산 시작</button>

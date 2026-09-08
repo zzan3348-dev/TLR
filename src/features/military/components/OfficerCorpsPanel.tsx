@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { UiIcon } from "../../../components/UiIcon";
+import { MilitaryIcon } from "./MilitaryIcon";
 import { fetchOfficerCorps, selectGrandDoctrine, selectOfficerSpirit } from "../militaryClient";
 import type { GrandDoctrine, MilitarySelectionState, OfficerCorpsState, OfficerSpirit, OfficerSpiritCategory } from "../types";
 
@@ -77,7 +78,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
 
       <div className="officer-corps__board">
         <button type="button" className="officer-corps__doctrine" onClick={() => setOpenCategory(openCategory === "DOCTRINE" ? null : "DOCTRINE")}>
-          {doctrine?.iconPath ? <img src={doctrine.iconPath} alt="" /> : <small>아이콘 미설정</small>}
+          {doctrine?.iconPath ? <img src={doctrine.iconPath} alt="" /> : <MilitaryIcon name="doctrine" />}
           <span className="officer-corps__slot-copy"><small>대교리</small><strong>{doctrine?.displayName ?? "대교리 미채택"}</strong><em>{doctrine?.description || "교리 목록을 열어 국가의 군사적 방향을 확인하십시오."}</em></span>
           <span className="officer-corps__slot-command">교리 목록</span>
         </button>
@@ -88,7 +89,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
             const meta = CATEGORY_META[category];
             return (
               <button key={category} type="button" className="officer-corps__slot" onClick={() => setOpenCategory(openCategory === category ? null : category)}>
-                {selected?.iconPath ? <img src={selected.iconPath} alt="" /> : <small>아이콘 미설정</small>}
+                {selected?.iconPath ? <img src={selected.iconPath} alt="" /> : <MilitaryIcon name="doctrine" />}
                 <span><small>{meta.label}</small><strong>{selected?.displayName ?? "미선택"}</strong></span>
                 <b>{openCategory === category ? "닫기" : "열기"}</b>
               </button>
@@ -107,7 +108,7 @@ export function OfficerCorpsPanel({ countryKey }: { countryKey: string }) {
                   onMouseEnter={() => setFocused(focusedOption)}
                   onFocus={() => setFocused(focusedOption)}
                   onClick={() => void applyOption(option)} disabled={pending !== null || option.selectionState !== "READY"}>
-                  {option.iconPath ? <img src={option.iconPath} alt="" /> : <small>아이콘 미설정</small>}
+                  {option.iconPath ? <img src={option.iconPath} alt="" /> : <MilitaryIcon name="doctrine" />}
                   <span><strong>{option.displayName}</strong><small>{STATE_LABEL[option.selectionState]}</small></span>
                   {(option.selectionState === "LOCKED" || option.selectionState === "PARTIAL") ? <UiIcon name="lock" /> : null}
                 </button>

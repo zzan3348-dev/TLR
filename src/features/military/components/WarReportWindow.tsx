@@ -105,9 +105,9 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
         )}
         {!loading && !error && sorted.length === 0 && (
           <div className="war-report-window__standby">
-            <img src="/assets/ui/generated-icons/military/victory.png" alt="" />
+            <img src="/assets/ui/military-art/offensive.png" alt="" />
             <div><small>WAR ARCHIVE STANDBY</small><strong>전투 판정 기록대</strong><span>교전 결과가 접수되면 승전·패전·피해·전선 변화가 이곳에 보존된다.</span></div>
-            <img src="/assets/ui/generated-icons/military/defeat.png" alt="" />
+            <img src="/assets/ui/military-art/defensive.png" alt="" />
           </div>
         )}
 
@@ -127,7 +127,7 @@ export function WarReportWindow({ onClose, initialReportId = null }: WarReportWi
                     className="war-report-card__header"
                     onClick={() => setExpandedId(expanded ? null : report.id)}
                   >
-                    <span className="war-report-card__marker"><img src={report.marker_tone === "LOSS" ? "/assets/ui/generated-icons/military/defeat.png" : "/assets/ui/generated-icons/military/victory.png"} alt="" /><b>{toneLabel(report)}</b></span>
+                    <span className="war-report-card__marker"><img src={report.marker_tone === "LOSS" ? "/assets/ui/military-art/defensive.png" : "/assets/ui/military-art/offensive.png"} alt="" /><b>{toneLabel(report)}</b></span>
                     <span className="war-report-card__title">{report.title}</span>
                     <span className="war-report-card__date">{report.report_world_date}</span>
                     <UiIcon name={expanded ? "chevron-up" : "chevron-down"} />

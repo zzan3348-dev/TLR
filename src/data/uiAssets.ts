@@ -41,9 +41,9 @@ export const uiIconAssets = {
   worldControl: {
     holdTime: "/assets/ui/generated-icons/world-control/hold-time.png",
     advanceTime: "/assets/ui/generated-icons/world-control/advance-time.png",
-    armyMap: "/assets/ui/generated-icons/world-control/army-map.png",
-    navyMap: "/assets/ui/generated-icons/world-control/navy-map.png",
-    airMap: "/assets/ui/generated-icons/world-control/air-map.png",
+    armyMap: "/assets/ui/military-art/army.png",
+    navyMap: "/assets/ui/military-art/navy.png",
+    airMap: "/assets/ui/military-art/air.png",
   },
   ui: {
     close: "/assets/ui/icons/ui/close.svg",
