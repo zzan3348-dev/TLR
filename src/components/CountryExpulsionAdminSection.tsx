@@ -76,7 +76,7 @@ export function CountryExpulsionAdminSection() {
   return (
     <section className="directorate-diplomacy directorate-expulsion" aria-labelledby="directorate-expulsion-title">
       <header>
-        <div><span>PLAYER ASSIGNMENT / REVOCATION</span><h2 id="directorate-expulsion-title">국가 연재 자격 추방</h2></div>
+        <div><h2 id="directorate-expulsion-title">국가 연재 자격 추방</h2></div>
         <strong>활성 배정 {assignments.length}건</strong>
       </header>
       {notice ? <p className="directorate-expulsion__notice" role="status">{notice}</p> : null}

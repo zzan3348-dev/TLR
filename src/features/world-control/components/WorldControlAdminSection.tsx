@@ -66,17 +66,17 @@ export function WorldControlAdminSection({ data, onReload, onError }: Props) {
 
   return (
     <section className="directorate-diplomacy world-control-admin" aria-labelledby="world-control-admin-title">
-      <header><div><span>WORLD CLOCK / REQUEST CONTROL</span><h2 id="world-control-admin-title">세계시간·상황 관제</h2></div><strong>{data.worldDate} · 진행 {data.counts.advance} / 보류 {data.counts.hold} / 미응답 {data.counts.none}</strong></header>
+      <header><div><h2 id="world-control-admin-title">세계시간·상황 관제</h2></div><strong>{data.worldDate} · 진행 {data.counts.advance} / 보류 {data.counts.hold} / 미응답 {data.counts.none}</strong></header>
       <div className="world-control-admin__situation">
         <img src={`/assets/ui/world-control/situation-level-${data.situationLevel}.png`} alt={`현재 세계상황 ${data.situationLevel}단계`} />
-        <div><small>CURRENT SITUATION</small><h3>{data.situationLevel}단계 · {SITUATION_LABELS[data.situationLevel]}</h3><p>{data.situationReason ?? "초기 안정 상태"}</p></div>
+        <div><h3>{data.situationLevel}단계 · {SITUATION_LABELS[data.situationLevel]}</h3><p>{data.situationReason ?? "초기 안정 상태"}</p></div>
         <label>단계<select value={level} onChange={(event) => setLevel(Number(event.target.value))}>{[5,4,3,2,1].map((value) => <option key={value} value={value}>{value} · {SITUATION_LABELS[value]}</option>)}</select></label>
         <label>변경 사유<input value={reason} maxLength={1000} onChange={(event) => setReason(event.target.value)} /></label>
         <div className="directorate-diplomacy__buttons"><button type="button" disabled={busy} onClick={() => void run("PREVIEW_SITUATION")}>미리보기</button><button type="button" disabled={busy || !preview} onClick={() => void run("SET_SITUATION")}>변경 확정</button></div>
         {preview ? <strong className="world-control-admin__preview">{preview}</strong> : null}
       </div>
       <div className="world-control-admin__time-advance">
-        <header><div><small>WORLD DATE ADVANCE</small><h3>세계시간 진행</h3></div><strong>{data.worldDate}</strong></header>
+        <header><div><h3>세계시간 진행</h3></div><strong>{data.worldDate}</strong></header>
         <div className="world-control-admin__date-shortcuts"><button type="button" onClick={() => { setTargetWorldDate(addWorldDays(data.worldDate, 1)); setTimePreview(null); }}>+1일</button><button type="button" onClick={() => { setTargetWorldDate(addWorldDays(data.worldDate, 7)); setTimePreview(null); }}>+7일</button></div>
         <label>목표 세계날짜<input type="date" min={data.worldDate} value={targetWorldDate} onChange={(event) => { setTargetWorldDate(event.target.value); setTimePreview(null); }} /></label>
         <label>진행 사유<input value={timeReason} maxLength={1000} onChange={(event) => { setTimeReason(event.target.value); setTimePreview(null); }} /></label>

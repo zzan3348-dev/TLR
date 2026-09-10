@@ -251,7 +251,7 @@ export function ProvinceRegionAdminSection() {
   return (
     <section className="directorate-card province-region-admin">
       <header>
-        <div><span>PROVINCE CONTROL / REGION REGISTRY</span><h2>프로빈스 지역 편집기</h2></div>
+        <div><h2>프로빈스 지역 편집기</h2></div>
         <strong>{message}</strong>
       </header>
       <div className="province-region-admin__layout">
@@ -277,7 +277,7 @@ export function ProvinceRegionAdminSection() {
             <div>{regions.map((region) => <button type="button" className={editingId === region.id ? "is-active" : ""} key={region.id} onClick={() => editRegion(region)}><b>{region.name}</b><small>{region.id} · {region.provinceIds.length}개</small></button>)}</div>
           </div>
           <label>지역 이름<input value={name} onChange={(event) => { setName(event.target.value); if (!regionId) setRegionId(`region_${Date.now().toString(36)}`); }} placeholder="파리 대도시권" /></label>
-          <label>Region ID<input value={regionId} onChange={(event) => setRegionId(event.target.value.toLowerCase().replace(/[^a-z0-9_-]/gu, ""))} placeholder="paris_metro" /></label>
+          <label>지역 식별자<input value={regionId} onChange={(event) => setRegionId(event.target.value.toLowerCase().replace(/[^a-z0-9_-]/gu, ""))} placeholder="paris_metro" /></label>
           <div className="province-region-admin__selection">
             <h3>선택된 프로빈스 <b>{selectedIds.size}개</b></h3>
             <ol>{[...selectedIds].sort().map((id) => <li key={id}>{id}</li>)}</ol>

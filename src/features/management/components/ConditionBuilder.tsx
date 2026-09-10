@@ -44,7 +44,7 @@ export function ConditionBuilder({ value, countries, onChange }: {
 
   return (
     <section className="management-builder" aria-labelledby="condition-builder-title">
-      <header><div><span>SHARED BUILDER</span><h3 id="condition-builder-title">발동 조건</h3></div>
+      <header><div><h3 id="condition-builder-title">발동 조건</h3></div>
         <select aria-label="조건 결합 방식" value={value.mode} onChange={(event) => onChange({ ...value, mode: event.target.value as ManagementConditionGroup["mode"] })}>
           <option value="ALL">모든 조건 충족</option><option value="ANY">하나 이상 충족</option>
         </select>
@@ -68,7 +68,7 @@ export function ConditionBuilder({ value, countries, onChange }: {
             <button type="button" onClick={() => remove(condition.id)} aria-label="조건 삭제">×</button>
           </div>
         ))}
-        {value.conditions.length === 0 ? <p>조건이 없습니다. 수동 발동 이벤트는 조건 없이 저장할 수 있습니다.</p> : null}
+        {value.conditions.length === 0 ? <p>조건 없음</p> : null}
       </div>
       <button className="management-builder__add" type="button" onClick={add}>+ 조건 추가</button>
     </section>

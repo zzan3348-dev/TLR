@@ -90,7 +90,7 @@ export function IntelligenceAdminSection({ data, onReload, onError }: Props) {
     >
       <header>
         <div>
-          <span>INTELLIGENCE CONTROL / CLASSIFIED</span>
+
           <h2 id="intelligence-admin-title">첩보 관제</h2>
         </div>
         <strong>

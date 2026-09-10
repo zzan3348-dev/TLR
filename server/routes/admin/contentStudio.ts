@@ -1,4 +1,6 @@
+import { randomUUID } from "node:crypto";
 import { mapCountries } from "../../../src/data/mapCountries.js";
+import { eventImageError } from "../../../src/features/management/imageUpload.js";
 import { COMMON_DECISIONS } from "../../../src/features/decisions/data/commonDecisions.js";
 import { validateEventEffects } from "../../../src/features/effects/effectValidation.js";
 import { listNationalSpiritDefinitions } from "../../../src/features/effects/nationalSpiritRegistry.js";
@@ -98,8 +100,8 @@ function normalizeDraft(value: unknown): ManagementEventDraft {
     body: safeText(source.body, 12000),
     image: safeText(source.image, 1000) || undefined,
     imageCrop: {
-      x: Math.min(100, Math.max(0, Number(crop.x) || 50)),
-      y: Math.min(100, Math.max(0, Number(crop.y) || 50)),
+      x: Math.min(100, Math.max(0, Number.isFinite(Number(crop.x)) ? Number(crop.x) : 50)),
+      y: Math.min(100, Math.max(0, Number.isFinite(Number(crop.y)) ? Number(crop.y) : 50)),
       scale: Math.min(4, Math.max(1, Number(crop.scale) || 1)),
     },
     quote: safeText(source.quote, 1200) || undefined,
@@ -153,9 +155,12 @@ async function readContent(admin: ReturnType<typeof getAdminClient>) {
 }
 
 async function persistEvent(admin: ReturnType<typeof getAdminClient>, draft: ManagementEventDraft) {
+  const existing = await admin.from("event_definitions").select("payload").eq("id", draft.id).maybeSingle<{ payload: Record<string, unknown> }>();
+  if (existing.error) throw existing.error;
   const databaseStatus = draft.publishState === "PUBLISHED" ? "ACTIVE" : draft.publishState === "ARCHIVED" ? "ARCHIVED" : "DRAFT";
   const payload = {
-    body: draft.body, image: draft.image, imageCrop: draft.imageCrop, quote: draft.quote, attribution: draft.attribution,
+    ...existing.data?.payload,
+    body: draft.body, image: draft.image ?? null, imageCrop: draft.imageCrop, quote: draft.quote, attribution: draft.attribution,
     targetCountryIds: draft.targetCountryIds, trigger: draft.trigger, conditions: draft.conditions, workflowState: draft.publishState,
     deliveries: draft.deliveries,
   };
@@ -178,6 +183,19 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (request.method !== "POST") return void response.status(405).json({ error: "METHOD_NOT_ALLOWED" });
     const body = request.body && typeof request.body === "object" && !Array.isArray(request.body) ? request.body as Record<string, unknown> : {};
     const action = safeText(body.action, 40);
+    if (action === "UPLOAD_EVENT_IMAGE") {
+      const eventId = safeText(body.eventId, 80);
+      const contentType = safeText(body.contentType, 40);
+      if (!EVENT_ID.test(eventId) || eventImageError(contentType, Number(body.size))) {
+        return void response.status(400).json({ error: "INVALID_EVENT_IMAGE" });
+      }
+      const extension = contentType === "image/jpeg" ? "jpg" : contentType === "image/png" ? "png" : "webp";
+      const path = `events/${eventId}/${randomUUID()}.${extension}`;
+      const storage = admin.storage.from("event-images");
+      const signed = await storage.createSignedUploadUrl(path);
+      if (signed.error) throw signed.error;
+      return void response.status(200).json({ signedUrl: signed.data.signedUrl, publicUrl: storage.getPublicUrl(path).data.publicUrl });
+    }
     if (action === "SAVE_EVENT") {
       const draft = normalizeDraft(body.event);
       await persistEvent(admin, draft);
@@ -185,7 +203,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     }
     if (action === "CLONE_EVENT") {
       const draft = normalizeDraft(body.event);
-      draft.id = `${draft.id}_copy_${Date.now().toString(36)}`.slice(0, 80);
+      draft.id = `${draft.id.slice(0, 37)}_copy_${randomUUID()}`;
       draft.title = `${draft.title} 복제본`.slice(0, 180);
       draft.publishState = "DRAFT";
       draft.deliveries = [];

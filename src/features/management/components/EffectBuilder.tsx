@@ -16,7 +16,7 @@ export function EffectBuilder({ value, countries, spirits, onChange }: {
   const add = () => onChange([...value, { type: "modify_country_value", targetCountryIds: [], statKey: "stability", amount: 0 }]);
   return (
     <section className="management-builder management-builder--effects" aria-label="선택지 효과">
-      <header><div><span>SHARED BUILDER</span><h3>선택 시 효과</h3></div></header>
+      <header><div><h3>선택 시 효과</h3></div></header>
       <div className="management-builder__rows">
         {value.map((effect, index) => {
           const target = effect.targetCountryIds[0] ?? "";

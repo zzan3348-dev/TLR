@@ -14,7 +14,7 @@ export function AdminPlayPreviewSection() {
     } catch { setError("관리자 테스트 세션을 시작하지 못했습니다."); setBusy(false); }
   };
   return <section className="directorate-diplomacy directorate-preview" aria-labelledby="directorate-preview-title">
-    <header><div><span>READ-ONLY PLAY INSPECTION</span><h2 id="directorate-preview-title">플레이 화면 테스트</h2></div><strong>DB 배정 없음 · PRE_OPEN 허용</strong></header>
+    <header><div><h2 id="directorate-preview-title">플레이 화면 테스트</h2></div><strong>읽기 전용 미리보기</strong></header>
     <div className="directorate-preview__body">
       <label>테스트 국가<select value={countryKey} onChange={(event) => setCountryKey(event.target.value)}>{mapCountries.map((country) => <option key={country.key} value={country.key}>{country.name}</option>)}</select></label>
       <button type="button" disabled={busy || !countryKey} onClick={() => void enter()}>{busy ? "준비 중…" : "테스트 입장"}</button>

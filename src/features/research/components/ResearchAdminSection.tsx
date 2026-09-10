@@ -1,3 +1,4 @@
+import { managementLabel } from "../../management/labels";
 import { useState } from "react";
 import { UiIcon } from "../../../components/UiIcon";
 import { mapCountries } from "../../../data/mapCountries";
@@ -31,7 +32,7 @@ export function ResearchAdminSection({ data, busyId, onAction }: Props) {
     <section className="directorate-research" aria-labelledby="directorate-research-title">
       <header>
         <UiIcon name="research/laboratory" />
-        <div><span>RESEARCH DIRECTORATE / REVIEW DESK</span><h2 id="directorate-research-title">국가 연구 심사</h2></div>
+        <div><h2 id="directorate-research-title">국가 연구 심사</h2></div>
         <strong>{data.worldDate} · 심사 {queue.length}건 · 진행 {active.length}건</strong>
       </header>
       <div className="directorate-research__ledger">
@@ -54,7 +55,7 @@ export function ResearchAdminSection({ data, busyId, onAction }: Props) {
           <article key={project.id} data-status={project.status.toLowerCase()}>
             <UiIcon name="research/request" />
             <div>
-              <small>{countryName(project.country_key)} · {project.category_id} · {project.status}</small>
+              <small>{countryName(project.country_key)} · {project.category_id} · {managementLabel(project.status)}</small>
               <h3>{project.title}</h3><p>{project.objective}</p>
               <span>최초 {project.initial_investment} RP · 누적 {project.total_investment} RP · 완료 {project.scheduled_completion_world_date ?? "미정"}</span>
             </div>
@@ -75,7 +76,7 @@ export function ResearchAdminSection({ data, busyId, onAction }: Props) {
       </div>
       {archive.length > 0 && <details className="directorate-research__archive">
         <summary>완료·반려·취소 기록 {archive.length}건</summary>
-        <div>{archive.map((project) => <span key={project.id}><b>{project.title}</b>{countryName(project.country_key)} · {project.status}</span>)}</div>
+        <div>{archive.map((project) => <span key={project.id}><b>{project.title}</b>{countryName(project.country_key)} · {managementLabel(project.status)}</span>)}</div>
       </details>}
     </section>
   );

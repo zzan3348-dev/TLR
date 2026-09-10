@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useSessionPreference } from "../useSessionPreference";
+import { EventImageUpload } from "./EventImageUpload";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { EventPaperTemplate } from "../../events/components/EventPaperTemplate";
 import { NewspaperEventTemplate } from "../../events/components/NewspaperEventTemplate";
 import { SuperEventTemplate } from "../../events/components/SuperEventTemplate";
@@ -7,7 +9,7 @@ import { ConditionBuilder } from "./ConditionBuilder";
 import { EffectBuilder } from "./EffectBuilder";
 import { createEmptyEventDraft, type ManagementContentPayload, type ManagementEventDraft, type ManagementPublishState } from "../types";
 import { mapCountries } from "../../../data/mapCountries";
-import { COMMON_DECISIONS } from "../../decisions/data/commonDecisions";
+import { COMMON_DECISIONS, DECISION_CATEGORY_LABELS, type DecisionCategoryId } from "../../decisions/data/commonDecisions";
 
 const STATE_LABEL: Record<ManagementPublishState, string> = {
   DRAFT: "초안",
@@ -87,23 +89,23 @@ function EventLivePreview({ event }: { event: ManagementEventDraft }) {
 }
 
 function AssetLibrary({ data, selected, onPick }: { data: ManagementContentPayload; selected?: string; onPick: (path: string) => void }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useSessionPreference<string>("asset-search", "");
   const assets = data.assets.filter((asset) => `${asset.label} ${asset.path}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
   return (
     <section className="management-asset-library">
       <header>
         <div>
-          <span>ASSET LIBRARY</span>
-          <h3>공용 에셋 선택</h3>
+
+          <h3>이미지·아이콘</h3>
         </div>
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="에셋 검색" aria-label="에셋 검색" />
+        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="이미지 검색" aria-label="이미지 검색" />
       </header>
       <div>
         {assets.map((asset) => (
           <button type="button" data-selected={selected === asset.path} onClick={() => onPick(asset.path)} key={asset.id}>
             <img src={asset.path} alt="" />
             <span>{asset.label}</span>
-            <small>{asset.kind}</small>
+            <small>{{ event: "이벤트", decision: "아이콘", portrait: "인물" }[asset.kind]}</small>
           </button>
         ))}
       </div>
@@ -111,16 +113,17 @@ function AssetLibrary({ data, selected, onPick }: { data: ManagementContentPaylo
   );
 }
 
-function ChoiceEditor({ choice, index, data, onChange, onRemove }: { choice: EventChoice; index: number; data: ManagementContentPayload; onChange: (choice: EventChoice) => void; onRemove: () => void }) {
+function ChoiceEditor({ choice, index, data, onChange, onRemove, onClone }: { choice: EventChoice; index: number; data: ManagementContentPayload; onChange: (choice: EventChoice) => void; onRemove: () => void; onClone?: () => void }) {
   return (
-    <article className="management-choice-editor">
+    <details className="management-choice-editor">
+      <summary><strong>{String(index + 1).padStart(2, "0")} {choice.text || "새 선택지"}</strong><span>효과 {choice.effects?.length ?? 0}개 · 편집</span></summary>
       <header>
-        <strong>선택지 {index + 1}</strong>
+        <strong>선택지 {index + 1}</strong>{onClone ? <button type="button" onClick={onClone}>복제</button> : null}
         <button type="button" onClick={onRemove} disabled={index === 0}>
           삭제
         </button>
       </header>
-      <label>
+      <details className="management-advanced"><summary>고급 설정</summary><label>
         선택지 ID
         <input
           value={choice.id}
@@ -132,7 +135,7 @@ function ChoiceEditor({ choice, index, data, onChange, onRemove }: { choice: Eve
           }
         />
       </label>
-      <label>
+      </details><label>
         표시 문구
         <input value={choice.text} onChange={(event) => onChange({ ...choice, text: event.target.value })} />
       </label>
@@ -140,31 +143,35 @@ function ChoiceEditor({ choice, index, data, onChange, onRemove }: { choice: Eve
         설명
         <textarea value={choice.description ?? ""} onChange={(event) => onChange({ ...choice, description: event.target.value })} />
       </label>
-      <EffectBuilder value={choice.effects ?? []} countries={data.countries} spirits={data.nationalSpirits} onChange={(effects) => onChange({ ...choice, effects })} />
-    </article>
+      <details className="management-disclosure"><summary>효과 {choice.effects?.length ?? 0}개 · 편집</summary><EffectBuilder value={choice.effects ?? []} countries={data.countries} spirits={data.nationalSpirits} onChange={(effects) => onChange({ ...choice, effects })} /></details>
+    </details>
   );
 }
 
-export function ContentStudio() {
+export function ContentStudio({ onPendingChange }: { onPendingChange?: (pending: boolean) => void }) {
   const visualPreview = import.meta.env.DEV && new URLSearchParams(window.location.search).get("management-ui-preview") === "1";
   const [data, setData] = useState<ManagementContentPayload | null>(() => (visualPreview ? DEV_CONTENT : null));
   const [selectedId, setSelectedId] = useState<string | null>(() => (visualPreview ? DEV_EVENT.id : null));
   const [draft, setDraft] = useState<ManagementEventDraft | null>(() => (visualPreview ? structuredClone(DEV_EVENT) : null));
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<ManagementPublishState | "ALL">("ALL");
+  const [query, setQuery] = useSessionPreference<string>("event-search", "");
+  const [filter, setFilter] = useSessionPreference<ManagementPublishState | "ALL">("event-filter", "ALL", ["ALL", ...Object.keys(STATE_LABEL)]);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [countryQuery, setCountryQuery] = useState("");
+  const [uploadBusy, setUploadBusy] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(true);
+  const [countryQuery, setCountryQuery] = useSessionPreference<string>("country-search", "");
   const [deliveryDate, setDeliveryDate] = useState(() => new Date().toISOString().slice(0, 10));
+  const loaded = useRef(false);
 
   useEffect(() => {
-    if (visualPreview) return;
+    if (visualPreview || loaded.current) return;
     let active = true;
     void fetch("/api/admin/content-studio", { credentials: "include" })
       .then(async (response) => {
         if (!response.ok) throw new Error("CONTENT_STUDIO_LOAD_FAILED");
         const payload = (await response.json()) as ManagementContentPayload;
         if (!active) return;
+        loaded.current = true;
         setData(payload);
         const first = payload.events[0] ?? null;
         setSelectedId(first?.id ?? null);
@@ -177,6 +184,17 @@ export function ContentStudio() {
       active = false;
     };
   }, [visualPreview]);
+
+  const persistedDraft = data?.events.find((event) => event.id === selectedId);
+  const dirty = Boolean(draft && JSON.stringify(draft) !== JSON.stringify(persistedDraft));
+  useEffect(() => { onPendingChange?.(dirty || uploadBusy || busy); }, [dirty, uploadBusy, busy, onPendingChange]);
+  useEffect(() => {
+    if (!dirty && !uploadBusy) return;
+    const prevent = (event: BeforeUnloadEvent) => { event.preventDefault(); };
+    window.addEventListener("beforeunload", prevent);
+    return () => window.removeEventListener("beforeunload", prevent);
+  }, [dirty, uploadBusy]);
+  const canSwitch = () => !busy && !uploadBusy && (!dirty || window.confirm("저장하지 않은 변경을 버리고 이동할까요?"));
 
   const visible = useMemo(() => (data?.events ?? []).filter((event) => (filter === "ALL" || event.publishState === filter) && `${event.id} ${event.title}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())), [data, filter, query]);
   const updateChoice = (index: number, choice: EventChoice) =>
@@ -201,7 +219,7 @@ export function ContentStudio() {
     return issues;
   };
   const save = async (publishState: ManagementPublishState, clone = false) => {
-    if (!draft || !data) return;
+    if (!draft || !data || uploadBusy || busy) return;
     const next = { ...draft, publishState };
     const issues = validate(next);
     if (publishState === "PUBLISHED" && issues.length) {
@@ -231,8 +249,8 @@ export function ContentStudio() {
       setSelectedId(nextId);
       setDraft(persisted ? structuredClone(persisted) : next);
       setMessage(clone ? "복제본을 생성했습니다." : `${STATE_LABEL[publishState]} 상태로 저장했습니다.`);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "저장하지 못했습니다.");
+    } catch {
+      setMessage("저장하지 못했습니다. 연결을 확인하고 다시 시도하세요.");
     } finally {
       setBusy(false);
     }
@@ -261,8 +279,8 @@ export function ContentStudio() {
       setData(payload);
       if (persisted) setDraft(structuredClone(persisted));
       setMessage(`${draft.targetCountryIds.length}개국에 ${deliveryDate}부터 표시되도록 예약했습니다.`);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "이벤트 예약에 실패했습니다.");
+    } catch {
+      setMessage("이벤트 예약에 실패했습니다. 다시 시도하세요.");
     } finally {
       setBusy(false);
     }
@@ -270,14 +288,15 @@ export function ContentStudio() {
 
   if (!data) return <section className="management-loading">{message ?? "콘텐츠 스튜디오 연결 중…"}</section>;
   return (
-    <div className="management-workspace">
+    <div className="management-workspace" data-preview={previewOpen}>
       <aside className="management-explorer">
         <header>
-          <span>CONTENT EXPLORER</span>
+
           <h2>이벤트</h2>
           <button
             type="button"
             onClick={() => {
+              if (!canSwitch()) return;
               const event = createEmptyEventDraft();
               setDraft(event);
               setSelectedId(null);
@@ -286,7 +305,7 @@ export function ContentStudio() {
             + 새 이벤트
           </button>
         </header>
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ID 또는 제목 검색" aria-label="콘텐츠 검색" />
+        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="이벤트 검색" aria-label="콘텐츠 검색" />
         <select value={filter} onChange={(event) => setFilter(event.target.value as typeof filter)} aria-label="게시 상태 필터">
           <option value="ALL">전체 상태</option>
           {Object.entries(STATE_LABEL).map(([value, label]) => (
@@ -301,13 +320,14 @@ export function ContentStudio() {
               type="button"
               data-selected={event.id === selectedId}
               onClick={() => {
+                if (!canSwitch()) return;
                 setSelectedId(event.id);
                 setDraft(structuredClone(event));
               }}
               key={event.id}
             >
               <strong>{event.title}</strong>
-              <small>{event.id}</small>
+              <small>{{ document: "문서형", newspaper: "신문형", super: "슈퍼이벤트" }[event.templateType]}</small>
               <span data-state={event.publishState}>{STATE_LABEL[event.publishState]}</span>
             </button>
           ))}
@@ -317,7 +337,8 @@ export function ContentStudio() {
               <button
                 type="button"
                 onClick={() => {
-                  const event = createEmptyEventDraft();
+                  if (!canSwitch()) return;
+              const event = createEmptyEventDraft();
                   setDraft(event);
                   setSelectedId(null);
                 }}
@@ -333,25 +354,27 @@ export function ContentStudio() {
           <>
             <header className="management-editor__header">
               <div>
-                <span>EVENT STUDIO / {draft.templateType.toUpperCase()}</span>
+                <span>{STATE_LABEL[draft.publishState]}{dirty ? " · 저장하지 않음" : ""}</span>
                 <h2>{draft.title}</h2>
               </div>
               <div>
-                <button type="button" disabled={busy} onClick={() => void save("DRAFT")}>
-                  초안 저장
+                <button className="is-primary" type="button" disabled={busy || uploadBusy} onClick={() => void save(draft.publishState)}>
+                  {busy ? "저장 중…" : "저장"}
                 </button>
-                <button type="button" disabled={busy} onClick={() => void save("READY")}>
+                <button type="button" onClick={() => setPreviewOpen(!previewOpen)}>{previewOpen ? "미리보기 숨기기" : "미리보기"}</button>
+                <details className="management-actions"><summary>기타 작업</summary><button type="button" disabled={busy || uploadBusy} onClick={() => void save("DRAFT")}>초안으로 저장</button>
+                <button type="button" disabled={busy || uploadBusy} onClick={() => void save("READY")}>
                   검토 준비
                 </button>
-                <button className="is-primary" type="button" disabled={busy} onClick={() => void save("PUBLISHED")}>
+                <button type="button" disabled={busy || uploadBusy} onClick={() => void save("PUBLISHED")}>
                   게시
                 </button>
-                <button type="button" disabled={busy} onClick={() => void save("DRAFT", true)}>
+                <button type="button" disabled={busy || uploadBusy} onClick={() => void save("DRAFT", true)}>
                   복제
                 </button>
-                <button type="button" disabled={busy || !selectedId} onClick={() => void save("ARCHIVED")}>
+                <button type="button" disabled={busy || uploadBusy || !selectedId} onClick={() => void save("ARCHIVED")}>
                   보관
-                </button>
+                </button></details>
               </div>
             </header>
             {message ? (
@@ -359,8 +382,8 @@ export function ContentStudio() {
                 {message}
               </p>
             ) : null}
-            <section className="management-form-grid">
-              <label>
+            <fieldset disabled={busy || uploadBusy} className="management-edit-fields"><section className="management-form-grid">
+              <details className="management-advanced is-wide"><summary>고급 설정</summary><label>
                 이벤트 ID
                 <input
                   value={draft.id}
@@ -373,17 +396,14 @@ export function ContentStudio() {
                   }
                 />
               </label>
-              <label>
-                템플릿
+              </details><label>
+                유형
                 <select
                   value={draft.templateType}
-                  onChange={(event) =>
-                    setDraft({
-                      ...draft,
-                      templateType: event.target.value as ManagementEventDraft["templateType"],
-                      choices: event.target.value === "super" ? draft.choices.slice(0, 1) : draft.choices,
-                    })
-                  }
+                  onChange={(event) => {
+                    if (event.target.value === "super" && draft.choices.length > 1 && !window.confirm("슈퍼이벤트는 첫 선택지만 사용합니다. 나머지 선택지를 제거할까요?")) return;
+                    setDraft({ ...draft, templateType: event.target.value as ManagementEventDraft["templateType"], choices: event.target.value === "super" ? draft.choices.slice(0, 1) : draft.choices });
+                  }}
                 >
                   <option value="document">문서형</option>
                   <option value="newspaper">신문형</option>
@@ -412,9 +432,12 @@ export function ContentStudio() {
                 </>
               )}
             </section>
-            <AssetLibrary data={data} selected={draft.image} onPick={(image) => setDraft({ ...draft, image })} />
+            {draft.templateType !== "document" ? <>
+              <EventImageUpload key={draft.id} eventId={draft.id} image={draft.image} onBusy={setUploadBusy} onChange={(image) => { setDraft((current) => current ? { ...current, image } : current); setPreviewOpen(true); }} />
+              <details className="management-disclosure"><summary>기존 이미지 사용</summary><AssetLibrary data={data} selected={draft.image} onPick={(image) => setDraft({ ...draft, image })} /></details>
+            </> : null}
             {draft.templateType !== "document" ? (
-              <section className="management-crop-fields">
+              <details className="management-disclosure"><summary>이미지 구도 조정</summary><section className="management-crop-fields">
                 <label>
                   가로 초점
                   <input
@@ -470,12 +493,54 @@ export function ContentStudio() {
                     }
                   />
                 </label>
-              </section>
+              </section></details>
             ) : null}
-            <section className="management-targets">
+            <section className="management-choices">
+              <header>
+
+                <h3>선택지</h3>
+              </header>
+              {draft.choices.map((choice, index) => (
+                <ChoiceEditor
+                  key={index}
+                  choice={choice}
+                  index={index}
+                  data={data}
+                  onChange={(next) => updateChoice(index, next)}
+                  onClone={draft.templateType !== "super" && draft.choices.length < 8 ? () => setDraft({ ...draft, choices: [...draft.choices, { ...structuredClone(choice), id: `choice_${crypto.randomUUID()}` }] }) : undefined}
+                  onRemove={() =>
+                    setDraft({
+                      ...draft,
+                      choices: draft.choices.filter((_, itemIndex) => itemIndex !== index),
+                    })
+                  }
+                />
+              ))}
+              {draft.templateType !== "super" && draft.choices.length < 8 ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setDraft({
+                      ...draft,
+                      choices: [
+                        ...draft.choices,
+                        {
+                          id: `choice_${crypto.randomUUID()}`,
+                          text: `선택지 ${draft.choices.length + 1}`,
+                          effects: [],
+                        },
+                      ],
+                    })
+                  }
+                >
+                  + 선택지 추가
+                </button>
+              ) : null}
+            </section>
+            <details className="management-disclosure"><summary>표시 국가 · {draft.targetCountryIds.length ? draft.targetCountryIds.map((key) => data.countries.find((country) => country.key === key)?.name ?? key).join(", ") : "선택 안 됨"}</summary><section className="management-targets">
               <header>
                 <div>
-                  <span>DELIVERY SCOPE</span>
+
                   <h3>표시 국가</h3>
                 </div>
                 <input aria-label="국가 검색" placeholder="국가 검색" value={countryQuery} onChange={(event) => setCountryQuery(event.target.value)} />
@@ -496,15 +561,15 @@ export function ContentStudio() {
                         }
                       />
                       <span>{country.name}</span>
-                      <small>{country.key}</small>
+
                     </label>
                   ))}
               </div>
             </section>
-            <section className="management-trigger">
+            </details><section className="management-trigger">
               <header>
-                <span>TRIGGER UNIT</span>
-                <h3>발동 단위</h3>
+
+                <h3 title="세계날짜와 턴은 독립적으로 발동합니다.">발동</h3>
               </header>
               <select
                 value={draft.trigger.mode}
@@ -556,7 +621,7 @@ export function ContentStudio() {
                   aria-label="발동 턴 번호"
                 />
               ) : null}
-              <p>세계날짜와 턴은 서로 독립적으로 발동합니다.</p>
+
               {draft.trigger.mode === "manual" ? (
                 <div className="management-delivery-control">
                   <label>
@@ -570,57 +635,17 @@ export function ContentStudio() {
                 </div>
               ) : null}
             </section>
-            <ConditionBuilder value={draft.conditions} countries={data.countries} onChange={(conditions) => setDraft({ ...draft, conditions })} />
-            <section className="management-choices">
-              <header>
-                <span>CHOICE EDITOR</span>
-                <h3>선택지와 실제 효과</h3>
-              </header>
-              {draft.choices.map((choice, index) => (
-                <ChoiceEditor
-                  key={`${choice.id}-${index}`}
-                  choice={choice}
-                  index={index}
-                  data={data}
-                  onChange={(next) => updateChoice(index, next)}
-                  onRemove={() =>
-                    setDraft({
-                      ...draft,
-                      choices: draft.choices.filter((_, itemIndex) => itemIndex !== index),
-                    })
-                  }
-                />
-              ))}
-              {draft.templateType !== "super" && draft.choices.length < 8 ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    setDraft({
-                      ...draft,
-                      choices: [
-                        ...draft.choices,
-                        {
-                          id: `choice_${draft.choices.length + 1}`,
-                          text: `선택지 ${draft.choices.length + 1}`,
-                          effects: [],
-                        },
-                      ],
-                    })
-                  }
-                >
-                  + 선택지 추가
-                </button>
-              ) : null}
-            </section>
+            <details className="management-disclosure"><summary>조건 {draft.conditions.conditions.length}개 · 편집</summary><ConditionBuilder value={draft.conditions} countries={data.countries} onChange={(conditions) => setDraft({ ...draft, conditions })} /></details>
+</fieldset>
           </>
         ) : (
           <p>왼쪽에서 이벤트를 선택하거나 새로 만드십시오.</p>
         )}
       </main>
-      <aside className="management-preview">
+      <aside className="management-preview" hidden={!previewOpen}>
         <header>
-          <span>LIVE PREVIEW</span>
-          <h2>실제 렌더러</h2>
+
+          <h2>게임 화면 미리보기</h2>
         </header>
         {draft ? (
           <div className="management-preview__viewport">
@@ -660,19 +685,19 @@ export function DecisionCatalog() {
     <section className="management-decision-catalog">
       <header>
         <div>
-          <span>DECISION STUDIO / RUNTIME CATALOG</span>
-          <h2>실행 중인 공통 결정 정의</h2>
+
+          <h2>디시전</h2>
         </div>
         <strong>{data?.decisions.length ?? 0}개</strong>
       </header>
-      <p>현재 적용 중인 공통 결정 목록입니다.</p>
+
       <div>
         {data?.decisions.map((decision) => (
           <article key={decision.id}>
             <img src={decision.icon} alt="" />
             <div>
               <small>
-                {decision.category} · {decision.id}
+                {DECISION_CATEGORY_LABELS[decision.category as DecisionCategoryId] ?? decision.category}
               </small>
               <h3>{decision.title}</h3>
               <p>{decision.description}</p>

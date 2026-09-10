@@ -101,7 +101,7 @@ export function MapCapitalAdminSection() {
   return (
     <section className="directorate-card capital-admin">
       <header>
-        <span>STRATEGIC CARTOGRAPHY</span>
+
         <h2>수도 좌표 관제</h2>
       </header>
       <div className="capital-admin__fields">

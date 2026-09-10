@@ -44,7 +44,7 @@ export function SiteStatusAdminSection() {
   return (
     <section className="directorate-diplomacy directorate-site-status" aria-labelledby="directorate-site-status-title">
       <header>
-        <div><span>SITE OPENING CONTROL</span><h2 id="directorate-site-status-title">개장 상태</h2></div>
+        <div><h2 id="directorate-site-status-title">개장 상태</h2></div>
         <strong>{site?.status === "open" ? "개장" : site ? "개장 전" : "확인 중"}</strong>
       </header>
       <div className="directorate-site-status__body">
