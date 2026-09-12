@@ -28,6 +28,8 @@ import { LawDetailModal } from "./LawDetailModal";
 import { LawSection } from "./LawSection";
 import { PoliticsWindowShell } from "./PoliticsWindowShell";
 import { createUnsetDevelopmentState } from "../utils/developmentState";
+import { StrategicWindow } from "../../play/components/StrategicWindow";
+import { COMPACT_LAYOUT_QUERY, useMediaQuery } from "../../../hooks/useMediaQuery";
 
 type PoliticsPanelProps = {
   country: MapCountryIndex;
@@ -52,6 +54,7 @@ export function PoliticsNationalSpirits({
 }: {
   spirits: readonly CountryNationalSpirit[];
 }) {
+  const touchLayout = useMediaQuery("(hover: none), (pointer: coarse)");
   const [tooltip, setTooltip] = useState<{
     spirit: CountryNationalSpirit;
     x: number;
@@ -77,19 +80,25 @@ export function PoliticsNationalSpirits({
       <div>
         {spirits.slice(0, 8).map((spirit) =>
           spirit.imagePath ? (
-            <img
+            <button
               key={spirit.id}
-              src={spirit.imagePath}
-              alt={spirit.name}
-              draggable={false}
-              onPointerEnter={(event) =>
+              type="button"
+              aria-label={spirit.name}
+              onPointerEnter={touchLayout ? undefined : (event) =>
                 showTooltip(spirit, event.clientX, event.clientY)
               }
-              onPointerMove={(event) =>
+              onPointerMove={touchLayout ? undefined : (event) =>
                 showTooltip(spirit, event.clientX, event.clientY)
               }
-              onPointerLeave={() => setTooltip(null)}
-            />
+              onPointerLeave={touchLayout ? undefined : () => setTooltip(null)}
+              onClick={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                if (tooltip?.spirit.id === spirit.id) setTooltip(null);
+                else showTooltip(spirit, bounds.right, bounds.top);
+              }}
+            >
+              <img src={spirit.imagePath} alt="" draggable={false} />
+            </button>
           ) : null,
         )}
       </div>
@@ -143,6 +152,7 @@ export function PoliticsPanel({
   readOnly = false,
   onClose,
 }: PoliticsPanelProps) {
+  const isMobile = useMediaQuery(COMPACT_LAYOUT_QUERY);
   const presentation = getCountryPresentation(country);
   const actualLawState = countryLawStates[country.key];
   const actualDevelopmentState = countryDevelopmentStates[country.key];
@@ -199,6 +209,59 @@ export function PoliticsPanel({
       ? getPartyDisplayColor(primaryParty, 0)
       : "#54615f",
   } as CSSProperties;
+
+  const lawDetail = (
+    <LawDetailModal
+      key={selectedLaw?.id ?? "closed"}
+      definition={selectedLaw}
+      selectedOptionId={selectedLaw ? choices[selectedLaw.id] ?? null : null}
+      availabilityContext={{
+        rulingIdeologyCategory: primaryParty?.ideologyCategory ?? presentation.politics.ideologyCategory,
+        rulingPartyName: primaryParty?.name ?? presentation.politics.rulingParty ?? "정당 미설정",
+        rulingPartySupport: primaryParty?.support ?? 0,
+        politicalPower: simulationState.politicalPower,
+        stability: simulationState.stability,
+        warSupport: simulationState.warSupport,
+        gdp: simulationState.gdp,
+        atWar: simulationState.atWar,
+        selectedLawOptions: choices,
+        developmentState,
+        readOnly,
+      }}
+      definitions={lawDefinitions}
+      onSelect={selectLawOption}
+      onClose={() => setSelectedLaw(null)}
+    />
+  );
+
+  if (isMobile) {
+    return (
+      <>
+        <StrategicWindow title="국가와 정치" eyebrow={presentation.title} onClose={onClose} className="mobile-politics-window">
+          <div className="mobile-politics">
+            <header className="mobile-politics__identity">
+              <CountryFlag country={country} flagPath={presentation.flagPath} className="mobile-politics__flag" />
+              <div><small>플레이 국가</small><h1>{presentation.title}</h1><p>{presentation.secondaryNames[0]}</p><strong>{primaryParty?.name || presentation.politics.rulingParty || "정당 미설정"}</strong></div>
+            </header>
+            <section className="mobile-politics__leader">
+              {presentation.leader.portraitPath ? <img src={presentation.leader.portraitPath} alt="" draggable={false} /> : null}
+              <div><small>{presentation.leader.title || "지도자"}</small><PoliticsLeaderInfo leader={presentation.leader} /><span>{rulingIdeology}</span></div>
+            </section>
+            <section className="mobile-politics__spirits"><header><h2>국민정신</h2><span>{presentation.nationalSpirits.length}</span></header><PoliticsNationalSpirits spirits={presentation.nationalSpirits} /></section>
+            <section className="mobile-politics__party"><header><h2>정당 지지도</h2><span>{primaryParty?.support.toFixed(1) ?? "0.0"}%</span></header><PartySupportChart parties={presentation.politics.parties} rulingPartyName={presentation.politics.rulingParty} /></section>
+            <section className="mobile-politics__laws">
+              <header><h2>국가 법률</h2><span>항목을 눌러 조건과 선택지를 확인합니다</span></header>
+              {SECTION_META.map(({ category, title, icon }) => (
+                <LawSection key={category} id={category} title={title} icon={icon} definitions={definitionsByCategory.get(category) ?? []} choices={choices} onOpenLaw={setSelectedLaw} />
+              ))}
+              <DevelopmentSection state={developmentState} />
+            </section>
+          </div>
+        </StrategicWindow>
+        {lawDetail}
+      </>
+    );
+  }
 
   return (
     <>
@@ -323,29 +386,7 @@ export function PoliticsPanel({
         onClose={onClose}
       />
 
-      <LawDetailModal
-        key={selectedLaw?.id ?? "closed"}
-        definition={selectedLaw}
-        selectedOptionId={
-          selectedLaw ? choices[selectedLaw.id] ?? null : null
-        }
-        availabilityContext={{
-          rulingIdeologyCategory: primaryParty?.ideologyCategory ?? presentation.politics.ideologyCategory,
-          rulingPartyName: primaryParty?.name ?? presentation.politics.rulingParty ?? "정당 미설정",
-          rulingPartySupport: primaryParty?.support ?? 0,
-          politicalPower: simulationState.politicalPower,
-          stability: simulationState.stability,
-          warSupport: simulationState.warSupport,
-          gdp: simulationState.gdp,
-          atWar: simulationState.atWar,
-          selectedLawOptions: choices,
-          developmentState,
-          readOnly,
-        }}
-        definitions={lawDefinitions}
-        onSelect={selectLawOption}
-        onClose={() => setSelectedLaw(null)}
-      />
+      {lawDetail}
     </>
   );
 }

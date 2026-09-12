@@ -15,6 +15,7 @@ import { CountryFlag } from "./CountryFlag";
 import { CountryLeaderInfo } from "./CountryLeaderInfo";
 import { getPartyDisplayColor } from "../utils/partyColors";
 import { PartySupportChart } from "./PartySupportChart";
+import { COMPACT_LAYOUT_QUERY, useMediaQuery } from "../hooks/useMediaQuery";
 
 type ReadOnlyCountryPanelProps = {
   country: MapCountryIndex | null;
@@ -82,6 +83,7 @@ function NationalSpiritStrip({
 }: {
   spirits: readonly CountryNationalSpirit[];
 }) {
+  const touchLayout = useMediaQuery("(hover: none), (pointer: coarse)");
   const railRef = useRef<HTMLDivElement>(null);
   const [scrollMetrics, setScrollMetrics] = useState({
     left: 0,
@@ -168,14 +170,19 @@ function NationalSpiritStrip({
                   type="button"
                   aria-label={spirit.name}
                   aria-describedby="national-spirit-tooltip"
-                  onPointerEnter={(event) =>
+                  onPointerEnter={touchLayout ? undefined : (event) =>
                     showTooltip(spirit, event.clientX, event.clientY)
                   }
-                  onPointerMove={(event) =>
+                  onPointerMove={touchLayout ? undefined : (event) =>
                     showTooltip(spirit, event.clientX, event.clientY)
                   }
-                  onPointerLeave={() => setTooltip(null)}
-                  onFocus={(event) => {
+                  onPointerLeave={touchLayout ? undefined : () => setTooltip(null)}
+                  onClick={(event) => {
+                    const bounds = event.currentTarget.getBoundingClientRect();
+                    if (tooltip?.spirit.id === spirit.id) setTooltip(null);
+                    else showTooltip(spirit, bounds.right, bounds.top);
+                  }}
+                  onFocus={touchLayout ? undefined : (event) => {
                     const bounds =
                       event.currentTarget.getBoundingClientRect();
                     showTooltip(spirit, bounds.right, bounds.top);
@@ -428,14 +435,43 @@ function CountryArchive({
   );
 }
 
+function MobileCountryPanel({ presentation, onClose }: { presentation: CountryPresentationData; onClose: () => void }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <aside className="mobile-country-sheet" data-expanded={expanded} aria-label={`${presentation.title} 국가 정보`}>
+      <div className="mobile-country-sheet__handle" aria-hidden="true" />
+      <header>
+        <CountryFlag country={presentation.country} flagPath={presentation.flagPath} className="mobile-country-sheet__flag" />
+        <div><small>선택 국가</small><h1>{presentation.title}</h1><p>{presentation.secondaryNames[0]}</p></div>
+        <button type="button" onClick={onClose}>지도 보기</button>
+      </header>
+      <div className="mobile-country-sheet__body">
+        <section className="mobile-country-sheet__leader">
+          {presentation.leader.portraitPath ? <img src={presentation.leader.portraitPath} alt="" draggable={false} /> : null}
+          <div><small>{presentation.leader.title || "지도자"}</small><strong>{presentation.leader.name || "미설정"}</strong><span>{presentation.politics.subIdeology || presentation.politics.ideologyCategory || "정치 정보 미설정"}</span></div>
+        </section>
+        <NationalSpiritStrip spirits={presentation.nationalSpirits} />
+        <CountryFacts presentation={presentation} />
+        {expanded ? <><MajorPartyPanel presentation={presentation} /><CountryArchive presentation={presentation} /></> : null}
+      </div>
+      <footer><button type="button" aria-expanded={expanded} onClick={() => setExpanded((value) => !value)}>{expanded ? "핵심 정보만 보기" : "국가 상세 보기"}</button></footer>
+    </aside>
+  );
+}
+
 export function ReadOnlyCountryPanel({
   country,
   onClose,
 }: ReadOnlyCountryPanelProps) {
+  const isMobile = useMediaQuery(COMPACT_LAYOUT_QUERY);
   const presentation = country ? getCountryPresentation(country) : null;
   const panelStyle = country
     ? ({ "--country-accent": country.color } as CSSProperties)
     : undefined;
+  if (isMobile) {
+    return presentation ? <MobileCountryPanel key={presentation.country.key} presentation={presentation} onClose={onClose} /> : null;
+  }
+
   return (
     <aside
       className="country-panel country-panel--hybrid"

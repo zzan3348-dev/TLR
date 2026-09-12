@@ -1,5 +1,6 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import { useState, type PropsWithChildren, type ReactNode } from "react";
 import { UiIcon } from "../../../components/UiIcon";
+import { MobileSheetHandle, type MobileSheetState } from "./MobileSheetHandle";
 
 type StrategicWindowProps = PropsWithChildren<{
   title: string;
@@ -19,11 +20,15 @@ export function StrategicWindow({
   onClose,
   children,
 }: StrategicWindowProps) {
+  const [mobileSheetState, setMobileSheetState] = useState<MobileSheetState>("half");
+
   return (
     <aside
       className={`strategic-window${className ? ` ${className}` : ""}`}
       aria-label={title}
+      data-mobile-sheet-state={mobileSheetState}
     >
+      <MobileSheetHandle state={mobileSheetState} onChange={setMobileSheetState} label={title} />
       <header className="strategic-window__chrome">
         <div>
           {eyebrow ? <small>{eyebrow}</small> : null}

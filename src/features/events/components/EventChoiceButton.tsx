@@ -2,6 +2,7 @@ import { useId, useRef, useState } from "react";
 import { useOptionalEventEffectExecutor } from "../../effects/useEventEffectExecutor";
 import type { EventChoice } from "../types";
 import { EventChoiceTooltip } from "./EventChoiceTooltip";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 type EventChoiceButtonProps = {
   eventId: string;
@@ -22,6 +23,7 @@ export function EventChoiceButton({
   variant = "paper",
   previewOnly = false,
 }: EventChoiceButtonProps) {
+  const touchLayout = useMediaQuery("(hover: none), (pointer: coarse)");
   const executor = useOptionalEventEffectExecutor();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const tooltipId = useId();
@@ -66,10 +68,16 @@ export function EventChoiceButton({
         type="button"
         disabled={pending || selected}
         aria-describedby={anchor ? tooltipId : undefined}
-        onClick={() => void choose()}
-        onPointerEnter={showTooltip}
-        onPointerLeave={() => setAnchor(null)}
-        onFocus={showTooltip}
+        onClick={() => {
+          if (touchLayout && !anchor) {
+            showTooltip();
+            return;
+          }
+          void choose();
+        }}
+        onPointerEnter={touchLayout ? undefined : showTooltip}
+        onPointerLeave={touchLayout ? undefined : () => setAnchor(null)}
+        onFocus={touchLayout ? undefined : showTooltip}
         onBlur={() => setAnchor(null)}
       >
         {variant === "paper" ? <span className="event-choice-button__accent" aria-hidden="true" /> : null}

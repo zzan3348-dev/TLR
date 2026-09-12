@@ -77,6 +77,7 @@ export type WorldMapHandle = {
   zoomIn: () => void;
   zoomOut: () => void;
   resetView: () => void;
+  focusCountry: (countryKey: string) => void;
 };
 
 type WorldMapProps = {
@@ -777,16 +778,6 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
       });
     }, [animateCamera]);
 
-    useImperativeHandle(
-      forwardedRef,
-      () => ({
-        zoomIn: () => zoomBy(1.3),
-        zoomOut: () => zoomBy(1 / 1.3),
-        resetView,
-      }),
-      [resetView, zoomBy],
-    );
-
     const focusComponent = useCallback(
       (component: MapCountryComponent) => {
         const assets = assetsRef.current;
@@ -834,6 +825,39 @@ export const WorldMap = forwardRef<WorldMapHandle, WorldMapProps>(
         animateCamera({ x: targetX, y: targetY, scale: targetScale });
       },
       [animateCamera],
+    );
+
+    const focusCountry = useCallback((countryKey: string) => {
+      const country = mapCountries.find((candidate) => candidate.key === countryKey);
+      const assets = assetsRef.current;
+      if (!country || !assets) return;
+      const preferredComponentIds = country.labelGroups.find((group) => group.enabled)?.componentIds ?? [];
+      const components = mapCountryComponents.filter((candidate) => candidate.countryId === country.id);
+      const component = components.find((candidate) => preferredComponentIds.includes(candidate.componentId))
+        ?? components.sort((left, right) => right.pixelCount - left.pixelCount)[0];
+      if (!component) return;
+      const viewport = viewportRef.current;
+      const targetScale = Math.min(
+        viewport.width / Math.max(1, component.bounds.width * 1.55),
+        viewport.height / Math.max(1, component.bounds.height * 1.55),
+        fitScaleRef.current * 16,
+      );
+      animateCamera({
+        x: component.centroid.x,
+        y: component.centroid.y,
+        scale: Math.max(fitScaleRef.current, targetScale),
+      });
+    }, [animateCamera]);
+
+    useImperativeHandle(
+      forwardedRef,
+      () => ({
+        zoomIn: () => zoomBy(1.3),
+        zoomOut: () => zoomBy(1 / 1.3),
+        resetView,
+        focusCountry,
+      }),
+      [focusCountry, resetView, zoomBy],
     );
 
     const findMapTarget = useCallback(

@@ -12,6 +12,7 @@ import {
 } from "../data/commonDecisions";
 import { getColonialDecisionCategory } from "../data/colonialDecisions";
 import { ColonialDecisionPanel } from "./ColonialDecisionPanel";
+import { COMPACT_LAYOUT_QUERY, useMediaQuery } from "../../../hooks/useMediaQuery";
 
 type DecisionWindowProps = { country: MapCountryIndex; onClose: () => void };
 type HoveredDecision = { decision: DecisionView; unmet: string[]; x: number; y: number };
@@ -46,7 +47,7 @@ function tooltipPosition(rect: DOMRect) {
   return { x, y };
 }
 
-function DecisionTooltip({ hovered }: { hovered: HoveredDecision }) {
+function DecisionTooltip({ hovered, onClose }: { hovered: HoveredDecision; onClose: () => void }) {
   const { decision, unmet } = hovered;
   const executionFailures = unmet.filter((value) =>
     value.includes("정치력") || value.includes("재사용") || value.includes("실행 중"),
@@ -59,6 +60,7 @@ function DecisionTooltip({ hovered }: { hovered: HoveredDecision }) {
       role="tooltip"
       style={{ left: hovered.x, top: hovered.y }}
     >
+      <button type="button" className="generic-decision-tooltip__close" onClick={onClose}>닫기</button>
       <header>
         <strong>{decision.title}</strong>
         <span data-status={decision.status}>{STATUS_LABEL[decision.status]}</span>
@@ -109,6 +111,7 @@ export function DecisionWindow(props: DecisionWindowProps) {
 }
 
 function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
+  const isMobile = useMediaQuery(COMPACT_LAYOUT_QUERY);
   const [overview, setOverview] = useState<DecisionOverview | null>(null);
   const [targets, setTargets] = useState<Record<string, string>>({});
   const [collapsed, setCollapsed] = useState<Record<DecisionCategoryId, boolean>>({ political: false, economy: false, wartime: false });
@@ -217,6 +220,10 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
                   onMouseLeave={() => setHovered(null)}
                   onFocus={onFocus}
                   onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setHovered(null); }}
+                  onClick={(event) => {
+                    if (!isMobile) return;
+                    showTooltip(tooltipDecision, unmet, event.currentTarget.getBoundingClientRect());
+                  }}
                 >
                   <div className="generic-decision-row__icon"><img src={decision.icon} alt="" /></div>
                   <div className="generic-decision-row__main">
@@ -257,7 +264,7 @@ function GenericDecisionWindow({ country, onClose }: DecisionWindowProps) {
           </section>
         ) : null}
       </div>
-      {hovered ? <DecisionTooltip hovered={hovered} /> : null}
+      {hovered ? <DecisionTooltip hovered={hovered} onClose={() => setHovered(null)} /> : null}
     </StrategicWindow>
   );
 }

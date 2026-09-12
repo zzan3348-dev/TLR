@@ -23,6 +23,7 @@ import type { MapMode } from "./types/faction";
 import { useAuth } from "./auth/AuthProvider";
 import { signOut, submitCountryApplication } from "./services/authService";
 import { endAdminPreview, loadAdminPreview } from "./services/adminPreviewService";
+import { COMPACT_LAYOUT_QUERY } from "./hooks/useMediaQuery";
 
 const PROVINCE_STORAGE_KEY = "world-map-show-province-borders";
 
@@ -71,7 +72,7 @@ export default function App() {
   const [playCountry, setPlayCountry] = useState<MapCountryIndex | null>(null);
   const [applicationCountry, setApplicationCountry] = useState<MapCountryIndex | null>(null);
   const [activePlayWindow, setActivePlayWindow] =
-    useState<PrimaryWindow>("politics");
+    useState<PrimaryWindow>(() => window.matchMedia(COMPACT_LAYOUT_QUERY).matches ? null : "politics");
   const [inspectedCountry, setInspectedCountry] =
     useState<MapCountryIndex | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -380,6 +381,12 @@ export default function App() {
       controller.abort();
       window.removeEventListener("tlr:economy-updated", refreshEconomy);
     };
+  }, [playCountry]);
+
+  useEffect(() => {
+    if (!playCountry || !window.matchMedia(COMPACT_LAYOUT_QUERY).matches) return;
+    const timers = [450, 1100].map((delay) => window.setTimeout(() => mapRef.current?.focusCountry(playCountry.key), delay));
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
   }, [playCountry]);
 
   const playSimulationState = playCountry

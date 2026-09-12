@@ -14,6 +14,8 @@ import type { PrimaryWindow } from "../types";
 import { loadResearchOverview } from "../../research/researchClient";
 import type { MapMode } from "../../../types/faction";
 import { WorldControlHud } from "../../world-control/components/WorldControlHud";
+import { MobilePlayNavigation } from "./MobilePlayNavigation";
+import { COMPACT_LAYOUT_QUERY } from "../../../hooks/useMediaQuery";
 
 type PlayHudProps = {
   country: MapCountryIndex;
@@ -43,6 +45,8 @@ type HudMetricProps = {
   lines: readonly HudDetailLine[];
   footer: string;
   onActivate?: () => void;
+  mobileOpen: boolean;
+  onToggleMobile: () => void;
 };
 
 const WINDOW_BUTTONS: readonly {
@@ -75,6 +79,8 @@ export function PlayHud({
   onChangeMapMode,
 }: PlayHudProps) {
   const presentation = getCountryPresentation(country);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [openMetric, setOpenMetric] = useState<string | null>(null);
   const [researchPower, setResearchPower] = useState(0);
   const [researchIncome, setResearchIncome] = useState(0);
   const researchCapacity = state.researchCapacity;
@@ -117,7 +123,7 @@ export function PlayHud({
       : "미설정";
 
   return (
-    <header className="play-hud" aria-label="플레이 모드 HUD">
+    <header className="play-hud" aria-label="플레이 모드 HUD" data-resources-open={resourcesOpen}>
       <button
         type="button"
         className="play-hud__flag"
@@ -149,6 +155,8 @@ export function PlayHud({
             { label: "증가 주기", value: "턴당", tone: "neutral" },
           ]}
           footer="정치력은 법률 변경, 디시전, 외교 행동의 비용으로 사용됩니다."
+          mobileOpen={openMetric === "political-power"}
+          onToggleMobile={() => setOpenMetric((value) => value === "political-power" ? null : "political-power")}
         />
         <HudMetric
           id="stability"
@@ -166,6 +174,8 @@ export function PlayHud({
             },
           ]}
           footer="안정도는 정치력 획득과 행정·생산 효율에 영향을 줍니다."
+          mobileOpen={openMetric === "stability"}
+          onToggleMobile={() => setOpenMetric((value) => value === "stability" ? null : "stability")}
         />
         <HudMetric
           id="war-support"
@@ -187,6 +197,8 @@ export function PlayHud({
             },
           ]}
           footer="전쟁 지지도는 동원, 전시법과 장기전 대응에 영향을 줍니다."
+          mobileOpen={openMetric === "war-support"}
+          onToggleMobile={() => setOpenMetric((value) => value === "war-support" ? null : "war-support")}
         />
         <HudMetric
           id="manpower"
@@ -216,6 +228,8 @@ export function PlayHud({
             },
           ]}
           footer="징병제와 인구 구조가 동원 가능한 전체 인력을 결정합니다."
+          mobileOpen={openMetric === "manpower"}
+          onToggleMobile={() => setOpenMetric((value) => value === "manpower" ? null : "manpower")}
         />
         <HudMetric
           id="production"
@@ -237,6 +251,8 @@ export function PlayHud({
             { label: "무역 제공", value: state.tradeCapacityProvided?.toString() ?? "미설정", tone: "negative" },
           ]}
           footer="생산능력은 산업시설과 경제법, 무역 상태의 영향을 받습니다."
+          mobileOpen={openMetric === "production"}
+          onToggleMobile={() => setOpenMetric((value) => value === "production" ? null : "production")}
         />
         <HudMetric
           id="research-power"
@@ -256,6 +272,8 @@ export function PlayHud({
           ]}
           footer="선택하면 연구 계획과 투자 현황을 확인할 수 있습니다."
           onActivate={() => onOpenWindow("research")}
+          mobileOpen={openMetric === "research-power"}
+          onToggleMobile={() => setOpenMetric((value) => value === "research-power" ? null : "research-power")}
         />
         <HudMetric
           id="gdp"
@@ -282,6 +300,8 @@ export function PlayHud({
             },
           ]}
           footer="GDP는 경제 규모와 국가의 민간 소비·재정 기반을 나타냅니다."
+          mobileOpen={openMetric === "gdp"}
+          onToggleMobile={() => setOpenMetric((value) => value === "gdp" ? null : "gdp")}
         />
         <HudMetric
           id="national-debt"
@@ -300,7 +320,21 @@ export function PlayHud({
             { label: "신용등급", value: state.creditRating ?? "미설정" },
           ]}
           footer="부채가 증가하면 국채 이자와 재정정책의 부담이 커집니다."
+          mobileOpen={openMetric === "national-debt"}
+          onToggleMobile={() => setOpenMetric((value) => value === "national-debt" ? null : "national-debt")}
         />
+        <button
+          type="button"
+          className="play-hud__resource-toggle"
+          aria-expanded={resourcesOpen}
+          onClick={() => {
+            setOpenMetric(null);
+            setResourcesOpen((value) => !value);
+          }}
+        >
+          <UiIcon name={resourcesOpen ? "ui/collapse" : "ui/expand"} />
+          <small>{resourcesOpen ? "접기" : "자원"}</small>
+        </button>
       </div>
 
       <nav className="play-hud__nav" aria-label="인게임 창">
@@ -318,6 +352,7 @@ export function PlayHud({
         ))}
       </nav>
       <WorldControlHud countryKey={country.key} mapMode={mapMode} onChangeMapMode={onChangeMapMode} />
+      <MobilePlayNavigation activeWindow={activeWindow} onOpenWindow={onOpenWindow} mapMode={mapMode} onChangeMapMode={onChangeMapMode} />
     </header>
   );
 }
@@ -333,6 +368,8 @@ function HudMetric({
   lines,
   footer,
   onActivate,
+  mobileOpen,
+  onToggleMobile,
 }: HudMetricProps) {
   const tooltipId = `hud-tooltip-${id}`;
 
@@ -342,20 +379,27 @@ function HudMetric({
       data-metric-id={id}
       data-tone={tone}
       data-tooltip-align={align}
-      onClick={onActivate}
+      data-mobile-open={mobileOpen}
+      aria-expanded={mobileOpen}
+      onClick={() => {
+        if (window.matchMedia(COMPACT_LAYOUT_QUERY).matches) onToggleMobile();
+        else onActivate?.();
+      }}
       onKeyDown={(event) => {
-        if (onActivate && (event.key === "Enter" || event.key === " ")) {
+        if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          onActivate();
+          if (window.matchMedia(COMPACT_LAYOUT_QUERY).matches) onToggleMobile();
+          else onActivate?.();
         }
       }}
-      role={onActivate ? "button" : undefined}
-      tabIndex={onActivate ? 0 : undefined}
+      role="button"
+      tabIndex={0}
     >
       <UiIcon name={icon} />
       <b>{value}</b>
       <small>{label}</small>
       <div id={tooltipId} className="play-hud__tooltip" role="tooltip">
+        <button type="button" className="play-hud__tooltip-close" onClick={(event) => { event.stopPropagation(); onToggleMobile(); }}>닫기</button>
         <strong>{label}</strong>
         <p>{intro}</p>
         <dl>
