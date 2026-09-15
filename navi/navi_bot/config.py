@@ -23,6 +23,9 @@ class Config:
     llm_provider: str = "ai_gateway"
     ai_gateway_api_key: str = ""
     llm_model: str = "google/gemma-4-31b-it"
+    openrouter_api_key: str = ""
+    openrouter_model: str = "google/gemma-4-31b-it:free"
+    openrouter_fallback_models: tuple[str, ...] = ("google/gemma-4-26b-a4b-it:free",)
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.7-flash"
     llm_timeout_seconds: float = 30.0
@@ -37,6 +40,14 @@ class Config:
             raise RuntimeError("DISCORD_BOT_TOKEN과 DISCORD_APPLICATION_ID가 필요합니다.")
         if not tlr_base_url or len(tlr_service_token) < 32:
             raise RuntimeError("TLR_API_BASE_URL과 32자 이상의 TLR_NAVI_SERVICE_TOKEN이 필요합니다.")
+        openrouter_fallback_models = tuple(
+            model.strip()
+            for model in os.getenv(
+                "OPENROUTER_LLM_FALLBACK_MODELS",
+                "google/gemma-4-26b-a4b-it:free",
+            ).split(",")
+            if model.strip()
+        )
         return cls(
             token=token,
             application_id=application_id,
@@ -50,6 +61,13 @@ class Config:
             ai_gateway_api_key=os.getenv("AI_GATEWAY_API_KEY", "").strip(),
             llm_model=os.getenv("NAVI_LLM_MODEL", "google/gemma-4-31b-it").strip()
             or "google/gemma-4-31b-it",
+            openrouter_api_key=os.getenv("OPENROUTER_API_KEY", "").strip(),
+            openrouter_model=os.getenv(
+                "OPENROUTER_LLM_MODEL",
+                "google/gemma-4-31b-it:free",
+            ).strip()
+            or "google/gemma-4-31b-it:free",
+            openrouter_fallback_models=openrouter_fallback_models,
             gemini_api_key=os.getenv("GEMINI_API_KEY", "").strip(),
             gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.7-flash").strip() or "gemini-3.7-flash",
             llm_timeout_seconds=max(10.0, float(os.getenv("NAVI_LLM_TIMEOUT_SECONDS", "30"))),

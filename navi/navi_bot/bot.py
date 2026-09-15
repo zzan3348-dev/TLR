@@ -30,7 +30,7 @@ from .llm_chat import (
 )
 from .llm_memory import MAX_LLM_KEYWORDS, is_safe_interest_keyword
 from .navi_safety import NaviSafety
-from .navi_llm import NaviLLMClient
+from .navi_llm import NaviLLMClient, OPENROUTER_BASE_URL
 from .tlr_client import TlrApiError, TlrClient
 
 log = logging.getLogger(__name__)
@@ -62,7 +62,22 @@ class NaviBot(commands.Bot):
             Path(__file__).with_name("assets") / "navi_safety_reactions.json",
         )
         self.llm_chat: LLMChatService | None = None
-        if config.llm_provider == "ai_gateway" and config.ai_gateway_api_key:
+        if config.llm_provider == "openrouter" and config.openrouter_api_key:
+            self.llm_chat = LLMChatService(
+                provider=NaviLLMClient(
+                    api_key=config.openrouter_api_key,
+                    model=config.openrouter_model,
+                    timeout_seconds=config.llm_timeout_seconds,
+                    max_tokens=400,
+                    base_url=OPENROUTER_BASE_URL,
+                    provider_name="openrouter",
+                    fallback_models=config.openrouter_fallback_models,
+                ),
+                db=self.db,
+                safety=self.navi_safety,
+                cooldown_seconds=LLM_COOLDOWN_SECONDS,
+            )
+        elif config.llm_provider == "ai_gateway" and config.ai_gateway_api_key:
             self.llm_chat = LLMChatService(
                 provider=NaviLLMClient(
                     api_key=config.ai_gateway_api_key,
@@ -84,7 +99,7 @@ class NaviBot(commands.Bot):
                 db=self.db,
                 safety=self.navi_safety,
             )
-        elif config.llm_provider not in {"ai_gateway", "gemini"}:
+        elif config.llm_provider not in {"openrouter", "ai_gateway", "gemini"}:
             log.error("지원하지 않는 NAVI LLM provider입니다: %s", config.llm_provider)
         else:
             log.warning("NAVI LLM 비활성화: %s API 키가 설정되지 않았습니다.", config.llm_provider)

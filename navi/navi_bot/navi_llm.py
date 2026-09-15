@@ -16,6 +16,10 @@ log = logging.getLogger(__name__)
 AI_GATEWAY_BASE_URL = "https://ai-gateway.vercel.sh/v1"
 AI_GATEWAY_CHAT_COMPLETIONS_URL = f"{AI_GATEWAY_BASE_URL}/chat/completions"
 DEFAULT_AI_GATEWAY_MODEL = "google/gemma-4-31b-it"
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+OPENROUTER_CHAT_COMPLETIONS_URL = f"{OPENROUTER_BASE_URL}/chat/completions"
+DEFAULT_OPENROUTER_MODEL = "google/gemma-4-31b-it:free"
+DEFAULT_OPENROUTER_FALLBACK_MODELS = ("google/gemma-4-26b-a4b-it:free",)
 DEFAULT_MAX_TOKENS = 400
 DEFAULT_TIMEOUT_SECONDS = 30.0
 MAX_ATTEMPTS = 3
@@ -57,7 +61,7 @@ class NaviLLMAttemptError(RuntimeError):
 
 
 class NaviLLMError(RuntimeError):
-    """프롬프트나 secret을 포함하지 않는 최종 AI Gateway 오류."""
+    """프롬프트나 secret을 포함하지 않는 최종 LLM 공급자 오류."""
 
     def __init__(
         self,
@@ -67,7 +71,7 @@ class NaviLLMError(RuntimeError):
         error_type: str,
         attempts: int,
     ) -> None:
-        super().__init__("Vercel AI Gateway request failed")
+        super().__init__("LLM provider request failed")
         self.status_code = status_code
         self.error_code = error_code
         self.error_type = error_type
@@ -77,7 +81,7 @@ class NaviLLMError(RuntimeError):
 
 
 class NaviLLMClient:
-    """Vercel AI Gateway chat/completions 어댑터와 제한 재시도 정책."""
+    """OpenAI 호환 chat/completions 어댑터와 제한 재시도 정책."""
 
     structured_logging = True
 
@@ -88,11 +92,19 @@ class NaviLLMClient:
         model: str = DEFAULT_AI_GATEWAY_MODEL,
         timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
         max_tokens: int = DEFAULT_MAX_TOKENS,
+        base_url: str = AI_GATEWAY_BASE_URL,
+        provider_name: str = "ai_gateway",
+        fallback_models: tuple[str, ...] = (),
     ) -> None:
         self.api_key = str(api_key or "").strip()
         self.model = str(model or DEFAULT_AI_GATEWAY_MODEL).strip() or DEFAULT_AI_GATEWAY_MODEL
         self.timeout_seconds = max(10.0, float(timeout_seconds))
         self.max_tokens = max(1, int(max_tokens))
+        self.base_url = str(base_url or AI_GATEWAY_BASE_URL).rstrip("/")
+        self.provider_name = str(provider_name or "llm").strip() or "llm"
+        self.fallback_models = tuple(
+            item.strip() for item in fallback_models if item and item.strip() and item.strip() != self.model
+        )
         self._client: AsyncOpenAI | None = None
         self._sleep: Callable[[float], Awaitable[None]] = asyncio.sleep
         self._jitter: Callable[[float, float], float] = random.uniform
@@ -101,7 +113,7 @@ class NaviLLMClient:
         if self._client is None:
             self._client = AsyncOpenAI(
                 api_key=self.api_key,
-                base_url=AI_GATEWAY_BASE_URL,
+                base_url=self.base_url,
                 timeout=self.timeout_seconds,
                 max_retries=0,
             )
@@ -133,8 +145,9 @@ class NaviLLMClient:
             latency_ms = int((time.monotonic() - started) * 1000)
             exc.diagnostic_logged = True
             log.error(
-                "[NAVI_LLM] result=failed model=%s status=%s attempts=%s retries=%s "
+                "[NAVI_LLM] result=failed provider=%s model=%s status=%s attempts=%s retries=%s "
                 "error_code=%s error_type=%s latency_ms=%s",
+                self.provider_name,
                 self.model,
                 exc.status_code if exc.status_code is not None else "none",
                 exc.attempts,
@@ -147,7 +160,8 @@ class NaviLLMClient:
 
         latency_ms = int((time.monotonic() - started) * 1000)
         log.info(
-            "[NAVI_LLM] result=success actual_model=%s latency_ms=%s",
+            "[NAVI_LLM] result=success provider=%s actual_model=%s latency_ms=%s",
+            self.provider_name,
             result.actual_model,
             latency_ms,
         )
@@ -221,8 +235,9 @@ class NaviLLMClient:
             if time.monotonic() + delay >= deadline:
                 break
             log.warning(
-                "[NAVI_LLM] result=retry model=%s status=%s "
+                "[NAVI_LLM] result=retry provider=%s model=%s status=%s "
                 "attempt=%s next_attempt=%s error_code=%s error_type=%s delay_ms=%s",
+                self.provider_name,
                 self.model,
                 failure.status_code if failure.status_code is not None else "none",
                 attempt,
@@ -254,11 +269,21 @@ class NaviLLMClient:
         max_tokens: int,
     ) -> NaviLLMCompletion:
         client = self._get_client()
-        payload = build_ai_gateway_payload(
-            model=self.model,
-            system_prompt=system_prompt,
-            message=message,
-            max_tokens=max_tokens,
+        payload = (
+            build_openrouter_payload(
+                model=self.model,
+                fallback_models=self.fallback_models,
+                system_prompt=system_prompt,
+                message=message,
+                max_tokens=max_tokens,
+            )
+            if self.fallback_models
+            else build_ai_gateway_payload(
+                model=self.model,
+                system_prompt=system_prompt,
+                message=message,
+                max_tokens=max_tokens,
+            )
         )
         try:
             response = await client.chat.completions.create(**payload)
@@ -311,6 +336,24 @@ def build_ai_gateway_payload(
     }
 
 
+def build_openrouter_payload(
+    *,
+    model: str,
+    fallback_models: tuple[str, ...],
+    system_prompt: str,
+    message: str,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+) -> dict[str, object]:
+    payload = build_ai_gateway_payload(
+        model=model,
+        system_prompt=system_prompt,
+        message=message,
+        max_tokens=max_tokens,
+    )
+    payload["extra_body"] = {"models": list(fallback_models)}
+    return payload
+
+
 def parse_ai_gateway_completion(data: object, *, primary_model: str) -> NaviLLMCompletion:
     if not isinstance(data, dict):
         raise _invalid_response("invalid_response")
@@ -354,6 +397,7 @@ def _http_error_type(status: int) -> str:
         400: "bad_request",
         401: "authentication_error",
         402: "credit_error",
+        403: "forbidden",
         404: "model_not_found",
         408: "request_timeout",
         429: "rate_limit",

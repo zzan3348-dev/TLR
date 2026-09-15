@@ -10,12 +10,17 @@ from navi_bot.llm_chat import LLMChatService
 from navi_bot.navi_llm import (
     AI_GATEWAY_CHAT_COMPLETIONS_URL,
     DEFAULT_AI_GATEWAY_MODEL,
+    DEFAULT_OPENROUTER_FALLBACK_MODELS,
+    DEFAULT_OPENROUTER_MODEL,
+    OPENROUTER_BASE_URL,
+    OPENROUTER_CHAT_COMPLETIONS_URL,
     NaviLLMAttemptError,
     NaviLLMClient,
     NaviLLMCompletion,
     NaviLLMError,
     _http_error_type,
     build_ai_gateway_payload,
+    build_openrouter_payload,
     parse_ai_gateway_completion,
 )
 
@@ -165,6 +170,7 @@ class AIGatewayLLMTests(unittest.TestCase):
             (400, "bad_request"),
             (401, "authentication_error"),
             (402, "credit_error"),
+            (403, "forbidden"),
             (404, "model_not_found"),
         ):
             with self.subTest(status=status):
@@ -175,6 +181,32 @@ class AIGatewayLLMTests(unittest.TestCase):
                     return client.calls, raised.exception.attempts, raised.exception.status_code
 
                 self.assertEqual(asyncio.run(exercise()), (1, 1, status))
+
+    def test_openrouter_payload_uses_only_verified_free_model_fallbacks(self) -> None:
+        payload = build_openrouter_payload(
+            model=DEFAULT_OPENROUTER_MODEL,
+            fallback_models=DEFAULT_OPENROUTER_FALLBACK_MODELS,
+            system_prompt="너는 NAVI다.",
+            message="안녕",
+        )
+        self.assertEqual(OPENROUTER_CHAT_COMPLETIONS_URL, "https://openrouter.ai/api/v1/chat/completions")
+        self.assertEqual(payload["model"], "google/gemma-4-31b-it:free")
+        self.assertEqual(
+            payload["extra_body"],
+            {"models": ["google/gemma-4-26b-a4b-it:free"]},
+        )
+        self.assertTrue(payload["model"].endswith(":free"))
+        self.assertTrue(all(model.endswith(":free") for model in payload["extra_body"]["models"]))
+
+        client = NaviLLMClient(
+            api_key="test",
+            model=DEFAULT_OPENROUTER_MODEL,
+            base_url=OPENROUTER_BASE_URL,
+            provider_name="openrouter",
+            fallback_models=DEFAULT_OPENROUTER_FALLBACK_MODELS,
+        )
+        self.assertEqual(client.provider_name, "openrouter")
+        self.assertEqual(client.base_url, OPENROUTER_BASE_URL)
 
     def test_empty_choices_is_a_retryable_failure(self) -> None:
         with self.assertRaises(NaviLLMAttemptError) as raised:
